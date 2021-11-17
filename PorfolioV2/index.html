@@ -106,30 +106,46 @@
 			</div>	
 			<br>
 			<div class="container">	
-				<div class="has-text-centered">
-					<h3 class="title is-3">Certifications</h3>
-				</div>   
-
+				<button class="collapsible">Certifications</button>
+				<div class="content" style = "color:white">
+				  <br>
 				  <p class = "intro">UC San Diego Extension</p> 
-				<li id = "yantitle">Android Programming Certification <b>(Sep. 2021 - June 2022)</b></li>
-				<li id = "yantitle">Business Management Certification <b>(Sep. 2020 - May 2021)</b></li>
-				<li id = "yantitle">Front-End Web Development Certification <b>(Jan. 2020 - Sep. 2020)</b></li>
-				<li id = "yantitle">iOS Programming Certification <b>(Jan. 2019 - May 2019)</b></li>
-				<p class = "intro">MathWorks</p> 
-				<li id = "yantitle">MATLAB Onramp Training Certificate <b>(October 2020)</b></li>   
-					<p class = "intro">MITx </p> 
-				<li id = "yantitle">Cybersecurity for Critical Urban Infrastructure Certification <b>(July 2020)</b></li>
-				<!-- 	<p class = "intro">International Business Management Institute </p> 
+				  <li id = "yantitle" >Android Programming Certification <b>(Sep. 2021 - June 2022)</b></li>
+				  <li id = "yantitle">Business Management Certification <b>(Sep. 2020 - May 2021)</b></li>
+				  <li id = "yantitle">Front-End Web Development Certification <b>(Jan. 2020 - Sep. 2020)</b></li>
+				  <li id = "yantitle">iOS Programming Certification <b>(Jan. 2019 - May 2019)</b></li>
+				  <p class = "intro">MathWorks</p> 
+				  <li id = "yantitle">MATLAB Onramp Training Certificate <b>(October 2020)</b></li>   
+					  <p class = "intro">MITx </p> 
+				  <li id = "yantitle">Cybersecurity for Critical Urban Infrastructure Certification <b>(July 2020)</b></li>
+				  <!-- 	<p class = "intro">International Business Management Institute </p> 
 				<li id = "yantitle">Project Management Program Certification <b>(August 2020 - December 2020)
 					</b></li>
 				 <p class = "intro">American Red Cross</p> 
 				<li id = "yantitle">Adult and Pediatric First Aid/CPR/AED <b>(August 2020)</b></li> -->
-
+				</div>
 
 		</section>
 
 
+		
 
+		<script>
+			var coll = document.getElementsByClassName("collapsible");
+			var i;
+			
+			for (i = 0; i < coll.length; i++) {
+			  coll[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var content = this.nextElementSibling;
+				if (content.style.maxHeight){
+				  content.style.maxHeight = null;
+				} else {
+				  content.style.maxHeight = content.scrollHeight + "px";
+				} 
+			  });
+			}
+			</script>
 
 		<!-- Projects -->
 		<section  id="projects" class="section section-2-5">

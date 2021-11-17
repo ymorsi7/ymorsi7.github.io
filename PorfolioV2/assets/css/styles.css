@@ -12,6 +12,33 @@ n1 {
 	font-size:18px;
 }
 
+.collapsible {
+	background-color: #1B2D55;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 30%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size:2rem;
+	margin: 0;
+	font-weight: 300;
+}
+  
+.active, .collapsible:hover {
+	background-color: #0B1738;
+}
+  
+.content {
+	padding: 0 18px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: #273b64;
+}
+
+
 
 a:hover {
   color: #00d1b2;
