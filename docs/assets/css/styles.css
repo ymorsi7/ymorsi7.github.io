@@ -17,7 +17,7 @@ n1 {
 	color: white;
 	cursor: pointer;
 	padding: 18px;
-	width: 30%;
+	width: 100%;
 	border: none;
 	text-align: left;
 	outline: none;
@@ -27,6 +27,7 @@ n1 {
 }
   
 .active, .collapsible:hover {
+	background-color: #1B2D55
 	background-color: #0B1738;
 }
   
