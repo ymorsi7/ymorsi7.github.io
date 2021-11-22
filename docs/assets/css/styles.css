@@ -40,6 +40,19 @@ n1 {
 }
 
 
+.column1 {
+	float: left;
+	width: 50%;
+  }
+  
+  /* Clear floats after the columns */
+.row1:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
 
 a:hover {
   color: #00d1b2;
