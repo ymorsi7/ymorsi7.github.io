@@ -1341,6 +1341,21 @@ ol {
 	.grid-width-2 {
 		width: 100%;
 	}
+	.hero-social-links {
+		position: relative;
+		width: 100%;
+		bottom: 0;
+		right: 0;
+		z-index: 9;
+		background: #fff;
+		text-align: center;
+		padding: 30px 0;
+		border-bottom: 1px solid #e8e8e8;
+	}
+	.hero-social-links a {
+		display: inline-block;
+		padding: 5px 10px;
+	}
 	.map {
 		height: 400px;
 	}
