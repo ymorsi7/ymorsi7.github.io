@@ -16,7 +16,7 @@ n1 {
 	background-color: #1B2D55;
 	color: white;
 	cursor: pointer;
-	padding: 18px;
+	padding: 15px;
 	width: 100%;
 	border: none;
 	text-align: left;
@@ -25,12 +25,40 @@ n1 {
 	margin: 0;
 	font-weight: 300;
 }
+
+
   
 .active, .collapsible:hover {
 	/*#1B2D55  */
 	background-color: #0B1738;
 }
   
+
+.collapsible1 {
+	background-color: #273b64;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size:2rem;
+	margin: 0;
+	font-weight: 300;
+}
+
+
+  
+.active, .collapsible1:hover {
+	/*#0B1738  */
+	background-color: #1B2D55;
+}
+
+.ok {
+	padding-left: 25px;
+}
+
 .content {
 	padding: 0 18px;
 	max-height: 0;
@@ -39,6 +67,13 @@ n1 {
 	background-color: #273b64;
 }
 
+.content1 {
+	padding: 0 -15px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: #273b64;
+}
 
 .column1 {
 	float: left;
