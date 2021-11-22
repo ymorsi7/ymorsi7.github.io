@@ -193,7 +193,7 @@ h1p{font-family: 'Syncopate', cursive;
 	color:"white"; max-width: 70%;
 }
 
-#yantitle{font-size:14px;margin:20px;padding-left:10px}
+#yantitle{font-size:14px;margin:20px;padding-left:10px; color:white;}
 
 .border {
 	border: 5px solid rgb(10, 75, 132);
