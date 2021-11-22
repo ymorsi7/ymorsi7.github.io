@@ -16,7 +16,7 @@ body {
 	bottom: 0;
 	position: relative; 
 	/* This filter is a lot of the magic, try commenting it out to see how the morphing works! */
-	filter: url(#threshold) blur(0.6px);
+	filter: url(#threshold) blur(0.5px);
 }
 
 /* Your average text styling */
