@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/title.css">
 
 	<link rel="icon" type="image/x-icon" href="assets/img/profile.png">
 	<meta name="author" content="Yusuf Morsi">
@@ -62,13 +63,32 @@
 			<div class="container has-text-centered">
 				<img class="avatar" src="assets/img/profile.png">
 			</div>
-			<div class="container"></br>
-				<h1 style="font-size: 300%">
-					<center style="color:#1B2D55 " >Yusuf Morsi</center>
-				</h1>
-			</div>
+			<center>
 		</section>
+		
+<div id="container"><br><br><br><br><br>
+	<span id="text1"></span>
+	<span id="text2"></span>
+</div>
 
+<!-- The SVG filter used to create the merging effect -->
+<svg id="filters">
+	<defs>
+		<filter id="threshold">
+			<!-- Basically just a threshold effect - pixels with a high enough opacity are set to full opacity, and all other pixels are set to completely transparent. -->
+			<feColorMatrix in="SourceGraphic"
+					type="matrix"
+					values="1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 255 -140" />
+		</filter>
+	</defs>
+</svg></center>
+
+<!-- Explanation in JS tab -->
+
+<!-- The two texts -->
 
 
 
@@ -367,6 +387,7 @@
 		</footer>-->
 		
 		<!-- Scripts  -->
-		<script src="controller.js"></script>		
+		<script src="controller.js"></script>	
+		<script src="js/title.js"></script>		
 	</body>	
 </html>
