@@ -29,6 +29,7 @@ body {
 	font-size: 80pt;
 	padding-right:  25px;
 	text-align: center;
-	
+	padding-top : 100px;
+    padding-right: 2000px;
 	user-select: none;
 }

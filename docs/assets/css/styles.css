@@ -79,7 +79,16 @@ n1 {
 	float: left;
 	width: 50%;
   }
+
+.column2 {
+	float: left;
+	width: 45%;
+  }
   
+.column25 {
+	float: left;
+	width: 55%;
+  }
   /* Clear floats after the columns */
 .row1:after {
 	content: "";
