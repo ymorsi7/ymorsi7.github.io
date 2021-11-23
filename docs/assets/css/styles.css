@@ -12,7 +12,7 @@ n1 {
 	font-size:18px;
 }
 
-.collapsible {
+.collapsible0 {
 	background-color: #1B2D55;
 	color: white;
 	cursor: pointer;
@@ -26,6 +26,17 @@ n1 {
 	font-weight: 300;
 }
 
+.collapsible {
+	padding:0.6em 2em;
+  border-radius: 8px;
+  color:#fff;
+  background-color:#41619c;
+  font-size:1.2em;
+	width: 100%;
+  border:0;
+  cursor:pointer;
+  margin:1em;
+}
 
   
 .active, .collapsible:hover {
@@ -238,6 +249,9 @@ h1p{font-family: 'Syncopate', cursive;
 }
 
 #yantitle{font-size:14px;margin:20px;padding-left:10px; color:white;}
+
+#h1{font-family: 'Syncopate', cursive; color: white;
+}
 
 .border {
 	border: 5px solid rgb(10, 75, 132);
