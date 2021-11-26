@@ -98,7 +98,7 @@
 		<section class="section section-1">
 
 			<div class="container has-text-centered">
-				<img class="avatar" src="/docs/assets/img/profile.png">
+				<img class="avatar" src="./docs/assets/img/profile.PNG">
 			</div>
 			<div class="container"></br>
 				<h1 style="font-size: 300%">
@@ -143,13 +143,13 @@
 					student and
 					researcher at the University of California, San Diego. I'm minoring in mathmetmatics in order to
 					enhance my problem-solving.
-					Welcome to my portfolio website, where I upload my some of projects! If you wish to contact me,
+					Welcome to my portfolio website, where I upload some of my <a href = "#projects" style = "color:white;">projects</a>! If you wish to contact me,
 					please
-					feel free to email me at ymorsi7[at]gmail.com.
+					feel free to email me at ymorsi7[at]gmail.com. Click <a href="./docs/assets/files/resume.pdf" class="nav-item" style = "display:inline;margin:0;
+					padding:0;
+					overflow-x:hidden;" target = "_blank"><b>here</b></a> for my resume!
 				</p>
 			</div>
-			<b><a href="/docs/assets/files/resume.pdf" class="nav-item" target="_blank">• Click here for my
-					resume!</a></b>
 		</div>
 
 
@@ -161,24 +161,70 @@
 		<br>
 		<div class="container">
 
-			<button class="collapsible">Experience</button>
+			<button class="collapsible" id = "exp">Experience</button>
 			<!-- Use the following as a guide to make pop-ups for experience: https://html-online.com/articles/simple-popup-box/-->
 			<div class="content" style="color:white">
 				<div class="columns is-multiline is-desktop"></div>
 				<br>
 				<p class="title is-4">Relevant Experience</p>
-				<p class="intro">Project YLLOW (Startup)</p>
-				<li id="yantitle">Software Engineer <b>(October 2021 - <i>Present</i>)</b></li>
-				<p class="intro">UC San Diego DigiHealth Lab</p>
-				<li id="yantitle">Undergraduate Researcher <b>(April 2021 - <i>Present</i>)</b></li>
-				<p class="intro">SDSU Experimental Mechanics Lab</p>
-				<li id="yantitle">Researcher - Young Engineer Experience <b>(June 2019 - July 2019)</b></li>
+				
+				<a href = "https://projectyllow.com/" class="intro" target = "blank" style = "color:white;">Project YLLOW (Startup)</a><br><br>
+				<a class="button1" id="yantitle" href="#popup00">Software Developer <b>(October 2021 - <i>Present</i>)</b></a>
+			<div id="popup00" class="overlay">
+				<div class="popup">
+					<h2>About</h2>
+					<a class="close" href="#exp">&times;</a>
+					<div class="content">
+						<p>My role as a software developer in this startup is to create a mobile application with Kotlin and Java. This app is
+							an exclusive social platform where people are only able to add people that they meet in real life by scanning an NFC chip. 
+							I decided to join this startup part-time for the opportunity to work with NFC chips and mobile app development.
+						</p>
+					</div>
+				</div>
+			</div><br><br>
+
+			<a href = "https://digihealth.eng.ucsd.edu" class="intro" target = "blank" style = "color:white;">UCSD DigiHealth Lab</a><br><br>
+				<a class="button1" id="yantitle" href="#popup01">Undergraduate Researcher <b>(April 2021 - <i>Present</i>)</b></a>
+			<div id="popup01" class="overlay">
+				<div class="popup">
+					<h2>About</h2>
+					<a class="close" href="#exp">&times;</a>
+					<div class="content">
+						<p>I am working as an undergraduate researcher under the guidance of Professor Edward Wang at UCSD's DigiHealth Lab, which is a combined product from the Electrical and Computer Engineering department and UCSD Design lab. I am working with other students in this lab to develop a health device.</p>
+					</div>
+				</div>
+			</div><br><br>
+
+				<a href = "https://youssef-lab.sdsu.edu/our-team/young-engineer-experience-yee/" class="intro" target = "blank" style = "color:white;">SDSU Experimental Mechanics Lab</a><br><br>
+				<a class="button1" id="yantitle" href="#popup02">Researcher - Young Engineer Experience <b>(June 2019 - July 2019)</b></a>
+
+				<div id="popup02" class="overlay">
+					<div class="popup">
+						<h2>About</h2>
+						<a class="close" href="#exp">&times;</a>
+						<div class="content">
+							<p>In this amazing research experience, I researched the tensile strength of 3D printed ABS ASTM D638 samples versus ASTM D638 samples created with injection molding in SDSU's Experimental Mechanics Laboratory (~100 hours). Working under the guidance of Professor George Youssef and his graduate students, I not only learned how to conduct research, but also how to work efficiently in a lab environment.</p>
+						</div>
+					</div>
+				</div><br><br>
 				<hr>
 				<p class="title is-4">Other Experience</p>
 				<p class="intro">Mathnasium</p>
-				<li id="yantitle">Mathematics Instructor <b>(May 2021 - <i>Present</i>)</b></li>
+				<a class="button1" id="yantitle" href="#popup03">Mathematics Instructor <b>(May 2021 - <i>Present</i>)</b></a><br><br>
+				<div id="popup03" class="overlay">
+					<div class="popup">
+						<h2>About</h2>
+						<a class="close" href="#exp">&times;</a>
+						<div class="content">
+							<p>I instruct elementary, middle, and high school students in areas of mathematics up until Pre-Calculus.</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+
+
 		<div class="container">
 
 			<button class="collapsible">Education</button>
@@ -593,14 +639,16 @@
 		<div class="container">
 			<div class="has-text-centered">
 				<h3 class="title is-3">More About Me</h3>
-				<p style = "display: inline;">Although love spending my free time coding, I also have interests in <a
-						href="/docs/photography.html" style = "display: inline;    margin:0;
+				<p style="display: inline;">Although I spend the majority of my free time coding, I also have interests
+					in <a href="/docs/photography.html" style="display: inline;    margin:0;
 						padding:0;
-						overflow-x:hidden;" class="nav-item" target="_blank"><b>photography</b></a>, 3D-printing, and record collecting.</p><br>
+						overflow-x:hidden;" class="nav-item" target="_blank"><b>photography</b></a>, 3D-printing, and record collecting.
+				</p><br>
 			</div><br>
 			<center>
 				<img src="assets/img/photography/sfurban.jpg" alt="Image" width=57% class="borderr">
-			</center></section>
+			</center>
+	</section>
 
 
 	<section id="projects" class="section section-2-5">
