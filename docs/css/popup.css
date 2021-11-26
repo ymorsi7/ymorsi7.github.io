@@ -36,10 +36,12 @@
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
+    z-index: 1 !important;
   }
   .overlay:target {
     visibility: visible;
     opacity: 1;
+    z-index: 1 !important;
   }
   
   .popup {
@@ -48,14 +50,17 @@
     background: #C3D9F1;
     border-radius: 5px;
     width: 30%;
-    position: relative;
+    position: relative; z-index: 3;
     transition: all 5s ease-in-out;
+    z-index: 1 !important;
   }
   
   .popup h2 {
     margin-top: 0;
     color: #333;
     font-family: Tahoma, Arial, sans-serif;
+    z-index: 1 !important;
+    z-index: 3;
   }
   .popup .close {
     position: absolute;
@@ -65,6 +70,7 @@
     font-size: 30px;
     font-weight: bold;
     text-decoration: none;
+    z-index: 1 !important;
     color: #333;
   }
   .popup .close:hover {
@@ -74,6 +80,7 @@
     max-height: 30%;
     background-color: #C3D9F1;
     overflow: auto;
+    z-index: 1 !important;
   }
   
   @media screen and (max-width: 700px){
