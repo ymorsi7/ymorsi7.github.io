@@ -6,6 +6,7 @@ body {
 	font-family: "Poppins", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smooth: antialiased;
+	color: #C3D9F1;
 }
 
 h1,
@@ -878,7 +879,7 @@ ol {
 }
 
 .pf-2 {
-	padding-left: 83px;
+	/*padding-left: 83px;*/
 }
 
 .portfolio-warp {

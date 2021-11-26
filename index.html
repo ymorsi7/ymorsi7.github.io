@@ -58,62 +58,77 @@
 		</span>
 	</nav>
 
-	
+
 	<!-- Desktop Title -->
-	<div id = "content-desktop">
-    <div class = "row1">
-    <div class = "column2">
-	<section class="section section-1">
-		<div class="container has-text-centered">
-			<img class="avatar" src="/docs/assets/img/profile.png">
-		</div></div>
-	</section>
+	<div id="content-desktop">
+		<div class="row1">
+			<div class="column2">
+				<section class="section section-1">
+					<div class="container has-text-centered">
+						<img class="avatar" src="/docs/assets/img/profile.png">
+					</div>
+			</div>
+			</section>
 
 
-  <div class = "column25">
-	<div id="container">
-		<span id="text1"></span>
-		<span id="text2"></span>
-	</div>
-	<svg id="filters">
-		<defs>
-			<filter id="threshold">
-				<!-- Basically just a threshold effect - pixels with a high enough opacity are set to full opacity, and all other pixels are set to completely transparent. -->
-				<feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+			<div class="column25">
+				<div id="container">
+					<span id="text1"></span>
+					<span id="text2"></span>
+				</div>
+				<svg id="filters">
+					<defs>
+						<filter id="threshold">
+							<!-- Basically just a threshold effect - pixels with a high enough opacity are set to full opacity, and all other pixels are set to completely transparent. -->
+							<feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
 									0 1 0 0 0
 									0 0 1 0 0
 									0 0 0 255 -140" />
-			</filter>
-		</defs>
-	</svg></div></div></div>
-  <!-- TITLE END-->
-
-
-  <!-- MOBILE TITLE-->
-<div id = "content-mobile">
-  <section class="section section-1">
-	
-	<div class="container has-text-centered">
-		<img class="avatar" src="/docs/assets/img/profile.png">
+						</filter>
+					</defs>
+				</svg>
+			</div>
+		</div>
 	</div>
-	<div class="container"></br>
-		<h1 style="font-size: 300%">
-			<center  style="color:#1B2D55" >Yusuf Morsi</center>
-		</h1>
+	<!-- TITLE END-->
+
+
+	<!-- MOBILE TITLE-->
+	<div id="content-mobile">
+		<section class="section section-1">
+
+			<div class="container has-text-centered">
+				<img class="avatar" src="/docs/assets/img/profile.png">
+			</div>
+			<div class="container"></br>
+				<h1 style="font-size: 300%">
+					<center style="color:#1B2D55">Yusuf Morsi</center>
+				</h1>
+			</div>
+		</section>
 	</div>
-</section></div>
 
-<style>
-	#content-desktop {display: block;}
-#content-mobile {display: none;}
+	<style>
+		#content-desktop {
+			display: block;
+		}
 
-@media screen and (max-width: 768px) {
+		#content-mobile {
+			display: none;
+		}
 
-#content-desktop {display: none;}
-#content-mobile {display: block;}
+		@media screen and (max-width: 768px) {
 
-}
-</style>
+			#content-desktop {
+				display: none;
+			}
+
+			#content-mobile {
+				display: block;
+			}
+
+		}
+	</style>
 
 	<!-- About -->
 	<section id="about" class="section section-2">
@@ -133,7 +148,8 @@
 					feel free to email me at ymorsi7[at]gmail.com.
 				</p>
 			</div>
-			<b><a href="/docs/assets/files/resume.pdf" class="nav-item" target="_blank">• Click here for my resume!</a></b>
+			<b><a href="/docs/assets/files/resume.pdf" class="nav-item" target="_blank">• Click here for my
+					resume!</a></b>
 		</div>
 
 
@@ -141,16 +157,16 @@
 		<!-- Education -->
 		<br>
 		<hr>
-		
+
 		<br>
 		<div class="container">
 
 			<button class="collapsible">Experience</button>
-<!-- Use the following as a guide to make pop-ups for experience: https://html-online.com/articles/simple-popup-box/-->
+			<!-- Use the following as a guide to make pop-ups for experience: https://html-online.com/articles/simple-popup-box/-->
 			<div class="content" style="color:white">
 				<div class="columns is-multiline is-desktop"></div>
 				<br>
-				<p class = "title is-4">Relevant Experience</p>
+				<p class="title is-4">Relevant Experience</p>
 				<p class="intro">Project YLLOW (Startup)</p>
 				<li id="yantitle">Software Engineer <b>(October 2021 - <i>Present</i>)</b></li>
 				<p class="intro">UC San Diego DigiHealth Lab</p>
@@ -158,10 +174,10 @@
 				<p class="intro">SDSU Experimental Mechanics Lab</p>
 				<li id="yantitle">Researcher - Young Engineer Experience <b>(June 2019 - July 2019)</b></li>
 				<hr>
-				<p class = "title is-4">Other Experience</p>
+				<p class="title is-4">Other Experience</p>
 				<p class="intro">Mathnasium</p>
 				<li id="yantitle">Mathematics Instructor <b>(May 2021 - <i>Present</i>)</b></li>
-			</div>	
+			</div>
 		</div>
 		<div class="container">
 
@@ -176,7 +192,7 @@
 				<p class="intro">PHHS - Engineering Academy</p>
 				<li id="yantitle">High School Diploma <b>(2016 - 2020)</b></li>
 				<li id="yantitle">Graduated w/ Honors and Academic Distinction</li>
-			</div>	
+			</div>
 		</div>
 
 
@@ -231,9 +247,9 @@
 			</div>
 		</div>
 
-		
+
 		<div class="container">
-			<button class="collapsible" id = "cert">Certifications</button>
+			<button class="collapsible" id="cert">Certifications</button>
 			<div class="content" style="color:white">
 				<br>
 				<p class="intro">UC San Diego Extension</p>
@@ -254,76 +270,80 @@
 					</div>
 				</div><br><br>
 
-				<a class="button1" id="yantitle" href="#popup2">Business Management Certification <b>(Sep. 2020 - May 2021)</b></a>
+				<a class="button1" id="yantitle" href="#popup2">Business Management Certification <b>(Sep. 2020 - May
+						2021)</b></a>
 
-			<div id="popup2" class="overlay">
-				<div class="popup">
-					<h2>Courses:</h2>
-					<a class="close" href="#cert">&times;</a>
-					<div class="content">
-						<li>BUSA-90019: Organizational Behavior</li>
-						<li>BUSA-90018: Elements of Marketing</li>
-						<li>BUSA-90017: Business Decision Making</li>
+				<div id="popup2" class="overlay">
+					<div class="popup">
+						<h2>Courses:</h2>
+						<a class="close" href="#cert">&times;</a>
+						<div class="content">
+							<li>BUSA-90019: Organizational Behavior</li>
+							<li>BUSA-90018: Elements of Marketing</li>
+							<li>BUSA-90017: Business Decision Making</li>
+						</div>
 					</div>
-				</div>
-			</div><br>
-			<br>
+				</div><br>
+				<br>
 
 
 
-			<a class="button1" id="yantitle" href="#popup3">Front-End Web Development Certification <b>(Jan. 2020 - Sep. 2020)</b></a>
+				<a class="button1" id="yantitle" href="#popup3">Front-End Web Development Certification <b>(Jan. 2020 -
+						Sep. 2020)</b></a>
 
-			<div id="popup3" class="overlay">
-				<div class="popup">
-					<h2>Courses:</h2>
-					<a class="close" href="#cert">&times;</a>
-					<div class="content">
-						<li>CSE-90027: Intro to Front End Technologies</li>
-						<li>CSE-90024: HTML5 and CSS</li>
-						<li>CSE-90025: HTML5 and JavaScript</li>
+				<div id="popup3" class="overlay">
+					<div class="popup">
+						<h2>Courses:</h2>
+						<a class="close" href="#cert">&times;</a>
+						<div class="content">
+							<li>CSE-90027: Intro to Front End Technologies</li>
+							<li>CSE-90024: HTML5 and CSS</li>
+							<li>CSE-90025: HTML5 and JavaScript</li>
+						</div>
 					</div>
-				</div>
-			</div><br><br>
+				</div><br><br>
 
-			<a class="button1" id="yantitle" href="#popup4">iOS Programming Certification <b>(Jan. 2019 - May 2019)</b></a>
+				<a class="button1" id="yantitle" href="#popup4">iOS Programming Certification <b>(Jan. 2019 - May
+						2019)</b></a>
 
-			<div id="popup4" class="overlay">
-				<div class="popup">
-					<h2>Courses:</h2>
-					<a class="close" href="#cert">&times;</a>
-					<div class="content">
-						<li>CSE-90028: iOS Programming I</li>
-						<li>CSE-90029: iOS Programming II</li>
+				<div id="popup4" class="overlay">
+					<div class="popup">
+						<h2>Courses:</h2>
+						<a class="close" href="#cert">&times;</a>
+						<div class="content">
+							<li>CSE-90028: iOS Programming I</li>
+							<li>CSE-90029: iOS Programming II</li>
+						</div>
 					</div>
-				</div>
-			</div><br><br><br>
+				</div><br><br><br>
 
-			<p class="intro">Codecademy </p>
+				<p class="intro">Codecademy </p>
 
-			<a class="button1" id="yantitle" href="#popup5">Computer Science <b>(Oct. 2021 - Dec. 2021)</b></a>
+				<a class="button1" id="yantitle" href="#popup5">Computer Science <b>(Oct. 2021 - Dec. 2021)</b></a>
 
-			<div id="popup5" class="overlay">
-				<div class="popup">
-					<h2>Courses:</h2>
-					<a class="close" href="#cert">&times;</a>
-					<div class="content">
-						<li>CS105: Discrete Math</li>
-						<li>CS104: Computer Architecture</li>
-						<li>CS103: Databases</li>
-						<li>CS102: Data Structures and Algorithms</li>
-						<li>CS101: Introduction to Programming</li>
-						<br>
+				<div id="popup5" class="overlay">
+					<div class="popup">
+						<h2>Courses:</h2>
+						<a class="close" href="#cert">&times;</a>
+						<div class="content">
+							<li>CS105: Discrete Math</li>
+							<li>CS104: Computer Architecture</li>
+							<li>CS103: Databases</li>
+							<li>CS102: Data Structures and Algorithms</li>
+							<li>CS101: Introduction to Programming</li>
+							<br>
+						</div>
 					</div>
-				</div>
-			</div><br><br>
+				</div><br><br>
 
 				<p class="intro">MathWorks</p>
 				<p id="yantitle">MATLAB Onramp Training <b>(October 2020)</b></p>
 
 
 				<p class="intro">MITx </p>
-				<p id="yantitle">Cybersecurity for Critical Urban Infrastructure <b>(July 2020)</b><p>
-				<!-- 	<p class = "intro">International Business Management Institute </p> 
+				<p id="yantitle">Cybersecurity for Critical Urban Infrastructure <b>(July 2020)</b>
+				<p>
+					<!-- 	<p class = "intro">International Business Management Institute </p> 
 				<li id = "yantitle">Project Management Program Certification <b>(August 2020 - December 2020)
 					</b></li>
 				 <p class = "intro">American Red Cross</p> 
@@ -379,7 +399,8 @@
 								<b>
 									<a href="/docs/assets/files/swayingattention.pdf" class="nav-item" target="_blank">•
 										Report</a>
-									<a href="/docs/assets/files/swayingattentionpres.pdf" class="nav-item" target="_blank">•
+									<a href="/docs/assets/files/swayingattentionpres.pdf" class="nav-item"
+										target="_blank">•
 										Presentation</a></b>
 							</div>
 						</article>
@@ -537,36 +558,33 @@
 				</div>
 			</div>
 		</div>
-<br>
+		<br>
 		<hr>
 
 		<div class="container">
 			<br>
-		<div>
-			<a href = "https://www.github.com/ymorsi7" class="title is-3" target = "blank">Github Contributions</a></div><br>
+			<div>
+				<a href="https://www.github.com/ymorsi7" class="title is-3" target="blank">Github Contributions</a>
+			</div><br>
 			<!-- Include the library. -->
-			
-<div>
-<script
-src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"
-></script>
+
+			<div>
+				<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
 
 
-<link
- rel="stylesheet"
- href="/docs/css/ghfile.css"
-/>
+				<link rel="stylesheet" href="/docs/css/ghfile.css" />
 
-<!-- Prepare a container for your calendar. -->
-<div class="calendar">
-  <!-- Loading stuff -->
-  Loading the data just for you.
-</div>
-<script>
-  GitHubCalendar(".calendar", "ymorsi7");
-  // or enable responsive functionality
-  GitHubCalendar(".calendar", "ymorsi7", { responsive: true });
-</script></div>
+				<!-- Prepare a container for your calendar. -->
+				<div class="calendar">
+					<!-- Loading stuff -->
+					Loading the data just for you.
+				</div>
+				<script>
+					GitHubCalendar(".calendar", "ymorsi7");
+					// or enable responsive functionality
+					GitHubCalendar(".calendar", "ymorsi7", { responsive: true });
+				</script>
+			</div>
 		</div>
 	</section>
 
@@ -574,19 +592,15 @@ src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"
 	<section id="projects" class="section section-2">
 		<div class="container">
 			<div class="has-text-centered">
-				<h3 class="title is-3">Photography</h3>
-				<p>I like to spend my spare time 3D printing and photographing skylines and nature. <a
-						href="/docs/photography.html" class="nav-item" target="_blank">Click<b>&nbsp; here &nbsp;</b> to see
-						some of my work!</a> </p><br>
-			</div>
+				<h3 class="title is-3">More About Me</h3>
+				<p style = "display: inline;">Although love spending my free time coding, I also have interests in <a
+						href="/docs/photography.html" style = "display: inline;    margin:0;
+						padding:0;
+						overflow-x:hidden;" class="nav-item" target="_blank"><b>photography</b></a>, 3D-printing, and record collecting.</p><br>
+			</div><br>
 			<center>
-				<img src="/docs/assets/img/photography/sfurban.jpg" alt="Image" width=60% class="borderr">
-			</center>
-
-
-
-
-	</section>
+				<img src="assets/img/photography/sfurban.jpg" alt="Image" width=57% class="borderr">
+			</center></section>
 
 
 	<section id="projects" class="section section-2-5">
@@ -603,7 +617,7 @@ src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"
 	<!-- Scripts  -->
 	<script src="/docs/js/controller.js"></script>
 	<script src="/docs/js/title.js"></script>
-	<script src = "/docs/js/popup.js"></script>
+	<script src="/docs/js/popup.js"></script>
 </body>
 
 </html>
