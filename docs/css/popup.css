@@ -82,6 +82,7 @@
     overflow: auto;
     z-index: 1 !important;
   }
+
   
   @media screen and (max-width: 700px){
     .box{
@@ -90,4 +91,62 @@
     .popup{
       width: 70%;
     }
+  }
+
+
+
+
+
+  .button2 {
+    font-size: 1em;
+    color: white;
+    padding: 10px;
+    border-radius: 10px/40px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+
+  .button2:hover {
+    padding-bottom: 50px;
+  } 
+
+  .popupb {
+    margin: 70px auto;
+    padding: 20px;
+    background: #C3D9F1;
+    border-radius: 5px;
+    width: 70%;
+    height: 50%;
+    position: relative; z-index: 3;
+    transition: all 5s ease-in-out;
+    z-index: 1 !important;
+  }
+  
+  .popupb h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+    z-index: 1 !important;
+    z-index: 3;
+  }
+  .popupb .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1 !important;
+    color: #333;
+  }
+  .popupb .close:hover {
+    color: #41619c;
+  }
+  .popupb .content {
+    max-height: 30%;
+    background-color: #C3D9F1;
+    overflow: auto;
+    z-index: 1 !important;
   }
