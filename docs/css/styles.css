@@ -43,6 +43,20 @@ n1 {
 	/*#1B2D55  */
 	background-color: #0B1738;
 }
+
+.kewl{
+	
+	padding:0.25em;
+  border-radius: 14px;
+  text-align: center;
+  color:#fff;
+  background-color:#41619c;
+  font-size:1.2em;
+	width: 85%;
+  border:0;
+  cursor:pointer;
+  margin:.4em;
+}
   
 
 .collapsible1 {
