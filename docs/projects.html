@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
 	<title>Yusuf M | Projects</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
@@ -21,7 +23,7 @@
 </head>
 
 <body>
-    <br>
+	<br>
 	<!-- Navbar -->
 	<nav class="nav container void-background">
 		<!-- This "nav-menu" is hidden on mobile -->
@@ -59,42 +61,53 @@
 
 
 	<!-- Desktop Title --><br><br>
-    <p class="line-1 anim-typewriter"  style="color:#1B2D55;font-size:380%">Projects</p>
-</div>
+	<p class="line-1 anim-typewriter" style="color:#1B2D55;font-size:380%">Projects</p>
+	</div>
 
 
-<style>
+	<style>
+		.line-1 {
+			position: relative;
+			top: 50%;
+			width: 24em;
+			margin: 0 auto;
+			border-right: 2px solid #1B2D55;
+			font-size: 180%;
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
+			transform: translateY(-50%);
+			padding-bottom: 0;
+		}
 
-.line-1{
-position: relative;
-top: 50%;  
-width: 24em;
-margin: 0 auto;
-border-right: 2px solid #1B2D55;
-font-size: 180%;
-text-align: center;
-white-space: nowrap;
-overflow: hidden;
-transform: translateY(-50%); 
-padding-bottom: 0;   
-}
+		/* Animation */
+		.anim-typewriter {
+			animation: typewriter 1s steps(16) .2s 1 normal both,
+				blinkTextCursor 500ms steps(16) infinite normal;
+		}
 
-/* Animation */
-.anim-typewriter{
-animation: typewriter 1s steps(16) .2s 1 normal both,
- blinkTextCursor 500ms steps(16) infinite normal;
-}
-@keyframes typewriter{
-from{width: 0;}
-to{width: 4em;}
-}
-@keyframes blinkTextCursor{
-from{border-right-color: #1B2D55;}
-to{border-right-color: transparent;}
-}
+		@keyframes typewriter {
+			from {
+				width: 0;
+			}
+
+			to {
+				width: 4em;
+			}
+		}
+
+		@keyframes blinkTextCursor {
+			from {
+				border-right-color: #1B2D55;
+			}
+
+			to {
+				border-right-color: transparent;
+			}
+		}
 
 
-#content-desktop {
+		#content-desktop {
 			display: block;
 		}
 
@@ -113,114 +126,153 @@ to{border-right-color: transparent;}
 			}
 
 		}
-</style>
+	</style>
 
 
 	<!-- TITLE END-->
 
 	<!-- About -->
-    
 
 
-	<section id="about" class="section section-2"><div class="container">
+
+	<section id="about" class="section section-2">
 		<div class="container">
-            <div class="has-text-centered">
-                <h3 class="title is-3" id = "minime">MiniMe: Bipedal Robot (Winter '21 - Summer '22)</h3>
-            </div></div>
-            
-            <div class="columns is-multiline is-desktop">
-                <p class="intro1">
-                    The final goal of MiniMe is the successful creation of a bipedal robot that can avoid obstacles on its own. 
-                            First, a small biped will be built using an Arduino Uno. Subsequently, remote-control capabilities will be added 
-                            to the Arduino biped. After this, a camera will be mounted to this biped, and using OpenCV and PyTorch, the biped 
-                            will be able to detect, then avoid objects. Using Machine Learning, the Arduino biped will walk through open areas and
-                            avoid objects while identifying them. Once the code is fully functional on this biped, a 1.5-foot tall biped will be designed
-                            with CAD software and 3D printed. Further machine learning technology will be explored upon the completion of the final
-                            biped.<br><br>
-                </p>
-                
-                <p class = 'intro1'>
-                    Click <b><a href = "https://ymorsi.com/docs/minime.html" style = "color:#C3D9F1;">here</a></b> for the project webpage!
-                </p>
-               
-            </div>
-                        
-            
-            <hr>
-
-			<div class="has-text-centered">
-				<h3 class="title is-3" id = "disc">AI Yusuf Discord Bot (Fall - Winter '21)</h3>
+			<div class="container">
+				<div class="has-text-centered">
+					<h3 class="title is-3" id="minime">MiniMe: Bipedal Robot (Winter '21 - Summer '22)</h3>
+				</div>
 			</div>
 
 			<div class="columns is-multiline is-desktop">
 				<p class="intro1">
-					With all the time I spend on undergraduate coursework, research, and programming projects, 
-                    I decided to save time by creating an AI version of myself to talk to my friends. First, I used Python
-                    to create a Discord bot that sorts through conversations in a server that I'm active in 
-                    and generates transcripts containing them. After this, I used PyTorch
-                    to interpret the transcripts and create a text file containing only my messages and what they were in response to.
-                    I then used Pytorch to build a chatbot using the new generated text file. <br><br></p>
-                <p class = "intro1">
-                    Using Python once again, I created another Discord bot that takes in messages from a Discord group server, runs it 
-                    through the Pytorch code, and outputs the result in Discord.<br><br></p>
+					The final goal of MiniMe is the successful creation of a bipedal robot that can avoid obstacles on
+					its own.
+					First, a small biped will be built using an Arduino Uno. Subsequently, remote-control capabilities
+					will be added
+					to the Arduino biped. After this, a camera will be mounted to this biped, and using OpenCV and
+					PyTorch, the biped
+					will be able to detect, then avoid objects. Using Machine Learning, the Arduino biped will walk
+					through open areas and
+					avoid objects while identifying them. Once the code is fully functional on this biped, a 1.5-foot
+					tall biped will be designed
+					with CAD software and 3D printed. Further machine learning technology will be explored upon the
+					completion of the final
+					biped.<br><br>
+				</p>
 
-                <p class = "intro1">The code for this project has been created. However, the project is currently in the data 
-                            collection phase. When complete, the code will be interpreted, and the AI Discord bot will be deployed.
-                            </p>
+				<p class='intro1'>
+					Click <b><a href="https://ymorsi.com/docs/minime.html" style="color:#C3D9F1;">here</a></b> for the
+					project webpage!
+				</p>
+
 			</div>
 
-<hr>
 
-<div class="has-text-centered">
-	<h3 class="title is-3" id = "drow">Drowsiness Detection with OpenCV and Arduino (Spring '21)</h3>
-</div>
+			<hr>
 
-<div class="columns is-multiline is-desktop">
-	<p class="intro1">
-		For our final project in our Rapid Software and Hardware Design course at UCSD, we used some of the skills we learned throughout the quarter to create a design that we had in mind. Swaying Attention is a project that aims to tackle the problem of dozing off during online class. Students not paying attention in class was a problem when school is in person but now that most students are doing school online as a result of quarantine the problem has gotten a lot worse. Many students, including ourselves, have a hard time paying attention in online lectures and end up missing a major portion of the content. To solve this problem we created Swaying attention, a program that uses eye detection to track students dozing off and gives them a reminder to stay focused. To achieve this we used Python, OpenCV, D-lib, Arduino-C code and a Sparkfun ESP32 board. Our prototype is able to detect drowsiness and outputs a message to the student on a display as well as making noise with a buzzer to get their attention.
-	</p>
-</div>
+			<div class="has-text-centered">
+				<h3 class="title is-3" id="disc">AI Yusuf Discord Bot (Fall - Winter '21)</h3>
+			</div>
+
+			<div class="columns is-multiline is-desktop">
+				<p class="intro1">
+					With all the time I spend on undergraduate coursework, research, and programming projects,
+					I decided to save time by creating an AI version of myself to talk to my friends. First, I used
+					Python
+					to create a Discord bot that sorts through conversations in a server that I'm active in
+					and generates transcripts containing them. After this, I used PyTorch
+					to interpret the transcripts and create a text file containing only my messages and what they were
+					in response to.
+					I then used Pytorch to build a chatbot using the new generated text file. <br><br></p>
+				<p class="intro1">
+					Using Python once again, I created another Discord bot that takes in messages from a Discord group
+					server, runs it
+					through the Pytorch code, and outputs the result in Discord.<br><br></p>
+
+				<p class="intro1">The code for this project has been created. However, the project is currently in the
+					data
+					collection phase. When complete, the code will be interpreted, and the AI Discord bot will be
+					deployed.
+				</p>
+			</div>
+
+			<hr>
+
+			<div class="has-text-centered">
+				<h3 class="title is-3" id="drow">Drowsiness Detection with OpenCV and Arduino (Spring '21)</h3>
+			</div>
+
+			<div class="columns is-multiline is-desktop">
+				<p class="intro1">
+					For our final project in our Rapid Software and Hardware Design course at UCSD, we used some of the
+					skills we learned throughout the quarter to create a design that we had in mind. Swaying Attention
+					is a project that aims to tackle the problem of dozing off during online class. Students not paying
+					attention in class was a problem when school is in person but now that most students are doing
+					school online as a result of quarantine the problem has gotten a lot worse. Many students, including
+					ourselves, have a hard time paying attention in online lectures and end up missing a major portion
+					of the content. To solve this problem we created Swaying attention, a program that uses eye
+					detection to track students dozing off and gives them a reminder to stay focused. To achieve this we
+					used Python, OpenCV, D-lib, Arduino-C code and a Sparkfun ESP32 board. Our prototype is able to
+					detect drowsiness and outputs a message to the student on a display as well as making noise with a
+					buzzer to get their attention.
+				</p>
+			</div>
 
 
-<hr>
-<div class="has-text-centered">
-	<h3 class="title is-3" id = "hcsr">Non-Contact Range Detection of HC-SR04 Ultrasonic Sensor (Fall '20)</h3>
-</div>
+			<hr>
+			<div class="has-text-centered">
+				<h3 class="title is-3" id="hcsr">Non-Contact Range Detection of HC-SR04 Ultrasonic Sensor (Fall '20)
+				</h3>
+			</div>
 
-<div class="columns is-multiline is-desktop">
-	<p class="intro1">
-		In this project, two other electrical engineering students at UCSD and I wrote Arduino-C code that prints the distance a pulse travels upon meeting an obstacle. In addition, we have our code graph the distances onto Arduino IDE’s serial monitor. We also integrated three LEDs and a buzzer to signify danger zones, and an IR Remote and Receiver to pause the HC-SR04 sensor. We also implemented a DHT11 temperature/humidity sensor to detect whether the obstacle is inanimate or not.
-	</p>
-</div>
-
-
-<hr>
-<div class="has-text-centered">
-	<h3 class="title is-3" id = "lf">Light-Following Arm with MATLAB and Arduino (Fall '20)</h3>
-</div>
-
-<div class="columns is-multiline is-desktop">
-	<p class="intro1">
-		In this project, I used an Arduino Mega to have lined up LEDs light up one-by-one. Then, using MATLAB, a second breadboard, a servo motor, and photoresistors, I had a board with the photoresistors on it follow the lights as they turn on.
+			<div class="columns is-multiline is-desktop">
+				<p class="intro1">
+					In this project, two other electrical engineering students at UCSD and I wrote Arduino-C code that
+					prints the distance a pulse travels upon meeting an obstacle. In addition, we have our code graph
+					the distances onto Arduino IDE’s serial monitor. We also integrated three LEDs and a buzzer to
+					signify danger zones, and an IR Remote and Receiver to pause the HC-SR04 sensor. We also implemented
+					a DHT11 temperature/humidity sensor to detect whether the obstacle is inanimate or not.
+				</p>
+			</div>
 
 
-	</p>
-</div>
+			<hr>
+			<div class="has-text-centered">
+				<h3 class="title is-3" id="lf">Light-Following Arm with MATLAB and Arduino (Fall '20)</h3>
+			</div>
+
+			<div class="columns is-multiline is-desktop">
+				<p class="intro1">
+					In this project, I used an Arduino Mega to have lined up LEDs light up one-by-one. Then, using
+					MATLAB, a second breadboard, a servo motor, and photoresistors, I had a board with the
+					photoresistors on it follow the lights as they turn on.
 
 
-<hr>
-<div class="has-text-centered">
-	<h3 class="title is-3" id = "yee">Tensile Strength of ABS Plastic Moldings and 3D Printed Samples (Summer '19)</h3>
-</div>
+				</p>
+			</div>
 
-<div class="columns is-multiline is-desktop">
-	<p class="intro1">
-		While working in the Experimental Mechanics Laboratory of Dr. George Youssef in San Diego State University for 5 weeks, myself, with the help of other members of the lab, created a makeshift aluminum ASTM D638 Standard mold and used an oven to melt plastic in it. We also used the lab's 3D printing technology to create some vertical, horizontal, and flat ASTM D638 samples. We then determined the tensile strength of the samples using a tensile strength testing machine. At the end of the five weeks, I made and presented a slideshow about my project in front of members of the lab. This amazing educational experience gave me a glimpse of the life of a student working in the Experimental Mechanics Laboratory.
-	</p>
-</div>
+
+			<hr>
+			<div class="has-text-centered">
+				<h3 class="title is-3" id="yee">Tensile Strength of ABS Plastic Moldings and 3D Printed Samples (Summer
+					'19)</h3>
+			</div>
+
+			<div class="columns is-multiline is-desktop">
+				<p class="intro1">
+					While working in the Experimental Mechanics Laboratory of Dr. George Youssef in San Diego State
+					University for 5 weeks, myself, with the help of other members of the lab, created a makeshift
+					aluminum ASTM D638 Standard mold and used an oven to melt plastic in it. We also used the lab's 3D
+					printing technology to create some vertical, horizontal, and flat ASTM D638 samples. We then
+					determined the tensile strength of the samples using a tensile strength testing machine. At the end
+					of the five weeks, I made and presented a slideshow about my project in front of members of the lab.
+					This amazing educational experience gave me a glimpse of the life of a student working in the
+					Experimental Mechanics Laboratory.
+				</p>
+			</div>
 
 		</div>
-<br><br>
+		<br><br>
 
 
 
@@ -228,18 +280,18 @@ to{border-right-color: transparent;}
 
 
 
-<center>
-	<p>Yusuf M - Portfolio 2022 &copy;</p>
-</center>
+		<center>
+			<p>Yusuf M - Portfolio 2022 &copy;</p>
+		</center>
 
-	<script src="/docs/js/controller.js"></script>
-	<script src="js/popup.js"></script>
-	<script src="js/title.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/browser.min.js"></script>
-	<script src="js/breakpoints.min.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/main.js"></script>
+		<script src="/docs/js/controller.js"></script>
+		<script src="js/popup.js"></script>
+		<script src="js/title.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="js/breakpoints.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
 </body>
 
 </html>
