@@ -1915,7 +1915,7 @@ table.alt tfoot {
   flex-wrap: wrap;
   position: relative;
   margin: -2.5em 0 0 -2.5em;
-  padding-right: 90px;
+  padding-left: 100px;
 }
 
 .tiles article {
@@ -1924,7 +1924,7 @@ table.alt tfoot {
   -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
   transition: transform 0.5s ease, opacity 0.5s ease;
   position: relative;
-  width: calc(120% - 2.5em);
+  width: calc(110% - 2.5em);
   margin: 2.5em 0 0 2.5em;
 }
 
@@ -2091,7 +2091,7 @@ body.is-touch .tiles article .content {
   }
 
   .tiles article {
-    width: calc(120% - 1.25em);
+    width: calc(110% - 1.25em);
     margin: 1.25em 0 0 1.25em;
   }
 }
@@ -2102,7 +2102,7 @@ body.is-touch .tiles article .content {
   }
 
   .tiles article {
-    width: calc(120% - 2.5em);
+    width: calc(110% - 2.5em);
     margin: 2.5em 0 0 2.5em;
   }
 }

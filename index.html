@@ -6,10 +6,19 @@
 	<!-- css files -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="./docs/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="./docs/css/title2.css">
 	<link rel="stylesheet" type="text/css" href="./docs/css/popup.css">
-	<link rel="stylesheet" type="text/css" href="./docs/css/main.css">
+	<link rel="stylesheet" type="text/css" href="./docs/css/main1.css">
+
+
+	<link rel="stylesheet" href="./docs/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./docs/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="./docs/css/magnific-popup.css" />
+	<link rel="stylesheet" href="./docs/css/slicknav.min.css" />
+	<link rel="stylesheet" href="./docs/css/owl.carousel.min.css" />
+	<link rel="stylesheet" type="text/css" href="./docs/css/stylep.css">
+	<link rel="stylesheet" type="text/css" href="./docs/css/styles.css">
+	<!-- Main Stylesheets -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="https://www.google.com/jsapi"></script>
 	<link rel="icon" type="image/x-icon" href="./docs/assets/img/profile.png">
@@ -92,7 +101,7 @@
 				</svg>
 			</div>
 		</div>
-	</div> -->
+	</div> 
 	<!-- TITLE END-->
 
 
@@ -621,18 +630,42 @@
 
 	<!-- Projects -->
 	<section id="projects" class="section section-2-5">
-		<div class="container">
 
-
-			<div id="main">
-
+				<div class = "inner">
+					
+		<div class = "container">
 				<div class="has-text-centered">
-					<h3 class="title is-3">Notable Projects</h3>
-				</div>
+					<h3 class="title is-3" style = "margin-bottom: -35px;">Projects</h3>
+				</div></div>
+				<div class="portfolio-2-section">
+					
+						<ul class="portfolio-filter pf-2 controls">
+							<center>
+								<li class="control" data-filter="all" style="color: white;font-size: 110%;">All</li>
+								<li class="control" data-filter=".notable" style="color:white;font-size: 110%;">Notable</li>
+								<li class="control" data-filter=".ml" style="color:white;font-size: 110%;">Machine Learning</li>
+							</center>
+							<center>
+								<li class="control" data-filter=".python" style="color:white;font-size: 110%;">Python</li>
+								
+								<li class="control" data-filter=".other" style="color:white;font-size: 120%;">Other</li>
+							</center>
+							<center>
+								<!-- <li class="control" data-filter=".arch" style= "color:#1B2D55">Architecture</li> -->
+							</center>
+						</ul>
+						<br>
 
-				<div class="inner">
+<div class="row portfolio-gallery m-0">
 
+
+
+
+				
 					<section class="tiles">
+						
+						<div class="mix col-lg-4 col-sm-6 p-0 ml notable other" style = "margin: -23px;">
+							<div class="portfolio-box">
 						<article class="style1">
 							<span class="imageb">
 								<img src="./docs/images/biped0.png" style="filter: blur(7px);" alt= />
@@ -646,9 +679,11 @@
 									</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div>
 
 
+						<div class="mix col-lg-4 col-sm-6 p-0 python ml" style = "margin: -23px;">
+							<div class="portfolio-box">
 						<article class="style1">
 							<span class="imageb">
 								<img src="./docs/assets/img/discbot.png" style="filter: blur(11px);" alt="" />
@@ -664,9 +699,77 @@
 									</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div>
+
+						<div class="mix col-lg-4 col-sm-6 p-0 python notable ml" style = "margin: -23px;">
+							<div class="portfolio-box">
+						<article class="style4">
+							<span class="imageb">
+								<img src="./docs/images/forest.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#battleship">
+								<h2 style="font-size: 130%;">Forest Cover Classification
+									<br><b>(Winter 2021)</b>
+								</h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">Here, I used deep learning to predict forest 
+										cover type using only cartographic variables. I utilized TensorFlow with Keras to build my classifiers.</p>
+								</div>
+							</a>
+						</article></div></div>
+				
+						<div class="mix col-lg-4 col-sm-6 p-0 ml python notable" style = "margin: -23px;">
+							<div class="portfolio-box">
+						<article class="style6">
+							<span class="imageb">
+								<img src="./docs/assets/img/ocean.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#yee">
+								<h2 style="font-size: 130%;">Identifying Garbage in the Ocean from Satellite Images<br><b> (Winter 2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this end-to-end data science project, 
+										I used Python and Jupyter Notebook to create an ML model that identifies
+										 areas in the ocean with garbage.</p>
+								</div>
+							</a>
+						</article></div></div>
 
 
+						<div class="mix col-lg-4 col-sm-6 p-0 ml python other ml" style = "margin: -23px;">
+							<div class="portfolio-box">
+						<article class="style6">
+							<span class="imageb">
+								<img src="./docs/assets/img/nlp.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#yee">
+								<h2 style="font-size: 130%;">NLP Message Analysis<br><b> (Winter 2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this end-to-end data science project, 
+										I used Python and Jupyter Notebook to create an ML model that identifies
+										 areas in the ocean with garbage.</p>
+								</div>
+							</a>
+						</article></div></div>
+
+						
+						<div class="mix col-lg-4 col-sm-6 p-0 python" style = "margin: -23px;">
+							<div class="portfolio-box">
+						<article class="style5">
+							<span class="imageb">
+								<img src="./docs/assets/img/cpu.jpg" style="filter: blur(5px);" alt="" />
+							</span>
+							<a href="docs/projects.html#lf">
+								<h2 style="font-size: 130%;">CPU Simluator <br><b>(Fall
+										2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this project, I researched, designed, and built
+										 a Python program that simulates the functionalities of a CPU.</p>
+								</div>
+							</a>
+						</article></div></div>
+
+						<div class="mix col-lg-4 col-sm-6 p-0 python ml " style = "margin: -23px;">
+							<div class="portfolio-box">
 						<article class="style3">
 							<span class="imageb">
 								<img src="./docs/assets/img/dappersuf.jpg" style="filter: blur(7px);" alt="" />
@@ -677,27 +780,34 @@
 								<div class="content" style="background-color: transparent;">
 									<p style="color: white">In this project, a colleague and I programmed a software
 										that detects
-										when the user becomes drowsy and starts to close their eyes before
+										when the user becomes drowsy before
 										alerting them with a buzzing noise until they open their eyes again.</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div>
+	
+						<div class="mix col-lg-4 col-sm-6 p-0" style = "margin: -23px;">
+							<div class="portfolio-box">
 						<article class="style4">
 							<span class="imageb">
 								<img src="./docs/assets/img/hcsr.jpg" style="filter: blur(4px);" alt="" />
 							</span>
 							<a href="docs/projects.html#hcsr">
-								<h2 style="font-size: 130%;">Non-Contact Range Detection of HC-SR04 Ultrasonic Sensor
+								<h2 style="font-size: 130%;">Non-Contact Range Detection of a HC-SR04 Ultrasonic Sensor
 									<br><b>(Fall 2020)</b>
 								</h2>
 								<div class="content" style="background-color: transparent;">
-									<p style="color: white">In this project, two other ECE
-										students at UCSD and I used MATLAB, an Arduino MEGA, LEDs, a buzzer, an IR
+									<p style="color: white">In this project, two ECE
+										classmates and I used MATLAB, an Arduino MEGA, LEDs, a buzzer, an IR
 										remote and receiver, and a DHT11 temperature
 										sensor to create a security device.</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div>
+
+						<!--
+						<div class="mix col-lg-4 col-sm-6 p-0 cpp matlab">
+							<div class="portfolio-box">
 						<article class="style5">
 							<span class="imageb">
 								<img src="./docs/assets/img/lightfollowing.jpg" style="filter: blur(4px);" alt="" />
@@ -713,7 +823,10 @@
 									</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div> -->
+				
+						<div class="mix col-lg-4 col-sm-6 p-0 other" style = "margin: -23px;"	>
+							<div class="portfolio-box">
 						<article class="style6">
 							<span class="imageb">
 								<img src="./docs/assets/img/yee.png" style="filter: blur(4px);" alt="" />
@@ -727,181 +840,23 @@
 										with injection molding (~100 hours).</p>
 								</div>
 							</a>
-						</article>
+						</article></div></div>
+
 
 					</section>
-				</div>
-			</div>
+				
+				
+				
+				</div></div>
 
 
-			<!--
-
-			<hr>
-			<div class="columns is-multiline is-desktop">
-				<div class="column">
-					<div class="box project-text">
-						<center><b>Drowsiness Detection with OpenCV and Arduino (Spring 2021)</b></center>
-						<article>
-							<div>
-								<figure class="image project-figure">
-									<img src="./assets/img/dappersuf.jpg" alt="Image">
-								</figure>
-							</div>
-							<div>
-								<p>
-									In this project, a colleague and I programmed a software that detects when the user
-									becomes drowsy and starts to close their eyes before alerting the user with a
-									buzzing noise until they open their eyes again.
-								</p>
-								<b>
-									<a href="./assets/files/swayingattention.pdf" class="nav-item" target="_blank">•
-										Report</a>
-									<a href="./assets/files/swayingattentionpres.pdf" class="nav-item" target="_blank">•
-										Presentation</a></b>
-							</div>
-						</article>
-					</div>
-				</div> 
-				<div class="column">
-					<div class="box project-text">
-						<center><b>IEEE Quarterly Project: Dear Pressure (Fall 2020)</b></center>
-						<article>
-							<figure class="image project-figure">
-								<img src="./assets/img/dp.jpg" alt="Image">
-							</figure>
-							<div>
-								<p>
-									In this project, I worked with four other engineering students at UCSD to create a
-									website that creates workouts based on peoples' gender, age, weight, level of
-									activeness, and what kind of goal they want to achieve. This website utilized HTML,
-									CSS, JavaScript, and Python. My main contribution to this project was creating the
-									website.
-								</p><b>
-									<a href="./assets/files/dearpressure.pdf" class="nav-item" target="_blank">•
-										Report</a>
-									<a href="https://www.youtube.com/embed/DAJ6kvTrCNI" class="nav-item"
-										target="_blank">• Video Presentation</a></b>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-		<div class="container">
-
-			<div class="columns is-multiline is-desktop">
-				<div class="column">
-					<div class="box project-text">
-						<center><b>Non-Contact Range Detection of HC-SR04 Ultrasonic Sensor (Fall 2020)</b></center>
-						<article>
-							<figure class="image project-figure">
-								<img src="./assets/img/hcsr.jpg" alt="Image">
-							</figure>
-
-							<div>
-								<p>
-									In this project, two other electrical engineering students at UCSD and I wrote
-									Arduino-C code that prints the distance a pulse travels upon meeting an obstacle. In
-									addition, we have our code graph the distances onto Arduino IDE’s serial monitor. We
-									also integrated three LEDs and a buzzer to signify danger zones, and an IR Remote
-									and Receiver to pause the HC-SR04 sensor. We also implemented a DHT11
-									temperature/humidity sensor to detect whether the obstacle is inanimate or not.
-								</p>
-								<b>
-									<a href="https://www.youtube.com/embed/WjJqojVelwM" class="nav-item"
-										target="_blank">• Video Presentation</a></b>
-							</div>
-						</article>
-					</div>
-				</div>
-
-				<div class="column">
-					<div class="box project-text">
-						<center><b>Light-Following Arm with MATLAB and Arduino (Fall 2020)</b></center>
-						<article>
-							<figure class="image project-figure">
-								<img src="./assets/img/lightfollowing.jpg" alt="Image">
-							</figure>
-
-							<div>
-								<p>
-									In this project, I used an Arduino Mega to have lined up LEDs light up one-by-one.
-									Then, using MATLAB, a second breadboard, a servo motor, and photoresistors, I had a
-									board with the photoresistors on it follow the lights as they turn on.
-								</p>
-								<b>
-									<a href="https://www.youtube.com/embed/p5GxtdExcM8" class="nav-item"
-										target="_blank">• Video Presentation</a></b>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-		<div class="container">
-			<div class="columns is-multiline is-desktop">
-				<div class="column">
-					<div class="box project-text">
-						<center><b>Tensile Strength of ABS Plastic Moldings and 3D Printed Samples (Summer 2019)</b>
-						</center>
-						<article>
-							<div>
-								<figure class="image project-figure">
-									<img src="./assets/img/yee.png" alt="Image">
-								</figure>
-							</div>
-							<div>
-								<p>
-									While working in the Experimental Mechanics Laboratory of Dr. George Youssef in San
-									Diego State University for 5 weeks, myself, with the help of other members of the
-									lab, created a makeshift aluminum ASTM D638 Standard mold and used an oven to melt
-									plastic in it. We also used the lab's 3D printing technology to create some
-									vertical, horizontal, and flat ASTM D638 samples. We then determined the tensile
-									strength of the samples using a tensile strength testing machine. At the end of the
-									five weeks, I made and presented a slideshow about my project in front of members of
-									the lab. This amazing educational experience gave me a glimpse of the life of a
-									student working in the Experimental Mechanics Laboratory.
-								</p>
-								<b><a href="https://youssef-lab.sdsu.edu/our-team/young-engineer-experience-yee/"
-										class="nav-item" target="_blank">• More Information</a></b>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class="column">
-					<div class="box project-text">
-						<center><b>Music Keyboard and Arduino (Spring 2019)</b></center>
-						<article>
-							<div>
-								<figure class="image project-figure">
-									<img src="./assets/img/keyboard.jpg" alt="Image">
-								</figure>
-							</div>
-							<div>
-								<p>
-									In this project, we created a keyboard that is connected to a speaker, and using
-									different wires, a colleague and I created a fully functional music keyboard with
-									Arduino-C code and a breadboard, Arduino-Uno, and wires.
-								</p><b>
-									<a href="./assets/files/keyboard.pdf" class="nav-item" target="_blank">•
-										Presentation</a></b>
-										
-							</div>
-						</article>
-					</div>
-				</div> 
-			</div> -->
-		</div>
-		<br>
 		<hr>
 
 		<div class="container">
 			<br>
 			<div>
 				<a href="https://www.github.com/ymorsi7" class="title is-3" target="blank">Github Contributions</a>
-			</div><br>
+			</div><br><br>
 			<!-- Include the library. -->
 
 			<div>
@@ -962,6 +917,18 @@
 	<script src="./docs/js/breakpoints.min.js"></script>
 	<script src="./docs/js/util.js"></script>
 	<script src="./docs/js/main.js"></script>
+
+	<script src="./docs/js/jquery-3.2.1.min.js"></script>
+	<script src="./docs/js/bootstrap.min.js"></script>
+	<script src="./docs/js/jquery.slicknav.min.js"></script>
+	<script src="./docs/js/owl.carousel.min.js"></script>
+	<script src="./docs/js/jquery.magnific-popup.min.js"></script>
+	<script src="./docs/js/circle-progress.min.js"></script>
+	<script src="./docs/js/mixitup.min.js"></script>
+	<script src="./docs/js/instafeed.min.js"></script>
+	<script src="./docs/js/masonry.pkgd.min.js"></script>
+	<script src="./docs/js/photoMain.js"></script>
+	<script src="./docs/controller.js"></script>
 </body>
 
 </html>
