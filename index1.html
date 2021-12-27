@@ -630,30 +630,28 @@
 
 	<!-- Projects -->
 	<section id="projects" class="section section-2-5">
-		<div class = "container">
-
-			<div id="main">
-
-				<div class="has-text-centered">
-					<h3 class="title is-3">Projects</h3>
-				</div></div></div>
 
 				<div class = "inner">
+					
+		<div class = "container">
+				<div class="has-text-centered">
+					<h3 class="title is-3">Projects</h3>
+				</div><p id = "intro" style = "text-align: center;">Below are some of my projects. Feel free to filter by type of project using the buttons below.</p></div>
 				<div class="portfolio-2-section">
+					
 						<ul class="portfolio-filter pf-2 controls">
 							<center>
-								<li class="control" data-filter="all" style="color:white;font-size: 120%;">All</li>
-								<li class="control" data-filter=".notable" style="color:white;font-size: 120%;">Notable</li>
-								<li class="control" data-filter=".python" style="color:white;font-size: 120%;">Python</li>
+								<li class="control" data-filter="all" style="color: white;font-size: 110%;">All</li>
+								<li class="control" data-filter=".notable" style="color:white;font-size: 110%;">Notable</li>
+								<li class="control" data-filter=".ml" style="color:white;font-size: 110%;">Machine Learning</li>
 							</center>
 							<center>
-								<li class="control" data-filter=".ml" style="color:white;font-size: 120%;">ML</li>
-								<li class="control" data-filter=".cpp" style="color:white;font-size: 120%;">C++</li>
-								<li class="control" data-filter=".matlab" style="color:white;font-size: 120%;">MATLAB</li>
+								<li class="control" data-filter=".python" style="color:white;font-size: 110%;">Python</li>
+								
+								<li class="control" data-filter=".other" style="color:white;font-size: 120%;">Other</li>
 							</center>
 							<center>
 								<!-- <li class="control" data-filter=".arch" style= "color:#1B2D55">Architecture</li> -->
-								<li class="control" data-filter=".other" style="color:white;font-size: 120%;">Other</li>
 							</center>
 						</ul>
 						<br>
@@ -684,7 +682,7 @@
 						</article></div></div>
 
 
-						<div class="mix col-lg-4 col-sm-6 p-0 python ml notable">
+						<div class="mix col-lg-4 col-sm-6 p-0 python ml">
 							<div class="portfolio-box">
 						<article class="style1">
 							<span class="imageb">
@@ -703,8 +701,74 @@
 							</a>
 						</article></div></div>
 
+						<div class="mix col-lg-4 col-sm-6 p-0 python notable ml">
+							<div class="portfolio-box">
+						<article class="style4">
+							<span class="imageb">
+								<img src="./docs/images/forest.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#battleship">
+								<h2 style="font-size: 130%;">Forest Cover Classification
+									<br><b>(Winter 2021)</b>
+								</h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">Here, I used deep learning to predict forest 
+										cover type using only cartographic variables. I utilized TensorFlow with Keras to build my classifiers.</p>
+								</div>
+							</a>
+						</article></div></div>
+				
+						<div class="mix col-lg-4 col-sm-6 p-0 ml python notable">
+							<div class="portfolio-box">
+						<article class="style6">
+							<span class="imageb">
+								<img src="./docs/assets/img/ocean.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#yee">
+								<h2 style="font-size: 130%;">Identifying Garbage in the Ocean from Satellite Images<br><b> (Winter 2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this end-to-end data science project, 
+										I used Python and Jupyter Notebook to create an ML model that identifies
+										 areas in the ocean with garbage.</p>
+								</div>
+							</a>
+						</article></div></div>
 
-						<div class="mix col-lg-4 col-sm-6 p-0 python ml notable">
+
+						<div class="mix col-lg-4 col-sm-6 p-0 ml python other ml">
+							<div class="portfolio-box">
+						<article class="style6">
+							<span class="imageb">
+								<img src="./docs/assets/img/nlp.jpg" style="filter: blur(4px);" alt="" />
+							</span>
+							<a href="docs/projects.html#yee">
+								<h2 style="font-size: 130%;">NLP Message Analysis<br><b> (Winter 2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this end-to-end data science project, 
+										I used Python and Jupyter Notebook to create an ML model that identifies
+										 areas in the ocean with garbage.</p>
+								</div>
+							</a>
+						</article></div></div>
+
+						
+						<div class="mix col-lg-4 col-sm-6 p-0 python">
+							<div class="portfolio-box">
+						<article class="style5">
+							<span class="imageb">
+								<img src="./docs/assets/img/cpu.jpg" style="filter: blur(5px);" alt="" />
+							</span>
+							<a href="docs/projects.html#lf">
+								<h2 style="font-size: 130%;">CPU Simluator <br><b>(Fall
+										2021)</b></h2>
+								<div class="content" style="background-color: transparent;">
+									<p style="color: white">In this project, I researched, designed, and built
+										 a Python program that simulates the functionalities of a CPU.</p>
+								</div>
+							</a>
+						</article></div></div>
+
+						<div class="mix col-lg-4 col-sm-6 p-0 python ml ">
 							<div class="portfolio-box">
 						<article class="style3">
 							<span class="imageb">
@@ -721,9 +785,8 @@
 								</div>
 							</a>
 						</article></div></div>
-
-						
-						<div class="mix col-lg-4 col-sm-6 p-0 cpp matlab">
+	
+						<div class="mix col-lg-4 col-sm-6 p-0">
 							<div class="portfolio-box">
 						<article class="style4">
 							<span class="imageb">
@@ -742,7 +805,7 @@
 							</a>
 						</article></div></div>
 
-						
+						<!--
 						<div class="mix col-lg-4 col-sm-6 p-0 cpp matlab">
 							<div class="portfolio-box">
 						<article class="style5">
@@ -760,7 +823,7 @@
 									</p>
 								</div>
 							</a>
-						</article></div></div>
+						</article></div></div> -->
 				
 						<div class="mix col-lg-4 col-sm-6 p-0 other">
 							<div class="portfolio-box">
@@ -779,11 +842,12 @@
 							</a>
 						</article></div></div>
 
+
 					</section>
 				
 				
 				
-				</div></div><br>
+				</div></div>
 
 
 		<hr>
