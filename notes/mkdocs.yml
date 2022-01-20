@@ -1,8 +1,6 @@
 site_name: Yusuf's Notes
 site_url: http://ymorsi.com/notes
 nav:
-    - Home: index.md
-    - About: about.md
-theme: litera
-theme:
-  favicon: images/favicon.png
+    - Home: http://ymorsi.com/
+    - Notes: index.html
+theme: litera 
