@@ -283,8 +283,8 @@ div.sticky {
 	position: sticky;
 	top: 0;
 	background-color: #C3D9F1;
-	padding: 15px;
-	font-size: 25px;
+	padding: 0px;
+	font-size: 30px;
     z-index: 1 !important;
 	font-family: 'Syncopate', cursive;
   }
