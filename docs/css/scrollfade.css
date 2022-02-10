@@ -1,0 +1,15 @@
+.scrollFade {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .scrollFade--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .scrollFade--visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .scrollFade--animate {
+    transition: opacity 0.7s ease-in-out;
+  }
