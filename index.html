@@ -58,14 +58,14 @@
 			</a>
 		</div>
 
-		<div class="nav-right nav-menu"  id = "content-desktop">
+		<div class="nav-right nav-menu">
 			<a class="nav-item" href="#about" style="color:#1B2D55; font-size:140%;">About</a>
 			<a class="nav-item" href="#projects" style="color:#1B2D55; font-size:140%;">Projects</a>
 		</div>
 
 		<!-- This "nav-toggle" hamburger menu is only visible on mobile -->
 		<!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-		<span class="nav-toggle"  id = "content-desktop">
+		<span class="nav-toggle">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -153,6 +153,9 @@
 	</style>
 
 
+  </head>
+
+  <!-- MOBILE POPUP-->
 	<style media="screen">
 		*,
   *:before,
@@ -211,9 +214,7 @@
 	  padding: 8px 0;
   }
 	  </style>
-
-  </head>
-
+	  <div id = "content-mobile">
 	  <div class="popupM" id = "content-mobile" style="position: fixed;">
 		  <button id="close">&times;</button>
 		  <h2 style = "color:#1B2D55";>Note:</h2>
@@ -221,9 +222,7 @@
 			  For the best experience, please visit this site on a computer.
 		  </p>
 	  </div>
-
-
-	  <!--Script-->
+	</div>
 	  <script type="text/javascript">
   window.addEventListener("load", function(){
 	  setTimeout(
@@ -239,7 +238,7 @@
 	  document.querySelector(".popupM").style.display = "none";
   });
 	  </script>
-
+<!-- MOBILE POPUP END-->
 
 
 
@@ -540,7 +539,7 @@
 
 
 			</div>
-
+<!-- MOBILE PROJECTS-->
 			<div id = "content-mobile">
 				<br><br><br>
 				<li><b>MiniMe:</b> 3D Printed Biped w/ OpenCV, TensorFlow</li><br>
@@ -550,6 +549,8 @@
 				<li><b>Portfolio Site</b> w/ HTML, CSS, JS</li><br>
 				<li><b>Research:</b> Tensile Strength of ABS Plastic Moldings and 3D Printed Samples</li><br>
 			</div>
+
+			<!-- MOBILE PROJECTS END-->
 	</section>
 
 
@@ -579,15 +580,7 @@
 							<h2>About</h2>
 							<a class="close" href="#exp">&times;</a>
 							<div class="content">
-								<p>My role as a software developer in this startup is to create a mobile application
-									with
-									React-Native and Java. This app is
-									an exclusive social platform where people are only able to add people that they meet
-									in
-									real life by scanning an NFC chip.
-									I decided to join this startup part-time for the opportunity to work with NFC chips
-									and
-									mobile app development.
+								<p>Developing iOS/Android app with React-Native. Also created new company site with HTML, CSS, and JS.
 								</p>
 							</div>
 						</div>
