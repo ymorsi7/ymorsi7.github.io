@@ -58,14 +58,14 @@
 			</a>
 		</div>
 
-		<div class="nav-right nav-menu">
+		<div class="nav-right nav-menu"  id = "content-desktop">
 			<a class="nav-item" href="#about" style="color:#1B2D55; font-size:140%;">About</a>
 			<a class="nav-item" href="#projects" style="color:#1B2D55; font-size:140%;">Projects</a>
 		</div>
 
 		<!-- This "nav-toggle" hamburger menu is only visible on mobile -->
 		<!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-		<span class="nav-toggle">
+		<span class="nav-toggle"  id = "content-desktop">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -151,6 +151,97 @@
 
 		}
 	</style>
+
+
+	<style media="screen">
+		*,
+  *:before,
+  *:after{
+	  padding: 0;
+	  margin: 0;
+	  box-sizing: border-box;
+  }
+  .popupM{
+	  background-color: #ffffff;
+	  width: 90%;
+	  padding: 30px 40px;
+	  position: absolute;
+	  transform: translate(-50%,-50%);
+	  left: 50%;
+	  top: 50%;
+	  border-radius: 8px;
+	  font-family: "Poppins",sans-serif;
+	  display: none; 
+	  text-align: center;
+	  z-index: 1 !important;
+  }
+  .popupM button{
+	  display: block;
+	  margin:  0 0 20px auto;
+	  background-color: transparent;
+	  font-size: 30px;
+	  color: #ffffff;
+	  background: #03549a;
+	  border-radius: 100%;
+	  width: 40px;
+	  height: 40px;
+	  border: none;
+	  outline: none;
+	  cursor: pointer;
+  }
+  .popupM h2{
+	margin-top: -20px;
+  }
+  .popupM p{
+	  font-size: 14px;
+	  text-align: justify;
+	  margin: 20px 0;
+	  line-height: 25px;
+  }
+  a.M{
+	  display: block;
+	  width: 150px;
+	  position: relative;
+	  margin: 10px auto;
+	  text-align: center;
+	  background-color: #03549a;
+	  border-radius: 20px;
+	  color: #ffffff;
+	  text-decoration: none;
+	  padding: 8px 0;
+  }
+	  </style>
+
+  </head>
+
+	  <div class="popupM" id = "content-mobile" style="position: fixed;">
+		  <button id="close">&times;</button>
+		  <h2 style = "color:#1B2D55";>Note:</h2>
+		  <p style = "color: black;">
+			  For the best experience, please visit this site on a computer.
+		  </p>
+	  </div>
+
+
+	  <!--Script-->
+	  <script type="text/javascript">
+  window.addEventListener("load", function(){
+	  setTimeout(
+		  function open(event){
+			  document.querySelector(".popupM").style.display = "block";
+		  },
+		  1
+	  )
+  });
+  
+  
+  document.querySelector("#close").addEventListener("click", function(){
+	  document.querySelector(".popupM").style.display = "none";
+  });
+	  </script>
+
+
+
 
 
 
