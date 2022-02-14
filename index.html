@@ -153,6 +153,96 @@
 	</style>
 
 
+  </head>
+
+  <!-- MOBILE POPUP-->
+	<style media="screen">
+		*,
+  *:before,
+  *:after{
+	  padding: 0;
+	  margin: 0;
+	  box-sizing: border-box;
+  }
+  .popupM{
+	  background-color: #ffffff;
+	  width: 90%;
+	  padding: 30px 40px;
+	  position: absolute;
+	  transform: translate(-50%,-50%);
+	  left: 50%;
+	  top: 50%;
+	  border-radius: 8px;
+	  font-family: "Poppins",sans-serif;
+	  display: none; 
+	  text-align: center;
+	  z-index: 1 !important;
+  }
+  .popupM button{
+	  display: block;
+	  margin:  0 0 20px auto;
+	  background-color: transparent;
+	  font-size: 30px;
+	  color: #ffffff;
+	  background: #03549a;
+	  border-radius: 100%;
+	  width: 40px;
+	  height: 40px;
+	  border: none;
+	  outline: none;
+	  cursor: pointer;
+  }
+  .popupM h2{
+	margin-top: -20px;
+  }
+  .popupM p{
+	  font-size: 14px;
+	  text-align: justify;
+	  margin: 20px 0;
+	  line-height: 25px;
+  }
+  a.M{
+	  display: block;
+	  width: 150px;
+	  position: relative;
+	  margin: 10px auto;
+	  text-align: center;
+	  background-color: #03549a;
+	  border-radius: 20px;
+	  color: #ffffff;
+	  text-decoration: none;
+	  padding: 8px 0;
+  }
+	  </style>
+	  <div id = "content-mobile">
+	  <div class="popupM" id = "content-mobile" style="position: fixed;">
+		  <button id="close">&times;</button>
+		  <h2 style = "color:#1B2D55";>Note:</h2>
+		  <p style = "color: black;">
+			  For the best experience, please visit this site on a computer.
+		  </p>
+	  </div>
+	</div>
+	  <script type="text/javascript">
+  window.addEventListener("load", function(){
+	  setTimeout(
+		  function open(event){
+			  document.querySelector(".popupM").style.display = "block";
+		  },
+		  1
+	  )
+  });
+  
+  
+  document.querySelector("#close").addEventListener("click", function(){
+	  document.querySelector(".popupM").style.display = "none";
+  });
+	  </script>
+<!-- MOBILE POPUP END-->
+
+
+
+
 
 
 	<!-- About -->
@@ -177,7 +267,7 @@
 
 	</section>
 
-
+	
 
 	<!-- Projects -->
 	<section id="projects" class="section section-2-5">
@@ -189,7 +279,7 @@
 					<h3 class="title is-3" style="margin-bottom: -35px;">Projects</h3>
 				</div>
 			</div>
-			<div class="portfolio-2-section">
+			<div class="portfolio-2-section"   id="content-desktop">
 
 				<ul class="portfolio-filter pf-2 controls">
 					<center>
@@ -449,6 +539,18 @@
 
 
 			</div>
+<!-- MOBILE PROJECTS-->
+			<div id = "content-mobile">
+				<br><br><br>
+				<li><b>MiniMe:</b> 3D Printed Biped w/ OpenCV, TensorFlow</li><br>
+				<li><b>Responsive AI Yusuf Discord Bot</b> w/ PyTorch</li><br>
+				<li><b>Drowsiness Detection</b> w/ OpenCV</li><br>
+				<li><b>Non-Contact Range Detection of HC-SR04 U/S Sensor</b> w/ MATLAB, C++</li><br>
+				<li><b>Portfolio Site</b> w/ HTML, CSS, JS</li><br>
+				<li><b>Research:</b> Tensile Strength of ABS Plastic Moldings and 3D Printed Samples</li><br>
+			</div>
+
+			<!-- MOBILE PROJECTS END-->
 	</section>
 
 
@@ -456,7 +558,7 @@
 
 	<!-- ABOUT ME TABS -->
 	<section id="about" class="section section-2">
-		<div class="scrollFade">
+		<div class="scrollFade"  id="content-desktop">
 			<div class="container">
 
 				<div class="has-text-centered">
@@ -478,15 +580,7 @@
 							<h2>About</h2>
 							<a class="close" href="#exp">&times;</a>
 							<div class="content">
-								<p>My role as a software developer in this startup is to create a mobile application
-									with
-									React-Native and Java. This app is
-									an exclusive social platform where people are only able to add people that they meet
-									in
-									real life by scanning an NFC chip.
-									I decided to join this startup part-time for the opportunity to work with NFC chips
-									and
-									mobile app development.
+								<p>Developing iOS/Android app with React-Native. Also created new company site with HTML, CSS, and JS.
 								</p>
 							</div>
 						</div>
@@ -890,6 +984,8 @@
 			</div>
 
 		</div>
+		
+		<center id = "content-mobile">Yusuf M - Portfolio 2022 &copy;</center>
 		</div>
 	</section>
 
@@ -898,12 +994,7 @@
 
 
 
-
-
-
-
-
-	<section class="section section-2-5">
+	<section class="section section-2-5"   id="content-desktop">
 		<div class="scrollFade">
 			<div class="container">
 				<br>
@@ -935,7 +1026,6 @@
 		</div>
 	</section>
 	<!-- ABOUT ME TABS END!!!! -->
-
 
 
 
