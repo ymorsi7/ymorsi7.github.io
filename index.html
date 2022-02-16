@@ -153,92 +153,97 @@
 	</style>
 
 
-  </head>
+	</head>
 
-  <!-- MOBILE POPUP-->
+	<!-- MOBILE POPUP-->
 	<style media="screen">
 		*,
-  *:before,
-  *:after{
-	  padding: 0;
-	  margin: 0;
-	  box-sizing: border-box;
-  }
-  .popupM{
-	  background-color: #ffffff;
-	  width: 90%;
-	  padding: 30px 40px;
-	  position: absolute;
-	  transform: translate(-50%,-50%);
-	  left: 50%;
-	  top: 50%;
-	  border-radius: 8px;
-	  font-family: "Poppins",sans-serif;
-	  display: none; 
-	  text-align: center;
-	  z-index: 1 !important;
-  }
-  .popupM button{
-	  display: block;
-	  margin:  0 0 20px auto;
-	  background-color: transparent;
-	  font-size: 30px;
-	  color: #ffffff;
-	  background: #03549a;
-	  border-radius: 100%;
-	  width: 40px;
-	  height: 40px;
-	  border: none;
-	  outline: none;
-	  cursor: pointer;
-  }
-  .popupM h2{
-	margin-top: -20px;
-  }
-  .popupM p{
-	  font-size: 14px;
-	  text-align: justify;
-	  margin: 20px 0;
-	  line-height: 25px;
-  }
-  a.M{
-	  display: block;
-	  width: 150px;
-	  position: relative;
-	  margin: 10px auto;
-	  text-align: center;
-	  background-color: #03549a;
-	  border-radius: 20px;
-	  color: #ffffff;
-	  text-decoration: none;
-	  padding: 8px 0;
-  }
-	  </style>
-	  <div id = "content-mobile">
-	  <div class="popupM" id = "content-mobile" style="position: fixed;">
-		  <button id="close">&times;</button>
-		  <h2 style = "color:#1B2D55";>Note:</h2>
-		  <p style = "color: black;">
-			  For the best experience, please visit this site on a computer.
-		  </p>
-	  </div>
+		*:before,
+		*:after {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		.popupM {
+			background-color: #ffffff;
+			width: 90%;
+			padding: 30px 40px;
+			position: absolute;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			top: 50%;
+			border-radius: 8px;
+			font-family: "Poppins", sans-serif;
+			display: none;
+			text-align: center;
+			z-index: 1 !important;
+		}
+
+		.popupM button {
+			display: block;
+			margin: 0 0 20px auto;
+			background-color: transparent;
+			font-size: 30px;
+			color: #ffffff;
+			background: #03549a;
+			border-radius: 100%;
+			width: 40px;
+			height: 40px;
+			border: none;
+			outline: none;
+			cursor: pointer;
+		}
+
+		.popupM h2 {
+			margin-top: -20px;
+		}
+
+		.popupM p {
+			font-size: 14px;
+			text-align: justify;
+			margin: 20px 0;
+			line-height: 25px;
+		}
+
+		a.M {
+			display: block;
+			width: 150px;
+			position: relative;
+			margin: 10px auto;
+			text-align: center;
+			background-color: #03549a;
+			border-radius: 20px;
+			color: #ffffff;
+			text-decoration: none;
+			padding: 8px 0;
+		}
+	</style>
+	<div id="content-mobile">
+		<div class="popupM" id="content-mobile" style="position: fixed;">
+			<button id="close">&times;</button>
+			<h2 style="color:#1B2D55" ;>Note:</h2>
+			<p style="color: black;">
+				For the best experience, please visit this site on a computer.
+			</p>
+		</div>
 	</div>
-	  <script type="text/javascript">
-  window.addEventListener("load", function(){
-	  setTimeout(
-		  function open(event){
-			  document.querySelector(".popupM").style.display = "block";
-		  },
-		  1
-	  )
-  });
-  
-  
-  document.querySelector("#close").addEventListener("click", function(){
-	  document.querySelector(".popupM").style.display = "none";
-  });
-	  </script>
-<!-- MOBILE POPUP END-->
+	<script type="text/javascript">
+		window.addEventListener("load", function () {
+			setTimeout(
+				function open(event) {
+					document.querySelector(".popupM").style.display = "block";
+				},
+				1
+			)
+		});
+
+
+		document.querySelector("#close").addEventListener("click", function () {
+			document.querySelector(".popupM").style.display = "none";
+		});
+	</script>
+	<!-- MOBILE POPUP END-->
 
 
 
@@ -267,7 +272,7 @@
 
 	</section>
 
-	
+
 
 	<!-- Projects -->
 	<section id="projects" class="section section-2-5">
@@ -279,7 +284,7 @@
 					<h3 class="title is-3" style="margin-bottom: -35px;">Projects</h3>
 				</div>
 			</div>
-			<div class="portfolio-2-section"   id="content-desktop">
+			<div class="portfolio-2-section" id="content-desktop">
 
 				<ul class="portfolio-filter pf-2 controls">
 					<center>
@@ -522,7 +527,8 @@
 												Printed
 												Samples<br><b> (Summer 2019)</b></h2>
 											<div class="content" style="background-color: transparent;">
-												<p style="color: white">In this research experience at SDSU, I researched the
+												<p style="color: white">In this research experience at SDSU, I
+													researched the
 													tensile
 													strength of 3D printed ABS ASTM D638 samples versus ASTM D638
 													samples created
@@ -539,8 +545,8 @@
 
 
 			</div>
-<!-- MOBILE PROJECTS-->
-			<div id = "content-mobile">
+			<!-- MOBILE PROJECTS-->
+			<div id="content-mobile">
 				<br><br><br>
 				<li><b>MiniMe:</b> 3D Printed Biped w/ OpenCV, TensorFlow</li><br>
 				<li><b>Responsive AI Yusuf Discord Bot</b> w/ PyTorch</li><br>
@@ -558,7 +564,7 @@
 
 	<!-- ABOUT ME TABS -->
 	<section id="about" class="section section-2">
-		<div class="scrollFade"  id="content-desktop">
+		<div class="scrollFade" id="content-desktop">
 			<div class="container">
 
 				<div class="has-text-centered">
@@ -580,7 +586,8 @@
 							<h2>About</h2>
 							<a class="close" href="#exp">&times;</a>
 							<div class="content">
-								<p>Developing iOS/Android app with React-Native. Also created new company site with HTML, CSS, and JS.
+								<p>Developing iOS/Android app with React-Native. Also created new company site with
+									HTML, CSS, and JS.
 								</p>
 							</div>
 						</div>
@@ -840,7 +847,7 @@
 
 					<p class="intro">MathWorks</p>
 					<a class="button1" id="yantitle" href="#popup6">MATLAB Onramp Training <b>(October 2020)</b></a>
-					
+
 					<div id="popup6" class="overlay">
 						<div class="popup">
 							<h2>Certificate:</h2>
@@ -852,7 +859,7 @@
 					</div>
 					<div><br></div>
 				</div>
-				
+
 				<!--
 					<p class="intro">MITx </p>
 	
@@ -877,8 +884,8 @@
 			</div>
 
 		</div>
-		
-		<center id = "content-mobile">Yusuf M - Portfolio 2022 &copy;</center>
+
+		<center id="content-mobile">Yusuf M - Portfolio 2022 &copy;</center>
 		</div>
 	</section>
 
@@ -887,7 +894,7 @@
 
 
 
-	<section class="section section-2-5"   id="content-desktop">
+	<section class="section section-2-5" id="content-desktop">
 		<div class="scrollFade">
 			<div class="container">
 				<br>
