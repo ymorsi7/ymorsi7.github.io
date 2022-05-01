@@ -124,7 +124,7 @@ n1 {
 
 
 a:hover {
-  color: #41619c;
+  color: #C3D9F1;
 }
 
 section{
@@ -165,7 +165,7 @@ a.nav-item {
 }
 
 a.nav-item:hover {
-	color: #fff;
+	color: #C3D9F1;
 }
 
 .avatar{
@@ -248,7 +248,7 @@ footer {
 	}
 
 	.nav-toggle span:hover {
-		background-color: #fff;
+		background-color: #C3D9F1;;
 	}
 
 }
