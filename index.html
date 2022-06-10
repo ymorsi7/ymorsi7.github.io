@@ -59,8 +59,8 @@
 		</div>
 
 		<div class="nav-right nav-menu">
-			<a class="nav-item" href="#about" style="color:#1B2D55; font-size:140%;">About</a>
-			<a class="nav-item" href="#projects" style="color:#1B2D55; font-size:140%;">Projects</a>
+			<a class="nav-item hover-underlineNav-animation" href="#about" style="color:#1B2D55; font-size:140%;">About</a>
+			<a class="nav-item hover-underlineNav-animation" href="#projects" style="color:#1B2D55; font-size:140%;">Projects</a>
 		</div>
 
 		<!-- This "nav-toggle" hamburger menu is only visible on mobile -->
@@ -287,15 +287,15 @@
 
 				<ul class="portfolio-filter pf-2 controls">
 					<center>
-						<li class="control" data-filter="all" style="color: white;font-size: 110%;">All</li>
-						<li class="control" data-filter=".notable" style="color:white;font-size: 110%;">Notable</li>
-						<li class="control" data-filter=".ml" style="color:white;font-size: 110%;">Machine Learning</li>
+						<li class="control hover-underline-animation" data-filter="all" style="color: white;font-size: 110%;">All</li>
+						<li class="control hover-underline-animation" data-filter=".notable" style="color:white;font-size: 110%;">Notable</li>
+						<li class="control hover-underline-animation" data-filter=".ml" style="color:white;font-size: 110%;">Machine Learning</li>
 					</center>
 					<center>
 						<!--
 						<li class="control" data-filter=".python" style="color:white;font-size: 110%;">Python</li>
 -->
-						<li class="control" data-filter=".other" style="color:white;font-size: 120%;">Other Projects
+						<li class="control hover-underline-animation" data-filter=".other" style="color:white;font-size: 120%;">Other Projects
 						</li>
 					</center>
 
@@ -639,16 +639,32 @@
 					<br>
 					<p class="title is-4">Relevant Experience</p>
 
+
+					<a href="https://api.carsxe.com/" class="intro" target="blank" style="color:white;">CarsXE API</a><br><br>
+					<a class="button1" id="yantitle" href="#popup00x">Software Engineer Intern <b>(June 2022 -
+							<i>Present</i>)</b></a>
+					<div id="popup00x" class="overlay">
+						<div class="popup">
+							<h2>About</h2>
+							<a class="close" href="#exp">&times;</a>
+							<div class="content">
+								<p>Focusing on front-end web development and machine learning for car data.
+								</p>
+							</div>
+						</div>
+					</div><br><br>
+
+
 					<a href="http://esdat.ucsd.edu/dey" class="intro" target="blank" style="color:white;">UCSD Mobile
 						Systems Design Lab (Dr. Sujit Dey)</a><br><br>
 					<a class="button1" id="yantitle" href="#popup000">Research Intern <b>(June 2022 -
-							<i>September 2022</i>)</b></a>
+							<i>Present</i>)</b></a>
 					<div id="popup000" class="overlay">
 						<div class="popup">
 							<h2>About</h2>
 							<a class="close" href="#exp">&times;</a>
 							<div class="content">
-								<p>Focussing on the research and development of an iOS application that enables
+								<p>Focusing on the research and development of an iOS application that enables
 									engagement between an ML platform, patients, and physicians.
 								</p>
 							</div>
@@ -1010,7 +1026,7 @@
 			<div class="container">
 				<br>
 				<div>
-					<a href="https://www.github.com/ymorsi7" class="title is-3" target="blank">Github Contributions</a>
+					<a href="https://www.github.com/ymorsi7" class="title is-3 hover-underline-animation" target="blank">Github Contributions</a>
 				</div><br><br>
 				<!-- Include the library. -->
 
@@ -1033,9 +1049,63 @@
 				</div>
 			</div>
 			<br><br>
-			<center style="color:white;">Y.M. 2022 </center>
+			<center style="color:white;">Y.M. 2022 | <a href = "docs/photography.html" class="hover-underline-animation" target = "blank">Photography</a></center>
 		</div>
 	</section>
+
+<style>
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #C3D9F1;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+
+
+.hover-underlineNav-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underlineNav-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #1B2D55;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underlineNav-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+</style>
+
+
 	<!-- ABOUT ME TABS END!!!! -->
 
 
