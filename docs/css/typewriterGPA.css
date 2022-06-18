@@ -1,0 +1,60 @@
+.line-1 {
+    position: relative;
+    top: 50%;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid #1B2D55;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+    padding-bottom: 0;
+}
+
+/* Animation */
+.anim-typewriter {
+    animation: typewriter 1s steps(16) .3s 1 normal both,
+        blinkTextCursor 500ms steps(8) infinite normal;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 7em;
+    }
+}
+
+@keyframes blinkTextCursor {
+    from {
+        border-right-color: #1B2D55;
+    }
+
+    to {
+        border-right-color: transparent;
+    }
+}
+
+
+#content-desktop {
+    display: block;
+}
+
+#content-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    #content-desktop {
+        display: none;
+    }
+
+    #content-mobile {
+        display: block;
+    }
+
+}
