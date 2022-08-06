@@ -14,7 +14,7 @@ Once again using JavaScript, I was able to implement a responsive project sorter
 
 ## JavaScript Collapsibles
 ![JS C](docs/assets/img/collapsibles.gif)
-Once again using JavaScript, I was able to create responsive.collapsible information sections.
+Once again using JavaScript, I was able to create responsive collapsible information sections.
 
 ## Bonus: Photography Page
 ![JS C](docs/assets/img/bonus.gif)
