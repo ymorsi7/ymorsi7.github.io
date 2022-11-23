@@ -5,11 +5,11 @@ Below, descriptions and gifs of certain components of this site can be found.
 
 
 ## JavaScript Title Animation
-![JavaScript Title Animation](docs/assets/img/site.gif)
+![JavaScript Title Animation](docs/assets/img/site.gif) <br />
 Using [JavaScript](docs/js/main.js), I was able to display my name with the creative animation shown above. 
 
 ## JavaScript Project Sorter
-![JS PS](docs/assets/img/projex.gif)
+![JS PS](docs/assets/img/projex.gif)<br />
 Once again using JavaScript, I was able to implement a responsive project sorter. When a user hovers over a project, a bio appears. Pressing on the project leads the user to a new tab with either the Github repository or a YouTube demonstration.
 
 ## JavaScript Collapsibles
