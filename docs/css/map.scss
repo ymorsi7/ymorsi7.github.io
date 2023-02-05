@@ -390,27 +390,27 @@ $color-light-blue:#80c3d9;
 				top:152px;
 			}
 		}
-		&.costa-rica {
-			bottom:5%;
-			left:20%;
+		&.cairo {
+			left:57%;
+		    top:40%;
 			top:auto;
 			&:before {
 				top:45px;
 			}
 		}
-		&.peterborough {
+		&.sharm {
 			top:12.5%;
 			left:48%;
 		}
-		&.vilnius {
+		&.hawaii {
 			top:10.5%;
 			left:54.5%;
 		}
-		&.dubai {
+		&.la {
 			top:35%;
 			left:66.5%;
 		}
-		&.singapore {
+		&.sd {
 			left:auto;
 			top:auto;
 			bottom:0%;
@@ -421,32 +421,6 @@ $color-light-blue:#80c3d9;
 				left:auto;
 				right:-16px;
 				top:55px;
-			}
-		}
-		&.manila {
-			left:auto;
-			top:auto;
-			bottom:1.75%;
-			right:18.5%;
-			&:before {
-				border-width: 13px 0 13px 16px;
-				border-color:transparent transparent transparent $color-black;
-				left:auto;
-				right:-16px;
-			//	top:55px;
-			}
-		}
-		&.sydney {
-			left: auto;
-			top:auto;
-			right:11.5%;
-			bottom:0;
-			&:before {
-				border-width: 13px 0 13px 16px;
-				border-color:transparent transparent transparent $color-black;
-				left:auto;
-				right:-16px;
-				bottom:50px;
 			}
 		}
 	}
