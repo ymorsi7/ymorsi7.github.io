@@ -211,22 +211,6 @@ $color-light-blue:#80c3d9;
 			margin-top: return-ems(33px,35px);
 		}
 	}
-	.wu-logo {
-		display: none;
-		height: px-to-ems(62px);
-		width: px-to-ems(181px);
-		@media (min-width:$break-5) {
-			background: url(https://jeffbridgforth.com/codepen/wu-logo.jpg) no-repeat;
-			display: block;
-			position: absolute;
-			bottom: px-to-ems(30px);
-			left:px-to-ems(32px);
-		}
-		@media (min-width:$break-6) {
-			left:50%;
-			margin-left: px-to-ems(-700px);
-		}
-	}
 	img {
 		height: auto;
 		position: relative;
@@ -285,53 +269,42 @@ $color-light-blue:#80c3d9;
 		-webkit-animation-delay:.1s;
 		animation-delay:.1s;
 	}
-	.marker-argentina {
-		left:29.5%;
-		bottom:21.5%;
+	.marker-vegas {
+		left:11%;
+		top:34%;
 		-webkit-animation-delay:.3s;
 		animation-delay:.3s;
 	}
-	.marker-dubai {
-		left:64%;
-		top:42%;
+	.marker-la {
+		left:9%;
+		top:36%;
 		-webkit-animation-delay:.6s;
 		animation-delay:.6s;
 	}
-	.marker-costa-rica {
-		left:17.5%;
-		top: 50%;
+	.marker-sd {
+		left:10%;
+		top:41%;
 		-webkit-animation-delay:.2s;
 		animation-delay:.2s;
+        z-index: 2;
 	}
-	.marker-peterborough {
-		left:45.5%;
-		top:20%;
+	.marker-hawaii {
+		left:0%;
+		top:50%;
 		-webkit-animation-delay:.4s;
 		animation-delay:.4s;
 	}
-	.marker-vilnius {
-		left:52%;
-		top:18%;
+	.marker-cairo {
+        left:56%;
+		top:39%;
 		-webkit-animation-delay:.5s;
 		animation-delay:.5s;
 	}
-	.marker-singapore {
-		left:79%;
-		bottom:42%;
+	.marker-sharm {
+        left:58%;
+		top:39%;
 		-webkit-animation-delay:.7s;
 		animation-delay:.7s;
-	}
-	.marker-manila {
-		left:84.5%;
-		top:48%;
-		-webkit-animation-delay:.8s;
-		animation-delay:.8s;
-	}
-	.marker-sydney {
-		bottom: 14%;
-		right:7.5%;
-		-webkit-animation-delay:.9s;
-		animation-delay:.9s;
 	}
 	.map-location-marker:after {
 		-webkit-animation: pulsate 2s ease-in-out infinite;
@@ -409,9 +382,9 @@ $color-light-blue:#80c3d9;
 			left:57%;
 		    top:29%;
 		}
-		&.argentina {
-			left:32.5%;
-			bottom:0;
+		&.vegas {
+			left:11%;
+			top:23%;
 			top:auto;
 			&:before {
 				top:152px;
