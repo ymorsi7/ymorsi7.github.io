@@ -1,0 +1,333 @@
+$browser-default-font-size:16px;
+$layout-size:16px;
+
+/* Breakpoints
+// ========================================================================== */
+$break-0:0;
+$break-1:20em; /* 320px */
+$break-2:30em; /* 480px */
+$break-mobile-max:37.4375em; /* 599px */
+$break-3:37.5em; /* 600px */
+$break-4:48em; /* 768px */
+$break-tablet-max: 59.9375em; /* 967px */
+$break-5:60em; /* 960px */
+$break-6:87.5em; /* 1400px */
+
+/* Colors 
+// ========================================================================== */
+$color-white:#fff;
+$color-text: #282828;
+$color-black:#000;
+$color-yellow:#ffdf1c;
+$color-yellow-hover:#ccb216;
+$color-light-blue:#80c3d9;
+
+/* Convert px to ems
+// ========================================================================== */
+@function px-to-ems( $pixels, $context: $browser-default-font-size ) {
+  @return #{$pixels/$context}em;
+}
+
+@function return-ems( $pixels, $context ) {
+  @return #{$pixels/$context}em;
+}
+
+@function layout-ems( $pixels, $context: $layout-size ) {
+  @return #{$pixels/$context}em;
+}
+
+/* Mixins
+// ========================================================================== */
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+@mixin delist {
+	list-style-type: none;
+	margin:0;
+	padding: 0;
+	li {
+		margin: 0;
+		padding: 0;
+	}
+}
+@mixin center() {
+	margin-left:auto;
+	margin-right: auto;
+}
+@mixin content-center() {
+	@media (min-width:$break-6) {
+		max-width: px-to-ems(1400px);
+		margin-left:auto;
+		margin-right: auto;
+	}
+}
+
+/* Media Query Watcher
+// ========================================================================== */
+#getActiveMQ-watcher {
+	font-family: "break-0";
+	@media (min-width:$break-1) {
+		font-family: "break-1";
+	}
+	@media (min-width:$break-2) {
+		font-family: "break-2";
+	}
+	@media (min-width:$break-3) {
+		font-family: "break-3";
+	}
+	@media (min-width:$break-4) {
+		font-family: "break-4";
+	}
+	@media (min-width:$break-5) {
+		font-family: "break-5";
+	}
+}
+
+/* =Map Pin Animation
+// ========================================================================== */
+
+@-webkit-keyframes pulsate {
+	0% {
+		-webkit-transform: scale(0.2);
+		transform: scale(0.2);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+		opacity: 0;
+	}
+}
+
+@-moz-keyframes pulsate {
+	0% {
+		-webkit-transform: scale(0.2);
+		transform: scale(0.2);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+		opacity: 0;
+	}
+}
+
+@keyframes pulsate {
+	0% {
+		-webkit-transform: scale(0.2);
+		transform: scale(0.2);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+		opacity: 0;
+	}
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    -ms-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.bounceInDown {
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
+
+/* =Places Map
+// ========================================================================== */
+#places-map {
+	background: #f8dc3b00;
+	padding: px-to-ems(52px) px-to-ems(25px) px-to-ems(40px);
+	position: relative;
+	@media (min-width:$break-6) {
+		// @include content-center;
+	}
+	h1 {
+		font-size: px-to-ems(21px);
+		margin-top: return-ems(20px,21px);
+		text-align: center;
+		@media (min-width:$break-3) {
+			font-size: px-to-ems(35px);
+			margin-top: return-ems(33px,35px);
+		}
+	}
+	img {
+		height: auto;
+		position: relative;
+		width: 100%;
+		z-index:1;
+	}
+	.secondary-page & .content {
+		margin: 0;
+		position: relative;
+		@media (min-width:$break-5) {
+			margin: 0 auto;
+		}
+	}
+	.map {
+		position: relative;
+		max-width: px-to-ems(903px);
+		@include center;
+	}
+	.map-pins {
+		position: absolute;
+		height: 100%;
+		top:0;
+		left:0;
+		width: 100%;
+	}
+	.map-location-marker {
+		background: url(https://jeffbridgforth.com/codepen/map-pin.png) no-repeat;
+        z-index:0;
+		cursor: pointer;
+		position: absolute;
+		height: px-to-ems(30px);
+		margin-top:px-to-ems(-30px);
+		margin-left: px-to-ems(-11px,14px);
+		width: px-to-ems(21px);
+		z-index:3;
+		@media (min-width:$break-4) {
+			.js & {
+				visibility: hidden;
+			}
+			.js &.bounceInDown {
+				visibility: visible;
+			}
+		}
+	}
+	.marker-san-francisco {
+		left:8%;
+		top:30%;
+		@media (max-width:$break-mobile-max) {
+			left:6%;
+			top:32%;
+		}
+	}
+	.marker-alex { /* Alexandria, Egypt */
+		left:55%;
+		top:35%;
+		-webkit-animation-delay:.1s;
+		animation-delay:.1s;
+	}
+	.marker-vegas {
+		left:11%;
+		top:34%;
+		-webkit-animation-delay:.3s;
+		animation-delay:.3s;
+	}
+	.marker-la {
+		left:9%;
+		top:36%;
+		-webkit-animation-delay:.6s;
+		animation-delay:.6s;
+	}
+	.marker-sd {
+		left:10%;
+		top:41%;
+		-webkit-animation-delay:.2s;
+		animation-delay:.2s;
+        z-index: 2;
+	}
+	.marker-hawaii {
+		left:0%;
+		top:50%;
+		-webkit-animation-delay:.4s;
+		animation-delay:.4s;
+	}
+	.marker-cairo {
+        left:56%;
+		top:39%;
+		-webkit-animation-delay:.5s;
+		animation-delay:.5s;
+	}
+	.marker-sharm {
+        left:58%;
+		top:39%;
+		-webkit-animation-delay:.7s;
+		animation-delay:.7s;
+	}
+	.map-location-marker:after {
+		-webkit-animation: pulsate 2s ease-in-out infinite;
+		-moz-animation: pulsate 2s ease-in-out infinite;
+		animation: pulsate 2s ease-in-out infinite;
+		background: transparent;
+		border: 2px solid $color-white;
+		border-radius: 30px;
+		content: "";
+		display: block;
+		height: 31px;
+		left: -7px;
+		opacity: 0;
+		position: absolute;
+		top: -8px;
+		-webkit-transition: all .25s linear;
+		-moz-transition: all .25s linear;
+		-o-transition: all .25s linear;
+		transition: all .25s linear;
+		width: 31px;
+		z-index: 2;
+	}
+}
+#page-places {
+	position: relative;
+}
