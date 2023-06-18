@@ -1,4 +1,7 @@
 # Portfolio Site
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d2b40b3f-df55-46ea-8bff-a1d587d6726d/deploy-status)](https://app.netlify.com/sites/ymorsi/deploys)
+
 I regularly update this site with information about projects, coursework, and more. This site can be accessed at https://www.ymorsi.com
 
 Below, descriptions and gifs of certain components of this site can be found.
