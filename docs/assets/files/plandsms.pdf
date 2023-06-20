@@ -291,7 +291,7 @@ endobj
 <</AP 303 0 R /DA(/Helv  0 Tf 0 g)/DR 304 0 R /F 4/FT/Tx/P 156 0 R /Q 1/Rect[ 621.12 249.48 698.76 266.76]/Subtype/Widget/T(SPRING QUARTERYEAR 3_3)/TU(SPRING QUARTER_YEAR 3)/Type/Annot/V(ECE 65)>>
 endobj
 82 0 obj
-<</AP 305 0 R /DA(/Helv  0 Tf 0 g)/DR 306 0 R /F 4/FT/Tx/P 156 0 R /Q 1/Rect[ 700.2 249.48 773.4 266.76]/Subtype/Widget/T(SUMMERYEAR 3_3)/TU(SUMMER_YEAR 3)/Type/Annot/V()>>
+<</AP 305 0 R /DA(/Helv  0 Tf 0 g)/DR 306 0 R /F 4/FT/Tx/P 156 0 R /Q 1/Rect[ 700.2 249.48 773.4 266.76]/Subtype/Widget/T(SUMMERYEAR 3_3)/TU(SUMMER_YEAR 3)/Type/Annot/V(ECE 107)>>
 endobj
 83 0 obj
 <</AP 307 0 R /DA(/Helv  0 Tf 0 g)/DR 308 0 R /F 4/FT/Tx/P 156 0 R /Q 1/Rect[ 542.04 231.24 619.8 248.52]/Subtype/Widget/T(WINTER QUARTERYEAR 3_4)/TU(WINTER QUARTER_YEAR 3)/Type/Annot/V(MGT 172)>>
@@ -423,16 +423,16 @@ endobj
 <</AP 393 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 394 0 R /P 156 0 R /Rect[ 462.94 195.603 540.7 212.523]/Subtype/Widget/T(3)/TU(3)/Type/Annot/V(ECE 100)>>
 endobj
 126 0 obj
-<</AP 395 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 396 0 R /P 156 0 R /Rect[ 462.94 177.363 540.7 194.643]/Subtype/Widget/T(32)/TU(32)/Type/Annot/V(ECE 107)>>
+<</AP 395 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 396 0 R /P 156 0 R /Rect[ 462.94 177.363 540.7 194.643]/Subtype/Widget/T(32)/TU(32)/Type/Annot/V(ECE 17)>>
 endobj
 127 0 obj
-<</AP 397 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 398 0 R /P 156 0 R /Rect[ 462.94 159.123 540.7 176.403]/Subtype/Widget/T(33)/TU(33)/Type/Annot/V(ECE 17)>>
+<</AP 397 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 398 0 R /P 156 0 R /Rect[ 462.94 159.123 540.7 176.403]/Subtype/Widget/T(33)/TU(33)/Type/Annot/V(ECE 65)>>
 endobj
 128 0 obj
 <</AP 399 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 400 0 R /P 156 0 R /Rect[ 462.94 140.883 540.7 158.163]/Subtype/Widget/T(34)/TU(34)/Type/Annot/V(CHEM 6A)>>
 endobj
 129 0 obj
-<</AP 401 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 402 0 R /P 156 0 R /Rect[ 462.94 123.003 540.7 140.043]/Subtype/Widget/T(35)/TU(35)/Type/Annot/V(ECE 65)>>
+<</AP 401 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 402 0 R /P 156 0 R /Rect[ 462.94 123.003 540.7 140.043]/Subtype/Widget/T(35)/TU(35)/Type/Annot/V()>>
 endobj
 130 0 obj
 <</AP 403 0 R /DA(/Helv  0 Tf 0 g)/F 4/FT/Tx/MK 404 0 R /P 156 0 R /Rect[ 462.699 103.933 540.459 120.853]/Subtype/Widget/T(5)/TU(5)/Type/Annot/V(ECE 271A?)>>
@@ -960,7 +960,7 @@ endobj
 <</Encoding 676 0 R /Font 677 0 R >>
 endobj
 305 0 obj
-<</N 2564 0 R >>
+<</N 2602 0 R >>
 endobj
 306 0 obj
 <</Encoding 679 0 R /Font 680 0 R >>
@@ -1224,13 +1224,13 @@ endobj
 <<>>
 endobj
 395 0 obj
-<</N 2598 0 R >>
+<</N 2601 0 R >>
 endobj
 396 0 obj
 <<>>
 endobj
 397 0 obj
-<</N 2577 0 R >>
+<</N 2603 0 R >>
 endobj
 398 0 obj
 <<>>
@@ -1242,7 +1242,7 @@ endobj
 <<>>
 endobj
 401 0 obj
-<</N 2600 0 R >>
+<</N 2604 0 R >>
 endobj
 402 0 obj
 <<>>
@@ -11184,12 +11184,6 @@ xú+‰
 4 µ≤C
 endstream
 endobj
-2564 0 obj
-<</BBox[ 0 0 73.2 17.28]/Filter/FlateDecode/FormType 1/Length 12/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1943 0 R /ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
-xú+‰
-‰ í ◊
-endstream
-endobj
 2565 0 obj
 <</BBox[ 0 0 73.2 17.28]/Filter/FlateDecode/FormType 1/Length 12/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1946 0 R /ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
 xú+‰
@@ -11224,13 +11218,6 @@ xú+‰
 ‰“©PpÚuÊ*‰r
 ·2PHÁ24—≥0≥000∂P0—317µ¥4∑TI·“˜HÕ)S04RI„“puvU022”T…‚r„
 4 πyV
-endstream
-endobj
-2577 0 obj
-<</BBox[ 0 0 77.76 17.28]/Filter/FlateDecode/FormType 1/Length 75/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1988 0 R >>/Subtype/Form/Type/XObject>>stream
-xú+‰
-‰“©PpÚuÊ*‰r
-·2PHÁ2T0—317µ¥40VI·“˜HÕ)S04RI„“puvU04◊T…‚rjvj ›D
 endstream
 endobj
 2578 0 obj
@@ -11318,13 +11305,6 @@ xú+‰
 4  õ1,
 endstream
 endobj
-2598 0 obj
-<</BBox[ 0 0 77.76 17.28]/Filter/FlateDecode/FormType 1/Length 76/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1987 0 R >>/Subtype/Form/Type/XObject>>stream
-xú+‰
-‰“©PpÚuÊ*‰r
-·2PHÁ2T0—317µ¥4∑TI·“˜HÕ)S04RI„“puvU040◊T…‚rÍvÍ ,˛Å
-endstream
-endobj
 2599 0 obj
 <</BBox[ 0 0 77.76 17.2803]/Filter/FlateDecode/FormType 1/Length 76/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1995 0 R >>/Subtype/Form/Type/XObject>>stream
 xú+‰
@@ -11332,11 +11312,31 @@ xú+‰
 ·2PHÁ2T0—3173450UI·“˜HÕ)S04RI„“puvU022’T…‚rÍvÍ )îl
 endstream
 endobj
-2600 0 obj
-<</BBox[ 0 0 77.76 17.04]/Filter/FlateDecode/FormType 1/Length 74/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1990 0 R >>/Subtype/Form/Type/XObject>>stream
+2601 0 obj
+<</BBox[ 0 0 77.76 17.28]/Filter/FlateDecode/FormType 1/Length 75/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1987 0 R >>/Subtype/Form/Type/XObject>>stream
 xú+‰
 ‰“©PpÚuÊ*‰r
-·2PHÁ2T0—365µ¥¥TI·“˜HÕ)S04RI„“puvU03’T…‚rÍuÍ µ
+·2PHÁ2T0—317µ¥4∑TI·“˜HÕ)S04RI„“puvU04◊T…‚rjvj “Q
+endstream
+endobj
+2602 0 obj
+<</BBox[ 0 0 73.2 17.28]/Filter/FlateDecode/FormType 1/Length 84/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1943 0 R /ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+xú+‰
+‰“©PpÚuÊ*‰r
+·2PHÁ24“3µ∞0005T0—317≤ÃBR∏Ù=Rs çB“∏4\ù]Ã5B≤∏\CÄ∆∏ç  ¥46
+endstream
+endobj
+2603 0 obj
+<</BBox[ 0 0 77.76 17.28]/Filter/FlateDecode/FormType 1/Length 75/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1988 0 R >>/Subtype/Form/Type/XObject>>stream
+xú+‰
+‰“©PpÚuÊ*‰r
+·2PHÁ2T0—317µ¥40VI·“˜HÕ)S04RI„“puvU03’T…‚rjvj G
+endstream
+endobj
+2604 0 obj
+<</BBox[ 0 0 77.76 17.04]/Filter/FlateDecode/FormType 1/Length 12/Matrix[ 1 0 0 1 0 0]/Resources<</Font 1990 0 R >>/Subtype/Form/Type/XObject>>stream
+xú+‰
+‰ í ◊
 endstream
 endobj
 xref
@@ -11424,53 +11424,53 @@ xref
 0000018660 00000 n
 0000018877 00000 n
 0000019093 00000 n
-0000019285 00000 n
-0000019501 00000 n
-0000019718 00000 n
-0000019910 00000 n
-0000020092 00000 n
-0000020300 00000 n
-0000020509 00000 n
-0000020700 00000 n
-0000020912 00000 n
-0000021126 00000 n
-0000021314 00000 n
-0000021527 00000 n
-0000021741 00000 n
-0000021926 00000 n
-0000022139 00000 n
-0000022353 00000 n
-0000022537 00000 n
-0000022743 00000 n
-0000022951 00000 n
-0000023137 00000 n
-0000023340 00000 n
-0000023544 00000 n
-0000023730 00000 n
-0000023945 00000 n
-0000024153 00000 n
-0000024343 00000 n
-0000024557 00000 n
-0000024764 00000 n
-0000024953 00000 n
-0000025157 00000 n
-0000025362 00000 n
-0000025549 00000 n
-0000025754 00000 n
-0000025960 00000 n
-0000026148 00000 n
-0000026353 00000 n
-0000026559 00000 n
-0000026747 00000 n
-0000026931 00000 n
-0000027113 00000 n
-0000027298 00000 n
-0000027483 00000 n
-0000027668 00000 n
-0000027842 00000 n
-0000028018 00000 n
-0000028193 00000 n
-0000028369 00000 n
+0000019292 00000 n
+0000019508 00000 n
+0000019725 00000 n
+0000019917 00000 n
+0000020099 00000 n
+0000020307 00000 n
+0000020516 00000 n
+0000020707 00000 n
+0000020919 00000 n
+0000021133 00000 n
+0000021321 00000 n
+0000021534 00000 n
+0000021748 00000 n
+0000021933 00000 n
+0000022146 00000 n
+0000022360 00000 n
+0000022544 00000 n
+0000022750 00000 n
+0000022958 00000 n
+0000023144 00000 n
+0000023347 00000 n
+0000023551 00000 n
+0000023737 00000 n
+0000023952 00000 n
+0000024160 00000 n
+0000024350 00000 n
+0000024564 00000 n
+0000024771 00000 n
+0000024960 00000 n
+0000025164 00000 n
+0000025369 00000 n
+0000025556 00000 n
+0000025761 00000 n
+0000025967 00000 n
+0000026155 00000 n
+0000026360 00000 n
+0000026566 00000 n
+0000026754 00000 n
+0000026938 00000 n
+0000027120 00000 n
+0000027305 00000 n
+0000027490 00000 n
+0000027675 00000 n
+0000027849 00000 n
+0000028024 00000 n
+0000028199 00000 n
+0000028375 00000 n
 0000028544 00000 n
 0000028723 00000 n
 0000028895 00000 n
@@ -13798,43 +13798,44 @@ xref
 0001238626 00000 n
 2562 1
 0001238886 00000 n
-2564 2
+2565 1
 0001239169 00000 n
-0001239378 00000 n
 2572 3
-0001239587 00000 n
-0001239870 00000 n
-0001240152 00000 n
-2576 3
-0001240434 00000 n
-0001240717 00000 n
-0001240976 00000 n
+0001239378 00000 n
+0001239661 00000 n
+0001239943 00000 n
+2576 1
+0001240225 00000 n
+2578 1
+0001240508 00000 n
 2582 1
-0001241235 00000 n
+0001240767 00000 n
 2585 2
-0001241444 00000 n
-0001241706 00000 n
+0001240976 00000 n
+0001241238 00000 n
 2588 7
-0001241916 00000 n
-0001242200 00000 n
-0001242462 00000 n
-0001242745 00000 n
-0001243028 00000 n
-0001243286 00000 n
-0001243544 00000 n
-2597 4
-0001243825 00000 n
-0001244091 00000 n
-0001244351 00000 n
-0001244613 00000 n
+0001241448 00000 n
+0001241732 00000 n
+0001241994 00000 n
+0001242277 00000 n
+0001242560 00000 n
+0001242818 00000 n
+0001243076 00000 n
+2597 1
+0001243357 00000 n
+2599 1
+0001243623 00000 n
+2601 4
+0001243885 00000 n
+0001244144 00000 n
+0001244425 00000 n
+0001244684 00000 n
 trailer
-<</DL 14892/Info 3 0 R /Root 2 0 R /Size 2601/ID[<6A55E81F37C6760EA01E57900D8791B9><B7165892F1B30A8F1685E28AE79BBEF9>]>>
+<</DL 14892/Info 3 0 R /Root 2 0 R /Size 2605/ID[<6A55E81F37C6760EA01E57900D8791B9><563BB1EC7B45FB8FB68094E139515813>]>>
 startxref
-1244871
+1244880
 %%EOF
-0 n
-0000119345 00000 n
-0000119422 00000 n
+22 00000 n
 0000119499 00000 n
 0000119575 00000 n
 0000119652 00000 n
