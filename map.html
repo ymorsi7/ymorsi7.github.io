@@ -11,9 +11,20 @@
 </center>
   <script src="docs/js/newMap.js"></script>
 
+  <script src = 'apiKey.js'></script>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRXCN2hnbGO77L_Sb4SzkSIWYvh5rpqPA&callback=initMap" async defer></script>
+
+  <script>
+    const apiKey = 'AIzaSyBRXCN2hnbGO77L_Sb4SzkSIWYvh5rpqPA';
+    
+    const scriptTag = document.createElement('script');
+    scriptTag.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=initMap';
+    scriptTag.async = true;
+    scriptTag.defer = true;
+
+    document.body.appendChild(scriptTag);
+  </script>
 
 </body>
 </html>
