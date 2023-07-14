@@ -51,33 +51,55 @@
           google.maps.event.trigger(map, 'resize');
         });
         
-          cities.forEach(city => {
-            const marker = new google.maps.Marker({
-              position: { lat: city.lat, lng: city.lng },
-              map: map,
-              title: city.name
-            });
+        //   cities.forEach(city => {
+        //     const marker = new google.maps.Marker({
+        //       position: { lat: city.lat, lng: city.lng },
+        //       map: map,
+        //       title: city.name
+        //     });
         
-            marker.addListener('click', function() {
-              showPhotoAlbum(city.photos);
-            });
+        //     marker.addListener('click', function() {
+        //       showPhotoAlbum(city.photos);
+        //     });
+        //   });
+        // }
+        
+        
+        
+        
+        // // Display the photo album for a selected city
+        // function showPhotoAlbum(photos) {
+        //   const photoAlbum = document.getElementById('photo-album');
+        //   photoAlbum.innerHTML = '';
+        
+        //   photos.forEach(photo => {
+        //     const img = document.createElement('img');
+        //     img.src = photo;
+        //     photoAlbum.appendChild(img);
+        //   });
+        
+        //   photoAlbum.style.display = 'block';
+        // }
+
+
+        cities.forEach((city, index) => {
+          const marker = new google.maps.Marker({
+            position: { lat: city.lat, lng: city.lng },
+            map: map,
+            title: city.name
           });
-        }
-        
-        
-        
-        
-        // Display the photo album for a selected city
-        function showPhotoAlbum(photos) {
-          const photoAlbum = document.getElementById('photo-album');
-          photoAlbum.innerHTML = '';
-        
-          photos.forEach(photo => {
-            const img = document.createElement('img');
-            img.src = photo;
-            photoAlbum.appendChild(img);
+      
+          let filter = index === 0 || index === 2 ? '.nature' : '.egypt';
+          marker.addListener('click', function () {
+            showPhotoAlbum(filter);
           });
-        
-          photoAlbum.style.display = 'block';
-        }
+        });
+      }
+      
+      // Display the photo album for a selected city
+      function showPhotoAlbum(filter) {
+        const photoAlbum = document.getElementById('photo-album');
+        photoAlbum.setAttribute('data-filter', filter);
+        photoAlbum.style.display = 'block';
+      }
         
