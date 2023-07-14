@@ -1,0 +1,22 @@
+
+#map {
+    width: 85vw;
+    height: 400px;
+    background-color: #f2f2f2;
+  }
+  .pin {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    cursor: pointer;
+  }
+  .photo-album {
+    display: none;
+    padding: 10px;
+  }
+  .photo-album img {
+    max-width: 100px;
+    margin: 5px;
+  }

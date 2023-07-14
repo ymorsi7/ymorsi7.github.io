@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Map with Photo Album</title>
+  <link rel = "stylesheet" href = "docs/css/newMap.css">
+</head>
+<body>
+    <center>
+  <div id="map"></div>
+  <div id="photo-album" class="photo-album"></div>
+</center>
+  <script src="docs/js/newMap.js"></script>
+
+  <script src = 'apiKey.js'></script>
+
+  <script>
+    const apiKey = 'AIzaSyBRXCN2hnbGO77L_Sb4SzkSIWYvh5rpqPA';
+
+    const scriptTag = document.createElement('script');
+    scriptTag.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=initMap';
+    scriptTag.async = true;
+    scriptTag.defer = true;
+
+    document.body.appendChild(scriptTag);
+  </script>
+
+</body>
+</html>
