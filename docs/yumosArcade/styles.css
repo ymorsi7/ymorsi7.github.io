@@ -1,0 +1,35 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #cce7ff;
+    text-align: center;
+    padding-top: 50px;
+}
+
+canvas {
+    border: 3px solid black;
+    display: block;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #0077b6;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #005994;
+}
+
+button#retry {
+    margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
