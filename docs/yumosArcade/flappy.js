@@ -20,8 +20,11 @@ let useAI = false;
 
 document.getElementById('toggleAI').addEventListener('click', function () {
     useAI = !useAI;
+    resetGame();
+    update();
     this.innerText = useAI ? 'AI On' : 'AI Off';
 });
+
 
 // Adding left-click event to the canvas
 canvas.addEventListener('click', function() {
@@ -34,8 +37,10 @@ document.addEventListener('keydown', function () {
 
 retryButton.addEventListener('click', function () {
     resetGame();
+    update();
     this.style.display = 'none';
 });
+
 
 function drawBird() {
     ctx.fillStyle = "yellow";
@@ -113,6 +118,41 @@ function update() {
 
     requestAnimationFrame(update);
 }
+
+let model;
+
+// We will represent the game state as a simple array: [bird.y, pipe.top, pipe.bottom]
+async function trainAI() {
+    model = tf.sequential();
+    
+    model.add(tf.layers.dense({units: 10, activation: 'relu', inputShape: [3]}));
+    model.add(tf.layers.dense({units: 2, activation: 'softmax'})); // jump or not jump
+    
+    model.compile({
+        optimizer: tf.train.adam(),
+        loss: 'categoricalCrossentropy',
+        metrics: ['accuracy']
+    });
+
+    // Some example training data here (you will need to generate real training data)
+    const xs = tf.tensor2d([[150, 200, 350], [170, 220, 370]]);
+    const ys = tf.tensor2d([[1, 0], [0, 1]]);
+
+    await model.fit(xs, ys, { epochs: 1000 });
+}
+
+function aiDecision() {
+    if (!model) return;
+    
+    let nextPipe = pipes[0];
+    if (nextPipe.x + pipeWidth < bird.x) nextPipe = pipes[1];
+    
+    const prediction = model.predict(tf.tensor2d([[bird.y, nextPipe.top, nextPipe.top + spacing]]));
+    if (prediction.argMax(-1).dataSync()[0] == 0) {
+        bird.vy = bird.jump;
+    }
+}
+
 
 function resetGame() {
     bird.y = canvas.height / 2;
