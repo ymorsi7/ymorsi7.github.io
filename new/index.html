@@ -38,7 +38,8 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-	<link rel="icon" type="image/x-icon" href="images/!head.png">
+	<!-- <link rel="icon" type="image/x-icon" href="images/!head.png"> -->
+	<link rel="icon" type="image/x-icon" href="images/smiling.png">
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
@@ -49,6 +50,58 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		.hover-underline-animation {
+			display: inline-block;
+			position: relative;
+		}
+
+		.hover-underline-animation:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #147823;
+			transform-origin: bottom right;
+			transition: transform 0.25s ease-out;
+		}
+
+		.hover-underline-animation:hover:after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+
+
+
+
+		.hover-underlineNav-animation {
+			display: inline-block;
+			position: relative;
+		}
+
+		.hover-underlineNav-animation:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #1b5529;
+			transform-origin: bottom right;
+			transition: transform 0.25s ease-out;
+		}
+
+		.hover-underlineNav-animation:hover:after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+	</style>
+
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -62,19 +115,19 @@
 <body>
 
 	<div class="fh5co-loader"></div>
-
 	<div id="page">
 		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
 			style="background-image:url(images/cover_bg_4BLUR.jpeg) " data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
+			
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t js-fullheight">
 							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
 								<div class="profile-thumb" style="background: url(images/user-3.jpg);"></div>
-								<h1><span>Yusuf Morsi</span></h1>
-								<h3><span>ECE @ UC San Diego</span></h3>
+								<h1 ><span >Yusuf Morsi</span></h1>
+								<h3><span>ECE @</span> <span>UC San Diego </span></h3>
 								<p>
 								<ul class="fh5co-social-icons">
 									<li><a href="https://www.linkedin.com/in/yusufmorsi/" target="_blank"><i
@@ -93,7 +146,7 @@
 				</div>
 			</div>
 		</header>
-		<!-- 
+<!-- 		
 	<div id="fh5co-about" class="animate-box">
 		<div class="container">
 			<div class="row">
@@ -132,7 +185,7 @@
 			<div class="container">
 				<div class="row animate-box">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Experience</h2>
+						<h2 >Relevant Experience</h2>
 					</div>
 				</div>
 				<div class="row">
@@ -161,7 +214,7 @@
 								<div class="timeline-panel">
 									<div class="timeline-heading">
 										<h3 class="timeline-title">Data Science Intern</h3>
-										<span class="company">FICO (2024) | San Diego, CA</span>
+										<span class="company" ><span class="hover-underline-animation">FICO (2024) | San Diego, CA</span></span>
 									</div>
 									<div class="timeline-body">
 										<p>Utilizing Python, SQL, and Tableau to develop and implement a data
@@ -175,7 +228,7 @@
 								<div class="timeline-panel">
 									<div class="timeline-heading">
 										<h3 class="timeline-title">Hardware Engineer Intern</h3>
-										<span class="company">Cisco (2023) | San Jose, CA</span>
+										<span class="company"><span class="hover-underline-animation">Cisco (2023) | San Jose, CA</span></span>
 									</div>
 									<div class="timeline-body">
 										<p>Automated analysis process by analyzing and clustering device failure data
@@ -189,7 +242,7 @@
 								<div class="timeline-panel">
 									<div class="timeline-heading">
 										<h3 class="timeline-title">Software Engineer Intern</h3>
-										<span class="company">Southwest Airlines (2023) | Dallas, TX</span>
+										<span class="company"><span class="hover-underline-animation">Southwest Airlines (2023) | Dallas, TX</span></span>
 									</div>
 									<div class="timeline-body">
 										<p>Automated GTM workflows for Ansible Tower through full-stack development,
@@ -205,7 +258,7 @@
 								<div class="timeline-panel">
 									<div class="timeline-heading">
 										<h3 class="timeline-title">Software Engineer Intern</h3>
-										<span class="company">CarsXE (2022-2023) | Highland, MD</span>
+										<span class="company"><span class="hover-underline-animation">CarsXE (2022-2023) | Highland, MD</span></span>
 									</div>
 									<div class="timeline-body">
 										<p>Led intern license plate recognition software implementation and development
@@ -222,11 +275,11 @@
 									</div>
 									<div class="timeline-body">
 
-										<span class="company">Mobile Systems Design Lab (2022) | San Diego, CA</span>
+										<span class="company"><span class="hover-underline-animation">Mobile Systems Design Lab (2022) | San Diego, CA</span></span>
 										<p>R&D of iOS/Android apps that enable engagement between an ML platform,
 											patients, and physicians.</p>
 										<br>
-										<span class="company">DigiHealth Lab (2021-2022) | San Diego, CA</span>
+										<span class="company"><span class="hover-underline-animation">DigiHealth Lab (2021-2022) | San Diego, CA</span></span> 
 										<hr>
 										<p>Developed I2C communication code; designed and soldered circuits (i.e. IMU).
 										</p>
@@ -238,10 +291,10 @@
 								<div class="timeline-panel">
 									<div class="timeline-heading">
 										<h3 class="timeline-title">Research Assistant (SDSU)</h3>
-										<span class="company">Experimental Mechanics Lab (2019) | San Diego, CA</span>
+										<span class="company"><span class="hover-underline-animation">Experimental Mechanics Lab (2019) | San Diego, CA</span></span>
 									</div>
 									<div class="timeline-body">
-										<p>Researched tensile strength of ABS ASTM D638 3D printed and injection molded
+										<p>As a high school intern, I researched tensile strength of ABS ASTM D638 3D printed and injection molded
 											samples.</p>
 									</div>
 								</div>
@@ -729,8 +782,8 @@
 					<div class="col-md-12">
 						<p>😁 2020 -
 							<script>document.write(new Date().getFullYear())</script> | <a href="old/index.html"
-								target="_blank">Old Site</a> | <a href="../old/photography.html"
-								target="_blank">Photography</a>
+								target="_blank"  class="hover-underline-animation">Old Site</a> | <a href="../old/photography.html"
+								target="_blank"  class="hover-underline-animation">Photography</a>
 						</p>
 					</div>
 				</div>
