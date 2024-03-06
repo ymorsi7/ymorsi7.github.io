@@ -47,13 +47,13 @@ body {
 }
 
 a {
-  color: #355ec6;
+  color: #088314;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #355ec6;
+  color: #088314;
   outline: none;
   text-decoration: none;
 }
@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6, figure {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #07351da0; 
+  background: #07311ba0; 
 }
 
   /*
@@ -273,7 +273,8 @@ ok brah
   display: table-cell;
   vertical-align: middle;
   height: 100px;
-  color: #355ec6 !important;
+  /* color: #355ec6 !important; */
+  color: #128a20 !important;
 }
 #fh5co-features .feature-left .feature-copy {
   width: 100%;
@@ -324,7 +325,7 @@ ok brah
 
 .fh5co-bg-dark {
   background: #2F3C4F;
-  background: #355ec6;
+  background: #094405;
 }
 .fh5co-bg-dark .fh5co-heading h2 {
   color: #fff !important;
@@ -381,7 +382,7 @@ ok brah
   display: inline-block;
   zoom: 1;
   *display: inline;
-  color: #355ec6;
+  color: #128a20;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -548,7 +549,7 @@ ok brah
   top: 40px;
   left: 50%;
   margin-left: -21px;
-  background-color: #355ec6;
+  background-color: #128a20;
   z-index: 100;
   display: table;
   -webkit-border-radius: 50%;
