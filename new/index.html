@@ -57,26 +57,34 @@
 			position: relative;
 		}
 
-		.hover-underline-animation:after {
-			content: '';
+		.hover-underline-animation:before {
+			/* content: '';
 			position: absolute;
 			width: 100%;
 			transform: scaleX(0);
 			height: 2px;
 			bottom: 0;
 			left: 0;
-			background-color: #147823;
+			background-color: #141c78;
 			transform-origin: bottom right;
-			transition: transform 0.25s ease-out;
+			transition: transform 0.25s ease-out; */
+			content: "";
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #2332d4;
+			transform: scaleX(0);
+			transition: transform 0.3s ease;
 		}
 
-		.hover-underline-animation:hover:after {
+		.hover-underline-animation:hover:before {
+			/* transform: scaleX(1);
+			transform-origin: bottom left; */
 			transform: scaleX(1);
-			transform-origin: bottom left;
 		}
-
-
-
 
 		.hover-underlineNav-animation {
 			display: inline-block;
@@ -91,7 +99,7 @@
 			height: 2px;
 			bottom: 0;
 			left: 0;
-			background-color: #1b5529;
+			background-color: #141c78;
 			transform-origin: bottom right;
 			transition: transform 0.25s ease-out;
 		}
@@ -117,7 +125,7 @@
 	<div class="fh5co-loader"></div>
 	<div id="page">
 		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
-			style="background-image:url(images/cover_bg_4BLUR.jpeg) " data-stellar-background-ratio="0.5">
+			style="background-image:url(images/alexx.jpg) " data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			
 			<div class="container">
@@ -798,8 +806,8 @@
 					<div class="col-md-12">
 						<p>😁 2020 -
 							<script>document.write(new Date().getFullYear())</script> | <a href="old/index.html"
-								target="_blank"  class="hover-underline-animation">Old Site</a> | <a href="../old/photography.html"
-								target="_blank"  class="hover-underline-animation">Photography</a>
+								target="_blank"  class="hover-underline-animation" style = "color:rgb(46, 46, 185)">Old Site</a> | <a href="../old/photography.html"
+								target="_blank"  class="hover-underline-animation" style = "color:rgb(46, 46, 185)">Photography</a>
 						</p>
 					</div>
 				</div>
