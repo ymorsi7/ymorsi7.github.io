@@ -1,68 +1,3 @@
- <!-- Step 8: Adding a CV/resume page
-This is a more freeform step, with the goal of getting you to explore HTML on your own and experiment. Add a new page to your website (and link to it from the navigation menu) that contains your CV or resume.
-
-If you do not want to publish your CV on the Web for privacy reasons, you can use fake data for all or part of it. In that case, try to keep the structure as close as possible to your real CV and simply change the actual data (e.g. names, dates, places) so that you are still solving a realistic use case.
-
-Structure the different sections of content with <section> elements. Think of <section> as the units of content that you would list in a table of contents for that page (which is exactly how they are exposed to assistive technology users).
-
-You may also find <article> useful for structuring independent, self-contained units of content (“article” as in “article of clothing” not “newspaper article” — yes, it is confusing!).
-
-Elements you will need (excluding those outside <body>):
-
-Headings, paragraphs, lists
-<a> for links
-<section> and <article> (see above)
-<time> for dates
-Elements you may need:
-
-<header> for <section> or <article> headers that are more than just a heading
-<img> in case you want to include icons or logos of organizations
-Don’t forget to preview your changes locally first, then when you’re happy with them commit and push to GitHub. 
-
-
-the following is the resume data:
-
-Yusuf Morsi
-ymorsi.com https://www.linkedin.com/in/yusufmorsi/
-Education
-University of California, San Diego
-M.S. Machine Learning and Data Science
-University of California, San Diego
-B.S. Electrical Engineering
-Experience
-Cisco
-Machine Learning Engineer (Hardware Failure Analysis) | H2O.ai, OpenAI, Snowflake
-• Improving device failure analysis by leveraging data science techniques and tools like H2O.ai, OpenAI API, and Generative
-AI, leading to more accurate identification of root causes and enhanced reliability of Cisco hardware.
-• Communicating with different groups integral in Failure Analysis process for various device failure cases.
-University of Southern California Los Angeles, CA Machine Learning Researcher | Pytorch, DBMS, PostgreSQL, ML Research Summer 2024 - Present
-• Optimizing query processing in large-scale databases by leveraging advanced machine learning algorithms • Developing LLM-based model for query prediction and data retrieval
-FICO San Diego, CA Data Science Intern | Tensorflow, SQL, Spark, Hadoop, ML Research Spring 2024 - Summer 2024
-• Implemented various models (including Classifier-Adjusted Density Estimation, Autoencoder, Isolation Forest) to detect fraud score anomalies in transaction data from major banks in the US, UK, Canada, India, Brazil. (pres. to Chief Analytics Officer)
-• Achieved high model accuracy and efficiency, as evidenced by consistent detection rates in test datasets
-Cisco San Jose, CA Hardware and Data Science Intern | H2O.ai, Tensorflow, Snowflake, Failure Analysis Summer 2023
-• Automated analysis process by analyzing and clustering device failure data with H2O.ai and Python, significantly reducing troubleshooting time and operational costs
-• Developed dashboard to lower carbon usage at Cisco, and presented it live to entire company on CiscoTV
-Southwest Airlines Dallas, TX Software Engineer Intern | JS, Node.js, React.js, Agile Spring 2023
-• Created internal tool with automated GTM workflows for Ansible Tower through full-stack development, achieving streamlined workflows
-• On intern team tasked with saving $24M/year by launching discounting feature rather than third parties (pres. to CIO) Projects
-LSTM Surrogate Modeling for Nonlinear Structural Systems Machine Learning
-• Developed and implemented a LSTM network-based surrogate model for predicting nonlinear structural responses in seismic design, with over 95% accuracy, and reducing computational time by 80% compared to traditional finite element methods.
-Targimo Data Science CEO and Chief ML Engineer
-• Leading B2B startup that provides business solutions from data science insights (i.e. attending meetings with VC firms) • Directing development of a team of three ML engineers, spearheading ML R&D
-• Leveraged PyTorch, CoreNLP, etc. to architect a market analysis tool, decoding media to fuel data-driven strategies
-Design and Analysis of High-Precision Differentiator Circuit Hardware Engineering • Engineered a signal processing circuit with operational amplifier inverter configuration (LTSpice, MATLAB, circuits)
-• Achieved time derivative of input with < 20 μs rise time and ensured output voltage overshoot didn’t exceed 15% Miscellaneous
-Skills: Python, C/C++, MATLAB, TensorFlow, NLP, Pytorch, OpenCV, Java, Typescript, JavaScript, HTML/CSS, Flask, iOS & Android Dev, LaTeX, LTSpice, Vivado, Circuit Analysis
-More Info: 3x Hackathon Winner; Previous Technical Chair of IEEE UCSD; CSE and ECE Mentor at UCSD Languages: English, Arabic
-ymorsi7@gmail.com (619) 855 - 2450 https://github.com/ymorsi7
-2024 - 2025 2020 - 2024
-San Jose, CA
-  Summer 2024 - Present
-  
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,64 +5,200 @@ San Jose, CA
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
     <link rel="stylesheet" href="style.css">
+
+<style>
+    /* Basic reset and layout */
+   * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+   
+   body {
+     font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+     background-color: #f7f7f7;
+     padding: 20px;
+     max-width: 1000px;
+     margin: 0 auto;
+     line-height: 1.5;
+   }
+   
+   /* Navigation bar */
+   nav ul {
+     list-style: none;
+     display: flex;
+     justify-content: space-between;
+     background-color: #269308;
+     padding: 5px;
+     margin-bottom: 10px;
+   }
+   
+   nav ul li {
+     margin: 0 5px;
+   }
+   
+   nav a {
+     color: white;
+     text-decoration: none;
+     padding: 4px 10px;
+   }
+   
+   nav a.current {
+     background-color: #114602;
+   }
+   
+   nav a:hover {
+     background-color: #104402;
+   }
+   
+   /* Page header */
+   h1 {
+     margin-bottom: 10px;
+     font-size: 2em;
+   }
+   
+   /* Form styles */
+   form {
+     background-color: white;
+     padding: 10px;
+     border: 1px solid #ccc;
+   }
+   
+   form label {
+     font-weight: bold;
+     display: block;
+     margin-bottom: 5px;
+   }
+   
+   form input[type="email"],
+   form input[type="text"],
+   form textarea {
+     width: 100%;
+     padding: 8px;
+     margin-bottom: 5px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+   }
+   
+   button {
+     padding: 10px 5px;
+     background-color: #1d7a04;
+     color: white;
+     border: none;
+     cursor: pointer;
+     border-radius: 4px;
+   }
+   
+   button:hover {
+     background-color: #1d7a04;
+   }
+   
+   /* Responsive Design */
+   @media (max-width: 768px) {
+     nav ul {
+         flex-direction: column;
+         align-items: center;
+     }
+   
+     nav a {
+         display: block;
+         width: 100%;
+         text-align: center;
+     }
+   }
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    ul {
+        padding-left: 15px;
+    }
+}
+   
+   
+   
+   </style>
 </head>
 
 <body>
+    <!-- Navigation Menu -->
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="projects/index.html">Projects</a></li>
             <li><a href="contact/index.html">Contact</a></li>
-            <li><a href="resume.html">Resume</a></li>
-            </ul>
+            <li><a href="resume.html" class="current">Resume</a></li>
+            <li><a href="https://github.com/YMORSI7" target = "_blank">GITHUB!!!</a></li>
+        </ul>
     </nav>
 
-    <section>
+    <!-- Resume Section -->
+    <section id="resume">
         <header>
             <h1>Yusuf Morsi</h1>
-            <p><a href="https://www.linkedin.com/in/yusufmorsi/">ymorsi.com</a></p>
+            <p><a href="https://www.linkedin.com/in/yusufmorsi/" target="_blank">ymorsi.com</a></p>
         </header>
+
+        <!-- Education -->
         <article>
             <h2>Education</h2>
             <ul>
-                <li>University of California, San Diego</li>
-                <li>M.S. Machine Learning and Data Science</li>
-                <li>University of California, San Diego</li>
-                <li>B.S. Electrical Engineering</li>
+                <li>University of California, San Diego - M.S. Machine Learning and Data Science</li>
+                <li>University of California, San Diego - B.S. Electrical Engineering</li>
             </ul>
         </article>
+
+        <!-- Experience -->
         <article>
             <h2>Experience</h2>
             <ul>
-                <li>Cisco</li>
-                <li>Machine Learning Engineer (Hardware Failure Analysis) | H2O.ai, OpenAI, Snowflake</li>
-                <li>University of Southern California Los Angeles, CA</li>
-                <li>Machine Learning Researcher | Pytorch, DBMS, PostgreSQL, ML Research</li>
-                <li>FICO San Diego, CA</li>
-                <li>Data Science Intern | Tensorflow, SQL, Spark, Hadoop, ML Research</li>
-                <li>Cisco San Jose, CA</li>
-                <li>Hardware and Data Science Intern | H2O.ai, Tensorflow, Snowflake, Failure Analysis</li>
-                <li>Southwest Airlines Dallas, TX</li>
-                <li>Software Engineer Intern | JS, Node.js, React.js, Agile</li>
+                <li><strong>Cisco</strong> - Machine Learning Engineer (Hardware Failure Analysis) | H2O.ai, OpenAI, Snowflake</li>
+                <li><strong>University of Southern California</strong>, Los Angeles, CA - Machine Learning Researcher | Pytorch, DBMS, PostgreSQL</li>
+                <li><strong>FICO</strong>, San Diego, CA - Data Science Intern | Tensorflow, SQL, Spark, Hadoop</li>
+                <li><strong>Cisco</strong>, San Jose, CA - Hardware and Data Science Intern | H2O.ai, Tensorflow, Snowflake</li>
+                <li><strong>Southwest Airlines</strong>, Dallas, TX - Software Engineer Intern | JS, Node.js, React.js, Agile</li>
             </ul>
         </article>
+
+        <!-- Projects -->
         <article>
             <h2>Projects</h2>
             <ul>
-                <li>LSTM Surrogate Modeling for Nonlinear Structural Systems Machine Learning</li>
-                <li>Targimo Data Science CEO and Chief ML Engineer</li>
-                <li>Design and Analysis of High-Precision Differentiator Circuit Hardware Engineering</li>
+                <li>LSTM Surrogate Modeling for Nonlinear Structural Systems</li>
+                <li>Targimo Data Science - CEO and Chief ML Engineer</li>
+                <li>Design and Analysis of High-Precision Differentiator Circuit</li>
             </ul>
         </article>
+
+        <!-- Miscellaneous -->
         <article>
             <h2>Miscellaneous</h2>
             <ul>
                 <li>Skills: Python, C/C++, MATLAB, TensorFlow, NLP, Pytorch, OpenCV, Java, Typescript, JavaScript, HTML/CSS, Flask, iOS & Android Dev, LaTeX, LTSpice, Vivado, Circuit Analysis</li>
-                <li>More Info: 3x Hackathon Winner; Previous Technical Chair</li>
+                <li>3x Hackathon Winner; Previous Technical Chair of IEEE UCSD</li>
                 <li>Languages: English, Arabic</li>
-                </ul>
-
+            </ul>
         </article>
-
-
     </section>
+
+</body>
+</html>
