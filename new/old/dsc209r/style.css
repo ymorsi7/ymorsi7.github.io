@@ -1,99 +1,30 @@
-/* Basic reset and layout */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Enable automatic light/dark mode */
+:root {
+  color-scheme: light dark;
 }
 
-body {
-  font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
-  background-color: #f7f7f7;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  line-height: 1.5;
-}
-
-/* Navigation bar */
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  background-color: #269308;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-nav ul li {
-  margin: 0 5px;
-}
-
+/* Navigation styles */
 nav a {
-  color: white;
+  padding: 10px;
   text-decoration: none;
-  padding: 4px 10px;
+  color: inherit;
 }
 
 nav a.current {
-  background-color: #114602;
-}
-
-nav a:hover {
-  background-color: #104402;
-}
-
-/* Page header */
-h1 {
-  margin-bottom: 10px;
-  font-size: 2em;
-}
-
-/* Form styles */
-form {
-  background-color: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-form label {
   font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+  color: red;
 }
 
-form input[type="email"],
-form input[type="text"],
-form textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom-color: var(--border-color);
+  border-bottom-style: solid;
 }
 
-button {
-  padding: 10px 5px;
-  background-color: #1d7a04;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #1d7a04;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  nav ul {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  nav a {
-      display: block;
-      width: 100%;
-      text-align: center;
-  }
+/* Dark mode switcher styles */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
 }
