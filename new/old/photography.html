@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<link rel="icon" type="image/x-icon" href="docs/assets/img/cam.png">
 	<style>
 		/* General Styling */
 		body {
@@ -84,29 +85,60 @@
 			padding: 0;
 		}
 
-		.portfolio-box {
-			width: 360px;
-			border-radius: 12px;
-			box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-			background-color: #ffffff;
-			overflow: hidden;
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			text-align: center;
-			margin-bottom: 20px;
-		}
+		/* Adjust portfolio item size and appearance */
+.portfolio-box {
+    width: 100%;
+    max-width: 320px; /* Adjust as needed to fit the layout */
+    margin: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: inline-block;
+}
 
-		.portfolio-box:hover {
-			transform: translateY(-5px);
-			box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.15);
-		}
+.portfolio-box:hover {
+    transform: scale(1.03); /* Subtle zoom effect on hover */
+}
 
-		.portfolio-item {
-			width: 100%;
-			height: 0;
-			padding-bottom: 75%;
-			background-size: cover;
-			background-position: center;
-		}
+/* Style for the portfolio item (image) */
+.portfolio-item {
+    background-size: cover;
+    background-position: center;
+    height: 280px; /* Increase height to make images appear taller */
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: background-size 0.3s;
+}
+
+.portfolio-item:hover {
+    background-size: 110%; /* Slight zoom on image hover */
+}
+
+/* Text below each image */
+.portfolio-box h6 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1B2D55;
+    margin: 10px 0 5px;
+    text-align: center;
+}
+
+.portfolio-box p {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+/* Container for portfolio gallery */
+.portfolio-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
 
 		.portfolio-box h6 {
 			margin: 15px 0 5px;
