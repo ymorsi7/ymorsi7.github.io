@@ -310,11 +310,15 @@
 		}
 
 		.timeline-title-wrapper {
-			flex-grow: 1;
-			background: none !important;
-			background-color: transparent !important;
-			width: 100%;
 			text-align: center;
+		}
+
+		.timeline-body {
+			text-align: center;
+		}
+		
+		.timeline-body p {
+			text-align: left;
 		}
 
 		h3.timeline-title {
@@ -568,14 +572,18 @@
 		}
 
 		.institution-name {
-			color: var(--primary-color);
+			color: white;
 			font-weight: 600;
-			display: block;
+			display: inline-block;
 			text-align: center;
-			font-size: 1.25rem;
-			margin: 0 0 15px 0;
+			font-size: 1.2rem;
+			margin: 10px auto;
 			text-transform: uppercase;
 			letter-spacing: 0.5px;
+			padding: 8px 20px;
+			background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+			border-radius: 25px;
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 		}
 	</style>
 
@@ -650,7 +658,8 @@
 										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Data Scientist / FA Engineer</h3>
-											<span class="company">Cisco (Aug 2024 - Present) | San Jose, CA</span>
+											<span class="institution-name">Cisco</span>
+											<span class="company">(Aug 2024 - Present) | San Jose, CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -667,7 +676,8 @@
 										<img src="images/usc.png" alt="USC Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">LLM Researcher</h3>
-											<span class="company">USC (Sep 2024 - April 2025) | Los Angeles, CA</span>
+											<span class="institution-name">USC</span>
+											<span class="company">(Sep 2024 - April 2025) | Los Angeles, CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -684,7 +694,8 @@
 										<img src="images/fico.png" alt="FICO Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Data Science Intern</h3>
-											<span class="company"><span class="hover-underline-animation">FICO (2024) | San Diego, CA</span></span>
+											<span class="institution-name">FICO</span>
+											<span class="company">(2024) | San Diego, CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -700,7 +711,8 @@
 										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Hardware Engineer Intern</h3>
-											<span class="company"><span class="hover-underline-animation">Cisco (2023) | San Jose, CA</span></span>
+											<span class="institution-name">Cisco</span>
+											<span class="company">(2023) | San Jose, CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -717,7 +729,8 @@
 										<img src="images/southwest.jpeg" alt="Southwest Airlines Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
-											<span class="company"><span class="hover-underline-animation">Southwest Airlines (2023) | Dallas, TX</span></span>
+											<span class="institution-name">Southwest Airlines</span>
+											<span class="company">(2023) | Dallas, TX</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -736,7 +749,8 @@
 										<img src="images/carsxe.png" alt="CarsXE Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
-											<span class="company"><span class="hover-underline-animation">CarsXE (2022-2023) | Highland, MD</span></span>
+											<span class="institution-name">CarsXE</span>
+											<span class="company">(2022-2023) | Highland, MD</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -755,12 +769,14 @@
 										</div>
 									</div>
 									<div class="timeline-body">
-										<span class="institution-name" style = "font-size: large; text-decoration: underline;;">UC San Diego</span>
-										<span class="company"><span class="hover-underline-animation">Mobile Systems Design Lab (2022) | San Diego, CA</span></span>
+										<div style="text-align: center;">
+											<span class="institution-name">UC San Diego</span>
+										</div>
+										<span class="company">Mobile Systems Design Lab (2022) | San Diego, CA</span>
 										<p>R&D of iOS/Android apps that enable engagement between an ML platform,
 											patients, and physicians.</p>
 										<br>
-										<span class="company"><span class="hover-underline-animation">DigiHealth Lab (2021-2022) | San Diego, CA</span></span> 
+										<span class="company">DigiHealth Lab (2021-2022) | San Diego, CA</span> 
 										<hr>
 										<p>Developed I2C communication code; designed and soldered circuits (i.e. IMU).
 										</p>
@@ -776,8 +792,8 @@
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Research Assistant</h3>
 											<br>
-											<span class="institution-name" style = "font-size: large; text-decoration: underline;;">San Diego State University</span>
-											<span class="company"><span class="hover-underline-animation">Experimental Mechanics Lab (2019) | San Diego, CA</span></span>
+											<span class="institution-name">San Diego State University</span>
+											<span class="company">Experimental Mechanics Lab (2019) | San Diego, CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
@@ -801,7 +817,7 @@
 										<img src="images/ucsd.png" alt="UCSD Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Master of Science</h3>
-											<span class="company"><span class="hover-underline-animation" style = "font-size:larger;">UC San Diego</span></span>
+											<span class="institution-name">UC San Diego</span>
 										</div>
 									</div>
 								<center>
@@ -820,7 +836,7 @@
 										<img src="images/ucsd.png" alt="UCSD Logo" class="company-logo">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Bachelor of Science</h3>
-											<span class="company"><span class="hover-underline-animation"  style = "font-size:larger;">UC San Diego</span></span>
+											<span class="institution-name">UC San Diego</span>
 										</div>
 									</div>
 									<center>
