@@ -2104,7 +2104,7 @@ body.is-touch .tiles article .content {
   }
 
   .tiles article {
-    width: calc(110% - 2.5em);
+    width: calc(50% - 2.5em);
     margin: 2.5em 0 0 2.5em;
   }
 }
