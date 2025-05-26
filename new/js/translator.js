@@ -42,16 +42,8 @@ function toggleLanguage() {
         // Force translate after a short delay
         setTimeout(forceTranslateAllContent, 100);
     } else {
-        // Switch back to English
-        document.body.classList.remove('rtl', 'arabic-font');
-        
-        // Update button text
-        const langLabel = document.querySelector('.lang-label');
-        if (langLabel) {
-            langLabel.textContent = 'EN → عربي';
-        }
-        
-        // No need to force translate for English - the original HTML is already in English
+        // Switch back to English - simply reload the page to restore original English content
+        window.location.reload();
     }
 }
 
