@@ -730,6 +730,56 @@
 			color: var(--accent);
 			transform: scale(1.2);
 		}
+
+		/* 1. Fix the language button styles to make it bigger and prevent position change */
+		.lang-switch-container {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 9999;
+		}
+		
+		.lang-switch-btn {
+			background-color: var(--primary-color);
+			color: white;
+			border: none;
+			border-radius: 30px;
+			width: auto;
+			min-width: 100px;
+			height: 40px;
+			padding: 0 15px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			transition: all 0.3s ease;
+			font-size: 14px;
+		}
+		
+		.lang-switch-btn:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+			background-color: var(--secondary-color);
+		}
+		
+		.lang-switch-btn:focus {
+			outline: none;
+		}
+		
+		.lang-switch-btn:active {
+			transform: translateY(0);
+		}
+		
+		.lang-switch-btn i {
+			margin-right: 8px;
+		}
+		
+		.lang-label {
+			font-weight: 600;
+			font-size: 14px;
+			white-space: nowrap;
+		}
 	</style>
 
 
@@ -740,9 +790,70 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<!-- Language Switcher Styles -->
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+		
+		.arabic-font {
+			font-family: 'Cairo', 'Poppins', sans-serif !important;
+		}
+		
+		.arabic-font h1, 
+		.arabic-font h2, 
+		.arabic-font h3, 
+		.arabic-font h4, 
+		.arabic-font h5, 
+		.arabic-font h6,
+		.arabic-font p,
+		.arabic-font span,
+		.arabic-font a,
+		.arabic-font div,
+		.arabic-font li {
+			font-family: 'Cairo', 'Poppins', sans-serif !important;
+		}
+		
+		.rtl {
+			direction: rtl !important;
+			text-align: right;
+		}
+		
+		.rtl .timeline:before {
+			right: 50%;
+			left: auto;
+			margin-right: -2px;
+			margin-left: 0;
+		}
+		
+		.rtl .timeline-badge {
+			right: 50%;
+			left: auto;
+			margin-right: -25px;
+			margin-left: 0;
+		}
+		
+		.rtl .timeline-title:after {
+			right: 0;
+			left: 0;
+		}
+		
+		.rtl .fh5co-social-icons {
+			padding-right: 0;
+		}
+		
+		.rtl .timeline-body p {
+			text-align: right;
+		}
+	</style>
+
 </head>
 
 <body>
+	<!-- Language Switcher -->
+	<div class="lang-switch-container">
+		<button id="lang-switch" class="lang-switch-btn" title="Switch to Arabic (تغيير إلى العربية)">
+			<i class="icon-earth"></i> <span class="lang-label">EN → عربي</span>
+		</button>
+	</div>
 
 	<div class="fh5co-loader"></div>
 	<div id="page">
@@ -1242,8 +1353,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p>😁 2020 -
-							<script>document.write(new Date().getFullYear())</script> | <a href="../old/photography.html"
-								target="_blank"  class="hover-underline-animation" style="color: var(--primary-color)">Photography</a>
+							<script>document.write(new Date().getFullYear())</script> | 
+							<a href="./old/photography.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Photography</a> |
+							<a href="./old/index.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Pre-GPT Portfolio</a>
 						</p>
 					</div>
 				</div>
@@ -1405,6 +1517,366 @@
 			
 			// Initial check on page load
 			reveal();
+		</script>
+
+		<!-- Language Switch Functionality -->
+		<script>
+			// Comprehensive Arabic translations by a professional Egyptian translator
+			const translations = {
+				en: {
+					// Header section
+					heading: "Yusuf Morsi",
+					subheading: "ML &commat; Cisco | ECE BS/MS @",
+					school: "UC San Diego",
+					prevAt: "Prev @ FICO, Southwest Airlines, USC",
+					hackathon: "7x Hackathon Winner",
+					
+					// Main sections
+					experience: "Relevant Experience",
+					work: "Work Experience",
+					education: "Education",
+					projects: "Projects",
+					
+					// Work experiences
+					workCiscoTitle: "Data Scientist / FA Engineer",
+					workCiscoDate: "(Aug 2024 - Present) | San Jose, CA",
+					workCiscoDesc: "Improving device failure analysis by leveraging data science techniques and tools like H2O.ai, OpenAI API, and other Generative AI technologies, leading to more accurate identification of root causes and enhanced reliability of Cisco hardware.",
+					
+					workUSCTitle: "LLM Researcher",
+					workUSCDate: "(Sep 2024 - April 2025) | Los Angeles, CA",
+					workUSCDesc1: "Optimizing query processing in large-scale databases by leveraging advanced machine learning algorithms",
+					workUSCDesc2: "Developing LLM-based model for query prediction and data retrieval",
+					
+					workFICOTitle: "Data Science Intern",
+					workFICODate: "(2024) | San Diego, CA",
+					workFICODesc: "Implemented various models (including Classifier-Adjusted Density Estimation, Autoencoder, Isolation Forest) to detect fraud score anomalies in transaction data from major banks in the US, UK, Canada, India, and Brazil.",
+					
+					workCisco2Title: "Hardware Engineer Intern",
+					workCisco2Date: "(2023) | San Jose, CA",
+					workCisco2Desc: "Automated analysis process by analyzing and clustering device failure data with H2O.ai and Python, significantly reducing troubleshooting time and operational costs.",
+					
+					workSouthwestTitle: "Software Engineer Intern",
+					workSouthwestDate: "(2023) | Dallas, TX",
+					workSouthwestDesc1: "Automated GTM workflows for Ansible Tower through full-stack development, streamlining workflows.",
+					workSouthwestDesc2: "On intern team tasked with saving $24M/year by launching discounting feature rather than third parties (presented to CIO).",
+					
+					workCarsXETitle: "Software Engineer Intern",
+					workCarsXEDate: "(2022-2023) | Highland, MD",
+					workCarsXEDesc: "Led intern license plate recognition software implementation and development of pip package for company API.",
+					
+					researcherTitle: "Undergraduate Researcher",
+					ucsdLabMobile: "Mobile Systems Design Lab (2022) | San Diego, CA",
+					ucsdLabMobileDesc: "R&D of iOS/Android apps that enable engagement between an ML platform, patients, and physicians.",
+					ucsdLabDigi: "DigiHealth Lab (2021-2022) | San Diego, CA",
+					ucsdLabDigiDesc: "Developed I2C communication code; designed and soldered circuits (i.e. IMU).",
+					
+					sdsuTitle: "Research Assistant",
+					sdsuDate: "Experimental Mechanics Lab (2019) | San Diego, CA",
+					sdsuDesc: "As a high school intern, I researched tensile strength of ABS ASTM D638 3D printed and injection molded samples.",
+					
+					// Education
+					educationMS: "Master of Science",
+					educationBS: "Bachelor of Science",
+					mldsTitle: "Machine Learning and Data Science M.S.",
+					eeTitle: "Electrical Engineering B.S.",
+					
+					// Projects section
+					projectSeismic: "SeismicLSTM",
+					projectSeismicDesc: "Mitigating the high computational costs associated with applying Bayesian model updating in inverse problems / Uncertainty Quantification and Efficient Sensitivity Analysis by using Surrogate Models",
+					
+					projectVIAPF: "VIAPF",
+					projectVIAPFDesc: "Trained and implemented autoencoder into a pipeline with Google Cloud transcription API to remove both musical instruments and profanity from music.",
+					
+					projectProstheTech: "ProstheTech",
+					projectProstheTechDesc: "3D-printed EMG",
+					
+					projectHateSpeech: "Hate Speech NLP Analysis",
+					projectHateSpeechDesc: "Detecting and analyzing hate speech",
+					
+					projectSLAM: "Visual-Intertial SLAM",
+					projectSLAMDesc: "Visual-Intertial SLAM with EKF and Feature Tracking",
+					
+					projectDrowsiness: "Drowsiness Detection",
+					projectDrowsinessDesc: "Drowsiness Detection with OpenCV and Arduino",
+					
+					projectFaceFinder: "FaceFinder for NamUS",
+					projectFaceFinderDesc: "Face and age recognition system for missing persons",
+					
+					projectAyatica: "Ayatica",
+					projectAyaticaDesc: "Exploring patterns, miracles, and linguistic features in Islamic sacred texts through data visualization",
+					
+					// Footer
+					footer: "😁 2020 -",
+					photography: "Photography",
+					oldPortfolio: "Pre-GPT Portfolio v1"
+				},
+				ar: {
+					// Header section - Professional Egyptian Arabic
+					heading: "يوسف مرسي",
+					subheading: "مهندس ذكاء اصطناعي في شركة سيسكو | بكالوريوس وماجستير في الهندسة الكهربائية @",
+					school: "جامعة كاليفورنيا سان دييجو",
+					prevAt: "سابقاً في فيكو، طيران ساوث ويست، جامعة جنوب كاليفورنيا",
+					hackathon: "فائز في ٧ مسابقات برمجية",
+					
+					// Main sections
+					experience: "الخبرات المهنية",
+					work: "الخبرة العملية",
+					education: "التعليم",
+					projects: "المشاريع",
+					
+					// Work experiences
+					workCiscoTitle: "عالم بيانات / مهندس تحليل الأعطال",
+					workCiscoDate: "(أغسطس ٢٠٢٤ - حتى الآن) | سان خوسيه، كاليفورنيا",
+					workCiscoDesc: "تحسين تحليل أعطال الأجهزة باستخدام تقنيات علوم البيانات وأدوات مثل H2O.ai وواجهة برمجة تطبيقات OpenAI وتقنيات الذكاء الاصطناعي التوليدي الأخرى، مما يؤدي إلى تحديد أكثر دقة للأسباب الجذرية وتعزيز موثوقية أجهزة سيسكو.",
+					
+					workUSCTitle: "باحث في نماذج اللغة الكبيرة",
+					workUSCDate: "(سبتمبر ٢٠٢٤ - أبريل ٢٠٢٥) | لوس أنجلوس، كاليفورنيا",
+					workUSCDesc1: "تحسين معالجة الاستعلامات في قواعد البيانات واسعة النطاق باستخدام خوارزميات التعلم الآلي المتقدمة",
+					workUSCDesc2: "تطوير نموذج قائم على نماذج اللغة الكبيرة للتنبؤ بالاستعلامات واسترجاع البيانات",
+					
+					workFICOTitle: "متدرب علوم البيانات",
+					workFICODate: "(٢٠٢٤) | سان دييجو، كاليفورنيا",
+					workFICODesc: "قمت بتنفيذ نماذج متنوعة (بما في ذلك تقدير الكثافة المعدل بالمصنف، الترميز التلقائي، غابة العزلة) لاكتشاف الشذوذ في درجات الاحتيال في بيانات المعاملات من البنوك الرئيسية في الولايات المتحدة والمملكة المتحدة وكندا والهند والبرازيل.",
+					
+					workCisco2Title: "متدرب هندسة الأجهزة",
+					workCisco2Date: "(٢٠٢٣) | سان خوسيه، كاليفورنيا",
+					workCisco2Desc: "أتمتة عملية التحليل من خلال تحليل وتجميع بيانات فشل الجهاز باستخدام H2O.ai وبايثون، مما يقلل بشكل كبير من وقت استكشاف الأخطاء وإصلاحها والتكاليف التشغيلية.",
+					
+					workSouthwestTitle: "متدرب هندسة البرمجيات",
+					workSouthwestDate: "(٢٠٢٣) | دالاس، تكساس",
+					workSouthwestDesc1: "أتمتة سير عمل GTM لـ Ansible Tower من خلال التطوير الشامل، مما يبسط سير العمل.",
+					workSouthwestDesc2: "عضو في فريق المتدربين المكلف بتوفير ٢٤ مليون دولار سنويًا من خلال إطلاق ميزة الخصم بدلاً من الأطراف الثالثة (تم تقديمه إلى CIO).",
+					
+					workCarsXETitle: "متدرب هندسة البرمجيات",
+					workCarsXEDate: "(٢٠٢٢-٢٠٢٣) | هايلاند، ماريلاند",
+					workCarsXEDesc: "قاد تنفيذ برنامج التعرف على لوحات الترخيص للمتدربين وتطوير حزمة pip لواجهة برمجة تطبيقات الشركة.",
+					
+					researcherTitle: "باحث جامعي",
+					ucsdLabMobile: "مختبر تصميم الأنظمة المحمولة (٢٠٢٢) | سان دييجو، كاليفورنيا",
+					ucsdLabMobileDesc: "البحث والتطوير لتطبيقات iOS/Android التي تمكن التفاعل بين منصة التعلم الآلي والمرضى والأطباء.",
+					ucsdLabDigi: "مختبر الصحة الرقمية (٢٠٢١-٢٠٢٢) | سان دييجو، كاليفورنيا",
+					ucsdLabDigiDesc: "طورت رمز الاتصال I2C؛ صممت ولحمت الدوائر الكهربائية (مثل IMU).",
+					
+					sdsuTitle: "مساعد باحث",
+					sdsuDate: "مختبر الميكانيكا التجريبية (٢٠١٩) | سان دييجو، كاليفورنيا",
+					sdsuDesc: "كمتدرب في المدرسة الثانوية، بحثت في قوة الشد لعينات ABS ASTM D638 المطبوعة ثلاثية الأبعاد والمصنوعة بالقولبة بالحقن.",
+					
+					// Education
+					educationMS: "ماجستير العلوم",
+					educationBS: "بكالوريوس العلوم",
+					mldsTitle: "ماجستير في التعلم الآلي وعلوم البيانات",
+					eeTitle: "بكالوريوس في الهندسة الكهربائية",
+					
+					// Projects section
+					projectSeismic: "نموذج LSTM للبيانات الزلزالية",
+					projectSeismicDesc: "تخفيف التكاليف الحسابية العالية المرتبطة بتطبيق تحديث النموذج البايزي في مشكلات عكسية / تحديد الكمي للشكوك وتحليل الحساسية الفعال باستخدام النماذج البديلة",
+					
+					projectVIAPF: "VIAPF",
+					projectVIAPFDesc: "تدريب وتنفيذ الترميز التلقائي في خط أنابيب مع واجهة برمجة تطبيقات النسخ السحابية من Google لإزالة كل من الآلات الموسيقية والألفاظ النابية من الموسيقى.",
+					
+					projectProstheTech: "تقنية الأطراف الصناعية",
+					projectProstheTechDesc: "جهاز تخطيط كهربية العضلات مطبوع ثلاثي الأبعاد",
+					
+					projectHateSpeech: "تحليل خطاب الكراهية باستخدام معالجة اللغة الطبيعية",
+					projectHateSpeechDesc: "اكتشاف وتحليل خطاب الكراهية",
+					
+					projectSLAM: "التموضع والخرائط المتزامنة البصرية القصورية",
+					projectSLAMDesc: "التموضع والخرائط المتزامنة البصرية القصورية باستخدام مرشح كالمان الممتد وتتبع الميزات",
+					
+					projectDrowsiness: "اكتشاف النعاس",
+					projectDrowsinessDesc: "اكتشاف النعاس باستخدام OpenCV وأردوينو",
+					
+					projectFaceFinder: "باحث الوجوه لـ NamUS",
+					projectFaceFinderDesc: "نظام التعرف على الوجه والعمر للأشخاص المفقودين",
+					
+					projectAyatica: "آياتيكا",
+					projectAyaticaDesc: "استكشاف الأنماط والمعجزات والميزات اللغوية في النصوص الإسلامية المقدسة من خلال تصور البيانات",
+					
+					// Footer
+					footer: "😁 ٢٠٢٠ -",
+					photography: "التصوير الفوتوغرافي",
+					oldPortfolio: "النسخة الأولى من الموقع الشخصي"
+				}
+			};
+			
+			let currentLang = 'en';
+			
+			document.addEventListener('DOMContentLoaded', function() {
+				const langSwitchBtn = document.getElementById('lang-switch');
+				
+				langSwitchBtn.addEventListener('click', function() {
+					// Toggle language
+					currentLang = currentLang === 'en' ? 'ar' : 'en';
+					
+					// Update button label and title
+					const langLabel = this.querySelector('.lang-label');
+					if (currentLang === 'ar') {
+						langLabel.textContent = 'عربي → EN';
+						this.title = 'Switch to English (تغيير إلى الإنجليزية)';
+					} else {
+						langLabel.textContent = 'EN → عربي';
+						this.title = 'Switch to Arabic (تغيير إلى العربية)';
+					}
+					
+					// Toggle body classes for RTL and Arabic font without changing button position
+					if (currentLang === 'ar') {
+						document.body.classList.add('arabic-font', 'rtl');
+					} else {
+						document.body.classList.remove('arabic-font', 'rtl');
+					}
+					
+					// Update all translatable content
+					updateAllTranslations();
+				});
+				
+				function updateAllTranslations() {
+					// Header section
+					updateTextContent('#fh5co-header h1 span', 'heading');
+					updateTextContent('#fh5co-header h3:nth-of-type(1) span:first-child', 'subheading');
+					updateTextContent('#fh5co-header h3:nth-of-type(1) span:last-child', 'school');
+					updateTextContent('#fh5co-header h3:nth-of-type(2) span', 'prevAt');
+					updateTextContent('#fh5co-header h3:nth-of-type(3) span', 'hackathon');
+					
+					// Main section headings
+					updateTextContent('#fh5co-resume .fh5co-heading h2', 'experience');
+					updateTextContent('.timeline-heading h3:contains("Work Experience")', 'work');
+					updateTextContent('.timeline-heading h3:contains("Education")', 'education');
+					updateTextContent('#fh5co-work .fh5co-heading h2', 'projects');
+					
+					// Direct translation of all job entries using more specific selectors
+					// Cisco
+					document.querySelector('.timeline > li:nth-of-type(3) .timeline-title').textContent = translations[currentLang].workCiscoTitle;
+					document.querySelector('.timeline > li:nth-of-type(3) .company').textContent = translations[currentLang].workCiscoDate;
+					document.querySelector('.timeline > li:nth-of-type(3) .timeline-body p').textContent = translations[currentLang].workCiscoDesc;
+					
+					// USC
+					document.querySelector('.timeline > li:nth-of-type(4) .timeline-title').textContent = translations[currentLang].workUSCTitle;
+					document.querySelector('.timeline > li:nth-of-type(4) .company').textContent = translations[currentLang].workUSCDate;
+					const uscParagraphs = document.querySelectorAll('.timeline > li:nth-of-type(4) .timeline-body p');
+					if (uscParagraphs.length >= 2) {
+						uscParagraphs[0].textContent = translations[currentLang].workUSCDesc1;
+						uscParagraphs[1].textContent = translations[currentLang].workUSCDesc2;
+					}
+					
+					// FICO
+					document.querySelector('.timeline > li:nth-of-type(5) .timeline-title').textContent = translations[currentLang].workFICOTitle;
+					document.querySelector('.timeline > li:nth-of-type(5) .company').textContent = translations[currentLang].workFICODate;
+					document.querySelector('.timeline > li:nth-of-type(5) .timeline-body p').textContent = translations[currentLang].workFICODesc;
+					
+					// Cisco 2
+					document.querySelector('.timeline > li:nth-of-type(6) .timeline-title').textContent = translations[currentLang].workCisco2Title;
+					document.querySelector('.timeline > li:nth-of-type(6) .company').textContent = translations[currentLang].workCisco2Date;
+					document.querySelector('.timeline > li:nth-of-type(6) .timeline-body p').textContent = translations[currentLang].workCisco2Desc;
+					
+					// Southwest
+					document.querySelector('.timeline > li:nth-of-type(7) .timeline-title').textContent = translations[currentLang].workSouthwestTitle;
+					document.querySelector('.timeline > li:nth-of-type(7) .company').textContent = translations[currentLang].workSouthwestDate;
+					const southwestParagraphs = document.querySelectorAll('.timeline > li:nth-of-type(7) .timeline-body p');
+					if (southwestParagraphs.length >= 2) {
+						southwestParagraphs[0].textContent = translations[currentLang].workSouthwestDesc1;
+						southwestParagraphs[1].textContent = translations[currentLang].workSouthwestDesc2;
+					}
+					
+					// CarsXE
+					document.querySelector('.timeline > li:nth-of-type(8) .timeline-title').textContent = translations[currentLang].workCarsXETitle;
+					document.querySelector('.timeline > li:nth-of-type(8) .company').textContent = translations[currentLang].workCarsXEDate;
+					document.querySelector('.timeline > li:nth-of-type(8) .timeline-body p').textContent = translations[currentLang].workCarsXEDesc;
+					
+					// UCSD Researcher
+					document.querySelector('.timeline > li:nth-of-type(9) .timeline-title').textContent = translations[currentLang].researcherTitle;
+					const ucsdLabCompanies = document.querySelectorAll('.timeline > li:nth-of-type(9) .company');
+					if (ucsdLabCompanies.length >= 2) {
+						ucsdLabCompanies[0].textContent = translations[currentLang].ucsdLabMobile;
+						ucsdLabCompanies[1].textContent = translations[currentLang].ucsdLabDigi;
+					}
+					const ucsdLabParagraphs = document.querySelectorAll('.timeline > li:nth-of-type(9) .timeline-body p');
+					if (ucsdLabParagraphs.length >= 2) {
+						ucsdLabParagraphs[0].textContent = translations[currentLang].ucsdLabMobileDesc;
+						ucsdLabParagraphs[1].textContent = translations[currentLang].ucsdLabDigiDesc;
+					}
+					
+					// SDSU
+					document.querySelector('.timeline > li:nth-of-type(10) .timeline-title').textContent = translations[currentLang].sdsuTitle;
+					document.querySelector('.timeline > li:nth-of-type(10) .company').textContent = translations[currentLang].sdsuDate;
+					document.querySelector('.timeline > li:nth-of-type(10) .timeline-body p').textContent = translations[currentLang].sdsuDesc;
+					
+					// Education - MS
+					document.querySelector('.timeline > li:nth-of-type(12) .timeline-title').textContent = translations[currentLang].educationMS;
+					document.querySelector('.timeline > li:nth-of-type(12) .timeline-body p').textContent = translations[currentLang].mldsTitle;
+					
+					// Education - BS
+					document.querySelector('.timeline > li:nth-of-type(13) .timeline-title').textContent = translations[currentLang].educationBS;
+					document.querySelector('.timeline > li:nth-of-type(13) .timeline-body p').textContent = translations[currentLang].eeTitle;
+					
+					// Translate institution names
+					const institutionNames = document.querySelectorAll('.institution-name');
+					institutionNames.forEach(element => {
+						const text = element.textContent.trim();
+						let translatedText = text;
+						
+						if (currentLang === 'ar') {
+							if (text === "Cisco") translatedText = "سيسكو";
+							else if (text === "USC") translatedText = "جامعة جنوب كاليفورنيا";
+							else if (text === "FICO") translatedText = "فيكو";
+							else if (text === "Southwest Airlines") translatedText = "طيران ساوث ويست";
+							else if (text === "CarsXE") translatedText = "كارز إكس إي";
+							else if (text === "UC San Diego") translatedText = "جامعة كاليفورنيا سان دييجو";
+							else if (text === "San Diego State University") translatedText = "جامعة ولاية سان دييجو";
+						} else {
+							if (text === "سيسكو") translatedText = "Cisco";
+							else if (text === "جامعة جنوب كاليفورنيا") translatedText = "USC";
+							else if (text === "فيكو") translatedText = "FICO";
+							else if (text === "طيران ساوث ويست") translatedText = "Southwest Airlines";
+							else if (text === "كارز إكس إي") translatedText = "CarsXE";
+							else if (text === "جامعة كاليفورنيا سان دييجو") translatedText = "UC San Diego";
+							else if (text === "جامعة ولاية سان دييجو") translatedText = "San Diego State University";
+						}
+						
+						element.textContent = translatedText;
+					});
+					
+					// Projects
+					const projects = document.querySelectorAll('#fh5co-work .work');
+					
+					if (projects.length >= 8) {
+						updateProject(projects[0], 'projectSeismic', 'projectSeismicDesc');
+						updateProject(projects[1], 'projectVIAPF', 'projectVIAPFDesc');
+						updateProject(projects[2], 'projectProstheTech', 'projectProstheTechDesc');
+						updateProject(projects[3], 'projectHateSpeech', 'projectHateSpeechDesc');
+						updateProject(projects[4], 'projectSLAM', 'projectSLAMDesc');
+						updateProject(projects[5], 'projectDrowsiness', 'projectDrowsinessDesc');
+						updateProject(projects[6], 'projectFaceFinder', 'projectFaceFinderDesc');
+						updateProject(projects[7], 'projectAyatica', 'projectAyaticaDesc');
+					}
+					
+					// Footer
+					document.querySelector('#fh5co-footer p').childNodes[0].nodeValue = translations[currentLang].footer;
+					updateTextContent('#fh5co-footer a:first-of-type', 'photography');
+					updateTextContent('#fh5co-footer a:last-of-type', 'oldPortfolio');
+				}
+				
+				function updateTextContent(selector, translationKey) {
+					const elements = document.querySelectorAll(selector);
+					elements.forEach(el => {
+						if (el) el.textContent = translations[currentLang][translationKey];
+					});
+				}
+				
+				function updateProject(projectItem, titleKey, descKey) {
+					if (!projectItem) return;
+					
+					const titleElement = projectItem.querySelector('h3');
+					const descElement = projectItem.querySelector('span');
+					
+					if (titleElement) {
+						titleElement.textContent = translations[currentLang][titleKey];
+					}
+					
+					if (descElement) {
+						descElement.textContent = translations[currentLang][descKey];
+					}
+				}
+			});
 		</script>
 
 </body>
