@@ -7,6 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<link rel="icon" type="image/x-icon" href="docs/assets/img/cam.png">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syncopate&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/97ac8d9bb6.js" crossorigin="anonymous"></script>
 	<style>
 		/* General Styling */
 		body {
@@ -17,6 +22,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			background-color: #f0f4f8;
 		}
 
 		/* Navbar Styling */
@@ -34,18 +40,53 @@
 		}
 
 		.navbar a {
-			color: #34495e;
+			color: #1B2D55;
 			text-decoration: none;
 			font-weight: 600;
 			margin: 0 15px;
+			transition: color 0.3s ease;
+		}
+
+		.navbar a:hover {
+			color: #3498db;
+		}
+
+		.navbar-left, .navbar-right {
+			display: flex;
+			align-items: center;
 		}
 
 		/* Hero Section */
 		h1 {
-			margin-top: 80px;
+			margin-top: 100px;
 			font-size: 2.8em;
-			color: #34495e;
+			color: #1B2D55;
 			text-align: center;
+			font-weight: 600;
+		}
+
+		/* Hover animation for links */
+		.hover-underline-animation {
+			display: inline-block;
+			position: relative;
+		}
+
+		.hover-underline-animation:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #C3D9F1;
+			transform-origin: bottom right;
+			transition: transform 0.25s ease-out;
+		}
+
+		.hover-underline-animation:hover:after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
 		}
 
 		/* Portfolio Filters */
@@ -63,7 +104,7 @@
 		.filter-btn {
 			font-size: 1.1em;
 			font-weight: 600;
-			color: #34495e;
+			color: #1B2D55;
 			cursor: pointer;
 			padding: 8px 16px;
 			border-radius: 15px;
@@ -139,20 +180,6 @@
     gap: 20px;
 }
 
-
-		.portfolio-box h6 {
-			margin: 15px 0 5px;
-			font-size: 1.1em;
-			color: #34495e;
-			font-weight: 600;
-		}
-
-		.portfolio-box p {
-			margin: 0 0 15px;
-			color: #7f8c8d;
-			font-size: 0.9em;
-		}
-
 		/* Map Container */
 		#map {
 			width: 90%;
@@ -161,20 +188,29 @@
 			border-radius: 12px;
 			box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 		}
+		
+		/* Footer styling */
+		.footer {
+			text-align: center;
+			padding: 20px 0;
+			margin-top: 30px;
+			color: #1B2D55;
+			width: 100%;
+		}
 	</style>
 </head>
 
 <body>
 	<!-- Navbar -->
 	<div class="navbar">
-		<div>
-			<a href="#" class="navbar-item">YM Photography</a>
+		<div class="navbar-left">
+			<a href="#" class="hover-underline-animation">YM Photography</a>
 		</div>
-		<div>
-			<a href="https://www.instagram.com/surpassing.photography/" target="_blank">Instagram</a>
-			<a href="https://www.youtube.com/c/YusufMorsi" target="_blank">YouTube</a>
-			<a href="#" class="navbar-item">Home</a>
-			<a href="#projects" class="navbar-item">Projects</a>
+		<div class="navbar-right">
+			<a href="https://www.instagram.com/surpassing.photography/" class="hover-underline-animation" target="_blank">Instagram</a>
+			<a href="https://www.youtube.com/c/YusufMorsi" class="hover-underline-animation" target="_blank">YouTube</a>
+			<a href="index.html" class="hover-underline-animation">Home</a>
+			<a href="index.html#projects" class="hover-underline-animation">Projects</a>
 		</div>
 	</div>
 
@@ -806,7 +842,7 @@
 	</div>
 
 	<!-- Map Container -->
-	<div id="map"></div>
+	<!-- <div id="map"></div> -->
 
 	<script>
 		// JavaScript for Filtering
@@ -882,7 +918,17 @@
 			{ name: "Giza, Egypt", coords: [31.1325, 29.9773] },
 			{ name: "Istanbul, Turkey", coords: [28.9784, 41.0082] },
 			{ name: "Cairo, Egypt", coords: [31.2357, 30.0444] },
-			{ name: "Gleem Bay (Alexandria, Egypt)", coords: [29.9429, 31.2156] }
+			{ name: "Gleem Bay (Alexandria, Egypt)", coords: [29.9429, 31.2156] },
+  { name: "Dubai, UAE", coords: [25.276987, 55.296249] }, // :contentReference[oaicite:1]{index=1}
+  { name: "Mecca, Saudi Arabia", coords: [21.4225, 39.8233] }, // :contentReference[oaicite:2]{index=2}
+  { name: "Medina, Saudi Arabia", coords: [24.470901, 39.612236] }, // :contentReference[oaicite:3]{index=3}
+  { name: "Kuwait City, Kuwait", coords: [29.378586, 47.990341] }, // :contentReference[oaicite:4]{index=4}
+  { name: "Ras Al-Khaimah, UAE", coords: [25.800694, 55.976200] }, // :contentReference[oaicite:5]{index=5}
+  { name: "Sharjah, UAE", coords: [25.348766, 55.405403] }, // :contentReference[oaicite:6]{index=6}
+  { name: "Fujairah, UAE", coords: [25.1333, 56.2500] }, // :contentReference[oaicite:7]{index=7}
+  { name: "Burj Khalifa, UAE", coords: [25.197525, 55.274288] }, // :contentReference[oaicite:8]{index=8}
+  { name: "Portland, Oregon", coords: [45.5200, -122.6819] } // :contentReference[oaicite:9]{index=9}
+
 		];
 
 
@@ -912,6 +958,28 @@
 		});
 	</script>
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
+
+	<!-- Footer -->
+	<div class="footer">
+		<center style="color:#1B2D55;">Yusuf M. &copy; 2020 -
+			<script>document.write(new Date().getFullYear())</script> | 
+			<a href="index.html" class="hover-underline-animation">
+				<i class="fa-solid fa-home"></i>&nbsp;Home
+			</a>
+		</center>
+	</div>
+
+	<script>
+		// Smooth scrolling for navigation links
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				document.querySelector(this.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		});
+	</script>
 
 </body>
 
