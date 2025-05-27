@@ -780,6 +780,26 @@
 			font-size: 14px;
 			white-space: nowrap;
 		}
+
+		/* Fix for excessive spacing between positions */
+		.timeline li {
+			margin-bottom: 10px !important; /* Reduce space between timeline items */
+		}
+		
+		.timeline-panel {
+			margin-bottom: 0 !important;
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
+		
+		.timeline-heading {
+			margin-bottom: 10px !important;
+		}
+		
+		/* Remove extra space before Education section */
+		.timeline-heading + br {
+			display: none;
+		}
 	</style>
 
 
