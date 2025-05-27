@@ -517,17 +517,23 @@
 		}
 
 		.js-gotop {
-			background: var(--primary-color);
-			color: white;
-			border-radius: 50%;
-			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-			transition: all 0.3s;
-		}
+	background: var(--primary-color);
+	color: white;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
 
-		.js-gotop:hover {
-			background: var(--secondary-color);
-			transform: translateY(-5px);
-		}
+.js-gotop:hover {
+	background: var(--secondary-color);
+	transform: translateY(-5px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
 		/* Reveal animations */
 		.reveal {
