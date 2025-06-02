@@ -1,0 +1,44 @@
+PROJECTS BY YUSUF MORSI
+
+1. SeismicLSTM
+- Mitigating the high computational costs associated with applying Bayesian model updating in inverse problems
+- Uncertainty Quantification and Efficient Sensitivity Analysis by using Surrogate Models
+- Repository: https://github.com/ymorsi7/SeismicLSTM
+
+2. VIAPF
+- Trained and implemented autoencoder into a pipeline with Google Cloud transcription API
+- Removes both musical instruments and profanity from music
+- Repository: https://github.com/ymorsi7/VIAPF
+
+3. ProstheTech
+- 3D-printed EMG prosthetic technology
+- Repository: https://github.com/ymorsi7/ProstheTech
+
+4. Hate Speech NLP Analysis
+- Detecting and analyzing hate speech using natural language processing
+- Repository: https://github.com/ymorsi7/HateSpeechNLP
+
+5. Visual-Intertial SLAM
+- Visual-Intertial SLAM with EKF and Feature Tracking
+- Repository: https://github.com/ymorsi7/Visual-Intertial-SLAM
+
+6. Drowsiness Detection (SwayingAttention)
+- Drowsiness Detection with OpenCV and Arduino
+- Repository: https://github.com/ymorsi7/SwayingAttention
+
+7. FaceFinder for NamUS
+- Face and age recognition system for missing persons
+- Repository: https://github.com/ymorsi7/FaceFinder-NamUS
+
+8. Ayatica
+- Exploring patterns, miracles, and linguistic features in Islamic sacred texts through data visualization
+- Repository: https://github.com/ymorsi7/Ayatica
+
+SKILLS AND TECHNOLOGIES:
+- Programming: Python, C/C++, TypeScript/JavaScript, HTML/CSS, Java, MATLAB
+- Data Science: SQL, Data Visualization, Data Engineering, Machine Learning, Data Analysis, Data Modeling
+- Tools: Jupyter Notebook, Git, Command Line, Cloud Services, Hardware, Networking
+- Machine Learning: TensorFlow, PyTorch, Scikit-learn
+- Data Visualization: Matplotlib, Seaborn, Plotly
+- Cloud Services: AWS, Google Cloud
+- Hardware: Microcontrollers, Sensors, IoT devices 

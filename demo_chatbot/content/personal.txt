@@ -1,0 +1,38 @@
+PERSONAL INFORMATION: YUSUF MORSI
+
+SUMMARY:
+I am Yusuf Morsi, a Machine Learning Engineer and Data Scientist currently working at Cisco. I am passionate about applying AI and machine learning to solve real-world problems and have experience in both hardware and software engineering.
+
+CONTACT:
+- Email: ymorsi7@gmail.com
+- LinkedIn: https://www.linkedin.com/in/yusufmorsi/
+- GitHub: https://github.com/ymorsi7
+- YouTube: https://www.youtube.com/@YusufMorsi
+
+BACKGROUND:
+- I specialize in Machine Learning, Data Science, and Electrical Engineering
+- I have a BS and MS from UC San Diego in Electrical Engineering and Machine Learning/Data Science
+- I am experienced in working with large-scale data, developing ML models, and implementing them in production environments
+- I have a strong background in both software and hardware engineering
+
+INTERESTS:
+- Artificial Intelligence and Machine Learning
+- Hardware Engineering and Electronics
+- Data Science and Analytics
+- Cloud Computing and Distributed Systems
+- Islamic studies and data visualization (as seen in my Ayatica project)
+- Photography (I have a photography portfolio on my website)
+
+LANGUAGES:
+- English (Fluent)
+- Arabic (Fluent)
+
+MISCELLANEOUS:
+- I have won 7 hackathons throughout my career
+- I have worked in various industries including airlines (Southwest), finance (FICO), and technology (Cisco)
+- I have research experience from UC San Diego, San Diego State University, and USC
+- I am interested in the intersection of hardware and AI, particularly in applications that can benefit society
+
+TEACHING/MENTORING:
+- I enjoy sharing knowledge about machine learning and data science
+- I have created educational content on my YouTube channel 

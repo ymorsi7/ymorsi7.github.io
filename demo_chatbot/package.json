@@ -1,0 +1,31 @@
+{
+  "name": "yusuf-personal-chatbot",
+  "version": "1.0.0",
+  "description": "A personal RAG-based chatbot that runs locally and knows about Yusuf Morsi",
+  "main": "browser_integration.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "start:python": "python llm_integration.py",
+    "start:web": "python web_interface.py",
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
+  },
+  "keywords": [
+    "rag",
+    "chatbot",
+    "llm",
+    "personal-assistant",
+    "webllm"
+  ],
+  "author": "Yusuf Morsi",
+  "license": "MIT",
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.7",
+    "@xenova/transformers": "^2.6.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+} 
