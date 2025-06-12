@@ -109,6 +109,12 @@
 
 		#fh5co-header .overlay {
 			background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(13, 17, 28, 0.85));
+			z-index: 1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 		}
 
 		#fh5co-header h1 {
@@ -116,6 +122,8 @@
 			letter-spacing: 1px;
 			margin-bottom: 10px;
 			font-size: 3rem;
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+			transition: all 0.3s ease;
 		}
 
 		.profile-thumb {
@@ -141,6 +149,7 @@
 			height: 100%;
 			top: 0;
 			left: 0;
+			z-index: 3;
 		}
 
 		/* Animation styles */
@@ -821,6 +830,37 @@
 		.timeline-heading + br {
 			display: none;
 		}
+
+		#logo-bubbles-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none; /* Pass clicks through the container */
+			z-index: 2;
+			overflow: hidden;
+		}
+
+		.logo-bubble {
+			position: absolute;
+			border-radius: 50%;
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2), inset 0 0 5px rgba(255, 255, 255, 0.3);
+			background-color: rgba(255, 255, 255, 0.9);
+			pointer-events: auto; /* Bubbles are draggable */
+			cursor: grab;
+			transition: box-shadow 0.2s ease-in-out;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.logo-bubble:active {
+			cursor: grabbing;
+			box-shadow: 0 8px 25px rgba(0,0,0,0.3), inset 0 0 10px rgba(255, 255, 255, 0.5);
+		}
 	</style>
 
 
@@ -1423,18 +1463,120 @@
 		<script src="js/jquery.stellar.min.js"></script>
 		<!-- Easy PieChart -->
 		<script src="js/jquery.easypiechart.min.js"></script>
-		<!-- Google Map -->
-		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-		<script src="js/google_map.js"></script>
 		
-		<!-- Particles.js -->
-		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+		<!-- Matter.js for floating logos -->
+		<script src="js/matter.min.js"></script>
+		
 		<!-- Main -->
 		<script src="js/main.js"></script>
 		
 		<script>
+			// Floating logos with Matter.js - DOM Rendering
+			document.addEventListener('DOMContentLoaded', function () {
+				if (typeof Matter === 'undefined') {
+					console.error('Matter.js not loaded');
+					return;
+				}
+
+				const { Engine, Runner, World, Bodies, Mouse, MouseConstraint, Body, Events } = Matter;
+
+				const container = document.getElementById('fh5co-header');
+				if (!container) return;
+
+				const domContainer = document.createElement('div');
+				domContainer.id = 'logo-bubbles-container';
+				container.prepend(domContainer);
+
+				const width = container.clientWidth;
+				const height = container.clientHeight;
+
+				const engine = Engine.create();
+				const world = engine.world;
+				world.gravity.y = 0; // No sinking
+
+				const logos = [
+					'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png',
+					'images/usc.png',
+					'images/southwest.jpeg',
+					'images/fico.png',
+					'images/ucsd.png',
+					'images/carsxe.png',
+					'images/sdsu.jpg'
+				];
+				
+				const bubbleSize = width > 768 ? 85 : 65;
+
+				const bubbles = logos.map(logoUrl => {
+					const bubbleDom = document.createElement('div');
+					bubbleDom.classList.add('logo-bubble');
+					Object.assign(bubbleDom.style, {
+						width: `${bubbleSize}px`,
+						height: `${bubbleSize}px`,
+						backgroundImage: `url(${logoUrl})`,
+					});
+					domContainer.appendChild(bubbleDom);
+
+					const bubbleBody = Bodies.circle(
+						bubbleSize + Math.random() * (width - bubbleSize * 2),
+						bubbleSize + Math.random() * (height - bubbleSize * 2),
+						bubbleSize / 2,
+						{
+							restitution: 0.8,
+							friction: 0.005,
+							frictionAir: 0.001,
+						}
+					);
+					Body.setVelocity(bubbleBody, { 
+						x: (Math.random() - 0.5) * 3, 
+						y: (Math.random() - 0.5) * 3 
+					});
+
+					return { dom: bubbleDom, body: bubbleBody };
+				});
+
+				World.add(world, bubbles.map(b => b.body));
+
+				const wallThickness = 100;
+				const wallOptions = { isStatic: true, render: { visible: false } };
+				World.add(world, [
+					Bodies.rectangle(width / 2, -wallThickness / 2, width, wallThickness, wallOptions), // Top
+					Bodies.rectangle(width / 2, height + wallThickness / 2, width, wallThickness, wallOptions), // Bottom
+					Bodies.rectangle(-wallThickness / 2, height / 2, wallThickness, height, wallOptions), // Left
+					Bodies.rectangle(width + wallThickness / 2, height / 2, wallThickness, height, wallOptions) // Right
+				]);
+
+				const mouse = Mouse.create(container);
+				// This hack prevents Matter.js from hijacking the mouse wheel, allowing scrolling.
+				mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+				mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+
+				const mouseConstraint = MouseConstraint.create(engine, {
+					mouse: mouse,
+					constraint: {
+						stiffness: 0.2,
+						render: { visible: false }
+					}
+				});
+				World.add(world, mouseConstraint);
+
+				(function render() {
+					bubbles.forEach(bubble => {
+						const { x, y } = bubble.body.position;
+						bubble.dom.style.transform = `translate(${x - bubbleSize / 2}px, ${y - bubbleSize / 2}px) rotate(${bubble.body.angle}rad)`;
+					});
+					requestAnimationFrame(render);
+				})();
+				
+				const runner = Runner.create();
+				Runner.run(runner, engine);
+
+				const contentContainer = document.querySelector('#fh5co-header .container');
+				if (contentContainer) {
+					contentContainer.style.position = 'relative';
+					contentContainer.style.zIndex = '4';
+				}
+			});
+
 			// Initialize particles.js
 			document.addEventListener('DOMContentLoaded', function() {
 				if (typeof particlesJS !== 'undefined') {
