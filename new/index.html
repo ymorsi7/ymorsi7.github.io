@@ -896,11 +896,11 @@
 		.award-logo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* This ensures the image itself is also clipped to a circle */
+    object-fit: contain;   /* <-- change this from cover to contain */
+    border-radius: 50%;
     display: block;
-
-		}
+    background: white;     /* optional: keeps the circle white if logo is transparent */
+}
 
 		.award-card h3 {
 			font-size: 16px;
@@ -1621,6 +1621,17 @@
 							<p class="award-org">Manufacturing Leadership Council</p>
 							<p class="award-date">Jun 2025</p>
 							<p class="award-desc">Our project at Cisco, Agentic Virtual FA, was a finalist for the Manufacturing Leadership Award</p>
+						</div>
+					</div>
+					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
+						<div class="award-card">
+							<div class="award-logo">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco">
+							</div>
+							<h3>Trade Secret Award</h3>
+							<p class="award-org">Cisco</p>
+							<p class="award-date">Jun 2025</p>
+							<p class="award-desc">Awarded to my team for the Virtual FA project (Agentic Virtual Failure Analysis)</p>
 						</div>
 					</div>
 					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
