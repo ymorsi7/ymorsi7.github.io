@@ -1012,6 +1012,40 @@
 				font-size: 13px;
 			}
 		}
+
+		.micro-mba-panel {
+			background: #f8fafc;
+			border-radius: 16px;
+			margin-bottom: 0 !important;
+			padding-top: 15px;
+			margin-right: 0;
+			padding-bottom: 15px;
+			display: block;
+			max-width: 300px;
+			width: 100%;
+			float: right; /* Align to center line */
+		}
+		.micro-mba-logo {
+			width: 32px;
+			height: 32px;
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+		.micro-mba-title {
+			font-size: 1.05rem;
+			font-weight: 600;
+			margin-bottom: 2px;
+			color: #2d4373;
+		}
+		.micro-mba-inst {
+			font-size: 0.95rem;
+			color: #4b6a88;
+		}
+
+		.timeline-inverted .micro-mba-panel {
+			position: relative;
+			left: -210px; 
+		}
 	</style>
 
 
@@ -1299,6 +1333,24 @@
 							<li class="timeline-heading text-center animate-box">
 								<div>
 									<h3>Education</h3>
+								</div>
+							</li>
+
+
+							<!-- MicroMBA timeline item, right side, smaller card -->
+							<li class="timeline-inverted animate-box reveal">
+								<div class="timeline-badge"><i class="fa fa-certificate"></i></div>
+								<div class="timeline-panel micro-mba-panel">
+									<div class="timeline-heading">
+										<img src="images/ucsd.png" alt="UCSD Logo" class="company-logo micro-mba-logo">
+										<div class="timeline-title-wrapper">
+											<h3 class="timeline-title micro-mba-title">Certification</h3>
+											<span class="institution-name">UC San Diego</span>
+										</div>
+									</div>
+									<div class="timeline-body" style="text-align:center;">
+										<p><b>MicroMBA</b></p>
+									</div>
 								</div>
 							</li>
 
