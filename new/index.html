@@ -704,23 +704,135 @@
 			}
 		}
 		
-		/* Enhanced project cards */
+		/* Enhanced project cards - OPTIMIZED for performance */
 		.work {
-			transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+			border-radius: 16px;
+			overflow: hidden;
+			position: relative;
+			will-change: transform;
 		}
 		
 		.work:hover {
-			transform: translateY(-15px) scale(1.03);
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+			transform: translateY(-8px);
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 		}
 		
 		.work .desc {
-			transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			transition: background-color 0.2s ease-out, border-top-color 0.2s ease-out;
+			background: rgba(13, 17, 23, 0.9);
+			border-top: 3px solid var(--primary-color);
 		}
 		
 		.work:hover .desc {
-			transform: translateY(0) scale(1.05);
 			background: rgba(13, 17, 23, 0.95);
+			border-top-color: var(--accent);
+		}
+
+		/* Project banner styles */
+		.work-container {
+			position: relative;
+			display: block;
+		}
+
+		/* Diagonal Ribbon for Award */
+		.diagonal-ribbon {
+			position: absolute;
+			top: 12px;
+			left: -30px;
+			width: 110px;
+			padding: 4px 0;
+			background: #FFC94D;
+			color: #2d2d2d;
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+			text-align: center;
+			letter-spacing: 1px;
+			transform: rotate(-35deg);
+			box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+			z-index: 20;
+			border-radius: 2px;
+			border: 1px solid #e6b800;
+		}
+		@media (max-width: 768px) {
+			.diagonal-ribbon {
+				width: 80px;
+				font-size: 9px;
+				left: -20px;
+				padding: 3px 0;
+			}
+		}
+
+		.project-banner {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+			color: white;
+			padding: 8px 16px;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+			z-index: 10;
+			animation: bannerPulse 3s ease-in-out infinite alternate;
+			will-change: transform;
+		}
+
+		@keyframes bannerPulse {
+			0% {
+				transform: scale(1);
+			}
+			100% {
+				transform: scale(1.02);
+			}
+		}
+
+		.project-banner span {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		/* Enhanced project card descriptions */
+		.work .desc h3 {
+			font-size: 22px;
+			font-weight: 700;
+			margin-bottom: 12px;
+			background: linear-gradient(45deg, #ffffff, #f0f0f0);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.work .desc span {
+			font-size: 15px;
+			line-height: 1.6;
+			color: rgba(255, 255, 255, 0.9);
+			font-weight: 400;
+		}
+
+		/* Responsive adjustments for 6-tile layout */
+		@media screen and (max-width: 1200px) {
+			.col-md-4 {
+				width: 50%;
+			}
+		}
+
+		@media screen and (max-width: 768px) {
+			.col-md-4 {
+				width: 100%;
+			}
+			
+			.project-banner {
+				top: 10px;
+				right: 10px;
+				padding: 6px 12px;
+				font-size: 11px;
+			}
 		}
 		
 		/* Social icons enhanced */
@@ -1636,7 +1748,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/SeismicLSTM"
 							target="_blank" class="work" style="background-image: url(old/docs/images/lstm.png);">
 							<div class="desc">
@@ -1645,7 +1757,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/VIAPF"
 							target="_blank" class="work" style="background-image: url(old/docs/images/viapf.png);">
 							<div class="desc">
@@ -1654,16 +1766,19 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-3 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work"
-						style="background-image: url(old/docs/images/pros.png);">
-							<div class="desc">
-								<h3>ProstheTech</h3>
-								<span>3D-printed EMG</span>
-							</div>
-						</a>
+					<div class="col-md-4 text-center col-padding animate-box reveal">
+						<div class="work-container" style="position: relative;">
+							<span class="diagonal-ribbon">2nd Place Winner</span>
+							<a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work"
+								style="background-image: url(old/docs/images/pros.png);">
+								<div class="desc">
+									<h3>ProstheTech</h3>
+									<span>3D-printed EMG</span>
+								</div>
+							</a>
+						</div>
 					</div>
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/HateSpeechNLP" target="_blank" class="work"
 							style="background-image: url(old/docs/images/rmbl.png);">
 							<div class="desc">
@@ -1671,9 +1786,9 @@
 								<span>Detecting and analyzing hate speech</span>
 							</div>
 						</a>
-					</div>
+					</div> -->
 
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/Visual-Intertial-SLAM" target="_blank" class="work"
 							style="background-image: url(old/docs/images/ekf.jpeg);">
 							<div class="desc">
@@ -1683,7 +1798,7 @@
 						</a>
 					</div>
 
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/SwayingAttention" target="_blank" class="work"
 							style="background-image: url(old/docs/assets/img/swayingattention.png);">
 							<div class="desc">
@@ -1692,8 +1807,8 @@
 									Arduino</span>
 							</div>
 						</a>
-					</div>
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					</div> -->
+					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/FaceFinder-NamUS"
 							target="_blank" class="work" style="background-image: url(old/docs/assets/img/face.jpeg);">
 							<div class="desc">
@@ -1702,7 +1817,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-3 text-center col-padding animate-box reveal">
+					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/Ayatica" target="_blank" class="work"
 						style="background-image: url(images/ayatica.png);">
 							<div class="desc">
