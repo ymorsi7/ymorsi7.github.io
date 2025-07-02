@@ -738,9 +738,9 @@
 		/* Diagonal Ribbon for Award */
 		.diagonal-ribbon {
 			position: absolute;
-			top: 12px;
-			left: -30px;
-			width: 110px;
+			top: 16px;
+			left: 0px;
+			width: 90px;
 			padding: 4px 0;
 			background: #FFC94D;
 			color: #2d2d2d;
@@ -750,16 +750,16 @@
 			text-align: center;
 			letter-spacing: 1px;
 			transform: rotate(-35deg);
-			box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-			z-index: 20;
 			border-radius: 2px;
 			border: 1px solid #e6b800;
+			/* Remove shadow and z-index so it is part of the card */
 		}
 		@media (max-width: 768px) {
 			.diagonal-ribbon {
-				width: 80px;
+				top: 10px;
+				left: 0px;
+				width: 65px;
 				font-size: 9px;
-				left: -20px;
 				padding: 3px 0;
 			}
 		}
@@ -1742,7 +1742,7 @@
 
 		<div id="fh5co-work" class="fh5co-bg-dark">
 			<div class="container">
-				<div id = "#projects" class="row animate-box">
+				<div id = "projects" class="row animate-box">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<h2>Projects</h2>
 					</div>
@@ -1768,9 +1768,9 @@
 					</div>
 					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<div class="work-container" style="position: relative;">
-							<span class="diagonal-ribbon">2nd Place Winner</span>
 							<a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work"
-								style="background-image: url(old/docs/images/pros.png);">
+								style="background-image: url(old/docs/images/pros.png); position: relative; overflow: hidden;">
+								<span class="diagonal-ribbon">2nd Place Winner</span>
 								<div class="desc">
 									<h3>ProstheTech</h3>
 									<span>3D-printed EMG</span>
