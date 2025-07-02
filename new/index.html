@@ -40,15 +40,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="images/smiling.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-
-	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
 
 	<style>
@@ -739,28 +733,31 @@
 		.diagonal-ribbon {
 			position: absolute;
 			top: 16px;
-			left: 0px;
-			width: 90px;
-			padding: 4px 0;
+			right: 16px;
+			left: auto;
+			transform: none;
+			width: auto;
+			max-width: 70%;
+			padding: 6px 18px;
 			background: #FFC94D;
 			color: #2d2d2d;
-			font-size: 11px;
+			font-size: 13px;
 			font-weight: 800;
 			text-transform: uppercase;
 			text-align: center;
 			letter-spacing: 1px;
-			transform: rotate(-35deg);
-			border-radius: 2px;
-			border: 1px solid #e6b800;
-			/* Remove shadow and z-index so it is part of the card */
+			border-radius: 20px;
+			border: 2px solid #e6b800;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			z-index: 2;
 		}
 		@media (max-width: 768px) {
 			.diagonal-ribbon {
-				top: 10px;
-				left: 0px;
-				width: 65px;
-				font-size: 9px;
-				padding: 3px 0;
+				top: 8px;
+				right: 8px;
+				padding: 4px 10px;
+				font-size: 10px;
+				max-width: 90%;
 			}
 		}
 
@@ -1238,17 +1235,157 @@
 			padding: 15px 8px;
 		  }
 		}
+
+		.fishtail-banner {
+		  position: absolute;
+		  top: 18px;
+		  right: 18px;
+		  background: #FFC94D;
+		  color: #2d2d2d;
+		  font-size: 13px;
+		  font-weight: 800;
+		  text-transform: uppercase;
+		  letter-spacing: 1px;
+		  padding: 8px 32px 8px 18px;
+		  border-radius: 16px 0 0 16px;
+		  border: 2px solid #e6b800;
+		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		  z-index: 2;
+		  display: inline-block;
+		  overflow: visible;
+		}
+		.fishtail-banner::after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  right: -22px;
+		  width: 0;
+		  height: 0;
+		  border-top: 22px solid transparent;
+		  border-bottom: 22px solid transparent;
+		  border-left: 22px solid #FFC94D;
+		  z-index: 1;
+		}
+		@media (max-width: 768px) {
+		  .fishtail-banner {
+			top: 8px;
+			right: 8px;
+			font-size: 10px;
+			padding: 5px 18px 5px 10px;
+			border-radius: 12px 0 0 12px;
+		  }
+		  .fishtail-banner::after {
+			border-top: 14px solid transparent;
+			border-bottom: 14px solid transparent;
+			border-left: 14px solid #FFC94D;
+			right: -14px;
+		  }
+		}
+
+		.vertical-fishtail-banner {
+		  position: absolute;
+		  top: 0;
+		  right: 32px;
+		  width: 38px;
+		  height: 110px;
+		  background: #FFC94D;
+		  color: #2d2d2d;
+		  font-size: 12px;
+		  font-weight: 800;
+		  text-transform: uppercase;
+		  letter-spacing: 1px;
+		  border-radius: 12px 12px 0 0;
+		  border: 2px solid #e6b800;
+		  border-bottom: none;
+		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		  z-index: 2;
+		  display: flex;
+		  align-items: flex-start;
+		  justify-content: center;
+		  writing-mode: vertical-rl;
+		  text-orientation: mixed;
+		  padding-top: 12px;
+		  text-align: center;
+		  overflow: visible;
+		}
+		.vertical-fishtail-banner::after {
+		  content: "";
+		  position: absolute;
+		  bottom: -18px;
+		  left: 0;
+		  width: 0;
+		  height: 0;
+		  border-left: 19px solid transparent;
+		  border-right: 19px solid transparent;
+		  border-top: 18px solid #FFC94D;
+		}
+		@media (max-width: 768px) {
+		  .vertical-fishtail-banner {
+			right: 12px;
+			width: 28px;
+			height: 70px;
+			font-size: 9px;
+			border-radius: 8px 8px 0 0;
+			padding-top: 7px;
+		  }
+		  .vertical-fishtail-banner::after {
+			bottom: -12px;
+			border-left: 14px solid transparent;
+			border-right: 14px solid transparent;
+			border-top: 12px solid #FFC94D;
+		  }
+		}
+
+		.horizontal-fishtail-banner {
+		  position: absolute;
+		  top: 18px;
+		  right: 18px;
+		  background: #FFC94D;
+		  color: #2d2d2d;
+		  font-size: 14px;
+		  font-weight: 800;
+		  text-transform: uppercase;
+		  letter-spacing: 1px;
+		  padding: 6px 28px 6px 18px;
+		  border-radius: 16px 0 0 16px;
+		  border: 2px solid #e6b800;
+		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		  z-index: 2;
+		  display: inline-block;
+		  height: 32px;
+		  line-height: 20px;
+		  overflow: visible;
+		}
+		.horizontal-fishtail-banner::after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  right: -18px;
+		  width: 0;
+		  height: 0;
+		  border-top: 16px solid transparent;
+		  border-bottom: 16px solid transparent;
+		  border-left: 18px solid #FFC94D;
+		}
+		@media (max-width: 768px) {
+		  .horizontal-fishtail-banner {
+			top: 8px;
+			right: 8px;
+			font-size: 10px;
+			padding: 4px 14px 4px 8px;
+			border-radius: 10px 0 0 10px;
+			height: 22px;
+		  }
+		  .horizontal-fishtail-banner::after {
+			border-top: 11px solid transparent;
+			border-bottom: 11px solid transparent;
+			border-left: 11px solid #FFC94D;
+			right: -11px;
+		  }
+		}
 	</style>
 
-
-	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-	
-	<!-- Language Switcher Styles -->
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
 		
@@ -1302,14 +1439,11 @@
 			text-align: right;
 		}
 	</style>
-	
-	<!-- Direct translation helper script -->
 	<script src="js/translator.js"></script>
 
 </head>
 
 <body>
-	<!-- Language Switcher -->
 	<div class="lang-switch-container">
 		<button id="lang-switch" class="lang-switch-btn" title="Switch to Arabic (تغيير إلى العربية)" onclick="toggleLanguage()">
 			<i class="icon-earth"></i> <span class="lang-label">EN → عربي</span>
@@ -1328,7 +1462,8 @@
 					<div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t js-fullheight">
 							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-								<div class="profile-thumb" style="background: url(images/animation.png);"></div>
+								<div class="profile-thumb" style="background: url(images/moi.png);"></div>
+								<!-- <div class="profile-thumb" style="background: url(images/animation.png);"></div> -->
 								<h1><span>Yusuf Morsi</span></h1>
 								<h3 style='font-size: 20px; font-weight: 500; margin-bottom: 15px;'><span>ML &commat; Cisco | ECE BS/MS @</span> <span>UC San Diego</span></h3>
 								<h3 style='font-size: 17px; opacity: 0.95;'><span>Prev @ FICO, Southwest Airlines, USC</span></h3>
@@ -1739,7 +1874,7 @@
 				</div>
 			</div>
 		</div> -->
-
+<a id = "projects"></a>
 		<div id="fh5co-work" class="fh5co-bg-dark">
 			<div class="container">
 				<div id = "projects" class="row animate-box">
@@ -1748,6 +1883,17 @@
 					</div>
 				</div>
 				<div class="row">
+
+					<div class="col-md-4 text-center col-padding animate-box reveal">
+						<a href="https://github.com/ymorsi7/Visual-Intertial-SLAM" target="_blank" class="work"
+							style="background-image: url(old/docs/images/ekf.jpeg);">
+							<div class="desc">
+								<h3>Visual-Intertial SLAM</h3>
+								<span>Visual-Intertial SLAM with EKF and Feature Tracking</span>
+							</div>
+						</a>
+					</div>
+
 					<div class="col-md-4 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/SeismicLSTM"
 							target="_blank" class="work" style="background-image: url(old/docs/images/lstm.png);">
@@ -1770,7 +1916,6 @@
 						<div class="work-container" style="position: relative;">
 							<a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work"
 								style="background-image: url(old/docs/images/pros.png); position: relative; overflow: hidden;">
-								<span class="diagonal-ribbon">2nd Place Winner</span>
 								<div class="desc">
 									<h3>ProstheTech</h3>
 									<span>3D-printed EMG</span>
@@ -1788,15 +1933,7 @@
 						</a>
 					</div> -->
 
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/Visual-Intertial-SLAM" target="_blank" class="work"
-							style="background-image: url(old/docs/images/ekf.jpeg);">
-							<div class="desc">
-								<h3>Visual-Intertial SLAM</h3>
-								<span>Visual-Intertial SLAM with EKF and Feature Tracking</span>
-							</div>
-						</a>
-					</div>
+
 
 					<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/SwayingAttention" target="_blank" class="work"
