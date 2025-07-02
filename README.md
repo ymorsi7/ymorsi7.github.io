@@ -31,9 +31,9 @@ Welcome to my portfolio repository! This contains both my current and previous p
 
 ## 👨‍💻 About Me
 
-- **Current:** Machine Learning Engineer at Cisco
+- **Current:** Data Scientist at Cisco
 - **Education:** ECE BS/MS at UC San Diego
-- **Previous:** Southwest Airlines
+- **Previous:** Southwest Airlines, FICO, USC
 - **Focus:** Machine Learning, Data Science, Electrical Engineering
 
 ## 📞 Contact
