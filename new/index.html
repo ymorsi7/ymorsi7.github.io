@@ -1219,10 +1219,11 @@
 		  display: flex;
 		  align-items: center;
 		  justify-content: center;
-		  background: white;
 		  border-radius: 50%;
-		  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-		  padding: 8px;
+		  /* Remove background and padding for flip cards */
+		  background: transparent;
+		  padding: 0;
+		  box-shadow: none;
 		  transition: all 0.3s ease;
 		}
 		.flip-card h3, .flip-card .award-org, .flip-card .award-date, .flip-card .award-desc {
