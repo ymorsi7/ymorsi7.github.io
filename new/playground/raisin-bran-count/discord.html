@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo's Daily Counter Analysis</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(118, 75, 162, 0.5)); }
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .chart-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .streak-calendar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .day {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: #2a2a2a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .day:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .day.present {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .day.missed {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            font-size: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        .axis-label {
+            font-size: 16px;
+            font-weight: 600;
+            fill: #e0e0e0;
+        }
+
+        .tick line {
+            stroke: rgba(255, 255, 255, 0.2);
+        }
+
+        .tick text {
+            font-size: 14px;
+            fill: #b0b0b0;
+        }
+
+        .domain {
+            stroke: rgba(255, 255, 255, 0.3);
+        }
+
+        .bar {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+            filter: brightness(1.2);
+        }
+
+        .line {
+            fill: none;
+            stroke: url(#lineGradient);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+        }
+
+        .area {
+            fill: url(#areaGradient);
+            opacity: 0.4;
+        }
+
+        .circle {
+            fill: url(#circleGradient);
+            stroke: white;
+            stroke-width: 2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .circle:hover {
+            fill: url(#circleHoverGradient);
+            r: 8;
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.8));
+        }
+
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-container svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .brush {
+            fill: rgba(102, 126, 234, 0.1);
+            stroke: rgba(102, 126, 234, 0.5);
+            stroke-width: 2;
+        }
+
+        .brush .selection {
+            fill: rgba(102, 126, 234, 0.2);
+        }
+
+        .brush .overlay {
+            fill: none;
+            pointer-events: all;
+        }
+
+        .brush .handle {
+            fill: rgba(102, 126, 234, 0.8);
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        .zoom-instructions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                padding: 20px;
+            }
+
+            .chart-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Leo's Daily Counter Analysis</h1>
+            <p>A journey through 3+ years of daily counting dedication</p>
+        </div>
+
+        <div class="loading" id="loading">Loading data...</div>
+
+        <div class="stats-grid" id="stats-grid" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-number" id="total-days">-</div>
+                <div class="stat-label">Total Days Counted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="current-streak">-</div>
+                <div class="stat-label">Current Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="missed-days">-</div>
+                <div class="stat-label">Missed Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="success-rate">-</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="progress-chart-container" style="display: none;">
+            <h2 class="chart-title">📈 Daily Counter Progress Over Time</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('progress-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="progress-chart"></div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="calendar-chart-container" style="display: none;">
+            <h2 class="chart-title">📅 Streak Calendar Heatmap</h2>
+            <div id="calendar-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #4CAF50, #45a049);"></div>
+                    <span>Counted</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #f44336, #d32f2f);"></div>
+                    <span>Missed</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2a2a2a;"></div>
+                    <span>No Data</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="monthly-chart-container" style="display: none;">
+            <h2 class="chart-title">📊 Monthly Activity Distribution</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('monthly-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="monthly-chart"></div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="time-chart-container" style="display: none;">
+            <h2 class="chart-title">⏰ Time of Day Analysis</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('time-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="time-chart"></div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="streaks-chart-container" style="display: none;">
+            <h2 class="chart-title">🎯 Longest Streaks</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('streaks-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="streaks-chart"></div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="minard-chart-container" style="display: none;">
+            <h2 class="chart-title">🗺️ Minard-Style Flow Visualization</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('minard-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="minard-chart"></div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="over-under-chart-container" style="display: none;">
+            <h2 class="chart-title">📊 Over/Under Analysis - Missing Days</h2>
+            <div class="chart-wrapper">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="resetZoom('over-under-chart')">Reset Zoom</button>
+                </div>
+                <div class="zoom-instructions">Click and drag to zoom • Double-click to reset</div>
+                <div id="over-under-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for zoom functionality
+        let zoomStates = {};
+
+        // Load and process the CSV data
+        d3.csv("discord_data.csv")
+            .then(function(data) {
+                // Process the data
+                const processedData = processData(data);
+                
+                // Update stats
+                updateStats(processedData);
+                
+                // Create visualizations
+                createProgressChart(processedData);
+                createCalendarChart(processedData);
+                createMonthlyChart(processedData);
+                createTimeChart(processedData);
+                createStreaksChart(processedData);
+                createMinardChart(processedData);
+                createOverUnderChart(processedData);
+                
+                // Hide loading and show content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('stats-grid').style.display = 'grid';
+                document.getElementById('progress-chart-container').style.display = 'block';
+                document.getElementById('calendar-chart-container').style.display = 'block';
+                document.getElementById('monthly-chart-container').style.display = 'block';
+                document.getElementById('time-chart-container').style.display = 'block';
+                document.getElementById('streaks-chart-container').style.display = 'block';
+                document.getElementById('minard-chart-container').style.display = 'block';
+                document.getElementById('over-under-chart-container').style.display = 'block';
+            })
+            .catch(function(error) {
+                console.error('Error loading the CSV file:', error);
+                document.getElementById('loading').innerHTML = 'Error loading data. Please make sure the CSV file "discord_data.csv" is in the same directory as this HTML file.';
+            });
+
+        function processData(data) {
+            // Filter Leo's counting messages and parse dates
+            const leoData = data.filter(d => 
+                d.Username === 'leo7.' && 
+                d.Content && 
+                !isNaN(parseInt(d.Content)) && 
+                d.Content.trim() !== ''
+            );
+
+            // Parse dates and create structured data
+            const processedData = leoData.map(d => {
+                const dateStr = d.Date.replace(/"/g, '');
+                const [datePart, timePart] = dateStr.split(',');
+                const [year, month, day] = datePart.split('-').map(Number);
+                const [hour, minute, second] = timePart.split(':').map(Number);
+                
+                return {
+                    date: new Date(year, month - 1, day, hour, minute, second),
+                    count: parseInt(d.Content),
+                    year: year,
+                    month: month,
+                    day: day,
+                    hour: hour,
+                    minute: minute,
+                    dayOfWeek: new Date(year, month - 1, day).getDay()
+                };
+            }).sort((a, b) => a.date - b.date);
+
+            // Generate complete date range for missing days analysis
+            const startDate = new Date(2022, 3, 13); // April 13, 2022
+            const endDate = new Date(2025, 8, 1); // September 1, 2025
+            const allDates = [];
+            
+            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                allDates.push(new Date(d));
+            }
+
+            // Find missing days
+            const countedDates = new Set(processedData.map(d => d.date.toDateString()));
+            const missingDays = allDates.filter(d => !countedDates.has(d.toDateString()));
+
+            return {
+                counted: processedData,
+                missing: missingDays,
+                allDates: allDates,
+                totalDays: processedData.length,
+                missingDays: missingDays.length,
+                successRate: (processedData.length / (processedData.length + missingDays.length) * 100).toFixed(1)
+            };
+        }
+
+        function updateStats(data) {
+            // Calculate current streak
+            const today = new Date();
+            const lastCount = data.counted[data.counted.length - 1];
+            let currentStreak = 0;
+            
+            if (lastCount) {
+                const lastDate = lastCount.date;
+                const daysDiff = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff <= 1) {
+                    // Count backwards to find streak
+                    let streakDate = new Date(lastDate);
+                    for (let i = data.counted.length - 1; i >= 0; i--) {
+                        const expectedDate = new Date(streakDate);
+                        expectedDate.setDate(expectedDate.getDate() - currentStreak);
+                        
+                        if (Math.abs(data.counted[i].date - expectedDate) < 24 * 60 * 60 * 1000) {
+                            currentStreak++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            document.getElementById('total-days').textContent = data.totalDays;
+            document.getElementById('current-streak').textContent = currentStreak;
+            document.getElementById('missed-days').textContent = data.missingDays;
+            document.getElementById('success-rate').textContent = data.successRate + '%';
+        }
+
+        function createProgressChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#progress-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Create gradients
+            const defs = svg.append("defs");
+            
+            const lineGradient = defs.append("linearGradient")
+                .attr("id", "lineGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "100%")
+                .attr("y2", "0%");
+
+            lineGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#667eea");
+
+            lineGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#764ba2");
+
+            const areaGradient = defs.append("linearGradient")
+                .attr("id", "areaGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            areaGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#667eea")
+                .attr("stop-opacity", 0.6);
+
+            areaGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#764ba2")
+                .attr("stop-opacity", 0.1);
+
+            const circleGradient = defs.append("radialGradient")
+                .attr("id", "circleGradient")
+                .attr("cx", "50%")
+                .attr("cy", "50%")
+                .attr("r", "50%");
+
+            circleGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#667eea");
+
+            circleGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#764ba2");
+
+            const circleHoverGradient = defs.append("radialGradient")
+                .attr("id", "circleHoverGradient")
+                .attr("cx", "50%")
+                .attr("cy", "50%")
+                .attr("r", "50%");
+
+            circleHoverGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#764ba2");
+
+            circleHoverGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#f093fb");
+
+            const x = d3.scaleTime()
+                .domain(d3.extent(data.counted, d => d.date))
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data.counted, d => d.count)])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 10])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.select(".area").attr("d", area.x(d => newX(d.date)).y0(height).y1(d => newY(d.count)));
+                    svg.select(".line").attr("d", line.x(d => newX(d.date)).y(d => newY(d.count)));
+                    svg.selectAll(".circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.count));
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleTime().domain(newXDomain).range([0, width]);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.select(".area").attr("d", area.x(d => newX(d.date)).y0(height).y1(d => newY(d.count)));
+                svg.select(".line").attr("d", line.x(d => newX(d.date)).y(d => newY(d.count)));
+                svg.selectAll(".circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.count));
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Add area
+            const area = d3.area()
+                .x(d => x(d.date))
+                .y0(height)
+                .y1(d => y(d.count));
+
+            svg.append("path")
+                .datum(data.counted)
+                .attr("class", "area")
+                .attr("d", area);
+
+            // Add line
+            const line = d3.line()
+                .x(d => x(d.date))
+                .y(d => y(d.count));
+
+            svg.append("path")
+                .datum(data.counted)
+                .attr("class", "line")
+                .attr("d", line);
+
+            // Add dots with tooltips
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".circle")
+                .data(data.counted)
+                .enter().append("circle")
+                .attr("class", "circle")
+                .attr("cx", d => x(d.date))
+                .attr("cy", d => y(d.count))
+                .attr("r", 4)
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Date:</strong> ${d.date.toLocaleDateString()}<br/>
+                                <strong>Count:</strong> ${d.count}<br/>
+                                <strong>Time:</strong> ${d.date.toLocaleTimeString()}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            // Add axes
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Add labels
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", width / 2)
+                .attr("y", height + margin.bottom)
+                .text("Date");
+
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -height / 2)
+                .attr("y", -margin.left + 20)
+                .text("Count");
+
+            // Store zoom state
+            zoomStates['progress-chart'] = { zoom, x, y };
+        }
+
+        function createCalendarChart(data) {
+            const container = document.getElementById('calendar-chart');
+            const calendar = document.createElement('div');
+            calendar.className = 'streak-calendar';
+            
+            data.allDates.forEach(date => {
+                const day = document.createElement('div');
+                day.className = 'day';
+                
+                const isCounted = data.counted.some(d => 
+                    d.date.toDateString() === date.toDateString()
+                );
+                
+                if (isCounted) {
+                    day.classList.add('present');
+                } else {
+                    day.classList.add('missed');
+                }
+                
+                // Add tooltip
+                day.title = `${date.toLocaleDateString()}: ${isCounted ? 'Counted' : 'Missed'}`;
+                
+                calendar.appendChild(day);
+            });
+            
+            container.appendChild(calendar);
+        }
+
+        function createMonthlyChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#monthly-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Group by month
+            const monthlyData = d3.rollup(data.counted, 
+                v => v.length, 
+                d => `${d.year}-${d.month.toString().padStart(2, '0')}`
+            );
+
+            const monthlyArray = Array.from(monthlyData, ([key, value]) => ({
+                month: key,
+                count: value
+            }));
+
+            const x = d3.scaleBand()
+                .domain(monthlyArray.map(d => d.month))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(monthlyArray, d => d.count)])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 5])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.selectAll(".bar")
+                        .attr("x", d => newX(d.month))
+                        .attr("width", newX.bandwidth())
+                        .attr("y", d => newY(d.count))
+                        .attr("height", d => height - newY(d.count));
+                    
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleBand().domain(newXDomain).range([0, width]).padding(0.1);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.selectAll(".bar")
+                    .attr("x", d => newX(d.month))
+                    .attr("width", newX.bandwidth())
+                    .attr("y", d => newY(d.count))
+                    .attr("height", d => height - newY(d.count));
+                
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Create gradient for bars
+            const defs = svg.append("defs");
+            const barGradient = defs.append("linearGradient")
+                .attr("id", "barGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            barGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#667eea");
+
+            barGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#764ba2");
+
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".bar")
+                .data(monthlyArray)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", d => x(d.month))
+                .attr("width", x.bandwidth())
+                .attr("y", d => y(d.count))
+                .attr("height", d => height - y(d.count))
+                .attr("fill", "url(#barGradient)")
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Month:</strong> ${d.month}<br/>
+                                <strong>Count:</strong> ${d.count} days`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Store zoom state
+            zoomStates['monthly-chart'] = { zoom, x, y };
+        }
+
+        function createTimeChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#time-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Group by hour
+            const hourlyData = d3.rollup(data.counted, 
+                v => v.length, 
+                d => d.hour
+            );
+
+            const hourlyArray = Array.from(hourlyData, ([hour, count]) => ({
+                hour: hour,
+                count: count
+            })).sort((a, b) => a.hour - b.hour);
+
+            const x = d3.scaleBand()
+                .domain(hourlyArray.map(d => d.hour))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(hourlyArray, d => d.count)])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 5])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.selectAll(".bar")
+                        .attr("x", d => newX(d.hour))
+                        .attr("width", newX.bandwidth())
+                        .attr("y", d => newY(d.count))
+                        .attr("height", d => height - newY(d.count));
+                    
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleBand().domain(newXDomain).range([0, width]).padding(0.1);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.selectAll(".bar")
+                    .attr("x", d => newX(d.hour))
+                    .attr("width", newX.bandwidth())
+                    .attr("y", d => newY(d.count))
+                    .attr("height", d => height - newY(d.count));
+                
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Create gradient for bars
+            const defs = svg.append("defs");
+            const timeBarGradient = defs.append("linearGradient")
+                .attr("id", "timeBarGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            timeBarGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#764ba2");
+
+            timeBarGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#f093fb");
+
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".bar")
+                .data(hourlyArray)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", d => x(d.hour))
+                .attr("width", x.bandwidth())
+                .attr("y", d => y(d.count))
+                .attr("height", d => height - y(d.count))
+                .attr("fill", "url(#timeBarGradient)")
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Hour:</strong> ${d.hour}:00<br/>
+                                <strong>Count:</strong> ${d.count} times`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Store zoom state
+            zoomStates['time-chart'] = { zoom, x, y };
+        }
+
+        function createStreaksChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#streaks-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Calculate streaks
+            const streaks = [];
+            let currentStreak = 1;
+            
+            for (let i = 1; i < data.counted.length; i++) {
+                const prevDate = data.counted[i-1].date;
+                const currDate = data.counted[i].date;
+                const dayDiff = Math.floor((currDate - prevDate) / (1000 * 60 * 60 * 24));
+                
+                if (dayDiff <= 1) {
+                    currentStreak++;
+                } else {
+                    if (currentStreak > 1) {
+                        streaks.push(currentStreak);
+                    }
+                    currentStreak = 1;
+                }
+            }
+            
+            if (currentStreak > 1) {
+                streaks.push(currentStreak);
+            }
+
+            // Get top 10 longest streaks
+            const topStreaks = streaks.sort((a, b) => b - a).slice(0, 10);
+
+            const x = d3.scaleBand()
+                .domain(topStreaks.map((_, i) => i + 1))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(topStreaks)])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 5])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.selectAll(".bar")
+                        .attr("x", (d, i) => newX(i + 1))
+                        .attr("width", newX.bandwidth())
+                        .attr("y", d => newY(d))
+                        .attr("height", d => height - newY(d));
+                    
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleBand().domain(newXDomain).range([0, width]).padding(0.1);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.selectAll(".bar")
+                    .attr("x", (d, i) => newX(i + 1))
+                    .attr("width", newX.bandwidth())
+                    .attr("y", d => newY(d))
+                    .attr("height", d => height - newY(d));
+                
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Create gradient for bars
+            const defs = svg.append("defs");
+            const streakBarGradient = defs.append("linearGradient")
+                .attr("id", "streakBarGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            streakBarGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#4CAF50");
+
+            streakBarGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#45a049");
+
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".bar")
+                .data(topStreaks)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", (d, i) => x(i + 1))
+                .attr("width", x.bandwidth())
+                .attr("y", d => y(d))
+                .attr("height", d => height - y(d))
+                .attr("fill", "url(#streakBarGradient)")
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Streak #${topStreaks.indexOf(d) + 1}</strong><br/>
+                                <strong>Length:</strong> ${d} days`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Store zoom state
+            zoomStates['streaks-chart'] = { zoom, x, y };
+        }
+
+        function createMinardChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#minard-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Create flow data - show the journey of counting over time
+            const flowData = data.counted.map((d, i) => ({
+                date: d.date,
+                count: d.count,
+                flow: d.count,
+                position: i,
+                dayOfYear: Math.floor((d.date - new Date(d.date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
+            }));
+
+            const x = d3.scaleTime()
+                .domain(d3.extent(flowData, d => d.date))
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(flowData, d => d.flow)])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 10])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.selectAll(".flow-path").attr("d", flowLine.x(d => newX(d.date)).y(d => newY(d.flow)));
+                    svg.selectAll(".flow-circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.flow));
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleTime().domain(newXDomain).range([0, width]);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.selectAll(".flow-path").attr("d", flowLine.x(d => newX(d.date)).y(d => newY(d.flow)));
+                svg.selectAll(".flow-circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.flow));
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Create gradients
+            const defs = svg.append("defs");
+            
+            const flowGradient = defs.append("linearGradient")
+                .attr("id", "flowGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "100%")
+                .attr("y2", "0%");
+
+            flowGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#667eea");
+
+            flowGradient.append("stop")
+                .attr("offset", "50%")
+                .attr("stop-color", "#764ba2");
+
+            flowGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#f093fb");
+
+            // Create flow line
+            const flowLine = d3.line()
+                .x(d => x(d.date))
+                .y(d => y(d.flow))
+                .curve(d3.curveMonotoneX);
+
+            // Add flow path
+            svg.append("path")
+                .datum(flowData)
+                .attr("class", "flow-path")
+                .attr("d", flowLine)
+                .attr("fill", "none")
+                .attr("stroke", "url(#flowGradient)")
+                .attr("stroke-width", 4)
+                .attr("opacity", 0.8)
+                .style("filter", "drop-shadow(0 0 10px rgba(102, 126, 234, 0.5))");
+
+            // Add flow circles with varying sizes based on count
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".flow-circle")
+                .data(flowData)
+                .enter().append("circle")
+                .attr("class", "flow-circle")
+                .attr("cx", d => x(d.date))
+                .attr("cy", d => y(d.flow))
+                .attr("r", d => Math.max(3, d.count / 20))
+                .attr("fill", "url(#flowGradient)")
+                .attr("stroke", "white")
+                .attr("stroke-width", 2)
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Date:</strong> ${d.date.toLocaleDateString()}<br/>
+                                <strong>Count:</strong> ${d.count}<br/>
+                                <strong>Day #:</strong> ${d.position + 1}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            // Add axes
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Add labels
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", width / 2)
+                .attr("y", height + margin.bottom)
+                .text("Time");
+
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -height / 2)
+                .attr("y", -margin.left + 20)
+                .text("Count Value");
+
+            // Store zoom state
+            zoomStates['minard-chart'] = { zoom, x, y };
+        }
+
+        function createOverUnderChart(data) {
+            const margin = {top: 30, right: 40, bottom: 50, left: 70};
+            const width = 900 - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+
+            const svg = d3.select("#over-under-chart")
+                .append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Calculate over/under data
+            const overUnderData = [];
+            let runningTotal = 0;
+            let expectedCount = 0;
+            
+            data.counted.forEach((d, i) => {
+                expectedCount = i + 1; // Expected count if no days were missed
+                runningTotal = d.count;
+                const difference = runningTotal - expectedCount;
+                
+                overUnderData.push({
+                    date: d.date,
+                    actual: runningTotal,
+                    expected: expectedCount,
+                    difference: difference,
+                    overUnder: difference > 0 ? 'over' : difference < 0 ? 'under' : 'even'
+                });
+            });
+
+            const x = d3.scaleTime()
+                .domain(d3.extent(overUnderData, d => d.date))
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([
+                    d3.min(overUnderData, d => d.difference) - 10,
+                    d3.max(overUnderData, d => d.difference) + 10
+                ])
+                .range([height, 0]);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 10])
+                .on("zoom", (event) => {
+                    const newX = event.transform.rescaleX(x);
+                    const newY = event.transform.rescaleY(y);
+                    
+                    svg.selectAll(".difference-line").attr("d", differenceLine.x(d => newX(d.date)).y(d => newY(d.difference)));
+                    svg.selectAll(".difference-circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.difference));
+                    svg.select(".x-axis").call(d3.axisBottom(newX));
+                    svg.select(".y-axis").call(d3.axisLeft(newY));
+                });
+
+            svg.call(zoom);
+
+            // Add brush for selection zoom
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on("end", brushed);
+
+            svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            function brushed(event) {
+                if (!event.selection) return;
+                
+                const [[x0, y0], [x1, y1]] = event.selection;
+                const newXDomain = [x.invert(x0), x.invert(x1)];
+                const newYDomain = [y.invert(y1), y.invert(y0)];
+                
+                const newX = d3.scaleTime().domain(newXDomain).range([0, width]);
+                const newY = d3.scaleLinear().domain(newYDomain).range([height, 0]);
+                
+                svg.selectAll(".difference-line").attr("d", differenceLine.x(d => newX(d.date)).y(d => newY(d.difference)));
+                svg.selectAll(".difference-circle").attr("cx", d => newX(d.date)).attr("cy", d => newY(d.difference));
+                svg.select(".x-axis").call(d3.axisBottom(newX));
+                svg.select(".y-axis").call(d3.axisLeft(newY));
+                
+                // Clear brush
+                svg.select(".brush").call(brush.move, null);
+            }
+
+            // Create gradients
+            const defs = svg.append("defs");
+            
+            const overGradient = defs.append("linearGradient")
+                .attr("id", "overGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            overGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#4CAF50");
+
+            overGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#45a049");
+
+            const underGradient = defs.append("linearGradient")
+                .attr("id", "underGradient")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "0%")
+                .attr("y2", "100%");
+
+            underGradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#f44336");
+
+            underGradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#d32f2f");
+
+            // Add zero line
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(0))
+                .attr("y2", y(0))
+                .attr("stroke", "rgba(255, 255, 255, 0.3)")
+                .attr("stroke-width", 2)
+                .attr("stroke-dasharray", "5,5");
+
+            // Create difference line
+            const differenceLine = d3.line()
+                .x(d => x(d.date))
+                .y(d => y(d.difference))
+                .curve(d3.curveMonotoneX);
+
+            // Add difference path
+            svg.append("path")
+                .datum(overUnderData)
+                .attr("class", "difference-line")
+                .attr("d", differenceLine)
+                .attr("fill", "none")
+                .attr("stroke", d => d.difference > 0 ? "url(#overGradient)" : "url(#underGradient)")
+                .attr("stroke-width", 3)
+                .attr("opacity", 0.8);
+
+            // Add difference circles
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".difference-circle")
+                .data(overUnderData)
+                .enter().append("circle")
+                .attr("class", "difference-circle")
+                .attr("cx", d => x(d.date))
+                .attr("cy", d => y(d.difference))
+                .attr("r", 4)
+                .attr("fill", d => d.difference > 0 ? "url(#overGradient)" : d.difference < 0 ? "url(#underGradient)" : "#667eea")
+                .attr("stroke", "white")
+                .attr("stroke-width", 2)
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`<strong>Date:</strong> ${d.date.toLocaleDateString()}<br/>
+                                <strong>Actual Count:</strong> ${d.actual}<br/>
+                                <strong>Expected Count:</strong> ${d.expected}<br/>
+                                <strong>Difference:</strong> ${d.difference > 0 ? '+' : ''}${d.difference}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px")
+                        .classed("show", true);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .classed("show", false);
+                });
+
+            // Add axes
+            const xAxis = d3.axisBottom(x);
+            const yAxis = d3.axisLeft(y);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            // Add labels
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", width / 2)
+                .attr("y", height + margin.bottom)
+                .text("Date");
+
+            svg.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -height / 2)
+                .attr("y", -margin.left + 20)
+                .text("Over/Under (Actual - Expected)");
+
+            // Add legend
+            const legend = svg.append("g")
+                .attr("class", "legend")
+                .attr("transform", `translate(${width - 150}, 20)`);
+
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", 15)
+                .attr("height", 15)
+                .attr("fill", "url(#overGradient)");
+
+            legend.append("text")
+                .attr("x", 25)
+                .attr("y", 12)
+                .attr("fill", "#e0e0e0")
+                .text("Over Expected");
+
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("y", 25)
+                .attr("width", 15)
+                .attr("height", 15)
+                .attr("fill", "url(#underGradient)");
+
+            legend.append("text")
+                .attr("x", 25)
+                .attr("y", 37)
+                .attr("fill", "#e0e0e0")
+                .text("Under Expected");
+
+            // Store zoom state
+            zoomStates['over-under-chart'] = { zoom, x, y };
+        }
+
+        function resetZoom(chartId) {
+            if (zoomStates[chartId]) {
+                const { zoom } = zoomStates[chartId];
+                d3.select(`#${chartId} svg`).transition().duration(750).call(
+                    zoom.transform,
+                    d3.zoomIdentity
+                );
+                
+                // Also clear any brush selection
+                d3.select(`#${chartId} .brush`).call(d3.brush().move, null);
+            }
+        }
+    </script>
+</body>
+</html>
