@@ -394,48 +394,27 @@
 		}
 
 		.btn-merge {
-			background: var(--gradient-main);
+			background: var(--blue-primary);
 			color: white;
 			border: none;
-			border-radius: 16px;
-			padding: 1.25rem 3rem;
-			font-size: 1.2rem;
-			font-weight: 700;
+			border-radius: 8px;
+			padding: 1rem 2.5rem;
+			font-size: 1.1rem;
+			font-weight: 600;
 			cursor: pointer;
-			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-			box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+			transition: background-color 0.2s ease;
 			display: inline-flex;
 			align-items: center;
-			gap: 1rem;
-			position: relative;
-			overflow: hidden;
-			text-transform: none;
-		}
-
-		.btn-merge::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: -100%;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-			transition: left 0.6s;
+			gap: 0.75rem;
 		}
 
 		.btn-merge:hover:not(:disabled) {
-			transform: translateY(-4px);
-			box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
-		}
-
-		.btn-merge:hover:not(:disabled)::before {
-			left: 100%;
+			background: var(--blue-hover);
 		}
 
 		.btn-merge:disabled {
 			opacity: 0.6;
 			cursor: not-allowed;
-			transform: none;
 		}
 
 		.btn-merge i {
@@ -474,25 +453,24 @@
 		}
 
 		.footer a {
-			color: #667eea;
+			color: var(--blue-primary);
 			text-decoration: none;
-			font-weight: 600;
-			font-size: 1rem;
-			transition: all 0.3s ease;
+			font-weight: 500;
+			font-size: 0.95rem;
+			transition: color 0.2s ease;
 			display: inline-flex;
 			align-items: center;
 			gap: 0.5rem;
 		}
 
 		.footer a:hover {
-			color: #764ba2;
-			gap: 0.75rem;
+			color: var(--blue-hover);
 		}
 
 		/* Responsive */
 		@media screen and (max-width: 768px) {
 			.header {
-				padding: 3rem 0 2.5rem;
+				padding: 3rem 0 2rem;
 			}
 
 			.main-content {
@@ -501,16 +479,16 @@
 			}
 
 			.drop-zone {
-				padding: 3.5rem 2rem;
+				padding: 3rem 2rem;
 			}
 
 			.upload-icon {
-				font-size: 4rem;
-				margin-bottom: 1.5rem;
+				font-size: 3.5rem;
+				margin-bottom: 1.25rem;
 			}
 
 			.drop-zone h2 {
-				font-size: 1.75rem;
+				font-size: 1.5rem;
 			}
 
 			.drop-zone p {
