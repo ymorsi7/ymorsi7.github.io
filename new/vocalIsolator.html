@@ -1,0 +1,1169 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Vocal Isolator - Isolate Vocals from Music</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Remove instruments from music and isolate vocals from audio files" />
+	<meta name="keywords" content="vocal isolator, isolate vocals, remove instruments, vocal extraction, karaoke" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='white' stroke-width='3'/%3E%3Cpath d='M45 45 L55 55 M55 45 L45 55' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--blue-primary: #1e3a8a;
+			--blue-dark: #1e40af;
+			--blue-light: #3b82f6;
+			--blue-hover: #2563eb;
+			--text-dark: #1e293b;
+			--text-medium: #475569;
+			--text-light: #64748b;
+			--bg-white: #ffffff;
+			--bg-light: #f1f5f9;
+			--border-color: #e2e8f0;
+			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+			--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+			--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: var(--bg-light);
+			color: var(--text-dark);
+			line-height: 1.6;
+			min-height: 100vh;
+			position: relative;
+			overflow-x: hidden;
+		}
+
+		#page {
+			position: relative;
+			z-index: 1;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Header */
+		.header {
+			background: var(--blue-primary);
+			padding: 4rem 0 3rem;
+			box-shadow: var(--shadow-md);
+		}
+
+		.header-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			text-align: center;
+		}
+
+		.header h1 {
+			font-size: clamp(2.5rem, 6vw, 3.5rem);
+			font-weight: 700;
+			color: white;
+			margin-bottom: 0.75rem;
+			letter-spacing: -0.02em;
+		}
+
+		.header p {
+			font-size: clamp(1rem, 2vw, 1.125rem);
+			color: rgba(255, 255, 255, 0.9);
+			font-weight: 400;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		/* Main Container */
+		.main-content {
+			flex: 1;
+			max-width: 1000px;
+			margin: -3rem auto 0;
+			padding: 0 2rem 4rem;
+			position: relative;
+			z-index: 2;
+		}
+
+		/* Alert Container */
+		#alert-container {
+			margin-bottom: 2rem;
+		}
+
+		.alert {
+			padding: 1rem 1.25rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+			display: none;
+			font-size: 0.95rem;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid;
+		}
+
+		.alert.show {
+			display: block;
+		}
+
+		.alert-success {
+			background: #ecfdf5;
+			color: #065f46;
+			border-color: #10b981;
+		}
+
+		.alert-error {
+			background: #fef2f2;
+			color: #991b1b;
+			border-color: #ef4444;
+		}
+
+		.alert-info {
+			background: #eff6ff;
+			color: #1e40af;
+			border-color: var(--blue-light);
+		}
+
+		/* Tab Navigation */
+		.tab-container {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 0;
+			box-shadow: var(--shadow-md);
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+			overflow: hidden;
+		}
+
+		.tab-buttons {
+			display: flex;
+			border-bottom: 2px solid var(--border-color);
+		}
+
+		.tab-button {
+			flex: 1;
+			padding: 1rem;
+			background: transparent;
+			border: none;
+			cursor: pointer;
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--text-medium);
+			transition: all 0.2s ease;
+			border-bottom: 3px solid transparent;
+		}
+
+		.tab-button.active {
+			color: var(--blue-primary);
+			border-bottom-color: var(--blue-primary);
+			background: var(--bg-light);
+		}
+
+		.tab-button:hover {
+			background: var(--bg-light);
+		}
+
+		.tab-content {
+			display: none;
+		}
+
+		.tab-content.active {
+			display: block;
+		}
+
+		/* Upload Card */
+		.upload-card {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 0;
+			box-shadow: var(--shadow-md);
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.drop-zone {
+			padding: 4rem 3rem;
+			text-align: center;
+			cursor: pointer;
+			position: relative;
+			background: var(--bg-white);
+			transition: background-color 0.2s ease;
+		}
+
+		.drop-zone::before {
+			content: '';
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			right: 15px;
+			bottom: 15px;
+			border: 2px dashed var(--border-color);
+			border-radius: 8px;
+			transition: border-color 0.2s ease;
+		}
+
+		.drop-zone:hover {
+			background: var(--bg-light);
+		}
+
+		.drop-zone:hover::before {
+			border-color: var(--blue-light);
+		}
+
+		.drop-zone.drag-over {
+			background: rgba(30, 58, 138, 0.05);
+		}
+
+		.drop-zone.drag-over::before {
+			border-color: var(--blue-primary);
+			border-style: solid;
+		}
+
+		.upload-icon {
+			font-size: 4rem;
+			color: var(--blue-primary);
+			margin-bottom: 1.5rem;
+			display: block;
+		}
+
+		.drop-zone h2 {
+			font-size: 1.75rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 0.75rem;
+		}
+
+		.drop-zone p {
+			color: var(--text-medium);
+			font-size: 1.1rem;
+			margin-bottom: 2.5rem;
+			font-weight: 400;
+		}
+
+		.file-input {
+			position: absolute;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.btn-primary {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-primary:hover {
+			background: var(--blue-hover);
+		}
+
+		.btn-primary:active {
+			background: var(--blue-dark);
+		}
+
+		/* Audio Preview Card */
+		.audio-card {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 2rem;
+			box-shadow: var(--shadow-md);
+			display: none;
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.audio-card.show {
+			display: block;
+		}
+
+		.audio-card h3 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 1.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		.audio-card h3 i {
+			color: var(--blue-primary);
+			font-size: 1.25rem;
+		}
+
+		.audio-info {
+			background: var(--bg-light);
+			border-radius: 8px;
+			padding: 1.25rem;
+			margin-bottom: 1.5rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.audio-info h4 {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 0.5rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.audio-info span {
+			font-size: 0.9rem;
+			color: var(--text-medium);
+			font-weight: 500;
+		}
+
+		.audio-player-wrapper {
+			margin-bottom: 1.5rem;
+		}
+
+		audio {
+			width: 100%;
+			height: 48px;
+			border-radius: 8px;
+		}
+
+		/* Processing Section */
+		.process-section {
+			padding-top: 2rem;
+			border-top: 2px solid #f1f5f9;
+			text-align: center;
+		}
+
+		.btn-process {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 1rem 2.5rem;
+			font-size: 1.1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		.btn-process:hover:not(:disabled) {
+			background: var(--blue-hover);
+		}
+
+		.btn-process:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+
+		.btn-process i {
+			font-size: 1.2rem;
+		}
+
+		/* Spinner */
+		.spinner {
+			border: 3px solid rgba(255, 255, 255, 0.3);
+			border-top: 3px solid white;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			animation: spin 0.8s linear infinite;
+			display: inline-block;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
+		/* Progress Bar */
+		.progress-container {
+			margin-top: 1.5rem;
+			display: none;
+		}
+
+		.progress-container.show {
+			display: block;
+		}
+
+		.progress-label {
+			font-size: 0.9rem;
+			color: var(--text-medium);
+			margin-bottom: 0.5rem;
+			text-align: center;
+		}
+
+		.progress-bar {
+			width: 100%;
+			height: 8px;
+			background: var(--bg-light);
+			border-radius: 4px;
+			overflow: hidden;
+		}
+
+		.progress-fill {
+			height: 100%;
+			background: var(--blue-primary);
+			width: 0%;
+			transition: width 0.3s ease;
+		}
+
+		/* Footer */
+		.footer {
+			background: var(--bg-white);
+			padding: 2.5rem 0;
+			text-align: center;
+			margin-top: 4rem;
+			border-top: 1px solid #f1f5f9;
+		}
+
+		.footer-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		.footer a {
+			color: var(--blue-primary);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.95rem;
+			transition: color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.footer a:hover {
+			color: var(--blue-hover);
+		}
+
+		/* YouTube URL Input */
+		.youtube-input-section {
+			padding: 3rem 2rem;
+		}
+
+		.youtube-input-wrapper {
+			display: flex;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.youtube-input {
+			flex: 1;
+			padding: 0.875rem 1rem;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			font-size: 1rem;
+			font-family: inherit;
+			transition: border-color 0.2s ease;
+		}
+
+		.youtube-input:focus {
+			outline: none;
+			border-color: var(--blue-primary);
+		}
+
+		.youtube-input::placeholder {
+			color: var(--text-light);
+		}
+
+		.btn-youtube {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-youtube:hover:not(:disabled) {
+			background: var(--blue-hover);
+		}
+
+		.btn-youtube:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+
+		/* Responsive */
+		@media screen and (max-width: 768px) {
+			.header {
+				padding: 3rem 0 2rem;
+			}
+
+			.main-content {
+				margin-top: -2rem;
+				padding: 0 1.5rem 3rem;
+			}
+
+			.drop-zone {
+				padding: 3rem 2rem;
+			}
+
+			.youtube-input-wrapper {
+				flex-direction: column;
+			}
+
+			.btn-youtube {
+				width: 100%;
+				justify-content: center;
+			}
+
+			.upload-icon {
+				font-size: 3.5rem;
+				margin-bottom: 1.25rem;
+			}
+
+			.drop-zone h2 {
+				font-size: 1.5rem;
+			}
+
+			.drop-zone p {
+				font-size: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.audio-card {
+				padding: 1.5rem;
+			}
+
+			.btn-process {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			.header h1 {
+				font-size: 2rem;
+			}
+
+			.drop-zone {
+				padding: 2.5rem 1.5rem;
+			}
+
+			.btn-primary {
+				width: 100%;
+				justify-content: center;
+			}
+
+			.audio-card {
+				padding: 1.25rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page">
+		<header class="header">
+			<div class="header-content">
+				<h1>Vocal Isolator</h1>
+				<p>Isolate vocals and remove instruments from audio files</p>
+			</div>
+		</header>
+
+		<div class="main-content">
+			<!-- Alert messages -->
+			<div id="alert-container"></div>
+
+			<!-- Upload area -->
+			<div class="tab-container">
+				<div class="tab-buttons">
+					<button class="tab-button active" onclick="switchTab('file', event)">
+						<i class="fas fa-file-audio"></i> Upload File
+					</button>
+					<button class="tab-button" onclick="switchTab('youtube', event)">
+						<i class="fab fa-youtube"></i> YouTube Link
+					</button>
+				</div>
+
+				<!-- File Upload Tab -->
+				<div class="tab-content active" id="fileTab">
+					<div class="upload-card">
+						<div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+							<i class="fas fa-music upload-icon"></i>
+							<h2>Drop your audio file here</h2>
+							<p>Support MP3, WAV, M4A, FLAC, and OGG audio files</p>
+							<p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">Uses free client-side processing - no API required. Works best with stereo files where vocals are centered.</p>
+							<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('fileInput').click();">
+								<i class="fas fa-folder-open"></i> Choose File
+							</button>
+							<input type="file" id="fileInput" class="file-input" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg">
+						</div>
+					</div>
+				</div>
+
+				<!-- YouTube Tab -->
+				<div class="tab-content" id="youtubeTab">
+					<div class="upload-card">
+						<div class="youtube-input-section">
+							<i class="fab fa-youtube upload-icon" style="font-size: 3rem;"></i>
+							<h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Enter YouTube Video URL</h2>
+							<p style="color: var(--text-medium); margin-bottom: 1.5rem; font-size: 0.95rem;">Paste a YouTube video link to extract and isolate vocals</p>
+							<div class="youtube-input-wrapper">
+								<input type="text" id="youtubeUrl" class="youtube-input" placeholder="https://www.youtube.com/watch?v=..." onkeypress="if(event.key === 'Enter') loadYouTubeAudio()">
+								<button class="btn-youtube" id="youtubeBtn" onclick="loadYouTubeAudio()">
+									<i class="fas fa-download"></i> Load Audio
+								</button>
+							</div>
+							<p style="font-size: 0.85rem; color: var(--text-light); margin-top: 1rem; font-style: italic;">Note: YouTube extraction requires a backend service. This feature needs server-side support with yt-dlp or similar.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Audio Preview Card -->
+			<div class="audio-card" id="audioCard">
+				<h3>
+					<i class="fas fa-waveform-lines"></i> Audio File
+				</h3>
+				<div class="audio-info">
+					<h4 id="fileName">-</h4>
+					<span id="fileSize">-</span>
+				</div>
+				<div class="audio-player-wrapper">
+					<audio id="audioPlayer" controls></audio>
+				</div>
+				<div class="process-section">
+					<div class="progress-container" id="progressContainer">
+						<div class="progress-label" id="progressLabel">Processing...</div>
+						<div class="progress-bar">
+							<div class="progress-fill" id="progressFill"></div>
+						</div>
+					</div>
+					<button class="btn-process" id="processBtn" onclick="processAudio()">
+						<i class="fas fa-magic"></i> Isolate Vocals
+					</button>
+				</div>
+			</div>
+
+			<!-- Processed Audio Card -->
+			<div class="audio-card" id="processedCard" style="display: none;">
+				<h3>
+					<i class="fas fa-microphone"></i> Isolated Vocals
+				</h3>
+				<div class="audio-info">
+					<h4 id="processedFileName">Vocals Isolated</h4>
+					<span>Play and preview the isolated vocals below</span>
+				</div>
+				<div class="audio-player-wrapper">
+					<audio id="processedPlayer" controls></audio>
+				</div>
+				<div class="process-section">
+					<button class="btn-primary" id="downloadBtn" onclick="downloadProcessedAudio()">
+						<i class="fas fa-download"></i> Download Vocals
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer-content">
+				<a href="index.html">
+					<i class="fas fa-arrow-left"></i> Back to Portfolio
+				</a>
+			</div>
+		</footer>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<script>
+		let selectedFile = null;
+		let audioBuffer = null;
+
+		// Initialize on page load
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeDropZone();
+			initializeFileInput();
+		});
+
+		// Switch between tabs
+		function switchTab(tab, event) {
+			// Update tab buttons
+			document.querySelectorAll('.tab-button').forEach(btn => {
+				btn.classList.remove('active');
+			});
+			if (event && event.target) {
+				event.target.classList.add('active');
+			} else {
+				// If no event, find the button by tab name
+				document.querySelectorAll('.tab-button').forEach(btn => {
+					if (btn.textContent.toLowerCase().includes(tab)) {
+						btn.classList.add('active');
+					}
+				});
+			}
+
+			// Update tab content
+			document.querySelectorAll('.tab-content').forEach(content => {
+				content.classList.remove('active');
+			});
+			document.getElementById(tab + 'Tab').classList.add('active');
+		}
+
+		// Load audio from YouTube URL
+		async function loadYouTubeAudio() {
+			const youtubeUrl = document.getElementById('youtubeUrl').value.trim();
+			const youtubeBtn = document.getElementById('youtubeBtn');
+
+			if (!youtubeUrl) {
+				showAlert('error', 'Please enter a YouTube URL');
+				return;
+			}
+
+			// Validate YouTube URL
+			const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+			const match = youtubeUrl.match(youtubeRegex);
+			
+			if (!match) {
+				showAlert('error', 'Please enter a valid YouTube URL');
+				return;
+			}
+
+			const originalText = youtubeBtn.innerHTML;
+			youtubeBtn.disabled = true;
+			youtubeBtn.innerHTML = '<span class="spinner"></span> Loading...';
+
+			showProgress();
+			updateProgress(10, 'Extracting audio from YouTube...');
+
+			try {
+				// Option 1: Use a free YouTube audio extraction service
+				// Note: This is a placeholder - you'll need to implement a backend or use a service
+				const videoId = match[1];
+				
+				// Try using a public API endpoint (you would need to set this up on your backend)
+				// For now, we'll show an error explaining this needs a backend
+				
+				// Example: You could set up a backend endpoint like:
+				// const response = await fetch('/api/extract-youtube-audio', {
+				//     method: 'POST',
+				//     headers: { 'Content-Type': 'application/json' },
+				//     body: JSON.stringify({ url: youtubeUrl })
+				// });
+				
+				updateProgress(50, 'Downloading audio stream...');
+				
+				// Alternative: Use a free service like youtube-dl-server
+				// This requires you to host a backend server with youtube-dl or yt-dlp
+				const backendUrl = 'YOUR_BACKEND_URL/api/extract-audio'; // Replace with your backend
+				
+				showAlert('info', 'YouTube extraction requires a backend service. Please set up a server with yt-dlp or use the file upload option. For now, you can manually download audio from YouTube and upload it here.');
+				
+				// Placeholder for actual implementation:
+				// const response = await fetch(backendUrl, {
+				//     method: 'POST',
+				//     headers: { 'Content-Type': 'application/json' },
+				//     body: JSON.stringify({ url: youtubeUrl })
+				// });
+				// const audioBlob = await response.blob();
+				// const file = new File([audioBlob], 'youtube_audio.mp3', { type: 'audio/mpeg' });
+				// handleFile(file);
+
+			} catch (error) {
+				console.error('Error loading YouTube audio:', error);
+				showAlert('error', `Error: ${error.message}. YouTube extraction requires a backend service with yt-dlp installed.`);
+			} finally {
+				youtubeBtn.disabled = false;
+				youtubeBtn.innerHTML = originalText;
+				hideProgress();
+			}
+		}
+
+		// Initialize drag and drop zone
+		function initializeDropZone() {
+			const dropZone = document.getElementById('dropZone');
+			const fileInput = document.getElementById('fileInput');
+
+			['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, preventDefaults, false);
+				document.body.addEventListener(eventName, preventDefaults, false);
+			});
+
+			['dragenter', 'dragover'].forEach(eventName => {
+				dropZone.addEventListener(eventName, highlight, false);
+			});
+
+			['dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, unhighlight, false);
+			});
+
+			dropZone.addEventListener('drop', handleDrop, false);
+
+			function preventDefaults(e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+
+			function highlight(e) {
+				dropZone.classList.add('drag-over');
+			}
+
+			function unhighlight(e) {
+				dropZone.classList.remove('drag-over');
+			}
+
+			function handleDrop(e) {
+				const dt = e.dataTransfer;
+				const files = dt.files;
+				if (files.length > 0) {
+					handleFile(files[0]);
+				}
+			}
+		}
+
+		// Initialize file input
+		function initializeFileInput() {
+			const fileInput = document.getElementById('fileInput');
+			fileInput.addEventListener('change', function(e) {
+				if (e.target.files.length > 0) {
+					handleFile(e.target.files[0]);
+				}
+			});
+		}
+
+		// Handle selected file
+		function handleFile(file) {
+			// Validate file type
+			const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/wave', 'audio/x-wav', 
+								'audio/mp4', 'audio/m4a', 'audio/flac', 'audio/ogg', 'audio/vorbis'];
+			const validExtensions = ['.mp3', '.wav', '.m4a', '.flac', '.ogg'];
+			const fileName = file.name.toLowerCase();
+			const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
+
+			if (!validTypes.includes(file.type) && !hasValidExtension) {
+				showAlert('error', `File "${file.name}" is not a supported audio format. Please upload MP3, WAV, M4A, FLAC, or OGG files.`);
+				return;
+			}
+
+			// Validate file size (max 50MB)
+			const maxSize = 50 * 1024 * 1024; // 50MB
+			if (file.size > maxSize) {
+				showAlert('error', `File "${file.name}" is too large. Maximum file size is 50MB.`);
+				return;
+			}
+
+			selectedFile = file;
+			updateAudioPreview(file);
+			showAlert('success', `Loaded "${file.name}"`);
+		}
+
+		// Update audio preview
+		function updateAudioPreview(file) {
+			const audioCard = document.getElementById('audioCard');
+			const fileName = document.getElementById('fileName');
+			const fileSize = document.getElementById('fileSize');
+			const audioPlayer = document.getElementById('audioPlayer');
+
+			fileName.textContent = file.name;
+			fileSize.textContent = formatFileSize(file.size);
+
+			const url = URL.createObjectURL(file);
+			audioPlayer.src = url;
+
+			audioCard.classList.add('show');
+
+			// Reset progress
+			hideProgress();
+		}
+
+		// Format file size
+		function formatFileSize(bytes) {
+			if (bytes === 0) return '0 Bytes';
+			const k = 1024;
+			const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+			const i = Math.floor(Math.log(bytes) / Math.log(k));
+			return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+		}
+
+		// Store processed audio blob globally
+		let processedAudioBlob = null;
+		let processedFileName = '';
+
+		// Process audio to isolate vocals using Web Audio API (free, client-side)
+		async function processAudio() {
+			if (!selectedFile) {
+				showAlert('error', 'Please select an audio file first.');
+				return;
+			}
+
+			const processBtn = document.getElementById('processBtn');
+			const originalText = processBtn.innerHTML;
+			processBtn.disabled = true;
+			processBtn.innerHTML = '<span class="spinner"></span> Processing...';
+
+			showProgress();
+			updateProgress(10, 'Loading audio file...');
+
+			try {
+				// Create audio context
+				const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+				
+				// Load audio file
+				const arrayBuffer = await selectedFile.arrayBuffer();
+				updateProgress(30, 'Decoding audio...');
+				
+				const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+				
+				// Check if stereo
+				if (audioBuffer.numberOfChannels < 2) {
+					showAlert('error', 'This audio file is not stereo. Vocal isolation works best with stereo files where vocals are centered.');
+					processBtn.disabled = false;
+					processBtn.innerHTML = originalText;
+					hideProgress();
+					return;
+				}
+
+				updateProgress(50, 'Extracting vocals...');
+
+				const leftChannel = audioBuffer.getChannelData(0);
+				const rightChannel = audioBuffer.getChannelData(1);
+				const length = audioBuffer.length;
+				
+				// Create isolated vocal buffer
+				const isolatedVocalBuffer = audioContext.createBuffer(
+					1, // mono
+					length,
+					audioBuffer.sampleRate
+				);
+				
+				const isolatedChannel = isolatedVocalBuffer.getChannelData(0);
+				
+				// Since L - R perfectly removes vocals (works great for instrumental)
+				// The vocals are what's removed, so they must be centered and identical
+				// For vocals: we want content where L ≈ R (channels are similar)
+				// Since vocals are centered and identical: Vocal ≈ L (when L ≈ R)
+				
+				// Direct approach: Where channels match, that's vocals
+				// Weight by how similar the channels are
+				for (let i = 0; i < length; i++) {
+					const left = leftChannel[i];
+					const right = rightChannel[i];
+					const diff = Math.abs(left - right);
+					const sum = Math.abs(left) + Math.abs(right);
+					
+					// Calculate how similar the channels are (1.0 = identical, 0.0 = very different)
+					const similarity = sum > 0.0001 ? 1.0 - (diff / (sum + 0.0001)) : 1.0;
+					
+					// Vocals are centered, so take the average of L and R
+					const center = (left + right) * 0.5;
+					
+					// Only keep content where channels are similar (vocals)
+					// Use similarity as a gate - strongly emphasize similar content
+					// The similarity^2 squares it to make the gate more aggressive
+					isolatedChannel[i] = center * Math.pow(Math.max(similarity, 0.0), 2.0);
+					
+					// Additional filtering: If channels are very different, reduce signal significantly
+					if (diff > sum * 0.5) {
+						// Channels are very different (likely instrumental)
+						isolatedChannel[i] = isolatedChannel[i] * 0.1; // Heavily attenuate
+					}
+				}
+
+				updateProgress(80, 'Normalizing audio...');
+
+				// Normalize the output to prevent clipping
+				// Use a loop instead of Math.max(...) to avoid call stack overflow for large files
+				let max = 0;
+				for (let i = 0; i < isolatedChannel.length; i++) {
+					const absValue = Math.abs(isolatedChannel[i]);
+					if (absValue > max) {
+						max = absValue;
+					}
+				}
+				
+				if (max > 0) {
+					for (let i = 0; i < isolatedChannel.length; i++) {
+						isolatedChannel[i] = isolatedChannel[i] / max * 0.9;
+					}
+				}
+
+				updateProgress(90, 'Finalizing audio...');
+
+				// Convert AudioBuffer to WAV Blob
+				processedAudioBlob = audioBufferToWav(isolatedVocalBuffer);
+				processedFileName = selectedFile.name.replace(/\.[^/.]+$/, '') + '_vocals_isolated.wav';
+				
+				updateProgress(100, 'Complete!');
+
+				// Show processed audio card with player
+				const processedCard = document.getElementById('processedCard');
+				const processedPlayer = document.getElementById('processedPlayer');
+				const processedFileNameEl = document.getElementById('processedFileName');
+				
+				processedFileNameEl.textContent = processedFileName;
+				
+				// Create URL for audio player
+				const playerUrl = URL.createObjectURL(processedAudioBlob);
+				processedPlayer.src = playerUrl;
+				
+				// Show the processed card
+				processedCard.style.display = 'block';
+				processedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+				showAlert('success', 'Vocals isolated! Play and preview the result below.');
+
+			} catch (error) {
+				console.error('Error processing audio:', error);
+				showAlert('error', `Error processing audio: ${error.message}`);
+				hideProgress();
+			} finally {
+				processBtn.disabled = false;
+				processBtn.innerHTML = originalText;
+			}
+		}
+
+		// Convert AudioBuffer to WAV Blob
+		function audioBufferToWav(buffer) {
+			const length = buffer.length;
+			const sampleRate = buffer.sampleRate;
+			const numberOfChannels = buffer.numberOfChannels;
+			const arrayBuffer = new ArrayBuffer(44 + length * numberOfChannels * 2);
+			const view = new DataView(arrayBuffer);
+			const channels = [];
+			
+			// Get channel data
+			for (let i = 0; i < numberOfChannels; i++) {
+				channels.push(buffer.getChannelData(i));
+			}
+
+			// WAV header
+			const writeString = (offset, string) => {
+				for (let i = 0; i < string.length; i++) {
+					view.setUint8(offset + i, string.charCodeAt(i));
+				}
+			};
+
+			writeString(0, 'RIFF');
+			view.setUint32(4, 36 + length * numberOfChannels * 2, true);
+			writeString(8, 'WAVE');
+			writeString(12, 'fmt ');
+			view.setUint32(16, 16, true); // PCM format
+			view.setUint16(20, 1, true); // PCM
+			view.setUint16(22, numberOfChannels, true);
+			view.setUint32(24, sampleRate, true);
+			view.setUint32(28, sampleRate * numberOfChannels * 2, true);
+			view.setUint16(32, numberOfChannels * 2, true);
+			view.setUint16(34, 16, true);
+			writeString(36, 'data');
+			view.setUint32(40, length * numberOfChannels * 2, true);
+
+			// Write PCM data
+			let offset = 44;
+			for (let i = 0; i < length; i++) {
+				for (let channel = 0; channel < numberOfChannels; channel++) {
+					let sample = Math.max(-1, Math.min(1, channels[channel][i]));
+					sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+					view.setInt16(offset, sample, true);
+					offset += 2;
+				}
+			}
+
+			return new Blob([arrayBuffer], { type: 'audio/wav' });
+		}
+
+		// Download processed audio
+		function downloadProcessedAudio() {
+			if (!processedAudioBlob) {
+				showAlert('error', 'No processed audio available. Please process an audio file first.');
+				return;
+			}
+
+			const downloadUrl = URL.createObjectURL(processedAudioBlob);
+			const a = document.createElement('a');
+			a.href = downloadUrl;
+			a.download = processedFileName;
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			
+			// Clean up URL after a delay
+			setTimeout(() => {
+				URL.revokeObjectURL(downloadUrl);
+			}, 100);
+
+			showAlert('success', `Downloading "${processedFileName}"`);
+		}
+
+		// Show progress bar
+		function showProgress() {
+			const progressContainer = document.getElementById('progressContainer');
+			progressContainer.classList.add('show');
+		}
+
+		// Hide progress bar
+		function hideProgress() {
+			const progressContainer = document.getElementById('progressContainer');
+			progressContainer.classList.remove('show');
+		}
+
+		// Update progress
+		function updateProgress(percentage, label) {
+			const progressFill = document.getElementById('progressFill');
+			const progressLabel = document.getElementById('progressLabel');
+			progressFill.style.width = percentage + '%';
+			if (label) {
+				progressLabel.textContent = label;
+			}
+		}
+
+		// Show alert message
+		function showAlert(type, message) {
+			const alertContainer = document.getElementById('alert-container');
+			
+			alertContainer.innerHTML = '';
+			
+			const alert = document.createElement('div');
+			alert.className = `alert alert-${type} show`;
+			alert.innerHTML = `
+				<strong>${type === 'error' ? 'Error' : type === 'success' ? 'Success' : 'Info'}:</strong> ${message}
+			`;
+			
+			alertContainer.appendChild(alert);
+			
+			setTimeout(() => {
+				alert.classList.remove('show');
+				setTimeout(() => {
+					alert.remove();
+				}, 300);
+			}, 5000);
+		}
+	</script>
+</body>
+
+</html>
+
