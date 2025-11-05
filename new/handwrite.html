@@ -276,7 +276,7 @@
     const paperContent = document.getElementById('paperContent');
     const paperHost = document.getElementById('paperHost');
 
-    const sample = `ECE271A MIDTERM CHEAT-SHEET (DOUBLE-SIDED)\n\nScope covered: Bayes decision rules (MAP/ML), Gaussian classification geometry, whole-sample decisions, MLE + Hessian checks, whitening/Mahalanobis, exponential-family templates. Use this as plug-and-chug templates.\n\n1) Equal-Σ Gaussian BDR: $$w = \\Sigma^{-1}(\\mu_1-\\mu_0),\\quad b= -\\tfrac12(\\mu_1^T\\Sigma^{-1}\\mu_1-\\mu_0^T\\Sigma^{-1}\\mu_0) + \\log \\tfrac{\\pi_1}{\\pi_0}$$\nDecide class 1 if $w^T x + b \\ge 0$.\n\n| Term | Formula | Note |\n|:----:|:-------:|:----:|\n| Logistic posterior | $P(Y=1\\mid x)=\\frac{1}{1+e^{-(w^Tx+b)}}$ | equal $\\Sigma$ only |\n| Threshold (1D) | $T=\\tfrac{\\mu_0+\\mu_1}{2} - \\tfrac{\\sigma^2}{\\mu_1-\\mu_0}\\log\\tfrac{\\pi_1}{\\pi_0}$ | priors shift |\n\ngraph: 1, 3, 2, 4, 6, 5, 8, 7\n`;
+    const sample = `2+2=4\n`;
     inp.value = sample;
 
     function rerender(){
