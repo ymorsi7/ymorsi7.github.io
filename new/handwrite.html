@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Handwritten Render Maker - Static</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Homemade+Apple&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <style>
+    :root { --bg:#f3f4f6; --ink:#111827; --card:#ffffff; --muted:#6b7280; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 960px){ .grid { grid-template-columns: 380px 1fr; } }
+    .card { background:var(--card); border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); padding:14px; }
+    label { display:block; font-size:12px; font-weight:600; margin-bottom:6px; }
+    textarea { width:100%; height:420px; font-size:13px; line-height:1.45; padding:10px; border:1px solid #d1d5db; border-radius:8px; }
+    select,input[type="number"],input[type="range"]{ width:100%; padding:8px; border:1px solid #d1d5db; border-radius:8px; }
+    button { appearance:none; border:0; background:#111827; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
+    .row { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
+    .handwriting { filter: drop-shadow(0.15px 0.15px rgba(0,0,0,0.3)); transform-origin: top left; }
+    .tip { font-size:11px; color:var(--muted); margin-top:6px; }
+    .paper-wrap { position:relative; display:inline-block; }
+    .paper-content { position:absolute; inset:0; padding:68px 48px 48px 72px; }
+    .katex { font-weight: 500; }
+    .toolbar { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="margin:10px 0 12px; font-size:24px; font-weight:800;">Handwritten Render Maker - Static</h1>
+    <p class="tip">Single HTML file. Works on GitHub Pages. Paste text and LaTeX. Use markdown tables with pipes. Add a quick chart with <code>graph: 1,2,3</code>. Export to PNG.</p>
+    <div class="grid">
+      <div class="card">
+        <label>Input</label>
+        <textarea id="inp"></textarea>
+        <div class="toolbar">
+          <div>
+            <label>Paper</label>
+            <select id="paper">
+              <option value="lined">Lined</option>
+              <option value="grid">Grid</option>
+              <option value="blank">Blank</option>
+            </select>
+          </div>
+          <div>
+            <label>Font</label>
+            <select id="font">
+              <option value="'Caveat', cursive">Caveat</option>
+              <option value="'Patrick Hand', cursive">Patrick Hand</option>
+              <option value="'Homemade Apple', cursive">Homemade Apple</option>
+            </select>
+          </div>
+          <div>
+            <label>Size</label>
+            <input id="size" type="number" value="20" />
+          </div>
+        </div>
+        <div class="toolbar">
+          <div>
+            <label>Wobble</label>
+            <input id="wobble" type="range" min="0" max="2" step="0.1" value="0.6" />
+          </div>
+          <div>
+            <label>Ink scale</label>
+            <input id="ink" type="range" min="0.9" max="1.25" step="0.01" value="1.05" />
+          </div>
+          <div>
+            <label>Export</label>
+            <button id="export">Export PNG</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div>
+            <label>Sheet width</label>
+            <input id="sheetW" type="number" value="900" />
+          </div>
+          <div>
+            <label>Sheet height</label>
+            <input id="sheetH" type="number" value="1200" />
+          </div>
+          <div>
+            <label>Refresh</label>
+            <button id="refresh">Re-render</button>
+          </div>
+        </div>
+        <p class="tip">Tip: Caveat 18-22, wobble 0.6 to 1.0 looks most natural.</p>
+      </div>
+      <div class="card" style="overflow:auto;">
+        <div id="paperHost" class="paper-wrap">
+          <svg id="paperSVG" width="900" height="1200" aria-hidden="true"></svg>
+          <div id="paperContent" class="paper-content handwriting"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+
+  <script>
+    // --- helpers ---
+    function setHandwritingCSS(font, size, wobble, inkScale){
+      const id = 'hw-style';
+      let node = document.getElementById(id);
+      if(!node){ node = document.createElement('style'); node.id = id; document.head.appendChild(node); }
+      node.innerHTML = `.handwriting{font-family:${font};font-size:${size}px;line-height:1.6;letter-spacing:${(wobble*0.6).toFixed(2)}px;transform:scale(${inkScale});}`;
+    }
+
+    function splitIntoSegments(input){
+      const segments = [];
+      const lines = input.replace(/\r\n?/g, "\n").split("\n");
+      let i=0;
+      while(i<lines.length){
+        const line = lines[i];
+        if (/^graph\s*:/i.test(line)){
+          segments.push({type:'graph', content: line.replace(/^graph\s*:/i,'').trim()});
+          i++; continue;
+        }
+        if (/^\s*\|.+\|\s*$/.test(line) && i+1<lines.length && /\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?/.test(lines[i+1])){
+          const tbl=[]; tbl.push(line); tbl.push(lines[i+1]); i+=2;
+          while(i<lines.length && /^\s*\|.*\|\s*$/.test(lines[i])){ tbl.push(lines[i]); i++; }
+          segments.push({type:'table', content: tbl.join('\n')});
+          continue;
+        }
+        if (/^\s*\$\$/.test(line)){
+          const buf=[]; const first = line.replace(/^\s*\$\$\s*/,""); if(first.length) buf.push(first); i++;
+          while(i<lines.length){
+            if(/\$\$\s*$/.test(lines[i])){ buf.push(lines[i].replace(/\$\$\s*$/,'')); i++; break; }
+            buf.push(lines[i]); i++;
+          }
+          segments.push({type:'math_block', content: buf.join('\n')});
+          continue;
+        }
+        if (line.includes('$') && /\$(?!\$).*?\$(?!\$)/.test(line)){
+          segments.push({type:'math_inline', content: line});
+          i++; continue;
+        }
+        const para=[line]; i++;
+        while(i<lines.length && !/^\s*\$\$/.test(lines[i]) && !/^\s*\|.+\|\s*$/.test(lines[i]) && !/^graph\s*:/i.test(lines[i])){
+          para.push(lines[i]); i++;
+          if(para.length>0 && lines[i-1]==='') break;
+        }
+        segments.push({type:'text', content: para.join('\n')});
+      }
+      return segments;
+    }
+
+    function renderInlineMathToHTML(line){
+      return line.replace(/\$(?!\$)(.+?)(?<!\\)\$(?!\$)/g, function(_, expr){
+        try{
+          return katex.renderToString(expr, {throwOnError:false, displayMode:false});
+        }catch(e){ return '<code>$'+expr+'$</code>'; }
+      });
+    }
+
+    function drawPaper(svg, variant, width, height){
+      while(svg.firstChild) svg.removeChild(svg.firstChild);
+      const rc = rough.svg(svg);
+      const margin = 12;
+      const base = rc.rectangle(margin, margin, width-2*margin, height-2*margin, {
+        fill:'#fffdf7', fillStyle:'solid', stroke:'#d1d5db', roughness:0.8
+      });
+      svg.appendChild(base);
+      if(variant==='lined'){
+        for(let y=margin+40; y<height-margin; y+=28){ svg.appendChild(rc.line(margin+10, y, width-margin-10, y, {stroke:'#9ec5ff', roughness:1})); }
+        svg.appendChild(rc.line(margin+48, margin+10, margin+48, height-margin-10, {stroke:'#ff8a8a', roughness:1.2}));
+      }
+      if(variant==='grid'){
+        for(let y=margin+20; y<height-margin; y+=28){ svg.appendChild(rc.line(margin+10, y, width-margin-10, y, {stroke:'#e5e7eb', roughness:1})); }
+        for(let x=margin+10; x<width-margin; x+=28){ svg.appendChild(rc.line(x, margin+10, x, height-margin-10, {stroke:'#e5e7eb', roughness:1})); }
+      }
+    }
+
+    function renderTable(host, markdown, handwritingClass){
+      host.innerHTML = '';
+      const lines = markdown.split(/\n/).filter(Boolean);
+      const header = lines[0].split('|').slice(1,-1).map(s=>s.trim());
+      const rows = lines.slice(2).map(ln=>ln.split('|').slice(1,-1).map(s=>s.trim()));
+      const cellW=160, cellH=42, pad=8;
+      const width = cellW*header.length+20, height = cellH*(rows.length+1)+20;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('width', String(width)); svg.setAttribute('height', String(height));
+      const rc = rough.svg(svg);
+      svg.appendChild(rc.rectangle(10,10,width-20,cellH,{fill:'#fff6d5',fillStyle:'hachure',fillWeight:1,roughness:1.1}));
+      for(let r=0;r<=rows.length+1;r++){ const y=10+r*cellH; svg.appendChild(rc.line(10,y,width-10,y,{stroke:'#111827',roughness:1.2})); }
+      for(let c=0;c<=header.length;c++){ const x=10+c*cellW; svg.appendChild(rc.line(x,10,x,10+(rows.length+1)*cellH,{stroke:'#111827',roughness:1.2})); }
+      host.appendChild(svg);
+      const overlay = document.createElement('div');
+      overlay.style.position='relative'; overlay.style.marginTop = (-height)+'px'; overlay.style.width=width+'px'; overlay.style.height=height+'px'; overlay.className = handwritingClass;
+      function place(txt,r,c,bold){ const d=document.createElement('div'); d.textContent=txt; d.style.position='absolute'; d.style.left=(10+c*cellW+pad)+'px'; d.style.top=(10+r*cellH+pad)+'px'; d.style.width=(cellW-2*pad)+'px'; d.style.height=(cellH-2*pad)+'px'; d.style.lineHeight=(cellH-2*pad)+'px'; d.style.fontWeight=bold?'700':'400'; d.style.fontSize='20px'; overlay.appendChild(d);} 
+      header.forEach((h,c)=>place(h,0,c,true));
+      rows.forEach((row,r)=>row.forEach((cell,c)=>place(cell,r+1,c,false)));
+      host.appendChild(overlay);
+    }
+
+    function renderGraph(host, yCSV){
+      host.innerHTML = '';
+      const ys = yCSV.split(/[;,\s]+/).map(t=>Number(t)).filter(n=>!Number.isNaN(n));
+      if(ys.length<2){ host.textContent='graph: provide at least two numbers'; return; }
+      const W=560, H=260, pad=36;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('width', String(W)); svg.setAttribute('height', String(H));
+      const rc = rough.svg(svg);
+      const minY = Math.min(...ys), maxY = Math.max(...ys);
+      const xScale = i=> pad + (i/(ys.length-1))*(W-2*pad);
+      const yScale = v=> H-pad - ((v-minY)/(maxY-minY||1))*(H-2*pad);
+      svg.appendChild(rc.line(pad,pad,pad,H-pad,{roughness:1.2}));
+      svg.appendChild(rc.line(pad,H-pad,W-pad,H-pad,{roughness:1.2}));
+      const points = ys.map((v,i)=>[xScale(i), yScale(v)]);
+      svg.appendChild(rc.curve(points,{stroke:'#111827',roughness:1.5,fill:'none'}));
+      host.appendChild(svg);
+    }
+
+    function renderInlineWobble(p, wobble){
+      const parts = p.split(/(\s+)/);
+      return parts.map(w=>{
+        const span = document.createElement('span');
+        span.textContent = w;
+        span.style.display='inline-block';
+        const ry = (Math.random()-0.5)*wobble;
+        const rr = (Math.random()-0.5)*wobble;
+        span.style.transform = `translateY(${ry}px) rotate(${rr}deg)`;
+        return span;
+      });
+    }
+
+    function renderSegments(container, segments, handwritingClass, wobble){
+      container.innerHTML = '';
+      container.className = 'paper-content handwriting '+handwritingClass;
+      segments.forEach(seg=>{
+        if(seg.type==='text'){
+          const div = document.createElement('div');
+          seg.content.split(/\n\n+/).forEach(p=>{
+            const P = document.createElement('p');
+            renderInlineWobble(p, wobble).forEach(node=>P.appendChild(node));
+            div.appendChild(P);
+          });
+          container.appendChild(div);
+        } else if(seg.type==='math_block'){
+          const d = document.createElement('div');
+          d.className = 'math';
+          d.innerHTML = katex.renderToString(seg.content, {throwOnError:false, displayMode:true});
+          container.appendChild(d);
+        } else if(seg.type==='math_inline'){
+          const p = document.createElement('p');
+          p.innerHTML = renderInlineMathToHTML(seg.content);
+          container.appendChild(p);
+        } else if(seg.type==='table'){
+          const d = document.createElement('div');
+          renderTable(d, seg.content, handwritingClass);
+          container.appendChild(d);
+        } else if(seg.type==='graph'){
+          const d = document.createElement('div'); d.style.margin='10px 0';
+          renderGraph(d, seg.content); container.appendChild(d);
+        }
+      });
+    }
+
+    // --- state and event wiring ---
+    const inp = document.getElementById('inp');
+    const paperSel = document.getElementById('paper');
+    const fontSel = document.getElementById('font');
+    const sizeInp = document.getElementById('size');
+    const wobbleInp = document.getElementById('wobble');
+    const inkInp = document.getElementById('ink');
+    const wInp = document.getElementById('sheetW');
+    const hInp = document.getElementById('sheetH');
+    const exportBtn = document.getElementById('export');
+    const refreshBtn = document.getElementById('refresh');
+    const paperSVG = document.getElementById('paperSVG');
+    const paperContent = document.getElementById('paperContent');
+    const paperHost = document.getElementById('paperHost');
+
+    const sample = `ECE271A MIDTERM CHEAT-SHEET (DOUBLE-SIDED)\n\nScope covered: Bayes decision rules (MAP/ML), Gaussian classification geometry, whole-sample decisions, MLE + Hessian checks, whitening/Mahalanobis, exponential-family templates. Use this as plug-and-chug templates.\n\n1) Equal-Σ Gaussian BDR: $$w = \\Sigma^{-1}(\\mu_1-\\mu_0),\\quad b= -\\tfrac12(\\mu_1^T\\Sigma^{-1}\\mu_1-\\mu_0^T\\Sigma^{-1}\\mu_0) + \\log \\tfrac{\\pi_1}{\\pi_0}$$\nDecide class 1 if $w^T x + b \\ge 0$.\n\n| Term | Formula | Note |\n|:----:|:-------:|:----:|\n| Logistic posterior | $P(Y=1\\mid x)=\\frac{1}{1+e^{-(w^Tx+b)}}$ | equal $\\Sigma$ only |\n| Threshold (1D) | $T=\\tfrac{\\mu_0+\\mu_1}{2} - \\tfrac{\\sigma^2}{\\mu_1-\\mu_0}\\log\\tfrac{\\pi_1}{\\pi_0}$ | priors shift |\n\ngraph: 1, 3, 2, 4, 6, 5, 8, 7\n`;
+    inp.value = sample;
+
+    function rerender(){
+      const width = parseInt(wInp.value||'900');
+      const height = parseInt(hInp.value||'1200');
+      paperSVG.setAttribute('width', String(width));
+      paperSVG.setAttribute('height', String(height));
+      paperHost.style.width = width+'px';
+      paperHost.style.height = height+'px';
+      setHandwritingCSS(fontSel.value, parseInt(sizeInp.value||'20'), parseFloat(wobbleInp.value||'0.6'), parseFloat(inkInp.value||'1.05'));
+      drawPaper(paperSVG, paperSel.value, width, height);
+      const segs = splitIntoSegments(inp.value);
+      renderSegments(paperContent, segs, '');
+    }
+
+    refreshBtn.addEventListener('click', rerender);
+    [inp, paperSel, fontSel, sizeInp, wobbleInp, inkInp, wInp, hInp].forEach(el=>{
+      el.addEventListener('input', rerender);
+    });
+
+    exportBtn.addEventListener('click', async function(){
+      const node = document.getElementById('paperHost');
+      try{
+        const dataUrl = await htmlToImage.toPng(node, {pixelRatio:2});
+        const link = document.createElement('a'); link.download='handwritten.png'; link.href=dataUrl; link.click();
+      }catch(e){ alert('Export failed. Try a smaller sheet size.'); }
+    });
+
+    // first render
+    rerender();
+  </script>
+</body>
+</html>
