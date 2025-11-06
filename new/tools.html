@@ -1032,51 +1032,9 @@
 			}
 		}
 
-		// Background Remover functionality using @imgly/background-removal
+		// Background Remover functionality - Canvas-based, no backend required
 		let bgRemoverResult = null;
 		let bgRemoverImgBitmap = null;
-		let bgRemovalModule = null;
-
-		// Load @imgly/background-removal when tab is clicked
-		document.querySelector('[data-tool="backgroundremover"]').addEventListener('click', async () => {
-			if (!bgRemovalModule) {
-				try {
-					showAlert('Loading background removal library...', 'info');
-					// Try multiple CDN sources for @imgly/background-removal
-					const cdnUrls = [
-						'https://esm.sh/@imgly/background-removal@1.2.0',
-						'https://cdn.skypack.dev/@imgly/background-removal@1.2.0',
-						'https://unpkg.com/@imgly/background-removal@1.2.0?module',
-						'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.2.0/+esm'
-					];
-					
-					let loaded = false;
-					for (const url of cdnUrls) {
-						try {
-							bgRemovalModule = await import(url);
-							// Check if the module has the expected export
-							if (bgRemovalModule && (bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule)) {
-								loaded = true;
-								showAlert('Library loaded! Ready to remove backgrounds.', 'success');
-								break;
-							} else {
-								throw new Error('Module loaded but missing expected exports');
-							}
-						} catch (err) {
-							console.warn(`Failed to load from ${url}:`, err);
-							continue;
-						}
-					}
-					
-					if (!loaded) {
-						throw new Error('Failed to load from all CDN sources');
-					}
-				} catch (error) {
-					console.error('Failed to load @imgly/background-removal:', error);
-					showAlert('Failed to load background removal library. Please refresh the page.', 'error');
-				}
-			}
-		});
 
 		document.getElementById('bgremover-input').addEventListener('change', async (e) => {
 			const file = e.target.files[0];
@@ -1095,73 +1053,203 @@
 			}
 		}
 
+		// Improved canvas-based background removal using flood fill from edges
+		function removeBackgroundCanvas(image) {
+			const canvas = document.createElement('canvas');
+			canvas.width = image.width;
+			canvas.height = image.height;
+			const ctx = canvas.getContext('2d');
+			ctx.drawImage(image, 0, 0);
+			
+			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			const data = imageData.data;
+			const width = canvas.width;
+			const height = canvas.height;
+			
+			// Create a mask to track which pixels are background
+			const mask = new Uint8Array(width * height);
+			const visited = new Uint8Array(width * height);
+			
+			// Sample background colors from edges (more reliable than corners)
+			const edgeSamples = [];
+			const edgeWidth = Math.max(3, Math.floor(Math.min(width, height) * 0.02));
+			
+			// Sample from all four edges
+			for (let i = 0; i < edgeWidth; i++) {
+				// Top edge
+				for (let x = 0; x < width; x++) {
+					const idx = (i * width + x) * 4;
+					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+				}
+				// Bottom edge
+				for (let x = 0; x < width; x++) {
+					const idx = ((height - 1 - i) * width + x) * 4;
+					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+				}
+				// Left edge
+				for (let y = 0; y < height; y++) {
+					const idx = (y * width + i) * 4;
+					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+				}
+				// Right edge
+				for (let y = 0; y < height; y++) {
+					const idx = (y * width + (width - 1 - i)) * 4;
+					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+				}
+			}
+			
+			// Calculate average background color from edges
+			let avgR = 0, avgG = 0, avgB = 0;
+			for (const [r, g, b] of edgeSamples) {
+				avgR += r;
+				avgG += g;
+				avgB += b;
+			}
+			avgR /= edgeSamples.length;
+			avgG /= edgeSamples.length;
+			avgB /= edgeSamples.length;
+			
+			// Calculate standard deviation for threshold
+			let sumSqDiff = 0;
+			for (const [r, g, b] of edgeSamples) {
+				const diff = Math.sqrt(
+					Math.pow(r - avgR, 2) +
+					Math.pow(g - avgG, 2) +
+					Math.pow(b - avgB, 2)
+				);
+				sumSqDiff += diff * diff;
+			}
+			const stdDev = Math.sqrt(sumSqDiff / edgeSamples.length);
+			const threshold = Math.max(25, stdDev * 2.5);
+			
+			// Helper function to get pixel color distance
+			function getColorDistance(idx) {
+				const r = data[idx];
+				const g = data[idx + 1];
+				const b = data[idx + 2];
+				return Math.sqrt(
+					Math.pow(r - avgR, 2) +
+					Math.pow(g - avgG, 2) +
+					Math.pow(b - avgB, 2)
+				);
+			}
+			
+			// Flood fill from edges to identify background
+			const queue = [];
+			
+			// Add edge pixels to queue
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					if (y < edgeWidth || y >= height - edgeWidth || 
+						x < edgeWidth || x >= width - edgeWidth) {
+						const idx = (y * width + x) * 4;
+						if (getColorDistance(idx) < threshold) {
+							queue.push([x, y]);
+							visited[y * width + x] = 1;
+						}
+					}
+				}
+			}
+			
+			// Flood fill
+			while (queue.length > 0) {
+				const [x, y] = queue.shift();
+				const idx = (y * width + x) * 4;
+				mask[y * width + x] = 1; // Mark as background
+				
+				// Check neighbors
+				const neighbors = [
+					[x - 1, y],
+					[x + 1, y],
+					[x, y - 1],
+					[x, y + 1]
+				];
+				
+				for (const [nx, ny] of neighbors) {
+					if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+						const nIdx = ny * width + nx;
+						if (!visited[nIdx]) {
+							const pixelIdx = nIdx * 4;
+							if (getColorDistance(pixelIdx) < threshold) {
+								visited[nIdx] = 1;
+								queue.push([nx, ny]);
+							}
+						}
+					}
+				}
+			}
+			
+			// Apply mask and smooth edges
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					const idx = (y * width + x) * 4;
+					const maskIdx = y * width + x;
+					
+					if (mask[maskIdx]) {
+						// Check if this is an edge pixel (has non-background neighbors)
+						let hasForegroundNeighbor = false;
+						const neighbors = [
+							[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1],
+							[x - 1, y - 1], [x + 1, y - 1], [x - 1, y + 1], [x + 1, y + 1]
+						];
+						
+						for (const [nx, ny] of neighbors) {
+							if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+								if (!mask[ny * width + nx]) {
+									hasForegroundNeighbor = true;
+									break;
+								}
+							}
+						}
+						
+						if (hasForegroundNeighbor) {
+							// Edge pixel - use partial transparency for smooth edges
+							const dist = getColorDistance(idx);
+							const alpha = Math.min(255, Math.max(0, (dist / threshold) * 255));
+							data[idx + 3] = Math.floor(alpha);
+						} else {
+							// Pure background - fully transparent
+							data[idx + 3] = 0;
+						}
+					}
+				}
+			}
+			
+			ctx.putImageData(imageData, 0, 0);
+			return canvas;
+		}
+
 		async function processBackgroundRemoval(file) {
 			if (!bgRemoverImgBitmap) {
 				showAlert('Please select an image first', 'error');
 				return;
 			}
 
-			// Use @imgly/background-removal
-			if (!bgRemovalModule) {
-				showAlert('Loading background removal library...', 'info');
-				// Try multiple CDN sources
-				const cdnUrls = [
-					'https://esm.sh/@imgly/background-removal@1.2.0',
-					'https://cdn.skypack.dev/@imgly/background-removal@1.2.0',
-					'https://unpkg.com/@imgly/background-removal@1.2.0?module',
-					'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.2.0/+esm'
-				];
-				
-				let loaded = false;
-				for (const url of cdnUrls) {
-					try {
-						bgRemovalModule = await import(url);
-						if (bgRemovalModule && (bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule)) {
-							loaded = true;
-							break;
-						}
-					} catch (err) {
-						console.warn(`Failed to load from ${url}:`, err);
-						continue;
-					}
-				}
-				
-				if (!loaded) {
-					showAlert('Failed to load background removal library. Please refresh the page.', 'error');
-					return;
-				}
-			}
-
 			try {
-				showAlert('Processing image with @imgly/background-removal...', 'info');
+				showAlert('Processing image (no backend required)...', 'info');
 				const canvas = document.getElementById('bgremover-canvas');
 				
-				// Use @imgly/background-removal
-				// The library exports removeBackground as default export
-				// It accepts File, Blob, ImageData, HTMLImageElement, HTMLCanvasElement, or URL string
-				const removeBackground = bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule;
-				
-				// Pass file directly (library accepts File objects)
-				const blob = await removeBackground(file);
-				
-				// Convert blob to image and display
-				const resultUrl = URL.createObjectURL(blob);
-				const resultImg = new Image();
+				// Create image from file
+				const img = new Image();
+				const imageUrl = URL.createObjectURL(file);
 				await new Promise((resolve, reject) => {
-					resultImg.onload = resolve;
-					resultImg.onerror = reject;
-					resultImg.src = resultUrl;
+					img.onload = resolve;
+					img.onerror = reject;
+					img.src = imageUrl;
 				});
 				
-				canvas.width = resultImg.width;
-				canvas.height = resultImg.height;
+				// Process image
+				const processedCanvas = removeBackgroundCanvas(img);
+				
+				canvas.width = processedCanvas.width;
+				canvas.height = processedCanvas.height;
 				const ctx = canvas.getContext('2d');
-				ctx.drawImage(resultImg, 0, 0);
+				ctx.drawImage(processedCanvas, 0, 0);
 				
 				bgRemoverResult = canvas.toDataURL('image/png');
 				document.getElementById('bgremover-result').style.display = 'block';
 				showAlert('Background removed successfully!', 'success');
-				URL.revokeObjectURL(resultUrl);
+				URL.revokeObjectURL(imageUrl);
 			} catch (error) {
 				console.error('Error:', error);
 				showAlert(`Error: ${error.message}`, 'error');
