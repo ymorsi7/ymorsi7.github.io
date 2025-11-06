@@ -501,6 +501,15 @@
 						</button>
 						<input type="file" id="bgremover-input" class="file-input" accept="image/*">
 					</div>
+					<div id="bgremover-controls" style="display: none; margin-top: 1rem;">
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+							Sensitivity: <span id="bgremover-sensitivity-value">50</span>%
+						</label>
+						<input type="range" id="bgremover-sensitivity" min="10" max="90" value="50" style="width: 100%; margin-bottom: 1rem;">
+						<small style="color: var(--text-muted); display: block; margin-bottom: 1rem;">
+							Lower = more aggressive (removes more), Higher = less aggressive (preserves more)
+						</small>
+					</div>
 					<button class="btn-primary" id="bgremover-process-btn" onclick="processBackgroundRemovalFromBtn()" style="width: 100%; margin-top: 1rem; display: none;">
 						<i class="fas fa-magic"></i> Remove Background
 					</button>
@@ -1035,6 +1044,11 @@
 		// Background Remover functionality - Canvas-based, no backend required
 		let bgRemoverResult = null;
 		let bgRemoverImgBitmap = null;
+		
+		// Update sensitivity display
+		document.getElementById('bgremover-sensitivity').addEventListener('input', (e) => {
+			document.getElementById('bgremover-sensitivity-value').textContent = e.target.value;
+		});
 
 		document.getElementById('bgremover-input').addEventListener('change', async (e) => {
 			const file = e.target.files[0];
@@ -1044,6 +1058,7 @@
 			document.getElementById('bgremover-original').src = imageUrl;
 			bgRemoverImgBitmap = await createImageBitmap(file);
 			document.getElementById('bgremover-process-btn').style.display = 'block';
+			document.getElementById('bgremover-controls').style.display = 'block';
 		});
 
 		async function processBackgroundRemovalFromBtn() {
@@ -1054,7 +1069,7 @@
 		}
 
 		// Improved canvas-based background removal using flood fill from edges
-		function removeBackgroundCanvas(image) {
+		function removeBackgroundCanvas(image, sensitivity = 50) {
 			const canvas = document.createElement('canvas');
 			canvas.width = image.width;
 			canvas.height = image.height;
@@ -1120,7 +1135,10 @@
 				sumSqDiff += diff * diff;
 			}
 			const stdDev = Math.sqrt(sumSqDiff / edgeSamples.length);
-			const threshold = Math.max(25, stdDev * 2.5);
+			// Sensitivity: lower = more aggressive, higher = less aggressive
+			// Convert 10-90 range to multiplier: 10 = 1.0x, 50 = 2.5x, 90 = 4.0x
+			const sensitivityMultiplier = 1.0 + (sensitivity / 100) * 3.0;
+			const threshold = Math.max(20, stdDev * sensitivityMultiplier);
 			
 			// Helper function to get pixel color distance
 			function getColorDistance(idx) {
@@ -1229,6 +1247,9 @@
 				showAlert('Processing image (no backend required)...', 'info');
 				const canvas = document.getElementById('bgremover-canvas');
 				
+				// Get sensitivity value
+				const sensitivity = parseInt(document.getElementById('bgremover-sensitivity').value) || 50;
+				
 				// Create image from file
 				const img = new Image();
 				const imageUrl = URL.createObjectURL(file);
@@ -1238,8 +1259,8 @@
 					img.src = imageUrl;
 				});
 				
-				// Process image
-				const processedCanvas = removeBackgroundCanvas(img);
+				// Process image with sensitivity
+				const processedCanvas = removeBackgroundCanvas(img, sensitivity);
 				
 				canvas.width = processedCanvas.width;
 				canvas.height = processedCanvas.height;
