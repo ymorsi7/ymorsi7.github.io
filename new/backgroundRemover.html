@@ -1,0 +1,1260 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Background Remover - Remove Image Backgrounds</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Remove backgrounds from images with AI-powered precision" />
+	<meta name="keywords" content="background remover, remove background, image editor, ai background removal" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<!-- TensorFlow.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+	<!-- BodyPix model for high-quality person segmentation -->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.2.1/dist/body-pix.min.js"></script>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--blue-primary: #1e3a8a;
+			--blue-dark: #1e40af;
+			--blue-light: #3b82f6;
+			--blue-hover: #2563eb;
+			--text-dark: #1e293b;
+			--text-medium: #475569;
+			--text-light: #64748b;
+			--bg-white: #ffffff;
+			--bg-light: #f1f5f9;
+			--border-color: #e2e8f0;
+			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+			--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+			--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: var(--bg-light);
+			color: var(--text-dark);
+			line-height: 1.6;
+			min-height: 100vh;
+			position: relative;
+			overflow-x: hidden;
+		}
+
+		#page {
+			position: relative;
+			z-index: 1;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Header */
+		.header {
+			background: var(--blue-primary);
+			padding: 4rem 0 3rem;
+			box-shadow: var(--shadow-md);
+		}
+
+		.header-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			text-align: center;
+		}
+
+		.header h1 {
+			font-size: clamp(2.5rem, 6vw, 3.5rem);
+			font-weight: 700;
+			color: white;
+			margin-bottom: 0.75rem;
+			letter-spacing: -0.02em;
+		}
+
+		.header p {
+			font-size: clamp(1rem, 2vw, 1.125rem);
+			color: rgba(255, 255, 255, 0.9);
+			font-weight: 400;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		/* Main Container */
+		.main-content {
+			flex: 1;
+			max-width: 1200px;
+			margin: -3rem auto 0;
+			padding: 0 2rem 4rem;
+			position: relative;
+			z-index: 2;
+		}
+
+		/* Alert Container */
+		#alert-container {
+			margin-bottom: 2rem;
+		}
+
+		.alert {
+			padding: 1rem 1.25rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+			display: none;
+			font-size: 0.95rem;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid;
+		}
+
+		.alert.show {
+			display: block;
+		}
+
+		.alert-success {
+			background: #ecfdf5;
+			color: #065f46;
+			border-color: #10b981;
+		}
+
+		.alert-error {
+			background: #fef2f2;
+			color: #991b1b;
+			border-color: #ef4444;
+		}
+
+		.alert-info {
+			background: #eff6ff;
+			color: #1e40af;
+			border-color: var(--blue-light);
+		}
+
+		/* Upload Card */
+		.upload-card {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 0;
+			box-shadow: var(--shadow-md);
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.drop-zone {
+			padding: 4rem 3rem;
+			text-align: center;
+			cursor: pointer;
+			position: relative;
+			background: var(--bg-white);
+			transition: background-color 0.2s ease;
+		}
+
+		.drop-zone::before {
+			content: '';
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			right: 15px;
+			bottom: 15px;
+			border: 2px dashed var(--border-color);
+			border-radius: 8px;
+			transition: border-color 0.2s ease;
+		}
+
+		.drop-zone:hover {
+			background: var(--bg-light);
+		}
+
+		.drop-zone:hover::before {
+			border-color: var(--blue-light);
+		}
+
+		.drop-zone.drag-over {
+			background: rgba(30, 58, 138, 0.05);
+		}
+
+		.drop-zone.drag-over::before {
+			border-color: var(--blue-primary);
+			border-style: solid;
+		}
+
+		.upload-icon {
+			font-size: 4rem;
+			color: var(--blue-primary);
+			margin-bottom: 1.5rem;
+			display: block;
+		}
+
+		.drop-zone h2 {
+			font-size: 1.75rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 0.75rem;
+		}
+
+		.drop-zone p {
+			color: var(--text-medium);
+			font-size: 1.1rem;
+			margin-bottom: 2.5rem;
+			font-weight: 400;
+		}
+
+		.file-input {
+			position: absolute;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.btn-primary {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-primary:hover {
+			background: var(--blue-hover);
+		}
+
+		.btn-primary:active {
+			background: var(--blue-dark);
+		}
+
+		.btn-primary:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+
+		/* Processing Card */
+		.processing-card {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 2rem;
+			box-shadow: var(--shadow-md);
+			display: none;
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.processing-card.show {
+			display: block;
+		}
+
+		.processing-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 1.5rem;
+		}
+
+		.processing-header h3 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		.processing-header h3 i {
+			color: var(--blue-primary);
+			font-size: 1.25rem;
+		}
+
+		.image-preview-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.preview-box {
+			background: var(--bg-light);
+			border-radius: 8px;
+			padding: 1.5rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.preview-box h4 {
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 1rem;
+			text-align: center;
+		}
+
+		.preview-image-wrapper {
+			position: relative;
+			width: 100%;
+			background: 
+				linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+				linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+				linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+				linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+			background-size: 20px 20px;
+			background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+			border-radius: 8px;
+			overflow: hidden;
+			min-height: 200px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.preview-image-wrapper img,
+		.preview-image-wrapper canvas {
+			max-width: 100%;
+			max-height: 500px;
+			display: block;
+			border-radius: 8px;
+		}
+
+		.progress-container {
+			margin-bottom: 2rem;
+		}
+
+		.progress-bar {
+			width: 100%;
+			height: 8px;
+			background: var(--bg-light);
+			border-radius: 4px;
+			overflow: hidden;
+			margin-bottom: 0.5rem;
+		}
+
+		.progress-fill {
+			height: 100%;
+			background: linear-gradient(90deg, var(--blue-primary), var(--blue-light));
+			border-radius: 4px;
+			transition: width 0.3s ease;
+			width: 0%;
+		}
+
+		.progress-text {
+			font-size: 0.9rem;
+			color: var(--text-medium);
+			text-align: center;
+			font-weight: 500;
+		}
+
+		.actions-section {
+			display: flex;
+			gap: 1rem;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.btn-secondary {
+			background: white;
+			color: var(--blue-primary);
+			border: 2px solid var(--blue-primary);
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-secondary:hover {
+			background: var(--blue-primary);
+			color: white;
+		}
+
+		.btn-download {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-download:hover {
+			background: var(--blue-hover);
+		}
+
+		/* Spinner */
+		.spinner {
+			border: 3px solid rgba(30, 58, 138, 0.3);
+			border-top: 3px solid var(--blue-primary);
+			border-radius: 50%;
+			width: 24px;
+			height: 24px;
+			animation: spin 0.8s linear infinite;
+			display: inline-block;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
+		/* Footer */
+		.footer {
+			background: var(--bg-white);
+			padding: 2.5rem 0;
+			text-align: center;
+			margin-top: 4rem;
+			border-top: 1px solid #f1f5f9;
+		}
+
+		.footer-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		.footer a {
+			color: var(--blue-primary);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.95rem;
+			transition: color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.footer a:hover {
+			color: var(--blue-hover);
+		}
+
+		/* Responsive */
+		@media screen and (max-width: 768px) {
+			.header {
+				padding: 3rem 0 2rem;
+			}
+
+			.main-content {
+				margin-top: -2rem;
+				padding: 0 1.5rem 3rem;
+			}
+
+			.drop-zone {
+				padding: 3rem 2rem;
+			}
+
+			.upload-icon {
+				font-size: 3.5rem;
+				margin-bottom: 1.25rem;
+			}
+
+			.drop-zone h2 {
+				font-size: 1.5rem;
+			}
+
+			.drop-zone p {
+				font-size: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.image-preview-container {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+			}
+
+			.actions-section {
+				flex-direction: column;
+			}
+
+			.btn-primary,
+			.btn-secondary,
+			.btn-download {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			.header h1 {
+				font-size: 2rem;
+			}
+
+			.drop-zone {
+				padding: 2.5rem 1.5rem;
+			}
+
+			.processing-card {
+				padding: 1.5rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page">
+		<header class="header">
+			<div class="header-content">
+				<h1>Background Remover</h1>
+				<p>Remove backgrounds from images with AI-powered precision</p>
+			</div>
+		</header>
+
+		<div class="main-content">
+			<!-- Alert messages -->
+			<div id="alert-container"></div>
+
+			<!-- Upload area -->
+			<div class="upload-card">
+				<div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+					<i class="fas fa-image upload-icon"></i>
+					<h2>Drop your image here</h2>
+					<p>Support JPG, PNG, WEBP, and other common image formats</p>
+					<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('fileInput').click();">
+						<i class="fas fa-folder-open"></i> Choose Image
+					</button>
+					<input type="file" id="fileInput" class="file-input" accept="image/*">
+				</div>
+			</div>
+
+			<!-- Processing area -->
+			<div class="processing-card" id="processingCard">
+				<div class="processing-header">
+					<h3>
+						<i class="fas fa-magic"></i> Processing Image
+					</h3>
+				</div>
+
+				<div class="progress-container" id="progressContainer">
+					<div class="progress-bar">
+						<div class="progress-fill" id="progressFill"></div>
+					</div>
+					<div class="progress-text" id="progressText">Initializing...</div>
+				</div>
+
+				<div class="image-preview-container">
+					<div class="preview-box">
+						<h4>Original</h4>
+						<div class="preview-image-wrapper">
+							<img id="originalImage" alt="Original image">
+						</div>
+					</div>
+					<div class="preview-box">
+						<h4>Background Removed</h4>
+						<div class="preview-image-wrapper">
+							<canvas id="resultCanvas"></canvas>
+						</div>
+					</div>
+				</div>
+
+				<div class="actions-section">
+					<button class="btn-secondary" id="newImageBtn" onclick="resetUpload()">
+						<i class="fas fa-plus"></i> New Image
+					</button>
+					<button class="btn-download" id="downloadBtn" onclick="downloadImage()">
+						<i class="fas fa-download"></i> Download
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer-content">
+				<a href="index.html">
+					<i class="fas fa-arrow-left"></i> Back to Portfolio
+				</a>
+				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
+				<a href="mergePDF.html">
+					<i class="fas fa-file-pdf"></i> MergePDF
+				</a>
+			</div>
+		</footer>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	<script>
+		let bodyPixModel = null;
+		let currentImage = null;
+		let resultImageData = null;
+		let useAdvancedFallback = false;
+
+		// Initialize model
+		async function initializeModel() {
+			// Check if bodyPix is available
+			if (typeof bodyPix === 'undefined') {
+				console.warn('BodyPix not available, using fallback method');
+				showAlert('Using advanced fallback method. Upload an image to continue.', 'info');
+				useAdvancedFallback = true;
+				return true;
+			}
+
+			try {
+				showAlert('Loading AI model...', 'info');
+				updateProgress(10, 'Loading BodyPix model...');
+				
+				// Load BodyPix model with high quality settings
+				// Try ResNet50 first for best quality
+				try {
+					bodyPixModel = await bodyPix.load({
+						architecture: 'ResNet50',
+						outputStride: 16,
+						quantBytes: 2,
+						multiplier: 0.75
+					});
+					updateProgress(30, 'Model loaded successfully');
+					showAlert('Model ready! You can now upload an image.', 'success');
+					return true;
+				} catch (resnetError) {
+					console.warn('ResNet50 failed, trying MobileNet:', resnetError);
+					// Fallback: try MobileNet version (lighter, faster)
+					updateProgress(15, 'Loading MobileNet model...');
+					bodyPixModel = await bodyPix.load({
+						architecture: 'MobileNetV1',
+						outputStride: 16,
+						multiplier: 0.75
+					});
+					updateProgress(30, 'Model loaded successfully');
+					showAlert('Model ready! You can now upload an image.', 'success');
+					return true;
+				}
+			} catch (error) {
+				console.error('Error loading BodyPix model:', error);
+				showAlert('Using advanced fallback method. Upload an image to continue.', 'info');
+				useAdvancedFallback = true;
+				return true;
+			}
+		}
+
+		// Show alert
+		function showAlert(message, type = 'info') {
+			const alertContainer = document.getElementById('alert-container');
+			const alert = document.createElement('div');
+			alert.className = `alert alert-${type} show`;
+			alert.textContent = message;
+			alertContainer.innerHTML = '';
+			alertContainer.appendChild(alert);
+			
+			if (type === 'success' || type === 'info') {
+				setTimeout(() => {
+					alert.classList.remove('show');
+				}, 5000);
+			}
+		}
+
+		// Update progress
+		function updateProgress(percent, text) {
+			document.getElementById('progressFill').style.width = percent + '%';
+			document.getElementById('progressText').textContent = text;
+		}
+
+		// Handle file input
+		document.getElementById('fileInput').addEventListener('change', async (e) => {
+			const file = e.target.files[0];
+			if (file) {
+				await processImage(file);
+			}
+		});
+
+		// Drag and drop handlers
+		const dropZone = document.getElementById('dropZone');
+		
+		dropZone.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			dropZone.classList.add('drag-over');
+		});
+
+		dropZone.addEventListener('dragleave', () => {
+			dropZone.classList.remove('drag-over');
+		});
+
+		dropZone.addEventListener('drop', async (e) => {
+			e.preventDefault();
+			dropZone.classList.remove('drag-over');
+			
+			const file = e.dataTransfer.files[0];
+			if (file && file.type.startsWith('image/')) {
+				await processImage(file);
+			} else {
+				showAlert('Please drop a valid image file.', 'error');
+			}
+		});
+
+		// Process image
+		async function processImage(file) {
+			if (!bodyPixModel && !useAdvancedFallback) {
+				showAlert('Model is still loading. Please wait...', 'error');
+				return;
+			}
+
+			try {
+				// Show processing card
+				document.getElementById('processingCard').classList.add('show');
+				updateProgress(40, 'Loading image...');
+
+				// Load image
+				const imageUrl = URL.createObjectURL(file);
+				const img = new Image();
+				
+				await new Promise((resolve, reject) => {
+					img.onload = resolve;
+					img.onerror = reject;
+					img.src = imageUrl;
+				});
+
+				currentImage = img;
+				document.getElementById('originalImage').src = imageUrl;
+				updateProgress(50, 'Analyzing image...');
+
+				// Wait a bit for UI update
+				await new Promise(resolve => setTimeout(resolve, 300));
+
+				// Create canvas for result
+				const canvas = document.getElementById('resultCanvas');
+				const ctx = canvas.getContext('2d');
+				
+				canvas.width = img.width;
+				canvas.height = img.height;
+
+				if (bodyPixModel) {
+					// Use BodyPix with multiple passes for better quality
+					updateProgress(60, 'Detecting person and background...');
+					
+					// Use the most accurate settings
+					const segOptions = {
+						flipHorizontal: false,
+						internalResolution: 'high', // Use high resolution for better accuracy
+						segmentationThreshold: 0.5, // Balanced threshold
+						maxDetections: 1
+					};
+					
+					// First pass: standard threshold
+					const seg1 = await bodyPixModel.segmentPerson(img, segOptions);
+					
+					updateProgress(70, 'Refining detection...');
+					
+					// Second pass: lower threshold to catch more edge details
+					const seg2 = await bodyPixModel.segmentPerson(img, {
+						...segOptions,
+						segmentationThreshold: 0.25 // Lower threshold for edges
+					});
+					
+					updateProgress(80, 'Creating alpha matte...');
+					
+					// Draw original image
+					ctx.drawImage(img, 0, 0);
+
+					// Get image data
+					const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+					const data = imageData.data;
+					const width = canvas.width;
+					const height = canvas.height;
+					
+					// Ensure masks are the right size
+					const mask1 = seg1.data;
+					const mask2 = seg2.data;
+					
+					// Resize masks if needed (BodyPix might return smaller masks)
+					let finalMask1 = mask1;
+					let finalMask2 = mask2;
+					
+					if (mask1.length !== width * height) {
+						finalMask1 = resizeMask(mask1, seg1.width, seg1.height, width, height);
+					}
+					if (mask2.length !== width * height) {
+						finalMask2 = resizeMask(mask2, seg2.width, seg2.height, width, height);
+					}
+					
+					// Combine masks and create smooth alpha matte
+					createSmoothAlphaMatte(data, finalMask1, finalMask2, width, height);
+
+					// Apply advanced edge refinement
+					updateProgress(90, 'Refining edges...');
+					applyAdvancedEdgeRefinement(data, width, height);
+					
+					// Remove remaining background artifacts
+					updateProgress(95, 'Removing artifacts...');
+					removeBackgroundArtifacts(data, width, height);
+					
+					// Final cleanup pass
+					applyAdvancedEdgeRefinement(data, width, height);
+					
+					// Put modified image data back
+					ctx.putImageData(imageData, 0, 0);
+				} else {
+					// Use advanced fallback method
+					updateProgress(60, 'Using advanced background removal...');
+					await advancedBackgroundRemoval(img, canvas, ctx);
+					updateProgress(90, 'Refining edges...');
+				}
+				
+				// Store result for download
+				resultImageData = canvas.toDataURL('image/png');
+
+				updateProgress(100, 'Complete!');
+				showAlert('Background removed successfully!', 'success');
+				
+				// Clean up
+				URL.revokeObjectURL(imageUrl);
+
+			} catch (error) {
+				console.error('Error processing image:', error);
+				// Try fallback if BodyPix fails
+				if (bodyPixModel && !useAdvancedFallback) {
+					showAlert('Trying alternative method...', 'info');
+					useAdvancedFallback = true;
+					await processImage(file);
+				} else {
+					showAlert('Failed to process image: ' + error.message, 'error');
+					updateProgress(0, 'Error occurred');
+				}
+			}
+		}
+
+		// Resize mask to match canvas dimensions
+		function resizeMask(mask, srcWidth, srcHeight, dstWidth, dstHeight) {
+			const resized = new Uint8Array(dstWidth * dstHeight);
+			const scaleX = srcWidth / dstWidth;
+			const scaleY = srcHeight / dstHeight;
+			
+			for (let y = 0; y < dstHeight; y++) {
+				for (let x = 0; x < dstWidth; x++) {
+					const srcX = Math.floor(x * scaleX);
+					const srcY = Math.floor(y * scaleY);
+					const srcIdx = srcY * srcWidth + srcX;
+					const dstIdx = y * dstWidth + x;
+					resized[dstIdx] = mask[srcIdx];
+				}
+			}
+			
+			return resized;
+		}
+		
+		// Create smooth alpha matte from multiple segmentation passes
+		function createSmoothAlphaMatte(data, mask1, mask2, width, height) {
+			// Create distance transform for smooth edges
+			const alphaMap = new Float32Array(width * height);
+			
+			// First, set core foreground (both masks agree)
+			for (let i = 0; i < mask1.length; i++) {
+				if (mask1[i] && mask2[i]) {
+					alphaMap[i] = 1.0; // Solid foreground
+				} else if (!mask1[i] && !mask2[i]) {
+					alphaMap[i] = 0.0; // Solid background
+				} else {
+					alphaMap[i] = 0.5; // Edge region
+				}
+			}
+			
+			// Apply distance-based feathering for edge regions
+			for (let pass = 0; pass < 3; pass++) {
+				for (let y = 1; y < height - 1; y++) {
+					for (let x = 1; x < width - 1; x++) {
+						const idx = y * width + x;
+						if (alphaMap[idx] === 0.5) {
+							// Edge pixel - check neighbors
+							let foregroundNeighbors = 0;
+							let backgroundNeighbors = 0;
+							let totalNeighbors = 0;
+							
+							for (let dy = -2; dy <= 2; dy++) {
+								for (let dx = -2; dx <= 2; dx++) {
+									const ny = y + dy;
+									const nx = x + dx;
+									if (ny >= 0 && ny < height && nx >= 0 && nx < width) {
+										const nIdx = ny * width + nx;
+										if (alphaMap[nIdx] > 0.7) foregroundNeighbors++;
+										if (alphaMap[nIdx] < 0.3) backgroundNeighbors++;
+										totalNeighbors++;
+									}
+								}
+							}
+							
+							// Calculate alpha based on neighbor distribution
+							const dist = Math.sqrt(Math.pow(x - width/2, 2) + Math.pow(y - height/2, 2));
+							const centerBias = Math.max(0, 1 - dist / (Math.min(width, height) * 0.5));
+							alphaMap[idx] = Math.min(1.0, Math.max(0.0, 
+								(foregroundNeighbors / totalNeighbors) * 0.7 + centerBias * 0.3
+							));
+						}
+					}
+				}
+			}
+			
+			// Apply alpha values to image data
+			for (let i = 0; i < alphaMap.length; i++) {
+				const pixelIndex = i * 4;
+				const alpha = alphaMap[i];
+				
+				if (alpha < 0.01) {
+					// Pure background - fully transparent
+					data[pixelIndex + 3] = 0;
+				} else {
+					// Apply alpha with smooth transition
+					data[pixelIndex + 3] = Math.round(alpha * 255);
+				}
+			}
+		}
+		
+		// Apply advanced edge refinement using bilateral filtering approach
+		function applyAdvancedEdgeRefinement(data, width, height) {
+			// Create temporary buffer for smoothed alpha
+			const smoothedAlpha = new Uint8Array(width * height);
+			
+			// Multi-pass edge smoothing
+			for (let pass = 0; pass < 2; pass++) {
+				for (let y = 2; y < height - 2; y++) {
+					for (let x = 2; x < width - 2; x++) {
+						const idx = y * width + x;
+						const pixelIndex = idx * 4;
+						const currentAlpha = data[pixelIndex + 3];
+						
+						// Only process edge pixels (partial transparency)
+						if (currentAlpha > 0 && currentAlpha < 255) {
+							let weightedSum = 0;
+							let weightSum = 0;
+							
+							// Bilateral-like filtering: weight by both spatial distance and alpha similarity
+							for (let dy = -2; dy <= 2; dy++) {
+								for (let dx = -2; dx <= 2; dx++) {
+									const ny = y + dy;
+									const nx = x + dx;
+									const nIdx = ny * width + nx;
+									const nPixelIndex = nIdx * 4;
+									const neighborAlpha = data[nPixelIndex + 3];
+									
+									// Spatial weight (Gaussian)
+									const spatialDist = Math.sqrt(dx * dx + dy * dy);
+									const spatialWeight = Math.exp(-spatialDist * spatialDist / 2.0);
+									
+									// Alpha similarity weight
+									const alphaDiff = Math.abs(currentAlpha - neighborAlpha) / 255.0;
+									const alphaWeight = Math.exp(-alphaDiff * alphaDiff / 0.1);
+									
+									const weight = spatialWeight * alphaWeight;
+									weightedSum += neighborAlpha * weight;
+									weightSum += weight;
+								}
+							}
+							
+							if (weightSum > 0) {
+								smoothedAlpha[idx] = Math.round(weightedSum / weightSum);
+							} else {
+								smoothedAlpha[idx] = currentAlpha;
+							}
+						} else {
+							smoothedAlpha[idx] = currentAlpha;
+						}
+					}
+				}
+				
+				// Apply smoothed alpha
+				for (let i = 0; i < smoothedAlpha.length; i++) {
+					const pixelIndex = i * 4;
+					if (data[pixelIndex + 3] > 0 && data[pixelIndex + 3] < 255) {
+						data[pixelIndex + 3] = smoothedAlpha[i];
+					}
+				}
+			}
+		}
+		
+		// Remove background artifacts (pixels that look like background but weren't removed)
+		function removeBackgroundArtifacts(data, width, height) {
+			// Sample background colors from corners and edges
+			const bgSamples = [];
+			const sampleSize = Math.min(width, height) * 0.15;
+			
+			for (let y = 0; y < sampleSize; y++) {
+				for (let x = 0; x < sampleSize; x++) {
+					// Sample from corners
+					const cornerIndices = [
+						y * width + x,                                    // Top-left
+						y * width + (width - 1 - x),                      // Top-right
+						(height - 1 - y) * width + x,                    // Bottom-left
+						(height - 1 - y) * width + (width - 1 - x)      // Bottom-right
+					];
+					
+					for (const idx of cornerIndices) {
+						const pixelIndex = idx * 4;
+						if (data[pixelIndex + 3] < 10) { // Transparent pixels (background)
+							bgSamples.push([
+								data[pixelIndex],
+								data[pixelIndex + 1],
+								data[pixelIndex + 2]
+							]);
+						}
+					}
+				}
+			}
+			
+			if (bgSamples.length === 0) return;
+			
+			// Calculate average background color
+			let avgR = 0, avgG = 0, avgB = 0;
+			for (const sample of bgSamples) {
+				avgR += sample[0];
+				avgG += sample[1];
+				avgB += sample[2];
+			}
+			avgR /= bgSamples.length;
+			avgG /= bgSamples.length;
+			avgB /= bgSamples.length;
+			
+			// Remove pixels that are too similar to background
+			for (let i = 0; i < data.length; i += 4) {
+				const alpha = data[i + 3];
+				if (alpha > 0) {
+					const r = data[i];
+					const g = data[i + 1];
+					const b = data[i + 2];
+					
+					// Color distance from background
+					const colorDist = Math.sqrt(
+						Math.pow(r - avgR, 2) + 
+						Math.pow(g - avgG, 2) + 
+						Math.pow(b - avgB, 2)
+					);
+					
+					// If pixel is very similar to background and has low alpha, remove it
+					if (colorDist < 25 && alpha < 100) {
+						data[i + 3] = 0;
+					} else if (colorDist < 15) {
+						// Very similar to background - reduce alpha significantly
+						data[i + 3] = Math.max(0, alpha - 50);
+					}
+				}
+			}
+		}
+
+		// Advanced background removal fallback (for non-person images)
+		async function advancedBackgroundRemoval(img, canvas, ctx) {
+			// Draw original image
+			ctx.drawImage(img, 0, 0);
+			
+			// Get image data
+			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			const data = imageData.data;
+			const width = canvas.width;
+			const height = canvas.height;
+			
+			// Create a temporary canvas for processing
+			const tempCanvas = document.createElement('canvas');
+			tempCanvas.width = width;
+			tempCanvas.height = height;
+			const tempCtx = tempCanvas.getContext('2d');
+			tempCtx.drawImage(img, 0, 0);
+			const tempImageData = tempCtx.getImageData(0, 0, width, height);
+			const tempData = tempImageData.data;
+			
+			// Convert to grayscale for edge detection
+			const grayscale = new Uint8Array(width * height);
+			for (let i = 0; i < tempData.length; i += 4) {
+				const gray = 0.299 * tempData[i] + 0.587 * tempData[i + 1] + 0.114 * tempData[i + 2];
+				grayscale[i / 4] = gray;
+			}
+			
+			// Apply Sobel edge detection
+			const edges = new Uint8Array(width * height);
+			for (let y = 1; y < height - 1; y++) {
+				for (let x = 1; x < width - 1; x++) {
+					const idx = y * width + x;
+					const gx = -grayscale[(y - 1) * width + (x - 1)] + grayscale[(y - 1) * width + (x + 1)]
+						- 2 * grayscale[y * width + (x - 1)] + 2 * grayscale[y * width + (x + 1)]
+						- grayscale[(y + 1) * width + (x - 1)] + grayscale[(y + 1) * width + (x + 1)];
+					const gy = -grayscale[(y - 1) * width + (x - 1)] - 2 * grayscale[(y - 1) * width + x]
+						- grayscale[(y - 1) * width + (x + 1)] + grayscale[(y + 1) * width + (x - 1)]
+						+ 2 * grayscale[(y + 1) * width + x] + grayscale[(y + 1) * width + (x + 1)];
+					edges[idx] = Math.sqrt(gx * gx + gy * gy);
+				}
+			}
+			
+			// Use GrabCut-like algorithm: assume center is foreground
+			const centerX = Math.floor(width / 2);
+			const centerY = Math.floor(height / 2);
+			const centerRadius = Math.min(width, height) * 0.3;
+			
+			// Sample background colors from corners
+			const cornerSize = Math.min(width, height) * 0.1;
+			const bgSamples = [];
+			for (let y = 0; y < cornerSize; y++) {
+				for (let x = 0; x < cornerSize; x++) {
+					// Top-left corner
+					const idx = (y * width + x) * 4;
+					bgSamples.push([tempData[idx], tempData[idx + 1], tempData[idx + 2]]);
+					// Top-right corner
+					const idx2 = (y * width + (width - 1 - x)) * 4;
+					bgSamples.push([tempData[idx2], tempData[idx2 + 1], tempData[idx2 + 2]]);
+					// Bottom-left corner
+					const idx3 = ((height - 1 - y) * width + x) * 4;
+					bgSamples.push([tempData[idx3], tempData[idx3 + 1], tempData[idx3 + 2]]);
+					// Bottom-right corner
+					const idx4 = ((height - 1 - y) * width + (width - 1 - x)) * 4;
+					bgSamples.push([tempData[idx4], tempData[idx4 + 1], tempData[idx4 + 2]]);
+				}
+			}
+			
+			// Calculate average background color
+			let avgBgR = 0, avgBgG = 0, avgBgB = 0;
+			for (const sample of bgSamples) {
+				avgBgR += sample[0];
+				avgBgG += sample[1];
+				avgBgB += sample[2];
+			}
+			avgBgR /= bgSamples.length;
+			avgBgG /= bgSamples.length;
+			avgBgB /= bgSamples.length;
+			
+			// Classify pixels
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					const idx = y * width + x;
+					const pixelIndex = idx * 4;
+					const r = tempData[pixelIndex];
+					const g = tempData[pixelIndex + 1];
+					const b = tempData[pixelIndex + 2];
+					
+					// Distance from center
+					const distFromCenter = Math.sqrt(
+						Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
+					);
+					
+					// Color distance from background
+					const colorDist = Math.sqrt(
+						Math.pow(r - avgBgR, 2) + Math.pow(g - avgBgG, 2) + Math.pow(b - avgBgB, 2)
+					);
+					
+					// Edge strength
+					const edgeStrength = edges[idx] / 255;
+					
+					// Determine if foreground
+					const isForeground = distFromCenter < centerRadius || 
+						(colorDist > 30 && edgeStrength < 0.3) ||
+						(colorDist > 50);
+					
+					if (!isForeground) {
+						data[pixelIndex + 3] = 0; // Transparent
+					} else if (edgeStrength > 0.2) {
+						// Edge pixels: partial transparency
+						data[pixelIndex + 3] = data[pixelIndex + 3] * (1 - edgeStrength * 0.3);
+					}
+				}
+			}
+			
+			// Apply morphological operations to clean up
+			applyMorphologicalOperations(data, width, height);
+			
+			// Put modified image data back
+			ctx.putImageData(imageData, 0, 0);
+		}
+		
+		// Apply morphological operations to clean up mask
+		function applyMorphologicalOperations(data, width, height) {
+			const alphaChannel = new Uint8Array(width * height);
+			for (let i = 0; i < data.length; i += 4) {
+				alphaChannel[i / 4] = data[i + 3];
+			}
+			
+			// Erosion followed by dilation (opening)
+			const kernelSize = 3;
+			const halfKernel = Math.floor(kernelSize / 2);
+			
+			// Erosion
+			const eroded = new Uint8Array(width * height);
+			for (let y = halfKernel; y < height - halfKernel; y++) {
+				for (let x = halfKernel; x < width - halfKernel; x++) {
+					const idx = y * width + x;
+					let minAlpha = 255;
+					for (let ky = -halfKernel; ky <= halfKernel; ky++) {
+						for (let kx = -halfKernel; kx <= halfKernel; kx++) {
+							const neighborIdx = (y + ky) * width + (x + kx);
+							minAlpha = Math.min(minAlpha, alphaChannel[neighborIdx]);
+						}
+					}
+					eroded[idx] = minAlpha;
+				}
+			}
+			
+			// Dilation
+			const dilated = new Uint8Array(width * height);
+			for (let y = halfKernel; y < height - halfKernel; y++) {
+				for (let x = halfKernel; x < width - halfKernel; x++) {
+					const idx = y * width + x;
+					let maxAlpha = 0;
+					for (let ky = -halfKernel; ky <= halfKernel; ky++) {
+						for (let kx = -halfKernel; kx <= halfKernel; kx++) {
+							const neighborIdx = (y + ky) * width + (x + kx);
+							maxAlpha = Math.max(maxAlpha, eroded[neighborIdx]);
+						}
+					}
+					dilated[idx] = maxAlpha;
+				}
+			}
+			
+			// Apply to image data
+			for (let i = 0; i < data.length; i += 4) {
+				data[i + 3] = dilated[i / 4];
+			}
+		}
+
+		// Download image
+		function downloadImage() {
+			if (!resultImageData) {
+				showAlert('No processed image available.', 'error');
+				return;
+			}
+
+			const link = document.createElement('a');
+			link.download = 'background-removed.png';
+			link.href = resultImageData;
+			link.click();
+		}
+
+		// Reset upload
+		function resetUpload() {
+			document.getElementById('processingCard').classList.remove('show');
+			document.getElementById('fileInput').value = '';
+			currentImage = null;
+			resultImageData = null;
+			document.getElementById('originalImage').src = '';
+			const canvas = document.getElementById('resultCanvas');
+			const ctx = canvas.getContext('2d');
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+		}
+
+		// Initialize on page load
+		window.addEventListener('load', () => {
+			initializeModel();
+		});
+	</script>
+</body>
+
+</html>
+
