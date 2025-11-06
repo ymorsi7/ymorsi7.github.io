@@ -16,10 +16,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-	<!-- TensorFlow.js -->
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-	<!-- BodyPix model for high-quality person segmentation -->
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.2.1/dist/body-pix.min.js"></script>
+	<!-- No external ML libraries - using advanced computer vision algorithms -->
 
 	<style>
 		* {
@@ -602,56 +599,13 @@
 	<script src="js/main.js"></script>
 
 	<script>
-		let bodyPixModel = null;
 		let currentImage = null;
 		let resultImageData = null;
-		let useAdvancedFallback = false;
 
-		// Initialize model
+		// Initialize - no model needed, using advanced algorithms
 		async function initializeModel() {
-			// Check if bodyPix is available
-			if (typeof bodyPix === 'undefined') {
-				console.warn('BodyPix not available, using fallback method');
-				showAlert('Using advanced fallback method. Upload an image to continue.', 'info');
-				useAdvancedFallback = true;
-				return true;
-			}
-
-			try {
-				showAlert('Loading AI model...', 'info');
-				updateProgress(10, 'Loading BodyPix model...');
-				
-				// Load BodyPix model with high quality settings
-				// Try ResNet50 first for best quality
-				try {
-					bodyPixModel = await bodyPix.load({
-						architecture: 'ResNet50',
-						outputStride: 16,
-						quantBytes: 2,
-						multiplier: 0.75
-					});
-					updateProgress(30, 'Model loaded successfully');
-					showAlert('Model ready! You can now upload an image.', 'success');
-					return true;
-				} catch (resnetError) {
-					console.warn('ResNet50 failed, trying MobileNet:', resnetError);
-					// Fallback: try MobileNet version (lighter, faster)
-					updateProgress(15, 'Loading MobileNet model...');
-					bodyPixModel = await bodyPix.load({
-						architecture: 'MobileNetV1',
-						outputStride: 16,
-						multiplier: 0.75
-					});
-					updateProgress(30, 'Model loaded successfully');
-					showAlert('Model ready! You can now upload an image.', 'success');
-					return true;
-				}
-			} catch (error) {
-				console.error('Error loading BodyPix model:', error);
-				showAlert('Using advanced fallback method. Upload an image to continue.', 'info');
-				useAdvancedFallback = true;
-				return true;
-			}
+			showAlert('Ready! Upload an image to remove its background.', 'success');
+			return true;
 		}
 
 		// Show alert
@@ -708,17 +662,12 @@
 			}
 		});
 
-		// Process image
+		// Process image with advanced algorithm
 		async function processImage(file) {
-			if (!bodyPixModel && !useAdvancedFallback) {
-				showAlert('Model is still loading. Please wait...', 'error');
-				return;
-			}
-
 			try {
 				// Show processing card
 				document.getElementById('processingCard').classList.add('show');
-				updateProgress(40, 'Loading image...');
+				updateProgress(20, 'Loading image...');
 
 				// Load image
 				const imageUrl = URL.createObjectURL(file);
@@ -732,7 +681,7 @@
 
 				currentImage = img;
 				document.getElementById('originalImage').src = imageUrl;
-				updateProgress(50, 'Analyzing image...');
+				updateProgress(30, 'Analyzing image...');
 
 				// Wait a bit for UI update
 				await new Promise(resolve => setTimeout(resolve, 300));
@@ -744,77 +693,11 @@
 				canvas.width = img.width;
 				canvas.height = img.height;
 
-				if (bodyPixModel) {
-					// Use BodyPix with multiple passes for better quality
-					updateProgress(60, 'Detecting person and background...');
-					
-					// Use the most accurate settings
-					const segOptions = {
-						flipHorizontal: false,
-						internalResolution: 'high', // Use high resolution for better accuracy
-						segmentationThreshold: 0.5, // Balanced threshold
-						maxDetections: 1
-					};
-					
-					// First pass: standard threshold
-					const seg1 = await bodyPixModel.segmentPerson(img, segOptions);
-					
-					updateProgress(70, 'Refining detection...');
-					
-					// Second pass: lower threshold to catch more edge details
-					const seg2 = await bodyPixModel.segmentPerson(img, {
-						...segOptions,
-						segmentationThreshold: 0.25 // Lower threshold for edges
-					});
-					
-					updateProgress(80, 'Creating alpha matte...');
-					
-					// Draw original image
-					ctx.drawImage(img, 0, 0);
-
-					// Get image data
-					const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-					const data = imageData.data;
-					const width = canvas.width;
-					const height = canvas.height;
-					
-					// Ensure masks are the right size
-					const mask1 = seg1.data;
-					const mask2 = seg2.data;
-					
-					// Resize masks if needed (BodyPix might return smaller masks)
-					let finalMask1 = mask1;
-					let finalMask2 = mask2;
-					
-					if (mask1.length !== width * height) {
-						finalMask1 = resizeMask(mask1, seg1.width, seg1.height, width, height);
-					}
-					if (mask2.length !== width * height) {
-						finalMask2 = resizeMask(mask2, seg2.width, seg2.height, width, height);
-					}
-					
-					// Combine masks and create smooth alpha matte
-					createSmoothAlphaMatte(data, finalMask1, finalMask2, width, height);
-
-					// Apply advanced edge refinement
-					updateProgress(90, 'Refining edges...');
-					applyAdvancedEdgeRefinement(data, width, height);
-					
-					// Remove remaining background artifacts
-					updateProgress(95, 'Removing artifacts...');
-					removeBackgroundArtifacts(data, width, height);
-					
-					// Final cleanup pass
-					applyAdvancedEdgeRefinement(data, width, height);
-					
-					// Put modified image data back
-					ctx.putImageData(imageData, 0, 0);
-				} else {
-					// Use advanced fallback method
-					updateProgress(60, 'Using advanced background removal...');
-					await advancedBackgroundRemoval(img, canvas, ctx);
-					updateProgress(90, 'Refining edges...');
-				}
+				// Use advanced multi-stage background removal
+				updateProgress(40, 'Detecting background...');
+				await advancedBackgroundRemoval(img, canvas, ctx);
+				
+				updateProgress(90, 'Final refinement...');
 				
 				// Store result for download
 				resultImageData = canvas.toDataURL('image/png');
@@ -827,235 +710,15 @@
 
 			} catch (error) {
 				console.error('Error processing image:', error);
-				// Try fallback if BodyPix fails
-				if (bodyPixModel && !useAdvancedFallback) {
-					showAlert('Trying alternative method...', 'info');
-					useAdvancedFallback = true;
-					await processImage(file);
-				} else {
-					showAlert('Failed to process image: ' + error.message, 'error');
-					updateProgress(0, 'Error occurred');
-				}
+				showAlert('Failed to process image: ' + error.message, 'error');
+				updateProgress(0, 'Error occurred');
 			}
 		}
 
-		// Resize mask to match canvas dimensions
-		function resizeMask(mask, srcWidth, srcHeight, dstWidth, dstHeight) {
-			const resized = new Uint8Array(dstWidth * dstHeight);
-			const scaleX = srcWidth / dstWidth;
-			const scaleY = srcHeight / dstHeight;
-			
-			for (let y = 0; y < dstHeight; y++) {
-				for (let x = 0; x < dstWidth; x++) {
-					const srcX = Math.floor(x * scaleX);
-					const srcY = Math.floor(y * scaleY);
-					const srcIdx = srcY * srcWidth + srcX;
-					const dstIdx = y * dstWidth + x;
-					resized[dstIdx] = mask[srcIdx];
-				}
-			}
-			
-			return resized;
-		}
-		
-		// Create smooth alpha matte from multiple segmentation passes
-		function createSmoothAlphaMatte(data, mask1, mask2, width, height) {
-			// Create distance transform for smooth edges
-			const alphaMap = new Float32Array(width * height);
-			
-			// First, set core foreground (both masks agree)
-			for (let i = 0; i < mask1.length; i++) {
-				if (mask1[i] && mask2[i]) {
-					alphaMap[i] = 1.0; // Solid foreground
-				} else if (!mask1[i] && !mask2[i]) {
-					alphaMap[i] = 0.0; // Solid background
-				} else {
-					alphaMap[i] = 0.5; // Edge region
-				}
-			}
-			
-			// Apply distance-based feathering for edge regions
-			for (let pass = 0; pass < 3; pass++) {
-				for (let y = 1; y < height - 1; y++) {
-					for (let x = 1; x < width - 1; x++) {
-						const idx = y * width + x;
-						if (alphaMap[idx] === 0.5) {
-							// Edge pixel - check neighbors
-							let foregroundNeighbors = 0;
-							let backgroundNeighbors = 0;
-							let totalNeighbors = 0;
-							
-							for (let dy = -2; dy <= 2; dy++) {
-								for (let dx = -2; dx <= 2; dx++) {
-									const ny = y + dy;
-									const nx = x + dx;
-									if (ny >= 0 && ny < height && nx >= 0 && nx < width) {
-										const nIdx = ny * width + nx;
-										if (alphaMap[nIdx] > 0.7) foregroundNeighbors++;
-										if (alphaMap[nIdx] < 0.3) backgroundNeighbors++;
-										totalNeighbors++;
-									}
-								}
-							}
-							
-							// Calculate alpha based on neighbor distribution
-							const dist = Math.sqrt(Math.pow(x - width/2, 2) + Math.pow(y - height/2, 2));
-							const centerBias = Math.max(0, 1 - dist / (Math.min(width, height) * 0.5));
-							alphaMap[idx] = Math.min(1.0, Math.max(0.0, 
-								(foregroundNeighbors / totalNeighbors) * 0.7 + centerBias * 0.3
-							));
-						}
-					}
-				}
-			}
-			
-			// Apply alpha values to image data
-			for (let i = 0; i < alphaMap.length; i++) {
-				const pixelIndex = i * 4;
-				const alpha = alphaMap[i];
-				
-				if (alpha < 0.01) {
-					// Pure background - fully transparent
-					data[pixelIndex + 3] = 0;
-				} else {
-					// Apply alpha with smooth transition
-					data[pixelIndex + 3] = Math.round(alpha * 255);
-				}
-			}
-		}
-		
-		// Apply advanced edge refinement using bilateral filtering approach
-		function applyAdvancedEdgeRefinement(data, width, height) {
-			// Create temporary buffer for smoothed alpha
-			const smoothedAlpha = new Uint8Array(width * height);
-			
-			// Multi-pass edge smoothing
-			for (let pass = 0; pass < 2; pass++) {
-				for (let y = 2; y < height - 2; y++) {
-					for (let x = 2; x < width - 2; x++) {
-						const idx = y * width + x;
-						const pixelIndex = idx * 4;
-						const currentAlpha = data[pixelIndex + 3];
-						
-						// Only process edge pixels (partial transparency)
-						if (currentAlpha > 0 && currentAlpha < 255) {
-							let weightedSum = 0;
-							let weightSum = 0;
-							
-							// Bilateral-like filtering: weight by both spatial distance and alpha similarity
-							for (let dy = -2; dy <= 2; dy++) {
-								for (let dx = -2; dx <= 2; dx++) {
-									const ny = y + dy;
-									const nx = x + dx;
-									const nIdx = ny * width + nx;
-									const nPixelIndex = nIdx * 4;
-									const neighborAlpha = data[nPixelIndex + 3];
-									
-									// Spatial weight (Gaussian)
-									const spatialDist = Math.sqrt(dx * dx + dy * dy);
-									const spatialWeight = Math.exp(-spatialDist * spatialDist / 2.0);
-									
-									// Alpha similarity weight
-									const alphaDiff = Math.abs(currentAlpha - neighborAlpha) / 255.0;
-									const alphaWeight = Math.exp(-alphaDiff * alphaDiff / 0.1);
-									
-									const weight = spatialWeight * alphaWeight;
-									weightedSum += neighborAlpha * weight;
-									weightSum += weight;
-								}
-							}
-							
-							if (weightSum > 0) {
-								smoothedAlpha[idx] = Math.round(weightedSum / weightSum);
-							} else {
-								smoothedAlpha[idx] = currentAlpha;
-							}
-						} else {
-							smoothedAlpha[idx] = currentAlpha;
-						}
-					}
-				}
-				
-				// Apply smoothed alpha
-				for (let i = 0; i < smoothedAlpha.length; i++) {
-					const pixelIndex = i * 4;
-					if (data[pixelIndex + 3] > 0 && data[pixelIndex + 3] < 255) {
-						data[pixelIndex + 3] = smoothedAlpha[i];
-					}
-				}
-			}
-		}
-		
-		// Remove background artifacts (pixels that look like background but weren't removed)
-		function removeBackgroundArtifacts(data, width, height) {
-			// Sample background colors from corners and edges
-			const bgSamples = [];
-			const sampleSize = Math.min(width, height) * 0.15;
-			
-			for (let y = 0; y < sampleSize; y++) {
-				for (let x = 0; x < sampleSize; x++) {
-					// Sample from corners
-					const cornerIndices = [
-						y * width + x,                                    // Top-left
-						y * width + (width - 1 - x),                      // Top-right
-						(height - 1 - y) * width + x,                    // Bottom-left
-						(height - 1 - y) * width + (width - 1 - x)      // Bottom-right
-					];
-					
-					for (const idx of cornerIndices) {
-						const pixelIndex = idx * 4;
-						if (data[pixelIndex + 3] < 10) { // Transparent pixels (background)
-							bgSamples.push([
-								data[pixelIndex],
-								data[pixelIndex + 1],
-								data[pixelIndex + 2]
-							]);
-						}
-					}
-				}
-			}
-			
-			if (bgSamples.length === 0) return;
-			
-			// Calculate average background color
-			let avgR = 0, avgG = 0, avgB = 0;
-			for (const sample of bgSamples) {
-				avgR += sample[0];
-				avgG += sample[1];
-				avgB += sample[2];
-			}
-			avgR /= bgSamples.length;
-			avgG /= bgSamples.length;
-			avgB /= bgSamples.length;
-			
-			// Remove pixels that are too similar to background
-			for (let i = 0; i < data.length; i += 4) {
-				const alpha = data[i + 3];
-				if (alpha > 0) {
-					const r = data[i];
-					const g = data[i + 1];
-					const b = data[i + 2];
-					
-					// Color distance from background
-					const colorDist = Math.sqrt(
-						Math.pow(r - avgR, 2) + 
-						Math.pow(g - avgG, 2) + 
-						Math.pow(b - avgB, 2)
-					);
-					
-					// If pixel is very similar to background and has low alpha, remove it
-					if (colorDist < 25 && alpha < 100) {
-						data[i + 3] = 0;
-					} else if (colorDist < 15) {
-						// Very similar to background - reduce alpha significantly
-						data[i + 3] = Math.max(0, alpha - 50);
-					}
-				}
-			}
-		}
-
-		// Advanced background removal fallback (for non-person images)
+		// Advanced multi-stage background removal algorithm
 		async function advancedBackgroundRemoval(img, canvas, ctx) {
+			updateProgress(45, 'Stage 1: Analyzing image structure...');
+			
 			// Draw original image
 			ctx.drawImage(img, 0, 0);
 			
@@ -1065,23 +728,285 @@
 			const width = canvas.width;
 			const height = canvas.height;
 			
-			// Create a temporary canvas for processing
-			const tempCanvas = document.createElement('canvas');
-			tempCanvas.width = width;
-			tempCanvas.height = height;
-			const tempCtx = tempCanvas.getContext('2d');
-			tempCtx.drawImage(img, 0, 0);
-			const tempImageData = tempCtx.getImageData(0, 0, width, height);
-			const tempData = tempImageData.data;
+			// Stage 1: Sample background from edges and corners
+			updateProgress(50, 'Stage 2: Identifying background regions...');
+			const bgMask = identifyBackgroundRegions(data, width, height);
 			
-			// Convert to grayscale for edge detection
-			const grayscale = new Uint8Array(width * height);
-			for (let i = 0; i < tempData.length; i += 4) {
-				const gray = 0.299 * tempData[i] + 0.587 * tempData[i + 1] + 0.114 * tempData[i + 2];
-				grayscale[i / 4] = gray;
+			// Stage 2: Flood fill from edges to catch all background
+			updateProgress(60, 'Stage 3: Flood filling background...');
+			floodFillBackground(bgMask, data, width, height);
+			
+			// Stage 3: Refine using edge detection
+			updateProgress(70, 'Stage 4: Refining edges...');
+			refineWithEdgeDetection(bgMask, data, width, height);
+			
+			// Stage 4: Apply mask to image
+			updateProgress(80, 'Stage 5: Applying mask...');
+			for (let i = 0; i < data.length; i += 4) {
+				const idx = i / 4;
+				if (bgMask[idx]) {
+					data[i + 3] = 0; // Make background transparent
+				}
 			}
 			
-			// Apply Sobel edge detection
+			// Stage 5: Smooth edges with alpha matting
+			updateProgress(85, 'Stage 6: Creating smooth edges...');
+			applyAlphaMatting(data, bgMask, width, height);
+			
+			// Stage 6: Remove artifacts
+			updateProgress(88, 'Stage 7: Removing artifacts...');
+			removeArtifacts(data, width, height);
+			
+			// Put modified image data back
+			ctx.putImageData(imageData, 0, 0);
+		}
+		
+		// Identify background regions using multiple heuristics
+		function identifyBackgroundRegions(data, width, height) {
+			const bgMask = new Uint8Array(width * height); // 1 = background, 0 = foreground
+			const sampleSize = Math.min(width, height) * 0.12;
+			
+			// Sample background colors from corners and edges
+			const bgSamples = [];
+			const edgeSamples = [];
+			
+			// Sample corners
+			for (let y = 0; y < sampleSize; y++) {
+				for (let x = 0; x < sampleSize; x++) {
+					const corners = [
+						y * width + x,
+						y * width + (width - 1 - x),
+						(height - 1 - y) * width + x,
+						(height - 1 - y) * width + (width - 1 - x)
+					];
+					
+					for (const idx of corners) {
+						const pixelIndex = idx * 4;
+						bgSamples.push({
+							r: data[pixelIndex],
+							g: data[pixelIndex + 1],
+							b: data[pixelIndex + 2],
+							idx: idx
+						});
+					}
+				}
+			}
+			
+			// Sample edges (top, bottom, left, right)
+			const edgeThickness = Math.min(width, height) * 0.05;
+			for (let i = 0; i < edgeThickness; i++) {
+				// Top edge
+				for (let x = 0; x < width; x++) {
+					const idx = i * width + x;
+					const pixelIndex = idx * 4;
+					edgeSamples.push({
+						r: data[pixelIndex],
+						g: data[pixelIndex + 1],
+						b: data[pixelIndex + 2],
+						idx: idx
+					});
+				}
+				// Bottom edge
+				for (let x = 0; x < width; x++) {
+					const idx = (height - 1 - i) * width + x;
+					const pixelIndex = idx * 4;
+					edgeSamples.push({
+						r: data[pixelIndex],
+						g: data[pixelIndex + 1],
+						b: data[pixelIndex + 2],
+						idx: idx
+					});
+				}
+				// Left edge
+				for (let y = 0; y < height; y++) {
+					const idx = y * width + i;
+					const pixelIndex = idx * 4;
+					edgeSamples.push({
+						r: data[pixelIndex],
+						g: data[pixelIndex + 1],
+						b: data[pixelIndex + 2],
+						idx: idx
+					});
+				}
+				// Right edge
+				for (let y = 0; y < height; y++) {
+					const idx = y * width + (width - 1 - i);
+					const pixelIndex = idx * 4;
+					edgeSamples.push({
+						r: data[pixelIndex],
+						g: data[pixelIndex + 1],
+						b: data[pixelIndex + 2],
+						idx: idx
+					});
+				}
+			}
+			
+			// Cluster background colors using K-means (simplified)
+			const bgClusters = clusterColors([...bgSamples, ...edgeSamples], 3);
+			
+			// Calculate center region (likely foreground)
+			const centerX = width / 2;
+			const centerY = height / 2;
+			const centerRadius = Math.min(width, height) * 0.35;
+			
+			// Classify each pixel
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					const idx = y * width + x;
+					const pixelIndex = idx * 4;
+					const r = data[pixelIndex];
+					const g = data[pixelIndex + 1];
+					const b = data[pixelIndex + 2];
+					
+					// Distance from center
+					const distFromCenter = Math.sqrt(
+						Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
+					);
+					
+					// Check if pixel matches background clusters
+					let minDist = Infinity;
+					for (const cluster of bgClusters) {
+						const dist = Math.sqrt(
+							Math.pow(r - cluster.r, 2) +
+							Math.pow(g - cluster.g, 2) +
+							Math.pow(b - cluster.b, 2)
+						);
+						minDist = Math.min(minDist, dist);
+					}
+					
+					// Classify as background if:
+					// 1. Far from center AND similar to background colors
+					// 2. Very similar to background colors (even if near center)
+					const isBackground = (distFromCenter > centerRadius && minDist < 40) || 
+					                     (minDist < 25) ||
+					                     (distFromCenter > centerRadius * 1.5);
+					
+					bgMask[idx] = isBackground ? 1 : 0;
+				}
+			}
+			
+			return bgMask;
+		}
+		
+		// Simple K-means clustering for background colors
+		function clusterColors(samples, k) {
+			if (samples.length === 0) return [];
+			
+			// Initialize centroids randomly
+			let centroids = [];
+			for (let i = 0; i < k && i < samples.length; i++) {
+				const sample = samples[Math.floor(Math.random() * samples.length)];
+				centroids.push({ r: sample.r, g: sample.g, b: sample.b });
+			}
+			
+			// Iterate a few times
+			for (let iter = 0; iter < 5; iter++) {
+				// Assign samples to nearest centroid
+				const clusters = centroids.map(() => []);
+				for (const sample of samples) {
+					let minDist = Infinity;
+					let nearestIdx = 0;
+					for (let i = 0; i < centroids.length; i++) {
+						const dist = Math.sqrt(
+							Math.pow(sample.r - centroids[i].r, 2) +
+							Math.pow(sample.g - centroids[i].g, 2) +
+							Math.pow(sample.b - centroids[i].b, 2)
+						);
+						if (dist < minDist) {
+							minDist = dist;
+							nearestIdx = i;
+						}
+					}
+					clusters[nearestIdx].push(sample);
+				}
+				
+				// Update centroids
+				centroids = clusters.map(cluster => {
+					if (cluster.length === 0) return { r: 0, g: 0, b: 0 };
+					const sum = cluster.reduce((acc, s) => ({
+						r: acc.r + s.r,
+						g: acc.g + s.g,
+						b: acc.b + s.b
+					}), { r: 0, g: 0, b: 0 });
+					return {
+						r: sum.r / cluster.length,
+						g: sum.g / cluster.length,
+						b: sum.b / cluster.length
+					};
+				});
+			}
+			
+			return centroids;
+		}
+		
+		// Flood fill from edges to catch all background
+		function floodFillBackground(bgMask, data, width, height) {
+			const visited = new Uint8Array(width * height);
+			const queue = [];
+			
+			// Start flood fill from edge pixels marked as background
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					const idx = y * width + x;
+					if ((x < 2 || x >= width - 2 || y < 2 || y >= height - 2) && bgMask[idx]) {
+						queue.push({ x, y });
+						visited[idx] = 1;
+					}
+				}
+			}
+			
+			// Flood fill
+			while (queue.length > 0) {
+				const { x, y } = queue.shift();
+				const idx = y * width + x;
+				const pixelIndex = idx * 4;
+				const r = data[pixelIndex];
+				const g = data[pixelIndex + 1];
+				const b = data[pixelIndex + 2];
+				
+				// Check neighbors
+				const neighbors = [
+					{ x: x - 1, y },
+					{ x: x + 1, y },
+					{ x, y: y - 1 },
+					{ x, y: y + 1 }
+				];
+				
+				for (const neighbor of neighbors) {
+					if (neighbor.x < 0 || neighbor.x >= width || neighbor.y < 0 || neighbor.y >= height) continue;
+					
+					const nIdx = neighbor.y * width + neighbor.x;
+					if (visited[nIdx]) continue;
+					
+					const nPixelIndex = nIdx * 4;
+					const nr = data[nPixelIndex];
+					const ng = data[nPixelIndex + 1];
+					const nb = data[nPixelIndex + 2];
+					
+					// Color similarity
+					const colorDist = Math.sqrt(
+						Math.pow(r - nr, 2) + Math.pow(g - ng, 2) + Math.pow(b - nb, 2)
+					);
+					
+					// If similar color, mark as background
+					if (colorDist < 35) {
+						bgMask[nIdx] = 1;
+						visited[nIdx] = 1;
+						queue.push(neighbor);
+					}
+				}
+			}
+		}
+		
+		// Refine mask using edge detection
+		function refineWithEdgeDetection(bgMask, data, width, height) {
+			// Convert to grayscale
+			const grayscale = new Uint8Array(width * height);
+			for (let i = 0; i < data.length; i += 4) {
+				grayscale[i / 4] = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+			}
+			
+			// Detect edges
 			const edges = new Uint8Array(width * height);
 			for (let y = 1; y < height - 1; y++) {
 				for (let x = 1; x < width - 1; x++) {
@@ -1092,87 +1017,137 @@
 					const gy = -grayscale[(y - 1) * width + (x - 1)] - 2 * grayscale[(y - 1) * width + x]
 						- grayscale[(y - 1) * width + (x + 1)] + grayscale[(y + 1) * width + (x - 1)]
 						+ 2 * grayscale[(y + 1) * width + x] + grayscale[(y + 1) * width + (x + 1)];
-					edges[idx] = Math.sqrt(gx * gx + gy * gy);
+					edges[idx] = Math.min(255, Math.sqrt(gx * gx + gy * gy));
 				}
 			}
 			
-			// Use GrabCut-like algorithm: assume center is foreground
-			const centerX = Math.floor(width / 2);
-			const centerY = Math.floor(height / 2);
-			const centerRadius = Math.min(width, height) * 0.3;
-			
-			// Sample background colors from corners
-			const cornerSize = Math.min(width, height) * 0.1;
-			const bgSamples = [];
-			for (let y = 0; y < cornerSize; y++) {
-				for (let x = 0; x < cornerSize; x++) {
-					// Top-left corner
-					const idx = (y * width + x) * 4;
-					bgSamples.push([tempData[idx], tempData[idx + 1], tempData[idx + 2]]);
-					// Top-right corner
-					const idx2 = (y * width + (width - 1 - x)) * 4;
-					bgSamples.push([tempData[idx2], tempData[idx2 + 1], tempData[idx2 + 2]]);
-					// Bottom-left corner
-					const idx3 = ((height - 1 - y) * width + x) * 4;
-					bgSamples.push([tempData[idx3], tempData[idx3 + 1], tempData[idx3 + 2]]);
-					// Bottom-right corner
-					const idx4 = ((height - 1 - y) * width + (width - 1 - x)) * 4;
-					bgSamples.push([tempData[idx4], tempData[idx4 + 1], tempData[idx4 + 2]]);
+			// Refine mask: pixels near strong edges are likely foreground
+			for (let y = 2; y < height - 2; y++) {
+				for (let x = 2; x < width - 2; x++) {
+					const idx = y * width + x;
+					
+					// Check if there's a strong edge nearby
+					let maxEdge = 0;
+					for (let dy = -2; dy <= 2; dy++) {
+						for (let dx = -2; dx <= 2; dx++) {
+							const nIdx = (y + dy) * width + (x + dx);
+							maxEdge = Math.max(maxEdge, edges[nIdx]);
+						}
+					}
+					
+					// If strong edge and currently marked as background, might be foreground
+					if (maxEdge > 50 && bgMask[idx]) {
+						// Check if neighbors are mostly foreground
+						let fgNeighbors = 0;
+						for (let dy = -1; dy <= 1; dy++) {
+							for (let dx = -1; dx <= 1; dx++) {
+								if (dx === 0 && dy === 0) continue;
+								const nIdx = (y + dy) * width + (x + dx);
+								if (!bgMask[nIdx]) fgNeighbors++;
+							}
+						}
+						
+						if (fgNeighbors > 4) {
+							bgMask[idx] = 0; // Mark as foreground
+						}
+					}
 				}
 			}
+		}
+		
+		// Apply alpha matting for smooth edges
+		function applyAlphaMatting(data, bgMask, width, height) {
+			const alphaMap = new Float32Array(width * height);
 			
-			// Calculate average background color
-			let avgBgR = 0, avgBgG = 0, avgBgB = 0;
-			for (const sample of bgSamples) {
-				avgBgR += sample[0];
-				avgBgG += sample[1];
-				avgBgB += sample[2];
-			}
-			avgBgR /= bgSamples.length;
-			avgBgG /= bgSamples.length;
-			avgBgB /= bgSamples.length;
-			
-			// Classify pixels
+			// Create distance transform
 			for (let y = 0; y < height; y++) {
 				for (let x = 0; x < width; x++) {
 					const idx = y * width + x;
-					const pixelIndex = idx * 4;
-					const r = tempData[pixelIndex];
-					const g = tempData[pixelIndex + 1];
-					const b = tempData[pixelIndex + 2];
-					
-					// Distance from center
-					const distFromCenter = Math.sqrt(
-						Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
-					);
-					
-					// Color distance from background
-					const colorDist = Math.sqrt(
-						Math.pow(r - avgBgR, 2) + Math.pow(g - avgBgG, 2) + Math.pow(b - avgBgB, 2)
-					);
-					
-					// Edge strength
-					const edgeStrength = edges[idx] / 255;
-					
-					// Determine if foreground
-					const isForeground = distFromCenter < centerRadius || 
-						(colorDist > 30 && edgeStrength < 0.3) ||
-						(colorDist > 50);
-					
-					if (!isForeground) {
-						data[pixelIndex + 3] = 0; // Transparent
-					} else if (edgeStrength > 0.2) {
-						// Edge pixels: partial transparency
-						data[pixelIndex + 3] = data[pixelIndex + 3] * (1 - edgeStrength * 0.3);
+					if (bgMask[idx]) {
+						alphaMap[idx] = 0.0;
+					} else {
+						// Find distance to nearest background pixel
+						let minDist = Infinity;
+						for (let dy = -5; dy <= 5; dy++) {
+							for (let dx = -5; dx <= 5; dx++) {
+								const ny = y + dy;
+								const nx = x + dx;
+								if (ny >= 0 && ny < height && nx >= 0 && nx < width) {
+									const nIdx = ny * width + nx;
+									if (bgMask[nIdx]) {
+										const dist = Math.sqrt(dx * dx + dy * dy);
+										minDist = Math.min(minDist, dist);
+									}
+								}
+							}
+						}
+						
+						// Create smooth alpha based on distance
+						if (minDist < Infinity) {
+							alphaMap[idx] = Math.min(1.0, Math.max(0.0, 1.0 - minDist / 3.0));
+						} else {
+							alphaMap[idx] = 1.0;
+						}
 					}
 				}
 			}
 			
-			// Apply morphological operations to clean up
-			applyMorphologicalOperations(data, width, height);
+			// Apply alpha
+			for (let i = 0; i < data.length; i += 4) {
+				const idx = i / 4;
+				const alpha = alphaMap[idx];
+				data[i + 3] = Math.round(alpha * 255);
+			}
+		}
+		
+		// Remove artifacts (small isolated background regions)
+		function removeArtifacts(data, width, height) {
+			const alpha = new Uint8Array(width * height);
+			for (let i = 0; i < data.length; i += 4) {
+				alpha[i / 4] = data[i + 3];
+			}
 			
-			// Put modified image data back
-			ctx.putImageData(imageData, 0, 0);
+			// Remove small isolated transparent regions (likely artifacts)
+			const visited = new Uint8Array(width * height);
+			for (let y = 1; y < height - 1; y++) {
+				for (let x = 1; x < width - 1; x++) {
+					const idx = y * width + x;
+					if (visited[idx] || alpha[idx] > 10) continue;
+					
+					// Flood fill to find connected transparent region
+					const region = [];
+					const queue = [{ x, y }];
+					visited[idx] = 1;
+					
+					while (queue.length > 0) {
+						const { x: cx, y: cy } = queue.shift();
+						const cIdx = cy * width + cx;
+						region.push(cIdx);
+						
+						const neighbors = [
+							{ x: cx - 1, y: cy },
+							{ x: cx + 1, y: cy },
+							{ x: cx, y: cy - 1 },
+							{ x: cx, y: cy + 1 }
+						];
+						
+						for (const neighbor of neighbors) {
+							if (neighbor.x < 0 || neighbor.x >= width || neighbor.y < 0 || neighbor.y >= height) continue;
+							const nIdx = neighbor.y * width + neighbor.x;
+							if (visited[nIdx] || alpha[nIdx] > 10) continue;
+							visited[nIdx] = 1;
+							queue.push(neighbor);
+						}
+					}
+					
+					// If region is small and surrounded by opaque pixels, fill it
+					if (region.length < 100) {
+						for (const rIdx of region) {
+							data[rIdx * 4 + 3] = 255; // Make opaque
+						}
+					}
+				}
+			}
 		}
 		
 		// Apply morphological operations to clean up mask
