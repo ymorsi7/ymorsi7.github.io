@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar Alarm Clock - Wake Up Gently</title>
     <link rel="icon" type="image/x-icon" href="images/smiling.png">
+    <link rel="icon" type="image/png" href="images/smiling.png">
     <style>
         * {
             margin: 0;
@@ -23,6 +24,43 @@
             justify-content: center;
             transition: background-color 0.5s ease, color 0.5s ease;
             overflow: hidden;
+            position: relative;
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+        #logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        #logo .tooltip {
+            position: absolute;
+            left: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            pointer-events: none;
+        }
+        #logo img:hover + .tooltip,
+        #logo .tooltip:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
         }
 
         .container {
@@ -397,6 +435,10 @@
     </style>
 </head>
 <body>
+    <div id="logo" onclick="window.location.href='https://ymorsi.com';">
+        <img src="images/smiling.png" alt="YM Home">
+        <div class="tooltip">YM - Home</div>
+    </div>
     <div class="solar-gradient" id="solarGradient"></div>
     <div class="sun" id="sun"></div>
 

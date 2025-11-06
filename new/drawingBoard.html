@@ -43,6 +43,43 @@
 			background: var(--bg-light);
 			color: var(--text-dark);
 			overflow: hidden;
+			position: relative;
+		}
+
+		#logo {
+			position: absolute;
+			top: 70px;
+			right: 10px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			z-index: 1000;
+		}
+		#logo img {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+		}
+		#logo .tooltip {
+			position: absolute;
+			right: 50px;
+			background: rgba(0, 0, 0, 0.8);
+			color: white;
+			padding: 5px 10px;
+			border-radius: 4px;
+			font-size: 12px;
+			white-space: nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateX(10px);
+			transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+			pointer-events: none;
+		}
+		#logo img:hover + .tooltip,
+		#logo .tooltip:hover {
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(0);
 		}
 
 		.header {
@@ -181,6 +218,10 @@
 </head>
 
 <body>
+	<div id="logo" onclick="window.location.href='https://ymorsi.com';">
+		<img src="images/smiling.png" alt="YM Home">
+		<div class="tooltip">YM - Home</div>
+	</div>
 	<div style="display: flex; flex-direction: column; height: 100vh;">
 		<header class="header">
 			<h1><i class="fas fa-paint-brush"></i> Drawing Board</h1>
