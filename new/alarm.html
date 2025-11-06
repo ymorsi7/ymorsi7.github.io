@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Alarm Clock - Wake Up Gently</title>
+    <link rel="icon" type="image/x-icon" href="images/smiling.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #d4c5a0;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow: hidden;
+        }
+
+        .container {
+            background: #3a3a3a;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+
+        .container.night-mode {
+            background: #050505;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .night-mode-btn {
+            background: #4a4a4a;
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .night-mode-btn:hover {
+            background: #5a5a5a;
+            transform: translateY(-1px);
+        }
+
+        .night-mode-btn.active {
+            background: #0a0a0a;
+        }
+
+        .container.night-mode .current-time-display {
+            color: #666;
+        }
+
+        .current-time-display {
+            font-size: 0.9rem;
+            color: #ccc;
+            font-weight: normal;
+        }
+
+        .alarm-display-container {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .container.night-mode .alarm-display-container {
+            background: #0a0a0a;
+        }
+
+        .alarm-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time-display {
+            font-family: 'Courier New', monospace;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 
+                0 0 10px rgba(255, 0, 0, 0.8),
+                0 0 20px rgba(255, 0, 0, 0.6),
+                0 0 30px rgba(255, 0, 0, 0.4);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .am-pm {
+            font-size: 1.5rem;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            background: #4a4a4a;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container.night-mode .control-btn {
+            background: #2a2a2a;
+        }
+
+        .control-btn:hover {
+            background: #5a5a5a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .container.night-mode .control-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sound-selector {
+            margin-bottom: 25px;
+        }
+
+        .sound-selector label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sound-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .sound-btn {
+            padding: 8px 16px;
+            background: #4a4a4a;
+            border: 1px solid #5a5a5a;
+            border-radius: 15px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .container.night-mode .sound-btn {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+        }
+
+        .sound-btn:hover {
+            background: #5a5a5a;
+            transform: translateY(-1px);
+        }
+
+        .container.night-mode .sound-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .sound-btn.active {
+            background: #2a2a2a;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: #4a4a4a;
+            color: #fff;
+            border: 1px solid #5a5a5a;
+        }
+
+        .container.night-mode .btn-primary {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+        }
+
+        .btn-primary:hover {
+            background: #5a5a5a;
+            transform: translateY(-1px);
+        }
+
+        .container.night-mode .btn-primary:hover {
+            background: #3a3a3a;
+        }
+
+        .btn-secondary {
+            background: #6a0000;
+            color: #fff;
+            border: 1px solid #8a0000;
+        }
+
+        .btn-secondary:hover {
+            background: #8a0000;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            min-height: 25px;
+            color: #4ade80;
+            text-align: center;
+        }
+
+        .status.active {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .solar-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: opacity 1s ease;
+            background: radial-gradient(ellipse at center top, rgba(255, 200, 100, 0) 0%, rgba(0, 0, 0, 1) 100%);
+            pointer-events: none;
+        }
+
+        .sun {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 220, 100, 0) 0%, rgba(255, 220, 100, 0) 100%);
+            z-index: 1;
+            transition: all 1s ease;
+            box-shadow: 0 0 100px rgba(255, 220, 100, 0);
+            pointer-events: none;
+        }
+
+        .sun.active {
+            background: radial-gradient(circle, rgba(255, 255, 200, 1) 0%, rgba(255, 200, 100, 0.9) 40%, rgba(255, 180, 50, 0.7) 70%, rgba(255, 150, 0, 0) 100%);
+            box-shadow: 0 0 200px rgba(255, 255, 200, 1), 
+                         0 0 400px rgba(255, 220, 100, 0.8), 
+                         0 0 600px rgba(255, 180, 50, 0.4),
+                         0 0 800px rgba(255, 150, 0, 0.2);
+        }
+
+        .sunrise-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(to bottom, 
+                rgba(255, 200, 150, 0) 0%,
+                rgba(255, 180, 100, 0) 20%,
+                rgba(255, 160, 80, 0) 40%,
+                rgba(255, 140, 60, 0) 60%,
+                rgba(255, 120, 40, 0) 80%,
+                rgba(50, 50, 50, 0) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .alarm-active {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            z-index: 100;
+        }
+
+        .wake-up-text {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 
+                0 0 20px rgba(255, 0, 0, 0.8),
+                0 0 40px rgba(255, 0, 0, 0.6);
+            animation: wakeUpAnimation 1s ease-in-out infinite;
+        }
+
+        @keyframes wakeUpAnimation {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .time-display {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+            .container {
+                padding: 25px;
+            }
+            .wake-up-text {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="solar-gradient" id="solarGradient"></div>
+    <div class="sun" id="sun"></div>
+
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <button class="night-mode-btn" id="nightModeBtn">Night Mode</button>
+            <div class="current-time-display">Current time is: <span id="currentTime">00:00:00 AM</span></div>
+        </div>
+
+        <div class="alarm-display-container">
+            <div class="alarm-label">Wake me up at:</div>
+            <div class="time-display">
+                <span id="alarmHourDisplay">07</span>:<span id="alarmMinuteDisplay">00</span><span class="am-pm" id="alarmAmPm">AM</span>
+            </div>
+            <div class="control-buttons">
+                <button class="control-btn" id="hourUp">+</button>
+                <button class="control-btn" id="hourDown">-</button>
+                <button class="control-btn" id="minuteUp">+</button>
+                <button class="control-btn" id="minuteDown">-</button>
+            </div>
+        </div>
+
+        <div class="sound-selector">
+            <label>with the sound of:</label>
+            <div class="sound-buttons">
+                <button class="sound-btn active" data-sound="birds">🌅 Morning Birds</button>
+                <button class="sound-btn" data-sound="forest">🌲 Forest Dawn</button>
+                <button class="sound-btn" data-sound="ocean">🌊 Ocean Waves</button>
+                <button class="sound-btn" data-sound="wind">🍃 Gentle Wind</button>
+            </div>
+            <div class="preview-controls">
+                <button class="btn btn-primary" id="previewBtn">Preview Sound</button>
+                <button class="btn btn-primary" id="stopPreviewBtn">Stop</button>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-primary" id="setAlarmBtn">Set Alarm</button>
+            <button class="btn btn-secondary hidden" id="cancelAlarmBtn">Cancel Alarm</button>
+        </div>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <div class="alarm-active hidden" id="alarmActive">
+        <div class="wake-up-text">Wake Up!</div>
+        <div>
+            <button class="btn btn-primary" id="stopBtn" style="font-size: 1.5rem; padding: 20px 40px;">Stop</button>
+            <button class="btn btn-secondary" id="snoozeBtn" style="font-size: 1.5rem; padding: 20px 40px;">Snooze 10 minutes</button>
+        </div>
+    </div>
+
+    <audio id="alarmAudio" loop></audio>
+    <audio id="ambientAudio" loop></audio>
+
+    <script>
+        // Initialize variables
+        let alarmTime = null;
+        let alarmInterval = null;
+        let currentSound = 'birds';
+        let ambientAudioPlaying = false;
+        let previewAudio = null;
+        let alarmHour = 7;
+        let alarmMinute = 0;
+        let alarmAmPm = 'AM';
+        let nightMode = false;
+
+        // Sound files from the sounds folder
+        const soundSources = {
+            birds: 'sounds/BirdChirp.mp3',
+            forest: 'sounds/forestDawn.mp3',
+            ocean: 'sounds/ocean.mp3',
+            wind: 'sounds/wind.mp3'
+        };
+
+        // Convert 24-hour to 12-hour format
+        function to12Hour(hour24) {
+            if (hour24 === 0) return { hour: 12, amPm: 'AM' };
+            if (hour24 === 12) return { hour: 12, amPm: 'PM' };
+            if (hour24 < 12) return { hour: hour24, amPm: 'AM' };
+            return { hour: hour24 - 12, amPm: 'PM' };
+        }
+
+        // Convert 12-hour to 24-hour format
+        function to24Hour(hour12, amPm) {
+            if (amPm === 'AM') {
+                if (hour12 === 12) return 0;
+                return hour12;
+            } else {
+                if (hour12 === 12) return 12;
+                return hour12 + 12;
+            }
+        }
+
+        // Update alarm display
+        function updateAlarmDisplay() {
+            document.getElementById('alarmHourDisplay').textContent = String(alarmHour).padStart(2, '0');
+            document.getElementById('alarmMinuteDisplay').textContent = String(alarmMinute).padStart(2, '0');
+            document.getElementById('alarmAmPm').textContent = alarmAmPm;
+        }
+
+        // Update current time display
+        function updateCurrentTime() {
+            const now = new Date();
+            const hour24 = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const time12 = to12Hour(hour24);
+            document.getElementById('currentTime').textContent = 
+                `${String(time12.hour).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${time12.amPm}`;
+        }
+
+        // Update current time every second
+        setInterval(updateCurrentTime, 1000);
+        updateCurrentTime();
+        updateAlarmDisplay();
+
+        // Hour controls
+        document.getElementById('hourUp').addEventListener('click', () => {
+            alarmHour++;
+            if (alarmHour > 12) {
+                alarmHour = 1;
+            }
+            if (alarmHour === 12) {
+                alarmAmPm = alarmAmPm === 'AM' ? 'PM' : 'AM';
+            }
+            updateAlarmDisplay();
+        });
+
+        document.getElementById('hourDown').addEventListener('click', () => {
+            alarmHour--;
+            if (alarmHour < 1) {
+                alarmHour = 12;
+            }
+            if (alarmHour === 11) {
+                alarmAmPm = alarmAmPm === 'AM' ? 'PM' : 'AM';
+            }
+            updateAlarmDisplay();
+        });
+
+        // Minute controls
+        document.getElementById('minuteUp').addEventListener('click', () => {
+            alarmMinute++;
+            if (alarmMinute > 59) {
+                alarmMinute = 0;
+            }
+            updateAlarmDisplay();
+        });
+
+        document.getElementById('minuteDown').addEventListener('click', () => {
+            alarmMinute--;
+            if (alarmMinute < 0) {
+                alarmMinute = 59;
+            }
+            updateAlarmDisplay();
+        });
+
+        // Night mode toggle
+        document.getElementById('nightModeBtn').addEventListener('click', () => {
+            nightMode = !nightMode;
+            const btn = document.getElementById('nightModeBtn');
+            const container = document.querySelector('.container');
+            if (nightMode) {
+                btn.textContent = 'Day Mode';
+                btn.classList.add('active');
+                container.classList.add('night-mode');
+                // Night mode: Start with very dark background (almost black)
+                document.body.style.backgroundColor = '#000011';
+                document.body.style.color = '#fff';
+            } else {
+                btn.textContent = 'Night Mode';
+                btn.classList.remove('active');
+                container.classList.remove('night-mode');
+                document.body.style.backgroundColor = '#d4c5a0';
+                document.body.style.color = '#fff';
+            }
+            // Reset solar effect when switching modes
+            resetSolarEffect();
+        });
+
+        // Sound selection
+        document.querySelectorAll('.sound-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.sound-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSound = btn.dataset.sound;
+            });
+        });
+
+        // Preview sound
+        document.getElementById('previewBtn').addEventListener('click', () => {
+            if (previewAudio) {
+                previewAudio.pause();
+                previewAudio = null;
+            }
+            
+            previewAudio = new Audio(soundSources[currentSound]);
+            previewAudio.volume = 0.5;
+            previewAudio.play().catch(e => console.log('Audio preview error:', e));
+        });
+
+        document.getElementById('stopPreviewBtn').addEventListener('click', () => {
+            if (previewAudio) {
+                previewAudio.pause();
+                previewAudio = null;
+            }
+        });
+
+        // Set alarm
+        document.getElementById('setAlarmBtn').addEventListener('click', () => {
+            const hour24 = to24Hour(alarmHour, alarmAmPm);
+
+            const now = new Date();
+            alarmTime = new Date();
+            alarmTime.setHours(hour24, alarmMinute, 0, 0);
+
+            // If alarm time has passed today, set it for tomorrow
+            if (alarmTime <= now) {
+                alarmTime.setDate(alarmTime.getDate() + 1);
+            }
+
+            const timeUntilAlarm = alarmTime - now;
+            const minutesUntilAlarm = Math.floor(timeUntilAlarm / 60000);
+
+            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmAmPm}`;
+            document.getElementById('status').textContent = `Alarm is set for ${displayTime} (${minutesUntilAlarm} minutes from now)`;
+            document.getElementById('status').classList.add('active');
+            document.getElementById('setAlarmBtn').classList.add('hidden');
+            document.getElementById('cancelAlarmBtn').classList.remove('hidden');
+
+            // Start checking for alarm
+            startAlarmCheck();
+        });
+
+        // Cancel alarm
+        document.getElementById('cancelAlarmBtn').addEventListener('click', () => {
+            alarmTime = null;
+            if (alarmInterval) {
+                clearInterval(alarmInterval);
+                alarmInterval = null;
+            }
+            stopAmbientAudio();
+            resetSolarEffect();
+            document.getElementById('status').textContent = '';
+            document.getElementById('status').classList.remove('active');
+            document.getElementById('setAlarmBtn').classList.remove('hidden');
+            document.getElementById('cancelAlarmBtn').classList.add('hidden');
+        });
+
+        // Start alarm checking
+        function startAlarmCheck() {
+            if (alarmInterval) {
+                clearInterval(alarmInterval);
+            }
+
+            alarmInterval = setInterval(() => {
+                const now = new Date();
+                const timeUntilAlarm = alarmTime - now;
+                const minutesUntilAlarm = timeUntilAlarm / 60000;
+
+                // Start solar effect 15 minutes before alarm
+                if (minutesUntilAlarm <= 15 && minutesUntilAlarm > 0) {
+                    const progress = 1 - (minutesUntilAlarm / 15); // 0 to 1 over 15 minutes
+                    updateSolarEffect(progress);
+                    startAmbientAudio(progress);
+                } else if (minutesUntilAlarm > 15) {
+                    // More than 15 minutes away - stop ambient audio if playing
+                    stopAmbientAudio();
+                }
+
+                // Trigger alarm
+                if (timeUntilAlarm <= 0) {
+                    triggerAlarm();
+                }
+            }, 1000);
+        }
+
+        // Update solar effect (brightness)
+        function updateSolarEffect(progress) {
+            // Progress goes from 0 to 1 over 15 minutes
+            const brightness = Math.min(progress, 1);
+            
+            // Calculate sunrise colors (warm orange/yellow tones)
+            const r = Math.floor(brightness * 255);
+            const g = Math.floor(brightness * 220);
+            const b = Math.floor(brightness * 150);
+            
+            // Background transitions start from night mode base or day mode base
+            if (nightMode) {
+                // In night mode: start from very dark (#000011) and gradually brighten
+                const baseR = 0;
+                const baseG = 0;
+                const baseB = 17;
+                const finalR = baseR + r;
+                const finalG = baseG + g;
+                const finalB = baseB + b;
+                document.body.style.backgroundColor = `rgb(${Math.min(finalR, 255)}, ${Math.min(finalG, 255)}, ${Math.min(finalB, 255)})`;
+            } else {
+                // Day mode: start from light beige and brighten
+                const baseR = 212;
+                const baseG = 197;
+                const baseB = 160;
+                const finalR = Math.min(baseR + r * 0.3, 255);
+                const finalG = Math.min(baseG + g * 0.3, 255);
+                const finalB = Math.min(baseB + b * 0.3, 255);
+                document.body.style.backgroundColor = `rgb(${finalR}, ${finalG}, ${finalB})`;
+            }
+            
+            // Text color changes based on brightness
+            document.body.style.color = brightness > 0.4 ? '#000' : '#fff';
+            
+            // Sun appears and grows
+            const sun = document.getElementById('sun');
+            const sunOpacity = brightness;
+            const sunSize = 200 + (brightness * 400); // Grow sun from 200px to 600px
+            const sunPosition = 50 + (brightness * 20); // Move sun up as it rises
+            
+            sun.style.opacity = sunOpacity;
+            sun.style.width = `${sunSize}px`;
+            sun.style.height = `${sunSize}px`;
+            sun.style.top = `${sunPosition}%`;
+            
+            if (brightness > 0.1) {
+                sun.classList.add('active');
+            }
+            
+            // Update gradient overlay
+            const gradient = document.getElementById('solar-gradient');
+            gradient.style.opacity = Math.max(0, 1 - brightness * 1.2);
+            
+            // Add sunrise gradient overlay
+            let sunriseGrad = document.getElementById('sunrise-gradient');
+            if (!sunriseGrad) {
+                sunriseGrad = document.createElement('div');
+                sunriseGrad.id = 'sunrise-gradient';
+                sunriseGrad.className = 'sunrise-gradient';
+                document.body.appendChild(sunriseGrad);
+            }
+            sunriseGrad.style.opacity = brightness * 0.6;
+        }
+
+        // Reset solar effect
+        function resetSolarEffect() {
+            // Reset to base colors based on mode - night mode is very dark
+            document.body.style.backgroundColor = nightMode ? '#000011' : '#d4c5a0';
+            document.body.style.color = '#fff';
+            const sun = document.getElementById('sun');
+            sun.style.opacity = '0';
+            sun.style.width = '200px';
+            sun.style.height = '200px';
+            sun.style.top = '50%';
+            sun.classList.remove('active');
+            document.getElementById('solar-gradient').style.opacity = '1';
+            const sunriseGrad = document.getElementById('sunrise-gradient');
+            if (sunriseGrad) {
+                sunriseGrad.style.opacity = '0';
+            }
+        }
+
+        // Start ambient audio (bird sounds)
+        function startAmbientAudio(progress) {
+            if (!ambientAudioPlaying) {
+                const audio = document.getElementById('ambientAudio');
+                audio.src = soundSources[currentSound];
+                audio.volume = 0; // Start silent
+                audio.play().catch(e => console.log('Audio play error:', e));
+                ambientAudioPlaying = true;
+            }
+
+            // Volume increases with progress (0 to 0.7 max)
+            const volume = Math.min(progress * 0.7, 0.7);
+            const audio = document.getElementById('ambientAudio');
+            audio.volume = volume;
+        }
+
+        // Stop ambient audio
+        function stopAmbientAudio() {
+            const audio = document.getElementById('ambientAudio');
+            audio.pause();
+            audio.currentTime = 0;
+            ambientAudioPlaying = false;
+        }
+
+        // Trigger alarm
+        function triggerAlarm() {
+            clearInterval(alarmInterval);
+            alarmInterval = null;
+
+            // Stop ambient audio
+            stopAmbientAudio();
+
+            // Play alarm sound at full volume
+            const alarmAudio = document.getElementById('alarmAudio');
+            alarmAudio.src = soundSources[currentSound];
+            alarmAudio.volume = 1.0;
+            alarmAudio.play().catch(e => console.log('Alarm audio error:', e));
+
+            // Show wake up screen
+            document.getElementById('mainContainer').classList.add('hidden');
+            document.getElementById('alarmActive').classList.remove('hidden');
+
+            // Ensure full brightness
+            updateSolarEffect(1);
+        }
+
+        // Stop alarm
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            const alarmAudio = document.getElementById('alarmAudio');
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
+
+            document.getElementById('alarmActive').classList.add('hidden');
+            document.getElementById('mainContainer').classList.remove('hidden');
+
+            // Reset alarm
+            alarmTime = null;
+            resetSolarEffect();
+            document.getElementById('status').textContent = '';
+            document.getElementById('status').classList.remove('active');
+            document.getElementById('setAlarmBtn').classList.remove('hidden');
+            document.getElementById('cancelAlarmBtn').classList.add('hidden');
+        });
+
+        // Snooze
+        document.getElementById('snoozeBtn').addEventListener('click', () => {
+            const alarmAudio = document.getElementById('alarmAudio');
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
+
+            document.getElementById('alarmActive').classList.add('hidden');
+            document.getElementById('mainContainer').classList.remove('hidden');
+
+            // Set alarm for 10 minutes from now
+            alarmTime = new Date(Date.now() + 10 * 60000);
+            const hour24 = alarmTime.getHours();
+            const time12 = to12Hour(hour24);
+            alarmHour = time12.hour;
+            alarmMinute = alarmTime.getMinutes();
+            alarmAmPm = time12.amPm;
+            updateAlarmDisplay();
+
+            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmAmPm}`;
+            document.getElementById('status').textContent = `Alarm snoozed! Will wake you at ${displayTime}`;
+            document.getElementById('status').classList.add('active');
+            document.getElementById('setAlarmBtn').classList.remove('hidden');
+            document.getElementById('cancelAlarmBtn').classList.remove('hidden');
+
+            resetSolarEffect();
+            startAlarmCheck();
+        });
+
+        // Initialize - start in day mode
+        resetSolarEffect();
+        document.body.style.backgroundColor = '#d4c5a0';
+    </script>
+</body>
+</html>
