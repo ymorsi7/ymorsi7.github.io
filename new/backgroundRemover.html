@@ -16,7 +16,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-	<!-- No external ML libraries - using advanced computer vision algorithms -->
+	<!-- MediaPipe Selfie Segmentation - Free, no API key required -->
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675469404/selfie_segmentation.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466864/camera_utils.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1620248257/drawing_utils.js" crossorigin="anonymous"></script>
 
 	<style>
 		* {
@@ -601,11 +604,43 @@
 	<script>
 		let currentImage = null;
 		let resultImageData = null;
+		let selfieSegmentation = null;
 
-		// Initialize - no model needed, using advanced algorithms
+		// Initialize MediaPipe Selfie Segmentation
 		async function initializeModel() {
-			showAlert('Ready! Upload an image to remove its background.', 'success');
-			return true;
+			try {
+				showAlert('Loading AI model...', 'info');
+				updateProgress(10, 'Loading MediaPipe Selfie Segmentation...');
+				
+				// Wait for MediaPipe to be available
+				if (typeof SelfieSegmentation === 'undefined') {
+					await new Promise(resolve => setTimeout(resolve, 1000));
+					if (typeof SelfieSegmentation === 'undefined') {
+						throw new Error('MediaPipe failed to load');
+					}
+				}
+				
+				selfieSegmentation = new SelfieSegmentation({
+					locateFile: (file) => {
+						return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675469404/${file}`;
+					}
+				});
+				
+				selfieSegmentation.setOptions({
+					modelSelection: 1, // 0 = general, 1 = landscape (better for photos)
+					smoothSegmentation: true
+				});
+				
+				await selfieSegmentation.initialize();
+				
+				updateProgress(30, 'Model loaded successfully');
+				showAlert('Ready! Upload an image to remove its background.', 'success');
+				return true;
+			} catch (error) {
+				console.error('Error loading model:', error);
+				showAlert('Failed to load AI model. Please refresh the page.', 'error');
+				return false;
+			}
 		}
 
 		// Show alert
@@ -662,8 +697,13 @@
 			}
 		});
 
-		// Process image with advanced algorithm
+		// Process image using MediaPipe Selfie Segmentation
 		async function processImage(file) {
+			if (!selfieSegmentation) {
+				showAlert('AI model is still loading. Please wait...', 'error');
+				return;
+			}
+
 			try {
 				// Show processing card
 				document.getElementById('processingCard').classList.add('show');
@@ -681,29 +721,75 @@
 
 				currentImage = img;
 				document.getElementById('originalImage').src = imageUrl;
-				updateProgress(30, 'Analyzing image...');
+				updateProgress(40, 'Detecting person...');
 
-				// Wait a bit for UI update
-				await new Promise(resolve => setTimeout(resolve, 300));
-
-				// Create canvas for result
+				// Create canvas for processing
 				const canvas = document.getElementById('resultCanvas');
 				const ctx = canvas.getContext('2d');
-				
 				canvas.width = img.width;
 				canvas.height = img.height;
-
-				// Use advanced multi-stage background removal
-				updateProgress(40, 'Detecting background...');
-				await advancedBackgroundRemoval(img, canvas, ctx);
 				
-				updateProgress(90, 'Final refinement...');
+				// Draw original image
+				ctx.drawImage(img, 0, 0);
 				
-				// Store result for download
-				resultImageData = canvas.toDataURL('image/png');
-
-				updateProgress(100, 'Complete!');
-				showAlert('Background removed successfully!', 'success');
+				// Get image data
+				const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+				
+				// Process with MediaPipe
+				updateProgress(60, 'Segmenting image...');
+				await new Promise((resolve, reject) => {
+					selfieSegmentation.onResults((results) => {
+						try {
+							// Draw original image first
+							ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+							
+							// Get segmentation mask
+							const mask = results.segmentationMask;
+							
+							// Apply mask to remove background
+							updateProgress(80, 'Removing background...');
+							const outputImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+							const outputData = outputImageData.data;
+							
+							// Create mask canvas to get mask data
+							const maskCanvas = document.createElement('canvas');
+							maskCanvas.width = canvas.width;
+							maskCanvas.height = canvas.height;
+							const maskCtx = maskCanvas.getContext('2d');
+							maskCtx.drawImage(mask, 0, 0, canvas.width, canvas.height);
+							const maskImageData = maskCtx.getImageData(0, 0, canvas.width, canvas.height);
+							const maskData = maskImageData.data;
+							
+							// Apply mask - set alpha to 0 for background pixels
+							for (let i = 0; i < outputData.length; i += 4) {
+								const maskIdx = i;
+								// Mask is grayscale, so use red channel (or any channel)
+								const maskValue = maskData[maskIdx];
+								
+								// If mask is dark (background), make transparent
+								// MediaPipe returns white for foreground, black for background
+								if (maskValue < 128) {
+									outputData[i + 3] = 0; // Set alpha to 0 (transparent)
+								}
+							}
+							
+							ctx.putImageData(outputImageData, 0, 0);
+							
+							// Store result for download
+							resultImageData = canvas.toDataURL('image/png');
+							
+							updateProgress(100, 'Complete!');
+							showAlert('Background removed successfully!', 'success');
+							
+							resolve();
+						} catch (err) {
+							reject(err);
+						}
+					});
+					
+					// Send image to MediaPipe
+					selfieSegmentation.send({ image: img });
+				});
 				
 				// Clean up
 				URL.revokeObjectURL(imageUrl);
@@ -714,8 +800,8 @@
 				updateProgress(0, 'Error occurred');
 			}
 		}
-
-		// Advanced multi-stage background removal algorithm
+		
+		// Advanced multi-stage background removal algorithm (kept as fallback, not currently used)
 		async function advancedBackgroundRemoval(img, canvas, ctx) {
 			updateProgress(45, 'Stage 1: Analyzing image structure...');
 			
