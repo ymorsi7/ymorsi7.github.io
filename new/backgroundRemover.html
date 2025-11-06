@@ -16,10 +16,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-	<!-- MediaPipe Selfie Segmentation - Free, no API key required -->
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675469404/selfie_segmentation.js" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466864/camera_utils.js" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1620248257/drawing_utils.js" crossorigin="anonymous"></script>
+	<!-- TensorFlow.js and BodyPix - Free, no API key required -->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
 
 	<style>
 		* {
@@ -604,41 +602,116 @@
 	<script>
 		let currentImage = null;
 		let resultImageData = null;
-		let selfieSegmentation = null;
+		let bodyPixModel = null;
 
-		// Initialize MediaPipe Selfie Segmentation
+		// Load BodyPix using import() - more reliable
+		async function loadBodyPix() {
+			// Try using dynamic import with different CDNs
+			const importUrls = [
+				'https://cdn.skypack.dev/@tensorflow-models/body-pix@2.2.1',
+				'https://esm.sh/@tensorflow-models/body-pix@2.2.1'
+			];
+			
+			for (const url of importUrls) {
+				try {
+					const module = await import(url);
+					// BodyPix might be exported as default or named export
+					if (module.default) {
+						window.bodyPix = module.default;
+					} else if (module.bodyPix) {
+						window.bodyPix = module.bodyPix;
+					} else {
+						window.bodyPix = module;
+					}
+					return; // Success!
+				} catch (error) {
+					console.warn(`Failed to import from ${url}:`, error);
+					continue;
+				}
+			}
+			
+			// Fallback: try script tag with correct path
+			return new Promise((resolve, reject) => {
+				if (typeof bodyPix !== 'undefined') {
+					resolve();
+					return;
+				}
+				
+				const script = document.createElement('script');
+				// Try the actual npm package structure
+				script.src = 'https://unpkg.com/@tensorflow-models/body-pix@2.2.1';
+				script.type = 'module';
+				script.onload = () => {
+					setTimeout(() => {
+						if (typeof bodyPix !== 'undefined') {
+							resolve();
+						} else {
+							reject(new Error('BodyPix loaded but not available as global'));
+						}
+					}, 1000);
+				};
+				script.onerror = () => reject(new Error('Failed to load BodyPix script'));
+				document.head.appendChild(script);
+			});
+		}
+
+		// Initialize BodyPix model
 		async function initializeModel() {
 			try {
 				showAlert('Loading AI model...', 'info');
-				updateProgress(10, 'Loading MediaPipe Selfie Segmentation...');
+				updateProgress(10, 'Loading TensorFlow.js...');
 				
-				// Wait for MediaPipe to be available
-				if (typeof SelfieSegmentation === 'undefined') {
-					await new Promise(resolve => setTimeout(resolve, 1000));
-					if (typeof SelfieSegmentation === 'undefined') {
-						throw new Error('MediaPipe failed to load');
-					}
+				// Wait for TensorFlow.js
+				let retries = 0;
+				while (typeof tf === 'undefined' && retries < 10) {
+					await new Promise(resolve => setTimeout(resolve, 500));
+					retries++;
 				}
 				
-				selfieSegmentation = new SelfieSegmentation({
-					locateFile: (file) => {
-						return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1.1675469404/${file}`;
-					}
-				});
+				if (typeof tf === 'undefined') {
+					throw new Error('TensorFlow.js failed to load. Please check your internet connection.');
+				}
 				
-				selfieSegmentation.setOptions({
-					modelSelection: 1, // 0 = general, 1 = landscape (better for photos)
-					smoothSegmentation: true
-				});
+				updateProgress(15, 'Loading BodyPix library...');
 				
-				await selfieSegmentation.initialize();
+				// Load BodyPix dynamically
+				try {
+					await loadBodyPix();
+				} catch (error) {
+					console.error('Failed to load BodyPix:', error);
+					throw new Error('BodyPix library failed to load. Please refresh the page.');
+				}
 				
-				updateProgress(30, 'Model loaded successfully');
-				showAlert('Ready! Upload an image to remove its background.', 'success');
-				return true;
+				updateProgress(20, 'Loading BodyPix model...');
+				
+				// Try to load MobileNet first (faster, lighter)
+				try {
+					bodyPixModel = await bodyPix.load({
+						architecture: 'MobileNetV1',
+						outputStride: 16,
+						multiplier: 0.75,
+						quantBytes: 2
+					});
+					updateProgress(30, 'Model loaded successfully');
+					showAlert('Ready! Upload an image to remove its background.', 'success');
+					return true;
+				} catch (error) {
+					console.warn('MobileNet failed, trying ResNet50...', error);
+					updateProgress(25, 'Trying alternative model...');
+					// Fallback to ResNet50 if MobileNet fails
+					bodyPixModel = await bodyPix.load({
+						architecture: 'ResNet50',
+						outputStride: 16,
+						quantBytes: 2,
+						multiplier: 0.75
+					});
+					updateProgress(30, 'Model loaded successfully');
+					showAlert('Ready! Upload an image to remove its background.', 'success');
+					return true;
+				}
 			} catch (error) {
 				console.error('Error loading model:', error);
-				showAlert('Failed to load AI model. Please refresh the page.', 'error');
+				showAlert('Failed to load AI model: ' + error.message + '. Please refresh the page.', 'error');
 				return false;
 			}
 		}
@@ -697,9 +770,9 @@
 			}
 		});
 
-		// Process image using MediaPipe Selfie Segmentation
+		// Process image using BodyPix
 		async function processImage(file) {
-			if (!selfieSegmentation) {
+			if (!bodyPixModel) {
 				showAlert('AI model is still loading. Please wait...', 'error');
 				return;
 			}
@@ -732,64 +805,74 @@
 				// Draw original image
 				ctx.drawImage(img, 0, 0);
 				
+				// Process with BodyPix
+				updateProgress(60, 'Segmenting image...');
+				const segmentation = await bodyPixModel.segmentPerson(img, {
+					flipHorizontal: false,
+					internalResolution: 'high',
+					segmentationThreshold: 0.7
+				});
+				
+				updateProgress(80, 'Removing background...');
+				
 				// Get image data
 				const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+				const data = imageData.data;
+				const mask = segmentation.data;
 				
-				// Process with MediaPipe
-				updateProgress(60, 'Segmenting image...');
-				await new Promise((resolve, reject) => {
-					selfieSegmentation.onResults((results) => {
-						try {
-							// Draw original image first
-							ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-							
-							// Get segmentation mask
-							const mask = results.segmentationMask;
-							
-							// Apply mask to remove background
-							updateProgress(80, 'Removing background...');
-							const outputImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-							const outputData = outputImageData.data;
-							
-							// Create mask canvas to get mask data
-							const maskCanvas = document.createElement('canvas');
-							maskCanvas.width = canvas.width;
-							maskCanvas.height = canvas.height;
-							const maskCtx = maskCanvas.getContext('2d');
-							maskCtx.drawImage(mask, 0, 0, canvas.width, canvas.height);
-							const maskImageData = maskCtx.getImageData(0, 0, canvas.width, canvas.height);
-							const maskData = maskImageData.data;
-							
-							// Apply mask - set alpha to 0 for background pixels
-							for (let i = 0; i < outputData.length; i += 4) {
-								const maskIdx = i;
-								// Mask is grayscale, so use red channel (or any channel)
-								const maskValue = maskData[maskIdx];
-								
-								// If mask is dark (background), make transparent
-								// MediaPipe returns white for foreground, black for background
-								if (maskValue < 128) {
-									outputData[i + 3] = 0; // Set alpha to 0 (transparent)
-								}
-							}
-							
-							ctx.putImageData(outputImageData, 0, 0);
-							
-							// Store result for download
-							resultImageData = canvas.toDataURL('image/png');
-							
-							updateProgress(100, 'Complete!');
-							showAlert('Background removed successfully!', 'success');
-							
-							resolve();
-						} catch (err) {
-							reject(err);
-						}
-					});
+				// Resize mask if needed (BodyPix might return smaller mask)
+				let finalMask = mask;
+				if (mask.length !== canvas.width * canvas.height) {
+					// Need to resize mask
+					const maskCanvas = document.createElement('canvas');
+					maskCanvas.width = segmentation.width;
+					maskCanvas.height = segmentation.height;
+					const maskCtx = maskCanvas.getContext('2d');
+					const maskImageData = maskCtx.createImageData(segmentation.width, segmentation.height);
+					for (let i = 0; i < mask.length; i++) {
+						const val = mask[i] ? 255 : 0;
+						maskImageData.data[i * 4] = val;
+						maskImageData.data[i * 4 + 1] = val;
+						maskImageData.data[i * 4 + 2] = val;
+						maskImageData.data[i * 4 + 3] = 255;
+					}
+					maskCtx.putImageData(maskImageData, 0, 0);
 					
-					// Send image to MediaPipe
-					selfieSegmentation.send({ image: img });
-				});
+					// Draw resized mask to main canvas temporarily to get correct size
+					const tempCanvas = document.createElement('canvas');
+					tempCanvas.width = canvas.width;
+					tempCanvas.height = canvas.height;
+					const tempCtx = tempCanvas.getContext('2d');
+					tempCtx.drawImage(maskCanvas, 0, 0, canvas.width, canvas.height);
+					const resizedMaskData = tempCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+					
+					// Apply mask
+					for (let i = 0; i < data.length; i += 4) {
+						const maskIdx = i;
+						const maskValue = resizedMaskData[maskIdx]; // Red channel
+						
+						// If mask is dark (background), make transparent
+						if (maskValue < 128) {
+							data[i + 3] = 0; // Set alpha to 0 (transparent)
+						}
+					}
+				} else {
+					// Apply mask directly
+					for (let i = 0; i < data.length; i += 4) {
+						const maskIdx = i / 4;
+						if (!mask[maskIdx]) {
+							data[i + 3] = 0; // Set alpha to 0 (transparent)
+						}
+					}
+				}
+				
+				ctx.putImageData(imageData, 0, 0);
+				
+				// Store result for download
+				resultImageData = canvas.toDataURL('image/png');
+				
+				updateProgress(100, 'Complete!');
+				showAlert('Background removed successfully!', 'success');
 				
 				// Clean up
 				URL.revokeObjectURL(imageUrl);
@@ -1310,9 +1393,12 @@
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 		}
 
-		// Initialize on page load
+		// Initialize on page load - wait a bit for scripts to load
 		window.addEventListener('load', () => {
-			initializeModel();
+			// Wait a moment for all scripts to load
+			setTimeout(() => {
+				initializeModel();
+			}, 500);
 		});
 	</script>
 </body>
