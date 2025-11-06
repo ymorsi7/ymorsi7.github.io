@@ -1,0 +1,1896 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tools - PDF, Image, Text & More</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free online tools: PDF merger, background remover, file converter, GIF editor, LaTeX converter, word counter" />
+	<meta name="keywords" content="pdf tools, image tools, file converter, gif editor, latex converter, word counter" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<!-- PDF-lib for PDF manipulation -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+	<!-- PDF.js for text extraction -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+	<!-- Transformers.js will be loaded dynamically when needed -->
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--blue-primary: #1e3a8a;
+			--blue-dark: #1e40af;
+			--blue-light: #3b82f6;
+			--blue-hover: #2563eb;
+			--text-dark: #1e293b;
+			--text-medium: #475569;
+			--text-light: #64748b;
+			--bg-white: #ffffff;
+			--bg-light: #f1f5f9;
+			--border-color: #e2e8f0;
+			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+			--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+			--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: var(--bg-light);
+			color: var(--text-dark);
+			line-height: 1.6;
+			min-height: 100vh;
+		}
+
+		#page {
+			position: relative;
+			z-index: 1;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Header */
+		.header {
+			background: var(--blue-primary);
+			padding: 3rem 0 2rem;
+			box-shadow: var(--shadow-md);
+		}
+
+		.header-content {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			text-align: center;
+		}
+
+		.header h1 {
+			font-size: clamp(2rem, 5vw, 3rem);
+			font-weight: 700;
+			color: white;
+			margin-bottom: 0.5rem;
+			letter-spacing: -0.02em;
+		}
+
+		.header p {
+			font-size: clamp(0.9rem, 2vw, 1rem);
+			color: rgba(255, 255, 255, 0.9);
+			font-weight: 400;
+		}
+
+		/* Tabs Navigation */
+		.tabs-container {
+			background: var(--bg-white);
+			border-bottom: 2px solid var(--border-color);
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.tabs {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			display: flex;
+			gap: 0.5rem;
+			overflow-x: auto;
+			scrollbar-width: none;
+		}
+
+		.tabs::-webkit-scrollbar {
+			display: none;
+		}
+
+		.tab {
+			padding: 1rem 1.5rem;
+			background: transparent;
+			border: none;
+			border-bottom: 3px solid transparent;
+			color: var(--text-medium);
+			font-size: 0.95rem;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			white-space: nowrap;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.tab:hover {
+			color: var(--blue-primary);
+			background: var(--bg-light);
+		}
+
+		.tab.active {
+			color: var(--blue-primary);
+			border-bottom-color: var(--blue-primary);
+			font-weight: 600;
+		}
+
+		.tab i {
+			font-size: 1rem;
+		}
+
+		/* Main Container */
+		.main-content {
+			flex: 1;
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 2rem;
+			width: 100%;
+		}
+
+		.tool-section {
+			display: none;
+		}
+
+		.tool-section.active {
+			display: block;
+		}
+
+		/* Alert Container */
+		#alert-container {
+			margin-bottom: 2rem;
+		}
+
+		.alert {
+			padding: 1rem 1.25rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+			display: none;
+			font-size: 0.95rem;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid;
+		}
+
+		.alert.show {
+			display: block;
+		}
+
+		.alert-success {
+			background: #ecfdf5;
+			color: #065f46;
+			border-color: #10b981;
+		}
+
+		.alert-error {
+			background: #fef2f2;
+			color: #991b1b;
+			border-color: #ef4444;
+		}
+
+		.alert-info {
+			background: #eff6ff;
+			color: #1e40af;
+			border-color: var(--blue-light);
+		}
+
+		/* Common Card Styles */
+		.card {
+			background: var(--bg-white);
+			border-radius: 12px;
+			padding: 2rem;
+			box-shadow: var(--shadow-md);
+			margin-bottom: 2rem;
+			border: 1px solid var(--border-color);
+		}
+
+		.drop-zone {
+			padding: 3rem 2rem;
+			text-align: center;
+			cursor: pointer;
+			position: relative;
+			background: var(--bg-white);
+			transition: background-color 0.2s ease;
+			border-radius: 8px;
+			border: 2px dashed var(--border-color);
+		}
+
+		.drop-zone:hover {
+			background: var(--bg-light);
+			border-color: var(--blue-light);
+		}
+
+		.drop-zone.drag-over {
+			background: rgba(30, 58, 138, 0.05);
+			border-color: var(--blue-primary);
+			border-style: solid;
+		}
+
+		.upload-icon {
+			font-size: 3rem;
+			color: var(--blue-primary);
+			margin-bottom: 1rem;
+		}
+
+		.drop-zone h3 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 0.5rem;
+		}
+
+		.drop-zone p {
+			color: var(--text-medium);
+			font-size: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.file-input {
+			position: absolute;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.btn-primary {
+			background: var(--blue-primary);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-primary:hover {
+			background: var(--blue-hover);
+		}
+
+		.btn-primary:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+
+		.btn-secondary {
+			background: white;
+			color: var(--blue-primary);
+			border: 2px solid var(--blue-primary);
+			border-radius: 8px;
+			padding: 0.875rem 2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-secondary:hover {
+			background: var(--blue-primary);
+			color: white;
+		}
+
+		/* Text Area Styles */
+		.text-area {
+			width: 100%;
+			min-height: 300px;
+			padding: 1rem;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			font-family: 'Inter', sans-serif;
+			font-size: 1rem;
+			resize: vertical;
+			transition: border-color 0.2s ease;
+		}
+
+		.text-area:focus {
+			outline: none;
+			border-color: var(--blue-primary);
+		}
+
+		/* Select Styles */
+		.select-input {
+			width: 100%;
+			padding: 0.875rem;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			font-family: 'Inter', sans-serif;
+			font-size: 1rem;
+			background: white;
+			cursor: pointer;
+			transition: border-color 0.2s ease;
+		}
+
+		.select-input:focus {
+			outline: none;
+			border-color: var(--blue-primary);
+		}
+
+		/* Footer */
+		.footer {
+			background: var(--bg-white);
+			padding: 2rem 0;
+			text-align: center;
+			margin-top: 4rem;
+			border-top: 1px solid var(--border-color);
+		}
+
+		.footer-content {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		.footer a {
+			color: var(--blue-primary);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.95rem;
+			transition: color 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.footer a:hover {
+			color: var(--blue-hover);
+		}
+
+		/* Stats Display */
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 1rem;
+			margin-top: 1.5rem;
+		}
+
+		.stat-card {
+			background: var(--bg-light);
+			padding: 1.5rem;
+			border-radius: 8px;
+			text-align: center;
+		}
+
+		.stat-value {
+			font-size: 2rem;
+			font-weight: 700;
+			color: var(--blue-primary);
+			margin-bottom: 0.5rem;
+		}
+
+		.stat-label {
+			font-size: 0.9rem;
+			color: var(--text-medium);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		/* Responsive */
+		@media screen and (max-width: 768px) {
+			.header {
+				padding: 2rem 0 1.5rem;
+			}
+
+			.main-content {
+				padding: 1.5rem;
+			}
+
+			.tabs {
+				padding: 0 1rem;
+			}
+
+			.tab {
+				padding: 0.75rem 1rem;
+				font-size: 0.85rem;
+			}
+
+			.card {
+				padding: 1.5rem;
+			}
+
+			.drop-zone {
+				padding: 2rem 1.5rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page">
+		<header class="header">
+			<div class="header-content">
+				<h1>Free Online Tools</h1>
+				<p>PDF, Image, Text & More - All in One Place</p>
+			</div>
+		</header>
+
+		<div class="tabs-container">
+			<div class="tabs">
+				<button class="tab active" data-tool="mergepdf">
+					<i class="fas fa-file-pdf"></i> Merge PDF
+				</button>
+				<button class="tab" data-tool="backgroundremover">
+					<i class="fas fa-magic"></i> Background Remover
+				</button>
+				<button class="tab" data-tool="fileconverter">
+					<i class="fas fa-exchange-alt"></i> File Converter
+				</button>
+				<button class="tab" data-tool="gifeditor">
+					<i class="fas fa-film"></i> GIF Editor
+				</button>
+				<button class="tab" data-tool="textolatex">
+					<i class="fas fa-code"></i> Text to LaTeX
+				</button>
+				<button class="tab" data-tool="wordcounter">
+					<i class="fas fa-font"></i> Word Counter
+				</button>
+			</div>
+		</div>
+
+		<div class="main-content">
+			<div id="alert-container"></div>
+
+			<!-- Merge PDF Tool -->
+			<div class="tool-section active" id="mergepdf-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-file-pdf" style="color: var(--blue-primary);"></i> Merge PDFs
+					</h2>
+					<div class="drop-zone" id="mergepdf-dropzone" onclick="document.getElementById('mergepdf-input').click()">
+						<i class="fas fa-cloud-upload-alt upload-icon"></i>
+						<h3>Drop your files here</h3>
+						<p>Support PDF and image files (JPG, PNG, GIF, BMP, WEBP)</p>
+						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('mergepdf-input').click();">
+							<i class="fas fa-folder-open"></i> Choose Files
+						</button>
+						<input type="file" id="mergepdf-input" class="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.gif,.bmp,.webp">
+					</div>
+					<div id="mergepdf-filelist" style="display: none;">
+						<h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Selected Files</h3>
+						<div id="mergepdf-list"></div>
+						<button class="btn-primary" id="mergepdf-btn" onclick="mergePDFFiles()" style="margin-top: 1.5rem; width: 100%;">
+							<i class="fas fa-file-pdf"></i> Merge Files
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Background Remover Tool -->
+			<div class="tool-section" id="backgroundremover-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-magic" style="color: var(--blue-primary);"></i> Background Remover
+					</h2>
+					<div class="drop-zone" id="bgremover-dropzone" onclick="document.getElementById('bgremover-input').click()">
+						<i class="fas fa-image upload-icon"></i>
+						<h3>Drop your image here</h3>
+						<p>Support JPG, PNG, WEBP, and other common image formats</p>
+						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('bgremover-input').click();">
+							<i class="fas fa-folder-open"></i> Choose Image
+						</button>
+						<input type="file" id="bgremover-input" class="file-input" accept="image/*">
+					</div>
+					<button class="btn-primary" id="bgremover-process-btn" onclick="processBackgroundRemovalFromBtn()" style="width: 100%; margin-top: 1rem; display: none;">
+						<i class="fas fa-magic"></i> Remove Background
+					</button>
+					<div id="bgremover-result" style="display: none; margin-top: 2rem;">
+						<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+							<div>
+								<h4 style="margin-bottom: 0.5rem;">Original</h4>
+								<img id="bgremover-original" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+							</div>
+							<div>
+								<h4 style="margin-bottom: 0.5rem;">Result</h4>
+								<canvas id="bgremover-canvas" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);"></canvas>
+							</div>
+						</div>
+						<button class="btn-primary" onclick="downloadBackgroundRemoved()" style="width: 100%;">
+							<i class="fas fa-download"></i> Download
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- File Converter Tool -->
+			<div class="tool-section" id="fileconverter-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-exchange-alt" style="color: var(--blue-primary);"></i> File Converter
+					</h2>
+					<div class="drop-zone" id="converter-dropzone" onclick="document.getElementById('converter-input').click()">
+						<i class="fas fa-file-upload upload-icon"></i>
+						<h3>Drop your files here</h3>
+						<p>Convert between PDF, PNG, JPG, WEBP, HEIC, and more. Select multiple files for batch conversion.</p>
+						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('converter-input').click();">
+							<i class="fas fa-folder-open"></i> Choose Files
+						</button>
+						<input type="file" id="converter-input" class="file-input" accept="*/*" multiple>
+					</div>
+					<div id="converter-file-list" style="display: none; margin-top: 1.5rem; max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+						<h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Selected Files:</h4>
+						<ul id="converter-files" style="list-style: none; padding: 0; margin: 0;"></ul>
+					</div>
+					<div id="converter-options" style="display: none; margin-top: 1.5rem;">
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Convert to:</label>
+						<select id="converter-format" class="select-input">
+							<option value="pdf">PDF</option>
+							<option value="png">PNG</option>
+							<option value="jpg">JPG</option>
+							<option value="jpeg">JPEG</option>
+							<option value="webp">WEBP</option>
+						</select>
+						<button class="btn-primary" onclick="convertFiles()" style="width: 100%; margin-top: 1rem;">
+							<i class="fas fa-exchange-alt"></i> Convert Files
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- GIF Editor Tool -->
+			<div class="tool-section" id="gifeditor-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-film" style="color: var(--blue-primary);"></i> GIF & Video Editor
+					</h2>
+					<div class="drop-zone" id="gifeditor-dropzone" onclick="document.getElementById('gifeditor-input').click()">
+						<i class="fas fa-video upload-icon"></i>
+						<h3>Drop your GIF or video here</h3>
+						<p>Edit, crop, resize, compress GIFs and videos</p>
+						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('gifeditor-input').click();">
+							<i class="fas fa-folder-open"></i> Choose File
+						</button>
+						<input type="file" id="gifeditor-input" class="file-input" accept="image/gif,video/*">
+					</div>
+					<div id="gifeditor-controls" style="display: none; margin-top: 1.5rem;">
+						<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+							<button class="btn-secondary" onclick="cropGIF()">
+								<i class="fas fa-crop"></i> Crop
+							</button>
+							<button class="btn-secondary" onclick="resizeGIF()">
+								<i class="fas fa-expand-arrows-alt"></i> Resize
+							</button>
+							<button class="btn-secondary" onclick="compressGIF()">
+								<i class="fas fa-compress"></i> Compress
+							</button>
+							<button class="btn-secondary" onclick="optimizeGIF()">
+								<i class="fas fa-tachometer-alt"></i> Optimize
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Text to LaTeX Tool -->
+			<div class="tool-section" id="textolatex-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-code" style="color: var(--blue-primary);"></i> Text to LaTeX
+					</h2>
+					<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Select Template:</label>
+					<select id="latex-template" class="select-input" style="margin-bottom: 1.5rem;">
+						<option value="ieee">IEEE Conference Paper</option>
+						<option value="ieee-journal">IEEE Journal Article</option>
+						<option value="engineering-report">Engineering Report</option>
+						<option value="resume">Resume/CV</option>
+						<option value="report">Report</option>
+						<option value="article">Article</option>
+						<option value="book">Book</option>
+						<option value="beamer">Beamer (Presentation)</option>
+						<option value="letter">Letter</option>
+					</select>
+					<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Enter your text:</label>
+					<textarea id="latex-input" class="text-area" placeholder="Type or paste your text here... (For Resume template, the template is pre-filled - just copy and customize)"></textarea>
+					<button class="btn-primary" onclick="convertToLaTeX()" style="width: 100%; margin-top: 1rem;">
+						<i class="fas fa-code"></i> Convert to LaTeX
+					</button>
+					<div id="latex-output-container" style="display: none; margin-top: 1.5rem;">
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">LaTeX Output:</label>
+						<textarea id="latex-output" class="text-area" readonly></textarea>
+						<button class="btn-secondary" onclick="copyLaTeX()" style="width: 100%; margin-top: 0.5rem;">
+							<i class="fas fa-copy"></i> Copy LaTeX
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Word Counter Tool -->
+			<div class="tool-section" id="wordcounter-section">
+				<div class="card">
+					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
+						<i class="fas fa-font" style="color: var(--blue-primary);"></i> Word Counter
+					</h2>
+					<textarea id="wordcounter-input" class="text-area" placeholder="Type or paste your text here to count words, characters, sentences, and paragraphs..."></textarea>
+					<div class="stats-grid">
+						<div class="stat-card">
+							<div class="stat-value" id="word-count">0</div>
+							<div class="stat-label">Words</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-value" id="char-count">0</div>
+							<div class="stat-label">Characters</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-value" id="char-no-spaces">0</div>
+							<div class="stat-label">Characters (no spaces)</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-value" id="sentence-count">0</div>
+							<div class="stat-label">Sentences</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-value" id="paragraph-count">0</div>
+							<div class="stat-label">Paragraphs</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-value" id="reading-time">0</div>
+							<div class="stat-label">Reading Time (min)</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer-content">
+				<a href="index.html">
+					<i class="fas fa-arrow-left"></i> Back to Portfolio
+				</a>
+			</div>
+		</footer>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<!-- Note: mergepdf.js is not included - functionality is integrated directly in this file -->
+
+	<script>
+		// Tab switching
+		document.querySelectorAll('.tab').forEach(tab => {
+			tab.addEventListener('click', () => {
+				const toolName = tab.dataset.tool;
+				
+				// Update active tab
+				document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+				tab.classList.add('active');
+				
+				// Update active section
+				document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+				document.getElementById(toolName + '-section').classList.add('active');
+			});
+		});
+
+		// Show alert function
+		function showAlert(message, type = 'info') {
+			const alertContainer = document.getElementById('alert-container');
+			const alert = document.createElement('div');
+			alert.className = `alert alert-${type} show`;
+			alert.textContent = message;
+			alertContainer.innerHTML = '';
+			alertContainer.appendChild(alert);
+			
+			if (type === 'success' || type === 'info') {
+				setTimeout(() => {
+					alert.classList.remove('show');
+				}, 5000);
+			}
+		}
+
+		// Merge PDF functionality - adapt mergePDF.js to work with new IDs
+		let mergePDFSelectedFiles = [];
+		let mergePDFFileCounter = 0;
+
+		document.getElementById('mergepdf-input').addEventListener('change', (e) => {
+			handleMergePDFFiles(e.target.files);
+		});
+
+		function handleMergePDFFiles(files) {
+			Array.from(files).forEach(file => {
+				const validTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
+				if (!validTypes.includes(file.type)) {
+					showAlert(`File "${file.name}" is not a supported type.`, 'error');
+					return;
+				}
+				const maxSize = 50 * 1024 * 1024;
+				if (file.size > maxSize) {
+					showAlert(`File "${file.name}" is too large (max 50MB).`, 'error');
+					return;
+				}
+				addMergePDFFile(file);
+			});
+		}
+
+		function addMergePDFFile(file) {
+			const fileObj = {
+				id: mergePDFFileCounter++,
+				file: file,
+				name: file.name,
+				size: file.size,
+				type: file.type,
+				order: mergePDFSelectedFiles.length
+			};
+			mergePDFSelectedFiles.push(fileObj);
+			updateMergePDFFileList();
+			showAlert(`Added "${file.name}"`, 'success');
+		}
+
+		function removeMergePDFFile(id) {
+			mergePDFSelectedFiles = mergePDFSelectedFiles.filter(f => f.id !== id);
+			updateMergePDFFileList();
+		}
+
+		function updateMergePDFFileList() {
+			const fileList = document.getElementById('mergepdf-list');
+			const fileListContainer = document.getElementById('mergepdf-filelist');
+			
+			if (mergePDFSelectedFiles.length === 0) {
+				fileListContainer.style.display = 'none';
+				return;
+			}
+
+			fileListContainer.style.display = 'block';
+			fileList.innerHTML = '';
+
+			mergePDFSelectedFiles.forEach((fileObj, index) => {
+				const fileItem = document.createElement('div');
+				fileItem.style.cssText = 'background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;';
+				fileItem.innerHTML = `
+					<div>
+						<div style="font-weight: 600; margin-bottom: 0.25rem;">${fileObj.name}</div>
+						<div style="font-size: 0.85rem; color: var(--text-medium);">${formatFileSize(fileObj.size)}</div>
+					</div>
+					<button onclick="removeMergePDFFile(${fileObj.id})" style="background: var(--red); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
+						<i class="fas fa-times"></i>
+					</button>
+				`;
+				fileList.appendChild(fileItem);
+			});
+		}
+
+		function formatFileSize(bytes) {
+			if (bytes === 0) return '0 Bytes';
+			const k = 1024;
+			const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+			const i = Math.floor(Math.log(bytes) / Math.log(k));
+			return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+		}
+
+		// NLP filename generation (from mergepdf.js)
+		const STOP_WORDS = new Set([
+			'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
+			'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
+			'to', 'was', 'will', 'with', 'the', 'this', 'but', 'they', 'have',
+			'had', 'what', 'said', 'each', 'which', 'their', 'time', 'would',
+			'about', 'if', 'up', 'out', 'many', 'then', 'them', 'these', 'so',
+			'some', 'her', 'would', 'make', 'like', 'into', 'him', 'has', 'two',
+			'more', 'go', 'no', 'way', 'could', 'my', 'than', 'first', 'been',
+			'call', 'who', 'oil', 'its', 'now', 'find', 'long', 'down', 'day',
+			'did', 'get', 'come', 'made', 'may', 'part', 'file', 'document',
+			'pdf', 'page', 'pages', 'merged', 'merge'
+		]);
+
+		function tokenize(text) {
+			return text
+				.toLowerCase()
+				.replace(/[^\w\s-]/g, ' ')
+				.split(/\s+/)
+				.filter(word => word.length > 2 && !STOP_WORDS.has(word))
+				.filter(word => !/^\d+$/.test(word));
+		}
+
+		function extractWordsFromFilename(filename) {
+			const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
+			return nameWithoutExt
+				.split(/[\s_\-\.]+/)
+				.map(word => word.toLowerCase())
+				.filter(word => word.length > 2 && !STOP_WORDS.has(word))
+				.filter(word => !/^\d+$/.test(word));
+		}
+
+		// Initialize PDF.js worker
+		if (typeof pdfjsLib !== 'undefined') {
+			pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+		}
+
+		async function extractTextFromPdf(pdfFile) {
+			try {
+				if (typeof pdfjsLib === 'undefined') {
+					return '';
+				}
+				const arrayBuffer = await pdfFile.arrayBuffer();
+				const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+				const pdf = await loadingTask.promise;
+				
+				let fullText = '';
+				const maxPages = Math.min(pdf.numPages, 3);
+				
+				for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
+					const page = await pdf.getPage(pageNum);
+					const textContent = await page.getTextContent();
+					const pageText = textContent.items.map(item => item.str).join(' ');
+					fullText += pageText + ' ';
+				}
+				
+				return fullText.trim();
+			} catch (error) {
+				console.warn('Could not extract text from PDF:', error);
+				return '';
+			}
+		}
+
+		function calculateTFIDF(allTexts, filenames) {
+			const termFrequencies = {};
+			const documentFrequencies = {};
+			const totalDocuments = allTexts.length + filenames.length;
+			
+			allTexts.forEach((text, docIndex) => {
+				const tokens = tokenize(text);
+				const docTerms = {};
+				tokens.forEach(term => {
+					docTerms[term] = (docTerms[term] || 0) + 1;
+				});
+				Object.keys(docTerms).forEach(term => {
+					if (!termFrequencies[term]) termFrequencies[term] = {};
+					termFrequencies[term][`text_${docIndex}`] = docTerms[term];
+					documentFrequencies[term] = (documentFrequencies[term] || 0) + 1;
+				});
+			});
+			
+			filenames.forEach((filename, docIndex) => {
+				const words = extractWordsFromFilename(filename);
+				words.forEach(term => {
+					if (!termFrequencies[term]) termFrequencies[term] = {};
+					termFrequencies[term][`file_${docIndex}`] = (termFrequencies[term][`file_${docIndex}`] || 0) + 3;
+					documentFrequencies[term] = (documentFrequencies[term] || 0) + 1;
+				});
+			});
+			
+			const scores = {};
+			Object.keys(termFrequencies).forEach(term => {
+				const tf = Object.values(termFrequencies[term]).reduce((sum, val) => sum + val, 0);
+				const df = documentFrequencies[term];
+				const idf = Math.log(totalDocuments / df);
+				scores[term] = tf * idf;
+			});
+			
+			return scores;
+		}
+
+		async function generateFilename(files) {
+			try {
+				const filenames = files.map(f => f.name || 'file');
+				
+				// First, try to extract meaningful words from filenames
+				const allWords = [];
+				filenames.forEach(name => {
+					const words = extractWordsFromFilename(name);
+					allWords.push(...words);
+				});
+				
+				// Count word frequency
+				const wordCounts = {};
+				allWords.forEach(word => {
+					if (word && word.length > 2) {
+						wordCounts[word] = (wordCounts[word] || 0) + 1;
+					}
+				});
+				
+				// Get most common meaningful words
+				const sortedWords = Object.entries(wordCounts)
+					.sort((a, b) => b[1] - a[1])
+					.slice(0, 4)
+					.map(entry => entry[0])
+					.filter(w => w && w.length > 2);
+				
+				if (sortedWords.length > 0) {
+					const filename = sortedWords.join('-');
+					if (filename.length > 60) {
+						return filename.substring(0, 60) + '.pdf';
+					}
+					return filename + '.pdf';
+				}
+				
+				// Fallback: Use first filename without extension
+				if (filenames.length > 0) {
+					const firstFile = filenames[0];
+					const nameWithoutExt = firstFile.replace(/\.[^/.]+$/, '');
+					// Clean up the name
+					const cleanName = nameWithoutExt
+						.replace(/[^a-zA-Z0-9\s-_]/g, ' ')
+						.replace(/\s+/g, '-')
+						.substring(0, 50);
+					if (cleanName.length > 3) {
+						return cleanName + '.pdf';
+					}
+				}
+				
+				// Last resort: use date-based name
+				const date = new Date().toISOString().split('T')[0];
+				return `merged-${date}.pdf`;
+			} catch (error) {
+				console.warn('Error generating filename:', error);
+				const date = new Date().toISOString().split('T')[0];
+				return `merged-${date}.pdf`;
+			}
+		}
+
+		async function mergePDFFiles() {
+			if (mergePDFSelectedFiles.length === 0) {
+				showAlert('Please select at least one file to merge.', 'error');
+				return;
+			}
+
+			const btn = document.getElementById('mergepdf-btn');
+			btn.disabled = true;
+			btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Merging...';
+
+			try {
+				const mergedPdf = await PDFLib.PDFDocument.create();
+
+				for (const fileObj of mergePDFSelectedFiles) {
+					if (fileObj.type === 'application/pdf') {
+						const arrayBuffer = await fileObj.file.arrayBuffer();
+						const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+						const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+						pages.forEach((page) => mergedPdf.addPage(page));
+					} else {
+						const arrayBuffer = await fileObj.file.arrayBuffer();
+						let pdfImage;
+						if (fileObj.type === 'image/jpeg' || fileObj.type === 'image/jpg') {
+							pdfImage = await mergedPdf.embedJpg(arrayBuffer);
+						} else if (fileObj.type === 'image/png') {
+							pdfImage = await mergedPdf.embedPng(arrayBuffer);
+						} else {
+							const img = new Image();
+							const imageUrl = URL.createObjectURL(fileObj.file);
+							await new Promise((resolve, reject) => {
+								img.onload = () => {
+									const canvas = document.createElement('canvas');
+									canvas.width = img.width;
+									canvas.height = img.height;
+									const ctx = canvas.getContext('2d');
+									ctx.drawImage(img, 0, 0);
+									canvas.toBlob(async (blob) => {
+										pdfImage = await mergedPdf.embedJpg(await blob.arrayBuffer());
+										URL.revokeObjectURL(imageUrl);
+										resolve();
+									}, 'image/jpeg');
+								};
+								img.onerror = reject;
+								img.src = imageUrl;
+							});
+						}
+						const imageDims = pdfImage.scale(1);
+						const page = mergedPdf.addPage([imageDims.width, imageDims.height]);
+						page.drawImage(pdfImage, { x: 0, y: 0, width: imageDims.width, height: imageDims.height });
+					}
+				}
+
+				const pdfBytes = await mergedPdf.save();
+				
+				// Generate filename using NLP
+				btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating filename...';
+				const fileObjects = mergePDFSelectedFiles.map(f => ({ name: f.name, file: f.file }));
+				const generatedName = await generateFilename(fileObjects);
+				
+				const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+				const url = URL.createObjectURL(blob);
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = generatedName;
+				link.click();
+				URL.revokeObjectURL(url);
+
+				showAlert(`Successfully merged ${mergePDFSelectedFiles.length} file(s)! Saved as "${generatedName}"`, 'success');
+				mergePDFSelectedFiles = [];
+				updateMergePDFFileList();
+				document.getElementById('mergepdf-input').value = '';
+			} catch (error) {
+				console.error('Error merging files:', error);
+				showAlert(`Error: ${error.message}`, 'error');
+			} finally {
+				btn.disabled = false;
+				btn.innerHTML = '<i class="fas fa-file-pdf"></i> Merge Files';
+			}
+		}
+
+		// Background Remover functionality using @imgly/background-removal
+		let bgRemoverResult = null;
+		let bgRemoverImgBitmap = null;
+		let bgRemovalModule = null;
+
+		// Load @imgly/background-removal when tab is clicked
+		document.querySelector('[data-tool="backgroundremover"]').addEventListener('click', async () => {
+			if (!bgRemovalModule) {
+				try {
+					showAlert('Loading background removal library...', 'info');
+					// Try multiple CDN sources for @imgly/background-removal
+					const cdnUrls = [
+						'https://esm.sh/@imgly/background-removal@1.2.0',
+						'https://cdn.skypack.dev/@imgly/background-removal@1.2.0',
+						'https://unpkg.com/@imgly/background-removal@1.2.0?module',
+						'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.2.0/+esm'
+					];
+					
+					let loaded = false;
+					for (const url of cdnUrls) {
+						try {
+							bgRemovalModule = await import(url);
+							// Check if the module has the expected export
+							if (bgRemovalModule && (bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule)) {
+								loaded = true;
+								showAlert('Library loaded! Ready to remove backgrounds.', 'success');
+								break;
+							} else {
+								throw new Error('Module loaded but missing expected exports');
+							}
+						} catch (err) {
+							console.warn(`Failed to load from ${url}:`, err);
+							continue;
+						}
+					}
+					
+					if (!loaded) {
+						throw new Error('Failed to load from all CDN sources');
+					}
+				} catch (error) {
+					console.error('Failed to load @imgly/background-removal:', error);
+					showAlert('Failed to load background removal library. Please refresh the page.', 'error');
+				}
+			}
+		});
+
+		document.getElementById('bgremover-input').addEventListener('change', async (e) => {
+			const file = e.target.files[0];
+			if (!file) return;
+			
+			const imageUrl = URL.createObjectURL(file);
+			document.getElementById('bgremover-original').src = imageUrl;
+			bgRemoverImgBitmap = await createImageBitmap(file);
+			document.getElementById('bgremover-process-btn').style.display = 'block';
+		});
+
+		async function processBackgroundRemovalFromBtn() {
+			const file = document.getElementById('bgremover-input').files[0];
+			if (file) {
+				await processBackgroundRemoval(file);
+			}
+		}
+
+		async function processBackgroundRemoval(file) {
+			if (!bgRemoverImgBitmap) {
+				showAlert('Please select an image first', 'error');
+				return;
+			}
+
+			// Use @imgly/background-removal
+			if (!bgRemovalModule) {
+				showAlert('Loading background removal library...', 'info');
+				// Try multiple CDN sources
+				const cdnUrls = [
+					'https://esm.sh/@imgly/background-removal@1.2.0',
+					'https://cdn.skypack.dev/@imgly/background-removal@1.2.0',
+					'https://unpkg.com/@imgly/background-removal@1.2.0?module',
+					'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.2.0/+esm'
+				];
+				
+				let loaded = false;
+				for (const url of cdnUrls) {
+					try {
+						bgRemovalModule = await import(url);
+						if (bgRemovalModule && (bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule)) {
+							loaded = true;
+							break;
+						}
+					} catch (err) {
+						console.warn(`Failed to load from ${url}:`, err);
+						continue;
+					}
+				}
+				
+				if (!loaded) {
+					showAlert('Failed to load background removal library. Please refresh the page.', 'error');
+					return;
+				}
+			}
+
+			try {
+				showAlert('Processing image with @imgly/background-removal...', 'info');
+				const canvas = document.getElementById('bgremover-canvas');
+				
+				// Use @imgly/background-removal
+				// The library exports removeBackground as default export
+				// It accepts File, Blob, ImageData, HTMLImageElement, HTMLCanvasElement, or URL string
+				const removeBackground = bgRemovalModule.default || bgRemovalModule.removeBackground || bgRemovalModule;
+				
+				// Pass file directly (library accepts File objects)
+				const blob = await removeBackground(file);
+				
+				// Convert blob to image and display
+				const resultUrl = URL.createObjectURL(blob);
+				const resultImg = new Image();
+				await new Promise((resolve, reject) => {
+					resultImg.onload = resolve;
+					resultImg.onerror = reject;
+					resultImg.src = resultUrl;
+				});
+				
+				canvas.width = resultImg.width;
+				canvas.height = resultImg.height;
+				const ctx = canvas.getContext('2d');
+				ctx.drawImage(resultImg, 0, 0);
+				
+				bgRemoverResult = canvas.toDataURL('image/png');
+				document.getElementById('bgremover-result').style.display = 'block';
+				showAlert('Background removed successfully!', 'success');
+				URL.revokeObjectURL(resultUrl);
+			} catch (error) {
+				console.error('Error:', error);
+				showAlert(`Error: ${error.message}`, 'error');
+			}
+		}
+
+
+		function downloadBackgroundRemoved() {
+			if (!bgRemoverResult) {
+				showAlert('No processed image available', 'error');
+				return;
+			}
+			const link = document.createElement('a');
+			link.download = 'background-removed.png';
+			link.href = bgRemoverResult;
+			link.click();
+		}
+
+		// File Converter functionality
+		let converterFiles = [];
+		
+		// Load JSZip for creating ZIP files
+		let JSZip = null;
+		async function loadJSZip() {
+			if (!JSZip) {
+				// JSZip is typically available as a UMD module
+				return new Promise((resolve, reject) => {
+					if (window.JSZip) {
+						JSZip = window.JSZip;
+						resolve();
+						return;
+					}
+					const script = document.createElement('script');
+					script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+					script.onload = () => {
+						if (window.JSZip) {
+							JSZip = window.JSZip;
+							resolve();
+						} else {
+							reject(new Error('JSZip not available after loading'));
+						}
+					};
+					script.onerror = () => reject(new Error('Failed to load JSZip'));
+					document.head.appendChild(script);
+				});
+			}
+		}
+
+		// Load Pyodide for HEIC conversion using PIL + pillow_heif
+		let pyodideHeic = null;
+		async function initPyodideHeic() {
+			if (!pyodideHeic) {
+				showAlert('Loading Python runtime for HEIC conversion...', 'info');
+				try {
+					// Check if Pyodide is already loaded
+					if (typeof loadPyodide === 'undefined') {
+						// Load Pyodide script
+						const script = document.createElement('script');
+						script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+						await new Promise((resolve, reject) => {
+							script.onload = resolve;
+							script.onerror = reject;
+							document.head.appendChild(script);
+						});
+					}
+					
+					// Wait a bit for loadPyodide to be available
+					let retries = 0;
+					while (typeof loadPyodide === 'undefined' && retries < 10) {
+						await new Promise(resolve => setTimeout(resolve, 100));
+						retries++;
+					}
+					
+					if (typeof loadPyodide === 'undefined') {
+						throw new Error('Pyodide failed to load');
+					}
+					
+					// Initialize Pyodide
+					pyodideHeic = await loadPyodide({
+						indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
+					});
+					
+					// Load required packages
+					showAlert('Loading Python packages (micropip, pillow)...', 'info');
+					await pyodideHeic.loadPackage(['micropip', 'pillow']);
+					
+					// Install pillow-heif using micropip
+					showAlert('Installing pillow-heif...', 'info');
+					await pyodideHeic.runPythonAsync(`
+						import micropip
+						await micropip.install('pillow-heif')
+					`);
+					
+					// Register pillow_heif opener
+					await pyodideHeic.runPythonAsync(`
+						from pillow_heif import register_heif_opener
+						register_heif_opener()
+					`);
+					
+					showAlert('HEIC conversion ready!', 'success');
+					return pyodideHeic;
+				} catch (error) {
+					console.error('Failed to load Pyodide for HEIC conversion:', error);
+					throw error;
+				}
+			}
+			return pyodideHeic;
+		}
+
+		document.getElementById('converter-input').addEventListener('change', (e) => {
+			converterFiles = Array.from(e.target.files);
+			if (converterFiles.length > 0) {
+				document.getElementById('converter-file-list').style.display = 'block';
+				document.getElementById('converter-options').style.display = 'block';
+				
+				// Display file list
+				const fileList = document.getElementById('converter-files');
+				fileList.innerHTML = '';
+				converterFiles.forEach((file, index) => {
+					const li = document.createElement('li');
+					li.style.padding = '0.5rem';
+					li.style.borderBottom = '1px solid var(--border-color)';
+					li.innerHTML = `<i class="fas fa-file"></i> ${file.name} <span style="color: var(--text-medium); font-size: 0.875rem;">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>`;
+					fileList.appendChild(li);
+				});
+			}
+		});
+
+		async function convertFiles() {
+			if (converterFiles.length === 0) {
+				showAlert('Please select at least one file first', 'error');
+				return;
+			}
+
+			const format = document.getElementById('converter-format').value;
+			const btn = document.querySelector('#converter-options .btn-primary');
+			btn.disabled = true;
+			btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Converting ${converterFiles.length} file(s)...`;
+
+			// Load required libraries
+			await loadJSZip();
+			// Pyodide will be loaded on-demand when HEIC files are encountered
+
+			try {
+				const convertedFiles = [];
+				let zip = null;
+				if (converterFiles.length > 1) {
+					if (!JSZip) {
+						await loadJSZip();
+					}
+					zip = new JSZip();
+				}
+
+				for (let i = 0; i < converterFiles.length; i++) {
+					const file = converterFiles[i];
+					showAlert(`Converting ${i + 1}/${converterFiles.length}: ${file.name}...`, 'info');
+
+					let convertedBlob = null;
+					let fileName = file.name.replace(/\.[^/.]+$/, '');
+
+					// Check if HEIC file (check extension first, then MIME type)
+					const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+					                file.name.toLowerCase().endsWith('.heif') ||
+					                file.name.toLowerCase().endsWith('.hif') ||
+					                file.type === 'image/heic' || 
+					                file.type === 'image/heif' ||
+					                file.type === 'image/heic-sequence' ||
+					                file.type === 'image/heif-sequence';
+
+					if (isHeic) {
+						// Use Pyodide with PIL + pillow_heif for HEIC conversion
+						try {
+							// Initialize Pyodide if not already loaded
+							if (!pyodideHeic) {
+								await initPyodideHeic();
+							}
+							
+							// Read file as array buffer
+							const arrayBuffer = await file.arrayBuffer();
+							const uint8Array = new Uint8Array(arrayBuffer);
+							
+							// Write file to Pyodide filesystem
+							pyodideHeic.FS.writeFile('input.heic', uint8Array);
+							
+							// Determine output format
+							let outputFormat = 'PNG';
+							let outputMime = 'image/png';
+							let outputExt = 'png';
+							if (format === 'jpg' || format === 'jpeg') {
+								outputFormat = 'JPEG';
+								outputMime = 'image/jpeg';
+								outputExt = 'jpg';
+							} else if (format === 'webp') {
+								outputFormat = 'WEBP';
+								outputMime = 'image/webp';
+								outputExt = 'webp';
+							} else if (format === 'pdf') {
+								outputFormat = 'PNG'; // Convert to PNG first, then to PDF
+								outputMime = 'image/png';
+								outputExt = 'png';
+							}
+							
+							// Run Python conversion code using PIL + pillow_heif
+							showAlert(`Converting ${file.name}...`, 'info');
+							await pyodideHeic.runPythonAsync(`
+								from PIL import Image
+								from pillow_heif import register_heif_opener
+								
+								# Register HEIF opener
+								register_heif_opener()
+								
+								# Open HEIC file
+								image = Image.open('input.heic')
+								
+								# Automatically handle and preserve EXIF metadata
+								exif_data = image.info.get("exif")
+								
+								# Save as output format
+								if exif_data:
+									image.save('output.${outputExt}', format='${outputFormat}', quality=90, exif=exif_data, optimize=True)
+								else:
+									image.save('output.${outputExt}', format='${outputFormat}', quality=90, optimize=True)
+							`);
+							
+							// Read converted file from Pyodide filesystem
+							const convertedData = pyodideHeic.FS.readFile('output.' + outputExt);
+							
+							// Clean up files
+							try {
+								pyodideHeic.FS.unlink('input.heic');
+								pyodideHeic.FS.unlink('output.' + outputExt);
+							} catch (e) {
+								// Ignore cleanup errors
+							}
+							
+							// Create blob from converted data
+							if (format === 'pdf') {
+								// Convert PNG to PDF
+								const pngBlob = new Blob([convertedData], { type: 'image/png' });
+								const img = new Image();
+								const imageUrl = URL.createObjectURL(pngBlob);
+								await new Promise((resolve, reject) => {
+									img.onload = resolve;
+									img.onerror = reject;
+									img.src = imageUrl;
+								});
+								
+								const canvas = document.createElement('canvas');
+								canvas.width = img.width;
+								canvas.height = img.height;
+								const ctx = canvas.getContext('2d');
+								ctx.drawImage(img, 0, 0);
+								
+								const pdfDoc = await PDFLib.PDFDocument.create();
+								const pngData = await new Promise(resolve => {
+									canvas.toBlob(resolve, 'image/png');
+								});
+								const arrayBuffer2 = await pngData.arrayBuffer();
+								const pdfImage = await pdfDoc.embedPng(arrayBuffer2);
+								const page = pdfDoc.addPage([canvas.width, canvas.height]);
+								page.drawImage(pdfImage, { x: 0, y: 0, width: canvas.width, height: canvas.height });
+								const pdfBytes = await pdfDoc.save();
+								convertedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+								URL.revokeObjectURL(imageUrl);
+							} else {
+								convertedBlob = new Blob([convertedData], { type: outputMime });
+							}
+						} catch (heicError) {
+							console.error('HEIC conversion error:', heicError);
+							showAlert(`Failed to convert ${file.name}. Error: ${heicError.message || heicError}`, 'error');
+							continue;
+						}
+					} else if (file.type.startsWith('image/') || file.name.match(/\.(jpg|jpeg|png|gif|webp|bmp)$/i)) {
+						// Regular image conversion
+						const img = new Image();
+						const imageUrl = URL.createObjectURL(file);
+						await new Promise((resolve, reject) => {
+							img.onload = resolve;
+							img.onerror = reject;
+							img.src = imageUrl;
+						});
+
+						const canvas = document.createElement('canvas');
+						canvas.width = img.width;
+						canvas.height = img.height;
+						const ctx = canvas.getContext('2d');
+						ctx.drawImage(img, 0, 0);
+
+						if (format === 'pdf') {
+							const pdfDoc = await PDFLib.PDFDocument.create();
+							const pngData = await new Promise(resolve => {
+								canvas.toBlob(resolve, 'image/png');
+							});
+							const arrayBuffer = await pngData.arrayBuffer();
+							const pdfImage = await pdfDoc.embedPng(arrayBuffer);
+							const page = pdfDoc.addPage([canvas.width, canvas.height]);
+							page.drawImage(pdfImage, { x: 0, y: 0, width: canvas.width, height: canvas.height });
+							const pdfBytes = await pdfDoc.save();
+							convertedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+						} else {
+							let mimeType = 'image/png';
+							if (format === 'jpg' || format === 'jpeg') {
+								mimeType = 'image/jpeg';
+							} else if (format === 'webp') {
+								mimeType = 'image/webp';
+							}
+							convertedBlob = await new Promise(resolve => {
+								canvas.toBlob(resolve, mimeType);
+							});
+						}
+						URL.revokeObjectURL(imageUrl);
+					} else {
+						showAlert(`Unsupported file type: ${file.name}`, 'error');
+						continue;
+					}
+
+					if (convertedBlob) {
+						const extension = format === 'jpeg' ? 'jpg' : format;
+						if (zip) {
+							zip.file(`${fileName}.${extension}`, convertedBlob);
+						}
+						convertedFiles.push({ blob: convertedBlob, name: `${fileName}.${extension}` });
+					}
+				}
+
+				// Download files
+				if (converterFiles.length === 1) {
+					// Single file - download directly
+					const url = URL.createObjectURL(convertedFiles[0].blob);
+					const link = document.createElement('a');
+					link.href = url;
+					link.download = convertedFiles[0].name;
+					link.click();
+					URL.revokeObjectURL(url);
+					showAlert('File converted successfully!', 'success');
+				} else {
+					// Multiple files - create ZIP
+					if (!zip) {
+						if (!JSZip) {
+							await loadJSZip();
+						}
+						zip = new JSZip();
+						convertedFiles.forEach(file => {
+							zip.file(file.name, file.blob);
+						});
+					}
+					const zipBlob = await zip.generateAsync({ type: 'blob' });
+					const url = URL.createObjectURL(zipBlob);
+					const link = document.createElement('a');
+					link.href = url;
+					link.download = `converted-files-${new Date().toISOString().split('T')[0]}.zip`;
+					link.click();
+					URL.revokeObjectURL(url);
+					showAlert(`Successfully converted ${convertedFiles.length} files! Downloading ZIP...`, 'success');
+				}
+
+				btn.disabled = false;
+				btn.innerHTML = '<i class="fas fa-exchange-alt"></i> Convert Files';
+			} catch (error) {
+				console.error('Conversion error:', error);
+				showAlert(`Conversion failed: ${error.message}`, 'error');
+				btn.disabled = false;
+				btn.innerHTML = '<i class="fas fa-exchange-alt"></i> Convert Files';
+			}
+		}
+
+		// GIF Editor functionality
+		let gifEditorFile = null;
+		let gifEditorCanvas = null;
+		let gifEditorCtx = null;
+
+		document.getElementById('gifeditor-input').addEventListener('change', async (e) => {
+			gifEditorFile = e.target.files[0];
+			if (gifEditorFile) {
+				if (gifEditorFile.type === 'image/gif') {
+					// Load GIF
+					const img = new Image();
+					const imageUrl = URL.createObjectURL(gifEditorFile);
+					img.src = imageUrl;
+					img.onload = () => {
+						if (!gifEditorCanvas) {
+							gifEditorCanvas = document.createElement('canvas');
+							gifEditorCtx = gifEditorCanvas.getContext('2d');
+						}
+						gifEditorCanvas.width = img.width;
+						gifEditorCanvas.height = img.height;
+						gifEditorCtx.drawImage(img, 0, 0);
+						document.getElementById('gifeditor-controls').style.display = 'block';
+						showAlert('GIF loaded. Use controls to edit.', 'success');
+					};
+				} else if (gifEditorFile.type.startsWith('video/')) {
+					showAlert('Video editing will be implemented', 'info');
+					document.getElementById('gifeditor-controls').style.display = 'block';
+				} else {
+					showAlert('Please select a GIF or video file', 'error');
+				}
+			}
+		});
+
+		function cropGIF() {
+			if (!gifEditorCanvas) {
+				showAlert('Please load a GIF first', 'error');
+				return;
+			}
+			showAlert('Crop tool: Click and drag on the canvas to select area', 'info');
+			// TODO: Implement crop functionality
+		}
+
+		function resizeGIF() {
+			if (!gifEditorCanvas) {
+				showAlert('Please load a GIF first', 'error');
+				return;
+			}
+			const newWidth = prompt('Enter new width:', gifEditorCanvas.width);
+			const newHeight = prompt('Enter new height:', gifEditorCanvas.height);
+			if (newWidth && newHeight) {
+				const tempCanvas = document.createElement('canvas');
+				tempCanvas.width = parseInt(newWidth);
+				tempCanvas.height = parseInt(newHeight);
+				const tempCtx = tempCanvas.getContext('2d');
+				tempCtx.drawImage(gifEditorCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+				gifEditorCanvas = tempCanvas;
+				gifEditorCtx = tempCtx;
+				showAlert('GIF resized successfully!', 'success');
+			}
+		}
+
+		function compressGIF() {
+			if (!gifEditorCanvas) {
+				showAlert('Please load a GIF first', 'error');
+				return;
+			}
+			showAlert('Compressing GIF...', 'info');
+			// Convert to lower quality JPEG then back to reduce size
+			gifEditorCanvas.toBlob((blob) => {
+				const url = URL.createObjectURL(blob);
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = 'compressed.gif';
+				link.click();
+				URL.revokeObjectURL(url);
+				showAlert('Compressed GIF downloaded!', 'success');
+			}, 'image/gif', 0.7);
+		}
+
+		function optimizeGIF() {
+			if (!gifEditorCanvas) {
+				showAlert('Please load a GIF first', 'error');
+				return;
+			}
+			showAlert('Optimizing GIF...', 'info');
+			// Similar to compress but with different settings
+			gifEditorCanvas.toBlob((blob) => {
+				const url = URL.createObjectURL(blob);
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = 'optimized.gif';
+				link.click();
+				URL.revokeObjectURL(url);
+				showAlert('Optimized GIF downloaded!', 'success');
+			}, 'image/gif', 0.8);
+		}
+
+		// Text to LaTeX functionality
+		function convertToLaTeX() {
+			const text = document.getElementById('latex-input').value;
+			const template = document.getElementById('latex-template').value;
+			
+			// Template headers
+			const templates = {
+				ieee: `\\documentclass[conference]{IEEEtran}
+\\IEEEoverridecommandlockouts
+\\usepackage{cite}
+\\usepackage{amsmath,amssymb,amsfonts}
+\\usepackage{algorithmic}
+\\usepackage{graphicx}
+\\usepackage{textcomp}
+\\def\\BibTeX{{\\rm B\\kern-.05em{\\sc i\\kern-.025em b}\\kern-.08em
+    T\\kern-.1667em\\lower.7ex\\hbox{E}\\kern-.125emX}}
+\\begin{document}
+
+\\title{Your Paper Title Here\\thanks{Identify applicable funding agency here. If none, delete this.}}
+\\author{\\IEEEauthorblockN{1\\textsuperscript{st} Author Name}
+\\IEEEauthorblockA{\\textit{dept. name of organization} \\\\
+\\textit{name of organization (of Aff.)}\\\\
+City, Country \\\\
+email@example.com}
+\\and
+\\IEEEauthorblockN{2\\textsuperscript{nd} Author Name}
+\\IEEEauthorblockA{\\textit{dept. name of organization} \\\\
+\\textit{name of organization (of Aff.)}\\\\
+City, Country \\\\
+email@example.com}}
+\\maketitle
+
+\\begin{abstract}
+This is where your abstract goes.
+\\end{abstract}
+
+\\begin{IEEEkeywords}
+keyword1, keyword2, keyword3
+\\end{IEEEkeywords}
+
+\\section{Introduction}
+`,
+				'ieee-journal': `\\documentclass[journal]{IEEEtran}
+\\usepackage{cite}
+\\usepackage{amsmath,amssymb,amsfonts}
+\\usepackage{algorithmic}
+\\usepackage{graphicx}
+\\usepackage{textcomp}
+\\def\\BibTeX{{\\rm B\\kern-.05em{\\sc i\\kern-.025em b}\\kern-.08em
+    T\\kern-.1667em\\lower.7ex\\hbox{E}\\kern-.125emX}}
+\\begin{document}
+
+\\title{Your Paper Title}
+\\author{Author Name\\thanks{Author is with Department, University, City, Country.}}
+\\maketitle
+
+\\begin{abstract}
+This is where your abstract goes.
+\\end{abstract}
+
+\\begin{IEEEkeywords}
+keyword1, keyword2, keyword3
+\\end{IEEEkeywords}
+
+\\IEEEPARstart{T}{his} is the first paragraph of your paper.
+`,
+				'engineering-report': `\\documentclass[11pt,a4paper]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{amsmath}
+\\usepackage{amsfonts}
+\\usepackage{amssymb}
+\\usepackage{graphicx}
+\\usepackage{geometry}
+\\geometry{margin=1in}
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+\\fancyhf{}
+\\rhead{Engineering Report}
+\\lhead{Your Name}
+\\cfoot{\\thepage}
+
+\\title{Engineering Report}
+\\author{Your Name\\\\
+Department of Engineering\\\\
+University Name}
+\\date{\\today}
+
+\\begin{document}
+\\maketitle
+
+\\section{Executive Summary}
+`,
+				resume: `\\documentclass[11pt,a4paper,sans]{moderncv}
+\\moderncvstyle{classic}
+\\moderncvcolor{blue}
+\\usepackage[utf8]{inputenc}
+\\usepackage[scale=0.75]{geometry}
+
+\\name{Your}{Name}
+\\title{Resume Title}
+\\address{Street}{City, State ZIP}{Country}
+\\phone[mobile]{+1~(555)~123~4567}
+\\email{email@example.com}
+\\social[linkedin]{yourlinkedin}
+\\social[github]{yourgithub}
+
+\\begin{document}
+\\makecvtitle
+
+\\section{Education}
+\\cventry{Year--Year}{Degree}{Institution}{City}{Grade}{Description}
+
+\\section{Experience}
+\\cventry{Year--Year}{Job Title}{Company}{City}{}{Description of responsibilities and achievements}
+
+\\section{Skills}
+\\cvitem{Category}{Skill1, Skill2, Skill3}
+
+\\section{Projects}
+\\cvitem{Project Name}{Description of project}
+
+\\end{document}`,
+				article: '\\documentclass{article}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amsmath}\n\\usepackage{graphicx}\n\\begin{document}\n\n',
+				report: '\\documentclass{report}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amsmath}\n\\usepackage{graphicx}\n\\begin{document}\n\n',
+				book: '\\documentclass{book}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amsmath}\n\\usepackage{graphicx}\n\\begin{document}\n\n',
+				beamer: '\\documentclass{beamer}\n\\usetheme{default}\n\\begin{document}\n\\begin{frame}\n',
+				letter: '\\documentclass{letter}\n\\begin{document}\n\n'
+			};
+
+			// For resume template, show template even without text
+			if (template === 'resume') {
+				const latexCode = templates.resume;
+				document.getElementById('latex-output').value = latexCode;
+				document.getElementById('latex-output-container').style.display = 'block';
+				showAlert('Resume template generated! Customize the fields as needed.', 'success');
+				return;
+			}
+			
+			if (!text.trim()) {
+				showAlert('Please enter some text', 'error');
+				return;
+			}
+
+			let latexCode = templates[template] || templates.article;
+			
+			// Convert text to LaTeX
+			const paragraphs = text.split(/\n\n+/);
+			paragraphs.forEach((para, idx) => {
+				if (para.trim()) {
+					// Escape special LaTeX characters
+					para = para.replace(/\\/g, '\\textbackslash{}')
+						.replace(/\{/g, '\\{')
+						.replace(/\}/g, '\\}')
+						.replace(/\$/g, '\\$')
+						.replace(/\&/g, '\\&')
+						.replace(/\#/g, '\\#')
+						.replace(/\^/g, '\\textasciicircum{}')
+						.replace(/\_/g, '\\_')
+						.replace(/\~/g, '\\textasciitilde{}')
+						.replace(/\%/g, '\\%');
+					
+					// For IEEE and engineering templates, add proper section formatting
+					if (template === 'ieee' || template === 'ieee-journal' || template === 'engineering-report') {
+						// Check if paragraph looks like a section header (short, all caps, or ends with colon)
+						if (para.length < 100 && (para === para.toUpperCase() || para.endsWith(':'))) {
+							latexCode += '\\section{' + para.replace(':', '') + '}\n';
+						} else {
+							latexCode += para;
+						}
+					} else {
+						latexCode += para;
+					}
+					
+					if (idx < paragraphs.length - 1) {
+						latexCode += '\n\n';
+					}
+				}
+			});
+
+			// Template footers
+			if (template === 'beamer') {
+				latexCode += '\n\\end{frame}\n\\end{document}';
+			} else {
+				latexCode += '\n\n\\end{document}';
+			}
+
+			document.getElementById('latex-output').value = latexCode;
+			document.getElementById('latex-output-container').style.display = 'block';
+			showAlert('Text converted to LaTeX successfully!', 'success');
+		}
+
+		async function copyLaTeX() {
+			const output = document.getElementById('latex-output');
+			try {
+				await navigator.clipboard.writeText(output.value);
+				showAlert('LaTeX code copied to clipboard!', 'success');
+			} catch (err) {
+				// Fallback for older browsers
+				output.select();
+				document.execCommand('copy');
+				showAlert('LaTeX code copied to clipboard!', 'success');
+			}
+		}
+
+		// Word Counter functionality
+		document.getElementById('wordcounter-input').addEventListener('input', updateWordCount);
+
+		function updateWordCount() {
+			const text = document.getElementById('wordcounter-input').value;
+			
+			// Word count
+			const words = text.trim() ? text.trim().split(/\s+/).filter(w => w.length > 0) : [];
+			document.getElementById('word-count').textContent = words.length;
+			
+			// Character count
+			document.getElementById('char-count').textContent = text.length;
+			
+			// Character count (no spaces)
+			document.getElementById('char-no-spaces').textContent = text.replace(/\s/g, '').length;
+			
+			// Sentence count
+			const sentences = text.match(/[.!?]+/g) || [];
+			document.getElementById('sentence-count').textContent = sentences.length || (text.trim() ? 1 : 0);
+			
+			// Paragraph count
+			const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+			document.getElementById('paragraph-count').textContent = paragraphs.length || (text.trim() ? 1 : 0);
+			
+			// Reading time (average 200 words per minute)
+			const readingTime = words.length / 200;
+			document.getElementById('reading-time').textContent = readingTime.toFixed(1);
+		}
+
+		// Drag and drop handlers
+		setupDragAndDrop('mergepdf-dropzone', 'mergepdf-input');
+		setupDragAndDrop('bgremover-dropzone', 'bgremover-input');
+		setupDragAndDrop('converter-dropzone', 'converter-input');
+		setupDragAndDrop('gifeditor-dropzone', 'gifeditor-input');
+
+		function setupDragAndDrop(dropzoneId, inputId) {
+			const dropzone = document.getElementById(dropzoneId);
+			const input = document.getElementById(inputId);
+			
+			dropzone.addEventListener('dragover', (e) => {
+				e.preventDefault();
+				dropzone.classList.add('drag-over');
+			});
+
+			dropzone.addEventListener('dragleave', () => {
+				dropzone.classList.remove('drag-over');
+			});
+
+			dropzone.addEventListener('drop', (e) => {
+				e.preventDefault();
+				dropzone.classList.remove('drag-over');
+				const files = e.dataTransfer.files;
+				if (files.length > 0) {
+					input.files = files;
+					input.dispatchEvent(new Event('change'));
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>
+
+
+

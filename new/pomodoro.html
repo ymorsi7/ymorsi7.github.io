@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Pomodoro Timer - Focus & Productivity</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free Pomodoro timer for better focus and productivity" />
+	<meta name="keywords" content="pomodoro timer, focus timer, productivity, study timer" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--blue-primary: #1e3a8a;
+			--blue-dark: #1e40af;
+			--blue-light: #3b82f6;
+			--blue-hover: #2563eb;
+			--green: #10b981;
+			--red: #ef4444;
+			--text-dark: #1e293b;
+			--text-medium: #475569;
+			--bg-white: #ffffff;
+			--bg-light: #f1f5f9;
+			--border-color: #e2e8f0;
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: var(--text-dark);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 2rem;
+		}
+
+		.container {
+			background: white;
+			border-radius: 20px;
+			padding: 3rem;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			max-width: 600px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.header {
+			margin-bottom: 2rem;
+		}
+
+		.header h1 {
+			font-size: 2.5rem;
+			font-weight: 700;
+			color: var(--blue-primary);
+			margin-bottom: 0.5rem;
+		}
+
+		.header p {
+			color: var(--text-medium);
+			font-size: 1rem;
+		}
+
+		.timer-display {
+			font-size: 5rem;
+			font-weight: 700;
+			color: var(--blue-primary);
+			margin: 2rem 0;
+			font-variant-numeric: tabular-nums;
+		}
+
+		.mode-indicator {
+			font-size: 1.25rem;
+			color: var(--text-medium);
+			margin-bottom: 1rem;
+			font-weight: 600;
+		}
+
+		.mode-indicator.work {
+			color: var(--blue-primary);
+		}
+
+		.mode-indicator.break {
+			color: var(--green);
+		}
+
+		.controls {
+			display: flex;
+			gap: 1rem;
+			justify-content: center;
+			margin: 2rem 0;
+		}
+
+		.btn {
+			padding: 1rem 2rem;
+			border: none;
+			border-radius: 12px;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn-primary {
+			background: var(--blue-primary);
+			color: white;
+		}
+
+		.btn-primary:hover {
+			background: var(--blue-hover);
+		}
+
+		.btn-secondary {
+			background: var(--bg-light);
+			color: var(--text-dark);
+		}
+
+		.btn-secondary:hover {
+			background: var(--border-color);
+		}
+
+		.btn-danger {
+			background: var(--red);
+			color: white;
+		}
+
+		.btn-danger:hover {
+			background: #dc2626;
+		}
+
+		.settings {
+			margin-top: 2rem;
+			padding-top: 2rem;
+			border-top: 2px solid var(--border-color);
+		}
+
+		.settings h3 {
+			font-size: 1.25rem;
+			margin-bottom: 1rem;
+			color: var(--text-dark);
+		}
+
+		.setting-group {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.setting-item {
+			text-align: left;
+		}
+
+		.setting-item label {
+			display: block;
+			margin-bottom: 0.5rem;
+			font-weight: 600;
+			color: var(--text-medium);
+			font-size: 0.9rem;
+		}
+
+		.setting-item input {
+			width: 100%;
+			padding: 0.75rem;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			font-size: 1rem;
+			font-family: inherit;
+		}
+
+		.setting-item input:focus {
+			outline: none;
+			border-color: var(--blue-primary);
+		}
+
+		.footer {
+			margin-top: 2rem;
+			padding-top: 2rem;
+			border-top: 2px solid var(--border-color);
+		}
+
+		.footer a {
+			color: var(--blue-primary);
+			text-decoration: none;
+			font-weight: 500;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.footer a:hover {
+			color: var(--blue-hover);
+		}
+
+		.progress-bar {
+			width: 100%;
+			height: 8px;
+			background: var(--bg-light);
+			border-radius: 4px;
+			overflow: hidden;
+			margin: 1rem 0;
+		}
+
+		.progress-fill {
+			height: 100%;
+			background: var(--blue-primary);
+			transition: width 0.3s ease;
+			width: 0%;
+		}
+
+		.progress-fill.break {
+			background: var(--green);
+		}
+
+		@media screen and (max-width: 768px) {
+			.container {
+				padding: 2rem 1.5rem;
+			}
+
+			.timer-display {
+				font-size: 4rem;
+			}
+
+			.controls {
+				flex-direction: column;
+			}
+
+			.btn {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1><i class="fas fa-clock"></i> Pomodoro Timer</h1>
+			<p>Focus for 50 minutes, rest for 10 minutes</p>
+		</div>
+
+		<div class="mode-indicator work" id="mode-indicator">Work Session</div>
+		
+		<div class="timer-display" id="timer">50:00</div>
+
+		<div class="progress-bar">
+			<div class="progress-fill" id="progress"></div>
+		</div>
+
+		<div class="controls">
+			<button class="btn btn-primary" id="start-btn">
+				<i class="fas fa-play"></i> Start
+			</button>
+			<button class="btn btn-secondary" id="pause-btn" style="display: none;">
+				<i class="fas fa-pause"></i> Pause
+			</button>
+			<button class="btn btn-danger" id="reset-btn">
+				<i class="fas fa-redo"></i> Reset
+			</button>
+		</div>
+
+		<div class="settings">
+			<h3>Timer Settings</h3>
+			<div class="setting-group">
+				<div class="setting-item">
+					<label>Work Duration (minutes)</label>
+					<input type="number" id="work-duration" value="50" min="1" max="120">
+				</div>
+				<div class="setting-item">
+					<label>Break Duration (minutes)</label>
+					<input type="number" id="break-duration" value="10" min="1" max="60">
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<a href="index.html">
+				<i class="fas fa-arrow-left"></i> Back to Portfolio
+			</a>
+			<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
+			<a href="tools.html">
+				<i class="fas fa-tools"></i> More Tools
+			</a>
+		</div>
+	</div>
+
+	<script>
+		let timerInterval = null;
+		let timeLeft = 50 * 60; // 50 minutes in seconds
+		let isRunning = false;
+		let isWorkMode = true;
+		let workDuration = 50;
+		let breakDuration = 10;
+		let totalTime = 50 * 60;
+
+		const timerDisplay = document.getElementById('timer');
+		const modeIndicator = document.getElementById('mode-indicator');
+		const progressBar = document.getElementById('progress');
+		const startBtn = document.getElementById('start-btn');
+		const pauseBtn = document.getElementById('pause-btn');
+		const resetBtn = document.getElementById('reset-btn');
+		const workInput = document.getElementById('work-duration');
+		const breakInput = document.getElementById('break-duration');
+
+		function updateDisplay() {
+			const minutes = Math.floor(timeLeft / 60);
+			const seconds = timeLeft % 60;
+			timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+			
+			const progress = ((totalTime - timeLeft) / totalTime) * 100;
+			progressBar.style.width = progress + '%';
+		}
+
+		function startTimer() {
+			if (timerInterval) return;
+			
+			isRunning = true;
+			startBtn.style.display = 'none';
+			pauseBtn.style.display = 'inline-flex';
+			
+			timerInterval = setInterval(() => {
+				timeLeft--;
+				updateDisplay();
+				
+				if (timeLeft <= 0) {
+					clearInterval(timerInterval);
+					timerInterval = null;
+					
+					// Switch mode
+					if (isWorkMode) {
+						isWorkMode = false;
+						timeLeft = breakDuration * 60;
+						totalTime = breakDuration * 60;
+						modeIndicator.textContent = 'Break Time!';
+						modeIndicator.className = 'mode-indicator break';
+						progressBar.className = 'progress-fill break';
+						document.body.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+					} else {
+						isWorkMode = true;
+						timeLeft = workDuration * 60;
+						totalTime = workDuration * 60;
+						modeIndicator.textContent = 'Work Session';
+						modeIndicator.className = 'mode-indicator work';
+						progressBar.className = 'progress-fill';
+						document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+					}
+					
+					updateDisplay();
+					
+					// Play notification sound (if browser allows)
+					try {
+						const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
+						audio.play();
+					} catch (e) {}
+					
+					// Auto-start next session
+					setTimeout(() => {
+						if (confirm(isWorkMode ? 'Start work session?' : 'Start break?')) {
+							startTimer();
+						} else {
+							isRunning = false;
+							startBtn.style.display = 'inline-flex';
+							pauseBtn.style.display = 'none';
+						}
+					}, 1000);
+				}
+			}, 1000);
+		}
+
+		function pauseTimer() {
+			if (timerInterval) {
+				clearInterval(timerInterval);
+				timerInterval = null;
+				isRunning = false;
+				startBtn.style.display = 'inline-flex';
+				pauseBtn.style.display = 'none';
+			}
+		}
+
+		function resetTimer() {
+			pauseTimer();
+			isWorkMode = true;
+			workDuration = parseInt(workInput.value) || 50;
+			breakDuration = parseInt(breakInput.value) || 10;
+			timeLeft = workDuration * 60;
+			totalTime = workDuration * 60;
+			modeIndicator.textContent = 'Work Session';
+			modeIndicator.className = 'mode-indicator work';
+			progressBar.className = 'progress-fill';
+			document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+			updateDisplay();
+		}
+
+		startBtn.addEventListener('click', startTimer);
+		pauseBtn.addEventListener('click', pauseTimer);
+		resetBtn.addEventListener('click', resetTimer);
+
+		workInput.addEventListener('change', () => {
+			if (!isRunning) {
+				workDuration = parseInt(workInput.value) || 50;
+				if (isWorkMode) {
+					timeLeft = workDuration * 60;
+					totalTime = workDuration * 60;
+					updateDisplay();
+				}
+			}
+		});
+
+		breakInput.addEventListener('change', () => {
+			if (!isRunning) {
+				breakDuration = parseInt(breakInput.value) || 10;
+				if (!isWorkMode) {
+					timeLeft = breakDuration * 60;
+					totalTime = breakDuration * 60;
+					updateDisplay();
+				}
+			}
+		});
+
+		updateDisplay();
+	</script>
+</body>
+
+</html>
+

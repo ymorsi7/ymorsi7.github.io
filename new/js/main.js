@@ -36,7 +36,11 @@
 
 	// Parallax
 	var parallax = function() {
-		$(window).stellar();
+		// Check if stellar is available before calling
+		if (typeof $.fn.stellar !== 'undefined') {
+			$(window).stellar();
+		}
+		// Silently skip if Stellar.js is not loaded (no warning needed)
 	};
 
 	var contentWayPoint = function() {

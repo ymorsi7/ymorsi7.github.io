@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Drawing Board - Free Online Drawing Tool</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free online drawing board - draw, sketch, and create art" />
+	<meta name="keywords" content="drawing board, sketch pad, online drawing, digital art" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--blue-primary: #1e3a8a;
+			--blue-dark: #1e40af;
+			--blue-light: #3b82f6;
+			--blue-hover: #2563eb;
+			--text-dark: #1e293b;
+			--text-medium: #475569;
+			--text-light: #64748b;
+			--bg-white: #ffffff;
+			--bg-light: #f1f5f9;
+			--border-color: #e2e8f0;
+			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+			--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: var(--bg-light);
+			color: var(--text-dark);
+			overflow: hidden;
+		}
+
+		.header {
+			background: var(--blue-primary);
+			padding: 1rem 2rem;
+			box-shadow: var(--shadow-md);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: white;
+		}
+
+		.header h1 {
+			font-size: 1.5rem;
+			font-weight: 700;
+		}
+
+		.toolbar {
+			background: var(--bg-white);
+			padding: 1rem;
+			border-bottom: 1px solid var(--border-color);
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.tool-group {
+			display: flex;
+			gap: 0.5rem;
+			align-items: center;
+			padding: 0.5rem;
+			border-right: 1px solid var(--border-color);
+			padding-right: 1rem;
+		}
+
+		.tool-group:last-child {
+			border-right: none;
+		}
+
+		.btn-tool {
+			width: 40px;
+			height: 40px;
+			border: 2px solid var(--border-color);
+			background: white;
+			border-radius: 8px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+			color: var(--text-dark);
+		}
+
+		.btn-tool:hover {
+			border-color: var(--blue-primary);
+			background: var(--bg-light);
+		}
+
+		.btn-tool.active {
+			border-color: var(--blue-primary);
+			background: var(--blue-primary);
+			color: white;
+		}
+
+		.color-picker {
+			width: 40px;
+			height: 40px;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			cursor: pointer;
+		}
+
+		.size-input {
+			width: 60px;
+			padding: 0.5rem;
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			text-align: center;
+		}
+
+		.canvas-container {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: #e5e7eb;
+			overflow: auto;
+			padding: 2rem;
+		}
+
+		#drawingCanvas {
+			background: white;
+			border-radius: 8px;
+			box-shadow: var(--shadow-lg);
+			cursor: crosshair;
+		}
+
+		.footer {
+			background: var(--bg-white);
+			padding: 1rem 2rem;
+			border-top: 1px solid var(--border-color);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.footer a {
+			color: var(--blue-primary);
+			text-decoration: none;
+			font-weight: 500;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.footer a:hover {
+			color: var(--blue-hover);
+		}
+
+		@media screen and (max-width: 768px) {
+			.toolbar {
+				padding: 0.75rem;
+			}
+
+			.tool-group {
+				padding-right: 0.75rem;
+			}
+
+			.btn-tool {
+				width: 36px;
+				height: 36px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div style="display: flex; flex-direction: column; height: 100vh;">
+		<header class="header">
+			<h1><i class="fas fa-paint-brush"></i> Drawing Board</h1>
+			<div>
+				<a href="index.html" style="color: white; text-decoration: none;">
+					<i class="fas fa-arrow-left"></i> Back to Portfolio
+				</a>
+			</div>
+		</header>
+
+		<div class="toolbar">
+			<div class="tool-group">
+				<button class="btn-tool active" id="pen-tool" title="Pen">
+					<i class="fas fa-pen"></i>
+				</button>
+				<button class="btn-tool" id="eraser-tool" title="Eraser">
+					<i class="fas fa-eraser"></i>
+				</button>
+			</div>
+			<div class="tool-group">
+				<label style="font-size: 0.9rem; margin-right: 0.5rem;">Color:</label>
+				<input type="color" id="color-picker" class="color-picker" value="#000000">
+			</div>
+			<div class="tool-group">
+				<label style="font-size: 0.9rem; margin-right: 0.5rem;">Size:</label>
+				<input type="number" id="brush-size" class="size-input" value="5" min="1" max="50">
+			</div>
+			<div class="tool-group">
+				<button class="btn-tool" id="clear-btn" title="Clear Canvas">
+					<i class="fas fa-trash"></i>
+				</button>
+				<button class="btn-tool" id="undo-btn" title="Undo">
+					<i class="fas fa-undo"></i>
+				</button>
+				<button class="btn-tool" id="redo-btn" title="Redo">
+					<i class="fas fa-redo"></i>
+				</button>
+			</div>
+			<div class="tool-group">
+				<button class="btn-tool" id="download-btn" title="Download">
+					<i class="fas fa-download"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="canvas-container">
+			<canvas id="drawingCanvas" width="1200" height="800"></canvas>
+		</div>
+
+		<footer class="footer">
+			<div>
+				<a href="tools.html">
+					<i class="fas fa-tools"></i> More Tools
+				</a>
+			</div>
+			<div style="color: var(--text-medium); font-size: 0.9rem;">
+				Press and drag to draw
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		const canvas = document.getElementById('drawingCanvas');
+		const ctx = canvas.getContext('2d');
+		let isDrawing = false;
+		let currentTool = 'pen';
+		let currentColor = '#000000';
+		let brushSize = 5;
+		let history = [];
+		let historyStep = -1;
+
+		// Initialize canvas
+		ctx.fillStyle = 'white';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		saveState();
+
+		// Tool selection
+		document.getElementById('pen-tool').addEventListener('click', () => {
+			currentTool = 'pen';
+			document.getElementById('pen-tool').classList.add('active');
+			document.getElementById('eraser-tool').classList.remove('active');
+			canvas.style.cursor = 'crosshair';
+		});
+
+		document.getElementById('eraser-tool').addEventListener('click', () => {
+			currentTool = 'eraser';
+			document.getElementById('eraser-tool').classList.add('active');
+			document.getElementById('pen-tool').classList.remove('active');
+			canvas.style.cursor = 'grab';
+		});
+
+		// Color picker
+		document.getElementById('color-picker').addEventListener('change', (e) => {
+			currentColor = e.target.value;
+		});
+
+		// Brush size
+		document.getElementById('brush-size').addEventListener('change', (e) => {
+			brushSize = parseInt(e.target.value);
+		});
+
+		// Drawing functions
+		function getMousePos(e) {
+			const rect = canvas.getBoundingClientRect();
+			return {
+				x: e.clientX - rect.left,
+				y: e.clientY - rect.top
+			};
+		}
+
+		function startDrawing(e) {
+			isDrawing = true;
+			const pos = getMousePos(e);
+			ctx.beginPath();
+			ctx.moveTo(pos.x, pos.y);
+		}
+
+		function draw(e) {
+			if (!isDrawing) return;
+			
+			const pos = getMousePos(e);
+			
+			if (currentTool === 'pen') {
+				ctx.strokeStyle = currentColor;
+				ctx.lineWidth = brushSize;
+				ctx.lineCap = 'round';
+				ctx.lineJoin = 'round';
+			} else if (currentTool === 'eraser') {
+				ctx.strokeStyle = 'white';
+				ctx.lineWidth = brushSize * 2;
+				ctx.lineCap = 'round';
+				ctx.lineJoin = 'round';
+			}
+			
+			ctx.lineTo(pos.x, pos.y);
+			ctx.stroke();
+		}
+
+		function stopDrawing() {
+			if (isDrawing) {
+				isDrawing = false;
+				saveState();
+			}
+		}
+
+		// Mouse events
+		canvas.addEventListener('mousedown', startDrawing);
+		canvas.addEventListener('mousemove', draw);
+		canvas.addEventListener('mouseup', stopDrawing);
+		canvas.addEventListener('mouseout', stopDrawing);
+
+		// Touch events for mobile
+		canvas.addEventListener('touchstart', (e) => {
+			e.preventDefault();
+			const touch = e.touches[0];
+			const mouseEvent = new MouseEvent('mousedown', {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			canvas.dispatchEvent(mouseEvent);
+		});
+
+		canvas.addEventListener('touchmove', (e) => {
+			e.preventDefault();
+			const touch = e.touches[0];
+			const mouseEvent = new MouseEvent('mousemove', {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			canvas.dispatchEvent(mouseEvent);
+		});
+
+		canvas.addEventListener('touchend', (e) => {
+			e.preventDefault();
+			const mouseEvent = new MouseEvent('mouseup', {});
+			canvas.dispatchEvent(mouseEvent);
+		});
+
+		// Clear canvas
+		document.getElementById('clear-btn').addEventListener('click', () => {
+			if (confirm('Clear the entire canvas?')) {
+				ctx.fillStyle = 'white';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				saveState();
+			}
+		});
+
+		// Undo/Redo
+		function saveState() {
+			historyStep++;
+			if (historyStep < history.length) {
+				history.length = historyStep;
+			}
+			history.push(canvas.toDataURL());
+		}
+
+		document.getElementById('undo-btn').addEventListener('click', () => {
+			if (historyStep > 0) {
+				historyStep--;
+				const img = new Image();
+				img.src = history[historyStep];
+				img.onload = () => {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					ctx.drawImage(img, 0, 0);
+				};
+			}
+		});
+
+		document.getElementById('redo-btn').addEventListener('click', () => {
+			if (historyStep < history.length - 1) {
+				historyStep++;
+				const img = new Image();
+				img.src = history[historyStep];
+				img.onload = () => {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					ctx.drawImage(img, 0, 0);
+				};
+			}
+		});
+
+		// Download
+		document.getElementById('download-btn').addEventListener('click', () => {
+			const link = document.createElement('a');
+			link.download = 'drawing.png';
+			link.href = canvas.toDataURL();
+			link.click();
+		});
+	</script>
+</body>
+
+</html>
+
