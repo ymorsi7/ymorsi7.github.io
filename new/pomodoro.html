@@ -350,6 +350,7 @@
 		let workDuration = 50;
 		let breakDuration = 10;
 		let totalTime = 50 * 60;
+		let endTime = null; // Track when timer should end (for background accuracy)
 
 		const timerDisplay = document.getElementById('timer');
 		const modeIndicator = document.getElementById('mode-indicator');
@@ -369,6 +370,15 @@
 			progressBar.style.width = progress + '%';
 		}
 
+		function calculateTimeLeft() {
+			if (endTime && isRunning) {
+				const now = Date.now();
+				const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
+				return remaining;
+			}
+			return timeLeft;
+		}
+
 		function startTimer() {
 			if (timerInterval) return;
 			
@@ -376,13 +386,17 @@
 			startBtn.style.display = 'none';
 			pauseBtn.style.display = 'inline-flex';
 			
+			// Set end time based on current timeLeft
+			endTime = Date.now() + (timeLeft * 1000);
+			
 			timerInterval = setInterval(() => {
-				timeLeft--;
+				timeLeft = calculateTimeLeft();
 				updateDisplay();
 				
 				if (timeLeft <= 0) {
 					clearInterval(timerInterval);
 					timerInterval = null;
+					endTime = null;
 					
 					// Switch mode
 					if (isWorkMode) {
@@ -430,6 +444,7 @@
 				clearInterval(timerInterval);
 				timerInterval = null;
 				isRunning = false;
+				endTime = null;
 				startBtn.style.display = 'inline-flex';
 				pauseBtn.style.display = 'none';
 			}
@@ -442,6 +457,7 @@
 			breakDuration = parseInt(breakInput.value) || 10;
 			timeLeft = workDuration * 60;
 			totalTime = workDuration * 60;
+			endTime = null;
 			modeIndicator.textContent = 'Work Session';
 			modeIndicator.className = 'mode-indicator work';
 			progressBar.className = 'progress-fill';
@@ -472,6 +488,15 @@
 					totalTime = breakDuration * 60;
 					updateDisplay();
 				}
+			}
+		});
+
+		// Handle tab visibility changes to keep timer accurate when switching tabs
+		document.addEventListener('visibilitychange', () => {
+			if (!document.hidden && isRunning && endTime) {
+				// Tab became visible - recalculate time left
+				timeLeft = calculateTimeLeft();
+				updateDisplay();
 			}
 		});
 
