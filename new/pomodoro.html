@@ -295,6 +295,9 @@
 		<div class="header">
 			<h1><i class="fas fa-clock"></i> Pomodoro Timer</h1>
 			<p>Focus for 50 minutes, rest for 10 minutes</p>
+			<p id="notification-status" style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-medium); display: none;">
+				<i class="fas fa-bell"></i> <span id="notification-text"></span>
+			</p>
 		</div>
 
 		<div class="mode-indicator work" id="mode-indicator">Work Session</div>
@@ -360,6 +363,72 @@
 		const resetBtn = document.getElementById('reset-btn');
 		const workInput = document.getElementById('work-duration');
 		const breakInput = document.getElementById('break-duration');
+		const notificationStatus = document.getElementById('notification-status');
+		const notificationText = document.getElementById('notification-text');
+
+		// Update notification status message
+		function updateNotificationStatus() {
+			if ('Notification' in window) {
+				notificationStatus.style.display = 'block';
+				if (Notification.permission === 'granted') {
+					notificationText.textContent = 'Notifications enabled - timer works even when tab is inactive';
+					notificationText.style.color = 'var(--green)';
+				} else if (Notification.permission === 'denied') {
+					notificationText.textContent = 'Notifications blocked - enable in browser settings for background alerts';
+					notificationText.style.color = 'var(--red)';
+				} else {
+					notificationText.textContent = 'Click Start to enable notifications for background alerts';
+					notificationText.style.color = 'var(--text-medium)';
+				}
+			} else {
+				notificationStatus.style.display = 'none';
+			}
+		}
+
+		// Request notification permission on page load
+		if ('Notification' in window && Notification.permission === 'default') {
+			Notification.requestPermission().then(() => updateNotificationStatus());
+		}
+
+		// Update status on load
+		updateNotificationStatus();
+
+		function showNotification(title, body) {
+			if ('Notification' in window && Notification.permission === 'granted') {
+				const notification = new Notification(title, {
+					body: body,
+					icon: 'images/smiling.png',
+					badge: 'images/smiling.png',
+					tag: 'pomodoro-timer',
+					requireInteraction: true
+				});
+
+				// Close notification after 5 seconds
+				setTimeout(() => notification.close(), 5000);
+
+				// Focus window when notification is clicked
+				notification.onclick = () => {
+					window.focus();
+					notification.close();
+				};
+			}
+		}
+
+		function playAlarm() {
+			// Try to play sound multiple times for better reliability
+			const playSound = () => {
+				try {
+					const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
+					audio.volume = 0.7;
+					audio.play().catch(() => {});
+				} catch (e) {}
+			};
+
+			// Play sound immediately and then a few more times
+			playSound();
+			setTimeout(playSound, 500);
+			setTimeout(playSound, 1000);
+		}
 
 		function updateDisplay() {
 			const minutes = Math.floor(timeLeft / 60);
@@ -381,6 +450,11 @@
 
 		function startTimer() {
 			if (timerInterval) return;
+			
+			// Request notification permission if not already granted
+			if ('Notification' in window && Notification.permission === 'default') {
+				Notification.requestPermission().then(() => updateNotificationStatus());
+			}
 			
 			isRunning = true;
 			startBtn.style.display = 'none';
@@ -419,11 +493,13 @@
 					
 					updateDisplay();
 					
-					// Play notification sound (if browser allows)
-					try {
-						const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
-						audio.play();
-					} catch (e) {}
+					// Show notification and play alarm (works even when tab is inactive)
+					if (isWorkMode) {
+						showNotification('Break Time! 🎉', `Your ${workDuration}-minute work session is complete. Time for a ${breakDuration}-minute break!`);
+					} else {
+						showNotification('Work Session! 💪', `Break is over. Time to focus for ${workDuration} minutes!`);
+					}
+					playAlarm();
 					
 					// Auto-start next session
 					setTimeout(() => {
