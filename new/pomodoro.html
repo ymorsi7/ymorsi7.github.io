@@ -295,9 +295,6 @@
 		<div class="header">
 			<h1><i class="fas fa-clock"></i> Pomodoro Timer</h1>
 			<p>Focus for 50 minutes, rest for 10 minutes</p>
-			<p id="notification-status" style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-medium); display: none;">
-				<i class="fas fa-bell"></i> <span id="notification-text"></span>
-			</p>
 		</div>
 
 		<div class="mode-indicator work" id="mode-indicator">Work Session</div>
@@ -353,7 +350,6 @@
 		let workDuration = 50;
 		let breakDuration = 10;
 		let totalTime = 50 * 60;
-		let endTime = null; // Track when timer should end (for background accuracy)
 
 		const timerDisplay = document.getElementById('timer');
 		const modeIndicator = document.getElementById('mode-indicator');
@@ -363,35 +359,12 @@
 		const resetBtn = document.getElementById('reset-btn');
 		const workInput = document.getElementById('work-duration');
 		const breakInput = document.getElementById('break-duration');
-		const notificationStatus = document.getElementById('notification-status');
-		const notificationText = document.getElementById('notification-text');
-
-		// Update notification status message
-		function updateNotificationStatus() {
-			if ('Notification' in window) {
-				notificationStatus.style.display = 'block';
-				if (Notification.permission === 'granted') {
-					notificationText.textContent = 'Notifications enabled - timer works even when tab is inactive';
-					notificationText.style.color = 'var(--green)';
-				} else if (Notification.permission === 'denied') {
-					notificationText.textContent = 'Notifications blocked - enable in browser settings for background alerts';
-					notificationText.style.color = 'var(--red)';
-				} else {
-					notificationText.textContent = 'Click Start to enable notifications for background alerts';
-					notificationText.style.color = 'var(--text-medium)';
-				}
-			} else {
-				notificationStatus.style.display = 'none';
-			}
-		}
+		let alarmInterval = null;
 
 		// Request notification permission on page load
 		if ('Notification' in window && Notification.permission === 'default') {
-			Notification.requestPermission().then(() => updateNotificationStatus());
+			Notification.requestPermission();
 		}
-
-		// Update status on load
-		updateNotificationStatus();
 
 		function showNotification(title, body) {
 			if ('Notification' in window && Notification.permission === 'granted') {
@@ -400,11 +373,12 @@
 					icon: 'images/smiling.png',
 					badge: 'images/smiling.png',
 					tag: 'pomodoro-timer',
-					requireInteraction: true
+					requireInteraction: true,
+					silent: false
 				});
 
-				// Close notification after 5 seconds
-				setTimeout(() => notification.close(), 5000);
+				// Keep notification open longer
+				setTimeout(() => notification.close(), 15000);
 
 				// Focus window when notification is clicked
 				notification.onclick = () => {
@@ -415,44 +389,73 @@
 		}
 
 		function playAlarm() {
-			// Play sound multiple times over a longer period to ensure it's not missed
-			const playSound = () => {
+			// Stop any existing alarm
+			if (alarmInterval) {
+				clearInterval(alarmInterval);
+			}
+
+			// Create a more noticeable beep pattern
+			const playBeep = () => {
 				try {
 					const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
-					audio.volume = 0.8;
+					audio.volume = 0.9;
 					audio.play().catch(() => {});
 				} catch (e) {}
 			};
 
-			// Play sound multiple times over 10 seconds to ensure it's heard
-			playSound();                    // 0ms
-			setTimeout(playSound, 300);     // 300ms
-			setTimeout(playSound, 600);      // 600ms
-			setTimeout(playSound, 1000);     // 1s
-			setTimeout(playSound, 2000);     // 2s
-			setTimeout(playSound, 3000);     // 3s
-			setTimeout(playSound, 4000);     // 4s
-			setTimeout(playSound, 5000);     // 5s
-			setTimeout(playSound, 7000);     // 7s
-			setTimeout(playSound, 10000);    // 10s
+			// Play beeps in a pattern: 3 quick beeps, pause, repeat
+			let beepCount = 0;
+			alarmInterval = setInterval(() => {
+				playBeep();
+				beepCount++;
+				
+				// Play for 30 seconds total (about 10 beep cycles)
+				if (beepCount >= 30) {
+					clearInterval(alarmInterval);
+					alarmInterval = null;
+				}
+			}, 1000);
+
+			// Also play immediately
+			playBeep();
+			setTimeout(playBeep, 200);
+			setTimeout(playBeep, 400);
+		}
+
+		function flashPage() {
+			// Flash the page background to get attention
+			let flashCount = 0;
+			const flashInterval = setInterval(() => {
+				if (flashCount % 2 === 0) {
+					document.body.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+				} else {
+					document.body.style.background = isWorkMode 
+						? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+						: 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+				}
+				flashCount++;
+				if (flashCount >= 20) { // Flash for 10 seconds
+					clearInterval(flashInterval);
+				}
+			}, 500);
 		}
 
 		function updateDisplay() {
 			const minutes = Math.floor(timeLeft / 60);
 			const seconds = timeLeft % 60;
-			timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+			const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+			timerDisplay.textContent = timeString;
 			
 			const progress = ((totalTime - timeLeft) / totalTime) * 100;
 			progressBar.style.width = progress + '%';
-		}
-
-		function calculateTimeLeft() {
-			if (endTime && isRunning) {
-				const now = Date.now();
-				const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
-				return remaining;
+			
+			// Update tab title with countdown
+			if (isRunning) {
+				const modeText = isWorkMode ? 'Work' : 'Break';
+				document.title = `${timeString} - ${modeText} | Pomodoro Timer`;
+			} else {
+				document.title = 'Pomodoro Timer - Focus & Productivity';
 			}
-			return timeLeft;
 		}
 
 		function startTimer() {
@@ -460,24 +463,20 @@
 			
 			// Request notification permission if not already granted
 			if ('Notification' in window && Notification.permission === 'default') {
-				Notification.requestPermission().then(() => updateNotificationStatus());
+				Notification.requestPermission();
 			}
 			
 			isRunning = true;
 			startBtn.style.display = 'none';
 			pauseBtn.style.display = 'inline-flex';
 			
-			// Set end time based on current timeLeft
-			endTime = Date.now() + (timeLeft * 1000);
-			
 			timerInterval = setInterval(() => {
-				timeLeft = calculateTimeLeft();
+				timeLeft--;
 				updateDisplay();
 				
 				if (timeLeft <= 0) {
 					clearInterval(timerInterval);
 					timerInterval = null;
-					endTime = null;
 					
 					// Switch mode
 					if (isWorkMode) {
@@ -500,13 +499,22 @@
 					
 					updateDisplay();
 					
-					// Show notification and play alarm (works even when tab is inactive)
+					// MULTIPLE ALARM METHODS - Make it impossible to miss!
+					// 1. Browser notification (works even when tab is inactive)
 					if (isWorkMode) {
-						showNotification('Break Time! 🎉', `Your ${workDuration}-minute work session is complete. Time for a ${breakDuration}-minute break!`);
+						showNotification('⏰ Break Time! 🎉', `Your ${workDuration}-minute work session is complete. Time for a ${breakDuration}-minute break!`);
 					} else {
-						showNotification('Work Session! 💪', `Break is over. Time to focus for ${workDuration} minutes!`);
+						showNotification('⏰ Work Session! 💪', `Break is over. Time to focus for ${workDuration} minutes!`);
 					}
+					
+					// 2. Play alarm sound repeatedly for 30 seconds
 					playAlarm();
+					
+					// 3. Flash the page background
+					flashPage();
+					
+					// 4. Update tab title to show alert
+					document.title = '⏰ TIMER COMPLETE! - Pomodoro Timer';
 					
 					// Auto-start next session
 					setTimeout(() => {
@@ -527,20 +535,28 @@
 				clearInterval(timerInterval);
 				timerInterval = null;
 				isRunning = false;
-				endTime = null;
 				startBtn.style.display = 'inline-flex';
 				pauseBtn.style.display = 'none';
+			}
+			// Stop any ongoing alarm
+			if (alarmInterval) {
+				clearInterval(alarmInterval);
+				alarmInterval = null;
 			}
 		}
 
 		function resetTimer() {
 			pauseTimer();
+			// Stop any ongoing alarm
+			if (alarmInterval) {
+				clearInterval(alarmInterval);
+				alarmInterval = null;
+			}
 			isWorkMode = true;
 			workDuration = parseInt(workInput.value) || 50;
 			breakDuration = parseInt(breakInput.value) || 10;
 			timeLeft = workDuration * 60;
 			totalTime = workDuration * 60;
-			endTime = null;
 			modeIndicator.textContent = 'Work Session';
 			modeIndicator.className = 'mode-indicator work';
 			progressBar.className = 'progress-fill';
@@ -571,15 +587,6 @@
 					totalTime = breakDuration * 60;
 					updateDisplay();
 				}
-			}
-		});
-
-		// Handle tab visibility changes to keep timer accurate when switching tabs
-		document.addEventListener('visibilitychange', () => {
-			if (!document.hidden && isRunning && endTime) {
-				// Tab became visible - recalculate time left
-				timeLeft = calculateTimeLeft();
-				updateDisplay();
 			}
 		});
 
