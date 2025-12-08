@@ -360,6 +360,8 @@
 		const workInput = document.getElementById('work-duration');
 		const breakInput = document.getElementById('break-duration');
 		let alarmInterval = null;
+		let endTime = null; // Track when timer should end (for background accuracy)
+		let alarmActive = false; // Track if alarm should be playing
 
 		// Request notification permission on page load
 		if ('Notification' in window && Notification.permission === 'default') {
@@ -368,27 +370,42 @@
 
 		function showNotification(title, body) {
 			if ('Notification' in window && Notification.permission === 'granted') {
-				const notification = new Notification(title, {
-					body: body,
-					icon: 'images/smiling.png',
-					badge: 'images/smiling.png',
-					tag: 'pomodoro-timer',
-					requireInteraction: true,
-					silent: false
+				// Show multiple notifications to ensure it's seen
+				for (let i = 0; i < 3; i++) {
+					setTimeout(() => {
+						const notification = new Notification(title, {
+							body: body,
+							icon: 'images/smiling.png',
+							badge: 'images/smiling.png',
+							tag: 'pomodoro-timer-' + i,
+							requireInteraction: true,
+							silent: false
+						});
+
+						// Keep notification open longer
+						setTimeout(() => notification.close(), 20000);
+
+						// Focus window when notification is clicked
+						notification.onclick = () => {
+							window.focus();
+							notification.close();
+						};
+					}, i * 500); // Stagger notifications
+				}
+			} else if ('Notification' in window && Notification.permission === 'default') {
+				// Request permission if not yet asked
+				Notification.requestPermission().then(permission => {
+					if (permission === 'granted') {
+						showNotification(title, body);
+					}
 				});
-
-				// Keep notification open longer
-				setTimeout(() => notification.close(), 15000);
-
-				// Focus window when notification is clicked
-				notification.onclick = () => {
-					window.focus();
-					notification.close();
-				};
 			}
 		}
 
 		function playAlarm() {
+			// Mark alarm as active
+			alarmActive = true;
+			
 			// Stop any existing alarm
 			if (alarmInterval) {
 				clearInterval(alarmInterval);
@@ -403,23 +420,29 @@
 				} catch (e) {}
 			};
 
-			// Play beeps in a pattern: 3 quick beeps, pause, repeat
-			let beepCount = 0;
-			alarmInterval = setInterval(() => {
-				playBeep();
-				beepCount++;
-				
-				// Play for 30 seconds total (about 10 beep cycles)
-				if (beepCount >= 30) {
-					clearInterval(alarmInterval);
-					alarmInterval = null;
-				}
-			}, 1000);
+			// Only play audio if tab is visible (browsers block background audio)
+			if (!document.hidden) {
+				// Play beeps in a pattern: beep every second
+				let beepCount = 0;
+				alarmInterval = setInterval(() => {
+					if (!document.hidden) {
+						playBeep();
+					}
+					beepCount++;
+					
+					// Play for 60 seconds total
+					if (beepCount >= 60) {
+						clearInterval(alarmInterval);
+						alarmInterval = null;
+						alarmActive = false;
+					}
+				}, 1000);
 
-			// Also play immediately
-			playBeep();
-			setTimeout(playBeep, 200);
-			setTimeout(playBeep, 400);
+				// Also play immediately
+				playBeep();
+				setTimeout(playBeep, 200);
+				setTimeout(playBeep, 400);
+			}
 		}
 
 		function flashPage() {
@@ -458,8 +481,24 @@
 			}
 		}
 
+		function calculateTimeLeft() {
+			if (endTime && isRunning) {
+				const now = Date.now();
+				const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
+				return remaining;
+			}
+			return timeLeft;
+		}
+
 		function startTimer() {
 			if (timerInterval) return;
+			
+			// Stop any active alarm when starting new session
+			if (alarmInterval) {
+				clearInterval(alarmInterval);
+				alarmInterval = null;
+			}
+			alarmActive = false;
 			
 			// Request notification permission if not already granted
 			if ('Notification' in window && Notification.permission === 'default') {
@@ -470,13 +509,20 @@
 			startBtn.style.display = 'none';
 			pauseBtn.style.display = 'inline-flex';
 			
+			// Set end time based on current timeLeft (works even when tab is inactive)
+			endTime = Date.now() + (timeLeft * 1000);
+			
 			timerInterval = setInterval(() => {
-				timeLeft--;
+				timeLeft = calculateTimeLeft();
 				updateDisplay();
 				
 				if (timeLeft <= 0) {
 					clearInterval(timerInterval);
 					timerInterval = null;
+					endTime = null;
+					
+					// Store the mode we just completed for notifications
+					const completedWorkMode = isWorkMode;
 					
 					// Switch mode
 					if (isWorkMode) {
@@ -500,8 +546,8 @@
 					updateDisplay();
 					
 					// MULTIPLE ALARM METHODS - Make it impossible to miss!
-					// 1. Browser notification (works even when tab is inactive)
-					if (isWorkMode) {
+					// 1. Browser notification (works even when tab is inactive) - show multiple times
+					if (completedWorkMode) {
 						showNotification('⏰ Break Time! 🎉', `Your ${workDuration}-minute work session is complete. Time for a ${breakDuration}-minute break!`);
 					} else {
 						showNotification('⏰ Work Session! 💪', `Break is over. Time to focus for ${workDuration} minutes!`);
@@ -535,6 +581,7 @@
 				clearInterval(timerInterval);
 				timerInterval = null;
 				isRunning = false;
+				endTime = null;
 				startBtn.style.display = 'inline-flex';
 				pauseBtn.style.display = 'none';
 			}
@@ -543,6 +590,7 @@
 				clearInterval(alarmInterval);
 				alarmInterval = null;
 			}
+			alarmActive = false;
 		}
 
 		function resetTimer() {
@@ -552,6 +600,8 @@
 				clearInterval(alarmInterval);
 				alarmInterval = null;
 			}
+			alarmActive = false;
+			endTime = null;
 			isWorkMode = true;
 			workDuration = parseInt(workInput.value) || 50;
 			breakDuration = parseInt(breakInput.value) || 10;
@@ -586,6 +636,22 @@
 					timeLeft = breakDuration * 60;
 					totalTime = breakDuration * 60;
 					updateDisplay();
+				}
+			}
+		});
+
+		// Handle tab visibility changes - play alarm when you return to tab if it's active
+		document.addEventListener('visibilitychange', () => {
+			if (!document.hidden) {
+				// Tab became visible - recalculate time left
+				if (isRunning && endTime) {
+					timeLeft = calculateTimeLeft();
+					updateDisplay();
+				}
+				
+				// If alarm should be playing, start it now
+				if (alarmActive && !alarmInterval) {
+					playAlarm();
 				}
 			}
 		});
