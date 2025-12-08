@@ -362,6 +362,7 @@
 		let alarmInterval = null;
 		let endTime = null; // Track when timer should end (for background accuracy)
 		let alarmActive = false; // Track if alarm should be playing
+		let notificationInterval = null; // Keep showing notifications
 
 		// Request notification permission on page load
 		if ('Notification' in window && Notification.permission === 'default') {
@@ -370,27 +371,45 @@
 
 		function showNotification(title, body) {
 			if ('Notification' in window && Notification.permission === 'granted') {
-				// Show multiple notifications to ensure it's seen
-				for (let i = 0; i < 3; i++) {
-					setTimeout(() => {
-						const notification = new Notification(title, {
-							body: body,
-							icon: 'images/smiling.png',
-							badge: 'images/smiling.png',
-							tag: 'pomodoro-timer-' + i,
-							requireInteraction: true,
-							silent: false
-						});
+				// Show notification immediately
+				const showOne = () => {
+					const notification = new Notification(title, {
+						body: body,
+						icon: 'images/smiling.png',
+						badge: 'images/smiling.png',
+						tag: 'pomodoro-timer',
+						requireInteraction: true,
+						silent: false
+					});
 
-						// Keep notification open longer
-						setTimeout(() => notification.close(), 20000);
+					// Keep notification open longer
+					setTimeout(() => notification.close(), 30000);
 
-						// Focus window when notification is clicked
-						notification.onclick = () => {
-							window.focus();
-							notification.close();
-						};
-					}, i * 500); // Stagger notifications
+					// Focus window when notification is clicked
+					notification.onclick = () => {
+						window.focus();
+						notification.close();
+						// Stop showing more notifications when clicked
+						if (notificationInterval) {
+							clearInterval(notificationInterval);
+							notificationInterval = null;
+						}
+					};
+				};
+
+				// Show immediately
+				showOne();
+				
+				// Keep showing notifications every 5 seconds until user interacts
+				if (!notificationInterval) {
+					notificationInterval = setInterval(() => {
+						if (alarmActive) {
+							showOne();
+						} else {
+							clearInterval(notificationInterval);
+							notificationInterval = null;
+						}
+					}, 5000);
 				}
 			} else if ('Notification' in window && Notification.permission === 'default') {
 				// Request permission if not yet asked
@@ -415,33 +434,40 @@
 			const playBeep = () => {
 				try {
 					const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
-					audio.volume = 0.9;
+					audio.volume = 1.0; // Maximum volume
 					audio.play().catch(() => {});
 				} catch (e) {}
 			};
 
-			// Only play audio if tab is visible (browsers block background audio)
-			if (!document.hidden) {
-				// Play beeps in a pattern: beep every second
-				let beepCount = 0;
-				alarmInterval = setInterval(() => {
-					if (!document.hidden) {
-						playBeep();
+			// Play beeps in a pattern: beep every second
+			let beepCount = 0;
+			alarmInterval = setInterval(() => {
+				// Only play if tab is visible (browsers block background audio)
+				if (!document.hidden) {
+					playBeep();
+				}
+				beepCount++;
+				
+				// Play for 120 seconds total (2 minutes) - very persistent
+				if (beepCount >= 120) {
+					clearInterval(alarmInterval);
+					alarmInterval = null;
+					alarmActive = false;
+					// Stop notifications too
+					if (notificationInterval) {
+						clearInterval(notificationInterval);
+						notificationInterval = null;
 					}
-					beepCount++;
-					
-					// Play for 60 seconds total
-					if (beepCount >= 60) {
-						clearInterval(alarmInterval);
-						alarmInterval = null;
-						alarmActive = false;
-					}
-				}, 1000);
+				}
+			}, 1000);
 
-				// Also play immediately
+			// Play immediately if tab is visible
+			if (!document.hidden) {
 				playBeep();
 				setTimeout(playBeep, 200);
 				setTimeout(playBeep, 400);
+				setTimeout(playBeep, 600);
+				setTimeout(playBeep, 800);
 			}
 		}
 
@@ -497,6 +523,11 @@
 			if (alarmInterval) {
 				clearInterval(alarmInterval);
 				alarmInterval = null;
+			}
+			// Stop notifications
+			if (notificationInterval) {
+				clearInterval(notificationInterval);
+				notificationInterval = null;
 			}
 			alarmActive = false;
 			
@@ -590,6 +621,11 @@
 				clearInterval(alarmInterval);
 				alarmInterval = null;
 			}
+			// Stop notifications
+			if (notificationInterval) {
+				clearInterval(notificationInterval);
+				notificationInterval = null;
+			}
 			alarmActive = false;
 		}
 
@@ -599,6 +635,11 @@
 			if (alarmInterval) {
 				clearInterval(alarmInterval);
 				alarmInterval = null;
+			}
+			// Stop notifications
+			if (notificationInterval) {
+				clearInterval(notificationInterval);
+				notificationInterval = null;
 			}
 			alarmActive = false;
 			endTime = null;
@@ -649,8 +690,24 @@
 					updateDisplay();
 				}
 				
-				// If alarm should be playing, start it now
-				if (alarmActive && !alarmInterval) {
+				// If alarm should be playing, play it IMMEDIATELY and LOUDLY
+				if (alarmActive) {
+					// Restart alarm to ensure it plays (even if already playing)
+					if (alarmInterval) {
+						clearInterval(alarmInterval);
+						alarmInterval = null;
+					}
+					// Play multiple beeps immediately
+					for (let i = 0; i < 10; i++) {
+						setTimeout(() => {
+							try {
+								const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWi77+efTRAMUKfj8LZjHAY4kdfyzHksBSR3x/DdkEAKFF606euoVRQKRp/g8r5sIQUrgc7y2Yk2CBlo');
+								audio.volume = 1.0;
+								audio.play().catch(() => {});
+							} catch (e) {}
+						}, i * 100);
+					}
+					// Then start the regular alarm pattern
 					playAlarm();
 				}
 			}
