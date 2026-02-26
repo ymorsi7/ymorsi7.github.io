@@ -5,12 +5,13 @@
 	<title>YM | Photography</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
 	<link rel="icon" type="image/x-icon" href="docs/assets/img/cam.png">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/97ac8d9bb6.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/97ac8d9bb6.js" crossorigin="anonymous" defer></script>
 	<style>
 		/* Modern Reset & Base Styles */
 		* {
@@ -141,8 +142,7 @@
 			width: 100vw;
 			height: 25vh;
 			min-height: 180px;
-			background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
-						url('docs/assets/img/photography/malibuu.jpg') center/cover no-repeat;
+			background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -271,6 +271,7 @@
 		.portfolio-item {
 			background-size: cover;
 			background-position: center;
+			background-color: rgba(0, 0, 0, 0.08);
 			height: 350px;
 			position: relative;
 			transition: all 0.4s ease;
@@ -577,49 +578,49 @@
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/images/chicagoNight.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoNight.jpg" data-full-src="docs/images/chicagoNight.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/images/chicagoooo.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoooo.jpg" data-full-src="docs/images/chicagoooo.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/images/chicagoL.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoL.jpg" data-full-src="docs/images/chicagoL.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/images/joilet.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/joilet.jpg" data-full-src="docs/images/joilet.jpg"></div>
 			<h6>Joliet, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box urban nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/images/whitingINN.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/whitingINN.jpg" data-full-src="docs/images/whitingINN.jpg"></div>
 			<h6>Whiting, IN</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box  nature">
-			<div class="portfolio-item" style="background-image: url('docs/images/IMG_6558.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/IMG_6558.jpg" data-full-src="docs/images/IMG_6558.jpg"></div>
 			<h6>Whiting, IN</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/images/bristolWIi.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/bristolWIi.jpg" data-full-src="docs/images/bristolWIi.jpg"></div>
 			<h6>Bristol, WI</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/images/bristolWi.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/images/bristolWi.jpg" data-full-src="docs/images/bristolWi.jpg"></div>
 			<h6>Bristol, WI</h6>
 			<p>November 2025</p>
 		</div>
@@ -627,25 +628,25 @@
 		
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/phoenixnew2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/phoenixnew2.jpg" data-full-src="docs/assets/img/phoenixnew2.jpg"></div>
 			<h6>Phoenix, AZ</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/phoenixNew.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/phoenixNew.jpg" data-full-src="docs/assets/img/phoenixNew.jpg"></div>
 			<h6>Phoenix, AZ</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/JacumbaHotSprings2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings2.jpg" data-full-src="docs/assets/img/JacumbaHotSprings2.jpg"></div>
 			<h6>Jacumba Hot Springs, CA</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/JacumbaHotSprings.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings.jpg" data-full-src="docs/assets/img/JacumbaHotSprings.jpg"></div>
 			<h6>Jacumba Hot Springs, CA</h6>
 			<p>October 2025</p>
 		</div>
@@ -654,32 +655,32 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SFROCK.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SFROCK.jpg" data-full-src="docs/assets/img/SFROCK.jpg"></div>
 			<h6>San Francisco, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SanDiegoPoway.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoPoway.jpg" data-full-src="docs/assets/img/SanDiegoPoway.jpg"></div>
 			<h6>Poway, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SanDiegoLuv.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoLuv.jpg" data-full-src="docs/assets/img/SanDiegoLuv.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SanDiego.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiego.jpg" data-full-src="docs/assets/img/SanDiego.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/Marin.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Marin.jpg" data-full-src="docs/assets/img/Marin.jpg"></div>
 			<h6>Marin County, CA</h6>
 			<p>September 2025</p>
 		</div>
@@ -687,52 +688,52 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/ICSDRocket.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/ICSDRocket.jpg" data-full-src="docs/assets/img/ICSDRocket.jpg"></div>
 			<h6>SpaceX Rocket Launch, San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/BVHills2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BVHills2.jpg" data-full-src="docs/assets/img/BVHills2.jpg"></div>
 			<h6>Beverly Hills, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box urban land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/BVHills.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BVHills.jpg" data-full-src="docs/assets/img/BVHills.jpg"></div>
 			<h6>Beverly Hills, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/Brisbane.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Brisbane.jpg" data-full-src="docs/assets/img/Brisbane.jpg"></div>
 			<h6>Brisbane, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SDLJ.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SDLJ.jpg" data-full-src="docs/assets/img/SDLJ.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SanJoseSky.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanJoseSky.jpg" data-full-src="docs/assets/img/SanJoseSky.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SDLanding.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SDLanding.jpg" data-full-src="docs/assets/img/SDLanding.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/AlexVibes.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/AlexVibes.jpg" data-full-src="docs/assets/img/AlexVibes.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<!-- <p>August 2025</p> -->
 			<p>Summer 2025</p>
@@ -740,40 +741,40 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/SanJose.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanJose.jpg" data-full-src="docs/assets/img/SanJose.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mountainview.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mountainview.jpg" data-full-src="docs/assets/img/mountainview.jpg"></div>
 			<h6>Mountain View, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/OrangeCA.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/OrangeCA.jpg" data-full-src="docs/assets/img/OrangeCA.jpg"></div>
 			<h6>Orange, CA</h6>
 			<p>July 2025</p>
 		</div>
 		
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/CityoL.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/CityoL.jpg" data-full-src="docs/assets/img/CityoL.jpg"></div>
 			<h6>City of London, UK</h6>
 			<p>July 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/canarywharf.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/canarywharf.jpg" data-full-src="docs/assets/img/canarywharf.jpg"></div>
 			<h6>Canary Wharf, London</h6>
 			<p>July 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/MarinaThree.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/MarinaThree.jpg" data-full-src="docs/assets/img/MarinaThree.jpg"></div>
 			<h6>Marina El Alamein, Egypt</h6>
 			<p>July 2025</p>
 		</div>
@@ -783,210 +784,210 @@
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/AlRehab.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/AlRehab.jpg" data-full-src="docs/assets/img/AlRehab.jpg"></div>
 			<h6>New Cairo, Egypt</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/BorgAlArab.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BorgAlArab.jpg" data-full-src="docs/assets/img/BorgAlArab.jpg"></div>
 			<h6>Borg Al Arab, Egypt</h6>
 			<p>July 2025</p>
 		</div> 
 		<!-- 11/6/2025 update above -->
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/gPAlex.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gPAlex.jpeg" data-full-src="docs/assets/img/gPAlex.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2025</p>
 		</div> 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alexhone.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexhone.jpeg" data-full-src="docs/assets/img/alexhone.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2025</p>
 		</div> 
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/meccaSunset.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaSunset.jpeg" data-full-src="docs/assets/img/meccaSunset.jpeg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box islam land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/borgSaa.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/borgSaa.jpeg" data-full-src="docs/assets/img/borgSaa.jpeg"></div>
 			<h6>Mecca Clock Tower</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box islam nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/meccaUrb.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaUrb.jpeg" data-full-src="docs/assets/img/meccaUrb.jpeg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
 		</div> 
 		
 		<div class="portfolio-box islam land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/meccaNew.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaNew.jpeg" data-full-src="docs/assets/img/meccaNew.jpeg"></div>
 			<h6>Masjid al-Haram</h6>
 			<p>July 2025</p>
 		</div> 
 
 		
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/qubaNew.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/qubaNew.jpeg" data-full-src="docs/assets/img/qubaNew.jpeg"></div>
 			<h6>Masjid Quba</h6>
 			<p>July 2025</p>
 		</div> 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/qubaa.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/qubaa.jpeg" data-full-src="docs/assets/img/qubaa.jpeg"></div>
 			<h6>Masjid Quba</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nabnew2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew2.jpeg" data-full-src="docs/assets/img/nabnew2.jpeg"></div>
 			<h6>Masjid al-Nabawi</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nabnew3.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew3.jpeg" data-full-src="docs/assets/img/nabnew3.jpeg"></div>
 			<h6>Masjid al-Nabawi</h6>
 			<p>July 2025</p>
 		</div> 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nabnew.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew.jpeg" data-full-src="docs/assets/img/nabnew.jpeg"></div>
 			<h6>Masjid al-Nabawi</h6>
 			<p>July 2025</p>
 		</div> 
 
 <!-- 
 		<div class="portfolio-box nature islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nabawiMagh.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabawiMagh.jpeg" data-full-src="docs/assets/img/nabawiMagh.jpeg"></div>
 			<h6>Masjid al-Nabawi</h6>
 			<p>July 2025</p>
 		</div> -->
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/newAlexSunset.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/newAlexSunset.jpeg" data-full-src="docs/assets/img/newAlexSunset.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2025</p>
 		</div> 
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/junealex.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/junealex.jpeg" data-full-src="docs/assets/img/junealex.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/turkey1.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/turkey1.jpg" data-full-src="docs/assets/img/turkey1.jpg"></div>
 			<h6>Istanbul, Turkey</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/camosque2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/camosque2.jpeg" data-full-src="docs/assets/img/camosque2.jpeg"></div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/camosque1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/camosque1.jpeg" data-full-src="docs/assets/img/camosque1.jpeg"></div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/cam2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cam2.jpg" data-full-src="docs/assets/img/cam2.jpg"></div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/underg.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/underg.jpg" data-full-src="docs/assets/img/underg.jpg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/londonout.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/londonout.jpg" data-full-src="docs/assets/img/londonout.jpg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/london2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/london2.jpeg" data-full-src="docs/assets/img/london2.jpeg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/london1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/london1.jpeg" data-full-src="docs/assets/img/london1.jpeg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/bl.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bl.jpeg" data-full-src="docs/assets/img/bl.jpeg"></div>
 			<h6>Feltham, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/miami6.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami6.jpg" data-full-src="docs/assets/img/miami6.jpg"></div>
 			<h6>Miami Beach, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/miami5.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami5.jpg" data-full-src="docs/assets/img/miami5.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/miami4.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami4.jpg" data-full-src="docs/assets/img/miami4.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/miami3.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami3.jpg" data-full-src="docs/assets/img/miami3.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/miami2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami2.jpg" data-full-src="docs/assets/img/miami2.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mi_beautiful2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful2.jpeg" data-full-src="docs/assets/img/mi_beautiful2.jpeg"></div>
 			<h6>Marco Island, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mi_beautiful.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful.jpeg" data-full-src="docs/assets/img/mi_beautiful.jpeg"></div>
 			<h6>Marco Island, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sfmay.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sfmay.jpg" data-full-src="docs/assets/img/sfmay.jpg"></div>
 			<h6>San Francisco, CA</h6>
 			<p>May 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/palms.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/palms.jpg" data-full-src="docs/assets/img/palms.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/LosBanos.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/LosBanos.jpg" data-full-src="docs/assets/img/LosBanos.jpg"></div>
 			<h6>Los Banos, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/gilroy.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gilroy.jpg" data-full-src="docs/assets/img/gilroy.jpg"></div>
 			<h6>Gilroy, CA</h6>
 			<p>April 2025</p>
 		</div>
@@ -994,102 +995,102 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sanjoseapril.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sanjoseapril.jpg" data-full-src="docs/assets/img/sanjoseapril.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/stanfrd.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/stanfrd.jpg" data-full-src="docs/assets/img/stanfrd.jpg"></div>
 			<h6>Stanford University</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/milpitas.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/milpitas.jpg" data-full-src="docs/assets/img/milpitas.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/roshdy.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/roshdy.jpg" data-full-src="docs/assets/img/roshdy.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>January 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/kuwaitmasjid.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/kuwaitmasjid.jpg" data-full-src="docs/assets/img/kuwaitmasjid.jpg"></div>
 			<h6>Kuwait City, Kuwait</h6>
 			<p>December 2024</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sharjah2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sharjah2.jpg" data-full-src="docs/assets/img/sharjah2.jpg"></div>
 			<h6>Sharjah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/rak.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/rak.jpg" data-full-src="docs/assets/img/rak.jpg"></div>
 			<h6>Ras Al-Khaimah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/Ras-Al-Khaimah.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Ras-Al-Khaimah.jpg" data-full-src="docs/assets/img/Ras-Al-Khaimah.jpg"></div>
 			<h6>Ras Al-Khaimah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature ">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sharjah.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sharjah.jpg" data-full-src="docs/assets/img/sharjah.jpg"></div>
 			<h6>Sharjah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/Fujairah.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Fujairah.jpg" data-full-src="docs/assets/img/Fujairah.jpg"></div>
 			<h6>Fujairah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dubai2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dubai2.jpg" data-full-src="docs/assets/img/dubai2.jpg"></div>
 			<h6>Dubai, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dibba\ alFujairah.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dibba\ alFujairah.jpg" data-full-src="docs/assets/img/dibba\ alFujairah.jpg"></div>
 			<h6>Dibba Al-Fujairah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature land urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/bK.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bK.jpg" data-full-src="docs/assets/img/bK.jpg"></div>
 			<h6>Burj Khalifa</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/med2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/med2.jpg" data-full-src="docs/assets/img/med2.jpg"></div>
 			<h6>Masjid Al-Nabawi</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/medinasky.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/medinasky.jpg" data-full-src="docs/assets/img/medinasky.jpg"></div>
 			<h6>Medina, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nabawi.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabawi.jpg" data-full-src="docs/assets/img/nabawi.jpg"></div>
 			<h6>Masjid Al-Nabawi</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/quba.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/quba.jpg" data-full-src="docs/assets/img/quba.jpg"></div>
 			<h6>Masjid Quba</h6>
 			<p>December 2024</p>
 		</div>
@@ -1097,637 +1098,540 @@
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mecca3.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mecca3.jpg" data-full-src="docs/assets/img/mecca3.jpg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mecca.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mecca.jpg" data-full-src="docs/assets/img/mecca.jpg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/decalex.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/decalex.jpg" data-full-src="docs/assets/img/decalex.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alexsky.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexsky.jpg" data-full-src="docs/assets/img/alexsky.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alexblue.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexblue.jpg" data-full-src="docs/assets/img/alexblue.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/blueclouds.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/blueclouds.jpg" data-full-src="docs/assets/img/blueclouds.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/cat.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cat.jpg" data-full-src="docs/assets/img/cat.jpg"></div>
 			<h6>Avalon, California</h6>
 			<p>November 2024</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sdnov1124.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sdnov1124.jpg" data-full-src="docs/assets/img/sdnov1124.jpg"></div>
 			<h6>San Diego, California</h6>
 			<p>November 2024</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/laham.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/laham.jpeg" data-full-src="docs/assets/img/laham.jpeg"></div>
 			<h6>Los Angeles, California</h6>
 			<p>November 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/33.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/33.jpeg" data-full-src="docs/assets/img/33.jpeg"></div>
 			<h6>Chicago, Illinois</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/chiAbove.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chiAbove.jpeg" data-full-src="docs/assets/img/chiAbove.jpeg"></div>
 			<h6>Chicago, Illinois</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/hicOct.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/hicOct.jpeg" data-full-src="docs/assets/img/hicOct.jpeg"></div>
 			<h6>Chicago, Illinois</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/rehab.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/rehab.jpeg" data-full-src="docs/assets/img/rehab.jpeg"></div>
 			<h6>New Cairo, Egypt</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alll.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alll.jpeg" data-full-src="docs/assets/img/alll.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/anton1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/anton1.jpeg" data-full-src="docs/assets/img/anton1.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dd.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dd.jpeg" data-full-src="docs/assets/img/dd.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/newcap.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/newcap.jpeg" data-full-src="docs/assets/img/newcap.jpeg"></div>
 			<h6>New Administrative Capitol, Egypt</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/bigben.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bigben.jpeg" data-full-src="docs/assets/img/bigben.jpeg"></div>
 			<h6>Big Ben</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lr2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lr2.jpeg" data-full-src="docs/assets/img/lr2.jpeg"></div>
 			<h6>London, England</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lon.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lon.jpeg" data-full-src="docs/assets/img/lon.jpeg"></div>
 			<h6>London, England</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lt.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lt.jpeg" data-full-src="docs/assets/img/lt.jpeg"></div>
 			<h6>London, England</h6>
 			<p>October 2024</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/wm.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/wm.jpeg" data-full-src="docs/assets/img/wm.jpeg"></div>
 			<h6>Washington, D.C.</h6>
 			<p>September 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/portlandd.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/portlandd.jpeg" data-full-src="docs/assets/img/portlandd.jpeg"></div>
 			<h6>Portland, Oregon</h6>
 			<p>September 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/capitola.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/capitola.jpeg" data-full-src="docs/assets/img/capitola.jpeg"></div>
 			<h6>Capitola, California</h6>
 			<p>September 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sr.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sr.jpeg" data-full-src="docs/assets/img/sr.jpeg"></div>
 			<h6>San Jose, California</h6>
 			<p>September 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mttam.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mttam.jpeg" data-full-src="docs/assets/img/mttam.jpeg"></div>
 			<h6>Mount Tamalpais, California</h6>
 			<p>August 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/mttam2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mttam2.jpeg" data-full-src="docs/assets/img/mttam2.jpeg"></div>
 			<h6>Mount Tamalpais, California</h6>
 			<p>August 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sfff.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sfff.jpeg" data-full-src="docs/assets/img/sfff.jpeg"></div>
 			<h6>San Francisco, California</h6>
 			<p>August 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alamein.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alamein.jpg" data-full-src="docs/assets/img/alamein.jpg"></div>
 			<h6>El Alamein, Egypt</h6>
 			<p>June 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/centralp.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/centralp.jpg" data-full-src="docs/assets/img/centralp.jpg"></div>
 			<h6>Central Park (New York, NY)</h6>
 			<p>July 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/cenparknature.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cenparknature.jpg" data-full-src="docs/assets/img/cenparknature.jpg"></div>
 			<h6>Central Park (New York, NY)</h6>
 			<p>July 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/austintree.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/austintree.jpg" data-full-src="docs/assets/img/austintree.jpg"></div>
 			<h6>Austin, Texas</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/atl.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg"></div>
 			<h6>Atlanta, Georgia</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/bos.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bos.jpg" data-full-src="docs/assets/img/bos.jpg"></div>
 			<h6>Boston, Massachusetts</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/cenpark.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cenpark.jpg" data-full-src="docs/assets/img/cenpark.jpg"></div>
 			<h6>Central Park (New York, NY)</h6>
 			<p>July 2024</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/bean.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bean.jpg" data-full-src="docs/assets/img/bean.jpg"></div>
 			<h6>Cloud Gate (Chicago, IL)</h6>
 			<p>May 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/nyccc.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nyccc.jpeg" data-full-src="docs/assets/img/nyccc.jpeg"></div>
 			<h6>New York, New York</h6>
 			<p>July 2024</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dumbo.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dumbo.jpeg" data-full-src="docs/assets/img/dumbo.jpeg"></div>
 			<h6>DUMBO (Brooklyn, New York)</h6>
 			<p>July 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/chitowwn.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chitowwn.jpg" data-full-src="docs/assets/img/chitowwn.jpg"></div>
 			<h6>Chicago, Illinois</h6>
 			<p>May 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/empview.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/empview.jpg" data-full-src="docs/assets/img/empview.jpg"></div>
 			<h6>New York, New York</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/atl.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg"></div>
 			<h6>Atlanta, Georgia</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alexpalm.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexpalm.jpg" data-full-src="docs/assets/img/alexpalm.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2024</p>
 		</div>
 
 
 		<div class="portfolio-box egy islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/morsijul24.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/morsijul24.jpg" data-full-src="docs/assets/img/morsijul24.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2024</p>
 		</div>
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lombard.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lombard.jpg" data-full-src="docs/assets/img/lombard.jpg"></div>
 			<h6>Lombard, IL</h6>
 			<p>May 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lombard2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lombard2.jpg" data-full-src="docs/assets/img/lombard2.jpg"></div>
 			<h6>Lombard, IL</h6>
 			<p>May 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/may24.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/may24.jpg" data-full-src="docs/assets/img/may24.jpg"></div>
 			<h6>Los Angeles, CA</h6>
 			<p>May 2024</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/seattle.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/seattle.jpg" data-full-src="docs/assets/img/seattle.jpg"></div>
 			<h6>Seattle, Washington</h6>
 			<p>July 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/redmond.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/redmond.jpg" data-full-src="docs/assets/img/redmond.jpg"></div>
 			<h6>Redmond, Washington</h6>
 			<p>July 2023</p>
 		</div>
 
 
 		<div class="portfolio-box nature islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/vanc2.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/vanc2.jpg" data-full-src="docs/assets/img/vanc2.jpg"></div>
 			<h6>Vancouver, B.C.</h6>
 			<p>July 2023</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/tampa.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/tampa.jpeg" data-full-src="docs/assets/img/tampa.jpeg"></div>
 			<h6>Tampa, Florida</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/balt1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/balt1.jpeg" data-full-src="docs/assets/img/balt1.jpeg"></div>
 			<h6>Baltimore, Maryland</h6>
 			<p>July 2023</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dc2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dc2.jpeg" data-full-src="docs/assets/img/dc2.jpeg"></div>
 			<h6>Washington Monument.</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/w1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/w1.jpeg" data-full-src="docs/assets/img/w1.jpeg"></div>
 			<h6>Williamsburg, Virginia</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/ches1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/ches1.jpeg" data-full-src="docs/assets/img/ches1.jpeg"></div>
 			<h6>Chesapeake, Virginia</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/chicago1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chicago1.jpeg" data-full-src="docs/assets/img/chicago1.jpeg"></div>
 			<h6>Chicago, Illinois</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature urban land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/needle.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/needle.jpg" data-full-src="docs/assets/img/needle.jpg"></div>
 			<h6>Seattle, Washington</h6>
 			<p>July 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/port.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/port.jpeg" data-full-src="docs/assets/img/port.jpeg"></div>
 			<h6>Portland, Oregon</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/abq.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/abq.jpg" data-full-src="docs/assets/img/abq.jpg"></div>
 			<h6>Albuquerque, New Mexico</h6>
 			<p>May 2023</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dal.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dal.jpeg" data-full-src="docs/assets/img/dal.jpeg"></div>
 			<h6>Dallas, Texas</h6>
 			<p>May 2023</p>
 		</div>
 		
 		<div class="portfolio-box vfa">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/lv.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lv.jpeg" data-full-src="docs/assets/img/lv.jpeg"></div>
 			<h6>Las Vegas, Nevada</h6>
 			<p>January 2023</p>
 		</div>
 		
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/dc1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dc1.jpeg" data-full-src="docs/assets/img/dc1.jpeg"></div>
 			<h6>Washington D.C.</h6>
 			<p>June 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/port2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/port2.jpeg" data-full-src="docs/assets/img/port2.jpeg"></div>
 			<h6>Portland, Oregon</h6>
 			<p>May 2023</p>
 		</div>
 		
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/h3.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h3.jpeg" data-full-src="docs/assets/img/h3.jpeg"></div>
 			<h6>Honolulu, Hawaii</h6>
 			<p>September 2022</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/h2.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h2.jpeg" data-full-src="docs/assets/img/h2.jpeg"></div>
 			<h6>Honolulu, Hawaii</h6>
 			<p>September 2022</p>
 		</div>
 		
 		<div class="portfolio-box vfa egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/alexSunset.webp');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexSunset.webp" data-full-src="docs/assets/img/alexSunset.webp"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2022</p>
 		</div>
 		
 		<div class="portfolio-box">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/h1.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h1.jpeg" data-full-src="docs/assets/img/h1.jpeg"></div>
 			<h6>Waikiki (Honolulu, HI)</h6>
 			<p>September 2022</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/hsf.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/hsf.jpeg" data-full-src="docs/assets/img/hsf.jpeg"></div>
 			<h6>San Francisco, California</h6>
 			<p>August 2022</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/losangeles22.webp');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/losangeles22.webp" data-full-src="docs/assets/img/losangeles22.webp"></div>
 			<h6>Los Angeles, California</h6>
 			<p>May 2022</p>
 		</div>
 		
 		<div class="portfolio-box vfa">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/i22.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/i22.jpeg" data-full-src="docs/assets/img/i22.jpeg"></div>
 			<h6>Istanbul, Turkey</h6>
 			<p>June 2022</p>
 		</div>
 		
 		<div class="portfolio-box vfa egy urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/cairo22.webp');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cairo22.webp" data-full-src="docs/assets/img/cairo22.webp"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2022</p>
 		</div>
 
 		<div class="portfolio-box vfa egy islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/azharJuly22.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/azharJuly22.jpg" data-full-src="docs/assets/img/azharJuly22.jpg"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2022</p>
 		</div>
 		
 		<div class="portfolio-box vfa egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/gleemBay.webp');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gleemBay.webp" data-full-src="docs/assets/img/gleemBay.webp"></div>
 			<h6>Gleem Bay (Alexandria, Egypt)</h6>
 			<p>June 2022</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/sdsunrise.jpeg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sdsunrise.jpeg" data-full-src="docs/assets/img/sdsunrise.jpeg"></div>
 			<h6>San Diego, California</h6>
 			<p>August 2021</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/malibuu.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/malibuu.jpg" data-full-src="docs/assets/img/photography/malibuu.jpg"></div>
 			<h6>Malibu (Los Angeles, California)</h6>
 			<p>July 2020</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/sfurban.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/sfurban.jpg" data-full-src="docs/assets/img/photography/sfurban.jpg"></div>
 			<h6>San Francisco, California</h6>
 			<p>July 2019</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/gliderport.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/gliderport.jpg" data-full-src="docs/assets/img/photography/gliderport.jpg"></div>
 			<h6>San Diego, California</h6>
 			<p>April 2019</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/sdurban.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/sdurban.jpg" data-full-src="docs/assets/img/photography/sdurban.jpg"></div>
 			<h6>San Diego, California</h6>
 			<p>February 2019</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/txcapital.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/txcapital.jpg" data-full-src="docs/assets/img/txcapital.jpg"></div>
 			<h6>Texas State Capitol (Austin, Texas)</h6>
 			<p>January 2024</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/castatecapitol19.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/castatecapitol19.jpg" data-full-src="docs/assets/img/photography/castatecapitol19.jpg"></div>
 			<h6>California State Capitol (Sacramento, CA)</h6>
 			<p>July 2019</p>
 		</div>
 		
 		<div class="portfolio-box land egy">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/giza.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/giza.jpg" data-full-src="docs/assets/img/photography/giza.jpg"></div>
 			<h6>Giza, Egypt</h6>
 			<p>July 2018</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/flower.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/flower.jpg" data-full-src="docs/assets/img/photography/flower.jpg"></div>
 			<h6>Sunflower on Concrete</h6>
 			<p>February 2018</p>
 		</div>
 		
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/palmsprings.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/palmsprings.jpg" data-full-src="docs/assets/img/photography/palmsprings.jpg"></div>
 			<h6>Palm Springs, California</h6>
 			<p>August 2018</p>
 		</div>
 		
 		<div class="portfolio-box land">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/hollywood.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/hollywood.jpg" data-full-src="docs/assets/img/photography/hollywood.jpg"></div>
 			<h6>Hollywood, California</h6>
 			<p>August 2018</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/phx.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/phx.jpg" data-full-src="docs/assets/img/photography/phx.jpg"></div>
 			<h6>Phoenix, Arizona</h6>
 			<p>December 2019</p>
 		</div>
 		
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/hollyurban.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/hollyurban.jpg" data-full-src="docs/assets/img/photography/hollyurban.jpg"></div>
 			<h6>Hollywood, California</h6>
 			<p>December 2019</p>
 		</div>
 		
 		<div class="portfolio-box architecture egy islam">
-			<div class="portfolio-item" style="background-image: url('docs/assets/img/photography/cairo.jpg');"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/cairo.jpg" data-full-src="docs/assets/img/photography/cairo.jpg"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2018</p>
 		</div>
 		
 	</div>
-	<!-- Map Container -->
-	<!-- <div id="map"></div> -->
+	<!-- Map Container (hidden; map code removed for performance) -->
 	<script>
-		// JavaScript for Filtering
-		document.querySelectorAll('.filter-btn').forEach(button => {
-			button.addEventListener('click', () => {
-				// Remove active class from all buttons
-				document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-				// Add active class to clicked button
-				button.classList.add('active');
-
-				// Get the filter category
-				const filter = button.getAttribute('data-filter');
-				// Show/hide items based on filter
-				document.querySelectorAll('.portfolio-box').forEach(item => {
-					if (filter === 'all' || item.classList.contains(filter)) {
-						item.style.display = 'block';
-					} else {
-						item.style.display = 'none';
-					}
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.filter-btn').forEach(button => {
+				button.addEventListener('click', () => {
+					document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+					button.classList.add('active');
+					const filter = button.getAttribute('data-filter');
+					document.querySelectorAll('.portfolio-box').forEach(item => {
+						if (filter === 'all' || item.classList.contains(filter)) {
+							item.style.display = 'block';
+						} else {
+							item.style.display = 'none';
+						}
+					});
 				});
 			});
 		});
-
-		// D3.js for Map with Pins
-		const width = document.getElementById("map").clientWidth;
-		const height = document.getElementById("map").clientHeight;
-
-		const projection = d3.geoMercator()
-			.scale(100)
-			.translate([width / 2, height / 1.5]);
-
-		const svg = d3.select("#map").append("svg")
-			.attr("width", width)
-			.attr("height", height);
-
-		const cities = [
-			{ name: "Los Angeles, California", coords: [-118.2437, 34.0522] },
-			{ name: "Chicago, Illinois", coords: [-87.6298, 41.8781] },
-			{ name: "New Cairo, Egypt", coords: [31.4913, 30.0185] },
-			{ name: "Alexandria, Egypt", coords: [29.9187, 31.2001] },
-			{ name: "New Administrative Capitol, Egypt", coords: [31.7632, 30.0088] },
-			{ name: "London, England", coords: [-0.1276, 51.5074] },
-			{ name: "Washington, D.C.", coords: [-77.0369, 38.9072] },
-			{ name: "Portland, Oregon", coords: [-122.6784, 45.5152] },
-			{ name: "Capitola, California", coords: [-121.953, 36.9752] },
-			{ name: "San Jose, California", coords: [-122.4194, 37.7749] },
-			{ name: "Mount Tamalpais, California", coords: [-122.5965, 37.9230] },
-			{ name: "El Alamein, Egypt", coords: [28.9523, 30.8269] },
-			{ name: "New York, New York", coords: [-74.0060, 40.7128] },
-			{ name: "Austin, Texas", coords: [-97.7431, 30.2672] },
-			{ name: "Atlanta, Georgia", coords: [-84.3880, 33.7490] },
-			{ name: "Boston, Massachusetts", coords: [-71.0589, 42.3601] },
-			{ name: "Cloud Gate (Chicago, IL)", coords: [-87.6233, 41.8827] },
-			{ name: "DUMBO (Brooklyn, New York)", coords: [-73.9881, 40.7033] },
-			{ name: "Seattle, Washington", coords: [-122.3321, 47.6062] },
-			{ name: "Redmond, Washington", coords: [-122.1215, 47.6740] },
-			{ name: "Tampa, Florida", coords: [-82.4572, 27.9506] },
-			{ name: "Baltimore, Maryland", coords: [-76.6122, 39.2904] },
-			{ name: "Williamsburg, Virginia", coords: [-76.7075, 37.2707] },
-			{ name: "Chesapeake, Virginia", coords: [-76.2875, 36.7682] },
-			{ name: "Albuquerque, New Mexico", coords: [-106.6504, 35.0844] },
-			{ name: "Dallas, Texas", coords: [-96.7970, 32.7767] },
-			{ name: "Las Vegas, Nevada", coords: [-115.1398, 36.1699] },
-			{ name: "Honolulu, Hawaii", coords: [-157.8583, 21.3069] },
-			{ name: "Waikiki (Honolulu, HI)", coords: [-157.8357, 21.2850] },
-			{ name: "Malibu (Los Angeles, California)", coords: [-118.7798, 34.0259] },
-			{ name: "Palm Springs, California", coords: [-116.5453, 33.8303] },
-			{ name: "Hollywood, California", coords: [-118.3287, 34.0928] },
-			{ name: "Phoenix, Arizona", coords: [-112.0740, 33.4484] },
-			{ name: "San Diego, California", coords: [-117.1611, 32.7157] },
-			{ name: "San Francisco, California", coords: [-122.4194, 37.7749] },
-			{ name: "Sacramento, California", coords: [-121.4944, 38.5816] },
-			{ name: "Giza, Egypt", coords: [31.1325, 29.9773] },
-			{ name: "Istanbul, Turkey", coords: [28.9784, 41.0082] },
-			{ name: "Cairo, Egypt", coords: [31.2357, 30.0444] },
-			{ name: "Gleem Bay (Alexandria, Egypt)", coords: [29.9429, 31.2156] },
-  { name: "Dubai, UAE", coords: [25.276987, 55.296249] }, // :contentReference[oaicite:1]{index=1}
-  { name: "Mecca, Saudi Arabia", coords: [21.4225, 39.8233] }, // :contentReference[oaicite:2]{index=2}
-  { name: "Medina, Saudi Arabia", coords: [24.470901, 39.612236] }, // :contentReference[oaicite:3]{index=3}
-  { name: "Kuwait City, Kuwait", coords: [29.378586, 47.990341] }, // :contentReference[oaicite:4]{index=4}
-  { name: "Ras Al-Khaimah, UAE", coords: [25.800694, 55.976200] }, // :contentReference[oaicite:5]{index=5}
-  { name: "Sharjah, UAE", coords: [25.348766, 55.405403] }, // :contentReference[oaicite:6]{index=6}
-  { name: "Fujairah, UAE", coords: [25.1333, 56.2500] }, // :contentReference[oaicite:7]{index=7}
-  { name: "Burj Khalifa, UAE", coords: [25.197525, 55.274288] }, // :contentReference[oaicite:8]{index=8}
-  { name: "Portland, Oregon", coords: [45.5200, -122.6819] } // :contentReference[oaicite:9]{index=9}
-
-		];
-
-
-		// Draw the world map
-		d3.json("https://d3js.org/world-50m.v1.json").then(world => {
-			const path = d3.geoPath().projection(projection);
-			svg.append("g")
-				.selectAll("path")
-				.data(topojson.feature(world, world.objects.countries).features)
-				.enter().append("path")
-				.attr("d", path)
-				.attr("fill", "#e1e8ed");
-
-			// Add city markers
-			svg.selectAll("circle")
-				.data(cities)
-				.enter()
-				.append("circle")
-				.attr("cx", d => projection(d.coords)[0])
-				.attr("cy", d => projection(d.coords)[1])
-				.attr("r", 5)
-				.attr("fill", "#3498db")
-				.attr("stroke", "#34495e")
-				.attr("stroke-width", 1)
-				.append("title")
-				.text(d => d.name);
-		});
 	</script>
-	<script src="https://d3js.org/topojson.v1.min.js"></script>
 
 	<!-- Footer -->
 	<div class="footer">
@@ -1739,89 +1643,55 @@
 		</center>
 	</div>
 	<script>
-		// Convert all background-image portfolio items to img tags with lazy loading
+		// Lazy-load gallery: inject img only when item is near viewport (data-src items). Existing img items keep native lazy loading.
 		document.addEventListener('DOMContentLoaded', function() {
-			const portfolioItems = document.querySelectorAll('.portfolio-item');
-			
-			// Intersection Observer for better lazy loading
 			const imageObserver = new IntersectionObserver((entries, observer) => {
 				entries.forEach(entry => {
-					if (entry.isIntersecting) {
-						const img = entry.target.querySelector('img.thumbnail-img');
-						if (img && !img.classList.contains('loaded')) {
-							// Image will load naturally with lazy attribute
+					if (!entry.isIntersecting) return;
+					const item = entry.target;
+					observer.unobserve(item);
+
+					// Already has img (e.g. Athens/Cambridge) – just wire load + click
+					const existingImg = item.querySelector('img.thumbnail-img');
+					if (existingImg) {
+						if (existingImg.complete && existingImg.naturalHeight) {
+							existingImg.classList.add('loaded');
+						} else {
+							existingImg.addEventListener('load', function() { this.classList.add('loaded'); });
 						}
-						observer.unobserve(entry.target);
+						item.addEventListener('click', function() {
+							const fullSrc = this.getAttribute('data-full-src');
+							if (fullSrc) showFullQualityImage(fullSrc);
+						});
+						return;
 					}
-				});
-			}, {
-				rootMargin: '50px' // Start loading 50px before image is visible
-			});
-			
-			portfolioItems.forEach(item => {
-				// Check if already converted (has img tag)
-				if (item.querySelector('img')) {
-					imageObserver.observe(item);
-					return;
-				}
-				
-				// Extract image URL from background-image style
-				const bgImage = item.style.backgroundImage;
-				if (!bgImage) return;
-				
-				const imageUrl = bgImage.replace(/url\(['"]?([^'"]+)['"]?\)/i, '$1');
-				
-				// Create img element
-				const img = document.createElement('img');
-				img.src = imageUrl;
-				img.loading = 'lazy';
-				img.className = 'thumbnail-img';
-				img.alt = item.parentElement.querySelector('h6')?.textContent || 'Photo';
-				
-				// Store full-quality path
-				item.setAttribute('data-full-src', imageUrl);
-				
-				// Clear background-image and add img
-				item.style.backgroundImage = 'none';
-				item.appendChild(img);
-				
-				// Observe for lazy loading
-				imageObserver.observe(item);
-				
-				// Handle image load - remove blur
-				img.addEventListener('load', function() {
-					this.classList.add('loaded');
-				});
-				
-				// Handle click - show full quality in modal
-				item.addEventListener('click', function() {
-					const fullSrc = this.getAttribute('data-full-src');
-					if (fullSrc) {
-						showFullQualityImage(fullSrc);
-					}
-				});
-			});
-			
-			// Handle already converted items
-			document.querySelectorAll('.portfolio-item[data-full-src]').forEach(item => {
-				const img = item.querySelector('img.thumbnail-img');
-				if (img) {
-					imageObserver.observe(item);
-					
-					img.addEventListener('load', function() {
-						this.classList.add('loaded');
-					});
-					
+
+					// data-src item: inject img only when in view so browser doesn't request image until now
+					const dataSrc = item.getAttribute('data-src');
+					const fullSrc = item.getAttribute('data-full-src');
+					if (!dataSrc) return;
+
+					const img = document.createElement('img');
+					img.src = dataSrc;
+					img.loading = 'lazy';
+					img.className = 'thumbnail-img';
+					img.alt = item.parentElement.querySelector('h6')?.textContent || 'Photo';
+					img.addEventListener('load', function() { this.classList.add('loaded'); });
+					item.appendChild(img);
+					if (img.complete && img.naturalHeight) img.classList.add('loaded');
+
 					item.addEventListener('click', function() {
-						const fullSrc = this.getAttribute('data-full-src');
-						if (fullSrc) {
-							showFullQualityImage(fullSrc);
-						}
+						const src = this.getAttribute('data-full-src');
+						if (src) showFullQualityImage(src);
 					});
-				}
+				});
+			}, { rootMargin: '200px' });
+
+			document.querySelectorAll('.portfolio-item').forEach(item => {
+				imageObserver.observe(item);
 			});
 		});
-		
+
 		// Modal functionality
 		const modal = document.getElementById('imageModal');
 		const modalImg = document.getElementById('modalImage');
