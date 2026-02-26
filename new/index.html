@@ -365,6 +365,58 @@
 			font-size: 1.4rem;
 		}
 
+		/* Education: collapsible coursework */
+		.timeline-panel.edu-coursework-collapsible {
+			cursor: pointer;
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-summary-line {
+			user-select: none;
+			text-align: center;
+			margin-top: 12px;
+			margin-bottom: 8px;
+			padding: 10px 14px;
+			border-radius: 8px;
+			background: rgba(59, 89, 152, 0.08);
+			color: var(--primary-color);
+			font-weight: 500;
+			font-size: 1.15rem;
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-summary-line:hover {
+			background: rgba(59, 89, 152, 0.12);
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-summary-line .expand-icon {
+			display: inline-block;
+			margin-left: 6px;
+			transition: transform 0.25s ease;
+			opacity: 0.8;
+		}
+		.timeline-panel.edu-coursework-collapsible.expanded .coursework-summary-line .expand-icon {
+			transform: rotate(180deg);
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-details {
+			display: none;
+		}
+		.timeline-panel.edu-coursework-collapsible.expanded .coursework-details {
+			display: block;
+			margin-top: 14px;
+			padding-top: 14px;
+			border-top: 1px solid rgba(59, 89, 152, 0.12);
+			font-size: 1.2rem;
+			text-align: left;
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-details ul {
+			list-style: none;
+			padding-left: 0;
+			margin: 0 0 0 0;
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-details li {
+			padding: 4px 0;
+			border-bottom: 1px solid rgba(59, 89, 152, 0.08);
+		}
+		.timeline-panel.edu-coursework-collapsible .coursework-details li:last-child {
+			border-bottom: none;
+		}
+
 		/* Technologies section */
 		#fh5co-technologies {
 			background: var(--light-bg);
@@ -1662,7 +1714,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel edu-coursework-collapsible" data-edu-coursework>
 									<div class="timeline-heading">
 										<img src="images/ucsd.png" alt="UCSD Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1675,13 +1727,31 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 											<span style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Machine Learning and Data Science M.S.</span>
 										</p>
 									</div>
+									<div class="coursework-summary-line">Show Relevant Coursework <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="coursework-details">
+										<ul>
+											<li>CSE272 - Advanced Image Synthesis</li>
+											<li>ECE225A - Prob &amp; Stats for Data Science</li>
+											<li>ECE253 - Fundamentals of Digital Image Processing</li>
+											<li>ECE285B - Deep Generative Models</li>
+											<li>MATH285 - Stochastic Processes</li>
+											<li>ECE176 - Intro Deep Learning &amp; Apps</li>
+											<li>ECE269 - Linear Algebra and Application</li>
+											<li>ECE276A - Sensing &amp; Estimation Robotics</li>
+											<li>CSE258R - Recommender Systems &amp; Web Mining</li>
+											<li>DSC209R - Data Visualization</li>
+											<li>CSE190 - Audio and AI</li>
+											<li>ECE228 - ML for Physical Applications</li>
+											<li>ECE285A - Intro to Visual Learning</li>
+										</ul>
+									</div>
 								</div>
 							</li>
 
 
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel edu-coursework-collapsible" data-edu-coursework>
 									<div class="timeline-heading">
 										<img src="images/ucsd.png" alt="UCSD Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1693,6 +1763,33 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 										<p style="text-align: center;">
 											<span style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Electrical Engineering B.S.</span>
 										</p>
+									</div>
+									<div class="coursework-summary-line">Show Relevant Coursework <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="coursework-details">
+										<ul>
+											<li>ECE175A - Pattern Recognition and Machine Learning</li>
+											<li>ECE172A - Introduction to Intelligent Systems</li>
+											<li>ECE174 - Linear &amp; Nonlinear Optimization</li>
+											<li>ECE143 - Programming for Data Analysis</li>
+											<li>ECE109 - Engineering Probability &amp; Statistics</li>
+											<li>ECE101 - Linear Systems Fundamentals</li>
+											<li>ECE171A,B - Linear Control System Theory I &amp; II</li>
+											<li>ECE148 - Intro to Autonomous Vehicles</li>
+											<li>ECE16 - Rapid Hardware &amp; Software Design</li>
+											<li>ECE17 - Object-Oriented Programming</li>
+											<li>ECE25 - Digital Design</li>
+											<li>ECE30 - Computer Organization</li>
+											<li>ECE35 - Analog Circuit Design</li>
+											<li>ECE45 - Circuits and Systems</li>
+											<li>ECE65 - Components &amp; Circuits Lab</li>
+											<li>ECE100 - Linear Electronic Systems</li>
+											<li>ECE140A,B - Full-Stack Product Engineering I &amp; II</li>
+											<li>MGT103 - Product Marketing &amp; Management</li>
+											<li>MGT172 - Business Project Management</li>
+											<li>MGT127R - Innovation and Technology Strategy</li>
+											<li>ECE198 - Direct Group Study</li>
+											<li>CSE194 - Race, Gender &amp; Computing</li>
+										</ul>
 									</div>
 								</div>
 							</li>
@@ -2494,6 +2591,11 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			document.querySelectorAll('.timeline-panel[data-work-exp]').forEach(function(panel) {
+				panel.addEventListener('click', function() {
+					panel.classList.toggle('expanded');
+				});
+			});
+			document.querySelectorAll('.timeline-panel[data-edu-coursework]').forEach(function(panel) {
 				panel.addEventListener('click', function() {
 					panel.classList.toggle('expanded');
 				});
