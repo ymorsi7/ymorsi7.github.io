@@ -72,10 +72,18 @@
 
 		body {
 			font-family: 'Poppins', sans-serif;
-			line-height: 1.75;
+			line-height: 1.8;
 			color: var(--text-color);
 			background-color: var(--light-bg);
 			font-weight: 400;
+		}
+
+		/* Comfortable reading width for long text */
+		.timeline-body p {
+			text-align: left;
+			max-width: 52ch;
+			margin-left: auto;
+			margin-right: auto;
 		}
 
 		h1, h2, h3, h4, h5, h6 {
@@ -329,6 +337,15 @@
 			text-align: left;
 		}
 
+		/* Sleek focus states (keyboard / a11y) */
+		a:focus-visible,
+		button:focus-visible,
+		[data-work-exp]:focus-visible,
+		[data-edu-coursework]:focus-visible {
+			outline: 2px solid var(--primary-color);
+			outline-offset: 3px;
+		}
+
 		h3.timeline-title {
 			background: none !important;
 			background-color: transparent !important;
@@ -377,6 +394,9 @@
 		}
 		.timeline-panel.work-exp-collapsible.expanded .work-exp-details p {
 			font-size: 1.4rem;
+			max-width: 52ch;
+			margin-left: auto;
+			margin-right: auto;
 		}
 
 		/* Education: collapsible coursework */
@@ -1216,7 +1236,7 @@
 		  position: relative;
 		  width: 100%;
 		  height: 100%;
-		  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+		  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 		  transform-style: preserve-3d;
 		}
 		.flip-card:hover .flip-card-inner, .flip-card:focus-within .flip-card-inner {
@@ -2276,6 +2296,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 						</div>
 					</div>
 					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
+						<a href="https://extendedstudies.ucsd.edu/news-events/extended-studies-blog/patrick-henry-high-school-grad-plans-to-make-a-big-social-impact" target="_blank" rel="noopener noreferrer" class="award-card-link">
 						<div class="award-card">
 							<div class="award-logo">
 								<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
@@ -2285,6 +2306,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 							<p class="award-date">Jul 2020</p>
 							<p class="award-desc">Article written about me in the UCSD Extended Studies Newsletter</p>
 						</div>
+						</a>
 					</div>
 					<!-- <div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
 						<div class="award-card">
