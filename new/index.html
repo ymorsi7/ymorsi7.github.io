@@ -323,6 +323,48 @@
 			border-radius: 0 !important;
 		}
 
+		/* Work experience: collapsible details */
+		.timeline-panel.work-exp-collapsible {
+			cursor: pointer;
+		}
+		.timeline-panel.work-exp-collapsible .work-exp-summary-line {
+			user-select: none;
+			text-align: center;
+			margin-top: 8px;
+			margin-bottom: 8px;
+			padding: 8px 12px;
+			border-radius: 8px;
+			background: rgba(59, 89, 152, 0.08);
+			color: var(--primary-color);
+			font-weight: 500;
+			font-size: 1.15rem;
+		}
+		.timeline-panel.work-exp-collapsible .work-exp-summary-line:hover {
+			background: rgba(59, 89, 152, 0.12);
+		}
+		.timeline-panel.work-exp-collapsible .work-exp-summary-line .expand-icon {
+			display: inline-block;
+			margin-left: 6px;
+			transition: transform 0.25s ease;
+			opacity: 0.8;
+		}
+		.timeline-panel.work-exp-collapsible.expanded .work-exp-summary-line .expand-icon {
+			transform: rotate(180deg);
+		}
+		.timeline-panel.work-exp-collapsible .work-exp-details {
+			display: none;
+		}
+		.timeline-panel.work-exp-collapsible.expanded .work-exp-details {
+			display: block;
+			margin-top: 14px;
+			padding-top: 14px;
+			border-top: 1px solid rgba(59, 89, 152, 0.12);
+			font-size: 1.4rem;
+		}
+		.timeline-panel.work-exp-collapsible.expanded .work-exp-details p {
+			font-size: 1.4rem;
+		}
+
 		/* Technologies section */
 		#fh5co-technologies {
 			background: var(--light-bg);
@@ -1446,11 +1488,11 @@
 </head>
 
 <body>
-	<div class="lang-switch-container">
+	<!-- <div class="lang-switch-container">
 		<button id="lang-switch" class="lang-switch-btn" title="Switch to Arabic (تغيير إلى العربية)" onclick="toggleLanguage()">
 			<i class="icon-earth"></i> <span class="lang-label">EN → عربي</span>
 		</button>
-	</div>
+	</div> -->
 
 	<div class="fh5co-loader"></div>
 	<div id="page">
@@ -1508,7 +1550,7 @@
 
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp>
 									<div class="timeline-heading">
 										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1517,7 +1559,8 @@
 											<span class="company">(Aug 2024 - Present) | San Jose, CA</span>
 										</div>
 									</div>
-									<div class="timeline-body">
+									<div class="work-exp-summary-line">ML pipelines / RAGs @ supply chain <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
 										<p>
 										Owned and led the link analysis automation project end-to-end, cutting a manual two-day data processing pipeline down to a few hours, with results surfaced across heatmaps, pinmaps, a RAG chatbot, and more- all built from scratch and deployed on an internal dashboard at link-analysis.cisco.com.</p>
 
@@ -1536,7 +1579,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp>
 									<div class="timeline-heading">
 										<img src="images/fico.png" alt="FICO Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1545,7 +1588,8 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 											<span class="company">(2024) | San Diego, CA</span>
 										</div>
 									</div>
-									<div class="timeline-body">
+									<div class="work-exp-summary-line">fraud detection @ ai analytics team <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
 										<p>
 											Benchmarked six anomaly detection models (including CADE, Isolation Forest, and autoencoders) on fraud transaction data from major banks across the US, UK, Canada, India, and Brazil.</p>
 											<br><p>Engineered rolling temporal features that improved AUC and precision during distribution shift periods. Presented findings directly to the Chief Analytics Officer.</p>
@@ -1572,7 +1616,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 							</li> -->
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp>
 									<div class="timeline-heading">
 										<img src="images/southwest.jpeg" alt="Southwest Airlines Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1581,7 +1625,8 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 											<span class="company">(2023) | Dallas, TX</span>
 										</div>
 									</div>
-									<div class="timeline-body">
+									<div class="work-exp-summary-line">infra tooling @ network automation team <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
 										<p>Built full-stack tooling with React and Node.js to automate GTM workflows in Ansible Tower</p>
 										<br>
 										<p>Contributed to an intern-led discounting system projected to save $24M per year by replacing third-party vendor fees for gift cards with an in-house solution & presented directly to the CIO.</p>
@@ -1590,7 +1635,7 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 							</li>
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp>
 									<div class="timeline-heading">
 										<img src="images/carsxe.png" alt="CarsXE Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
@@ -1599,7 +1644,8 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 											<span class="company">(2022-2023) | Highland, MD</span>
 										</div>
 									</div>
-									<div class="timeline-body">
+									<div class="work-exp-summary-line">license plate CV & full-stack <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
 										<p>Led development of a license plate recognition pipeline using YOLOv4, TensorFlow, and OCR. Built and published a pip package for the company's API alongside full-stack work in Vue, Nuxt, and Next.js.</p>
 									</div>
 								</div>
@@ -2443,6 +2489,16 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 					});
 				});
 			});
+		</script>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.timeline-panel[data-work-exp]').forEach(function(panel) {
+				panel.addEventListener('click', function() {
+					panel.classList.toggle('expanded');
+				});
+			});
+		});
 		</script>
 
 		<script>
