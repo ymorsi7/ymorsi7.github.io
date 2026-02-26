@@ -337,6 +337,14 @@
 			text-align: left;
 		}
 
+		/* Research descriptions: same size as expanded job descriptions */
+		#fh5co-research .timeline-body p {
+			font-size: 1.4rem;
+			max-width: 52ch;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
 		/* Sleek focus states (keyboard / a11y) */
 		a:focus-visible,
 		button:focus-visible,
@@ -570,6 +578,8 @@
 
 		#fh5co-work .fh5co-heading h2 {
 			color: white;
+			font-size: 2rem;
+			font-weight: 600;
 		}
 
 		#fh5co-work .fh5co-heading h2:after {
@@ -694,11 +704,28 @@
 			}
 
 			#fh5co-header h1 {
-				font-size: 2.5rem;
+				font-size: 2rem;
+			}
+
+			.fh5co-heading h2 {
+				font-size: 1.6rem;
+				margin-bottom: 1.75rem;
+			}
+
+			#fh5co-work .fh5co-heading h2 {
+				font-size: 1.6rem;
 			}
 
 			.timeline-panel {
-				padding: 20px;
+				padding: 18px 16px;
+			}
+
+			.timeline-title {
+				font-size: 1.05rem;
+			}
+
+			.company {
+				font-size: 0.95rem;
 			}
 
 			.tech-container {
@@ -707,6 +734,126 @@
 
 			.tech-item {
 				width: 100%;
+			}
+
+			.work {
+				height: 260px;
+				margin-bottom: 20px;
+			}
+
+			.work .desc {
+				padding: 18px;
+			}
+
+			.work .desc h3 {
+				font-size: 1.1rem;
+			}
+
+			.work .desc span {
+				font-size: 0.9rem;
+			}
+
+			.timeline-body p,
+			.timeline-panel.work-exp-collapsible.expanded .work-exp-details p,
+			#fh5co-research .timeline-body p {
+				max-width: 100%;
+				font-size: 1.1rem;
+			}
+
+			.timeline-panel.work-exp-collapsible.expanded .work-exp-details p {
+				font-size: 1.15rem;
+			}
+
+			.work-exp-summary-line,
+			.coursework-summary-line {
+				font-size: 1rem;
+				padding: 10px 12px;
+			}
+
+			#research-toggle {
+				min-height: 44px;
+				padding: 14px 28px !important;
+				font-size: 15px !important;
+			}
+
+			.filter-btn {
+				min-height: 44px;
+				padding: 12px 18px;
+				font-size: 14px;
+			}
+
+			.award-filters {
+				gap: 10px;
+				margin-bottom: 24px;
+			}
+
+			.award-card {
+				height: auto;
+				min-height: 260px;
+				padding: 20px 16px;
+			}
+
+			.award-card h3 {
+				font-size: 1rem;
+			}
+
+			.award-org {
+				font-size: 13px;
+			}
+
+			.award-desc {
+				font-size: 0.9rem;
+				line-height: 1.5;
+			}
+
+			.container {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+
+			#fh5co-resume,
+			#fh5co-research,
+			#fh5co-technologies,
+			#fh5co-work,
+			#fh5co-awards {
+				padding: 3em 0;
+			}
+
+			.js-gotop {
+				width: 44px;
+				height: 44px;
+				bottom: 16px;
+				right: 16px;
+			}
+
+			.lang-switch-container {
+				top: 12px;
+				right: 12px;
+			}
+
+			.lang-switch-btn {
+				min-height: 44px;
+				padding: 10px 14px;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			#fh5co-header h1 {
+				font-size: 1.65rem;
+			}
+
+			.fh5co-heading h2,
+			#fh5co-work .fh5co-heading h2 {
+				font-size: 1.4rem;
+			}
+
+			.timeline-panel {
+				padding: 16px 14px;
+			}
+
+			.profile-thumb {
+				width: 130px;
+				height: 130px;
 			}
 		}
 
@@ -1094,19 +1241,10 @@
 			flex-grow: 1;
 		}
 
-		/* Responsive adjustments for awards */
+		/* Responsive adjustments for awards - consolidated in main @media above */
 		@media screen and (max-width: 768px) {
-			.award-card {
-				height: auto;
-				min-height: 250px;
-			}
-			
-			.award-card h3 {
-				font-size: 15px;
-			}
-			
-			.award-desc {
-				font-size: 12px;
+			.award-filters {
+				gap: 10px;
 			}
 		}
 
