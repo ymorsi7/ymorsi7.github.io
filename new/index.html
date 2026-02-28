@@ -738,6 +738,48 @@
 				box-sizing: border-box;
 			}
 
+			/* Compact experience/education cards on mobile */
+			.timeline-panel .timeline-heading {
+				margin-bottom: 8px !important;
+			}
+			.timeline-panel .company-logo {
+				width: 44px;
+				height: 44px;
+				margin: 0 auto 8px auto;
+				background: transparent;
+				box-shadow: none;
+				padding: 0;
+			}
+			.timeline-panel h3.timeline-title {
+				margin: 0 0 4px 0 !important;
+				font-size: 1rem;
+			}
+			.timeline-panel .timeline-title:after {
+				display: none;
+			}
+			.timeline-panel .institution-name {
+				display: none;
+			}
+			.timeline-panel .company {
+				margin-top: 4px;
+				font-size: 0.9rem;
+			}
+			.timeline-panel.work-exp-collapsible .work-exp-summary-line,
+			.timeline-panel.edu-coursework-collapsible .coursework-summary-line {
+				margin-top: 6px;
+				margin-bottom: 4px;
+				padding: 8px 10px;
+				font-size: 0.95rem;
+			}
+			.timeline-panel.work-exp-collapsible.expanded .work-exp-details {
+				margin-top: 10px;
+				padding-top: 10px;
+			}
+
+			.timeline > li {
+				margin-bottom: 12px !important;
+			}
+
 			.timeline > li > .timeline-panel {
 				width: 100% !important;
 				float: none !important;
@@ -1194,8 +1236,8 @@
 
 		.timeline-panel {
 			margin-bottom: 0 !important;
-			padding-top: 28px;
-			padding-bottom: 28px;
+			padding-top: 18px;
+			padding-bottom: 18px;
 		}
 
 		.timeline-heading {
