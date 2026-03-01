@@ -637,13 +637,13 @@
 
 		/* Footer */
 		#fh5co-footer {
-			padding: 4em 0;
+			padding: 3em 0;
 			background: var(--light-bg);
 			text-align: center;
 		}
 
 		#fh5co-footer p {
-			font-size: 16px;
+			font-size: 15px;
 			margin-bottom: 0;
 		}
 
@@ -703,23 +703,20 @@
 			max-width: 280px;
 		}
 
-		.footer-copyright {
-			font-size: 0.9rem;
+		.footer-line {
 			color: var(--text-color);
-			opacity: 0.9;
-			font-weight: 400;
-			line-height: 1.5;
-			margin: 0;
+			line-height: 1.6;
 		}
 
-		.footer-copyright a {
+		.footer-line a {
 			color: var(--primary-color);
-			text-decoration: none;
-			transition: color 0.2s ease;
 		}
 
-		.footer-copyright a:hover {
-			color: var(--primary-dark);
+		.footer-sep {
+			color: var(--text-color);
+			opacity: 0.5;
+			margin: 0 0.35em;
+			user-select: none;
 		}
 
 		.gototop {
@@ -2710,10 +2707,12 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 							</div>
 						</div>
 						<hr class="footer-divider">
-						<p class="footer-copyright">😁 2020 –
-							<script>document.write(new Date().getFullYear())</script> |
-							<a href="./old/photography.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Photography</a> |
-							<a href="./old/index.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Pre-GPT (Archive)</a>
+						<p class="footer-line footer-copyright">😁 2020 –
+							<script>document.write(new Date().getFullYear())</script>
+							<span class="footer-sep">·</span>
+							<a href="./old/photography.html" target="_blank" class="hover-underline-animation">Photography</a>
+							<span class="footer-sep">·</span>
+							<a href="./old/index.html" target="_blank" class="hover-underline-animation">Pre-GPT (Archive)</a>
 						</p>
 					</div>
 				</div>
