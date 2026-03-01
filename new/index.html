@@ -647,6 +647,72 @@
 			margin-bottom: 0;
 		}
 
+		.footer-tools {
+			margin-bottom: 1.5rem;
+		}
+
+		.footer-tools-label {
+			display: block;
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: var(--text-color);
+			opacity: 0.7;
+			margin-bottom: 0.75rem;
+		}
+
+		.footer-tools-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.5rem 1rem;
+			align-items: center;
+		}
+
+		.footer-tool-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			padding: 0.5rem 0.9rem;
+			background: white;
+			color: var(--primary-color);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.95rem;
+			border-radius: 20px;
+			border: 1px solid rgba(0, 0, 0, 0.06);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+			transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.footer-tool-link:hover {
+			background: var(--light-bg-2);
+			color: var(--primary-dark);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+		}
+
+		.footer-tool-link i {
+			font-size: 0.9em;
+			opacity: 0.9;
+		}
+
+		.footer-divider {
+			border: none;
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+			margin: 1.5rem auto 1.25rem;
+			max-width: 320px;
+		}
+
+		.footer-copyright {
+			font-size: 0.95rem;
+			color: var(--text-color);
+			opacity: 0.85;
+		}
+
+		.footer-copyright a {
+			color: var(--primary-color);
+		}
+
 		.gototop {
 			position: fixed;
 			bottom: 20px;
@@ -2625,26 +2691,18 @@ Built optimal RAG systems with attribute filtering from scratch for device log d
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p style="margin-top: 10px;">
-							<span style="color: var(--text-color); opacity: 0.7;">Tools:</span>
-							<a href="./mergePDF.html" class="hover-underline-animation" style="color: var(--primary-color); margin-left: 5px;">
-								<i class="fa-solid fa-file"></i> MergePDF Tool
-							</a> |
-							<a href="./alarm.html" class="hover-underline-animation" style="color: var(--primary-color)">
-								<i class="fas fa-clock"></i> Alarm
-							</a> |
-							<a href="./pomodoro.html" class="hover-underline-animation" style="color: var(--primary-color)">
-								<i class="fa-solid fa-business-time"></i> Pomodoro Timer
-							</a> |
-							<a href="./drawingBoard.html" class="hover-underline-animation" style="color: var(--primary-color)">
-								<i class="fas fa-paint-brush"></i> Drawing Board
-							</a>
-						</p>
-
-						<hr>
-
-						<p>😁 2020 -
-							<script>document.write(new Date().getFullYear())</script> | 
+						<div class="footer-tools">
+							<span class="footer-tools-label">Tools</span>
+							<div class="footer-tools-links">
+								<a href="./mergePDF.html" class="footer-tool-link"><i class="fa-solid fa-file"></i> MergePDF</a>
+								<a href="./alarm.html" class="footer-tool-link"><i class="fas fa-clock"></i> Alarm</a>
+								<a href="./pomodoro.html" class="footer-tool-link"><i class="fa-solid fa-business-time"></i> Pomodoro</a>
+								<a href="./drawingBoard.html" class="footer-tool-link"><i class="fas fa-paint-brush"></i> Drawing Board</a>
+							</div>
+						</div>
+						<hr class="footer-divider">
+						<p class="footer-copyright">😁 2020 –
+							<script>document.write(new Date().getFullYear())</script> |
 							<a href="./old/photography.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Photography</a> |
 							<a href="./old/index.html" target="_blank" class="hover-underline-animation" style="color: var(--primary-color)">Pre-GPT (Archive)</a>
 						</p>
