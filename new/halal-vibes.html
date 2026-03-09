@@ -1,0 +1,1028 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Halal Vibes Blog</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="description" content="Halal spots for coffee, food, and good vibes. SF Bay Area, San Diego, LA, Alexandria, Cairo, London. Food & vibes ratings." />
+	<meta name="keywords" content="halal spots, halal coffee, halal food, halal restaurants, SF Bay Area, San Diego, Los Angeles, Alexandria Egypt, Cairo Egypt, London England, vibes" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<meta property="og:title" content="Halal Vibes Blog | Halal Coffee, Food & Vibes" />
+	<meta property="og:description" content="Halal spots for coffee, food, and good vibes. SF Bay Area, San Diego, LA, Alexandria, Cairo, London." />
+	<meta name="twitter:title" content="Halal Vibes Blog | Halal Coffee, Food & Vibes" />
+	<meta name="twitter:card" content="summary" />
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="images/smiling.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		:root {
+			--primary-color: #2d4a3e;
+			--primary-dark: #1a2f26;
+			--secondary-color: #5a7c6e;
+			--accent-warm: #c17f59;
+			--accent-warm-hover: #a96b48;
+			--text-color: #2d4a3e;
+			--text-muted: #5a7c6e;
+			--light-bg: #faf9f7;
+			--light-bg-2: #f0ede8;
+			--card-bg: #ffffff;
+			--shadow-sm: 0 2px 8px rgba(45, 74, 62, 0.06);
+			--shadow-md: 0 8px 30px rgba(45, 74, 62, 0.1);
+			--shadow-lg: 0 20px 60px rgba(45, 74, 62, 0.12);
+			--shadow-xl: 0 30px 80px rgba(45, 74, 62, 0.15);
+			--radius: 20px;
+			--radius-sm: 14px;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			overflow-x: hidden;
+			font-size: 16px;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.7;
+			color: var(--text-color);
+			background: linear-gradient(180deg, var(--light-bg) 0%, #f5f2ee 100%);
+			font-weight: 400;
+			overflow-x: hidden;
+			min-height: 100vh;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 600;
+			color: var(--primary-dark);
+		}
+
+		/* Hero header */
+		#hv-header {
+			background-image: url(images/blueclouds.jpg);
+			background-position: center center;
+			background-size: cover;
+			position: relative;
+			min-height: 32vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 4rem 2rem;
+		}
+
+		#hv-header .overlay {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(26, 47, 38, 0.6) 0%, rgba(26, 47, 38, 0.75) 100%);
+		}
+
+		#hv-header .header-content {
+			position: relative;
+			z-index: 2;
+			text-align: center;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		#hv-header .logo-link {
+			position: absolute;
+			top: 28px;
+			left: 28px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			color: white;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 1.05rem;
+			transition: opacity 0.2s;
+		}
+
+		#hv-header .logo-link:hover {
+			opacity: 0.9;
+			color: white;
+		}
+
+		#hv-header .logo-link img {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			border: 2px solid rgba(255,255,255,0.5);
+		}
+
+		#hv-header h1 {
+			font-family: 'Playfair Display', serif;
+			color: white;
+			font-size: clamp(2.75rem, 6vw, 4rem);
+			margin-bottom: 16px;
+			letter-spacing: -0.02em;
+			line-height: 1.15;
+			text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+		}
+
+		#hv-header p {
+			color: rgba(255,255,255,0.95);
+			font-size: clamp(1.1rem, 2vw, 1.35rem);
+			line-height: 1.6;
+			max-width: 500px;
+			margin: 0 auto;
+		}
+
+		/* Filter bar — NNG: prioritized, progressive disclosure, content-first */
+		.hv-filters {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 12px 20px;
+			margin-bottom: 2.5rem;
+			padding: 0 0.5rem;
+		}
+
+		.hv-filter-category {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			background: white;
+			padding: 4px;
+			border-radius: 10px;
+			border: 1px solid rgba(45, 74, 62, 0.1);
+			box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+		}
+
+		.hv-cat-btn {
+			padding: 6px 14px;
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--text-muted);
+			background: none;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: all 0.15s ease;
+		}
+
+		.hv-cat-btn:hover {
+			color: var(--primary-color);
+			background: var(--light-bg-2);
+		}
+
+		.hv-cat-btn.active {
+			background: var(--primary-dark);
+			color: white;
+		}
+
+		.hv-location-wrap {
+			position: relative;
+		}
+
+		.hv-location-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 12px 6px 14px;
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--primary-color);
+			background: white;
+			border: 1px solid rgba(45, 74, 62, 0.1);
+			border-radius: 8px;
+			cursor: pointer;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+			transition: all 0.15s ease;
+		}
+
+		.hv-location-btn:hover {
+			border-color: rgba(45, 74, 62, 0.2);
+			background: var(--light-bg-2);
+		}
+
+		.hv-location-btn[aria-expanded="true"] {
+			border-color: var(--accent-warm);
+			background: rgba(193, 127, 89, 0.08);
+			color: var(--accent-warm-hover);
+		}
+
+		.hv-location-btn i {
+			font-size: 0.7rem;
+			opacity: 0.7;
+			transition: transform 0.2s;
+		}
+
+		.hv-location-btn[aria-expanded="true"] i {
+			transform: rotate(180deg);
+		}
+
+		.hv-location-panel {
+			position: absolute;
+			top: calc(100% + 6px);
+			left: 50%;
+			transform: translateX(-50%);
+			background: white;
+			border-radius: 10px;
+			box-shadow: var(--shadow-lg);
+			border: 1px solid rgba(0,0,0,0.06);
+			min-width: 200px;
+			max-height: 280px;
+			overflow-y: auto;
+			z-index: 100;
+			padding: 6px;
+			display: none;
+		}
+
+		.hv-location-panel.open {
+			display: block;
+		}
+
+		.hv-location-option {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			padding: 10px 12px;
+			font-size: 0.875rem;
+			color: var(--primary-color);
+			background: none;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			text-align: left;
+			transition: background 0.1s;
+		}
+
+		.hv-location-option:hover {
+			background: var(--light-bg-2);
+		}
+
+		.hv-location-option .count {
+			font-size: 0.8rem;
+			color: var(--text-muted);
+		}
+
+		.hv-result-count {
+			font-size: 0.8125rem;
+			color: var(--text-muted);
+			margin-left: auto;
+		}
+
+		.hv-cat-btn:focus-visible,
+		.hv-location-btn:focus-visible,
+		.hv-location-option:focus-visible {
+			outline: 2px solid var(--accent-warm);
+			outline-offset: 2px;
+		}
+
+		/* Ad slots - larger for better monetization */
+		.hv-ad-slot {
+			background: linear-gradient(135deg, var(--light-bg-2) 0%, #e8e4df 100%);
+			border: 2px dashed var(--secondary-color);
+			border-radius: var(--radius);
+			min-height: 120px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--text-muted);
+			font-size: 1rem;
+			font-weight: 500;
+			margin: 3rem 0;
+			opacity: 0.85;
+			letter-spacing: 0.03em;
+		}
+
+		.hv-ad-slot.leaderboard {
+			min-height: 100px;
+		}
+
+		/* Support CTA - prominent for monetization */
+		.hv-support-cta {
+			background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+			border-radius: var(--radius);
+			padding: 3rem;
+			text-align: center;
+			margin: 4rem 0;
+			box-shadow: var(--shadow-lg);
+			color: white;
+		}
+
+		.hv-support-cta h3 {
+			color: white;
+			font-size: 1.75rem;
+			margin-bottom: 12px;
+		}
+
+		.hv-support-cta p {
+			opacity: 0.9;
+			font-size: 1.1rem;
+			margin-bottom: 1.5rem;
+			max-width: 500px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.hv-support-cta .cta-placeholder {
+			display: inline-block;
+			background: rgba(255,255,255,0.2);
+			padding: 14px 32px;
+			border-radius: 30px;
+			font-weight: 600;
+			font-size: 1rem;
+			border: 2px solid rgba(255,255,255,0.4);
+		}
+
+		/* Main content - wider */
+		.hv-main {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 3rem 2rem 5rem;
+		}
+
+		/* Entry cards - bigger, bolder */
+		.hv-entries-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+			gap: 32px;
+			margin-top: 4rem;
+			margin-bottom: 3rem;
+		}
+
+		.hv-entry-card {
+			background: var(--card-bg);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow-md);
+			overflow: hidden;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+			border: 1px solid rgba(45, 74, 62, 0.06);
+			display: flex;
+			flex-direction: column;
+			cursor: pointer;
+		}
+
+		.hv-entry-card:hover {
+			box-shadow: var(--shadow-xl);
+			transform: translateY(-8px);
+			border-color: rgba(193, 127, 89, 0.2);
+		}
+
+		.hv-entry-card .card-image-wrap {
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hv-entry-card .card-image {
+			width: 100%;
+			height: 260px;
+			object-fit: cover;
+			display: block;
+			transition: transform 0.5s ease;
+		}
+
+		.hv-entry-card:hover .card-image {
+			transform: scale(1.06);
+		}
+
+		.hv-entry-card .card-image-wrap::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 80px;
+			background: linear-gradient(transparent, rgba(0,0,0,0.2));
+			pointer-events: none;
+		}
+
+		.hv-entry-card .card-body {
+			padding: 28px 32px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.hv-entry-card .card-title {
+			font-size: 1.5rem;
+			margin-bottom: 16px;
+			color: var(--primary-dark);
+			line-height: 1.3;
+			font-weight: 600;
+		}
+
+		.hv-entry-card .card-tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-bottom: 16px;
+		}
+
+		.hv-entry-card .card-tag {
+			background: var(--light-bg-2);
+			color: var(--primary-color);
+			font-size: 0.9rem;
+			padding: 8px 16px;
+			border-radius: 24px;
+			font-weight: 500;
+			transition: background 0.2s;
+		}
+
+		.hv-entry-card:hover .card-tag {
+			background: rgba(193, 127, 89, 0.15);
+			color: var(--accent-warm-hover);
+		}
+
+		.hv-entry-card .card-scores {
+			display: flex;
+			gap: 20px;
+			margin-bottom: 20px;
+			flex-wrap: wrap;
+		}
+
+		.hv-entry-card .card-score {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 1rem;
+			color: var(--text-muted);
+			font-weight: 600;
+			background: linear-gradient(135deg, rgba(193, 127, 89, 0.12) 0%, rgba(193, 127, 89, 0.06) 100%);
+			padding: 8px 16px;
+			border-radius: 20px;
+			border: 1px solid rgba(193, 127, 89, 0.25);
+		}
+
+		.hv-entry-card .card-score strong {
+			color: var(--accent-warm-hover);
+		}
+
+		.hv-entry-card .card-excerpt {
+			font-size: 1.1rem;
+			color: var(--text-muted);
+			line-height: 1.7;
+			margin-bottom: 24px;
+			flex: 1;
+		}
+
+		.hv-entry-card .card-read-more {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--accent-warm);
+			font-weight: 600;
+			text-decoration: none;
+			font-size: 1.05rem;
+			transition: all 0.25s;
+			margin-top: auto;
+		}
+
+		.hv-entry-card .card-read-more i {
+			transition: transform 0.25s;
+		}
+
+		.hv-entry-card:hover .card-read-more {
+			color: var(--accent-warm-hover);
+		}
+
+		.hv-entry-card:hover .card-read-more i {
+			transform: translateX(4px);
+		}
+
+		/* Modal - larger */
+		.hv-modal-overlay {
+			position: fixed;
+			inset: 0;
+			background: rgba(26, 47, 38, 0.75);
+			backdrop-filter: blur(8px);
+			z-index: 1000;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			padding: 3rem;
+			overflow-y: auto;
+		}
+
+		.hv-modal-overlay.active {
+			display: flex;
+		}
+
+		.hv-modal {
+			background: white;
+			border-radius: var(--radius);
+			box-shadow: var(--shadow-xl);
+			max-width: 800px;
+			width: 100%;
+			max-height: 90vh;
+			overflow-y: auto;
+			position: relative;
+		}
+
+		.hv-modal-close {
+			position: absolute;
+			top: 24px;
+			right: 24px;
+			width: 48px;
+			height: 48px;
+			border: none;
+			background: var(--light-bg-2);
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.5rem;
+			color: var(--primary-dark);
+			transition: all 0.2s;
+			z-index: 2;
+		}
+
+		.hv-modal-close:hover {
+			background: var(--accent-warm);
+			color: white;
+			transform: scale(1.05);
+		}
+
+		.hv-modal-content {
+			padding: 3rem;
+			padding-top: 4rem;
+		}
+
+		.hv-modal-content h2 {
+			font-size: 2rem;
+			margin-bottom: 20px;
+		}
+
+		.hv-modal-content h4 {
+			margin-top: 2rem;
+			margin-bottom: 0.75rem;
+			font-size: 1.2rem;
+			color: var(--accent-warm-hover);
+		}
+
+		.hv-modal-content p {
+			margin-bottom: 1.25rem;
+			font-size: 1.1rem;
+			line-height: 1.8;
+		}
+
+		/* Footer */
+		#fh5co-footer {
+			padding: 4em 0;
+			background: var(--primary-dark);
+			text-align: center;
+			color: rgba(255,255,255,0.85);
+		}
+
+		#fh5co-footer .footer-tool-link {
+			background: rgba(255,255,255,0.1);
+			color: white;
+			border-color: rgba(255,255,255,0.2);
+		}
+
+		#fh5co-footer .footer-tool-link:hover {
+			background: var(--accent-warm);
+			color: white;
+		}
+
+		#fh5co-footer .footer-line,
+		#fh5co-footer .footer-line a {
+			color: rgba(255,255,255,0.8);
+		}
+
+		#fh5co-footer .footer-divider {
+			border-color: rgba(255,255,255,0.2);
+		}
+
+		.footer-tools span {
+			color: rgba(255,255,255,0.6) !important;
+		}
+
+		.footer-tools-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.75rem 1.25rem;
+			align-items: center;
+		}
+
+		.footer-tool-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.65rem 1.2rem;
+			background: white;
+			color: var(--primary-color);
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 1rem;
+			border-radius: 24px;
+			border: 1px solid rgba(0, 0, 0, 0.06);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+			transition: all 0.25s ease;
+		}
+
+		.footer-tool-link:hover {
+			background: var(--light-bg-2);
+			color: var(--primary-dark);
+			transform: translateY(-2px);
+		}
+
+		.footer-divider {
+			border: none;
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+			margin: 1.5rem auto 1rem;
+			max-width: 320px;
+		}
+
+		.gototop {
+			position: fixed;
+			bottom: 28px;
+			right: 28px;
+			z-index: 999;
+			opacity: 0;
+			visibility: hidden;
+			transition: 0.4s;
+		}
+
+		.gototop.active {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.js-gotop {
+			background: var(--accent-warm);
+			color: white;
+			border-radius: 50%;
+			width: 56px;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: var(--shadow-lg);
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.js-gotop:hover {
+			color: white;
+			background: var(--accent-warm-hover);
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-xl);
+		}
+
+		/* Empty state */
+		.hv-empty-state {
+			grid-column: 1 / -1;
+			text-align: center;
+			padding: 5rem 2rem;
+			color: var(--text-muted);
+			font-size: 1.2rem;
+		}
+
+		@media (max-width: 768px) {
+			#hv-header {
+				min-height: 28vh;
+				padding: 2rem 1.5rem;
+			}
+
+			#hv-header h1 {
+				font-size: 2.25rem;
+			}
+
+			#hv-header .logo-link {
+				top: 20px;
+				left: 20px;
+			}
+
+			#hv-header .logo-link img {
+				width: 40px;
+				height: 40px;
+			}
+
+			.hv-filters {
+				margin-bottom: 2rem;
+				gap: 10px;
+			}
+
+			.hv-filter-category {
+				width: 100%;
+				justify-content: center;
+			}
+
+			.hv-location-wrap {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+			}
+
+			.hv-result-count {
+				width: 100%;
+				text-align: center;
+				margin-left: 0;
+			}
+
+			.hv-main {
+				padding: 0 1.25rem 3rem;
+			}
+
+			.hv-entries-grid {
+				grid-template-columns: 1fr;
+				gap: 24px;
+			}
+
+			.hv-entry-card .card-image {
+				height: 220px;
+			}
+
+			.hv-entry-card .card-body {
+				padding: 24px;
+			}
+
+			.hv-entry-card .card-title {
+				font-size: 1.35rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page">
+		<header id="hv-header">
+			<div class="overlay"></div>
+			<a href="./index.html" class="logo-link" aria-label="Back to home">
+				<img src="images/chicago.jpg" alt="">
+				<span>Yusuf Morsi</span>
+			</a>
+			<div class="header-content">
+				<h1>Halal Vibes Blog</h1>
+				<p>Halal spots for coffee, food & good vibes</p>
+			</div>
+		</header>
+
+		<div class="hv-main">
+			<!-- Ad slot 1 - Above the fold (leaderboard)
+			<div class="hv-ad-slot leaderboard" aria-hidden="true">
+				Ad space — 728×90 or 970×250
+			</div>
+			-->
+
+			<div class="hv-filters">
+				<div class="hv-filter-category" role="group" aria-label="Category">
+					<button type="button" class="hv-cat-btn active" data-category="all">All</button>
+					<button type="button" class="hv-cat-btn" data-category="coffee">Coffee</button>
+					<button type="button" class="hv-cat-btn" data-category="food">Food</button>
+					<button type="button" class="hv-cat-btn" data-category="vibes">Vibes</button>
+					<button type="button" class="hv-cat-btn" data-category="lounges">Lounges</button>
+				</div>
+				<div class="hv-location-wrap">
+					<button type="button" class="hv-location-btn" id="hv-location-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="hv-location-label">
+						<span id="hv-location-label">All cities</span>
+						<i class="fa-solid fa-chevron-down"></i>
+					</button>
+					<div class="hv-location-panel" id="hv-location-panel" role="listbox" aria-label="Select city"></div>
+				</div>
+				<span class="hv-result-count" id="hv-result-count" aria-live="polite"></span>
+			</div>
+
+			<!-- Entry cards grid (populated by JS) -->
+			<div id="hv-entries-container" class="hv-entries-grid"></div>
+
+			<!-- Ad slot 2 - Mid content (rectangle)
+			<div class="hv-ad-slot" aria-hidden="true">
+				Ad space — 300×250 or 336×280
+			</div>
+			-->
+
+			<!-- Support CTA - prominent for monetization
+			<div class="hv-support-cta">
+				<h3>Support Halal Vibes</h3>
+				<p>Enjoy this blog? Subscribe for new spots, or support with a coffee. Your support keeps the reviews coming!</p>
+				<span class="cta-placeholder">Newsletter signup / Buy Me a Coffee</span>
+			</div>
+			-->
+		</div>
+
+		<!-- Entry detail modal -->
+		<div id="hv-modal-overlay" class="hv-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="hv-modal-title">
+			<div class="hv-modal">
+				<button class="hv-modal-close" id="hv-modal-close" aria-label="Close">&times;</button>
+				<div id="hv-modal-content" class="hv-modal-content"></div>
+			</div>
+		</div>
+
+		<div id="fh5co-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="footer-tools" style="margin-bottom: 1.5rem;">
+							<div class="footer-tools-links">
+								<a href="./index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+								<a href="./halal-vibes.html" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a>
+							</div>
+						</div>
+						<hr class="footer-divider">
+						<p class="footer-line" style="color: var(--text-color); font-size: 15px; margin-bottom: 0;">
+							😁 2020 – <script>document.write(new Date().getFullYear())</script>
+							<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+							<a href="./old/photography.html" target="_blank" style="color: var(--primary-color);">Photography</a>
+							<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+							<a href="./old/index.html" target="_blank" style="color: var(--primary-color);">Pre-GPT (Archive)</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="fa-solid fa-arrow-up" style="color: white;"></i></a>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="halal-vibes/entries.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			let locationFilter = 'all';
+			let categoryFilter = 'all';
+
+			function getLocationCounts() {
+				const counts = {};
+				HALAL_VIBES_ENTRIES.forEach(e => {
+					counts[e.location] = (counts[e.location] || 0) + 1;
+				});
+				return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+			}
+
+			function renderLocationPanel() {
+				const panel = document.getElementById('hv-location-panel');
+				panel.innerHTML = '';
+				const all = document.createElement('button');
+				all.type = 'button';
+				all.className = 'hv-location-option';
+				all.role = 'option';
+				all.innerHTML = `All cities <span class="count">${HALAL_VIBES_ENTRIES.length}</span>`;
+				all.addEventListener('click', () => { locationFilter = 'all'; updateLocationLabel(); closeLocationPanel(); renderCards(); });
+				panel.appendChild(all);
+				getLocationCounts().forEach(([loc, count]) => {
+					const btn = document.createElement('button');
+					btn.type = 'button';
+					btn.className = 'hv-location-option';
+					btn.role = 'option';
+					btn.innerHTML = `${loc} <span class="count">${count}</span>`;
+					btn.addEventListener('click', () => { locationFilter = loc; updateLocationLabel(); closeLocationPanel(); renderCards(); });
+					panel.appendChild(btn);
+				});
+			}
+
+			function updateLocationLabel() {
+				const label = document.getElementById('hv-location-label');
+				label.textContent = locationFilter === 'all' ? 'All cities' : locationFilter;
+			}
+
+			function closeLocationPanel() {
+				document.getElementById('hv-location-panel').classList.remove('open');
+				document.getElementById('hv-location-btn').setAttribute('aria-expanded', 'false');
+			}
+
+			document.querySelectorAll('.hv-cat-btn').forEach(btn => {
+				btn.addEventListener('click', () => {
+					categoryFilter = btn.dataset.category;
+					document.querySelectorAll('.hv-cat-btn').forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					renderCards();
+				});
+			});
+
+			const locBtn = document.getElementById('hv-location-btn');
+			const locPanel = document.getElementById('hv-location-panel');
+			locBtn.addEventListener('click', (e) => {
+				e.stopPropagation();
+				locPanel.classList.toggle('open');
+				locBtn.setAttribute('aria-expanded', locPanel.classList.contains('open'));
+			});
+			document.addEventListener('click', () => closeLocationPanel());
+			locPanel.addEventListener('click', e => e.stopPropagation());
+
+			renderLocationPanel();
+
+			function matchesFilters(entry) {
+				const locMatch = locationFilter === 'all' || entry.location === locationFilter;
+				const catMatch = categoryFilter === 'all' || entry.categories.includes(categoryFilter);
+				return locMatch && catMatch;
+			}
+
+			function renderCards() {
+				const container = document.getElementById('hv-entries-container');
+				container.innerHTML = '';
+				const filtered = HALAL_VIBES_ENTRIES.filter(matchesFilters);
+
+				filtered.forEach((entry, idx) => {
+					const card = document.createElement('article');
+					card.className = 'hv-entry-card';
+					card.dataset.slug = entry.slug;
+					card.dataset.location = entry.location;
+					entry.categories.forEach(c => card.dataset.category = (card.dataset.category || '') + ' ' + c);
+
+					const imgSection = entry.image ? `
+						<div class="card-image-wrap">
+							<img class="card-image" src="${entry.image.startsWith('http') ? entry.image : './' + entry.image}" alt="${entry.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+						</div>` : '';
+					const scoresHtml = [
+						entry.foodScore != null ? `<span class="card-score"><strong>Food ${entry.foodScore}/10</strong></span>` : '',
+						entry.vibesScore != null ? `<span class="card-score"><strong>Vibes ${entry.vibesScore}/10</strong></span>` : ''
+					].filter(Boolean).join('');
+
+					card.innerHTML = `
+						${imgSection}
+						<div class="card-body">
+							<h3 class="card-title">${entry.title}</h3>
+							<div class="card-tags">
+								<span class="card-tag">${entry.location}</span>
+								${entry.categories.map(c => `<span class="card-tag">${c.charAt(0).toUpperCase() + c.slice(1)}</span>`).join('')}
+							</div>
+							${scoresHtml ? `<div class="card-scores">${scoresHtml}</div>` : ''}
+							${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
+							<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
+						</div>
+					`;
+
+					card.addEventListener('click', function(e) {
+						e.preventDefault();
+						openModal(entry.slug);
+					});
+
+					container.appendChild(card);
+				});
+
+				const countEl = document.getElementById('hv-result-count');
+				if (countEl) {
+					countEl.textContent = filtered.length === 0 ? '' : `${filtered.length} spot${filtered.length === 1 ? '' : 's'}`;
+				}
+
+				if (filtered.length === 0) {
+					container.innerHTML = '<p class="hv-empty-state">No spots match. Try a different city or category.</p>';
+				}
+			}
+
+			function openModal(slug) {
+				const entry = HALAL_VIBES_ENTRIES.find(e => e.slug === slug);
+				if (!entry) return;
+				const content = document.getElementById('hv-modal-content');
+				content.innerHTML = `
+					<h2 id="hv-modal-title">${entry.title}</h2>
+					<div class="card-tags" style="margin-bottom: 1rem;">
+						<span class="card-tag">${entry.location}</span>
+						${entry.categories.map(c => `<span class="card-tag">${c.charAt(0).toUpperCase() + c.slice(1)}</span>`).join('')}
+					</div>
+					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}
+					${entry.vibesScore != null ? `<p><strong>Vibes:</strong> ${entry.vibesScore}/10</p>` : ''}
+					<div class="hv-modal-body">${entry.content}</div>
+				`;
+				document.getElementById('hv-modal-overlay').classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeModal() {
+				document.getElementById('hv-modal-overlay').classList.remove('active');
+				document.body.style.overflow = '';
+			}
+
+			document.getElementById('hv-modal-close').addEventListener('click', closeModal);
+			document.getElementById('hv-modal-overlay').addEventListener('click', function(e) {
+				if (e.target === this) closeModal();
+			});
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					if (locPanel.classList.contains('open')) closeLocationPanel();
+					else closeModal();
+				}
+			});
+
+			renderCards();
+
+			// Hash support for direct entry links
+			if (window.location.hash) {
+				const slug = window.location.hash.slice(1);
+				if (HALAL_VIBES_ENTRIES.some(e => e.slug === slug)) {
+					setTimeout(() => openModal(slug), 100);
+				}
+			}
+
+			// Go to top button
+			const gotop = document.querySelector('.gototop');
+			window.addEventListener('scroll', function() {
+				gotop.classList.toggle('active', window.scrollY > 400);
+			});
+			document.querySelector('.js-gotop').addEventListener('click', function(e) {
+				e.preventDefault();
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		});
+	</script>
+</body>
+
+</html>
