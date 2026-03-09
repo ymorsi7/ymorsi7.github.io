@@ -380,10 +380,24 @@
 			height: 260px;
 			object-fit: cover;
 			display: block;
-			transition: transform 0.5s ease;
+			transition: transform 0.5s ease, filter 0.4s ease;
+		}
+
+		.hv-entry-card .card-image:not(.loaded) {
+			filter: blur(8px) brightness(1.1);
+			transform: scale(1.02);
+		}
+
+		.hv-entry-card .card-image.loaded {
+			filter: blur(0) brightness(1);
+			transform: scale(1);
 		}
 
 		.hv-entry-card:hover .card-image {
+			transform: scale(1.06);
+		}
+
+		.hv-entry-card:hover .card-image.loaded {
 			transform: scale(1.06);
 		}
 
@@ -910,6 +924,27 @@
 
 			renderLocationPanel();
 
+			const hvImageObserver = (function() {
+				const obs = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (!entry.isIntersecting) return;
+						const img = entry.target;
+						obs.unobserve(img);
+						const src = img.getAttribute('data-src');
+						if (!src) return;
+						img.removeAttribute('data-src');
+						img.addEventListener('load', function() { this.classList.add('loaded'); });
+						img.src = src;
+						if (img.complete && img.naturalHeight) img.classList.add('loaded');
+					});
+				}, { rootMargin: '200px' });
+				return {
+					observeAll: function(container) {
+						container.querySelectorAll('.card-image[data-src]').forEach(img => obs.observe(img));
+					}
+				};
+			})();
+
 			function matchesFilters(entry) {
 				const locMatch = locationFilter === 'all' || entry.location === locationFilter;
 				const catMatch = categoryFilter === 'all' || entry.categories.includes(categoryFilter);
@@ -928,9 +963,10 @@
 					card.dataset.location = entry.location;
 					entry.categories.forEach(c => card.dataset.category = (card.dataset.category || '') + ' ' + c);
 
+					const imgSrc = entry.image ? (entry.image.startsWith('http') ? entry.image : './' + entry.image) : '';
 					const imgSection = entry.image ? `
 						<div class="card-image-wrap">
-							<img class="card-image" src="${entry.image.startsWith('http') ? entry.image : './' + entry.image}" alt="${entry.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+							<img class="card-image" data-src="${imgSrc}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${entry.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
 						</div>` : '';
 					const scoresHtml = [
 						entry.foodScore != null ? `<span class="card-score"><strong>Food ${entry.foodScore}/10</strong></span>` : '',
@@ -958,6 +994,9 @@
 
 					container.appendChild(card);
 				});
+
+				// Lazy-load images when near viewport (like photography page)
+				hvImageObserver.observeAll(container);
 
 				const countEl = document.getElementById('hv-result-count');
 				if (countEl) {
