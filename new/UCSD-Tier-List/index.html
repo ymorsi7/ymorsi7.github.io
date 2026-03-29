@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ECE / CSE / DSC Tier List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>ECE / CSE / DSC Tier List</h1>
+      <p class="tagline">Unranked pool groups ECE, CSE, and DSC (catalog) — drag to tiers above.</p>
+      <div class="toolbar">
+        <button type="button" id="btn-reset" class="btn">Reset to Unranked</button>
+      </div>
+    </header>
+
+    <main class="tier-board">
+      <section class="tier-row tier-s" data-zone="S" aria-label="S tier">
+        <div class="tier-label">S</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+      <section class="tier-row tier-a" data-zone="A" aria-label="A tier">
+        <div class="tier-label">A</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+      <section class="tier-row tier-b" data-zone="B" aria-label="B tier">
+        <div class="tier-label">B</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+      <section class="tier-row tier-c" data-zone="C" aria-label="C tier">
+        <div class="tier-label">C</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+      <section class="tier-row tier-d" data-zone="D" aria-label="D tier">
+        <div class="tier-label">D</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+      <section class="tier-row tier-f" data-zone="F" aria-label="F tier">
+        <div class="tier-label">F</div>
+        <div class="tier-strip drop-strip" tabindex="-1"></div>
+      </section>
+
+      <section class="tier-row pool" data-zone="unranked" aria-label="Unranked">
+        <div class="tier-label" title="Not yet ranked">Unranked</div>
+        <div class="tier-strip-unranked">
+          <div class="unranked-group" data-subject="ECE">
+            <div class="unranked-subject-label">ECE</div>
+            <div class="unranked-substrip drop-strip" data-dept="ECE" tabindex="-1"></div>
+          </div>
+          <div class="unranked-group" data-subject="CSE">
+            <div class="unranked-subject-label">CSE</div>
+            <div class="unranked-substrip drop-strip" data-dept="CSE" tabindex="-1"></div>
+          </div>
+          <div class="unranked-group" data-subject="DSC">
+            <div class="unranked-subject-label">DSC</div>
+            <div class="unranked-substrip drop-strip" data-dept="DSC" tabindex="-1"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="catalog-courses.js"></script>
+    <script src="dsc-catalog.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
