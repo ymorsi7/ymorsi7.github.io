@@ -8,3 +8,4 @@
 .env.test
 .env.production
 new/.DS_Store
+new/old/.DS_Store
