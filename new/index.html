@@ -1333,6 +1333,103 @@
 			position: relative;
 		}
 
+		/* Recommendations section */
+		#fh5co-recommendations {
+			background: var(--light-bg-2);
+			padding: 6em 0;
+			position: relative;
+		}
+
+		.recommendation-card {
+			background: white;
+			border-radius: var(--radius);
+			padding: 34px 36px;
+			box-shadow: var(--shadow-md);
+			border: 1px solid rgba(0, 0, 0, 0.04);
+			margin-bottom: 24px;
+			transition: transform 0.25s ease, box-shadow 0.25s ease;
+			text-align: left;
+		}
+
+		.recommendation-card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.recommendation-header {
+			margin-bottom: 16px;
+		}
+
+		.recommendation-name {
+			font-size: 1.35rem;
+			font-weight: 600;
+			color: var(--primary-dark);
+			margin: 0 0 6px 0;
+			line-height: 1.35;
+		}
+
+		.recommendation-role {
+			font-size: 1.03rem;
+			color: var(--text-muted);
+			margin: 0;
+			line-height: 1.6;
+		}
+
+		.recommendation-meta {
+			font-size: 0.95rem;
+			font-weight: 500;
+			color: var(--secondary-color);
+			margin-top: 10px;
+		}
+
+		.recommendation-quote {
+			font-size: 1.08rem;
+			color: #334155;
+			line-height: 1.95;
+			margin: 0;
+			padding-left: 22px;
+			border-left: 3px solid rgba(100, 116, 139, 0.35);
+			position: relative;
+		}
+
+		.recommendation-quote:before {
+			content: "\201C";
+			position: absolute;
+			top: -4px;
+			left: 6px;
+			font-size: 1.5rem;
+			color: var(--secondary-color);
+			font-weight: 700;
+		}
+
+		.recommendation-quote:after {
+			content: "";
+		}
+
+		@media screen and (max-width: 768px) {
+			.recommendation-card {
+				padding: 24px 22px;
+			}
+
+			.recommendation-name {
+				font-size: 1.18rem;
+			}
+
+			.recommendation-role {
+				font-size: 0.98rem;
+			}
+
+			.recommendation-meta {
+				font-size: 0.88rem;
+			}
+
+			.recommendation-quote {
+				font-size: 1rem;
+				line-height: 1.8;
+				padding-left: 16px;
+			}
+		}
+
 		#fh5co-awards:before {
 			content: '';
 			position: absolute;
@@ -2723,6 +2820,51 @@
 							<p class="award-desc">Graduated with Honors and Academic Distinction</p>
 						</div>
 					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<div id="fh5co-recommendations">
+			<div class="container">
+				<div class="row animate-box">
+					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+						<h2>Recommendations</h2>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+						<div class="recommendation-card">
+							<div class="recommendation-header">
+								<h3 class="recommendation-name">J.P. Chen</h3>
+								<p class="recommendation-role">Data Analytics &amp; Quality Leader | SW, HW, Cloud &amp; Production Quality Excellence</p>
+								<p class="recommendation-meta">May 27, 2026 - Managed Yusuf directly at Cisco</p>
+							</div>
+							<p class="recommendation-quote">I had the pleasure of managing Yusuf at Cisco and can confidently say he is an exceptional software engineer with tremendous potential. Yusuf stands out for his strong technical capability and natural curiosity for new technologies, especially in AI/ML. Even early in his career, he demonstrated an impressive ability to quickly learn, adapt, and take on challenging problems. His work on ML pipelines and RAG-based solutions in the supply chain space showed both depth and practical impact. Beyond his technical skills, Yusuf is an absolute pleasure to work with. He brings a positive attitude every day and contributes to a highly collaborative team environment. He is proactive in helping others, often stepping in to support teammates, troubleshoot issues, and accelerate overall progress. What truly distinguishes him is his passion for technology. Outside of work, he actively participates in hackathons and competitions, frequently earning top awards, clear proof of both his dedication and talent. I highly recommend him for any software engineering or AI/ML-focused role.</p>
+						</div>
+					</div>
+
+					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+						<div class="recommendation-card">
+							<div class="recommendation-header">
+								<h3 class="recommendation-name">Ayham Dewan</h3>
+								<p class="recommendation-role">Software Engineer @ Southwest Airlines | MSCS @ Georgia Tech</p>
+								<p class="recommendation-meta">March 15, 2026 - Worked with Yusuf on the same team</p>
+							</div>
+							<p class="recommendation-quote">I've had the pleasure of working with Yusuf at Southwest Airlines. Throughout our time together, he consistently showed tremendous ownership and drove the vision and development of a critical feature while staying aligned with team objectives and timelines. He showcased strong technical skills and excelled in all stages of the project: design, development, and testing. Yusuf is a natural leader who seeks to help his teammates whenever possible. His self-starter mindset makes him resourceful and quick to execute. Even on ambiguous, ill-defined problems, he performed thorough analysis and proposed practical, well-scoped solutions. Beyond his professional strengths, Yusuf brought kindness, thoughtfulness, humor, and a bright personality that made collaboration genuinely enjoyable. His technical depth and positive team presence are a rare combination.</p>
+						</div>
+					</div>
+
+					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+						<div class="recommendation-card">
+							<div class="recommendation-header">
+								<h3 class="recommendation-name">Girish Krishnan</h3>
+								<p class="recommendation-role">Software Engineer @ SpaceX | EE + Math-CS + Physics @ UCSD</p>
+								<p class="recommendation-meta">March 3, 2026 - Worked with Yusuf on projects and hackathons</p>
+							</div>
+							<p class="recommendation-quote">I met Yusuf during a mentorship program at UCSD, where he was an outstanding mentor who gave practical advice on coursework, research, and internships. We later took courses together and teamed up in major course projects and hackathons, including a 2nd place finish at HARD Hack 2023 and 1st place at HARD Hack 2025. Throughout these projects, Yusuf was highly professional in how he wrote and organized software, especially under intense time constraints. His programming, AI/ML, and data science skills are top-tier. He is also an excellent presenter who makes complex projects understandable for any audience. I am confident these strengths will carry forward to any role he pursues.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
