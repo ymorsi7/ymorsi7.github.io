@@ -1336,17 +1336,22 @@
 		/* Recommendations section */
 		#fh5co-recommendations {
 			background: var(--light-bg-2);
-			padding: 6em 0;
+			padding: 6.5em 0;
 			position: relative;
+		}
+
+		.recommendations-row {
+			max-width: 1160px;
+			margin: 0 auto;
 		}
 
 		.recommendation-card {
 			background: white;
 			border-radius: var(--radius);
-			padding: 34px 36px;
+			padding: 42px 46px;
 			box-shadow: var(--shadow-md);
 			border: 1px solid rgba(0, 0, 0, 0.04);
-			margin-bottom: 24px;
+			margin-bottom: 30px;
 			transition: transform 0.25s ease, box-shadow 0.25s ease;
 			text-align: left;
 		}
@@ -1361,34 +1366,70 @@
 		}
 
 		.recommendation-name {
-			font-size: 1.35rem;
+			font-size: 1.72rem;
 			font-weight: 600;
 			color: var(--primary-dark);
 			margin: 0 0 6px 0;
 			line-height: 1.35;
 		}
 
+		.recommendation-name-row {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+			margin-bottom: 6px;
+		}
+
+		.recommendation-profile-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 34px;
+			height: 34px;
+			border-radius: 50%;
+			background: #e8f0fe;
+			color: #0a66c2;
+			text-decoration: none;
+			transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.recommendation-profile-link i {
+			font-size: 1rem;
+		}
+
+		.recommendation-profile-link:hover {
+			background: #d8e8fd;
+			transform: translateY(-1px);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.recommendation-profile-link:focus-visible {
+			outline: 2px solid #0a66c2;
+			outline-offset: 2px;
+		}
+
 		.recommendation-role {
-			font-size: 1.03rem;
+			font-size: 1.24rem;
 			color: var(--text-muted);
 			margin: 0;
-			line-height: 1.6;
+			line-height: 1.65;
 		}
 
 		.recommendation-meta {
-			font-size: 0.95rem;
+			font-size: 1.1rem;
 			font-weight: 500;
 			color: var(--secondary-color);
-			margin-top: 10px;
+			margin-top: 12px;
 		}
 
 		.recommendation-quote {
-			font-size: 1.08rem;
+			font-size: 1.3rem;
 			color: #334155;
-			line-height: 1.95;
+			line-height: 1.86;
 			margin: 0;
-			padding-left: 22px;
-			border-left: 3px solid rgba(100, 116, 139, 0.35);
+			padding-left: 26px;
+			border-left: 4px solid rgba(100, 116, 139, 0.35);
 			position: relative;
 		}
 
@@ -1408,25 +1449,30 @@
 
 		@media screen and (max-width: 768px) {
 			.recommendation-card {
-				padding: 24px 22px;
+				padding: 30px 24px;
 			}
 
 			.recommendation-name {
-				font-size: 1.18rem;
+				font-size: 1.42rem;
 			}
 
 			.recommendation-role {
-				font-size: 0.98rem;
+				font-size: 1.1rem;
 			}
 
 			.recommendation-meta {
-				font-size: 0.88rem;
+				font-size: 1rem;
 			}
 
 			.recommendation-quote {
-				font-size: 1rem;
-				line-height: 1.8;
-				padding-left: 16px;
+				font-size: 1.14rem;
+				line-height: 1.78;
+				padding-left: 18px;
+			}
+
+			.recommendation-profile-link {
+				width: 31px;
+				height: 31px;
 			}
 		}
 
@@ -2832,11 +2878,16 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+				<div class="row recommendations-row">
+					<div class="col-md-12 animate-box reveal">
 						<div class="recommendation-card">
 							<div class="recommendation-header">
-								<h3 class="recommendation-name">J.P. Chen</h3>
+								<div class="recommendation-name-row">
+									<h3 class="recommendation-name">J.P. Chen</h3>
+									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/jpchen/" target="_blank" rel="noopener noreferrer" aria-label="J.P. Chen LinkedIn profile" title="View LinkedIn profile">
+										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+									</a>
+								</div>
 								<p class="recommendation-role">Data Analytics &amp; Quality Leader | SW, HW, Cloud &amp; Production Quality Excellence</p>
 								<p class="recommendation-meta">May 27, 2026 - Managed Yusuf directly at Cisco</p>
 							</div>
@@ -2844,10 +2895,15 @@
 						</div>
 					</div>
 
-					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+					<div class="col-md-12 animate-box reveal">
 						<div class="recommendation-card">
 							<div class="recommendation-header">
-								<h3 class="recommendation-name">Ayham Dewan</h3>
+								<div class="recommendation-name-row">
+									<h3 class="recommendation-name">Ayham Dewan</h3>
+									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/ayham-dewan-23613118a/" target="_blank" rel="noopener noreferrer" aria-label="Ayham Dewan LinkedIn profile" title="View LinkedIn profile">
+										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+									</a>
+								</div>
 								<p class="recommendation-role">Software Engineer @ Southwest Airlines | MSCS @ Georgia Tech</p>
 								<p class="recommendation-meta">March 15, 2026 - Worked with Yusuf on the same team</p>
 							</div>
@@ -2855,10 +2911,15 @@
 						</div>
 					</div>
 
-					<div class="col-md-10 col-md-offset-1 animate-box reveal">
+					<div class="col-md-12 animate-box reveal">
 						<div class="recommendation-card">
 							<div class="recommendation-header">
-								<h3 class="recommendation-name">Girish Krishnan</h3>
+								<div class="recommendation-name-row">
+									<h3 class="recommendation-name">Girish Krishnan</h3>
+									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/girk/" target="_blank" rel="noopener noreferrer" aria-label="Girish Krishnan LinkedIn profile" title="View LinkedIn profile">
+										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+									</a>
+								</div>
 								<p class="recommendation-role">Software Engineer @ SpaceX | EE + Math-CS + Physics @ UCSD</p>
 								<p class="recommendation-meta">March 3, 2026 - Worked with Yusuf on projects and hackathons</p>
 							</div>
