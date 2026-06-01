@@ -534,6 +534,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "breakfast", "egyptian"]
   },
   {
+    slug: "bazooka-chicken-alexandria",
+    title: "Bazooka Chicken",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 5,
+    excerpt: "5 stars from me. Their cheeseburger wrap and fried chicken wrap are out of this world.",
+    image: null,
+    content: `
+      <p>Alexandria Governorate, Egypt</p>
+      <p>5 stars from me. Their cheeseburger wrap and fried chicken wrap are out of this world.</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "chicken", "wrap", "alexandria"]
+  },
+  {
     slug: "caribou-coffee-alexandria",
     title: "Caribou Coffee",
     region: "Egypt",
@@ -893,6 +911,38 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2024-10-01",
     tags: ["halal", "hotel", "desserts"]
+  },
+  {
+    slug: "genoise-alexandria",
+    title: "Genoise",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Alexandria Governorate, Egypt</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "desserts", "bakery", "alexandria"]
+  },
+  {
+    slug: "mr-baker-alexandria",
+    title: "Mr Baker",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Alexandria Governorate, Egypt</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "desserts", "bakery", "alexandria"]
   },
   {
     slug: "area-31-miami",
