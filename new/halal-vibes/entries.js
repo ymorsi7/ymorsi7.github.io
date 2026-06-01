@@ -69,6 +69,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "donuts", "bagels", "north park"]
   },
   {
+    slug: "urban-skillet-san-diego",
+    title: "Urban Skillet San Diego",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 6,
+    excerpt: "Mac and Cheese burrito is very tasty and filling. Great service and amazing location with good parking. All halal/zabiha. Food better than vibes — vibes moderate to average.",
+    image: "halal-vibes/imgs/urban.png",
+    content: `
+      <p>9254 Scranton Rd, San Diego, CA 92121</p>
+      <p>Went during the grand opening; was a big fan of their location in Santa Monica. Mac and Cheese burrito is very tasty and filling, though feels very unhealthy 😂. Great service and amazing location with good parking. Great that it's all halal/zabiha. Will definitely be back.</p>
+      <p><em>Food better than vibes tbh vibes are moderate to average</em></p>
+    `,
+    date: "2025-02-15",
+    tags: ["halal", "zabiha", "burrito"]
+  },
+  {
     slug: "courage-bagels-la",
     title: "Courage Bagels",
     region: "US",
@@ -107,6 +125,42 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "coffee", "study spot"]
   },
   {
+    slug: "ibs-santa-clara",
+    title: "IB's",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 5,
+    excerpt: "Best halal philly cheese steak I've ever had. Amazing sandwiches and good service. Can be oily and messy, no restroom, parking a bit tough. Atmosphere 2/5.",
+    image: "halal-vibes/imgs/IB.png",
+    content: `
+      <p>2261 The Alameda, Santa Clara, CA 95050</p>
+      <p>Amazing sandwiches and good service. Best halal philly cheese steak I've ever had. Unfortunately they can be oily and messy, and there is no restroom to wash hands. Parking is also a bit tough. Otherwise, great spot</p>
+      <p><strong>Price per person:</strong> $10–20 | Food: 5 | Service: 5 | Atmosphere: 2</p>
+    `,
+    date: "2025-02-01",
+    tags: ["halal", "philly", "sandwiches"]
+  },
+  {
+    slug: "halalstreet-xinjiang-mountain-view",
+    title: "HalalStreet Xinjiang Cuisine",
+    region: "US",
+    location: "Mountain View",
+    categories: ["food"],
+    foodScore: 5,
+    vibesScore: 5,
+    excerpt: "Wait for table despite empty tables, popular stuff sold out, lamb took ages, overpriced. 3 stars; would never go back.",
+    image: "halal-vibes/imgs/xin.png",
+    content: `
+      <p>174 Castro St, Mountain View, CA 94041</p>
+      <p>My friends and I went there and had to wait a while to get a table (although there were empty tables). All the popular stuff was sold out (e.g. kung pao), and they didn't have any of the more famous Chinese-American cuisine like sweet and spicy chicken. I ordered a lamb dish and it took absolute ages to arrive. To top it all off, the items were quite overpriced. Waitress was very good but when dealing with the guy that saw us waiting to be seated, we felt the service was unprofessional.</p>
+      <p>3 stars; would never go back</p>
+    `,
+    date: "2025-02-01",
+    tags: ["halal", "xinjiang", "chinese"]
+  },
+  {
     slug: "mr-toots-coffeehouse-capitola",
     title: "Mr Toots Coffeehouse",
     region: "US",
@@ -142,6 +196,23 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-02-01",
     tags: ["halal", "bakery", "breakfast"]
+  },
+  {
+    slug: "susiecakes-del-mar",
+    title: "SusieCakes - Del Mar",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 8,
+    excerpt: "Brilliant cakes. Recommend cranberry loaf, carrot cake, and probably anything else. Very good service and quality desserts. My go-to bakery in Del Mar. 8/10 vibe score.",
+    image: null,
+    content: `
+      <p>3705 Caminito Ct #0500, San Diego, CA 92130</p>
+      <p>Brilliant cakes. I recommend their cranberry loaf, carrot cake, and honestly probably anything else they have. Very good service and quality desserts. My go-to bakery in Del Mar. Food: 5 | Service: 5. 8/10 vibe score</p>
+    `,
+    date: "2024-11-01",
+    tags: ["halal", "bakery", "desserts"]
   },
   {
     slug: "alfursan-lounge-jeddah",
@@ -265,6 +336,23 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "istanbul"]
   },
   {
+    slug: "gad-alexandria",
+    title: "Gad",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["food"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "One of the greatest falafel spots in Alex. Recommend the egg/pastrami sandwich and pastrami-stuffed falafel sandwiches. Very tasty and filling.",
+    image: null,
+    content: `
+      <p>272 El-Gaish Road, Stanley Bridge, El Raml 2, Alexandria Governorate, Egypt</p>
+      <p>One of the greatest falafel spots in Alex. I recommend the egg/pastrami sandwich, and the pastrami-stuffed falafel sandwiches. Very tasty, and filling. Price per person: E£1–200. Meal type: Breakfast</p>
+    `,
+    date: "2024-12-01",
+    tags: ["halal", "falafel", "egyptian"]
+  },
+  {
     slug: "nos-regheef-alexandria",
     title: "Nos Regheef - Gleem Bay",
     region: "Egypt",
@@ -302,7 +390,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "coffee", "spanish latte"]
   },
   {
-    slug: "qahwa-cairo",
+    slug: "fikscue-thrive-city-sf",
+    title: "Fikscue Thrive City",
+    region: "US",
+    location: "San Francisco",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 8,
+    excerpt: "Brisket sandwich was amazing and decently priced. Great view and location. Parking may not be optimal. Good BBQ sauce. 8.5/10 vibe score.",
+    image: "halal-vibes/imgs/fiks.png",
+    images: ["halal-vibes/imgs/fiks.png", "halal-vibes/imgs/fix2.png"],
+    content: `
+      <p>7 Warriors Wy Suite 208, San Francisco, CA 94158</p>
+      <p>The brisket sandwich was amazing and decently priced. Great view and location, although parking may not be optimal. Good BBQ sauce, would def try again. 8.5/10 vibe score</p>
+    `,
+    date: "2024-12-01",
+    tags: ["halal", "bbq", "brisket"]
+  },
+  {
     title: "Qahwa",
     region: "Egypt",
     location: "Cairo, Egypt",
@@ -337,7 +442,6 @@ const HALAL_VIBES_ENTRIES = [
     date: "2024-12-01",
     tags: ["halal", "coffee", "breakfast"]
   },
-  /*
   {
     slug: "coasterra-san-diego",
     title: "Coasterra",
@@ -355,7 +459,6 @@ const HALAL_VIBES_ENTRIES = [
     date: "2024-12-01",
     tags: ["halal", "mexican", "waterfront"]
   },
-  */
   {
     slug: "jazwah-coffee-chicago",
     title: "JAZWAH COFFEE",
@@ -372,6 +475,75 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2024-11-01",
     tags: ["halal", "coffee", "bridgeview"]
+  },
+  {
+    slug: "mdakhan-chicago",
+    title: "M'dakhan (Mdakhan)",
+    region: "US",
+    location: "Chicago",
+    categories: ["food"],
+    foodScore: 10,
+    vibesScore: 6,
+    excerpt: "Best Middle Eastern restaurant I've ever had in the US. Amazing mixed grill platter and delectable brisket sandwich. Vibe score not that high but more of an amazing restaurant.",
+    image: "halal-vibes/imgs/mdakhan.png",
+    content: `
+      <p>9115 S Harlem Ave, Bridgeview, IL 60455</p>
+      <p>Best Middle Eastern restaurant I've ever had in the US. Amazing mixed grill platter and delectable brisket sandwich. Absolutely amazing. There was a short wait but it was absolutely worth it 100%. The banana milk was also pretty good. Food: 5 | Service: 5 | Atmosphere: 5. Wait time: 10-30 min</p>
+      <p><em>Vibe score not that high but more of an amazing restaurant.</em></p>
+    `,
+    date: "2024-11-01",
+    tags: ["halal", "middle eastern", "bridgeview"]
+  },
+  {
+    slug: "et-voila-san-diego",
+    title: "Et Voilà! French Bistro",
+    region: "US",
+    location: "San Diego",
+    categories: ["food"],
+    foodScore: 6,
+    vibesScore: 6,
+    excerpt: "Out of 6 menu pages one was food. 40 min wait for smallest portions. Parking abysmal. Do not recommend. Food was good but not worth price, wait, or parking.",
+    image: null,
+    content: `
+      <p>3015 Adams Ave, San Diego, CA 92116</p>
+      <p>Out of 6 menu pages (iirc) one was food. We waited about 40 minutes give or take for one of the smallest portion sizes I have ever seen in my life. Parking is abysmal. Do not recommend. Food was good but certainly not worth the price, wait, or even parking situation. Food: 3 | Service: 5 | Atmosphere: 4</p>
+    `,
+    date: "2024-11-01",
+    tags: ["french", "bistro"]
+  },
+  {
+    slug: "cafe-luna-san-diego",
+    title: "Cafe Luna",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 9,
+    excerpt: "Great food with great service. Manicotti #1 recommendation. Bread with sauce appetizer pretty good. Olive Garden has no business being in the same complex. 9/10 vibe score.",
+    image: null,
+    content: `
+      <p>11040 Rancho Carmel Dr #2, San Diego, CA 92128</p>
+      <p>Great food with great service. I loved the Manicotti, definitely #1 recommendation. Bread with sauce appetizer was also pretty good. I'm not usually big on Italian restaurants but honestly the Olive Garden has no business being in the same complex as this 😂. Food: 5 | Service: 5. 9/10 vibe score</p>
+    `,
+    date: "2024-11-01",
+    tags: ["halal", "italian"]
+  },
+  {
+    slug: "dukes-malibu",
+    title: "Duke's Malibu",
+    region: "US",
+    location: "Malibu",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 8,
+    excerpt: "Best calamari in California. Amazing view of the coast. Social distancing done right, no flies. 8.5/10 vibe score.",
+    image: null,
+    content: `
+      <p>21150 Pacific Coast Hwy, Malibu, CA 90265</p>
+      <p>Best calamari in California, in my opinion. Highly recommend it as an appetizer. Unlike the outdoor seating at other restaurants, this one implemented social distancing (in 2020), had no flies or anything, and an amazing view of the coast of Malibu. Food: 5 | Atmosphere: 5. 8.5/10 vibe score</p>
+    `,
+    date: "2024-11-01",
+    tags: ["halal", "seafood", "waterfront"]
   },
   {
     slug: "alexandria-sporting-club",
@@ -409,6 +581,57 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["gardens", "nature", "alexandria"]
   },
   {
+    slug: "chicken-gs-mountain-view",
+    title: "Chicken G's",
+    region: "US",
+    location: "Mountain View",
+    categories: ["food"],
+    foodScore: 9,
+    vibesScore: 3,
+    excerpt: "Best zinger you've ever tasted. Amazing Zinger, although oily and diet-destroyer. Love the pineapple juice. Unattractive shack, no restroom inside, have to go outside. They have a prayer room.",
+    image: null,
+    content: `
+      <p>1414 W El Camino Real, Mountain View, CA 94040</p>
+      <p>If you want the best zinger you've ever gifted your tongue with the opportunity of tasting, come to this place. Amazing Zinger, although oily and a diet-destroyer, I would say it's worth trying at least once. I love that they have a prayer room. The only downside to this place is that they don't have a restroom inside the restaurant, you have to go outside to use it. Also the place is a really unattractive shack. Nevertheless I go occasionally because of how darn good the zinger is. I also really recommend the pineapple juice (sublime). Food: 5</p>
+    `,
+    date: "2024-10-01",
+    tags: ["halal", "chicken", "zinger"]
+  },
+  {
+    slug: "zankou-chicken-valencia",
+    title: "Zankou Chicken Valencia",
+    region: "US",
+    location: "Santa Clarita",
+    categories: ["food"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Great halal food. Chicken tarna wrap quite delectable. Location convenient, wait not awful. Service 4 stars. Everything else great.",
+    image: null,
+    content: `
+      <p>24463 Magic Mountain Pkwy, Santa Clarita, CA 91355</p>
+      <p>Great halal food. Got the chicken tarna wrap, and it was quite delectable. Location was quite convenient, and the wait wasn't so awful. I give 4 stars for service bc they did finish it after when they said they would but other than that everything was great. Food: 5 | Service: 4 | Atmosphere: 4. Price: $10–20</p>
+    `,
+    date: "2024-10-01",
+    tags: ["halal", "chicken", "wrap"]
+  },
+  {
+    slug: "tesla-diner-la",
+    title: "Tesla Diner",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "V2G Egg sandwich brilliant. Really got the 50s Hollywood feel. Great view of Hollywood sign on second floor. Bread a bit tasteless. 8/10 vibe score.",
+    image: "halal-vibes/imgs/tesla.jpg",
+    content: `
+      <p>7001 Santa Monica Blvd, Los Angeles, CA 90038</p>
+      <p>Great experience- especially for tourists. Really got the 50s Hollywood feel. Got the V2G Egg sandwich and it was brilliant. Only thing was that the bread was a bit tasteless. Great view of Hollywood sign on the second floor. You will probably have to street park if you don't come with an electric car, but I was able to easily find parking on a Sunday ~10:30 AM. 8/10 vibe score</p>
+    `,
+    date: "2024-10-01",
+    tags: ["halal", "breakfast", "hollywood"]
+  },
+  {
     slug: "golden-gate-park-sf",
     title: "Golden Gate Park",
     region: "US",
@@ -427,7 +650,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "equator-coffees-sf",
-    title: "Equator Coffees",
+    title: "Equator Coffee",
     region: "US",
     location: "San Francisco",
     categories: ["coffee", "vibes"],
@@ -631,6 +854,22 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-02-01",
     tags: ["halal", "coffee", "yemeni"]
+  },
+  {
+    slug: "the-tiffin-truck-cambridge",
+    title: "The Tiffin Truck",
+    region: "UK",
+    location: "Cambridge",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "halal-vibes/imgs/tiffint.png",
+    content: `
+      <p>22 Regent St, Cambridge CB2 1DB, United Kingdom</p>
+    `,
+    date: "2025-02-01",
+    tags: ["halal", "indian", "street food"]
   },
   {
     slug: "sky-garden-london",
