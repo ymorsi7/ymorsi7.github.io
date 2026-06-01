@@ -135,148 +135,225 @@
 			margin: 0 auto;
 		}
 
-		/* Filter bar — NNG: prioritized, progressive disclosure, content-first */
-		.hv-filters {
+		/* Sticky nav: section tabs + city chips */
+		.hv-nav-sticky {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			background: rgba(250, 249, 247, 0.94);
+			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+			border-bottom: 1px solid rgba(45, 74, 62, 0.08);
+			margin: -1rem -2rem 2.5rem;
+			padding: 1.25rem 2rem 1.5rem;
+		}
+
+		.hv-section-tabs {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 6px;
+			background: white;
+			padding: 5px;
+			border-radius: 14px;
+			border: 1px solid rgba(45, 74, 62, 0.1);
+			box-shadow: var(--shadow-sm);
+			margin-bottom: 1.25rem;
+		}
+
+		.hv-section-tab {
 			display: flex;
-			flex-wrap: wrap;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			gap: 12px 20px;
-			margin-bottom: 2.5rem;
-			padding: 0 0.5rem;
-		}
-
-		.hv-filter-category {
-			display: flex;
-			align-items: center;
 			gap: 4px;
-			background: white;
-			padding: 4px;
-			border-radius: 10px;
-			border: 1px solid rgba(45, 74, 62, 0.1);
-			box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-		}
-
-		.hv-cat-btn {
-			padding: 6px 14px;
-			font-size: 0.875rem;
-			font-weight: 500;
+			padding: 12px 8px;
+			font-size: 0.8rem;
+			font-weight: 600;
 			color: var(--text-muted);
 			background: none;
 			border: none;
-			border-radius: 8px;
+			border-radius: 10px;
 			cursor: pointer;
-			transition: all 0.15s ease;
+			transition: all 0.2s ease;
+			text-align: center;
+			line-height: 1.25;
 		}
 
-		.hv-cat-btn:hover {
+		.hv-section-tab i {
+			font-size: 1.05rem;
+			opacity: 0.75;
+		}
+
+		.hv-section-tab:hover {
 			color: var(--primary-color);
 			background: var(--light-bg-2);
 		}
 
-		.hv-cat-btn.active {
+		.hv-section-tab.active {
 			background: var(--primary-dark);
 			color: white;
+			box-shadow: 0 4px 14px rgba(26, 47, 38, 0.25);
 		}
 
-		.hv-location-wrap {
-			position: relative;
+		.hv-section-tab.active i {
+			opacity: 1;
 		}
 
-		.hv-location-btn {
-			display: inline-flex;
+		.hv-section-tab:focus-visible {
+			outline: 2px solid var(--accent-warm);
+			outline-offset: 2px;
+		}
+
+		.hv-city-bar {
+			display: flex;
 			align-items: center;
-			gap: 6px;
-			padding: 6px 12px 6px 14px;
-			font-size: 0.875rem;
-			font-weight: 500;
-			color: var(--primary-color);
-			background: white;
-			border: 1px solid rgba(45, 74, 62, 0.1);
-			border-radius: 8px;
-			cursor: pointer;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-			transition: all 0.15s ease;
+			gap: 12px;
 		}
 
-		.hv-location-btn:hover {
-			border-color: rgba(45, 74, 62, 0.2);
-			background: var(--light-bg-2);
-		}
-
-		.hv-location-btn[aria-expanded="true"] {
-			border-color: var(--accent-warm);
-			background: rgba(193, 127, 89, 0.08);
-			color: var(--accent-warm-hover);
-		}
-
-		.hv-location-btn i {
-			font-size: 0.7rem;
-			opacity: 0.7;
-			transition: transform 0.2s;
-		}
-
-		.hv-location-btn[aria-expanded="true"] i {
-			transform: rotate(180deg);
-		}
-
-		.hv-location-panel {
-			position: absolute;
-			top: calc(100% + 6px);
-			left: 50%;
-			transform: translateX(-50%);
-			background: white;
-			border-radius: 10px;
-			box-shadow: var(--shadow-lg);
-			border: 1px solid rgba(0,0,0,0.06);
-			min-width: 200px;
-			max-height: 280px;
-			overflow-y: auto;
-			z-index: 100;
-			padding: 6px;
+		.hv-city-label {
+			font-size: 0.75rem;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+			color: var(--text-muted);
+			flex-shrink: 0;
 			display: none;
 		}
 
-		.hv-location-panel.open {
-			display: block;
+		.hv-city-scroll-wrap {
+			flex: 1;
+			min-width: 0;
+			position: relative;
 		}
 
-		.hv-location-option {
+		.hv-city-scroll-wrap::after {
+			content: '';
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			width: 32px;
+			background: linear-gradient(90deg, transparent, rgba(250, 249, 247, 0.95));
+			pointer-events: none;
+		}
+
+		.hv-city-scroll {
 			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			width: 100%;
-			padding: 10px 12px;
-			font-size: 0.875rem;
-			color: var(--primary-color);
-			background: none;
-			border: none;
-			border-radius: 6px;
-			cursor: pointer;
-			text-align: left;
-			transition: background 0.1s;
+			gap: 8px;
+			overflow-x: auto;
+			padding: 2px 24px 2px 2px;
+			scroll-snap-type: x proximity;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
 		}
 
-		.hv-location-option:hover {
+		.hv-city-scroll::-webkit-scrollbar {
+			display: none;
+		}
+
+		.hv-city-chip {
+			flex-shrink: 0;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 8px 16px;
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--primary-color);
+			background: white;
+			border: 1.5px solid rgba(45, 74, 62, 0.12);
+			border-radius: 999px;
+			cursor: pointer;
+			transition: all 0.15s ease;
+			scroll-snap-align: start;
+			white-space: nowrap;
+		}
+
+		.hv-city-chip:hover {
+			border-color: rgba(45, 74, 62, 0.25);
 			background: var(--light-bg-2);
 		}
 
-		.hv-location-option .count {
-			font-size: 0.8rem;
-			color: var(--text-muted);
+		.hv-city-chip.active {
+			background: var(--accent-warm);
+			border-color: var(--accent-warm);
+			color: white;
 		}
 
-		.hv-result-count {
-			font-size: 0.8125rem;
-			color: var(--text-muted);
-			margin-left: auto;
+		.hv-city-chip .chip-count {
+			font-size: 0.75rem;
+			font-weight: 600;
+			opacity: 0.65;
+			background: rgba(45, 74, 62, 0.08);
+			padding: 2px 7px;
+			border-radius: 999px;
 		}
 
-		.hv-cat-btn:focus-visible,
-		.hv-location-btn:focus-visible,
-		.hv-location-option:focus-visible {
+		.hv-city-chip.active .chip-count {
+			background: rgba(255, 255, 255, 0.25);
+			opacity: 1;
+		}
+
+		.hv-city-chip:focus-visible {
 			outline: 2px solid var(--accent-warm);
 			outline-offset: 2px;
+		}
+
+		.hv-results-header {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
+			padding-bottom: 0.75rem;
+			border-bottom: 1px solid rgba(45, 74, 62, 0.08);
+		}
+
+		.hv-results-header h2 {
+			font-size: 1.35rem;
+			margin: 0;
+			font-weight: 600;
+		}
+
+		.hv-results-header p {
+			margin: 0;
+			font-size: 0.9rem;
+			color: var(--text-muted);
+		}
+
+		.hv-city-group {
+			margin-bottom: 3rem;
+		}
+
+		.hv-city-group-header {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 1.25rem;
+			padding: 0.5rem 0;
+		}
+
+		.hv-city-group-header h3 {
+			font-size: 1.15rem;
+			margin: 0;
+			font-weight: 600;
+			color: var(--primary-dark);
+		}
+
+		.hv-city-group-header span {
+			font-size: 0.8rem;
+			font-weight: 600;
+			color: var(--text-muted);
+			background: var(--light-bg-2);
+			padding: 4px 10px;
+			border-radius: 999px;
+		}
+
+		.hv-city-group-header::after {
+			content: '';
+			flex: 1;
+			height: 1px;
+			background: rgba(45, 74, 62, 0.1);
 		}
 
 		/* Ad slots - larger for better monetization */
@@ -346,10 +423,9 @@
 		/* Entry cards - bigger, bolder */
 		.hv-entries-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-			gap: 32px;
-			margin-top: 4rem;
-			margin-bottom: 3rem;
+			grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+			gap: 24px;
+			margin-bottom: 0;
 		}
 
 		.hv-entry-card {
@@ -425,6 +501,34 @@
 			color: var(--primary-dark);
 			line-height: 1.3;
 			font-weight: 600;
+		}
+
+		.hv-entry-card .card-stars {
+			display: inline-flex;
+			align-items: center;
+			gap: 3px;
+			margin-bottom: 12px;
+			color: #d4a017;
+			font-size: 0.95rem;
+		}
+
+		.hv-entry-card .card-stars .star-empty {
+			color: rgba(45, 74, 62, 0.2);
+		}
+
+		.hv-entry-card .card-location {
+			font-size: 0.85rem;
+			font-weight: 500;
+			color: var(--accent-warm-hover);
+			margin-bottom: 6px;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+
+		.hv-entry-card .card-location i {
+			font-size: 0.75rem;
+			opacity: 0.7;
 		}
 
 		.hv-entry-card .card-tags {
@@ -696,6 +800,12 @@
 			font-size: 1.2rem;
 		}
 
+		@media (min-width: 900px) {
+			.hv-city-label {
+				display: block;
+			}
+		}
+
 		@media (max-width: 768px) {
 			#hv-header {
 				min-height: 28vh;
@@ -716,26 +826,38 @@
 				height: 40px;
 			}
 
-			.hv-filters {
-				margin-bottom: 2rem;
-				gap: 10px;
+			.hv-nav-sticky {
+				margin: -0.5rem -1.25rem 2rem;
+				padding: 1rem 1.25rem 1.25rem;
 			}
 
-			.hv-filter-category {
-				width: 100%;
-				justify-content: center;
-			}
-
-			.hv-location-wrap {
-				width: 100%;
+			.hv-section-tabs {
 				display: flex;
-				justify-content: center;
+				overflow-x: auto;
+				scrollbar-width: none;
+				gap: 4px;
 			}
 
-			.hv-result-count {
-				width: 100%;
-				text-align: center;
-				margin-left: 0;
+			.hv-section-tabs::-webkit-scrollbar {
+				display: none;
+			}
+
+			.hv-section-tab {
+				flex: 1 0 auto;
+				min-width: 140px;
+				flex-direction: column;
+				padding: 10px 12px;
+				font-size: 0.78rem;
+				gap: 4px;
+			}
+
+			.hv-city-label {
+				display: none;
+			}
+
+			.hv-results-header {
+				flex-direction: column;
+				gap: 0.25rem;
 			}
 
 			.hv-main {
@@ -771,8 +893,8 @@
 				<span>Yusuf Morsi</span>
 			</a>
 			<div class="header-content">
-				<h1>Halal Vibes Blog</h1>
-				<p>Halal spots for coffee, food & good vibes</p>
+				<h1>Halal Vibes</h1>
+				<p>Coffee, restaurants & spots worth the trip</p>
 			</div>
 		</header>
 
@@ -783,26 +905,39 @@
 			</div>
 			-->
 
-			<div class="hv-filters">
-				<div class="hv-filter-category" role="group" aria-label="Category">
-					<button type="button" class="hv-cat-btn active" data-category="all">All</button>
-					<button type="button" class="hv-cat-btn" data-category="coffee">Coffee</button>
-					<button type="button" class="hv-cat-btn" data-category="food">Food</button>
-					<button type="button" class="hv-cat-btn" data-category="vibes">Vibes</button>
-					<button type="button" class="hv-cat-btn" data-category="lounges">Lounges</button>
-				</div>
-				<div class="hv-location-wrap">
-					<button type="button" class="hv-location-btn" id="hv-location-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="hv-location-label">
-						<span id="hv-location-label">All cities</span>
-						<i class="fa-solid fa-chevron-down"></i>
+			<nav class="hv-nav-sticky" aria-label="Browse spots">
+				<div class="hv-section-tabs" role="tablist" aria-label="Section">
+					<button type="button" class="hv-section-tab active" role="tab" aria-selected="true" data-section="sips" id="tab-sips">
+						<i class="fa-solid fa-mug-hot"></i>
+						Sips & Spots
 					</button>
-					<div class="hv-location-panel" id="hv-location-panel" role="listbox" aria-label="Select city"></div>
+					<button type="button" class="hv-section-tab" role="tab" aria-selected="false" data-section="restaurants" id="tab-restaurants">
+						<i class="fa-solid fa-utensils"></i>
+						Halal Restaurants
+					</button>
+					<button type="button" class="hv-section-tab" role="tab" aria-selected="false" data-section="desserts" id="tab-desserts">
+						<i class="fa-solid fa-cookie-bite"></i>
+						Desserts
+					</button>
+					<button type="button" class="hv-section-tab" role="tab" aria-selected="false" data-section="lounges" id="tab-lounges">
+						<i class="fa-solid fa-plane-departure"></i>
+						Airport Lounges
+					</button>
 				</div>
-				<span class="hv-result-count" id="hv-result-count" aria-live="polite"></span>
+				<div class="hv-city-bar">
+					<span class="hv-city-label">City</span>
+					<div class="hv-city-scroll-wrap">
+						<div class="hv-city-scroll" id="hv-city-chips" role="group" aria-label="Filter by city"></div>
+					</div>
+				</div>
+			</nav>
+
+			<div class="hv-results-header" id="hv-results-header">
+				<h2 id="hv-results-title">Sips & Spots</h2>
+				<p id="hv-results-subtitle" aria-live="polite"></p>
 			</div>
 
-			<!-- Entry cards grid (populated by JS) -->
-			<div id="hv-entries-container" class="hv-entries-grid"></div>
+			<div id="hv-entries-container"></div>
 
 			<!-- Ad slot 2 - Mid content (rectangle)
 			<div class="hv-ad-slot" aria-hidden="true">
@@ -861,68 +996,124 @@
 	<script src="halal-vibes/entries.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			let locationFilter = 'all';
-			let categoryFilter = 'all';
+			const SECTION_META = {
+				sips: { title: 'Sips & Spots', subtitle: 'Coffee, bagels, parks & aesthetic spots' },
+				restaurants: { title: 'Halal Restaurants', subtitle: 'Sit-down halal dining' },
+				desserts: { title: 'Desserts', subtitle: 'Bakeries, donuts, pastries & sweet spots' },
+				lounges: { title: 'Airport Lounges', subtitle: 'Layovers done right' }
+			};
 
-			function getLocationCounts() {
+			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'San Jose', 'San Francisco'];
+
+			const DESSERT_TAG_HINTS = ['desserts', 'donuts', 'pastries', 'croissants', 'bakery'];
+
+			const SIPS_TAG_HINTS = [
+				'bagels', 'coffee', 'nature', 'gardens', 'park', 'venue', 'wedding',
+				'views', 'tourist', 'specialty', 'yemeni', 'spanish latte', 'vietnamese',
+				'study spot', 'south bay'
+			];
+
+			let sectionFilter = 'sips';
+			let cityFilter = 'all';
+
+			function normalizeCity(loc) {
+				return loc.replace(/,\s*(Egypt|United Kingdom|Saudi Arabia|Turkey)$/i, '').trim();
+			}
+
+			function compareCities(a, b) {
+				const pa = CITY_PRIORITY.indexOf(a);
+				const pb = CITY_PRIORITY.indexOf(b);
+				if (pa !== -1 && pb !== -1) return pa - pb;
+				if (pa !== -1) return -1;
+				if (pb !== -1) return 1;
+				return a.localeCompare(b);
+			}
+
+			function getEntrySection(entry) {
+				if (entry.categories.includes('lounges')) return 'lounges';
+				if (entry.tags.some(t => DESSERT_TAG_HINTS.includes(t))) return 'desserts';
+				if (/porto|donut|croissant|bakery/i.test(entry.title) && !/coffee house|coffee roaster/i.test(entry.title)) return 'desserts';
+				if (entry.categories.includes('coffee')) return 'sips';
+				if (entry.categories.length === 1 && entry.categories[0] === 'vibes') return 'sips';
+				if (entry.tags.some(t => SIPS_TAG_HINTS.includes(t))) return 'sips';
+				if (/coffee|bagel|park|garden|roaster|venue|perk|sky garden/i.test(entry.title)) return 'sips';
+				if (entry.categories.includes('food')) return 'restaurants';
+				return 'sips';
+			}
+
+			function renderStars(count) {
+				let html = '<div class="card-stars" aria-label="' + count + ' out of 5 stars">';
+				for (let i = 1; i <= 5; i++) {
+					html += i <= count
+						? '<i class="fa-solid fa-star"></i>'
+						: '<i class="fa-regular fa-star star-empty"></i>';
+				}
+				html += '</div>';
+				return html;
+			}
+
+			function getSectionEntries(section) {
+				return HALAL_VIBES_ENTRIES.filter(e => getEntrySection(e) === section);
+			}
+
+			function getCityCounts(entries) {
 				const counts = {};
-				HALAL_VIBES_ENTRIES.forEach(e => {
-					counts[e.location] = (counts[e.location] || 0) + 1;
+				entries.forEach(e => {
+					const city = normalizeCity(e.location);
+					counts[city] = (counts[city] || 0) + 1;
 				});
-				return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+				return Object.entries(counts).sort((a, b) => compareCities(a[0], b[0]));
 			}
 
-			function renderLocationPanel() {
-				const panel = document.getElementById('hv-location-panel');
-				panel.innerHTML = '';
-				const all = document.createElement('button');
-				all.type = 'button';
-				all.className = 'hv-location-option';
-				all.role = 'option';
-				all.innerHTML = `All cities <span class="count">${HALAL_VIBES_ENTRIES.length}</span>`;
-				all.addEventListener('click', () => { locationFilter = 'all'; updateLocationLabel(); closeLocationPanel(); renderCards(); });
-				panel.appendChild(all);
-				getLocationCounts().forEach(([loc, count]) => {
-					const btn = document.createElement('button');
-					btn.type = 'button';
-					btn.className = 'hv-location-option';
-					btn.role = 'option';
-					btn.innerHTML = `${loc} <span class="count">${count}</span>`;
-					btn.addEventListener('click', () => { locationFilter = loc; updateLocationLabel(); closeLocationPanel(); renderCards(); });
-					panel.appendChild(btn);
-				});
+			function matchesFilters(entry) {
+				if (getEntrySection(entry) !== sectionFilter) return false;
+				if (cityFilter === 'all') return true;
+				return normalizeCity(entry.location) === cityFilter;
 			}
 
-			function updateLocationLabel() {
-				const label = document.getElementById('hv-location-label');
-				label.textContent = locationFilter === 'all' ? 'All cities' : locationFilter;
-			}
+			function renderCityChips() {
+				const container = document.getElementById('hv-city-chips');
+				const sectionEntries = getSectionEntries(sectionFilter);
+				const cities = getCityCounts(sectionEntries);
+				container.innerHTML = '';
 
-			function closeLocationPanel() {
-				document.getElementById('hv-location-panel').classList.remove('open');
-				document.getElementById('hv-location-btn').setAttribute('aria-expanded', 'false');
-			}
-
-			document.querySelectorAll('.hv-cat-btn').forEach(btn => {
-				btn.addEventListener('click', () => {
-					categoryFilter = btn.dataset.category;
-					document.querySelectorAll('.hv-cat-btn').forEach(b => b.classList.remove('active'));
-					btn.classList.add('active');
+				const allChip = document.createElement('button');
+				allChip.type = 'button';
+				allChip.className = 'hv-city-chip' + (cityFilter === 'all' ? ' active' : '');
+				allChip.innerHTML = `All cities <span class="chip-count">${sectionEntries.length}</span>`;
+				allChip.addEventListener('click', () => {
+					cityFilter = 'all';
+					renderCityChips();
 					renderCards();
 				});
-			});
+				container.appendChild(allChip);
 
-			const locBtn = document.getElementById('hv-location-btn');
-			const locPanel = document.getElementById('hv-location-panel');
-			locBtn.addEventListener('click', (e) => {
-				e.stopPropagation();
-				locPanel.classList.toggle('open');
-				locBtn.setAttribute('aria-expanded', locPanel.classList.contains('open'));
-			});
-			document.addEventListener('click', () => closeLocationPanel());
-			locPanel.addEventListener('click', e => e.stopPropagation());
+				cities.forEach(([city, count]) => {
+					const chip = document.createElement('button');
+					chip.type = 'button';
+					chip.className = 'hv-city-chip' + (cityFilter === city ? ' active' : '');
+					chip.innerHTML = `${city} <span class="chip-count">${count}</span>`;
+					chip.addEventListener('click', () => {
+						cityFilter = city;
+						renderCityChips();
+						renderCards();
+					});
+					container.appendChild(chip);
+				});
+			}
 
-			renderLocationPanel();
+			function updateResultsHeader(count) {
+				const meta = SECTION_META[sectionFilter];
+				document.getElementById('hv-results-title').textContent = meta.title;
+				const subtitle = document.getElementById('hv-results-subtitle');
+				if (count === 0) {
+					subtitle.textContent = 'No spots in this section yet.';
+				} else if (cityFilter === 'all') {
+					subtitle.textContent = `${count} spot${count === 1 ? '' : 's'} · grouped by city`;
+				} else {
+					subtitle.textContent = `${count} spot${count === 1 ? '' : 's'} in ${cityFilter}`;
+				}
+			}
 
 			const hvImageObserver = (function() {
 				const obs = new IntersectionObserver((entries) => {
@@ -945,10 +1136,43 @@
 				};
 			})();
 
-			function matchesFilters(entry) {
-				const locMatch = locationFilter === 'all' || entry.location === locationFilter;
-				const catMatch = categoryFilter === 'all' || entry.categories.includes(categoryFilter);
-				return locMatch && catMatch;
+			function buildCard(entry) {
+				const card = document.createElement('article');
+				card.className = 'hv-entry-card';
+				card.dataset.slug = entry.slug;
+
+				const imgSrc = entry.image ? (entry.image.startsWith('http') ? entry.image : './' + entry.image) : '';
+				const imgSection = entry.image ? `
+					<div class="card-image-wrap">
+						<img class="card-image" data-src="${imgSrc}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${entry.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+					</div>` : '';
+
+				const scoresHtml = entry.stars != null ? renderStars(entry.stars) : [
+					entry.foodScore != null ? `<span class="card-score"><strong>Food ${entry.foodScore}/10</strong></span>` : '',
+					entry.vibesScore != null ? `<span class="card-score"><strong>Vibes ${entry.vibesScore}/10</strong></span>` : ''
+				].filter(Boolean).join('');
+
+				const scoresWrap = entry.stars != null
+					? scoresHtml
+					: (scoresHtml ? `<div class="card-scores">${scoresHtml}</div>` : '');
+
+				card.innerHTML = `
+					${imgSection}
+					<div class="card-body">
+						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
+						<h3 class="card-title">${entry.title}</h3>
+						${scoresWrap}
+						${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
+						<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
+					</div>
+				`;
+
+				card.addEventListener('click', function(e) {
+					e.preventDefault();
+					openModal(entry.slug);
+				});
+
+				return card;
 			}
 
 			function renderCards() {
@@ -956,57 +1180,80 @@
 				container.innerHTML = '';
 				const filtered = HALAL_VIBES_ENTRIES.filter(matchesFilters);
 
-				filtered.forEach((entry, idx) => {
-					const card = document.createElement('article');
-					card.className = 'hv-entry-card';
-					card.dataset.slug = entry.slug;
-					card.dataset.location = entry.location;
-					entry.categories.forEach(c => card.dataset.category = (card.dataset.category || '') + ' ' + c);
-
-					const imgSrc = entry.image ? (entry.image.startsWith('http') ? entry.image : './' + entry.image) : '';
-					const imgSection = entry.image ? `
-						<div class="card-image-wrap">
-							<img class="card-image" data-src="${imgSrc}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${entry.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
-						</div>` : '';
-					const scoresHtml = [
-						entry.foodScore != null ? `<span class="card-score"><strong>Food ${entry.foodScore}/10</strong></span>` : '',
-						entry.vibesScore != null ? `<span class="card-score"><strong>Vibes ${entry.vibesScore}/10</strong></span>` : ''
-					].filter(Boolean).join('');
-
-					card.innerHTML = `
-						${imgSection}
-						<div class="card-body">
-							<h3 class="card-title">${entry.title}</h3>
-							<div class="card-tags">
-								<span class="card-tag">${entry.location}</span>
-								${entry.categories.map(c => `<span class="card-tag">${c.charAt(0).toUpperCase() + c.slice(1)}</span>`).join('')}
-							</div>
-							${scoresHtml ? `<div class="card-scores">${scoresHtml}</div>` : ''}
-							${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
-							<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
-						</div>
-					`;
-
-					card.addEventListener('click', function(e) {
-						e.preventDefault();
-						openModal(entry.slug);
-					});
-
-					container.appendChild(card);
-				});
-
-				// Lazy-load images when near viewport (like photography page)
-				hvImageObserver.observeAll(container);
-
-				const countEl = document.getElementById('hv-result-count');
-				if (countEl) {
-					countEl.textContent = filtered.length === 0 ? '' : `${filtered.length} spot${filtered.length === 1 ? '' : 's'}`;
-				}
+				updateResultsHeader(filtered.length);
 
 				if (filtered.length === 0) {
-					container.innerHTML = '<p class="hv-empty-state">No spots match. Try a different city or category.</p>';
+					container.innerHTML = '<p class="hv-empty-state">No spots here yet. Try another city or section.</p>';
+					return;
+				}
+
+				if (cityFilter === 'all') {
+					const grouped = {};
+					filtered.forEach(entry => {
+						const city = normalizeCity(entry.location);
+						if (!grouped[city]) grouped[city] = [];
+						grouped[city].push(entry);
+					});
+
+					const sortedCities = Object.keys(grouped).sort(compareCities);
+
+					sortedCities.forEach(city => {
+						const group = document.createElement('section');
+						group.className = 'hv-city-group';
+
+						const header = document.createElement('div');
+						header.className = 'hv-city-group-header';
+						header.innerHTML = `<h3>${city}</h3><span>${grouped[city].length} spot${grouped[city].length === 1 ? '' : 's'}</span>`;
+						group.appendChild(header);
+
+						const grid = document.createElement('div');
+						grid.className = 'hv-entries-grid';
+						grouped[city].forEach(entry => grid.appendChild(buildCard(entry)));
+						group.appendChild(grid);
+
+						container.appendChild(group);
+					});
+				} else {
+					const grid = document.createElement('div');
+					grid.className = 'hv-entries-grid';
+					filtered.forEach(entry => grid.appendChild(buildCard(entry)));
+					container.appendChild(grid);
+				}
+
+				hvImageObserver.observeAll(container);
+			}
+
+			function setSection(section) {
+				sectionFilter = section;
+				cityFilter = 'all';
+				document.querySelectorAll('.hv-section-tab').forEach(tab => {
+					const active = tab.dataset.section === section;
+					tab.classList.toggle('active', active);
+					tab.setAttribute('aria-selected', active ? 'true' : 'false');
+				});
+				renderCityChips();
+				renderCards();
+				if (history.replaceState) {
+					history.replaceState(null, '', '?section=' + section);
 				}
 			}
+
+			document.querySelectorAll('.hv-section-tab').forEach(tab => {
+				tab.addEventListener('click', () => setSection(tab.dataset.section));
+			});
+
+			const urlSection = new URLSearchParams(window.location.search).get('section');
+			if (urlSection && SECTION_META[urlSection]) {
+				sectionFilter = urlSection;
+				document.querySelectorAll('.hv-section-tab').forEach(tab => {
+					const active = tab.dataset.section === urlSection;
+					tab.classList.toggle('active', active);
+					tab.setAttribute('aria-selected', active ? 'true' : 'false');
+				});
+			}
+
+			renderCityChips();
+			renderCards();
 
 			function openModal(slug) {
 				const entry = HALAL_VIBES_ENTRIES.find(e => e.slug === slug);
@@ -1015,9 +1262,10 @@
 				content.innerHTML = `
 					<h2 id="hv-modal-title">${entry.title}</h2>
 					<div class="card-tags" style="margin-bottom: 1rem;">
-						<span class="card-tag">${entry.location}</span>
-						${entry.categories.map(c => `<span class="card-tag">${c.charAt(0).toUpperCase() + c.slice(1)}</span>`).join('')}
+						<span class="card-tag">${normalizeCity(entry.location)}</span>
+						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
+					${entry.stars != null ? renderStars(entry.stars) : ''}
 					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}
 					${entry.vibesScore != null ? `<p><strong>Vibes:</strong> ${entry.vibesScore}/10</p>` : ''}
 					<div class="hv-modal-body">${entry.content}</div>
@@ -1036,23 +1284,19 @@
 				if (e.target === this) closeModal();
 			});
 			document.addEventListener('keydown', function(e) {
-				if (e.key === 'Escape') {
-					if (locPanel.classList.contains('open')) closeLocationPanel();
-					else closeModal();
-				}
+				if (e.key === 'Escape') closeModal();
 			});
 
-			renderCards();
-
-			// Hash support for direct entry links
 			if (window.location.hash) {
 				const slug = window.location.hash.slice(1);
 				if (HALAL_VIBES_ENTRIES.some(e => e.slug === slug)) {
+					const entry = HALAL_VIBES_ENTRIES.find(e => e.slug === slug);
+					const entrySection = getEntrySection(entry);
+					if (entrySection !== sectionFilter) setSection(entrySection);
 					setTimeout(() => openModal(slug), 100);
 				}
 			}
 
-			// Go to top button
 			const gotop = document.querySelector('.gototop');
 			window.addEventListener('scroll', function() {
 				gotop.classList.toggle('active', window.scrollY > 400);
