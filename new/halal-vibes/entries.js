@@ -5,7 +5,7 @@
  * and edit the fields. No HTML editing needed.
  *
  * Region: US | Egypt | UK | Saudi Arabia | Turkey
- * Location: city/area — auto-appears in city dropdown
+ * Location: city/area,  auto-appears in city dropdown
  * Categories: coffee | food | vibes | lounges
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
@@ -56,7 +56,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["food", "vibes"],
     foodScore: 9,
     vibesScore: 8,
-    excerpt: "Amazing bagels and great donuts. Everything bagel with salmon, avocado and egg — impressed. Maple donut thoroughly enjoyed. Parking surprisingly good for North Park.",
+    excerpt: "Amazing bagels and great donuts. Everything bagel with salmon, avocado and egg,  impressed. Maple donut thoroughly enjoyed. Parking surprisingly good for North Park.",
     image: "halal-vibes/imgs/nomads2.jpg",
     images: ["halal-vibes/imgs/nomads2.jpg", "halal-vibes/imgs/nomad.jpg"],
     content: `
@@ -69,6 +69,71 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "donuts", "bagels", "north park"]
   },
   {
+    slug: "il-giardino-di-lilli-san-diego",
+    title: "Il Giardino di Lilli",
+    region: "US",
+    location: "San Diego",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>San Diego, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "san diego"]
+  },
+  {
+    slug: "golden-bagel-san-diego",
+    title: "Golden Bagel",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>San Diego, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "bagels", "san diego"]
+  },
+  {
+    slug: "copa-vida-torrey-ridge-san-diego",
+    title: "Copa Vida Torrey Ridge",
+    region: "US",
+    location: "San Diego",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>10578 Science Center Dr, San Diego, CA 92121</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "torrey ridge", "san diego"]
+  },
+  {
+    slug: "parakeet-cafe-la-jolla",
+    title: "Parakeet Cafe",
+    region: "US",
+    location: "San Diego",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "La Jolla. Only good to go in the morning.",
+    image: null,
+    content: `
+      <p>La Jolla, San Diego, CA</p>
+      <p>Only good to go in the morning.</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "la jolla", "san diego"]
+  },
+  {
     slug: "urban-skillet-san-diego",
     title: "Urban Skillet San Diego",
     region: "US",
@@ -76,7 +141,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["food", "vibes"],
     foodScore: 9,
     vibesScore: 6,
-    excerpt: "Mac and Cheese burrito is very tasty and filling. Great service and amazing location with good parking. All halal/zabiha. Food better than vibes — vibes moderate to average.",
+    excerpt: "Mac and Cheese burrito is very tasty and filling. Great service and amazing location with good parking. All halal/zabiha. Food better than vibes, vibes moderate to average.",
     image: "halal-vibes/imgs/urban.png",
     content: `
       <p>9254 Scranton Rd, San Diego, CA 92121</p>
@@ -87,14 +152,95 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "zabiha", "burrito"]
   },
   {
-    slug: "courage-bagels-la",
+    slug: "fidels-little-mexico-solana-beach",
+    title: "Fidel's Little Mexico",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Solana Beach. Only the seafood is halal,  not the full menu.",
+    image: null,
+    content: `
+      <p>Solana Beach, San Diego, CA</p>
+      <p><strong>Note:</strong> Only the seafood is halal.</p>
+    `,
+    date: "2025-05-31",
+    tags: ["seafood", "mexican", "solana beach"]
+  },
+  {
+    slug: "pacific-coast-grill-san-diego",
+    title: "Pacific Coast Grill",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Only the seafood is halal, not the full menu.",
+    image: null,
+    content: `
+      <p>San Diego, CA</p>
+      <p><strong>Note:</strong> Only the seafood is halal.</p>
+    `,
+    date: "2025-05-31",
+    tags: ["seafood", "san diego"]
+  },
+  {
+    slug: "mal-al-sham-san-diego",
+    title: "Mal al Sham",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>San Diego, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "middle eastern", "san diego"]
+  },
+  {
+    slug: "kunduz-kabob-san-diego",
+    title: "Kunduz Kabob",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>San Diego, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "kabob", "san diego"]
+  },
+  {
+    slug: "urban-skillet-santa-monica",
+    title: "Urban Skillet Santa Monica",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Santa Monica, Los Angeles, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "zabiha", "burrito", "santa monica"]
+  },
+  {
     title: "Courage Bagels",
     region: "US",
     location: "Los Angeles",
     categories: ["food", "vibes"],
     foodScore: 8,
     vibesScore: 7,
-    excerpt: "Salmon bagel on everything bread — quite delicious. Seating not plentiful, line to stand in, no parking, quite pricey. Vibes slightly above average. Good for showing tourists around LA.",
+    excerpt: "Salmon bagel on everything bread,  quite delicious. Seating not plentiful, line to stand in, no parking, quite pricey. Vibes slightly above average. Good for showing tourists around LA.",
     image: "halal-vibes/imgs/fefef.jpg",
     images: ["halal-vibes/imgs/fefef.jpg", "halal-vibes/imgs/faaedf.jpg", "halal-vibes/imgs/fefe.jpg", "halal-vibes/imgs/kaefn.jpg", "halal-vibes/imgs/ljnlj.jpg", "halal-vibes/imgs/vadfda.jpg"],
     content: `
@@ -215,6 +361,22 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "bakery", "desserts"]
   },
   {
+    slug: "batch-and-box-la-jolla",
+    title: "Batch & Box,  La Jolla",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>La Jolla, San Diego, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "desserts", "la jolla"]
+  },
+  {
     slug: "alfursan-lounge-jeddah",
     title: "Alfursan Lounge - Jeddah Airport",
     region: "Saudi Arabia",
@@ -252,7 +414,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "cac-lounge-cairo-terminal-3",
-    title: "CAC Lounge (E Lounge) — Terminal 3",
+    title: "CAC Lounge (E Lounge),  Terminal 3",
     region: "Egypt",
     location: "Cairo, Egypt",
     categories: ["lounges"],
@@ -390,6 +552,22 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "coffee", "spanish latte"]
   },
   {
+    slug: "mikel-coffee-company-alexandria",
+    title: "Mikel Coffee Company",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>88 El-Horeya Rd, Bab Sharqi WA Wabour Al Meyah, Bab Shar', Alexandria Governorate 5423002, Egypt</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "bab shar"]
+  },
+  {
     slug: "fikscue-thrive-city-sf",
     title: "Fikscue Thrive City",
     region: "US",
@@ -414,7 +592,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["coffee", "vibes"],
     foodScore: 5,
     vibesScore: 9,
-    excerpt: "Vibes of the place 9/10 but service was terrible — took forever, not that busy. Parking horrendous. Many heaters broken.",
+    excerpt: "Vibes of the place 9/10 but service was terrible,  took forever, not that busy. Parking horrendous. Many heaters broken.",
     image: null,
     content: `
       <p>New Cairo 1, Cairo Governorate, Egypt</p>
@@ -450,7 +628,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["food", "vibes"],
     foodScore: 9,
     vibesScore: 9,
-    excerpt: "Amazing enchiladas. Sublime view. Very good service. Valet parking ($10) — worth it, especially with Chase Sapphire dining credit. 9/10 vibe score.",
+    excerpt: "Amazing enchiladas. Sublime view. Very good service. Valet parking ($10),  worth it, especially with Chase Sapphire dining credit. 9/10 vibe score.",
     image: "halal-vibes/imgs/coasterra.png",
     content: `
       <p>880 B Harbor Island Dr, San Diego, CA 92101</p>
@@ -494,6 +672,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2024-11-01",
     tags: ["halal", "middle eastern", "bridgeview"]
   },
+  /*
   {
     slug: "et-voila-san-diego",
     title: "Et Voilà! French Bistro",
@@ -511,6 +690,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2024-11-01",
     tags: ["french", "bistro"]
   },
+  */
   {
     slug: "cafe-luna-san-diego",
     title: "Cafe Luna",
@@ -632,6 +812,38 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "breakfast", "hollywood"]
   },
   {
+    slug: "hh-brazilian-steakhouse-beverlywood",
+    title: "H&H Brazilian Steakhouse",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Beverlywood, Los Angeles, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "steakhouse", "brazilian", "beverlywood"]
+  },
+  {
+    slug: "sincerly-syria-hollywood",
+    title: "Sincerly Syria",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Hollywood, Los Angeles, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "syrian", "hollywood"]
+  },
+  {
     slug: "golden-gate-park-sf",
     title: "Golden Gate Park",
     region: "US",
@@ -639,7 +851,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["vibes"],
     foodScore: null,
     vibesScore: 9,
-    excerpt: "Perfect weekend morning — bike around from 7AM. Not too hard to find free street parking, amazing views and vibes. GG Park larger than Central Park. 9.5/10 vibe score.",
+    excerpt: "Perfect weekend morning,  bike around from 7AM. Not too hard to find free street parking, amazing views and vibes. GG Park larger than Central Park. 9.5/10 vibe score.",
     image: "halal-vibes/imgs/goldengate.jpg",
     content: `
       <p>San Francisco, CA</p>
@@ -690,7 +902,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["food", "vibes"],
     foodScore: 9,
     vibesScore: 10,
-    excerpt: "Great first-time Miami spot. Eggs benedict expensive but delectable. Main reason was the view — was not disappointed. Parking not easy. 10/10 vibe score.",
+    excerpt: "Great first-time Miami spot. Eggs benedict expensive but delectable. Main reason was the view,  was not disappointed. Parking not easy. 10/10 vibe score.",
     image: null,
     content: `
       <p>270 Biscayne Blvd Way, Miami, FL 33131</p>
@@ -751,8 +963,8 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "coffee", "friends themed"]
   },
   {
-    slug: "property-royal-coffee-alexandria",
-    title: "Property Royal Coffee",
+    slug: "propery-coffee-alexandria",
+    title: "Propery Coffee",
     region: "Egypt",
     location: "Alexandria, Egypt",
     categories: ["coffee", "vibes"],
@@ -898,7 +1110,7 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["food", "vibes"],
     foodScore: null,
     vibesScore: null,
-    excerpt: "Great place, good location, and amazing idea. Especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but really enjoyed it — clever concept.",
+    excerpt: "Great place, good location, and amazing idea. Especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but really enjoyed it,  clever concept.",
     image: null,
     content: `
       <p>New Cairo, Cairo Governorate, Egypt</p>
@@ -975,7 +1187,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "layla-bagels-santa-monica",
     title: "Layla Bagels",
     region: "US",
-    location: "Santa Monica",
+    location: "Los Angeles",
     categories: ["food", "vibes"],
     foodScore: null,
     vibesScore: null,
@@ -986,6 +1198,22 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-05-31",
     tags: ["halal", "bagels", "santa monica"]
+  },
+  {
+    slug: "jyan-isaac-bread-santa-monica",
+    title: "Jyan Isaac Bread",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: null,
+    content: `
+      <p>Santa Monica, Los Angeles, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "bagels", "bread", "santa monica"]
   },
   {
     slug: "groundwork-coffee-venice",
@@ -1005,7 +1233,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "ceremony-coffee-roasters-baltimore",
-    title: "Ceremony Coffee Roasters — Harbor Point",
+    title: "Ceremony Coffee Roasters,  Harbor Point",
     region: "US",
     location: "Baltimore",
     categories: ["coffee", "vibes"],

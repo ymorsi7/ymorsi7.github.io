@@ -1,5 +1,5 @@
 /**
- * Courses you took (transcripts) — titles as on your academic history.
+ * Courses you took (transcripts),  titles as on your academic history.
  * Merged with catalog-courses.js (ECE + CSE) and dsc-catalog.js (DSC) by id; transcript wins on duplicates.
  */
 const TRANSCRIPT_COURSES = [

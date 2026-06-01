@@ -17,7 +17,7 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-	<link rel="icon" type="image/x-icon" href="images/smiling.png">
+	<link rel="icon" type="image/png" href="images/Coffee_Transparent_PNG_Clip_Art_Image.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -901,7 +901,7 @@
 		<div class="hv-main">
 			<!-- Ad slot 1 - Above the fold (leaderboard)
 			<div class="hv-ad-slot leaderboard" aria-hidden="true">
-				Ad space — 728×90 or 970×250
+				Ad space,  728×90 or 970×250
 			</div>
 			-->
 
@@ -941,7 +941,7 @@
 
 			<!-- Ad slot 2 - Mid content (rectangle)
 			<div class="hv-ad-slot" aria-hidden="true">
-				Ad space — 300×250 or 336×280
+				Ad space,  300×250 or 336×280
 			</div>
 			-->
 
@@ -1008,7 +1008,7 @@
 			const DESSERT_TAG_HINTS = ['desserts', 'donuts', 'pastries', 'croissants', 'bakery'];
 
 			const SIPS_TAG_HINTS = [
-				'bagels', 'coffee', 'nature', 'gardens', 'park', 'venue', 'wedding',
+				'bagels', 'bread', 'coffee', 'nature', 'gardens', 'park', 'venue', 'wedding',
 				'views', 'tourist', 'specialty', 'yemeni', 'spanish latte', 'vietnamese',
 				'study spot', 'south bay'
 			];
@@ -1031,12 +1031,12 @@
 
 			function getEntrySection(entry) {
 				if (entry.categories.includes('lounges')) return 'lounges';
-				if (entry.tags.some(t => DESSERT_TAG_HINTS.includes(t))) return 'desserts';
-				if (/porto|donut|croissant|bakery/i.test(entry.title) && !/coffee house|coffee roaster/i.test(entry.title)) return 'desserts';
 				if (entry.categories.includes('coffee')) return 'sips';
 				if (entry.categories.length === 1 && entry.categories[0] === 'vibes') return 'sips';
 				if (entry.tags.some(t => SIPS_TAG_HINTS.includes(t))) return 'sips';
-				if (/coffee|bagel|park|garden|roaster|venue|perk|sky garden/i.test(entry.title)) return 'sips';
+				if (/coffee|bagel|park|garden|giardino|roaster|venue|perk|sky garden/i.test(entry.title)) return 'sips';
+				if (entry.tags.some(t => DESSERT_TAG_HINTS.includes(t))) return 'desserts';
+				if (/porto|donut|croissant|bakery/i.test(entry.title) && !/coffee house|coffee roaster/i.test(entry.title)) return 'desserts';
 				if (entry.categories.includes('food')) return 'restaurants';
 				return 'sips';
 			}
