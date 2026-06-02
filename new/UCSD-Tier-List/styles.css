@@ -200,15 +200,9 @@ body {
 }
 
 .tier-board-tiers {
-  position: sticky;
-  top: 0;
-  z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding: 0.35rem 0 0.5rem;
-  background: linear-gradient(180deg, var(--bg) 70%, transparent);
-  backdrop-filter: blur(6px);
 }
 
 .tier-row {
@@ -388,6 +382,8 @@ body {
   padding: 0.3rem 0.55rem;
   cursor: pointer;
   font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .dept-enabled-chip-main--active {
@@ -465,6 +461,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .add-dept-option:hover,
@@ -495,6 +493,8 @@ body {
   font-weight: 600;
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   cursor: pointer;
   font-family: inherit;
 }
@@ -580,6 +580,8 @@ body {
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   cursor: pointer;
 }
 
@@ -840,6 +842,8 @@ body {
   border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .dept-check:hover {

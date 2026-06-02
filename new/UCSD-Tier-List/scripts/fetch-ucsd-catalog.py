@@ -71,9 +71,9 @@ def parse_courses_from_body(body: str, dept_code: str) -> list[dict]:
 def parse_dept_page(html: str, slug: str) -> tuple[str, str, list[dict]]:
     title_m = TITLE_RE.search(html)
     if title_m:
-        name, code = title_m.group(1).strip(), title_m.group(2).upper()
+        name, code = title_m.group(1).strip().upper(), title_m.group(2).upper()
     else:
-        name, code = slug.replace("-", " ").title(), slug.upper()
+        name, code = slug.replace("-", " ").upper(), slug.upper()
 
     if "## Courses" in html:
         body = html.split("## Courses", 1)[1]
@@ -110,15 +110,16 @@ def parse_index(html: str) -> list[dict]:
         if slug in seen:
             continue
         seen.add(slug)
-        name = slug.replace("-", " ").title()
+        name = slug.replace("-", " ").upper()
         start = max(0, m.start() - 400)
         chunk = html[start : m.start()]
         nm = NAME_BEFORE_LINK.search(chunk + "<span class=\"courseFacLink\">[ courses")
         if nm:
             name = strip_html(nm.group(1))
+        name = name.upper()
         depts.append(
             {
-                "slug": slug,
+                "slug": slug.upper(),
                 "name": name,
                 "url": f"https://catalog.ucsd.edu/courses/{slug}.html",
             }
@@ -129,7 +130,13 @@ def parse_index(html: str) -> list[dict]:
             if slug in seen:
                 continue
             seen.add(slug)
-            depts.append({"slug": slug, "url": f"https://catalog.ucsd.edu/courses/{slug}.html"})
+            depts.append(
+                {
+                    "slug": slug.upper(),
+                    "name": slug.upper(),
+                    "url": f"https://catalog.ucsd.edu/courses/{slug}.html",
+                }
+            )
     return sorted(depts, key=lambda d: d["slug"].lower())
 
 
@@ -141,8 +148,11 @@ def parse_local_file(path: Path) -> tuple[str, str, list[dict]]:
 
 def emit_js(index: list[dict], by_dept: dict[str, list[dict]]) -> None:
     for entry in index:
-        code = entry.get("code") or entry["slug"].upper()
+        code = (entry.get("code") or entry["slug"]).upper()
         entry["code"] = code
+        entry["slug"] = entry.get("slug", code).upper()
+        if entry.get("name"):
+            entry["name"] = entry["name"].upper()
         entry["courseCount"] = len(by_dept.get(code, []))
 
     index_path = ROOT / "catalog-index.js"

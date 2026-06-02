@@ -47,6 +47,30 @@ const TRANSCRIPT_COURSES = [
   },
 ];
 
+/** @param {string} name @param {Record<string, string | number | boolean>} [params] */
+function track(name, params) {
+  if (typeof window.trackEvent === "function") window.trackEvent(name, params);
+}
+
+/** @param {string} code */
+function deptCodeUpper(code) {
+  return String(code || "").toUpperCase();
+}
+
+/** @param {string} [text] */
+function deptTextUpper(text) {
+  return String(text || "").toUpperCase();
+}
+
+/** @param {string} code @param {string} [name] @param {number | string | null | undefined} [count] */
+function formatDeptListLabel(code, name, count) {
+  const c = deptCodeUpper(code);
+  const cnt = count !== undefined && count !== null && count !== "" ? count : "?";
+  const n = deptTextUpper(name || c);
+  if (n === c) return `${c} (${cnt})`;
+  return `${c} — ${n} (${cnt})`;
+}
+
 const ZONES = ["unranked", "S", "A", "B", "C", "D", "F"];
 const TIER_ZONES = ["S", "A", "B", "C", "D", "F"];
 const STORAGE_KEY = "ucsd-tier-list-v2";
@@ -214,11 +238,11 @@ function loadSettings() {
     if (!raw) return { enabledDepts: [...DEFAULT_ENABLED_DEPTS], deptFilter: null };
     const parsed = JSON.parse(raw);
     const enabled = Array.isArray(parsed.enabledDepts)
-      ? parsed.enabledDepts.filter((d) => typeof d === "string")
+      ? parsed.enabledDepts.filter((d) => typeof d === "string").map((d) => d.toUpperCase())
       : [...DEFAULT_ENABLED_DEPTS];
     return {
       enabledDepts: enabled.length ? enabled : [...DEFAULT_ENABLED_DEPTS],
-      deptFilter: typeof parsed.deptFilter === "string" ? parsed.deptFilter : null,
+      deptFilter: typeof parsed.deptFilter === "string" ? parsed.deptFilter.toUpperCase() : null,
     };
   } catch {
     return { enabledDepts: [...DEFAULT_ENABLED_DEPTS], deptFilter: null };
@@ -379,6 +403,7 @@ function moveCourseToTier(id, zone) {
     insertAtUnranked(id, state.unranked.length);
   } else {
     insertAt(zone, id, state[zone].length);
+    track("course_ranked", { tier: zone, dept: courseById[id].dept || "" });
   }
   saveState();
   setSelectedCard(null);
@@ -416,8 +441,8 @@ function catalogIndexSorted() {
   if (typeof CATALOG_INDEX === "undefined") return [];
   return [...CATALOG_INDEX]
     .map((e) => ({
-      code: (e.code || e.slug || "").toUpperCase(),
-      name: e.name || e.code || "",
+      code: deptCodeUpper(e.code || e.slug),
+      name: deptTextUpper(e.name || e.code || e.slug),
       courseCount: e.courseCount || 0,
     }))
     .filter((e) => e.code)
@@ -468,6 +493,7 @@ async function enableDepartment(dept) {
     const input = document.getElementById("add-dept-input");
     if (input) /** @type {HTMLInputElement} */ (input).value = "";
     render();
+    track("dept_added", { dept: code, course_count: COURSES.length });
     setLoadStatus(`Added ${code} — ${COURSES.length} courses in your list`);
   } catch (err) {
     setLoadStatus(err instanceof Error ? err.message : "Could not load department.", true);
@@ -491,6 +517,7 @@ async function removeDepartment(dept) {
   renderDeptFilterRow();
   renderQuickAddDepts();
   render();
+  track("dept_removed", { dept, dept_count: settings.enabledDepts.length });
   setLoadStatus(`${settings.enabledDepts.length} departments · ${COURSES.length} courses`);
 }
 
@@ -504,7 +531,8 @@ function renderEnabledDeptsRow() {
     return;
   }
 
-  for (const dept of settings.enabledDepts) {
+  for (const deptRaw of settings.enabledDepts) {
+    const dept = deptCodeUpper(deptRaw);
     const chip = document.createElement("div");
     chip.className = "dept-enabled-chip";
     chip.setAttribute("role", "listitem");
@@ -589,7 +617,7 @@ function renderAddDeptSuggestions(q) {
     btn.className = "add-dept-option";
     btn.setAttribute("role", "option");
     const count = entry.courseCount ? ` · ${entry.courseCount} courses` : "";
-    btn.textContent = `${entry.code} — ${entry.name}${count}`;
+    btn.textContent = formatDeptListLabel(entry.code, entry.name, entry.courseCount || "?");
     btn.addEventListener("click", () => {
       enableDepartment(entry.code);
       list.hidden = true;
@@ -665,12 +693,15 @@ function renderDeptDialog() {
   const q = (document.getElementById("dept-search")?.value || "").trim().toLowerCase();
   list.innerHTML = "";
 
-  const index = [...CATALOG_INDEX].sort((a, b) => (a.name || a.code).localeCompare(b.name || b.code));
+  const index = [...CATALOG_INDEX].sort((a, b) =>
+    deptCodeUpper(a.code || a.slug).localeCompare(deptCodeUpper(b.code || b.slug))
+  );
 
   for (const entry of index) {
-    const code = entry.code || entry.slug.toUpperCase();
-    const label = `${code} — ${entry.name || code}`;
-    if (q && !label.toLowerCase().includes(q) && !code.toLowerCase().includes(q)) continue;
+    const code = deptCodeUpper(entry.code || entry.slug);
+    const nameUpper = deptTextUpper(entry.name || code);
+    const hay = `${code} ${nameUpper}`;
+    if (q && !hay.includes(q.toUpperCase()) && !code.includes(q.toUpperCase())) continue;
 
     const count =
       entry.courseCount ||
@@ -685,7 +716,8 @@ function renderDeptDialog() {
     cb.checked = settings.enabledDepts.includes(code);
     labelEl.appendChild(cb);
     const span = document.createElement("span");
-    span.textContent = `${entry.name || code} (${count || "?"})`;
+    span.textContent = formatDeptListLabel(code, entry.name, count);
+    span.title = nameUpper;
     labelEl.appendChild(span);
     list.appendChild(labelEl);
   }
@@ -970,6 +1002,7 @@ async function applyDeptDialog() {
   renderQuickAddDepts();
   render();
   updateDeptButtonLabel();
+  track("departments_bulk_apply", { dept_count: settings.enabledDepts.length, course_count: COURSES.length });
   setLoadStatus(`${COURSES.length} courses ready · ${settings.enabledDepts.length} departments`);
 }
 
@@ -994,6 +1027,7 @@ function wireControls() {
       state = defaultState();
       saveState();
       setSelectedCard(null);
+      track("tier_list_reset", { course_count: COURSES.length });
       render();
     }
   });
@@ -1114,6 +1148,10 @@ async function init() {
   renderQuickAddDepts();
   updateDeptButtonLabel();
   render();
+  track("tier_list_view", {
+    dept_count: settings.enabledDepts.length,
+    course_count: COURSES.length,
+  });
   setLoadStatus(`${COURSES.length} courses · add departments in the pool · drag or tap S–F to rank`);
 }
 
