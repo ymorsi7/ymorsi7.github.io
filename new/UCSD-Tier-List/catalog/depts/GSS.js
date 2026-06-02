@@ -1,0 +1,1 @@
+var CATALOG_DEPT_GSS=[{"id":"GSS-20","code":"GSS 20","title":"Introduction to Global South Studies","dept":"GSS"},{"id":"GSS-132","code":"GSS 132","title":"Literature and Global South Societies","dept":"GSS"},{"id":"GSS-190","code":"GSS 190","title":"Undergraduate Seminars","dept":"GSS"},{"id":"GSS-197","code":"GSS 197","title":"Fieldwork","dept":"GSS"}];

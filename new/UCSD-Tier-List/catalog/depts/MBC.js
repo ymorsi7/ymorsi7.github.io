@@ -1,0 +1,1 @@
+var CATALOG_DEPT_MBC=[{"id":"MBC-258","code":"MBC 258","title":"Marine Conservation and Communication Practicum 1","dept":"MBC"},{"id":"MBC-259","code":"MBC 259","title":"Marine Conservation and Communication Practicum 2","dept":"MBC"},{"id":"MBC-296","code":"MBC 296","title":"Capstone Independent Study Project","dept":"MBC"}];

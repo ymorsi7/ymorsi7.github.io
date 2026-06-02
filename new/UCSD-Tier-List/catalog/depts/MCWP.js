@@ -1,0 +1,1 @@
+var CATALOG_DEPT_MCWP=[{"id":"MCWP-40","code":"MCWP 40","title":"Critical Writing","dept":"MCWP"},{"id":"MCWP-50","code":"MCWP 50","title":"Critical Writing","dept":"MCWP"},{"id":"MCWP-125","code":"MCWP 125","title":"Argument and Analysis","dept":"MCWP"}];

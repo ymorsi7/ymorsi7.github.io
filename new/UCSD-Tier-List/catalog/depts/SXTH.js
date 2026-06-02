@@ -1,0 +1,1 @@
+var CATALOG_DEPT_SXTH=[{"id":"SXTH-1","code":"SXTH 1","title":"First Year Experience","dept":"SXTH"},{"id":"SXTH-2","code":"SXTH 2","title":"Transfer Year Experience","dept":"SXTH"},{"id":"SXTH-20","code":"SXTH 20","title":"First-year Student Honors Seminar","dept":"SXTH"}];

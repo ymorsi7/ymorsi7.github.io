@@ -1,0 +1,1 @@
+var CATALOG_DEPT_CCS=[{"id":"CCS-101","code":"CCS 101","title":"Carbon Neutrality Initiative at University of California","dept":"CCS"},{"id":"CCS-102","code":"CCS 102","title":"Research Perspectives on Climate Change","dept":"CCS"},{"id":"CCS-123","code":"CCS 123","title":"Policy and Politics of Climate Change","dept":"CCS"}];

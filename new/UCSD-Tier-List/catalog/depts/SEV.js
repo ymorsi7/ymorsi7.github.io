@@ -1,0 +1,1 @@
+var CATALOG_DEPT_SEV=[{"id":"SEV-20","code":"SEV 20","title":"First-Year Honors Seminar","dept":"SEV"},{"id":"SEV-195","code":"SEV 195","title":"Instructional Apprenticeship","dept":"SEV"},{"id":"SEV-500","code":"SEV 500","title":"Apprentice Teaching","dept":"SEV"}];

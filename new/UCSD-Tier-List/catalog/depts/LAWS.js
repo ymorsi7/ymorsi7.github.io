@@ -1,0 +1,1 @@
+var CATALOG_DEPT_LAWS=[{"id":"LAWS-101","code":"LAWS 101","title":"Contemporary Legal Issues","dept":"LAWS"},{"id":"LAWS-102S","code":"LAWS 102S","title":"Crimes, Civil Wrongs, and Constitution","dept":"LAWS"}];

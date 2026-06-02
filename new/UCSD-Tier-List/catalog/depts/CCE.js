@@ -1,0 +1,1 @@
+var CATALOG_DEPT_CCE=[{"id":"CCE-1","code":"CCE 1","title":"Critical Approaches in Community Practice","dept":"CCE"},{"id":"CCE-2","code":"CCE 2","title":"Cultivating Community-Informed Practices","dept":"CCE"},{"id":"CCE-3","code":"CCE 3","title":"Elements of Community-Engaged Collaborative Research","dept":"CCE"}];

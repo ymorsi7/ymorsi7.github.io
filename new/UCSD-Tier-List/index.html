@@ -3,63 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ECE / CSE / DSC Tier List</title>
+    <title>UCSD Course Tier List</title>
+    <link rel="icon" type="image/png" href="../images/smiling.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-tiers">Skip to main content</a>
+
     <header class="page-header">
-      <h1>ECE / CSE / DSC Tier List</h1>
-      <p class="tagline">Unranked pool groups ECE, CSE, and DSC (catalog),  drag to tiers above.</p>
-      <div class="toolbar">
-        <button type="button" id="btn-reset" class="btn">Reset to Unranked</button>
+      <div class="page-header-top">
+        <h1>UCSD Course Tier List</h1>
+        <a
+          class="header-youtube"
+          href="https://youtu.be/gPMQL9NxIGw?si=4_KT885naECBXJsU"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Watch my tier list walkthrough on YouTube"
+          aria-label="Watch my tier list on YouTube"
+        >
+          <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          <span class="header-youtube-label">My tier list</span>
+        </a>
       </div>
+      <p class="tagline">
+        Works offline: open this file directly in your browser. Pick departments, search the pool, then
+        <strong>drag</strong> or use the <strong>S–F buttons</strong> on each card to rank.
+      </p>
+      <div class="toolbar">
+        <button type="button" id="btn-depts" class="btn btn-primary">Departments</button>
+        <button type="button" id="btn-reset" class="btn">Reset to pool</button>
+      </div>
+      <p id="load-status" class="load-status" role="status" aria-live="polite"></p>
     </header>
 
-    <main class="tier-board">
-      <section class="tier-row tier-s" data-zone="S" aria-label="S tier">
-        <div class="tier-label">S</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
-      <section class="tier-row tier-a" data-zone="A" aria-label="A tier">
-        <div class="tier-label">A</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
-      <section class="tier-row tier-b" data-zone="B" aria-label="B tier">
-        <div class="tier-label">B</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
-      <section class="tier-row tier-c" data-zone="C" aria-label="C tier">
-        <div class="tier-label">C</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
-      <section class="tier-row tier-d" data-zone="D" aria-label="D tier">
-        <div class="tier-label">D</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
-      <section class="tier-row tier-f" data-zone="F" aria-label="F tier">
-        <div class="tier-label">F</div>
-        <div class="tier-strip drop-strip" tabindex="-1"></div>
-      </section>
+    <main id="main-tiers" class="tier-board">
+      <div class="tier-board-tiers" aria-label="Tier rows">
+        <section class="tier-row tier-s" data-zone="S" aria-label="S tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="S" title="Move selected course to S">S</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+        <section class="tier-row tier-a" data-zone="A" aria-label="A tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="A" title="Move selected course to A">A</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+        <section class="tier-row tier-b" data-zone="B" aria-label="B tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="B" title="Move selected course to B">B</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+        <section class="tier-row tier-c" data-zone="C" aria-label="C tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="C" title="Move selected course to C">C</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+        <section class="tier-row tier-d" data-zone="D" aria-label="D tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="D" title="Move selected course to D">D</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+        <section class="tier-row tier-f" data-zone="F" aria-label="F tier">
+          <button type="button" class="tier-label tier-drop-target" data-tier="F" title="Move selected course to F">F</button>
+          <div class="tier-strip drop-strip" tabindex="-1"></div>
+        </section>
+      </div>
 
-      <section class="tier-row pool" data-zone="unranked" aria-label="Unranked">
-        <div class="tier-label" title="Not yet ranked">Unranked</div>
-        <div class="tier-strip-unranked">
-          <div class="unranked-group" data-subject="ECE">
-            <div class="unranked-subject-label">ECE</div>
-            <div class="unranked-substrip drop-strip" data-dept="ECE" tabindex="-1"></div>
+      <section class="tier-row pool" data-zone="unranked" aria-label="Unranked course pool">
+        <button type="button" class="tier-label tier-drop-target pool-label" data-tier="unranked" title="Move selected course to pool">
+          Pool
+        </button>
+        <div class="pool-panel">
+          <div class="pool-toolbar">
+            <label class="search-wrap">
+              <span class="visually-hidden">Search courses</span>
+              <input
+                type="search"
+                id="pool-search"
+                class="pool-search"
+                placeholder="Search code or title…"
+                autocomplete="off"
+              />
+            </label>
+            <p class="pool-meta" id="pool-meta" aria-live="polite"></p>
           </div>
-          <div class="unranked-group" data-subject="CSE">
-            <div class="unranked-subject-label">CSE</div>
-            <div class="unranked-substrip drop-strip" data-dept="CSE" tabindex="-1"></div>
-          </div>
-          <div class="unranked-group" data-subject="DSC">
-            <div class="unranked-subject-label">DSC</div>
-            <div class="unranked-substrip drop-strip" data-dept="DSC" tabindex="-1"></div>
-          </div>
+          <div class="dept-filter-row" id="dept-filter-row" role="toolbar" aria-label="Filter pool by department"></div>
+          <div class="unranked-pool drop-strip" id="unranked-pool" tabindex="-1"></div>
         </div>
       </section>
     </main>
 
+    <dialog id="dept-dialog" class="dept-dialog">
+      <form method="dialog" class="dept-dialog-inner">
+        <header class="dept-dialog-header">
+          <h2>Catalog departments</h2>
+          <button type="button" class="btn-icon" id="dept-dialog-close" aria-label="Close">×</button>
+        </header>
+        <p class="dept-dialog-hint">
+          Only selected departments are loaded (keeps the page fast when opened as a file). Data from
+          <a href="https://catalog.ucsd.edu/front/courses.html" target="_blank" rel="noopener noreferrer">catalog.ucsd.edu</a>.
+        </p>
+        <label class="search-wrap">
+          <span class="visually-hidden">Search departments</span>
+          <input type="search" id="dept-search" class="pool-search" placeholder="Filter departments…" autocomplete="off" />
+        </label>
+        <div class="dept-dialog-actions">
+          <button type="button" class="btn btn-small" id="dept-select-defaults">ECE + CSE + DSC + MATH + COGS</button>
+          <button type="button" class="btn btn-small" id="dept-preset-stem">+ MATH + MAE</button>
+          <button type="button" class="btn btn-small" id="dept-select-all">Select all</button>
+          <button type="button" class="btn btn-small" id="dept-select-none">Clear</button>
+        </div>
+        <div class="dept-checklist" id="dept-checklist"></div>
+        <footer class="dept-dialog-footer">
+          <button type="submit" class="btn btn-primary" id="dept-apply">Apply</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="footer-tools">
+        <span class="footer-tools-label">Tools</span>
+        <div class="footer-tools-links">
+          <a href="../index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+          <a href="../mergePDF.html" class="footer-tool-link"><i class="fa-solid fa-file"></i> MergePDF</a>
+          <a href="../alarm.html" class="footer-tool-link"><i class="fas fa-clock"></i> Alarm</a>
+          <a href="../pomodoro.html" class="footer-tool-link"><i class="fa-solid fa-business-time"></i> Pomodoro</a>
+          <a href="../drawingBoard.html" class="footer-tool-link"><i class="fas fa-paint-brush"></i> Drawing Board</a>
+          <a href="./index.html" class="footer-tool-link footer-tool-link--current" aria-current="page"
+            ><i class="fa-solid fa-list"></i> UCSD Tier List</a
+          >
+        </div>
+      </div>
+      <hr class="footer-divider" />
+      <p class="footer-line">
+        <a href="../index.html">Yusuf Morsi</a>
+        <span class="footer-sep">·</span>
+        😁 2020 –
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <span class="footer-sep">·</span>
+        <a href="../old/photography.html" target="_blank" rel="noopener noreferrer">Photography</a>
+        <span class="footer-sep">·</span>
+        <a href="../halal-vibes.html">Halal Vibes</a>
+        <span class="footer-sep">·</span>
+        <a href="../old/index.html" target="_blank" rel="noopener noreferrer">Pre-GPT (Archive)</a>
+      </p>
+    </footer>
+
+    <script src="catalog-index.js"></script>
     <script src="catalog-courses.js"></script>
     <script src="dsc-catalog.js"></script>
     <script src="app.js"></script>
