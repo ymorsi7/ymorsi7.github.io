@@ -1,28 +1,25 @@
 /**
- * Site analytics — edit this file once, then include on any page:
+ * Site analytics — GoatCounter (free for personal / open-source sites).
+ *
+ * Included on pages via:
  *   <script src="js/site-analytics-config.js"></script>
  *   <script src="js/site-analytics.js"></script>
  *
- * GitHub Pages has no server logs; use a third-party service below.
- *
- * GA4 (Google Analytics): https://analytics.google.com
- *   → Admin → Data streams → your site → Measurement ID (G-XXXXXXXXXX)
- *
- * GoatCounter (simple, privacy-friendly): https://www.goatcounter.com
- *   → Create site → Settings → copy counting endpoint (ends with /count)
+ * View stats: https://ymorsi.goatcounter.com
+ * (Site code at goatcounter.com must be "ymorsi" — same as your dashboard URL.)
  */
 window.SITE_ANALYTICS = {
-  enabled: false,
+  enabled: true,
 
-  /** "ga4" | "goatcounter" */
-  provider: "ga4",
+  /** "goatcounter" (free) | "ga4" (also free; needs Google account + G- ID) */
+  provider: "goatcounter",
 
-  /** GA4 measurement ID, e.g. G-XXXXXXXXXX */
+  /** GoatCounter counting endpoint — must match your site code at goatcounter.com */
+  goatcounterUrl: "https://ymorsi.goatcounter.com/count",
+
+  /** Dashboard — open in browser to see visitors, pages, countries, referrers */
+  dashboardUrl: "https://ymorsi.goatcounter.com",
+
+  /** GA4 — only used if provider is "ga4" */
   ga4MeasurementId: "",
-
-  /**
-   * GoatCounter endpoint, e.g. https://ymorsi7.goatcounter.com/count
-   * (from your GoatCounter site settings)
-   */
-  goatcounterUrl: "",
 };

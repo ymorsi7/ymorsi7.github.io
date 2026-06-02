@@ -50,8 +50,16 @@
     const s = document.createElement("script");
     s.async = true;
     s.dataset.goatcounter = url;
-    s.src = "//gc.zgo.at/count.js";
+    s.dataset.goatcounterSettings = JSON.stringify({
+      allow_local: true,
+      allow_frame: false,
+    });
+    s.src = "https://gc.zgo.at/count.js";
     document.head.appendChild(s);
+
+    if (cfg.dashboardUrl) {
+      window.SITE_ANALYTICS_DASHBOARD = cfg.dashboardUrl;
+    }
   }
 
   /**
