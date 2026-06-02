@@ -77,12 +77,28 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/il.jpg",
     content: `
       <p>San Diego, CA</p>
     `,
     date: "2025-05-31",
     tags: ["halal", "coffee", "san diego"]
+  },
+  {
+    slug: "ijava-cafe-almaden-san-jose",
+    title: "iJava Cafe (Almaden)",
+    region: "US",
+    location: "San Jose",
+    categories: ["coffee", "food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/IMG_5847.jpg",
+    content: `
+      <p>4858 Almaden Expy, San Jose, CA 95118</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "almaden", "san jose"]
   },
   {
     slug: "golden-bagel-san-diego",
@@ -93,7 +109,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/goldenbagel.png",
     content: `
       <p>San Diego, CA</p>
     `,
@@ -329,7 +345,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "Porto's Bakery and Cafe",
     region: "US",
     location: "Buena Park",
-    categories: ["food", "vibes"],
+    categories: ["coffee", "food", "vibes"],
     foodScore: 9,
     vibesScore: 10,
     excerpt: "Amazing atmosphere, great food, amazing vibes, and good location. AMAZING VIBES!!! Just go early or it'll be overly crowded.",
@@ -405,7 +421,7 @@ const HALAL_VIBES_ENTRIES = [
     vibesScore: null,
     stars: 4,
     excerpt: "",
-    image: null,
+    image: "images/AMEX.jpg",
     content: `
       <p>Los Angeles International Airport (LAX), Los Angeles, CA</p>
     `,
@@ -456,7 +472,7 @@ const HALAL_VIBES_ENTRIES = [
     vibesScore: null,
     stars: 4,
     excerpt: "",
-    image: null,
+    image: "images/SANsaph.jpg",
     content: `
       <p>San Diego International Airport (SAN), San Diego, CA</p>
     `,
@@ -490,7 +506,7 @@ const HALAL_VIBES_ENTRIES = [
     vibesScore: null,
     stars: 5,
     excerpt: "",
-    image: null,
+    image: "images/iga.jpg",
     content: `
       <p>Istanbul Airport (IST), Istanbul, Turkey</p>
     `,
@@ -1034,7 +1050,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "Croissante",
     region: "US",
     location: "Santa Clara",
-    categories: ["food", "vibes"],
+    categories: ["coffee", "food", "vibes"],
     foodScore: 9,
     vibesScore: 8,
     excerpt: "My favorite bakery in south bay. Great croissants but quite expensive. Seating is good too, the place is always active, and once again, amazing pastries.",
@@ -1161,7 +1177,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "Great place, good location, and amazing idea. Especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but really enjoyed it,  clever concept.",
-    image: null,
+    image: "images/IMG_3729.jpg",
     content: `
       <p>New Cairo, Cairo Governorate, Egypt</p>
       <p>Great place, good location, and amazing idea. The food options here are good; I especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but I really enjoyed it, and must reiterate how clever an idea it is.</p>
@@ -1178,7 +1194,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/IMG_3920.jpg",
     content: `
       <p>San Stefano, El Raml 1, Alexandria Governorate, Egypt</p>
     `,
@@ -1242,7 +1258,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/layhla.jpg",
     content: `
       <p>Santa Monica, Los Angeles, CA</p>
     `,
@@ -1296,5 +1312,168 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-05-31",
     tags: ["halal", "coffee", "baltimore"]
+  },
+  {
+    slug: "temple-coffee-s-st-sacramento",
+    title: "Temple Coffee (S St)",
+    region: "US",
+    location: "Sacramento",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/sac.jpg",
+    content: `
+      <p>2203 S St, Sacramento, CA 95816</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "sacramento"]
+  },
+  {
+    slug: "scorpio-coffee-16th-sacramento",
+    title: "Scorpio Coffee (16th St)",
+    region: "US",
+    location: "Sacramento",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/sac0.jpg",
+    content: `
+      <p>1215 16th St, Sacramento, CA 95814</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "sacramento"]
+  },
+  {
+    slug: "la-vaca-birria-san-francisco",
+    title: "La Vaca Birria",
+    region: "US",
+    location: "San Francisco",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/vaca.jpg",
+    content: `
+      <p>San Francisco, CA</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "birria", "san francisco"]
+  },
+  {
+    slug: "crust-sourdough-deli-santa-clara",
+    title: "CRUST Sourdough Deli",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Tuna sandwich on sourdough is amazing.",
+    image: "images/crust.jpg",
+    content: `
+      <p>Santa Clara, CA</p>
+      <p>Tuna sandwich on sourdough is amazing.</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "sandwiches", "sourdough", "santa clara"]
+  },
+  /*
+  {
+    slug: "coffee-lab-rehab-new-cairo",
+    title: "Coffee Lab",
+    region: "Egypt",
+    location: "Cairo, Egypt",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/IMG_4384.jpg",
+    content: `
+      <p>El Rehab, New Cairo, Cairo Governorate, Egypt</p>
+    `,
+    date: "2025-05-31",
+    tags: ["halal", "coffee", "rehab", "new cairo"]
+  }
+  */,
+  {
+    slug: "story-coffee-seattle",
+    title: "Story Coffee",
+    region: "US",
+    location: "Seattle",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/IMG_2651.jpg",
+    content: `
+      <p>NE 8th St, Seattle, WA</p>
+    `,
+    date: "2025-06-01",
+    tags: ["halal", "coffee", "seattle"]
+  },
+  {
+    slug: "toasted-bagels-bellevue",
+    title: "TOASTED Bagels & Coffee",
+    region: "US",
+    location: "Bellevue",
+    categories: ["coffee", "food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/TOASTED.jpg",
+    content: `
+      <p>Bellevue, WA</p>
+    `,
+    date: "2025-06-01",
+    tags: ["halal", "bagels", "coffee", "bellevue"]
+  },
+  {
+    slug: "bitez-arlington",
+    title: "Bitez",
+    region: "US",
+    location: "Arlington",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/arl.jpg",
+    content: `
+      <p>Arlington, VA</p>
+    `,
+    date: "2025-06-01",
+    tags: ["halal", "arlington", "virginia"]
+  },
+  {
+    slug: "bussin-buns-austin",
+    title: "Bussin Buns",
+    region: "US",
+    location: "Austin",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/bussin.jpg",
+    content: `
+      <p>Austin, TX</p>
+    `,
+    date: "2025-06-01",
+    tags: ["halal", "austin", "chicken"]
+  },
+  {
+    slug: "tiffs-treats-austin",
+    title: "Tiff's Treats",
+    region: "US",
+    location: "Austin",
+    categories: ["desserts", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "",
+    image: "images/IMG_1257.jpg",
+    content: `
+      <p>Austin, TX</p>
+    `,
+    date: "2025-06-01",
+    tags: ["halal", "desserts", "cookies", "austin"]
   }
 ];
