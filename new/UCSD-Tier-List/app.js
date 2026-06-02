@@ -53,6 +53,21 @@ const STORAGE_KEY = "ucsd-tier-list-v2";
 const SETTINGS_KEY = "ucsd-tier-list-settings-v1";
 const LEGACY_STORAGE_KEY = "ece-cse-tier-list-v1";
 const DEFAULT_ENABLED_DEPTS = ["ECE", "CSE", "DSC", "MATH", "COGS"];
+/** One-click add buttons for departments not yet loaded */
+const POPULAR_QUICK_ADD = [
+  "MAE",
+  "PHYS",
+  "ECON",
+  "BIOL",
+  "CHEM",
+  "POLI",
+  "PSYC",
+  "SE",
+  "BENG",
+  "VIS",
+  "ANTH",
+  "HIST",
+];
 
 /** @type {{ enabledDepts: string[]; deptFilter: string | null }} */
 let settings = { enabledDepts: [...DEFAULT_ENABLED_DEPTS], deptFilter: null };
@@ -393,6 +408,227 @@ function updatePoolMeta() {
   } else {
     el.textContent = `${total} in pool · ${settings.enabledDepts.length} departments`;
   }
+  updatePoolDeptHint();
+}
+
+/** @returns {{ code: string; name: string; courseCount: number }[]} */
+function catalogIndexSorted() {
+  if (typeof CATALOG_INDEX === "undefined") return [];
+  return [...CATALOG_INDEX]
+    .map((e) => ({
+      code: (e.code || e.slug || "").toUpperCase(),
+      name: e.name || e.code || "",
+      courseCount: e.courseCount || 0,
+    }))
+    .filter((e) => e.code)
+    .sort((a, b) => a.code.localeCompare(b.code));
+}
+
+/** @param {string} q */
+function matchDepartments(q) {
+  const query = q.trim().toLowerCase();
+  if (!query) return [];
+  const enabled = new Set(settings.enabledDepts);
+  return catalogIndexSorted()
+    .filter((e) => {
+      if (enabled.has(e.code)) return false;
+      const hay = `${e.code} ${e.name}`.toLowerCase();
+      return hay.includes(query) || e.code.toLowerCase().startsWith(query);
+    })
+    .slice(0, 10);
+}
+
+/** @param {string} dept */
+async function enableDepartment(dept) {
+  const code = dept.toUpperCase();
+  if (!code) return;
+
+  if (settings.enabledDepts.includes(code)) {
+    settings.deptFilter = code;
+    saveSettings();
+    renderDeptFilterRow();
+    renderEnabledDeptsRow();
+    renderQuickAddDepts();
+    renderUnranked();
+    return;
+  }
+
+  setLoadStatus(`Loading ${code}…`);
+  try {
+    await loadDepartments([code]);
+    settings.enabledDepts = [...settings.enabledDepts, code].sort();
+    settings.deptFilter = code;
+    saveSettings();
+    rebuildCourses();
+    saveState();
+    renderEnabledDeptsRow();
+    renderDeptFilterRow();
+    renderQuickAddDepts();
+    renderAddDeptSuggestions("");
+    const input = document.getElementById("add-dept-input");
+    if (input) /** @type {HTMLInputElement} */ (input).value = "";
+    render();
+    setLoadStatus(`Added ${code} — ${COURSES.length} courses in your list`);
+  } catch (err) {
+    setLoadStatus(err instanceof Error ? err.message : "Could not load department.", true);
+  }
+}
+
+/** @param {string} dept */
+async function removeDepartment(dept) {
+  if (settings.enabledDepts.length <= 1) {
+    alert("Keep at least one department loaded.");
+    return;
+  }
+  if (!confirm(`Remove ${dept} and all of its courses from your tier list?`)) return;
+
+  settings.enabledDepts = settings.enabledDepts.filter((d) => d !== dept);
+  if (settings.deptFilter === dept) settings.deptFilter = null;
+  saveSettings();
+  rebuildCourses();
+  saveState();
+  renderEnabledDeptsRow();
+  renderDeptFilterRow();
+  renderQuickAddDepts();
+  render();
+  setLoadStatus(`${settings.enabledDepts.length} departments · ${COURSES.length} courses`);
+}
+
+function renderEnabledDeptsRow() {
+  const row = document.getElementById("dept-enabled-chips");
+  if (!row) return;
+  row.innerHTML = "";
+
+  if (!settings.enabledDepts.length) {
+    row.innerHTML = '<p class="dept-empty-hint">No departments yet — add one below.</p>';
+    return;
+  }
+
+  for (const dept of settings.enabledDepts) {
+    const chip = document.createElement("div");
+    chip.className = "dept-enabled-chip";
+    chip.setAttribute("role", "listitem");
+
+    const label = document.createElement("button");
+    label.type = "button";
+    label.className = "dept-enabled-chip-main";
+    const count = getDeptCourses(dept).length || COURSES.filter((c) => c.dept === dept).length;
+    label.textContent = count ? `${dept} (${count})` : dept;
+    label.title = `Show only ${dept} in pool`;
+    if (settings.deptFilter === dept) label.classList.add("dept-enabled-chip-main--active");
+    label.addEventListener("click", () => {
+      settings.deptFilter = settings.deptFilter === dept ? null : dept;
+      saveSettings();
+      renderEnabledDeptsRow();
+      renderDeptFilterRow();
+      renderUnranked();
+    });
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "dept-enabled-chip-remove";
+    remove.setAttribute("aria-label", `Remove ${dept} department`);
+    remove.textContent = "×";
+    remove.addEventListener("click", (e) => {
+      e.stopPropagation();
+      removeDepartment(dept);
+    });
+
+    chip.appendChild(label);
+    chip.appendChild(remove);
+    row.appendChild(chip);
+  }
+}
+
+function renderQuickAddDepts() {
+  const row = document.getElementById("dept-quick-add");
+  if (!row) return;
+  row.innerHTML = "";
+
+  const enabled = new Set(settings.enabledDepts);
+  const toShow = POPULAR_QUICK_ADD.filter((d) => !enabled.has(d));
+  if (!toShow.length) return;
+
+  const label = document.createElement("span");
+  label.className = "dept-quick-add-label";
+  label.textContent = "Quick add:";
+  row.appendChild(label);
+
+  for (const dept of toShow) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "dept-quick-add-btn";
+    b.textContent = `+ ${dept}`;
+    b.addEventListener("click", () => enableDepartment(dept));
+    row.appendChild(b);
+  }
+}
+
+/** @param {string} q */
+function renderAddDeptSuggestions(q) {
+  const list = document.getElementById("add-dept-suggestions");
+  const input = document.getElementById("add-dept-input");
+  if (!list || !input) return;
+
+  const matches = matchDepartments(q);
+  list.innerHTML = "";
+
+  if (!q.trim() || !matches.length) {
+    list.hidden = true;
+    input.setAttribute("aria-expanded", "false");
+    return;
+  }
+
+  list.hidden = false;
+  input.setAttribute("aria-expanded", "true");
+
+  for (const entry of matches) {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "add-dept-option";
+    btn.setAttribute("role", "option");
+    const count = entry.courseCount ? ` · ${entry.courseCount} courses` : "";
+    btn.textContent = `${entry.code} — ${entry.name}${count}`;
+    btn.addEventListener("click", () => {
+      enableDepartment(entry.code);
+      list.hidden = true;
+      input.setAttribute("aria-expanded", "false");
+    });
+    li.appendChild(btn);
+    list.appendChild(li);
+  }
+}
+
+function updatePoolDeptHint() {
+  const hint = document.getElementById("pool-dept-hint");
+  if (!hint) return;
+
+  if (!poolSearchQuery || poolSearchQuery.length < 2 || unrankedIdsForRender().length > 0) {
+    hint.hidden = true;
+    return;
+  }
+
+  const enabled = new Set(settings.enabledDepts);
+  const match = catalogIndexSorted().find((e) => {
+    if (enabled.has(e.code)) return false;
+    const q = poolSearchQuery;
+    return e.code.toLowerCase().startsWith(q) || e.name.toLowerCase().includes(q);
+  });
+
+  if (!match) {
+    hint.hidden = true;
+    return;
+  }
+
+  hint.hidden = false;
+  hint.innerHTML = `No courses match “${escapeHtml(poolSearchQuery)}”. Load <strong>${escapeHtml(match.code)}</strong>? `;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn btn-small btn-primary pool-dept-hint-btn";
+  btn.textContent = `Add ${match.code}`;
+  btn.addEventListener("click", () => enableDepartment(match.code));
+  hint.appendChild(btn);
 }
 
 function renderDeptFilterRow() {
@@ -729,7 +965,9 @@ async function applyDeptDialog() {
 
   rebuildCourses();
   saveState();
+  renderEnabledDeptsRow();
   renderDeptFilterRow();
+  renderQuickAddDepts();
   render();
   updateDeptButtonLabel();
   setLoadStatus(`${COURSES.length} courses ready · ${settings.enabledDepts.length} departments`);
@@ -807,8 +1045,41 @@ function wireControls() {
     renderUnranked();
   });
 
+  const addDeptInput = document.getElementById("add-dept-input");
+  addDeptInput?.addEventListener("input", (e) => {
+    renderAddDeptSuggestions(/** @type {HTMLInputElement} */ (e.target).value);
+  });
+  addDeptInput?.addEventListener("focus", (e) => {
+    renderAddDeptSuggestions(/** @type {HTMLInputElement} */ (e.target).value);
+  });
+  addDeptInput?.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    const q = /** @type {HTMLInputElement} */ (e.target).value;
+    const first = matchDepartments(q)[0];
+    if (first) {
+      e.preventDefault();
+      enableDepartment(first.code);
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const combo = document.querySelector(".dept-add-combo");
+    if (combo && !combo.contains(/** @type {Node} */ (e.target))) {
+      const list = document.getElementById("add-dept-suggestions");
+      const input = document.getElementById("add-dept-input");
+      if (list) list.hidden = true;
+      if (input) input.setAttribute("aria-expanded", "false");
+    }
+  });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setSelectedCard(null);
+    if (e.key === "Escape") {
+      setSelectedCard(null);
+      const list = document.getElementById("add-dept-suggestions");
+      const input = document.getElementById("add-dept-input");
+      if (list) list.hidden = true;
+      if (input) input.setAttribute("aria-expanded", "false");
+    }
   });
 
   wireTierLabelClicks();
@@ -838,10 +1109,12 @@ async function init() {
 
   courseById = Object.fromEntries(COURSES.map((c) => [c.id, c]));
   state = loadState();
+  renderEnabledDeptsRow();
   renderDeptFilterRow();
+  renderQuickAddDepts();
   updateDeptButtonLabel();
   render();
-  setLoadStatus(`${COURSES.length} courses · drag or tap S–F on cards · tiers stay pinned while you scroll the pool`);
+  setLoadStatus(`${COURSES.length} courses · add departments in the pool · drag or tap S–F to rank`);
 }
 
 if (document.readyState === "loading") {

@@ -27,11 +27,10 @@
         </a>
       </div>
       <p class="tagline">
-        Works offline: open this file directly in your browser. Pick departments, search the pool, then
-        <strong>drag</strong> or use the <strong>S–F buttons</strong> on each card to rank.
+        Add departments in the pool below (search or quick-add), then <strong>drag</strong> or tap <strong>S–F</strong> to rank.
       </p>
       <div class="toolbar">
-        <button type="button" id="btn-depts" class="btn btn-primary">Departments</button>
+        <button type="button" id="btn-depts" class="btn">Browse all departments…</button>
         <button type="button" id="btn-reset" class="btn">Reset to pool</button>
       </div>
       <p id="load-status" class="load-status" role="status" aria-live="polite"></p>
@@ -70,20 +69,45 @@
           Pool
         </button>
         <div class="pool-panel">
+          <section class="dept-manage" aria-labelledby="dept-manage-heading">
+            <div class="dept-manage-header">
+              <h2 id="dept-manage-heading" class="dept-manage-heading">Your departments</h2>
+              <p class="dept-manage-hint">Add any UCSD catalog department. Courses appear in the pool below.</p>
+            </div>
+            <div id="dept-enabled-chips" class="dept-enabled-chips" role="list" aria-label="Loaded departments"></div>
+            <div class="dept-add-row">
+              <label class="dept-add-label" for="add-dept-input">Add department</label>
+              <div class="dept-add-combo">
+                <input
+                  type="search"
+                  id="add-dept-input"
+                  class="pool-search"
+                  placeholder="Type code or name — e.g. MAE, Physics, Econ…"
+                  autocomplete="off"
+                  aria-controls="add-dept-suggestions"
+                  aria-expanded="false"
+                />
+                <ul id="add-dept-suggestions" class="add-dept-suggestions" role="listbox" hidden></ul>
+              </div>
+            </div>
+            <div id="dept-quick-add" class="dept-quick-add" aria-label="Popular departments to add"></div>
+            <p class="dept-filter-label">Filter pool</p>
+            <div class="dept-filter-row" id="dept-filter-row" role="toolbar" aria-label="Filter pool by department"></div>
+          </section>
           <div class="pool-toolbar">
             <label class="search-wrap">
-              <span class="visually-hidden">Search courses</span>
+              <span class="visually-hidden">Search courses in pool</span>
               <input
                 type="search"
                 id="pool-search"
                 class="pool-search"
-                placeholder="Search code or title…"
+                placeholder="Search courses in pool…"
                 autocomplete="off"
               />
             </label>
             <p class="pool-meta" id="pool-meta" aria-live="polite"></p>
           </div>
-          <div class="dept-filter-row" id="dept-filter-row" role="toolbar" aria-label="Filter pool by department"></div>
+          <p id="pool-dept-hint" class="pool-dept-hint" hidden></p>
           <div class="unranked-pool drop-strip" id="unranked-pool" tabindex="-1"></div>
         </div>
       </section>
