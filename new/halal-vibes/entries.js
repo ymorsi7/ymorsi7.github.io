@@ -125,7 +125,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/copa.jpg",
     content: `
       <p>10578 Science Center Dr, San Diego, CA 92121</p>
     `,
