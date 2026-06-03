@@ -920,7 +920,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Never slept here but ordered from lobby restaurant. Very clean, desserts excellent. Good place for meetings. 8/10 vibe score.",
-    image: null,
+    image: "images/20241009_203443_Original.JPG",
     content: `
       <p>399 El El-Gaish Rd, San Stefano, El Raml 1, Alexandria Governorate, Egypt</p>
       <p>I've never slept here before, but I sat down and ordered from the restaurant in the lobby. The place is very clean and the desserts are excellent. It's a good place for meetings and things like that. 8/10 vibe score</p>
@@ -1089,8 +1089,8 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: 9,
     excerpt: "9/10 vibes.",
-    image: "halal-vibes/imgs/zed1.jpg",
-    images: ["halal-vibes/imgs/zed1.jpg", "halal-vibes/imgs/zed2.jpg", "halal-vibes/imgs/zed3.jpg", "halal-vibes/imgs/zed4.png", "halal-vibes/imgs/zed5.png"],
+    image: "images/IMG_8961.jpg",
+    images: ["images/IMG_8961.jpg"],
     content: `
       <p>Sant Giyn, Abu an Nawatir, Sidi Gaber, Alexandria Governorate 5433113, Egypt</p>
       <p>9/10 vibes.</p>
@@ -1242,7 +1242,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/unnamed.jpg",
     content: `
       <p>Syria St., Sidi Gaber, Alexandria Governorate, Egypt</p>
     `,
@@ -1290,7 +1290,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/unnamed-1.jpg",
     content: `
       <p>Venice, CA</p>
     `,
