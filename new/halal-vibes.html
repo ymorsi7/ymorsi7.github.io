@@ -531,6 +531,13 @@
 			color: rgba(45, 74, 62, 0.2);
 		}
 
+		.hv-entry-card .card-stars .star-rating-value {
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			margin-right: 6px;
+		}
+
 		.hv-entry-card .card-location {
 			font-size: 0.85rem;
 			font-weight: 500;
@@ -1034,7 +1041,10 @@
 				'Saudi Arabia': 'Middle East',
 				'Turkey': 'Middle East',
 				'UK': 'Europe',
-				'United Kingdom': 'Europe'
+				'United Kingdom': 'Europe',
+				'Italy': 'Europe',
+				'Poland': 'Europe',
+				'Greece': 'Europe'
 			};
 
 			const LOUNGE_REGION_PRIORITY = ['US', 'Middle East', 'Europe'];
@@ -1113,11 +1123,20 @@
 			}
 
 			function renderStars(count) {
-				let html = '<div class="card-stars" aria-label="' + count + ' out of 5 stars">';
+				const rating = Number(count);
+				const label = Number.isInteger(rating) ? String(rating) : rating.toFixed(2).replace(/\.?0+$/, '');
+				let html = '<div class="card-stars" aria-label="' + label + ' out of 5 stars">';
+				if (!Number.isInteger(rating)) {
+					html += '<span class="star-rating-value">' + label + '/5</span>';
+				}
 				for (let i = 1; i <= 5; i++) {
-					html += i <= count
-						? '<i class="fa-solid fa-star"></i>'
-						: '<i class="fa-regular fa-star star-empty"></i>';
+					if (rating >= i) {
+						html += '<i class="fa-solid fa-star"></i>';
+					} else if (rating >= i - 0.5) {
+						html += '<i class="fa-solid fa-star-half-stroke"></i>';
+					} else {
+						html += '<i class="fa-regular fa-star star-empty"></i>';
+					}
 				}
 				html += '</div>';
 				return html;

@@ -5,7 +5,7 @@
  * and edit the fields. No HTML editing needed.
  *
  * Region: US | Egypt | UK | Saudi Arabia | Turkey
- * Location: city/area,  auto-appears in city dropdown
+ * Location: city/area (airport lounges: include IATA code, e.g. "Las Vegas (LAS)")
  * Categories: coffee | food | vibes | lounges
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
@@ -393,10 +393,47 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "desserts", "la jolla"]
   },
   {
+    slug: "aerotel-lounge-jeddah",
+    title: "Aerotel Lounge",
+    region: "Saudi Arabia",
+    location: "Jeddah (JED)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 5,
+    excerpt: "Very nice—amazing food, excellent service, brilliant overall. Not on Priority Pass; you have to pay extra for entry.",
+    image: null,
+    content: `
+      <p>King Abdulaziz International Airport (JED), Jeddah, Saudi Arabia</p>
+      <p>Very nice, amazing food, excellent service, and brilliant overall.</p>
+      <p><strong>Note:</strong> It isn't Priority Pass—you have to pay extra for it.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "jeddah", "jed", "aerotel"]
+  },
+  {
+    slug: "jed-welcome-lounge",
+    title: "JED Welcome Lounge",
+    region: "Saudi Arabia",
+    location: "Jeddah (JED)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Very good, but not out of this world. A bit small compared to other Jeddah lounges.",
+    image: null,
+    content: `
+      <p>King Abdulaziz International Airport (JED), Jeddah, Saudi Arabia</p>
+      <p>Very good, but not out of this world. A bit small compared to other Jeddah lounges.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "jeddah", "jed", "welcome lounge"]
+  },
+  {
     slug: "alfursan-lounge-jeddah",
     title: "Alfursan Lounge - Jeddah Airport",
     region: "Saudi Arabia",
-    location: "Jeddah",
+    location: "Jeddah (JED)",
     categories: ["food", "vibes", "lounges"],
     foodScore: null,
     vibesScore: null,
@@ -415,7 +452,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "amex-lounge-lax",
     title: "American Express Lounge",
     region: "US",
-    location: "Los Angeles",
+    location: "Los Angeles (LAX)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
@@ -432,7 +469,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "cac-lounge-cairo-terminal-3",
     title: "CAC Lounge (E Lounge),  Terminal 3",
     region: "Egypt",
-    location: "Cairo, Egypt",
+    location: "Cairo (CAI)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
@@ -449,7 +486,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "pearl-lounge-alexandria-hbe",
     title: "Pearl Lounge",
     region: "Egypt",
-    location: "Alexandria, Egypt",
+    location: "Alexandria (HBE)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
@@ -467,24 +504,97 @@ const HALAL_VIBES_ENTRIES = [
     slug: "etihad-lounge-washington",
     title: "Etihad Airways Washington Lounge",
     region: "US",
-    location: "Washington, D.C.",
+    location: "Washington, D.C. (IAD)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
     stars: 4,
-    excerpt: "",
+    excerpt: "Has a prayer room with a rug. Washington Dulles (IAD).",
     image: "images/IMG_2590.jpg",
     content: `
       <p>Washington Dulles International Airport (IAD), Washington, D.C.</p>
+      <p>Has a prayer room and a rug for prayer.</p>
     `,
     date: "2025-05-31",
-    tags: ["lounge", "airport", "etihad"]
+    tags: ["lounge", "airport", "etihad", "iad", "prayer room"]
+  },
+  {
+    slug: "prima-vista-lounge-fco",
+    title: "Prima Vista Lounge – Portus",
+    region: "Italy",
+    location: "Rome (FCO)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Pretty much no wait, easy to get in. Amazing desserts, and very nice and big.",
+    image: "images/IMG_4550.jpg",
+    content: `
+      <p>Leonardo da Vinci–Fiumicino Airport (FCO), Rome, Italy</p>
+      <p>Pretty much no wait, easy to get in. Amazing desserts, and very nice and big.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "fco", "rome", "portus", "prima vista"]
+  },
+  {
+    slug: "essence-escape-lounge-stansted",
+    title: "Essence by Escape Lounge",
+    region: "UK",
+    location: "London Stansted (STN)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 2.75,
+    excerpt: "Very hard to get in—always a waitlist. Showed up before opening and still waited after they opened while on a list. Food is not good.",
+    image: "images/IMG_7756.jpg",
+    content: `
+      <p>London Stansted Airport (STN), Essex, United Kingdom</p>
+      <p>Very hard to get in, always wait list. I showed up early before opening and still took me a while to get in after they opened because they still put me on a list. Takes very long to get in consistently, and the food is not good.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "stansted", "stn", "escape lounge"]
+  },
+  {
+    slug: "lot-business-lounge-mazurek-warsaw",
+    title: "LOT Business Lounge Mazurek",
+    region: "Poland",
+    location: "Warsaw (WAW)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 3.75,
+    excerpt: "Wasn't outstanding, but they allow paid entry. Decent selections—nothing crazy.",
+    image: null,
+    content: `
+      <p>Warsaw Chopin Airport (WAW), Warsaw, Poland</p>
+      <p>Wasn't outstanding. They allow you to pay for entry. Decent selections but nothing crazy.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "warsaw", "waw", "lot"]
+  },
+  {
+    slug: "skyserv-aristotle-onassis-lounge-athens",
+    title: "Skyserv Aristotle Onassis Lounge",
+    region: "Greece",
+    location: "Athens (ATH)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Great lounge—decent food, not too crowded, and nice bathrooms.",
+    image: null,
+    content: `
+      <p>Athens International Airport (ATH), Athens, Greece</p>
+      <p>It is a great lounge. Decent food, not too crowded, and nice bathrooms.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "athens", "ath", "skyserv"]
   },
   {
     slug: "chase-sapphire-lounge-san-diego",
     title: "Chase Sapphire Lounge",
     region: "US",
-    location: "San Diego",
+    location: "San Diego (SAN)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
@@ -501,7 +611,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "chase-sapphire-lounge-las-vegas",
     title: "Chase Sapphire Lounge, Las Vegas",
     region: "US",
-    location: "Las Vegas",
+    location: "Las Vegas (LAS)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
@@ -519,24 +629,31 @@ const HALAL_VIBES_ENTRIES = [
     slug: "san-jose-airport-lounge",
     title: "San Jose Airport Lounge",
     region: "US",
-    location: "San Jose",
+    location: "San Jose (SJC)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
     stars: 2,
-    excerpt: "",
+    excerpt: "Breakfast is good, but evening halal/veg options are slim (often just chicken). Terminal A only—far from Terminal B gates. Dry cookies, but a really nice coworking space.",
     image: null,
     content: `
-      <p>Mineta San Jose International Airport (SJC), San Jose, CA</p>
+      <p>Mineta San Jose International Airport (SJC), Terminal A — San Jose, CA</p>
+      <p>This was the first lounge I've ever been to, so it pains me to make this review.</p>
+      <p>I have to say, in my experience, their breakfast is good. However, I've been there around 6PM many many times, only to say that their lunch/dinner options are pretty much nil if you can't eat meat. As someone who only eats halal certified meat, I am not able to eat their lunch/dinner because it's usually just one option that is chicken.</p>
+      <p>After living in San Jose, I can confidently say that I am not alone in not being able to eat their meals with meat, as a lot of the community is vegetarian.</p>
+      <p>Another note is that their cookies are consistently dry which I find surprising for a lounge that presumably has a kitchen.</p>
+      <p>Another problem is that people usually come to SJC to fly out of terminal B, but this, which is the nearest lounge, is in terminal A, forcing people to have to walk far from their gate in order to use their lounge benefits.</p>
+      <p>I would rate lower if it wasn't for the fact that they have a really nice coworking space.</p>
+      <p><strong>Update:</strong> Food options have gotten slightly better—they started including quesadillas that don't have to contain meat.</p>
     `,
-    date: "2025-05-31",
-    tags: ["lounge", "airport", "san jose"]
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "san jose", "sjc", "halal", "vegetarian", "terminal a"]
   },
   {
     slug: "iga-lounge-istanbul",
     title: "iGA Lounge",
     region: "Turkey",
-    location: "Istanbul",
+    location: "Istanbul (IST)",
     categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
