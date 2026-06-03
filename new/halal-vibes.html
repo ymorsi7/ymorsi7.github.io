@@ -607,6 +607,7 @@
 			flex: 1;
 		}
 
+		.hv-halal-badge,
 		.hv-non-meat-badge {
 			display: inline-flex;
 			align-items: center;
@@ -616,12 +617,22 @@
 			font-size: 0.72rem;
 			font-weight: 600;
 			line-height: 1.35;
-			color: #5c4a1a;
-			background: #fef3c7;
-			border: 1px solid rgba(212, 160, 23, 0.4);
 			border-radius: 6px;
 		}
 
+		.hv-halal-badge {
+			color: #14532d;
+			background: #dcfce7;
+			border: 1px solid rgba(22, 101, 52, 0.35);
+		}
+
+		.hv-non-meat-badge {
+			color: #5c4a1a;
+			background: #fef3c7;
+			border: 1px solid rgba(212, 160, 23, 0.4);
+		}
+
+		.hv-modal-content .hv-halal-badge,
 		.hv-modal-content .hv-non-meat-badge {
 			margin-bottom: 1rem;
 		}
@@ -1120,6 +1131,14 @@
 				return getCityGroup(entry.location);
 			}
 
+			/** Halal spots before "not halal · good non-meat options" entries. */
+			function compareEntries(a, b) {
+				const aNonMeat = a.nonMeatOptions ? 1 : 0;
+				const bNonMeat = b.nonMeatOptions ? 1 : 0;
+				if (aNonMeat !== bNonMeat) return aNonMeat - bNonMeat;
+				return normalizeCity(a.location).localeCompare(normalizeCity(b.location)) || a.title.localeCompare(b.title);
+			}
+
 			function compareGroups(a, b) {
 				if (sectionFilter === 'lounges') {
 					const pa = LOUNGE_REGION_PRIORITY.indexOf(a);
@@ -1259,6 +1278,10 @@
 				};
 			})();
 
+			function renderHalalBadge() {
+				return '<p class="hv-halal-badge" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Halal</p>';
+			}
+
 			function renderNonMeatBadge() {
 				return '<p class="hv-non-meat-badge" role="status"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Not halal · good non-meat options</p>';
 			}
@@ -1288,6 +1311,7 @@
 					<div class="card-body">
 						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
 						<h3 class="card-title">${entry.title}</h3>
+						${entry.halalBadge ? renderHalalBadge() : ''}
 						${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
 						${scoresWrap}
 						${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
@@ -1342,7 +1366,7 @@
 
 						const grid = document.createElement('div');
 						grid.className = 'hv-entries-grid';
-						entriesInGroup.sort((a, b) => normalizeCity(a.location).localeCompare(normalizeCity(b.location)) || a.title.localeCompare(b.title));
+						entriesInGroup.sort(compareEntries);
 						entriesInGroup.forEach(entry => grid.appendChild(buildCard(entry)));
 						group.appendChild(grid);
 
@@ -1351,7 +1375,7 @@
 				} else {
 					const grid = document.createElement('div');
 					grid.className = 'hv-entries-grid';
-					filtered.forEach(entry => grid.appendChild(buildCard(entry)));
+					filtered.sort(compareEntries).forEach(entry => grid.appendChild(buildCard(entry)));
 					container.appendChild(grid);
 				}
 
@@ -1400,6 +1424,7 @@
 						<span class="card-tag">${normalizeCity(entry.location)}</span>
 						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
+					${entry.halalBadge ? renderHalalBadge() : ''}
 					${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
 					${entry.stars != null ? renderStars(entry.stars) : ''}
 					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}

@@ -10,6 +10,7 @@
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
  * nonMeatOptions: true — show "Not halal · good non-meat options" badge on card
+ * halalBadge: true — show "Halal" badge on card and modal
  */
 const HALAL_VIBES_ENTRIES = [
   {
@@ -91,6 +92,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Jose",
     categories: ["coffee", "food", "vibes"],
+    halalBadge: true,
     foodScore: null,
     vibesScore: null,
     excerpt: "",
@@ -277,6 +279,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Santa Clara",
     categories: ["coffee", "vibes"],
+    halalBadge: true,
     foodScore: 6,
     vibesScore: 9,
     excerpt: "Amazing atmosphere and probably the best bathroom I've ever seen in a public place. Just Peachy drink is good. Coffee isn't the greatest but atmosphere is great.",
@@ -331,7 +334,7 @@ const HALAL_VIBES_ENTRIES = [
     slug: "mr-toots-coffeehouse-capitola",
     title: "Mr Toots Coffeehouse",
     region: "US",
-    location: "Capitola",
+    location: "Santa Cruz/Capitola",
     categories: ["coffee", "vibes"],
     foodScore: 8,
     vibesScore: 10,
@@ -962,6 +965,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Chicago",
     categories: ["coffee", "food", "vibes"],
+    halalBadge: true,
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Beautiful on the inside. Spanish Latte good. Peach and Mango espresso AMAZING. Chocolate chip cookies and chocolate cake amazing. 8.5/10 vibe score.",
@@ -1272,6 +1276,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Chicago",
     categories: ["food", "vibes"],
+    halalBadge: true,
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Favorite halal breakfast spot in Chicago. Amazing bagels where you can add meat and it's halal. Great location, lovely park nearby. A bit of a line but worth it. 8.5/10 vibe score.",
@@ -1411,6 +1416,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Sunnyvale",
     categories: ["coffee", "vibes"],
+    halalBadge: true,
     foodScore: null,
     vibesScore: null,
     excerpt: "",
