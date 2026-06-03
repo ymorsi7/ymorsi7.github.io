@@ -178,29 +178,66 @@
 			cursor: crosshair;
 		}
 
-		.footer {
+		.page-footer {
+			flex-shrink: 0;
 			background: var(--bg-white);
-			padding: 1rem 2rem;
+			padding: 0.75rem 1.5rem;
 			border-top: 1px solid var(--border-color);
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
 		}
 
-		.footer a {
+		.page-footer-inner {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 0.5rem 1.25rem;
+		}
+
+		.page-footer-nav {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.25rem 0.5rem;
+		}
+
+		.page-footer-nav a {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
 			color: var(--blue-primary);
 			text-decoration: none;
 			font-weight: 500;
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
+			font-size: 0.875rem;
+			padding: 0.4rem 0.7rem;
+			border-radius: 6px;
+			white-space: nowrap;
 		}
 
-		.footer a:hover {
+		.page-footer-nav a:hover {
 			color: var(--blue-hover);
+			background: var(--bg-light);
+		}
+
+		.page-footer-nav .sep {
+			color: var(--text-light);
+			font-size: 0.75rem;
+			user-select: none;
+			padding: 0 0.1rem;
+		}
+
+		.page-footer-hint {
+			margin: 0;
+			color: var(--text-light);
+			font-size: 0.8rem;
+			white-space: nowrap;
 		}
 
 		@media screen and (max-width: 768px) {
+			.page-footer-inner {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
 			.toolbar {
 				padding: 0.75rem;
 			}
@@ -273,20 +310,18 @@
 			<canvas id="drawingCanvas" width="1200" height="800"></canvas>
 		</div>
 
-		<footer class="footer">
-			<div>
-				<a href="tools.html">
-					<i class="fas fa-tools"></i> More Tools
-				</a>
-				<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-				<a href="old/photography.html" target="_blank">Photography</a>
-				<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-				<a href="halal-vibes.html">Halal Vibes</a>
-				<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-				<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
-			</div>
-			<div style="color: var(--text-medium); font-size: 0.9rem;">
-				Press and drag to draw
+		<footer class="page-footer">
+			<div class="page-footer-inner">
+				<nav class="page-footer-nav" aria-label="Site links">
+					<a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i> More Tools</a>
+					<span class="sep" aria-hidden="true">·</span>
+					<a href="old/photography.html" target="_blank" rel="noopener">Photography</a>
+					<span class="sep" aria-hidden="true">·</span>
+					<a href="halal-vibes.html">Halal Vibes</a>
+					<span class="sep" aria-hidden="true">·</span>
+					<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list" aria-hidden="true"></i> UCSD Tier List</a>
+				</nav>
+				<p class="page-footer-hint">Press and drag to draw</p>
 			</div>
 		</footer>
 	</div>
