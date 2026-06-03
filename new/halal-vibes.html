@@ -327,10 +327,15 @@
 
 		.hv-city-group-header {
 			display: flex;
-			align-items: center;
+			align-items: flex-start;
 			gap: 12px;
 			margin-bottom: 1.25rem;
 			padding: 0.5rem 0;
+		}
+
+		.hv-city-group-header > div:first-child {
+			flex: 1;
+			min-width: 0;
 		}
 
 		.hv-city-group-header h3 {
@@ -340,7 +345,15 @@
 			color: var(--primary-dark);
 		}
 
-		.hv-city-group-header span {
+		.hv-city-group-sub {
+			margin: 0.35rem 0 0;
+			font-size: 0.8rem;
+			color: var(--text-muted);
+			line-height: 1.4;
+		}
+
+		.hv-city-group-header > span {
+			flex-shrink: 0;
 			font-size: 0.8rem;
 			font-weight: 600;
 			color: var(--text-muted);
@@ -354,6 +367,8 @@
 			flex: 1;
 			height: 1px;
 			background: rgba(45, 74, 62, 0.1);
+			align-self: center;
+			min-width: 12px;
 		}
 
 		/* Ad slots - larger for better monetization */
@@ -927,7 +942,7 @@
 					</button>
 				</div>
 				<div class="hv-city-bar">
-					<span class="hv-city-label">City</span>
+					<span class="hv-city-label">Area</span>
 					<div class="hv-city-scroll-wrap">
 						<div class="hv-city-scroll" id="hv-city-chips" role="group" aria-label="Filter by city"></div>
 					</div>
@@ -1010,7 +1025,32 @@
 				lounges: { title: 'Airport Lounges', subtitle: 'Layovers done right' }
 			};
 
-			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'San Jose', 'San Francisco'];
+			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'SF South Bay', 'San Francisco'];
+
+			/** Lounge entries group by travel region (not city). */
+			const LOUNGE_REGION_MAP = {
+				'US': 'US',
+				'Egypt': 'Middle East',
+				'Saudi Arabia': 'Middle East',
+				'Turkey': 'Middle East',
+				'UK': 'Europe',
+				'United Kingdom': 'Europe'
+			};
+
+			const LOUNGE_REGION_PRIORITY = ['US', 'Middle East', 'Europe'];
+
+			/** Metro groups for browse/filter (cards still show the specific city). */
+			const CITY_TO_GROUP = {
+				'San Jose': 'SF South Bay',
+				'Mountain View': 'SF South Bay',
+				'Santa Clara': 'SF South Bay',
+				'Sunnyvale': 'SF South Bay',
+				'Palo Alto': 'SF South Bay',
+				'Malibu': 'Los Angeles',
+				'Venice': 'Los Angeles',
+				'Buena Park': 'Los Angeles',
+				'Santa Clarita': 'Los Angeles'
+			};
 
 			const DESSERT_TAG_HINTS = ['desserts', 'donuts', 'pastries', 'croissants', 'bakery'];
 
@@ -1027,7 +1067,31 @@
 				return loc.replace(/,\s*(Egypt|United Kingdom|Saudi Arabia|Turkey)$/i, '').trim();
 			}
 
-			function compareCities(a, b) {
+			function getCityGroup(loc) {
+				const city = normalizeCity(loc);
+				return CITY_TO_GROUP[city] || city;
+			}
+
+			function getLoungeRegion(entry) {
+				return LOUNGE_REGION_MAP[entry.region] || entry.region;
+			}
+
+			function getGroupKey(entry) {
+				if (getEntrySection(entry) === 'lounges') {
+					return getLoungeRegion(entry);
+				}
+				return getCityGroup(entry.location);
+			}
+
+			function compareGroups(a, b) {
+				if (sectionFilter === 'lounges') {
+					const pa = LOUNGE_REGION_PRIORITY.indexOf(a);
+					const pb = LOUNGE_REGION_PRIORITY.indexOf(b);
+					if (pa !== -1 && pb !== -1) return pa - pb;
+					if (pa !== -1) return -1;
+					if (pb !== -1) return 1;
+					return a.localeCompare(b);
+				}
 				const pa = CITY_PRIORITY.indexOf(a);
 				const pb = CITY_PRIORITY.indexOf(b);
 				if (pa !== -1 && pb !== -1) return pa - pb;
@@ -1063,31 +1127,35 @@
 				return HALAL_VIBES_ENTRIES.filter(e => getEntrySection(e) === section);
 			}
 
-			function getCityCounts(entries) {
+			function getGroupCounts(entries) {
 				const counts = {};
 				entries.forEach(e => {
-					const city = normalizeCity(e.location);
-					counts[city] = (counts[city] || 0) + 1;
+					const group = getGroupKey(e);
+					counts[group] = (counts[group] || 0) + 1;
 				});
-				return Object.entries(counts).sort((a, b) => compareCities(a[0], b[0]));
+				return Object.entries(counts).sort((a, b) => compareGroups(a[0], b[0]));
 			}
 
 			function matchesFilters(entry) {
 				if (getEntrySection(entry) !== sectionFilter) return false;
 				if (cityFilter === 'all') return true;
-				return normalizeCity(entry.location) === cityFilter;
+				return getGroupKey(entry) === cityFilter;
 			}
 
 			function renderCityChips() {
 				const container = document.getElementById('hv-city-chips');
+				const filterLabel = document.querySelector('.hv-city-label');
+				const isLounges = sectionFilter === 'lounges';
+				if (filterLabel) filterLabel.textContent = isLounges ? 'Region' : 'Area';
+
 				const sectionEntries = getSectionEntries(sectionFilter);
-				const cities = getCityCounts(sectionEntries);
+				const groups = getGroupCounts(sectionEntries);
 				container.innerHTML = '';
 
 				const allChip = document.createElement('button');
 				allChip.type = 'button';
 				allChip.className = 'hv-city-chip' + (cityFilter === 'all' ? ' active' : '');
-				allChip.innerHTML = `All cities <span class="chip-count">${sectionEntries.length}</span>`;
+				allChip.innerHTML = `${isLounges ? 'All regions' : 'All areas'} <span class="chip-count">${sectionEntries.length}</span>`;
 				allChip.addEventListener('click', () => {
 					cityFilter = 'all';
 					renderCityChips();
@@ -1095,13 +1163,13 @@
 				});
 				container.appendChild(allChip);
 
-				cities.forEach(([city, count]) => {
+				groups.forEach(([group, count]) => {
 					const chip = document.createElement('button');
 					chip.type = 'button';
-					chip.className = 'hv-city-chip' + (cityFilter === city ? ' active' : '');
-					chip.innerHTML = `${city} <span class="chip-count">${count}</span>`;
+					chip.className = 'hv-city-chip' + (cityFilter === group ? ' active' : '');
+					chip.innerHTML = `${group} <span class="chip-count">${count}</span>`;
 					chip.addEventListener('click', () => {
-						cityFilter = city;
+						cityFilter = group;
 						renderCityChips();
 						renderCards();
 					});
@@ -1116,7 +1184,8 @@
 				if (count === 0) {
 					subtitle.textContent = 'No spots in this section yet.';
 				} else if (cityFilter === 'all') {
-					subtitle.textContent = `${count} spot${count === 1 ? '' : 's'} · grouped by city`;
+					const groupBy = sectionFilter === 'lounges' ? 'region' : 'area';
+					subtitle.textContent = `${count} spot${count === 1 ? '' : 's'} · grouped by ${groupBy}`;
 				} else {
 					subtitle.textContent = `${count} spot${count === 1 ? '' : 's'} in ${cityFilter}`;
 				}
@@ -1190,32 +1259,39 @@
 				updateResultsHeader(filtered.length);
 
 				if (filtered.length === 0) {
-					container.innerHTML = '<p class="hv-empty-state">No spots here yet. Try another city or section.</p>';
+					container.innerHTML = '<p class="hv-empty-state">No spots here yet. Try another area or section.</p>';
 					return;
 				}
 
 				if (cityFilter === 'all') {
 					const grouped = {};
 					filtered.forEach(entry => {
-						const city = normalizeCity(entry.location);
-						if (!grouped[city]) grouped[city] = [];
-						grouped[city].push(entry);
+						const key = getGroupKey(entry);
+						if (!grouped[key]) grouped[key] = [];
+						grouped[key].push(entry);
 					});
 
-					const sortedCities = Object.keys(grouped).sort(compareCities);
+					const sortedGroups = Object.keys(grouped).sort(compareGroups);
 
-					sortedCities.forEach(city => {
+					sortedGroups.forEach(groupName => {
 						const group = document.createElement('section');
 						group.className = 'hv-city-group';
 
+						const entriesInGroup = grouped[groupName];
+						const subLabels = [...new Set(entriesInGroup.map(e => normalizeCity(e.location)))].sort((a, b) => a.localeCompare(b));
+						const subHint = subLabels.length > 1
+							? `<p class="hv-city-group-sub">${subLabels.join(' · ')}</p>`
+							: '';
+
 						const header = document.createElement('div');
 						header.className = 'hv-city-group-header';
-						header.innerHTML = `<h3>${city}</h3><span>${grouped[city].length} spot${grouped[city].length === 1 ? '' : 's'}</span>`;
+						header.innerHTML = `<div><h3>${groupName}</h3>${subHint}</div><span>${entriesInGroup.length} spot${entriesInGroup.length === 1 ? '' : 's'}</span>`;
 						group.appendChild(header);
 
 						const grid = document.createElement('div');
 						grid.className = 'hv-entries-grid';
-						grouped[city].forEach(entry => grid.appendChild(buildCard(entry)));
+						entriesInGroup.sort((a, b) => normalizeCity(a.location).localeCompare(normalizeCity(b.location)) || a.title.localeCompare(b.title));
+						entriesInGroup.forEach(entry => grid.appendChild(buildCard(entry)));
 						group.appendChild(grid);
 
 						container.appendChild(group);

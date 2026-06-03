@@ -141,7 +141,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "La Jolla. Only good to go in the morning.",
-    image: null,
+    image: "images/3.jpg",
     content: `
       <p>La Jolla, San Diego, CA</p>
       <p>Only good to go in the morning.</p>
@@ -446,6 +446,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "cairo"]
   },
   {
+    slug: "pearl-lounge-alexandria-hbe",
+    title: "Pearl Lounge",
+    region: "Egypt",
+    location: "Alexandria, Egypt",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 1,
+    excerpt: "Very few food options and poor quality—nothing filling. Tiny, cramped space. Often have to wait; Priority Pass frequently doesn't sync with their system.",
+    image: null,
+    content: `
+      <p>Borg El Arab Airport (HBE), Alexandria Governorate, Egypt</p>
+      <p>Very little food options, and the quality of them aren't good—and nothing filling. Also very small space and very crammed. Often times I go there and have to wait because they have issues getting Priority Pass to work with the system.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "alexandria", "hbe", "priority pass"]
+  },
+  {
     slug: "etihad-lounge-washington",
     title: "Etihad Airways Washington Lounge",
     region: "US",
@@ -455,7 +473,7 @@ const HALAL_VIBES_ENTRIES = [
     vibesScore: null,
     stars: 4,
     excerpt: "",
-    image: null,
+    image: "images/IMG_2590.jpg",
     content: `
       <p>Washington Dulles International Airport (IAD), Washington, D.C.</p>
     `,
@@ -478,6 +496,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-05-31",
     tags: ["lounge", "airport", "san diego"]
+  },
+  {
+    slug: "chase-sapphire-lounge-las-vegas",
+    title: "Chase Sapphire Lounge, Las Vegas",
+    region: "US",
+    location: "Las Vegas",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Food options are great, but the wait is annoying and it's crowded. I was stuck at the bar with nowhere else to sit—even though I don't drink. Also a bit of a walk from where I was.",
+    image: "images/vegas.jpg",
+    content: `
+      <p>Harry Reid International Airport (LAS), Las Vegas, NV</p>
+      <p>Food options are great. The wait is very annoying, and it's crowded—I was stuck sitting at a bar despite not drinking, because according to the waiter there was nowhere else to sit. Also a bit of a walk from where I was.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "las vegas", "chase sapphire"]
   },
   {
     slug: "san-jose-airport-lounge",
@@ -594,7 +630,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/images.jpg",
     content: `
       <p>88 El-Horeya Rd, Bab Sharqi WA Wabour Al Meyah, Bab Shar', Alexandria Governorate 5423002, Egypt</p>
     `,
@@ -903,7 +939,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 8,
     vibesScore: 9,
     excerpt: "Really enjoyed their matcha. Quite a line every time but worth it. Recommend going with friends, then walking across Golden Gate Bridge and back. Parking pretty bad. 9/10 vibe score.",
-    image: null,
+    image: "images/20210623_Equator_Coffees_at_Roundhouse_Images_and_Press_Release_Credit_Equator_Coffees_002.webp",
     content: `
       <p>Golden Gate Bridge Plaza, San Francisco, CA 94129</p>
       <p>I really enjoyed their matcha. Quite a line every time I go but worth it. I recommend going with friends/family, maybe getting something to eat/drink, then walking across the Golden Gate Bridge and back. Definitely a time to remember. Parking situation is pretty bad though. 9/10 vibe score (just crowded)</p>
@@ -1274,7 +1310,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/Cereal-Milk-French-toast-1.webp",
     content: `
       <p>Santa Monica, Los Angeles, CA</p>
     `,
@@ -1306,7 +1342,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "images/ceeremony.webp",
     content: `
       <p>Harbor Point, Baltimore, MD</p>
     `,
