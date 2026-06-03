@@ -1,0 +1,11 @@
+{
+  "name": "ymorsi-site-new",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:alarm": "node tests/alarm-buttons.test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.49.0"
+  }
+}

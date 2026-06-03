@@ -70,7 +70,9 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             max-width: 500px;
             width: 90%;
+            position: relative;
             z-index: 10;
+            pointer-events: auto;
             transition: background-color 0.3s ease;
         }
 
@@ -446,40 +448,40 @@
 
     <div class="container" id="mainContainer">
         <div class="header">
-            <button class="night-mode-btn" id="nightModeBtn">Night Mode</button>
+            <button type="button" class="night-mode-btn" id="nightModeBtn">Night Mode</button>
             <div class="current-time-display">Current time is: <span id="currentTime">00:00:00 AM</span></div>
         </div>
 
         <div class="alarm-display-container">
             <div class="alarm-label">Wake me up at:</div>
             <div class="time-display">
-                <span id="alarmHourDisplay">07</span>:<span id="alarmMinuteDisplay">00</span><span class="am-pm" id="alarmAmPm">AM</span>
+                <span id="alarmHourDisplay">07</span>:<span id="alarmMinuteDisplay">00</span><span class="am-pm" id="alarmAmPmLabel">AM</span>
             </div>
             <div class="control-buttons">
-                <button class="control-btn" id="hourUp">+</button>
-                <button class="control-btn" id="hourDown">-</button>
-                <button class="control-btn" id="minuteUp">+</button>
-                <button class="control-btn" id="minuteDown">-</button>
+                <button type="button" class="control-btn" id="hourUp" aria-label="Increase hour">+</button>
+                <button type="button" class="control-btn" id="hourDown" aria-label="Decrease hour">−</button>
+                <button type="button" class="control-btn" id="minuteUp" aria-label="Increase minute">+</button>
+                <button type="button" class="control-btn" id="minuteDown" aria-label="Decrease minute">−</button>
             </div>
         </div>
 
         <div class="sound-selector">
             <label>with the sound of:</label>
             <div class="sound-buttons">
-                <button class="sound-btn active" data-sound="birds">🌅 Morning Birds</button>
-                <button class="sound-btn" data-sound="forest">🌲 Forest Dawn</button>
-                <button class="sound-btn" data-sound="ocean">🌊 Ocean Waves</button>
-                <button class="sound-btn" data-sound="wind">🍃 Gentle Wind</button>
+                <button type="button" class="sound-btn active" data-sound="birds">🌅 Morning Birds</button>
+                <button type="button" class="sound-btn" data-sound="forest">🌲 Forest Dawn</button>
+                <button type="button" class="sound-btn" data-sound="ocean">🌊 Ocean Waves</button>
+                <button type="button" class="sound-btn" data-sound="wind">🍃 Gentle Wind</button>
             </div>
             <div class="preview-controls">
-                <button class="btn btn-primary" id="previewBtn">Preview Sound</button>
-                <button class="btn btn-primary" id="stopPreviewBtn">Stop</button>
+                <button type="button" class="btn btn-primary" id="previewBtn">Preview Sound</button>
+                <button type="button" class="btn btn-primary" id="stopPreviewBtn">Stop</button>
             </div>
         </div>
 
         <div style="text-align: center;">
-            <button class="btn btn-primary" id="setAlarmBtn">Set Alarm</button>
-            <button class="btn btn-secondary hidden" id="cancelAlarmBtn">Cancel Alarm</button>
+            <button type="button" class="btn btn-primary" id="setAlarmBtn">Set Alarm</button>
+            <button type="button" class="btn btn-secondary hidden" id="cancelAlarmBtn">Cancel Alarm</button>
         </div>
 
         <div class="status" id="status"></div>
@@ -488,8 +490,8 @@
     <div class="alarm-active hidden" id="alarmActive">
         <div class="wake-up-text">Wake Up!</div>
         <div>
-            <button class="btn btn-primary" id="stopBtn" style="font-size: 1.5rem; padding: 20px 40px;">Stop</button>
-            <button class="btn btn-secondary" id="snoozeBtn" style="font-size: 1.5rem; padding: 20px 40px;">Snooze 10 minutes</button>
+            <button type="button" class="btn btn-primary" id="stopBtn" style="font-size: 1.5rem; padding: 20px 40px;">Stop</button>
+            <button type="button" class="btn btn-secondary" id="snoozeBtn" style="font-size: 1.5rem; padding: 20px 40px;">Snooze 10 minutes</button>
         </div>
     </div>
 
@@ -505,7 +507,7 @@
         let previewAudio = null;
         let alarmHour = 7;
         let alarmMinute = 0;
-        let alarmAmPm = 'AM';
+        let alarmPeriod = 'AM';
         let nightMode = false;
 
         // Sound files from the sounds folder
@@ -515,6 +517,10 @@
             ocean: 'sounds/ocean.mp3',
             wind: 'sounds/wind.mp3'
         };
+
+        function getSolarGradientEl() {
+            return document.getElementById('solarGradient');
+        }
 
         // Convert 24-hour to 12-hour format
         function to12Hour(hour24) {
@@ -539,7 +545,7 @@
         function updateAlarmDisplay() {
             document.getElementById('alarmHourDisplay').textContent = String(alarmHour).padStart(2, '0');
             document.getElementById('alarmMinuteDisplay').textContent = String(alarmMinute).padStart(2, '0');
-            document.getElementById('alarmAmPm').textContent = alarmAmPm;
+            document.getElementById('alarmAmPmLabel').textContent = alarmPeriod;
         }
 
         // Update current time display
@@ -565,7 +571,7 @@
                 alarmHour = 1;
             }
             if (alarmHour === 12) {
-                alarmAmPm = alarmAmPm === 'AM' ? 'PM' : 'AM';
+                alarmPeriod = alarmPeriod === 'AM' ? 'PM' : 'AM';
             }
             updateAlarmDisplay();
         });
@@ -576,7 +582,7 @@
                 alarmHour = 12;
             }
             if (alarmHour === 11) {
-                alarmAmPm = alarmAmPm === 'AM' ? 'PM' : 'AM';
+                alarmPeriod = alarmPeriod === 'AM' ? 'PM' : 'AM';
             }
             updateAlarmDisplay();
         });
@@ -651,7 +657,7 @@
 
         // Set alarm
         document.getElementById('setAlarmBtn').addEventListener('click', () => {
-            const hour24 = to24Hour(alarmHour, alarmAmPm);
+            const hour24 = to24Hour(alarmHour, alarmPeriod);
 
             const now = new Date();
             alarmTime = new Date();
@@ -665,7 +671,7 @@
             const timeUntilAlarm = alarmTime - now;
             const minutesUntilAlarm = Math.floor(timeUntilAlarm / 60000);
 
-            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmAmPm}`;
+            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmPeriod}`;
             document.getElementById('status').textContent = `Alarm is set for ${displayTime} (${minutesUntilAlarm} minutes from now)`;
             document.getElementById('status').classList.add('active');
             document.getElementById('setAlarmBtn').classList.add('hidden');
@@ -768,8 +774,10 @@
             }
             
             // Update gradient overlay
-            const gradient = document.getElementById('solar-gradient');
-            gradient.style.opacity = Math.max(0, 1 - brightness * 1.2);
+            const gradient = getSolarGradientEl();
+            if (gradient) {
+                gradient.style.opacity = Math.max(0, 1 - brightness * 1.2);
+            }
             
             // Add sunrise gradient overlay
             let sunriseGrad = document.getElementById('sunrise-gradient');
@@ -793,7 +801,10 @@
             sun.style.height = '200px';
             sun.style.top = '50%';
             sun.classList.remove('active');
-            document.getElementById('solar-gradient').style.opacity = '1';
+            const gradient = getSolarGradientEl();
+            if (gradient) {
+                gradient.style.opacity = '1';
+            }
             const sunriseGrad = document.getElementById('sunrise-gradient');
             if (sunriseGrad) {
                 sunriseGrad.style.opacity = '0';
@@ -879,10 +890,10 @@
             const time12 = to12Hour(hour24);
             alarmHour = time12.hour;
             alarmMinute = alarmTime.getMinutes();
-            alarmAmPm = time12.amPm;
+            alarmPeriod = time12.amPm;
             updateAlarmDisplay();
 
-            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmAmPm}`;
+            const displayTime = `${String(alarmHour).padStart(2, '0')}:${String(alarmMinute).padStart(2, '0')} ${alarmPeriod}`;
             document.getElementById('status').textContent = `Alarm snoozed! Will wake you at ${displayTime}`;
             document.getElementById('status').classList.add('active');
             document.getElementById('setAlarmBtn').classList.remove('hidden');

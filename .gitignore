@@ -9,3 +9,5 @@
 .env.production
 new/.DS_Store
 new/old/.DS_Store
+new/node_modules/
+new/package-lock.json
