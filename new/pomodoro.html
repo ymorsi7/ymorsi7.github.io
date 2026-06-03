@@ -226,24 +226,38 @@
 			border-color: var(--blue-primary);
 		}
 
-		.footer {
+		.page-footer {
 			margin-top: 2rem;
-			padding-top: 2rem;
-			border-top: 2px solid var(--border-color);
+			padding-top: 1.5rem;
+			border-top: 1px solid var(--border-color);
 		}
 
-		.footer a {
+		.page-footer-nav {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem 0.75rem;
+		}
+
+		.page-footer-nav a {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
 			color: var(--blue-primary);
 			text-decoration: none;
 			font-weight: 500;
-			display: inline-flex;
-			align-items: center;
-			gap: 0.5rem;
+			font-size: 0.875rem;
+			padding: 0.35rem 0.6rem;
+			border-radius: 6px;
+			white-space: nowrap;
 		}
 
-		.footer a:hover {
+		.page-footer-nav a:hover {
 			color: var(--blue-hover);
+			background: var(--bg-light);
 		}
+
 
 		.progress-bar {
 			width: 100%;
@@ -339,21 +353,15 @@
 			</div>
 		</div>
 
-		<div class="footer">
-			<a href="index.html">
-				<i class="fas fa-arrow-left"></i> Back to Portfolio
-			</a>
-			<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-			<a href="tools.html">
-				<i class="fas fa-tools"></i> More Tools
-			</a>
-			<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-			<a href="old/photography.html" target="_blank">Photography</a>
-			<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-			<a href="halal-vibes.html">Halal Vibes</a>
-			<span style="margin: 0 1rem; color: var(--text-medium);">|</span>
-			<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
-		</div>
+		<footer class="page-footer">
+			<nav class="page-footer-nav" aria-label="Site links">
+				<a href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Portfolio</a>
+				<a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i> More Tools</a>
+				<a href="old/photography.html" target="_blank" rel="noopener">Photography</a>
+				<a href="halal-vibes.html">Halal Vibes</a>
+				<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list" aria-hidden="true"></i> UCSD Tier List</a>
+			</nav>
+		</footer>
 	</div>
 
 	<script>
