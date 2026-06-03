@@ -9,6 +9,7 @@
  * Categories: coffee | food | vibes | lounges
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
+ * nonMeatOptions: true — show "Not halal · good non-meat options" badge on card
  */
 const HALAL_VIBES_ENTRIES = [
   {
@@ -173,6 +174,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Diego",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: null,
     vibesScore: null,
     excerpt: "Solana Beach. Only the seafood is halal,  not the full menu.",
@@ -190,6 +192,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Diego",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: null,
     vibesScore: null,
     excerpt: "Only the seafood is halal, not the full menu.",
@@ -304,6 +307,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2025-02-01",
     tags: ["halal", "philly", "sandwiches"]
   },
+  /*
   {
     slug: "halalstreet-xinjiang-mountain-view",
     title: "HalalStreet Xinjiang Cuisine",
@@ -322,6 +326,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2025-02-01",
     tags: ["halal", "xinjiang", "chinese"]
   },
+  */
   {
     slug: "mr-toots-coffeehouse-capitola",
     title: "Mr Toots Coffeehouse",
@@ -939,6 +944,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Diego",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: 9,
     vibesScore: 9,
     excerpt: "Amazing enchiladas. Sublime view. Very good service. Valet parking ($10),  worth it, especially with Chase Sapphire dining credit. 9/10 vibe score.",
@@ -948,7 +954,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>Amazing enchiladas. Sublime view. Very good service. Only issue was that you basically have to get valet parking (10 dollars) because was 0 parking in the lot, but I have to say it was worth it - especially if you have the Chase Sapphire dining credit. Price: $30–50. Food: 5. 9/10 vibe score</p>
     `,
     date: "2024-12-01",
-    tags: ["halal", "mexican", "waterfront"]
+    tags: ["mexican", "waterfront", "vegetarian options"]
   },
   {
     slug: "jazwah-coffee-chicago",
@@ -1010,6 +1016,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Diego",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: 9,
     vibesScore: 9,
     excerpt: "Great food with great service. Manicotti #1 recommendation. Bread with sauce appetizer pretty good. Olive Garden has no business being in the same complex. 9/10 vibe score.",
@@ -1019,7 +1026,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>Great food with great service. I loved the Manicotti, definitely #1 recommendation. Bread with sauce appetizer was also pretty good. I'm not usually big on Italian restaurants but honestly the Olive Garden has no business being in the same complex as this 😂. Food: 5 | Service: 5. 9/10 vibe score</p>
     `,
     date: "2024-11-01",
-    tags: ["halal", "italian"]
+    tags: ["italian", "vegetarian options"]
   },
   {
     slug: "dukes-malibu",
@@ -1027,6 +1034,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Malibu",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Best calamari in California. Amazing view of the coast. Social distancing done right, no flies. 8.5/10 vibe score.",
@@ -1036,7 +1044,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>Best calamari in California, in my opinion. Highly recommend it as an appetizer. Unlike the outdoor seating at other restaurants, this one implemented social distancing (in 2020), had no flies or anything, and an amazing view of the coast of Malibu. Food: 5 | Atmosphere: 5. 8.5/10 vibe score</p>
     `,
     date: "2024-11-01",
-    tags: ["halal", "seafood", "waterfront"]
+    tags: ["seafood", "waterfront", "vegetarian options"]
   },
   {
     slug: "alexandria-sporting-club",
@@ -1113,6 +1121,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Los Angeles",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: 8,
     vibesScore: 8,
     excerpt: "V2G Egg sandwich brilliant. Really got the 50s Hollywood feel. Great view of Hollywood sign on second floor. Bread a bit tasteless. 8/10 vibe score.",
@@ -1122,7 +1131,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>Great experience- especially for tourists. Really got the 50s Hollywood feel. Got the V2G Egg sandwich and it was brilliant. Only thing was that the bread was a bit tasteless. Great view of Hollywood sign on the second floor. You will probably have to street park if you don't come with an electric car, but I was able to easily find parking on a Sunday ~10:30 AM. 8/10 vibe score</p>
     `,
     date: "2024-10-01",
-    tags: ["halal", "breakfast", "hollywood"]
+    tags: ["breakfast", "hollywood", "vegetarian options"]
   },
   {
     slug: "hh-brazilian-steakhouse-beverlywood",
@@ -1245,6 +1254,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Miami",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: 9,
     vibesScore: 10,
     excerpt: "Great first-time Miami spot. Eggs benedict expensive but delectable. Main reason was the view,  was not disappointed. Parking not easy. 10/10 vibe score.",
@@ -1254,7 +1264,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>This place was great. I came here my first time in Miami to experience a place that captured the Miami vibe without any of the Miami sin haha. I ordered eggs benedict and they were quite expensive, but delectable nevertheless. The main reason I came here anyways, food aside, was for the view, which I was not disappointed by. Only criticism is that the parking wasn't so easy, but definitely would do again. Meal type: Breakfast. Price: $50–100. <strong>10/10 vibe score</strong></p>
     `,
     date: "2024-10-01",
-    tags: ["halal", "breakfast", "waterfront"]
+    tags: ["breakfast", "waterfront", "vegetarian options"]
   },
   {
     slug: "cafe-53-chicago",
@@ -1646,6 +1656,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Santa Clara",
     categories: ["food", "vibes"],
+    nonMeatOptions: true,
     foodScore: null,
     vibesScore: null,
     excerpt: "Tuna sandwich on sourdough is amazing.",
@@ -1655,7 +1666,7 @@ const HALAL_VIBES_ENTRIES = [
       <p>Tuna sandwich on sourdough is amazing.</p>
     `,
     date: "2025-05-31",
-    tags: ["halal", "sandwiches", "sourdough", "santa clara"]
+    tags: ["sandwiches", "sourdough", "santa clara", "vegetarian options"]
   },
   /*
   {
@@ -1708,20 +1719,91 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["halal", "bagels", "coffee", "bellevue"]
   },
   {
+    slug: "mr-shawarma-pacific-beach",
+    title: "Mr Shawarma",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4.5,
+    excerpt: "Pretty good shawarma (4–4.5 stars). Open late and good food—parking isn't great, and it can feel heavy fast.",
+    image: null,
+    content: `
+      <p>Pacific Beach, San Diego, CA</p>
+      <p>Pretty good shawarma—I'd say 4–4.5 stars. I personally get sick of it quickly because of how unhealthy it feels to me, and parking is not great, but they're open late, and it's good food.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["shawarma", "san diego", "pacific beach", "late night"]
+  },
+  {
+    slug: "busboys-and-poets-dc",
+    title: "Busboys and Poets",
+    region: "US",
+    location: "Washington, D.C.",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Pretty good vibes for coffee and hanging out. Food wasn't that great, but good for the vibes.",
+    image: null,
+    content: `
+      <p>Washington, D.C.</p>
+      <p>Pretty good vibes for coffee and hanging out. Food wasn't that great, but good for the vibes.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["coffee", "washington dc", "northern virginia", "hangout"]
+  },
+  {
+    slug: "nazs-halal-food-sterling",
+    title: "Naz's Halal Food",
+    region: "US",
+    location: "Sterling",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Pretty good food—I enjoyed it. 4 stars.",
+    image: null,
+    content: `
+      <p>Sterling, Northern Virginia</p>
+      <p>Pretty good food, I enjoyed it. I give it like 4 stars.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "sterling", "northern virginia"]
+  },
+  {
+    slug: "talkin-tacos-washington-dc",
+    title: "Talkin' Tacos",
+    region: "US",
+    location: "Washington, D.C.",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 5,
+    excerpt: "Great Mexican food and it's halal. Also decent service.",
+    image: null,
+    content: `
+      <p>Washington, D.C.</p>
+      <p>Great Mexican food and it's halal. Also decent service.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "mexican", "washington dc", "northern virginia"]
+  },
+  {
     slug: "bitez-arlington",
     title: "Bitez",
     region: "US",
-    location: "Arlington",
+    location: "Northern Virginia",
     categories: ["food", "vibes"],
     foodScore: null,
     vibesScore: null,
     excerpt: "",
     image: "images/arl.jpg",
     content: `
-      <p>Arlington, VA</p>
+      <p>Northern Virginia</p>
     `,
     date: "2025-06-01",
-    tags: ["halal", "arlington", "virginia"]
+    tags: ["halal", "northern virginia", "virginia"]
   },
   {
     slug: "bussin-buns-austin",
@@ -1754,5 +1836,252 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2025-06-01",
     tags: ["halal", "desserts", "cookies", "austin"]
+  },
+  {
+    slug: "living-room-coffeehouse-la-jolla",
+    title: "Living Room Coffeehouse",
+    region: "US",
+    location: "La Jolla",
+    categories: ["coffee", "food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Great spot indoors with decent food. Parking is hard to find. Halal status unclear—they have other options.",
+    image: null,
+    content: `
+      <p>La Jolla, San Diego, CA</p>
+      <p>Great spot. Indoors, however—decent food. Only problem is it is hard to find parking.</p>
+      <p><strong>Note:</strong> Not sure on halal status, but they've got other options.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["coffee", "la jolla", "san diego", "vegetarian options"]
+  },
+  {
+    slug: "egglet-la-jolla",
+    title: "Egglet",
+    region: "US",
+    location: "La Jolla",
+    categories: ["food", "vibes"],
+    nonMeatOptions: true,
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Good breakfast spot—very yummy.",
+    image: null,
+    content: `
+      <p>La Jolla, San Diego, CA</p>
+      <p>Good breakfast spot. Very yummy.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["breakfast", "la jolla", "san diego", "vegetarian options"]
+  },
+  {
+    slug: "craft-by-smoke-and-fire-anaheim",
+    title: "Craft By Smoke & Fire",
+    region: "US",
+    location: "Anaheim",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "I like their meat selections—pretty good and halal. Don't love that they also serve alcohol.",
+    image: null,
+    content: `
+      <p>Anaheim, CA (Orange County)</p>
+      <p>I like their meat selections, pretty good—it's halal. I don't like that they also serve alcohol though.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "bbq", "anaheim", "oc", "orange county"]
+  },
+  {
+    slug: "tasa2go-fullerton",
+    title: "Tasa2Go",
+    region: "US",
+    location: "Fullerton",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Great Egyptian food. A bit pricey.",
+    image: null,
+    content: `
+      <p>Fullerton, CA (Orange County)</p>
+      <p>Great Egyptian food. Four stars because it's a bit pricey.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "egyptian", "fullerton", "oc", "orange county"]
+  },
+  {
+    slug: "dr-ink-san-jose",
+    title: "Dr.ink",
+    region: "US",
+    location: "San Jose",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Good coffee spot in San Jose—pretty good for vibes.",
+    image: null,
+    content: `
+      <p>San Jose, CA</p>
+      <p>Good coffee spot in San Jose. Pretty good for vibes.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "coffee", "san jose", "south bay"]
+  },
+  // {
+  //   slug: "bagel-broker-los-angeles",
+  //   title: "Bagel Broker",
+  //   region: "US",
+  //   location: "Los Angeles",
+  //   categories: ["food", "vibes"],
+  //   foodScore: null,
+  //   vibesScore: null,
+  //   stars: 4,
+  //   excerpt: "Decent bagel (4 stars), but not great vibes—more on-the-go than a hangout spot. Meat isn't halal; lots of non-meat options.",
+  //   image: null,
+  //   content: `
+  //     <p>Los Angeles, CA</p>
+  //     <p>Not great vibes location, but decent bagel—I give it like 4 stars, but it's not on the top of my list of bagel spots for vibes. More for on the go.</p>
+  //     <p><strong>Note:</strong> Meat is not halal, but there are lots of non-meat options.</p>
+  //   `,
+  //   date: "2026-06-03",
+  //   tags: ["bagels", "los angeles", "vegetarian options", "on the go"]
+  // },
+  {
+    slug: "big-shoulders-coffee-chicago",
+    title: "Big Shoulders Coffee",
+    region: "US",
+    location: "Chicago",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Decent spot—good on the go, with a nice place to sit nearby. Great vibes.",
+    image: null,
+    content: `
+      <p>141 W Jackson Blvd, Chicago, IL 60604</p>
+      <p>Decent spot, good if you're on the go but also has a nice place to sit down nearby. Great vibes.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "coffee", "chicago"]
+  },
+  {
+    slug: "perch-los-angeles",
+    title: "Perch",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["desserts"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Decent rooftop dessert spot—great view, fine for 1–4 people. Sit away from the alcohol; parking isn't too easy.",
+    image: null,
+    content: `
+      <p>Los Angeles, CA</p>
+      <p>Decent rooftop dessert place. Make sure to sit away from the alcohol. Decent spot for 1–4 people. Great view. Parking not too easy though.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["desserts", "rooftop", "los angeles", "views"]
+  },
+  {
+    slug: "new-york-chicken-gyro-pasadena",
+    title: "New York Chicken & Gyro",
+    region: "US",
+    location: "Pasadena",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Pretty good platter, nice Pasadena area—the food wasn't bad. Halal; I enjoyed it.",
+    image: null,
+    content: `
+      <p>Pasadena, Los Angeles, CA</p>
+      <p>Pretty good platter, nice area, and the food wasn't bad. I enjoyed it. It's halal.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "gyro", "chicken", "pasadena", "los angeles"]
+  },
+  {
+    slug: "stumptown-cafe-portland",
+    title: "Stumptown Cafe",
+    region: "US",
+    location: "Portland",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4.5,
+    excerpt: "4.5 stars for vibes—great and amazing walkable area.",
+    image: null,
+    content: `
+      <p>1140 SW Washington St Ste 103, Portland, OR 97205</p>
+      <p>Great and amazing walkable area.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "coffee", "portland", "walkable"]
+  },
+  {
+    slug: "davincis-marco-island",
+    title: "DaVinci's",
+    region: "US",
+    location: "Marco Island",
+    categories: ["food", "vibes"],
+    nonMeatOptions: true,
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Decent food but extremely pricey. Some no-meat options that aren't too bad.",
+    image: null,
+    content: `
+      <p>Marco Island, FL</p>
+      <p>Decent food but extremely pricey. They have some no-meat options there that aren't too bad.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["vegetarian", "marco island", "florida"]
+  },
+  {
+    slug: "ibn-alsham-cairo",
+    title: "مطعم ابن الشام · Ibn Alsham Restaurant",
+    region: "Egypt",
+    location: "Cairo",
+    categories: ["food", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Popular Syrian/Levantine chain—shawarma, grills, and Damascene dishes. Branches in El Rehab and Fifth Settlement.",
+    image: null,
+    content: `
+      <p><strong>El Rehab:</strong> Commercial Market, Shop 161 (behind Ezaby Pharmacy)</p>
+      <p><strong>Fifth Settlement:</strong> Banks Center St, H1 Mall, New Cairo 1</p>
+      <p>Authentic Syrian and Levantine food—shawarma, charcoal grills, and family-style meals. Delivery hotline: 15155 · <a href="http://www.ibnalsham.com/" target="_blank" rel="noopener">ibnalsham.com</a></p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "syrian", "shawarma", "cairo", "el rehab", "new cairo"]
+  },
+  {
+    slug: "zein-al-sham-el-rehab-cairo",
+    title: "Zein al Sham · زين الشام",
+    region: "Egypt",
+    location: "Cairo",
+    categories: ["food"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "El Rehab. Syrian grills, shawarma, manaeesh, and Levantine plates in the Old Commercial Market.",
+    image: null,
+    content: `
+      <p>Old Commercial Market, Gate 6, Shop 127 (next to Koueider), El Rehab City, New Cairo</p>
+      <p>Syrian restaurant—shawarma, grills, sandwiches, manaeesh, and mansaf-style dishes. Hotline: 16551</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "syrian", "shawarma", "grill", "el rehab", "cairo"]
+  },
+  {
+    slug: "3am-bashandy-nasr-city-cairo",
+    title: "3am Bashandy · عم بشندي",
+    region: "Egypt",
+    location: "Cairo",
+    categories: ["food"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Amazing breakfast in Madinat Nasr—foul, falafel, and classic Egyptian morning plates.",
+    image: null,
+    content: `
+      <p><strong>Nasr City (Madinat Nasr):</strong> 16 El Sherka El Saudi Block · also E-Zone Mall (Omar Effendi), Makram Ebeid St</p>
+      <p>Traditional Egyptian breakfast spot—foul, taameya (falafel), and oriental plates. Great morning run. Hotline: 16319 · 0224113711</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "breakfast", "foul", "falafel", "nasr city", "cairo", "egyptian"]
   }
 ];

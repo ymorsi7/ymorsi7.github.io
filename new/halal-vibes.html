@@ -607,6 +607,25 @@
 			flex: 1;
 		}
 
+		.hv-non-meat-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			margin: 0 0 10px;
+			padding: 5px 10px;
+			font-size: 0.72rem;
+			font-weight: 600;
+			line-height: 1.35;
+			color: #5c4a1a;
+			background: #fef3c7;
+			border: 1px solid rgba(212, 160, 23, 0.4);
+			border-radius: 6px;
+		}
+
+		.hv-modal-content .hv-non-meat-badge {
+			margin-bottom: 1rem;
+		}
+
 		.hv-entry-card .card-read-more {
 			display: inline-flex;
 			align-items: center;
@@ -1032,7 +1051,7 @@
 				lounges: { title: 'Airport Lounges', subtitle: 'Layovers done right' }
 			};
 
-			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'SF South Bay', 'San Francisco'];
+			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'OC', 'SF South Bay', 'San Francisco', 'Northern Virginia / DC'];
 
 			/** Lounge entries group by travel region (not city). */
 			const LOUNGE_REGION_MAP = {
@@ -1051,6 +1070,8 @@
 
 			/** Metro groups for browse/filter (cards still show the specific city). */
 			const CITY_TO_GROUP = {
+				'La Jolla': 'San Diego',
+				'Bellevue': 'Seattle',
 				'San Jose': 'SF South Bay',
 				'Mountain View': 'SF South Bay',
 				'Santa Clara': 'SF South Bay',
@@ -1058,8 +1079,14 @@
 				'Palo Alto': 'SF South Bay',
 				'Malibu': 'Los Angeles',
 				'Venice': 'Los Angeles',
-				'Buena Park': 'Los Angeles',
-				'Santa Clarita': 'Los Angeles'
+				'Santa Clarita': 'Los Angeles',
+				'Pasadena': 'Los Angeles',
+				'Fullerton': 'OC',
+				'Buena Park': 'OC',
+				'Anaheim': 'OC',
+				'Northern Virginia': 'Northern Virginia / DC',
+				'Washington, D.C.': 'Northern Virginia / DC',
+				'Sterling': 'Northern Virginia / DC'
 			};
 
 			const DESSERT_TAG_HINTS = ['desserts', 'donuts', 'pastries', 'croissants', 'bakery'];
@@ -1112,6 +1139,7 @@
 
 			function getEntrySection(entry) {
 				if (entry.categories.includes('lounges')) return 'lounges';
+				if (entry.categories.includes('desserts')) return 'desserts';
 				if (entry.categories.includes('coffee')) return 'sips';
 				if (entry.categories.length === 1 && entry.categories[0] === 'vibes') return 'sips';
 				if (entry.tags.some(t => SIPS_TAG_HINTS.includes(t))) return 'sips';
@@ -1231,6 +1259,10 @@
 				};
 			})();
 
+			function renderNonMeatBadge() {
+				return '<p class="hv-non-meat-badge" role="status"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Not halal · good non-meat options</p>';
+			}
+
 			function buildCard(entry) {
 				const card = document.createElement('article');
 				card.className = 'hv-entry-card';
@@ -1256,6 +1288,7 @@
 					<div class="card-body">
 						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
 						<h3 class="card-title">${entry.title}</h3>
+						${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
 						${scoresWrap}
 						${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
 						<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
@@ -1367,6 +1400,7 @@
 						<span class="card-tag">${normalizeCity(entry.location)}</span>
 						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
+					${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
 					${entry.stars != null ? renderStars(entry.stars) : ''}
 					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}
 					${entry.vibesScore != null ? `<p><strong>Vibes:</strong> ${entry.vibesScore}/10</p>` : ''}
