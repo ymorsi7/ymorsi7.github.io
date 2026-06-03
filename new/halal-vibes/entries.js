@@ -467,6 +467,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "miami", "mia", "tap", "avianca"]
   },
   {
+    slug: "plaza-premium-lounge-dfw",
+    title: "Plaza Premium Lounge",
+    region: "US",
+    location: "Dallas (DFW)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Great lounge, great sweets, and good location—not too far from the gates.",
+    image: null,
+    content: `
+      <p>Dallas/Fort Worth International Airport (DFW), Dallas, TX</p>
+      <p>Great lounge, great sweets, and good location—not too far.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "dallas", "dfw", "plaza premium"]
+  },
+  {
     slug: "admirals-club-ord",
     title: "American Airlines Admirals Club",
     region: "US",
