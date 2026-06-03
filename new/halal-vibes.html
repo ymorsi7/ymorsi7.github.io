@@ -608,6 +608,7 @@
 		}
 
 		.hv-halal-badge,
+		.hv-halal-options-badge,
 		.hv-non-meat-badge {
 			display: inline-flex;
 			align-items: center;
@@ -626,6 +627,12 @@
 			border: 1px solid rgba(22, 101, 52, 0.35);
 		}
 
+		.hv-halal-options-badge {
+			color: #1e3a5f;
+			background: #dbeafe;
+			border: 1px solid rgba(37, 99, 235, 0.35);
+		}
+
 		.hv-non-meat-badge {
 			color: #5c4a1a;
 			background: #fef3c7;
@@ -633,6 +640,7 @@
 		}
 
 		.hv-modal-content .hv-halal-badge,
+		.hv-modal-content .hv-halal-options-badge,
 		.hv-modal-content .hv-non-meat-badge {
 			margin-bottom: 1rem;
 		}
@@ -1088,6 +1096,9 @@
 				'Santa Clara': 'SF South Bay',
 				'Sunnyvale': 'SF South Bay',
 				'Palo Alto': 'SF South Bay',
+				'Redwood City': 'SF South Bay',
+				'Fremont': 'SF South Bay',
+				'Newark': 'SF South Bay',
 				'Malibu': 'Los Angeles',
 				'Venice': 'Los Angeles',
 				'Santa Clarita': 'Los Angeles',
@@ -1104,7 +1115,7 @@
 
 			const SIPS_TAG_HINTS = [
 				'bagels', 'bread', 'coffee', 'nature', 'gardens', 'park', 'venue', 'wedding',
-				'views', 'tourist', 'specialty', 'yemeni', 'spanish latte', 'vietnamese',
+				'views', 'tourist', 'specialty', 'spanish latte', 'vietnamese',
 				'study spot', 'south bay'
 			];
 
@@ -1156,16 +1167,19 @@
 				return a.localeCompare(b);
 			}
 
+			const SIPS_TYPE_TAG_HINTS = SIPS_TAG_HINTS.filter(t => t !== 'south bay');
+
 			function getEntrySection(entry) {
 				if (entry.categories.includes('lounges')) return 'lounges';
 				if (entry.categories.includes('desserts')) return 'desserts';
 				if (entry.categories.includes('coffee')) return 'sips';
-				if (entry.categories.length === 1 && entry.categories[0] === 'vibes') return 'sips';
-				if (entry.tags.some(t => SIPS_TAG_HINTS.includes(t))) return 'sips';
-				if (/coffee|bagel|park|garden|giardino|roaster|venue|perk|sky garden/i.test(entry.title)) return 'sips';
 				if (entry.tags.some(t => DESSERT_TAG_HINTS.includes(t))) return 'desserts';
-				if (/porto|donut|croissant|bakery/i.test(entry.title) && !/coffee house|coffee roaster/i.test(entry.title)) return 'desserts';
+				if (/porto|donut|croissant|bakery|cakes?/i.test(entry.title) && !/coffee house|coffee roaster/i.test(entry.title)) return 'desserts';
+				if (entry.tags.some(t => SIPS_TYPE_TAG_HINTS.includes(t))) return 'sips';
+				if (/coffee|bagel|park|garden|giardino|roaster|venue|perk|sky garden/i.test(entry.title)) return 'sips';
 				if (entry.categories.includes('food')) return 'restaurants';
+				if (entry.categories.length === 1 && entry.categories[0] === 'vibes') return 'sips';
+				if (entry.tags.includes('south bay')) return 'sips';
 				return 'sips';
 			}
 
@@ -1282,8 +1296,19 @@
 				return '<p class="hv-halal-badge" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Halal</p>';
 			}
 
+			function renderHalalOptionsBadge() {
+				return '<p class="hv-halal-options-badge" role="status"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Has halal options</p>';
+			}
+
 			function renderNonMeatBadge() {
 				return '<p class="hv-non-meat-badge" role="status"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Not halal · good non-meat options</p>';
+			}
+
+			function renderDietaryBadges(entry) {
+				if (entry.nonMeatOptions) return renderNonMeatBadge();
+				if (entry.halalOptions) return renderHalalOptionsBadge();
+				if (entry.halalBadge || getEntrySection(entry) === 'restaurants') return renderHalalBadge();
+				return '';
 			}
 
 			function buildCard(entry) {
@@ -1311,8 +1336,7 @@
 					<div class="card-body">
 						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
 						<h3 class="card-title">${entry.title}</h3>
-						${entry.halalBadge ? renderHalalBadge() : ''}
-						${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
+						${renderDietaryBadges(entry)}
 						${scoresWrap}
 						${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
 						<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
@@ -1424,8 +1448,7 @@
 						<span class="card-tag">${normalizeCity(entry.location)}</span>
 						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
-					${entry.halalBadge ? renderHalalBadge() : ''}
-					${entry.nonMeatOptions ? renderNonMeatBadge() : ''}
+					${renderDietaryBadges(entry)}
 					${entry.stars != null ? renderStars(entry.stars) : ''}
 					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}
 					${entry.vibesScore != null ? `<p><strong>Vibes:</strong> ${entry.vibesScore}/10</p>` : ''}

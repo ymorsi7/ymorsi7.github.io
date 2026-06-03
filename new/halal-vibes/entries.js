@@ -10,7 +10,8 @@
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
  * nonMeatOptions: true — show "Not halal · good non-meat options" badge on card
- * halalBadge: true — show "Halal" badge on card and modal
+ * halalBadge: true — show "Halal" badge (also auto on Halal Restaurants tab entries)
+ * halalOptions: true — show "Has halal options" badge (e.g. partial halal menu)
  */
 const HALAL_VIBES_ENTRIES = [
   {
@@ -108,7 +109,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "Golden Bagel",
     region: "US",
     location: "San Diego",
-    categories: ["food", "vibes"],
+    categories: ["coffee", "vibes"],
     foodScore: null,
     vibesScore: null,
     excerpt: "",
@@ -240,19 +241,22 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "urban-skillet-santa-monica",
-    title: "Urban Skillet Santa Monica",
+    title: "Urban Skillet",
     region: "US",
     location: "Los Angeles",
     categories: ["food", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "",
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "My #1 lunch/dinner pick in LA. Brisket wrap + mac and cheese is bussin—never disappoints. Parking is the only pain (sometimes worth the ticket).",
     image: null,
     content: `
-      <p>Santa Monica, Los Angeles, CA</p>
+      <p>2307 Main St, Santa Monica, CA 90405</p>
+      <p>My #1 lunch/dinner recommendation to anyone visiting LA. Amazing. The brisket wrap with mac and cheese is absolutely bussin, and they never disappoint. Only bad thing about this place is the parking—but sometimes it's worth the ticket.</p>
+      <p>If I wasn't only restricted to eating halal food, I would still go out of my way to eat here.</p>
     `,
-    date: "2025-05-31",
-    tags: ["halal", "zabiha", "burrito", "santa monica"]
+    date: "2026-06-03",
+    tags: ["halal", "zabiha", "burrito", "brisket", "santa monica", "los angeles"]
   },
   {
     title: "Courage Bagels",
@@ -372,7 +376,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "SusieCakes - Del Mar",
     region: "US",
     location: "San Diego",
-    categories: ["food", "vibes"],
+    categories: ["desserts", "vibes"],
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Brilliant cakes. Recommend cranberry loaf, carrot cake, and probably anything else. Very good service and quality desserts. My go-to bakery in Del Mar. 8/10 vibe score.",
@@ -842,17 +846,17 @@ const HALAL_VIBES_ENTRIES = [
     region: "Egypt",
     location: "Alexandria, Egypt",
     categories: ["food", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    stars: 5,
-    excerpt: "5 stars from me. Their cheeseburger wrap and fried chicken wrap are out of this world.",
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Deserves an award. Cheeseburger wraps and fried chicken wraps are out of this world—always a good eat, and perfect when you want wraps over a greasy bucket.",
     image: null,
     content: `
-      <p>Alexandria Governorate, Egypt</p>
-      <p>5 stars from me. Their cheeseburger wrap and fried chicken wrap are out of this world.</p>
+      <p>Alexandria Governorate, Egypt · branches across Alexandria (Raml, Asafra, Smouha, Louran, and more)</p>
+      <p>This place deserves an award or something. Their cheeseburger wraps and fried chicken wraps are out of this world. Very delectable and always a good eat. The wraps are good when not in the mood to eat something oily like a bucket of fried chicken haha.</p>
     `,
-    date: "2025-05-31",
-    tags: ["halal", "chicken", "wrap", "alexandria"]
+    date: "2026-06-03",
+    tags: ["halal", "chicken", "wrap", "fried chicken", "alexandria"]
   },
   {
     slug: "caribou-coffee-alexandria",
@@ -1090,17 +1094,20 @@ const HALAL_VIBES_ENTRIES = [
     title: "Chicken G's",
     region: "US",
     location: "Mountain View",
-    categories: ["food"],
-    foodScore: 9,
-    vibesScore: 3,
-    excerpt: "Best zinger you've ever tasted. Amazing Zinger, although oily and diet-destroyer. Love the pineapple juice. Unattractive shack, no restroom inside, have to go outside. They have a prayer room.",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 4,
+    excerpt: "Best zinger you'll ever taste—worth it once despite the shack vibes. Prayer room. No indoor restroom; sublime pineapple juice.",
     image: null,
     content: `
       <p>1414 W El Camino Real, Mountain View, CA 94040</p>
-      <p>If you want the best zinger you've ever gifted your tongue with the opportunity of tasting, come to this place. Amazing Zinger, although oily and a diet-destroyer, I would say it's worth trying at least once. I love that they have a prayer room. The only downside to this place is that they don't have a restroom inside the restaurant, you have to go outside to use it. Also the place is a really unattractive shack. Nevertheless I go occasionally because of how darn good the zinger is. I also really recommend the pineapple juice (sublime). Food: 5</p>
+      <p>If you want the best zinger you've ever gifted your tongue with the opportunity of tasting, come to this place. Amazing zinger—although oily and a diet-destroyer, I would say it's worth trying at least once.</p>
+      <p>I love that they have a prayer room. The only downside is that they don't have a restroom inside the restaurant—you have to go outside. Also the place is a really unattractive shack, and judging from how it looks on the outside, I would never eat there. Nevertheless I go occasionally because of how darn good the zinger is.</p>
+      <p>I also really recommend the pineapple juice (sublime).</p>
     `,
-    date: "2024-10-01",
-    tags: ["halal", "chicken", "zinger"]
+    date: "2026-06-03",
+    tags: ["halal", "chicken", "zinger", "prayer room", "mountain view"]
   },
   {
     slug: "zankou-chicken-valencia",
@@ -1108,6 +1115,7 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Santa Clarita",
     categories: ["food"],
+    halalOptions: true,
     foodScore: 9,
     vibesScore: 7,
     excerpt: "Great halal food. Chicken tarna wrap quite delectable. Location convenient, wait not awful. Service 4 stars. Everything else great.",
@@ -1294,16 +1302,23 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "Santa Clara",
     categories: ["coffee", "food", "vibes"],
-    foodScore: 8,
+    foodScore: 10,
     vibesScore: 8,
-    excerpt: "Favorite coffee shop in South Bay. Food pretty good, location great. WiFi password changes frequently, can get crowded, some items overpriced. 8.5/10 vibe score.",
+    excerpt: "My favorite coffee shop in Santa Clara—food is pretty good and location is great. WiFi changes often, crowded, sometimes overpriced… I still keep going.",
     image: null,
     content: `
       <p>3014 El Camino Real, Santa Clara, CA 95051</p>
-      <p>My favorite coffee shop in South Bay. Food is actually pretty good in my opinion, and location is great. Only criticism: 1) They change the wifi password frequently 2) Can get quite crowded 3) Can be a bit overpriced for some items. Despite all that, I keep going lol. Meal type: Breakfast. Price: $10–20. Food: 5. 8.5/10 vibe score</p>
+      <p>My favorite coffee shop in Santa Clara. Food is actually pretty good in my opinion, and location is great. Only criticism I have is that:</p>
+      <ol>
+        <li>They change the wifi password frequently</li>
+        <li>Can get quite crowded</li>
+        <li>Can be a bit overpriced for some items</li>
+      </ol>
+      <p>Despite all that, I keep going lol</p>
+      <p><strong>Order type:</strong> Dine in · <strong>Meal type:</strong> Breakfast · <strong>Price per person:</strong> $10–20 · Food: 5</p>
     `,
-    date: "2024-10-01",
-    tags: ["halal", "coffee", "south bay"]
+    date: "2026-06-03",
+    tags: ["halal", "coffee", "breakfast", "santa clara", "south bay"]
   },
   {
     slug: "central-perk-alexandria",
@@ -1469,9 +1484,9 @@ const HALAL_VIBES_ENTRIES = [
     region: "Egypt",
     location: "Cairo, Egypt",
     categories: ["food", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "Great place, good location, and amazing idea. Especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but really enjoyed it,  clever concept.",
+    foodScore: 8,
+    vibesScore: 9,
+    excerpt: "Great place, good location, and amazing idea. Especially liked the boba spot and TakoSan (Japanese/Hispanic fusion). A tad expensive, but really enjoyed it—clever concept.",
     image: "images/IMG_3729.jpg",
     content: `
       <p>New Cairo, Cairo Governorate, Egypt</p>
@@ -1486,12 +1501,13 @@ const HALAL_VIBES_ENTRIES = [
     region: "Egypt",
     location: "Alexandria, Egypt",
     categories: ["coffee", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "",
+    foodScore: 7,
+    vibesScore: 9,
+    excerpt: "Amazing atmosphere—great morning or evening hangout. Decent food and drinks; cash only (no cards).",
     image: "images/IMG_3920.jpg",
     content: `
       <p>San Stefano, El Raml 1, Alexandria Governorate, Egypt</p>
+      <p>Amazing atmosphere. Decent food and drinks—have hung out here both in the morning and in the evening. Only inconvenient in that you must have cash to pay; they don't accept credit cards.</p>
     `,
     date: "2025-05-31",
     tags: ["halal", "coffee", "san stefano"]
@@ -1534,15 +1550,18 @@ const HALAL_VIBES_ENTRIES = [
     region: "Egypt",
     location: "Alexandria, Egypt",
     categories: ["coffee", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "",
+    foodScore: 6,
+    vibesScore: 8,
+    excerpt: "Fire Spanish Matcha—but service dropped the ball: ~30 min for fridge items with no line. Lowered from 5★ to 3★ overall; still love the vibes.",
     image: "images/unnamed.jpg",
     content: `
       <p>Syria St., Sidi Gaber, Alexandria Governorate, Egypt</p>
+      <p>Great vibes—fire Spanish Matcha, which I didn't even know was a thing but tasted great.</p>
+      <p><strong>Update:</strong> Returned and lowered my review from 5 to 3. I ordered a Spanish latte and a mango tart (both prepped in the fridge). No line or crowd, yet it took around thirty minutes—and they didn't have to make anything, just pull from the fridge. Multiple workers on their phones the whole time.</p>
+      <p>Not happy to lower this, especially because vibes- and distance-wise this is one of my favorite spots, but the poor service really changed how I view it. P.S. the mango tart was still tasty.</p>
     `,
-    date: "2025-05-31",
-    tags: ["halal", "coffee", "sidi gaber"]
+    date: "2026-06-03",
+    tags: ["halal", "coffee", "matcha", "sidi gaber"]
   },
   {
     slug: "layla-bagels-santa-monica",
@@ -1646,15 +1665,18 @@ const HALAL_VIBES_ENTRIES = [
     region: "US",
     location: "San Francisco",
     categories: ["food", "vibes"],
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "",
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "Chicken and brisket quesadillas slapped. Best fries I've ever had. Maybe the best halal Mexican in the Bay. Friday lunch—parking wasn't bad.",
     image: "images/vaca.jpg",
     content: `
-      <p>San Francisco, CA</p>
+      <p>2962 24th St, San Francisco, CA 94110</p>
+      <p>I liked the chicken and brisket quesadillas. The cheese fries were the best fries I've ever had in my life. One of the best halal Mexican spots I've been to in the Bay—maybe even the best. I went on a Friday afternoon and the parking situation wasn't so bad.</p>
+      <p><strong>Meal type:</strong> Lunch · Dine in · <strong>Price per person:</strong> $10–20 · Food: 5 | Service: 5 | Atmosphere: 4</p>
     `,
-    date: "2025-05-31",
-    tags: ["halal", "birria", "san francisco"]
+    date: "2026-06-03",
+    tags: ["halal", "birria", "san francisco", "mission"]
   },
   {
     slug: "crust-sourdough-deli-santa-clara",
@@ -2020,6 +2042,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2026-06-03",
     tags: ["halal", "coffee", "portland", "walkable"]
   },
+  /*
   {
     slug: "davincis-marco-island",
     title: "DaVinci's",
@@ -2038,6 +2061,7 @@ const HALAL_VIBES_ENTRIES = [
     date: "2026-06-03",
     tags: ["vegetarian", "marco island", "florida"]
   },
+  */
   {
     slug: "ibn-alsham-cairo",
     title: "مطعم ابن الشام · Ibn Alsham Restaurant",
@@ -2089,5 +2113,273 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-03",
     tags: ["halal", "breakfast", "foul", "falafel", "nasr city", "cairo", "egyptian"]
+  },
+  {
+    slug: "mikes-red-tacos-mira-mesa",
+    title: "Mike's Red Tacos (Mira Mesa)",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Best halal Mexican I've had in San Diego. Amazing birria and crunch wrap—store confirmed halal beef.",
+    image: null,
+    content: `
+      <p>9089 Mira Mesa Blvd, San Diego, CA 92126</p>
+      <p>Best halal Mexican I've had in San Diego (not that there are many options). Amazing birria and great crunch wrap. Confirmed with the store that their beef is halal.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "mexican", "birria", "mira mesa", "san diego"]
+  },
+  {
+    slug: "stans-donut-shop-santa-clara",
+    title: "Stan's Donut Shop",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["desserts", "coffee", "vibes"],
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "Best donuts I've ever had—by far. Bargain Peerless coffee too. Cash only (ATM inside), incredibly inconvenient but worth it.",
+    image: null,
+    content: `
+      <p>2628 Homestead Rd, Santa Clara, CA 95051</p>
+      <p>Donuts · $1–10 · South Bay / San Jose area</p>
+      <p>These are absolutely the best donuts I have ever had in my entire life. By far. Brewed Peerless coffee for about $1.50—no fancy espresso, just classic cafe vibes. Family-run since 1959; cash and check only (ATM on site).</p>
+      <p><strong>Only criticism:</strong> Cash-only is incredibly inconvenient.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["donuts", "cash only", "santa clara", "south bay", "coffee"]
+  },
+  {
+    slug: "halalstreet-hot-pot-newark",
+    title: "HalalStreet Hot Pot | Newark",
+    region: "US",
+    location: "Newark",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 10,
+    excerpt: "Best buffet I've ever been to. Sublime taste, excellent service, amazing deal—outstanding decor and vibes.",
+    image: null,
+    content: `
+      <p>5605 Mowry School Rd, Newark, CA 94560</p>
+      <p>Brilliant place. Best buffet I have ever been to. Outstanding. Amazing food, excellent service, and it is truly an amazing deal. The taste is sublime, and the vibes/decor of the place are too.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "hot pot", "buffet", "newark", "east bay"]
+  },
+  {
+    slug: "takosan-the-drive-new-cairo",
+    title: "Takosan - The Drive",
+    region: "Egypt",
+    location: "Cairo, Egypt",
+    categories: ["food", "vibes"],
+    foodScore: 8,
+    vibesScore: 6,
+    excerpt: "Burger tacos were the best—Cali roll burrito and chicken poppers decent. ~20 min wait, so-so service, tough mall parking.",
+    image: "images/download.png",
+    content: `
+      <p>2C52+RCV, New Cairo 1, Cairo Governorate 4720110, Egypt · inside <strong>The Drive</strong></p>
+      <p>Had the Cali roll burrito, chicken poppers, and the burger tacos. By far the burger tacos were the best—the other items were decent.</p>
+      <p>Not five stars because service wasn't the greatest and the wait was extremely long (more or less 20 minutes). Parking in this mall is pretty hard to come by, but otherwise a good spot.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "japanese", "mexican", "fusion", "the drive", "new cairo", "tacos"]
+  },
+  {
+    slug: "nyc-halal-eats-lombard",
+    title: "NYC Halal Eats",
+    region: "US",
+    location: "Chicago",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Chicken platter was amazing—great chicken, sauce on point, and very nice seating.",
+    image: null,
+    content: `
+      <p>52 W Roosevelt Rd, Lombard, IL 60148</p>
+      <p>Excellent food. I had the chicken platter and it was amazing. Very nice seating, great chicken, and with the sauce it was quite yummy.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "chicken", "platter", "lombard", "chicago"]
+  },
+  {
+    slug: "alforon-mediterranean-lebanese-san-diego",
+    title: "Alforon Mediterranean / Lebanese Cuisine",
+    region: "US",
+    location: "San Diego",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 9,
+    vibesScore: 10,
+    excerpt: "Very good food and ambiance—kind owners stayed open late for us and sent out free dessert. Pricey but worth it.",
+    image: null,
+    content: `
+      <p>5965 El Cajon Blvd, San Diego, CA 92115</p>
+      <p>Good food, good vibes, and very kind owners. My friends and I came late and they stayed open past hours for us, and were very friendly. They even gave us a free dessert at the end (it was amazing).</p>
+      <p>Food quality was very good—would definitely go again. Only downside is that it is quite pricey, but other than that, great food and ambiance.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "lebanese", "mediterranean", "san diego", "el cajon"]
+  },
+  {
+    slug: "mazra-redwood-city",
+    title: "MAZRA",
+    region: "US",
+    location: "Redwood City",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Probably the best Arab food in the Bay—sublime beef kofta, solid falafel, great frozen date juice. Far, bad parking, long waits, pricey—but worth it.",
+    image: null,
+    content: `
+      <p>2021 Broadway, Redwood City, CA 94063</p>
+      <p>I've had quite a journey with my opinion of this place. I used to avoid it—not because of food quality, but because:</p>
+      <ol>
+        <li>Redwood City is far from everything</li>
+        <li>The parking situation is abysmal</li>
+        <li>There is never a table ready when you get there</li>
+        <li>The food is expensive</li>
+      </ol>
+      <p>That being said, their meat is great, the vibes are great, and their service is great. Their beef kofta is sublime, and their falafel isn't too bad either. They also have a pretty good frozen date juice that I enjoyed.</p>
+      <p>If you don't mind those four things (I'm personally caring less and less about them in lieu of the amazing food), definitely go. This is probably the best Arab food I've had in the Bay Area.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "arab", "kofta", "falafel", "redwood city", "bay area"]
+  },
+  {
+    slug: "cracked-and-battered-san-francisco",
+    title: "Cracked & Battered",
+    region: "US",
+    location: "San Francisco",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 10,
+    excerpt: "A must-visit in SF. Chicken benedict is amazing, potatoes scrumptious—friendly owners, great walkable location. Indoor or outdoor, family or friends.",
+    image: null,
+    content: `
+      <p>1434 18th St, San Francisco, CA 94107</p>
+      <p>A must-visit in SF. Great restaurant with very friendly owners. Amazing location too, and great to walk around afterwards. I recommend the chicken benedict—it's amazing. Their potatoes are also quite scrumptious.</p>
+      <p>Whether you sit indoors or outdoors, you will have a great time. I recommend going with family or with friends—you will definitely want to go again.</p>
+      <p><strong>Meal type:</strong> Brunch · <strong>Reservations:</strong> Not required · <strong>Group size:</strong> 2 people, 3–4 people</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "brunch", "chicken benedict", "san francisco", "potrero"]
+  },
+  {
+    slug: "house-of-mandi-anaheim",
+    title: "House of Mandi - Yemeni Restaurant",
+    region: "US",
+    location: "Anaheim",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Excellent food and meat, great seating for friends/family. Great Ramadan buffet too.",
+    image: null,
+    content: `
+      <p>518 S Brookhurst St #1, Anaheim, CA 92804</p>
+      <p>Excellent food and meat. Great seating as well; I recommend as a place to eat with friends/family. Great Ramadan buffet too.</p>
+      <p><strong>Order type:</strong> Dine in · <strong>Meal type:</strong> Dinner · <strong>Seating:</strong> Indoor dining area</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "yemeni", "mandi", "anaheim", "oc", "buffet"]
+  },
+  {
+    slug: "el-halal-amigos-san-jose",
+    title: "El Halal Amigos",
+    region: "US",
+    location: "San Jose",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 7,
+    vibesScore: 8,
+    excerpt: "One of my first Bay halal spots—chicken quesadillas with chips & salsa in-person. Fell off a bit but still good occasionally. Nice for groups, good parking.",
+    image: null,
+    content: `
+      <p>1100 Lincoln Ave, San Jose, CA 95125</p>
+      <p>One of my first halal spot experiences in the Bay. I love their chicken quesadillas, which comes with chips and salsa <em>only</em> if you go in-person AFAIK. It kind of fell off and isn't as good as it used to be, but good every once in a while nevertheless.</p>
+      <p>Good for groups and parking is nice as well.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "mexican", "quesadilla", "san jose", "south bay"]
+  },
+  {
+    slug: "the-burger-shop-fremont",
+    title: "The Burger Shop",
+    region: "US",
+    location: "Fremont",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "My favorite halal burger in the Bay—great quality, okay prices. Food truck spot with nice seating; great quick Fremont stop.",
+    image: null,
+    content: `
+      <p>4050 Alder Ave, Fremont, CA 94536</p>
+      <p>Gotta say that this is my favorite halal burger in the Bay. Prices are okay and not as good as say Dough Burger, but the quality is great. Food truck location is good too, and seating is nice. Great quick stop for when you are in Fremont.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "burger", "food truck", "fremont", "bay area"]
+  },
+  {
+    slug: "habibiz-san-jose",
+    title: "Habibiz",
+    region: "US",
+    location: "San Jose",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 10,
+    excerpt: "Amazing food and huge portions—mosque next door, free ice cream, incredibly generous. May Allah bless the owners.",
+    image: null,
+    content: `
+      <p>262 E Santa Clara St, San Jose, CA 95113</p>
+      <p>This place is amazing. May Allah bless the owners and increase them in bounty. Amazing food, amazing portion sizes, and it's awesome that they have their own mosque next door. I love that they also give free ice cream, and to reiterate, they are very generous with portion sizes. I leave feeling like I gained weight haha.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "generous portions", "mosque", "san jose", "south bay"]
+  },
+  {
+    slug: "dough-burger-san-jose",
+    title: "Dough Burger",
+    region: "US",
+    location: "San Jose",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 9,
+    vibesScore: 8,
+    excerpt: "Great halal burgers—amazing base prices, oily but worth it. Double with tomato; good parking near SJC. Watch them cook through the window.",
+    image: null,
+    content: `
+      <p>1751 N First St, San Jose, CA 95112</p>
+      <p>Great burger place, despite having oily burgers. Amazing prices unless you're adding toppings, which make you pay quite a bit haha. I personally get the double with tomato on it. Parking situation is good, and it's very close to the airport. If you eat too much you will feel guilty because of how unhealthy it is haha, but it is a great halal option and my roommates and I go at least once a week.</p>
+      <p>Also, it's really cool that you can see them making the burgers through a window as well.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "burger", "san jose", "south bay", "sjc"]
+  },
+  {
+    slug: "pakwan-restaurant-san-francisco",
+    title: "Pakwan Restaurant",
+    region: "US",
+    location: "San Francisco",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 9,
+    excerpt: "Better desi food than I expected—TSM, naan, and biryani all great. This Ocean Ave location beats the Fremont branch by a mile.",
+    image: null,
+    content: `
+      <p>1140 Ocean Ave, San Francisco, CA 94112</p>
+      <p>Great location, amazing food—I didn't think I'd find better desi food than what they have at Zareen's. I had the TSM, naan, and some biryani and all of it was great.</p>
+      <p><strong>Note:</strong> Only this location—I didn't like their Fremont one; the quality was not anywhere near this one.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["halal", "desi", "biryani", "pakistani", "san francisco", "ocean ave"]
   }
 ];
