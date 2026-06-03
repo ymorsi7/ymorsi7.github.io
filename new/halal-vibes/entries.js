@@ -609,6 +609,42 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "stansted", "stn", "escape lounge"]
   },
   {
+    slug: "plaza-premium-lounge-heathrow",
+    title: "Plaza Premium Lounge",
+    region: "UK",
+    location: "London Heathrow (LHR)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 3.5,
+    excerpt: "Decent food, but the lounge is tiny—feels wedged into whatever leftover space they could find at Heathrow.",
+    image: null,
+    content: `
+      <p>London Heathrow Airport (LHR), London, United Kingdom</p>
+      <p>Decent food options, but so tiny. Feels like they just crammed a lounge into some small space they found—not much room to breathe for an airport this size.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "london", "lhr", "heathrow", "plaza premium"]
+  },
+  {
+    slug: "club-aspire-lounge-heathrow",
+    title: "Club Aspire Lounge",
+    region: "UK",
+    location: "London Heathrow (LHR)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 3.5,
+    excerpt: "Food is passable, but the footprint is minuscule—basically the same cramped vibe as the other small Heathrow lounges.",
+    image: null,
+    content: `
+      <p>London Heathrow Airport (LHR), London, United Kingdom</p>
+      <p>Food options are decent, but the lounge is so small it seems shoehorned into a tight corner. Functionally the same story as Plaza Premium at LHR: fine for a bite, not a place to settle in.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "london", "lhr", "heathrow", "aspire"]
+  },
+  {
     slug: "lot-business-lounge-mazurek-warsaw",
     title: "LOT Business Lounge Mazurek",
     region: "Poland",
