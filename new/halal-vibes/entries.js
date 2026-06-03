@@ -449,6 +449,42 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "jeddah"]
   },
   {
+    slug: "av-tap-vip-lounge-miami",
+    title: "AV/TAP VIP Lounge",
+    region: "US",
+    location: "Miami (MIA)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Great lounge, great food—very impressed for a lounge in America.",
+    image: null,
+    content: `
+      <p>Miami International Airport (MIA), Miami, FL</p>
+      <p>Great lounge, great food. Was very impressed for a lounge in America.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "miami", "mia", "tap", "avianca"]
+  },
+  {
+    slug: "admirals-club-ord",
+    title: "American Airlines Admirals Club",
+    region: "US",
+    location: "Chicago (ORD)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Good lounge, very good food. Convenient for work calls after landing—I paid for entry before I had Priority Pass.",
+    image: null,
+    content: `
+      <p>O'Hare International Airport (ORD), Chicago, IL</p>
+      <p>I paid for entry—I went there before I had Priority Pass. Good lounge, very good. Was convenient because I had work meetings upon landing and was easily able to take them from there. Good food.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "chicago", "ord", "american airlines", "admirals club"]
+  },
+  {
     slug: "amex-lounge-lax",
     title: "American Express Lounge",
     region: "US",
@@ -591,6 +627,24 @@ const HALAL_VIBES_ENTRIES = [
     tags: ["lounge", "airport", "athens", "ath", "skyserv"]
   },
   {
+    slug: "aspire-lounge-san-diego",
+    title: "Aspire Lounge",
+    region: "US",
+    location: "San Diego (SAN)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 2,
+    excerpt: "Very small. Food options are awful, at least for breakfast.",
+    image: null,
+    content: `
+      <p>San Diego International Airport (SAN), San Diego, CA</p>
+      <p>Very small. Food options are awful, at least for breakfast.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "san diego", "san", "aspire"]
+  },
+  {
     slug: "chase-sapphire-lounge-san-diego",
     title: "Chase Sapphire Lounge",
     region: "US",
@@ -627,7 +681,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "san-jose-airport-lounge",
-    title: "San Jose Airport Lounge",
+    title: "The Club",
     region: "US",
     location: "San Jose (SJC)",
     categories: ["lounges"],
@@ -637,7 +691,7 @@ const HALAL_VIBES_ENTRIES = [
     excerpt: "Breakfast is good, but evening halal/veg options are slim (often just chicken). Terminal A only—far from Terminal B gates. Dry cookies, but a really nice coworking space.",
     image: null,
     content: `
-      <p>Mineta San Jose International Airport (SJC), Terminal A — San Jose, CA</p>
+      <p>The Club — Mineta San Jose International Airport (SJC), Terminal A — San Jose, CA</p>
       <p>This was the first lounge I've ever been to, so it pains me to make this review.</p>
       <p>I have to say, in my experience, their breakfast is good. However, I've been there around 6PM many many times, only to say that their lunch/dinner options are pretty much nil if you can't eat meat. As someone who only eats halal certified meat, I am not able to eat their lunch/dinner because it's usually just one option that is chicken.</p>
       <p>After living in San Jose, I can confidently say that I am not alone in not being able to eat their meals with meat, as a lot of the community is vegetarian.</p>
@@ -647,7 +701,25 @@ const HALAL_VIBES_ENTRIES = [
       <p><strong>Update:</strong> Food options have gotten slightly better—they started including quesadillas that don't have to contain meat.</p>
     `,
     date: "2026-06-03",
-    tags: ["lounge", "airport", "san jose", "sjc", "halal", "vegetarian", "terminal a"]
+    tags: ["lounge", "airport", "san jose", "sjc", "the club", "halal", "vegetarian", "terminal a"]
+  },
+  {
+    slug: "plaza-premium-marmara-saw",
+    title: "Plaza Premium Lounge – Marmara",
+    region: "Turkey",
+    location: "Istanbul (SAW)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Very nice—good food with halal options, Priority Pass works. A bit small; not out of this world, but a good lounge I enjoyed.",
+    image: null,
+    content: `
+      <p>Istanbul Sabiha Gökçen Airport (SAW), Istanbul, Turkey</p>
+      <p>Very nice. A bit small but good food and halal food, and Priority Pass. I enjoyed it and had a nice lounge experience—not out of this world, but a good lounge.</p>
+    `,
+    date: "2026-06-03",
+    tags: ["lounge", "airport", "istanbul", "saw", "plaza premium", "halal", "priority pass"]
   },
   {
     slug: "iga-lounge-istanbul",
