@@ -56,7 +56,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "Nomad Donuts",
     region: "US",
     location: "San Diego",
-    categories: ["food", "vibes"],
+    categories: ["coffee", "food", "vibes"],
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Amazing bagels and great donuts. Everything bagel with salmon, avocado and egg,  impressed. Maple donut thoroughly enjoyed. Parking surprisingly good for North Park.",
