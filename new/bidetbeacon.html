@@ -1031,15 +1031,14 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
       <button type="button" class="dialog-close" id="promoClose" aria-label="Close">×</button>
       <img class="promo-logo" src="images/a50c06f8-c0bd-476d-a552-61827c573027_copy-removebg-preview.png" alt="" width="72" height="72" decoding="async">
       <h2 id="promoTitle">Help others find clean wudu spaces</h2>
-      <p class="promo-lead">BidetBeacon is community-built. If you know a masjid or restaurant with a bidet, add it — we review every submission.</p>
+      <p class="promo-lead">BidetBeacon is community-built. Know a masjid or restaurant with a bidet? Use <strong>Add spot</strong> in the <strong>top right</strong> of the page anytime.</p>
       <ol class="promo-steps">
-        <li>Open the form and tell us the place name &amp; city</li>
-        <li>Tap the map to drop a pin (or paste coordinates)</li>
-        <li>Submit — it goes live after a quick review</li>
+        <li>Tap <strong>Add spot</strong> (top right of the header)</li>
+        <li>Fill in the place name, city, and bidet details</li>
+        <li>Tap the map to set a pin, then submit — we review before it goes live</li>
       </ol>
       <div class="dialog-actions">
-        <button type="button" class="btn btn-primary" id="promoAddBtn">Add a spot now</button>
-        <button type="button" class="promo-skip" id="promoLaterBtn">Maybe later</button>
+        <button type="button" class="btn btn-primary" id="promoGotItBtn">Got it</button>
       </div>
     </div>
   </div>
@@ -1240,7 +1239,6 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     const anyOpen = document.querySelector('.overlay.open');
     document.body.classList.toggle('modal-open', Boolean(anyOpen));
     if(id === 'addOverlay' && open){
-      try{ localStorage.setItem('bb_add_opened', '1'); }catch(e){}
       setOverlayOpen('promoOverlay', false);
     }
   }
@@ -1252,20 +1250,18 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     }
   }
 
-  function dismissPromoPopup(permanent){
+  function markPromoSeen(){
+    try{ localStorage.setItem('bb_promo_seen', '1'); }catch(e){}
+  }
+
+  function dismissPromoPopup(){
     setOverlayOpen('promoOverlay', false);
-    if(permanent){
-      try{ localStorage.setItem('bb_promo_dismiss', '1'); }catch(e){}
-    } else {
-      try{ sessionStorage.setItem('bb_promo_session', '1'); }catch(e){}
-    }
+    markPromoSeen();
   }
 
   function shouldShowPromoPopup(){
     try{
-      if(localStorage.getItem('bb_promo_dismiss') === '1') return false;
-      if(sessionStorage.getItem('bb_promo_session') === '1') return false;
-      if(localStorage.getItem('bb_add_opened') === '1') return false;
+      if(localStorage.getItem('bb_promo_seen') === '1') return false;
     }catch(e){}
     return true;
   }
@@ -1274,24 +1270,22 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     const overlay = document.getElementById('promoOverlay');
     if(!overlay) return;
 
-    document.getElementById('promoAddBtn')?.addEventListener('click', ()=>{
-      dismissPromoPopup(true);
-      openAddForm('promo_popup');
-    });
-    document.getElementById('promoLaterBtn')?.addEventListener('click', ()=> dismissPromoPopup(false));
-    document.getElementById('promoClose')?.addEventListener('click', ()=> dismissPromoPopup(false));
+    document.getElementById('promoGotItBtn')?.addEventListener('click', ()=> dismissPromoPopup());
+    document.getElementById('promoClose')?.addEventListener('click', ()=> dismissPromoPopup());
     overlay.addEventListener('click', e=>{
-      if(e.target.id === 'promoOverlay') dismissPromoPopup(false);
+      if(e.target.id === 'promoOverlay') dismissPromoPopup();
     });
 
     if(shouldShowPromoPopup()){
       window.setTimeout(()=>{
         if(document.querySelector('.overlay.open')) return;
+        if(!shouldShowPromoPopup()) return;
         setOverlayOpen('promoOverlay', true);
+        markPromoSeen();
         if(typeof window.trackEvent === 'function'){
           window.trackEvent('bidetbeacon_promo_show', {});
         }
-      }, 6700);
+      }, 5000);
     }
   }
 
@@ -1642,10 +1636,13 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     });
     document.addEventListener('keydown',e=>{
       if(e.key==='Escape'){
-        setOverlayOpen('detailOverlay', false);
-        setOverlayOpen('addOverlay', false);
-        setOverlayOpen('promoOverlay', false);
-        resetAddForm();
+        if(document.getElementById('promoOverlay')?.classList.contains('open')){
+          dismissPromoPopup();
+        } else {
+          setOverlayOpen('detailOverlay', false);
+          setOverlayOpen('addOverlay', false);
+          resetAddForm();
+        }
       }
     });
     document.getElementById('submitAdd').addEventListener('click', async ()=>{
