@@ -1,0 +1,4 @@
+# GitHub Pages builds from /docs. The live site is on Netlify (see /new).
+# .nojekyll publishes these files as static HTML without Jekyll processing.
+title: ymorsi7.github.io
+plugins: []
