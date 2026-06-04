@@ -46,3 +46,40 @@ a.github-star-footer i {
 .footer-content a.github-star-footer:hover {
   color: var(--blue-hover, #1d4ed8);
 }
+
+/* YouTube demo link (Font Awesome) — matches github-star-footer layout */
+a.youtube-demo-footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0 2px;
+  line-height: 1;
+  font-size: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  color: #57606a;
+  opacity: 0.9;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.youtube-demo-footer:hover {
+  color: #cc0000;
+  opacity: 1;
+  text-decoration: none;
+}
+
+a.youtube-demo-footer i {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+.site-footer a.youtube-demo-footer {
+  color: var(--brand, var(--primary-color, #0969da));
+}
+
+.site-footer a.youtube-demo-footer:hover {
+  color: #cc0000;
+}
