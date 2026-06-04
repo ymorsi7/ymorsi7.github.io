@@ -1,5 +1,5 @@
 /**
- * UCSD course tier list — works from file:// (no server).
+ * UCSD course tier list. Works from file:// (no server).
  * Departments load from catalog/depts/*.js on demand.
  */
 
@@ -68,7 +68,7 @@ function formatDeptListLabel(code, name, count) {
   const cnt = count !== undefined && count !== null && count !== "" ? count : "?";
   const n = deptTextUpper(name || c);
   if (n === c) return `${c} (${cnt})`;
-  return `${c} — ${n} (${cnt})`;
+  return `${c} · ${n} (${cnt})`;
 }
 
 const ZONES = ["unranked", "S", "A", "B", "C", "D", "F"];
@@ -198,7 +198,7 @@ function loadDeptScript(dept) {
       pendingDeptLoads.delete(dept);
       reject(
         new Error(
-          `Missing catalog/depts/${dept}.js — keep index.html in the UCSD-Tier-List folder, or run the catalog fetch script.`
+          `Missing catalog/depts/${dept}.js. Keep index.html in the UCSD-Tier-List folder, or run the catalog fetch script.`
         )
       );
     };
@@ -494,7 +494,7 @@ async function enableDepartment(dept) {
     if (input) /** @type {HTMLInputElement} */ (input).value = "";
     render();
     track("dept_added", { dept: code, course_count: COURSES.length });
-    setLoadStatus(`Added ${code} — ${COURSES.length} courses in your list`);
+    setLoadStatus(`Added ${code} · ${COURSES.length} courses in your list`);
   } catch (err) {
     setLoadStatus(err instanceof Error ? err.message : "Could not load department.", true);
   }
@@ -527,7 +527,7 @@ function renderEnabledDeptsRow() {
   row.innerHTML = "";
 
   if (!settings.enabledDepts.length) {
-    row.innerHTML = '<p class="dept-empty-hint">No departments yet — add one below.</p>';
+    row.innerHTML = '<p class="dept-empty-hint">No departments yet. Add one below.</p>';
     return;
   }
 
@@ -1121,7 +1121,7 @@ function wireControls() {
 
 async function init() {
   if (typeof CATALOG_INDEX === "undefined") {
-    setLoadStatus("Missing catalog-index.js — open index.html from the UCSD-Tier-List folder.", true);
+    setLoadStatus("Missing catalog-index.js. Open index.html from the UCSD-Tier-List folder.", true);
     return;
   }
 

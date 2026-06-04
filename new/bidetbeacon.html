@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BidetBeacon — Verified Bidet Finder</title>
-<meta name="description" content="Find mosques and restaurants with verified bidets — TOTO, heated seats, and more.">
+<title>BidetBeacon: Verified Bidet Finder</title>
+<meta name="description" content="Find mosques and restaurants with verified bidets: TOTO, heated seats, and more.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23047857'/%3E%3Ctext x='50' y='64' font-size='44' text-anchor='middle' fill='white'%3E🚿%3C/text%3E%3C/svg%3E">
 <style id="leaflet-css">/* required styles */
 
@@ -856,13 +856,13 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
     <section class="panel" aria-label="Location list">
       <div class="panel-head">
         <h2>Verified locations</h2>
-        <p>Only confirmed bidets — standard, TOTO-style, or heated seats.</p>
+        <p>Only confirmed bidets: standard, TOTO-style, or heated seats.</p>
       </div>
       <div class="list" id="locationList"></div>
     </section>
   </main>
 
-  <p class="footer"><a href="index.html">← Back to portfolio</a></p>
+  <p class="footer"><a href="index.html">← Portfolio</a> · <a href="halal-vibes.html">Halal Vibes</a></p>
 </div>
 
 <div class="overlay" id="detailOverlay" role="dialog" aria-modal="true">
@@ -928,7 +928,7 @@ window.BIDETBEACON_SEED = [{"name":"King Fahad Mosque","address":"10980 Washingt
 //# sourceMappingURL=leaflet.markercluster.js.map</script>
 <script>
 (function(){
-  // Airtable free tier: 1,000 records/base — plenty for submissions.
+  // Airtable free tier: 1,000 records/base, plenty for submissions.
   // Setup: airtable.com → New base → add fields below → Create form → Share → Embed → paste URL here.
   // Fields: Name, Address, City, Country, Type, Bidet Status, Bidet Details, Latitude, Longitude, Email, Notes
   const AIRTABLE_FORM_EMBED_URL = 'https://airtable.com/embed/appooaJBbg4weWhI0/shrYzqffjo9JpweKW';
@@ -984,7 +984,7 @@ window.BIDETBEACON_SEED = [{"name":"King Fahad Mosque","address":"10980 Washingt
     const hint = document.getElementById('coordHint');
     const text = lat.toFixed(6) + ', ' + lng.toFixed(6);
     hint.textContent = useAirtable()
-      ? 'Coordinates copied: ' + text + ' — paste into Latitude / Longitude in the form.'
+      ? 'Coordinates copied: ' + text + '. Paste into Latitude / Longitude in the form.'
       : 'Pin set at ' + text;
     hint.classList.add('show');
     if(useAirtable() && navigator.clipboard){
@@ -1143,7 +1143,7 @@ window.BIDETBEACON_SEED = [{"name":"King Fahad Mosque","address":"10980 Washingt
     if(!res.ok || data.success === false){
       throw new Error(data.message || 'Submission failed. Try again in a moment.');
     }
-    return 'Thanks! Sent to ymorsi8+bidet@gmail.com — we\'ll review and add it soon.';
+    return 'Thanks! Sent to ymorsi8+bidet@gmail.com. We\'ll review and add it soon.';
   }
 
   function initMap(){
