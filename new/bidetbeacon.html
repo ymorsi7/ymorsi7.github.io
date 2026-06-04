@@ -798,6 +798,8 @@ body.modal-open{overflow:hidden}
 .legend-dot.warmed{background:#d97706}
 .legend-dot.internet{background:#2563eb}
 .legend-dot.limited{background:#059669;border-style:dashed;outline:1px dashed #fb923c;outline-offset:1px}
+.legend-dot.friendly-country{background:#34d399}
+.leaflet-tooltip.bidet-country-tip{font-weight:600;color:#047857}
 .sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0;box-shadow:-6px 0 24px rgba(15,23,42,.04)}
 .sidebar-head{flex-shrink:0;padding:14px 16px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#fafbfc 100%)}
 .filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -979,6 +981,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <span class="legend-item"><span class="legend-dot warmed"></span> Heated</span>
         <span class="legend-item"><span class="legend-dot internet"></span> Web source</span>
         <span class="legend-item"><span class="legend-dot limited"></span> Limited</span>
+        <span class="legend-item"><span class="legend-dot friendly-country"></span> Bidet-friendly country</span>
       </div>
     </div>
     <aside class="sidebar" aria-label="Location list">
@@ -1095,7 +1098,22 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
   const HAS_BIDET = s => s === 'verified' || s === 'warmed' || s === 'internet';
   const useAirtable = () => Boolean(AIRTABLE_FORM_EMBED_URL);
 
-  let allLocations = [], userLocation = null, map, clusterGroup, pickMarker;
+  let allLocations = [], userLocation = null, map, clusterGroup, pickMarker, countriesLayer;
+  // Regions with common bidets, washlets, or handheld toilet sprayers (not every restroom).
+  const BIDET_FRIENDLY_COUNTRIES = [
+    'Japan', 'South Korea', 'Taiwan',
+    'Italy', 'Portugal', 'Spain', 'France', 'Greece', 'Finland',
+    'Croatia', 'Slovenia', 'Slovakia', 'Hungary', 'Romania', 'Bulgaria', 'Serbia', 'North Macedonia',
+    'Albania', 'Bosnia and Herzegovina',
+    'Turkey', 'Egypt', 'Saudi Arabia', 'United Arab Emirates', 'Kuwait', 'Qatar', 'Bahrain', 'Oman',
+    'Iran', 'Jordan', 'Lebanon', 'Morocco', 'Tunisia', 'Algeria',
+    'Malaysia', 'Indonesia', 'Thailand', 'Vietnam', 'Philippines', 'India',
+    'Argentina', 'Uruguay', 'Paraguay', 'Brazil'
+  ];
+  const BIDET_FRIENDLY_GEO_NAMES = new Set(BIDET_FRIENDLY_COUNTRIES.map(name => ({
+    Serbia: 'Republic of Serbia'
+  }[name] || name)));
+  const BIDET_COUNTRY_GEOJSON_URL = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
   let placeFilter = 'all', extraFilter = null, nearMe = false, radiusMi = 50;
 
   function stableSeedId(row){
@@ -1395,12 +1413,53 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     return 'Thanks! Sent to ymorsi8+bidet@gmail.com. We\'ll review and add it soon.';
   }
 
+  function bidetCountryStyle(feature){
+    if(!BIDET_FRIENDLY_GEO_NAMES.has(feature.properties.name)){
+      return { fillOpacity: 0, opacity: 0, weight: 0, interactive: false };
+    }
+    return { fillColor: '#34d399', fillOpacity: 0.42, color: '#059669', weight: 1.25, opacity: 0.9 };
+  }
+
+  function onBidetCountryFeature(feature, layer){
+    if(!BIDET_FRIENDLY_GEO_NAMES.has(feature.properties.name)) return;
+    layer.bindTooltip('Bidet-friendly country', {
+      sticky: true,
+      direction: 'top',
+      className: 'bidet-country-tip'
+    });
+    layer.on({
+      mouseover(e){ e.target.setStyle({ fillOpacity: 0.58, weight: 2 }); },
+      mouseout(e){ if(countriesLayer) countriesLayer.resetStyle(e.target); }
+    });
+  }
+
+  function loadBidetFriendlyCountries(){
+    fetch(BIDET_COUNTRY_GEOJSON_URL)
+      .then(res => {
+        if(!res.ok) throw new Error('Country boundaries unavailable');
+        return res.json();
+      })
+      .then(geo => {
+        if(!map) return;
+        if(countriesLayer) map.removeLayer(countriesLayer);
+        countriesLayer = L.geoJSON(geo, {
+          style: bidetCountryStyle,
+          onEachFeature: onBidetCountryFeature,
+          pane: 'countriesPane'
+        }).addTo(map);
+      })
+      .catch(err => console.warn('Bidet-friendly country layer:', err));
+  }
+
   function initMap(){
-    map = L.map('map',{zoomControl:true}).setView([39.8283,-98.5795],4);
+    map = L.map('map',{zoomControl:true}).setView([20,10],2);
+    map.createPane('countriesPane');
+    map.getPane('countriesPane').style.zIndex = 350;
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
       maxZoom:19,
       attribution:'© OpenStreetMap · © CARTO'
     }).addTo(map);
+    loadBidetFriendlyCountries();
     clusterGroup = L.markerClusterGroup({
       maxClusterRadius:40,
       iconCreateFunction:c=>L.divIcon({
