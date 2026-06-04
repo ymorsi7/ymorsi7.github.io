@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BidetBeacon: Verified Bidet Finder</title>
-<meta name="description" content="Find mosques and restaurants with bidets. User verified and web-sourced listings in the USA, UK, and Canada.">
+<meta name="description" content="Find masajed and restaurants with bidets. User verified and web-sourced listings in the USA, UK, and Canada.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23047857'/%3E%3Ctext x='50' y='64' font-size='44' text-anchor='middle' fill='white'%3E🚿%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -950,7 +950,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <div class="logo" aria-hidden="true">🚿</div>
         <div class="brand-text">
           <h1>BidetBeacon</h1>
-          <p>Find bidets at mosques &amp; restaurants</p>
+          <p>Find bidets at masajed &amp; restaurants</p>
         </div>
       </a>
       <div class="search">
@@ -985,7 +985,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <div class="filter-row">
           <div class="segmented" id="placeFilter" role="group" aria-label="Place type">
             <button type="button" class="active" data-type="all">All</button>
-            <button type="button" data-type="mosque">Mosques</button>
+            <button type="button" data-type="mosque">Masajed</button>
           </div>
           <details class="more-filters">
             <summary>Filters</summary>
@@ -1048,7 +1048,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
       <label for="addCountry">Country</label>
       <input id="addCountry" value="USA">
       <label for="addType">Type</label>
-      <select id="addType"><option value="mosque">Mosque</option><option value="restaurant">Restaurant / café</option></select>
+      <select id="addType"><option value="mosque">Masjid</option><option value="restaurant">Restaurant / café</option></select>
       <label for="addStatus">Bidet type</label>
       <select id="addStatus">
         <option value="verified">Verified bidet</option>
@@ -1232,7 +1232,7 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     return '<div class="access-warn"><strong>Limited access — not a public restroom</strong>'+escapeHtml(m.accessNote||'Hotel rooms, showrooms, and private clubs are not open to walk-in visitors.')+'</div>';
   }
 
-  function typeLabel(t){ return t==='restaurant' ? 'Restaurant' : 'Mosque'; }
+  function typeLabel(t){ return t==='restaurant' ? 'Restaurant' : 'Masjid'; }
 
   function createIcon(status, access){
     let color = '#059669', emoji = '✓';
@@ -1276,11 +1276,11 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     const internet = filtered.filter(m=>m.bidetStatus==='internet').length;
     const limited = filtered.filter(m=>m.access==='limited').length;
     const pub = filtered.length - limited;
-    const mosques = filtered.filter(m=>m.type==='mosque').length;
+    const masajid = filtered.filter(m=>m.type==='mosque').length;
     let countHtml = '<strong>'+filtered.length+'</strong> '+(filtered.length===1?'place':'places');
     if(nearMe) countHtml += ' near you';
     const badges = [];
-    if(mosques && placeFilter!=='mosque') badges.push(mosques+' mosques');
+    if(masajid && placeFilter!=='mosque') badges.push(masajid+' masajed');
     if(pub) badges.push(pub+' public');
     if(limited) badges.push(limited+' limited');
     if(verified) badges.push(verified+' verified');
