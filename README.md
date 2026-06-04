@@ -1,47 +1,24 @@
-# Yusuf Morsi - Portfolio Repository
+# ymorsi7.github.io
 
-Welcome to my portfolio repository! This contains both my current and previous portfolio websites showcasing my work in machine learning, electrical engineering, and software development.
+Personal site source for [ymorsi.com](https://ymorsi.com), deployed on Netlify. Main content lives in `new/`.
 
-## 🚀 Live Site
+## Site
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d2b40b3f-df55-46ea-8bff-a1d587d6726d/deploy-status)](https://app.netlify.com/sites/ymorsi/deploys)
+- **[Portfolio](https://ymorsi.com/)** — projects, experience, and contact
+- **[Halal Vibes](https://ymorsi.com/halal-vibes)** — halal food and coffee spots
+- **[Photography](https://ymorsi.com/old/photography.html)** — photo gallery
+- **[BidetBeacon](https://ymorsi.com/bidetbeacon)** — community map of bidets at mosques and restaurants
 
-**Visit:** [ymorsi.com](https://ymorsi.com)
+## Tools
 
-## 📁 Repository Structure
+- [MergePDF](https://ymorsi.com/mergePDF.html) — merge PDFs and images
+- [Alarm](https://ymorsi.com/alarm.html) — online alarm clock
+- [Pomodoro](https://ymorsi.com/pomodoro.html) — focus timer
+- [Drawing Board](https://ymorsi.com/drawingBoard.html) — simple drawing canvas
+- [UCSD Tier List](https://ymorsi.com/UCSD-Tier-List/) — course tier list
 
-- **`new/`** - Current portfolio website (2024+)
-  - Modern, responsive design with Bootstrap
-  - Features projects, experience, and contact information
-  - Includes interactive elements and animations
+## Contact
 
-- **`new/old/`** - Previous portfolio versions
-  - Historical iterations of my portfolio
-  - Various design experiments and projects
-  - Academic work and course materials
-
-- **`demo_chatbot/`** - Interactive demo projects
-
-## 🛠️ Technologies Used
-
-- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap
-- **Styling:** Custom CSS, SCSS, Animate.css
-- **Icons:** Font Awesome, Icomoon
-- **Deployment:** Netlify
-
-## 👨‍💻 About Me
-
-- **Current:** Data Scientist at Cisco
-- **Education:** ECE BS/MS at UC San Diego
-- **Previous:** Southwest Airlines, FICO, USC
-- **Focus:** Machine Learning, Data Science, Electrical Engineering
-
-## 📞 Contact
-
-- **LinkedIn:** [yusufmorsi](https://www.linkedin.com/in/yusufmorsi/)
-- **GitHub:** [ymorsi7](https://github.com/ymorsi7)
-- **YouTube:** [YusufMorsi](https://www.youtube.com/c/YusufMorsi)
-
----
-
-*This repository serves as both a portfolio showcase and a historical record of my web development journey.*
+- [LinkedIn](https://www.linkedin.com/in/yusufmorsi/)
+- [GitHub](https://github.com/ymorsi7)
+- [YouTube](https://www.youtube.com/c/YusufMorsi)
