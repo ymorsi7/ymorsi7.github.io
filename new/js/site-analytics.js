@@ -39,6 +39,35 @@
     });
   }
 
+  /** @type {{ path: string; title: string; event: boolean }[]} */
+  const pendingGoatEvents = [];
+
+  function goatCounterReady() {
+    return window.goatcounter && typeof window.goatcounter.count === "function";
+  }
+
+  function flushGoatEvents() {
+    if (!goatCounterReady()) return;
+    while (pendingGoatEvents.length) {
+      window.goatcounter.count(pendingGoatEvents.shift());
+    }
+  }
+
+  /**
+   * @param {string} name
+   * @param {Record<string, string | number | boolean>} [params]
+   */
+  function sendGoatEvent(name, params) {
+    const p = params || {};
+    const path = p.dept ? `/event/${name}/${p.dept}` : `/event/${name}`;
+    const payload = { path, title: String(name), event: true };
+    if (goatCounterReady()) {
+      window.goatcounter.count(payload);
+    } else {
+      pendingGoatEvents.push(payload);
+    }
+  }
+
   function loadGoatCounter() {
     let url = (cfg.goatcounterUrl || "").trim();
     if (!url) {
@@ -55,6 +84,7 @@
       allow_frame: false,
     });
     s.src = "https://gc.zgo.at/count.js";
+    s.onload = flushGoatEvents;
     document.head.appendChild(s);
 
     if (cfg.dashboardUrl) {
@@ -78,14 +108,7 @@
       return;
     }
 
-    if (provider === "goatcounter" && window.goatcounter && typeof window.goatcounter.count === "function") {
-      const path = p.dept ? `/event/${name}/${p.dept}` : `/event/${name}`;
-      window.goatcounter.count({
-        path,
-        title: String(name),
-        event: true,
-      });
-    }
+    if (provider === "goatcounter") sendGoatEvent(name, p);
   };
 
   if (provider === "goatcounter") loadGoatCounter();

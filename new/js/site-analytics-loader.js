@@ -1,6 +1,7 @@
 /**
  * Loads site analytics from the same directory as this script (works at any page depth).
- * Usage: <script src="/new/js/site-analytics-loader.js"></script>
+ * Usage: <script src="/js/site-analytics-loader.js"></script>
+ *    (On Netlify, /new/js/* redirects to /js/* — see new/_redirects)
  *    or: <script src="../js/site-analytics-loader.js"></script>
  */
 (function () {
@@ -10,10 +11,10 @@
     try {
       base = new URL(".", el.src).href;
     } catch (e) {
-      base = "/new/js/";
+      base = "/js/";
     }
   }
-  if (!base) base = "/new/js/";
+  if (!base) base = "/js/";
   if (base.charAt(base.length - 1) !== "/") base += "/";
 
   function load(file, next) {

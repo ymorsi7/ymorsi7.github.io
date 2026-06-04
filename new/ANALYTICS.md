@@ -5,10 +5,12 @@ The whole static site (portfolio, tools, BidetBeacon, old pages, 404s, etc.) use
 Every HTML page includes one script:
 
 ```html
-<script src="/new/js/site-analytics-loader.js"></script>
+<script src="/js/site-analytics-loader.js"></script>
 ```
 
-The loader pulls in `site-analytics-config.js` and `site-analytics.js` from `/new/js/` (path is resolved automatically if you use a relative `../js/` URL instead).
+On **Netlify** (publish directory `new/`), scripts live at `/js/`. Older pages still use `/new/js/…`; `new/_redirects` maps those to `/js/`.
+
+The loader pulls in `site-analytics-config.js` and `site-analytics.js` from the same folder as the loader URL (or use a relative `../js/` URL from nested pages).
 
 ## View your stats
 
@@ -33,6 +35,31 @@ Analytics code is already enabled in `js/site-analytics-config.js`. You only nee
 4. Deploy/push to GitHub Pages, visit a few pages, then refresh the dashboard.
 
 Until step 2 is done, the script runs but counts are discarded — no error on your pages.
+
+## Troubleshooting (“is it working?”)
+
+If you see **any** rows in [the dashboard](https://ymorsi.goatcounter.com) (page paths, totals, referrers), GoatCounter **is** receiving hits. A quiet hour shown as **“0 visits”** (e.g. `2 Jun 10:00 – 10:59`) only means nobody visited in that hour — not that tracking is broken.
+
+What you should expect:
+
+| Dashboard | Meaning |
+|-----------|---------|
+| `/bidetbeacon` | BidetBeacon map (page views) |
+| `/event/bidetbeacon_view` | BidetBeacon loaded successfully (custom event) |
+| `/ucsd-tier-list` | Netlify pretty URL for the tier list (page views) |
+| `/event/tier_list_view` | Custom event from `trackEvent("tier_list_view")` |
+| `/event/course_ranked/MATH` | Custom event when someone ranks a MATH course |
+| `(unknown)` referrer | Direct traffic, in-app browsers, or privacy stripping — normal |
+| **Languages 100% (unknown)** | Disabled under GoatCounter **Settings** — enable there if you want language breakdown |
+| **122 of 146 visits shown** | Pagination on the Pages table — use “Show more” |
+
+Quick self-test after deploy:
+
+1. Open [https://ymorsi.com/bidetbeacon](https://ymorsi.com/bidetbeacon) (or the tier list) in a normal browser (not a strict ad blocker).
+2. DevTools → **Network** → filter `count` — you should see a request to `https://ymorsi.goatcounter.com/count` (status 200).
+3. Wait ~1–2 minutes, refresh the dashboard (GoatCounter is not Google-style real-time).
+
+Under **Settings → Allowed domains**, include `ymorsi.com` and `ymorsi7.github.io` so production and preview hosts are accepted.
 
 ## Change provider
 

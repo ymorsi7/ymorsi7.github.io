@@ -1,0 +1,3 @@
+# Netlify publish root is `new/` — assets live at /js/, /css/, not under /new/
+/new/js/*   /js/:splat   200
+/new/css/*  /css/:splat  200
