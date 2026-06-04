@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BidetBeacon: Verified Bidet Finder</title>
-<meta name="description" content="Find mosques and restaurants with verified bidets: TOTO, heated seats, and more.">
+<meta name="description" content="Find mosques and restaurants with bidets. User verified and web-sourced listings in the USA, UK, and Canada.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23047857'/%3E%3Ctext x='50' y='64' font-size='44' text-anchor='middle' fill='white'%3E🚿%3C/text%3E%3C/svg%3E">
 <style id="leaflet-css">/* required styles */
 
@@ -746,6 +746,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 :root{
   --bg:#f8fafc;--surface:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;
   --brand:#047857;--brand-2:#059669;--brand-soft:#ecfdf5;--warm:#b45309;--warm-soft:#fffbeb;
+  --web:#2563eb;--web-soft:#eff6ff;
   --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06);
   --radius:16px;
 }
@@ -790,6 +791,7 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-seri
 .tag{font-size:.68rem;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap}
 .tag-verified{background:var(--brand-soft);color:var(--brand)}
 .tag-warmed{background:var(--warm-soft);color:var(--warm)}
+.tag-internet{background:var(--web-soft);color:var(--web)}
 .tag-type{background:#f1f5f9;color:#475569;margin-top:8px;display:inline-block}
 .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px}
 .dist{font-size:.72rem;color:var(--muted)}
@@ -828,7 +830,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <div class="logo" aria-hidden="true">🚿</div>
         <div class="brand-text">
           <h1>BidetBeacon</h1>
-          <p>Verified bidets only · نظافة</p>
+          <p>User verified & web-sourced · نظافة</p>
         </div>
       </div>
       <div class="search">
@@ -845,18 +847,20 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <button type="button" class="chip active" data-type="all">All</button>
         <button type="button" class="chip" data-type="mosque">Mosques</button>
         <button type="button" class="chip" data-type="restaurant">Restaurants</button>
+        <button type="button" class="chip" data-type="verified">User verified</button>
         <button type="button" class="chip" data-type="warmed">Heated / TOTO</button>
+        <button type="button" class="chip" data-type="internet">From internet</button>
       </div>
       <span class="meta" id="countLabel">Loading…</span>
     </div>
   </header>
 
   <main class="layout">
-    <div id="map" role="application" aria-label="Map of verified bidet locations"></div>
+    <div id="map" role="application" aria-label="Map of bidet locations"></div>
     <section class="panel" aria-label="Location list">
       <div class="panel-head">
-        <h2>Verified locations</h2>
-        <p>Only confirmed bidets: standard, TOTO-style, or heated seats.</p>
+        <h2>Bidet locations</h2>
+        <p>Green = you verified. Blue = found online (WuduMate, TOTO, news). Not personally checked.</p>
       </div>
       <div class="list" id="locationList"></div>
     </section>
@@ -916,7 +920,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
 </div>
 
 <script>
-window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, Berkeley, CA 94705","latitude":"37.8717","longitude":"-122.2656","city":"Berkeley, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Cairo Restaurant and Cafe","address":"Anaheim, CA","latitude":"33.8366","longitude":"-117.9143","city":"Anaheim, CA","country":"USA","type":"restaurant","bidetStatus":"verified"},{"name":"Islamic Center of Irvine","address":"9752 13th St, Garden Grove, CA 92844","latitude":"33.755837","longitude":"-117.958866","city":"Irvine, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Center of San Diego","address":"7050 Eckstrom Ave, San Diego, CA 92111","latitude":"32.8206","longitude":"-117.1655","city":"San Diego, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Society of Baltimore","address":"6631 Johnnycake Road, Windsor Mill, MD 21244","latitude":"39.3034707","longitude":"-76.7480735","city":"Windsor Mill, MD","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Society of Colorado Springs","address":"2125 N Chestnut St, Colorado Springs, CO 80907","latitude":"38.8339","longitude":"-104.8214","city":"Colorado Springs, CO","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"King Fahad Mosque","address":"10980 Washington Blvd, Culver City, CA 90232","latitude":"34.01141","longitude":"-118.41012","city":"Los Angeles, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"London Central Mosque","address":"146 Park Rd, London NW8 7RG, UK","latitude":"51.5074","longitude":"-0.1278","city":"London","country":"UK","type":"mosque","bidetStatus":"warmed"},{"name":"Masjid Al Ansar","address":"1000 N State College Blvd, Anaheim, CA 92806","latitude":"33.8366","longitude":"-117.9143","city":"Anaheim, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Muslim Community Association","address":"3003 Scott Blvd, Santa Clara, CA 95054","latitude":"37.37708","longitude":"-121.95946","city":"Santa Clara, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Muslim Community Center San Diego","address":"9445 Activity Rd, San Diego, CA 92126","latitude":"32.8312","longitude":"-117.0225","city":"San Diego, CA","country":"USA","type":"mosque","bidetStatus":"verified"}];
+window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, Berkeley, CA 94705","latitude":"37.8717","longitude":"-122.2656","city":"Berkeley, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Cairo Restaurant and Cafe","address":"Anaheim, CA","latitude":"33.8366","longitude":"-117.9143","city":"Anaheim, CA","country":"USA","type":"restaurant","bidetStatus":"verified"},{"name":"Islamic Center of Irvine","address":"9752 13th St, Garden Grove, CA 92844","latitude":"33.755837","longitude":"-117.958866","city":"Irvine, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Center of San Diego","address":"7050 Eckstrom Ave, San Diego, CA 92111","latitude":"32.8206","longitude":"-117.1655","city":"San Diego, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Society of Baltimore","address":"6631 Johnnycake Road, Windsor Mill, MD 21244","latitude":"39.3034707","longitude":"-76.7480735","city":"Windsor Mill, MD","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Islamic Society of Colorado Springs","address":"2125 N Chestnut St, Colorado Springs, CO 80907","latitude":"38.8339","longitude":"-104.8214","city":"Colorado Springs, CO","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"King Fahad Mosque","address":"10980 Washington Blvd, Culver City, CA 90232","latitude":"34.01141","longitude":"-118.41012","city":"Los Angeles, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"London Central Mosque","address":"146 Park Rd, London NW8 7RG, UK","latitude":"51.5074","longitude":"-0.1278","city":"London","country":"UK","type":"mosque","bidetStatus":"warmed","bidetType":"Heated seat (unconfirmed)"},{"name":"Masjid Al Ansar","address":"1000 N State College Blvd, Anaheim, CA 92806","latitude":"33.8366","longitude":"-117.9143","city":"Anaheim, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Muslim Community Association","address":"3003 Scott Blvd, Santa Clara, CA 95054","latitude":"37.37708","longitude":"-121.95946","city":"Santa Clara, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Muslim Community Center San Diego","address":"9445 Activity Rd, San Diego, CA 92126","latitude":"32.8312","longitude":"-117.0225","city":"San Diego, CA","country":"USA","type":"mosque","bidetStatus":"verified"},{"name":"Community Masjid of Atlanta","address":"547 West End Pl SW, Atlanta, GA 30310","latitude":"33.7341","longitude":"-84.4254","city":"Atlanta, GA","country":"USA","type":"mosque","bidetStatus":"internet","bidetType":"WuduMate Modular wudu stations","sourceUrl":"https://wudumate.com/wudumate-testimonial-community-masjid-of-atlanta/"},{"name":"Weston Islamic Education Centre","address":"66 Palmer Street, Weston-super-Mare BS23 1RU","latitude":"51.3460","longitude":"-2.9770","city":"Weston-super-Mare","country":"UK","type":"mosque","bidetStatus":"internet","bidetType":"WuduMate Modular ablution area","sourceUrl":"https://wudumate.com/projects/west-country-masjid-in-uk/"},{"name":"Gatwick Airport Chapel","address":"Gatwick Airport, South Terminal, Horley RH6 0NP","latitude":"51.1569","longitude":"-0.1618","city":"Gatwick","country":"UK","type":"mosque","bidetStatus":"internet","bidetType":"WuduMate wudu facilities in multi-faith chapel","sourceUrl":"https://wudumate.com/projects/wudumate-commercial-installation-in-gatwick-airport-chapel/"},{"name":"UTM Student Centre","address":"3359 Mississauga Rd, Mississauga, ON L5L 1C6","latitude":"43.5489","longitude":"-79.6629","city":"Mississauga, ON","country":"Canada","type":"mosque","bidetStatus":"internet","bidetType":"Bidets in washrooms incl. multi-faith prayer room","sourceUrl":"https://themedium.ca/bidets-make-their-debut-at-utm/"},{"name":"UTSC Student Centre","address":"1265 Military Trail, Scarborough, ON M1C 1A4","latitude":"43.7844","longitude":"-79.1864","city":"Scarborough, ON","country":"Canada","type":"mosque","bidetStatus":"internet","bidetType":"Student centre washroom bidets","sourceUrl":"https://asianpacificpost.com/article/10626-canada%E2%80%99s-bidet-divide.html"},{"name":"Hotel Strata","address":"93 W El Camino Real, Mountain View, CA 94040","latitude":"37.3947","longitude":"-122.0783","city":"Mountain View, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Hotel Nikko San Francisco","address":"222 Mason St, San Francisco, CA 94102","latitude":"37.7859","longitude":"-122.4094","city":"San Francisco, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Palace Hotel San Francisco","address":"2 New Montgomery St, San Francisco, CA 94105","latitude":"37.7885","longitude":"-122.4015","city":"San Francisco, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"HanaHaus","address":"456 University Ave, Palo Alto, CA 94301","latitude":"37.4452","longitude":"-122.1634","city":"Palo Alto, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Fairmont Miramar Hotel & Bungalows","address":"101 Wilshire Blvd, Santa Monica, CA 90401","latitude":"34.0172","longitude":"-118.5017","city":"Santa Monica, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Matsuhisa","address":"129 N La Cienega Blvd, Beverly Hills, CA 90211","latitude":"34.0736","longitude":"-118.4003","city":"Beverly Hills, CA","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Andaz Hyatt New York","address":"485 5th Ave, New York, NY 10017","latitude":"40.7544","longitude":"-73.9812","city":"New York, NY","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Morimoto","address":"88 10th Ave, New York, NY 10011","latitude":"40.7435","longitude":"-74.0070","city":"New York, NY","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Aburiya Raku Las Vegas","address":"5030 W Spring Mountain Rd #2, Las Vegas, NV 89146","latitude":"36.1260","longitude":"-115.2100","city":"Las Vegas, NV","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"APA Hotel Woodbridge","address":"120 South Wood Ave, Iselin, NJ 08830","latitude":"40.5675","longitude":"-74.3225","city":"Iselin, NJ","country":"USA","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Coast Coal Harbour Vancouver Hotel","address":"1180 West Hastings St, Vancouver, BC V6E 4R5","latitude":"49.2889","longitude":"-123.1210","city":"Vancouver, BC","country":"Canada","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Coast Edmonton Plaza Hotel","address":"10155 105th St NW, Edmonton, AB T5J 1E2","latitude":"53.5460","longitude":"-113.4930","city":"Edmonton, AB","country":"Canada","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Ritz-Carlton Montreal","address":"1228 Sherbrooke St W, Montreal, QC H3G 1H6","latitude":"45.5022","longitude":"-73.5740","city":"Montreal, QC","country":"Canada","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"},{"name":"Coast Victoria Hotel & Marina","address":"146 Kingston St, Victoria, BC V8V 1V4","latitude":"48.4287","longitude":"-123.3680","city":"Victoria, BC","country":"Canada","type":"restaurant","bidetStatus":"internet","bidetType":"TOTO Washlet","sourceUrl":"https://www.totousa.com/washlet/experience-it"}];
 </script>
 <script>/* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
@@ -934,7 +938,7 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
   const AIRTABLE_FORM_EMBED_URL = 'https://airtable.com/embed/appooaJBbg4weWhI0/shrYzqffjo9JpweKW';
   const SUBMIT_EMAIL = 'ymorsi8+bidet@gmail.com'; // fallback until Airtable URL is set
 
-  const HAS_BIDET = s => s === 'verified' || s === 'warmed';
+  const HAS_BIDET = s => s === 'verified' || s === 'warmed' || s === 'internet';
   const useAirtable = () => Boolean(AIRTABLE_FORM_EMBED_URL);
 
   let allLocations = [], userLocation = null, map, clusterGroup, pickMarker;
@@ -953,10 +957,15 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
   }
 
   function normalizeSeed(row){
+    const s = row.bidetStatus;
+    let defaultType = 'Verified bidet';
+    if(s === 'warmed') defaultType = 'Heated seat';
+    else if(s === 'internet') defaultType = 'Web source';
     return {
       id: stableSeedId(row), name: row.name, address: row.address||'', latitude: String(row.latitude), longitude: String(row.longitude),
-      city: row.city||'', country: row.country||'', type: row.type||'mosque', bidetStatus: row.bidetStatus,
-      bidetType: row.bidetType || (row.bidetStatus==='warmed' ? 'Heated seat' : 'Verified bidet')
+      city: row.city||'', country: row.country||'', type: row.type||'mosque', bidetStatus: s,
+      bidetType: row.bidetType || defaultType,
+      sourceUrl: row.sourceUrl || ''
     };
   }
 
@@ -1014,6 +1023,8 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
       if(activeType==='mosque' && m.type!=='mosque') return false;
       if(activeType==='restaurant' && m.type!=='restaurant') return false;
       if(activeType==='warmed' && m.bidetStatus!=='warmed') return false;
+      if(activeType==='verified' && m.bidetStatus!=='verified') return false;
+      if(activeType==='internet' && m.bidetStatus!=='internet') return false;
       if(nearMe && userLocation){
         const dist = haversineMiles(userLocation,{lat:+m.latitude,lng:+m.longitude});
         if(dist>radiusMi) return false;
@@ -1027,16 +1038,17 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
   }
 
   function statusTag(m){
+    if(m.bidetStatus==='internet') return '<span class="tag tag-internet">From internet</span>';
     if(m.bidetStatus==='warmed') return '<span class="tag tag-warmed">Heated / TOTO</span>';
-    return '<span class="tag tag-verified">Verified</span>';
+    return '<span class="tag tag-verified">User verified</span>';
   }
 
   function typeLabel(t){ return t==='restaurant' ? 'Restaurant' : 'Mosque'; }
 
   function createIcon(status){
-    const warm = status==='warmed';
-    const color = warm ? '#d97706' : '#059669';
-    const emoji = warm ? '🔥' : '✓';
+    let color = '#059669', emoji = '✓';
+    if(status==='warmed'){ color = '#d97706'; emoji = '🔥'; }
+    else if(status==='internet'){ color = '#2563eb'; emoji = '🌐'; }
     return L.divIcon({
       html:'<div style="background:'+color+';color:#fff;border:2.5px solid #fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:14px;font-weight:700">'+emoji+'</div>',
       className:'custom-marker', iconSize:[30,30], iconAnchor:[15,15], popupAnchor:[0,-15]
@@ -1056,9 +1068,18 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
 
   function renderList(filtered){
     const q=getQuery(), el=document.getElementById('locationList');
-    document.getElementById('countLabel').textContent = filtered.length + ' verified spot' + (filtered.length===1?'':'s');
+    const verified = filtered.filter(m=>m.bidetStatus==='verified').length;
+    const warmed = filtered.filter(m=>m.bidetStatus==='warmed').length;
+    const internet = filtered.filter(m=>m.bidetStatus==='internet').length;
+    let label = filtered.length + ' spot' + (filtered.length===1?'':'s');
+    const parts = [];
+    if(verified) parts.push(verified + ' user verified');
+    if(warmed) parts.push(warmed + ' heated');
+    if(internet) parts.push(internet + ' from internet');
+    if(parts.length) label += ' · ' + parts.join(', ');
+    document.getElementById('countLabel').textContent = label;
     if(!filtered.length){
-      el.innerHTML='<div class="empty">No verified bidets match your filters.</div>';
+      el.innerHTML='<div class="empty">No bidet locations match your filters.</div>';
       return;
     }
     el.innerHTML = sortedLocations(filtered).map(m=>{
@@ -1089,11 +1110,13 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     const m=allLocations.find(x=>x.id===id);
     if(!m) return;
     if(map) map.setView([+m.latitude,+m.longitude], Math.max(map.getZoom(),14));
+    const source = m.sourceUrl ? '<p class="sub" style="margin-top:10px"><a href="'+escapeHtml(m.sourceUrl)+'" target="_blank" rel="noopener">View web source</a></p>' : '';
     document.getElementById('detailContent').innerHTML =
       '<h2>'+escapeHtml(m.name)+'</h2>'+
       '<p class="sub">'+escapeHtml(typeLabel(m.type))+' · '+escapeHtml(m.city)+', '+escapeHtml(m.country)+'</p>'+
       '<p>'+escapeHtml(m.address)+'</p>'+
       '<div class="row">'+statusTag(m)+(m.bidetType?'<span class="tag tag-type">'+escapeHtml(m.bidetType)+'</span>':'')+'</div>'+
+      source+
       '<div class="dialog-actions">'+
       '<a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query='+m.latitude+','+m.longitude+'" target="_blank" rel="noopener" style="text-decoration:none">Open in Google Maps</a>'+
       '</div>';
