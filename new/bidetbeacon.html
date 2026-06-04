@@ -858,10 +858,15 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
 .dialog-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:none;border-radius:999px;background:#f1f5f9;cursor:pointer;font-size:20px;line-height:1;color:var(--muted);transition:background .15s,color .15s}
 .dialog-close:hover{background:#e2e8f0;color:var(--text)}
 .dialog.wide{max-width:680px}
+#addDialog.dialog.wide{max-width:min(800px,96vw);max-height:95vh;display:flex;flex-direction:column;overflow:hidden;padding:18px 20px 16px}
+#addDialog .sub{flex-shrink:0;margin-bottom:6px}
+#addDialog .coord-hint{flex-shrink:0;margin:6px 0}
+#addDialog h2{flex-shrink:0}
+#airtablePanel:not([hidden]){flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-top:4px}
 .dialog h2{font-size:1.2rem;font-weight:700;padding-right:40px;letter-spacing:-.02em;line-height:1.3}
 .coord-hint{font-size:.8rem;color:var(--brand);background:var(--brand-soft);border-radius:var(--radius);padding:8px 12px;margin:10px 0;display:none}
 .coord-hint.show{display:block}
-.airtable-embed{width:100%;height:520px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+.airtable-embed{width:100%;flex:1 1 auto;min-height:520px;height:calc(95vh - 10.5rem);max-height:900px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
 .dialog .sub{color:var(--muted);font-size:.86rem;margin:6px 0 14px}
 .dialog a:not(.btn){color:var(--web);font-weight:600;text-decoration:none}
 .dialog a:not(.btn):hover{text-decoration:underline}
@@ -908,11 +913,12 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
   .mobile-tabs{display:flex}
   .site-footer{padding:6px 12px calc(6px + var(--safe-bottom));font-size:.7rem}
   .overlay{align-items:flex-end;padding:0}
-  .overlay.open .dialog,.overlay.open .dialog.wide{border-radius:20px 20px 0 0;max-height:min(92dvh,720px);padding:20px 16px calc(20px + var(--safe-bottom));animation:sheetIn .25s ease}
+  .overlay.open .dialog,.overlay.open .dialog.wide{border-radius:20px 20px 0 0;max-height:min(96dvh,900px);padding:16px 14px calc(14px + var(--safe-bottom));animation:sheetIn .25s ease}
+  .overlay.open #addDialog.dialog.wide{max-height:96dvh;height:96dvh}
   @keyframes sheetIn{from{transform:translateY(100%)}to{transform:none}}
   .dialog-close{top:12px;right:12px;width:40px;height:40px}
   .dialog-actions .btn{flex:1;justify-content:center;padding:12px 16px}
-  .airtable-embed{height:min(520px,55dvh)}
+  .airtable-embed{min-height:360px;height:calc(96dvh - 9rem);max-height:none}
   .card h3{font-size:.92rem}
   .more-filters{margin-left:0;flex:1}
   .more-filters summary{display:flex;align-items:center;justify-content:center;min-height:40px}
