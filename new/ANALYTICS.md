@@ -1,6 +1,14 @@
 # Site analytics (free)
 
-This site uses **[GoatCounter](https://www.goatcounter.com)** — free for personal and open-source sites, no cookies, privacy-friendly.
+The whole static site (portfolio, tools, BidetBeacon, old pages, 404s, etc.) uses **[GoatCounter](https://www.goatcounter.com)** — free for personal and open-source sites, no cookies, privacy-friendly.
+
+Every HTML page includes one script:
+
+```html
+<script src="/new/js/site-analytics-loader.js"></script>
+```
+
+The loader pulls in `site-analytics-config.js` and `site-analytics.js` from `/new/js/` (path is resolved automatically if you use a relative `../js/` URL instead).
 
 ## View your stats
 
@@ -8,10 +16,10 @@ This site uses **[GoatCounter](https://www.goatcounter.com)** — free for perso
 
 After you deploy, open that link to see:
 
-- Page views (which tools/pages get traffic)
+- Page views for any path (e.g. `/new/index.html`, `/bidetbeacon`, `/new/bidetbeacon.html`)
 - Referrers (where visitors came from)
 - Countries / browsers (aggregated)
-- UCSD Tier List custom events (under paths like `/event/tier_list_view`)
+- Custom events from pages that call `trackEvent()` (e.g. UCSD Tier List under `/event/...`)
 
 ## One-time setup (about 2 minutes)
 

@@ -1,9 +1,8 @@
 /**
  * Site analytics — GoatCounter (free for personal / open-source sites).
  *
- * Included on pages via:
- *   <script src="js/site-analytics-config.js"></script>
- *   <script src="js/site-analytics.js"></script>
+ * Loaded site-wide via site-analytics-loader.js:
+ *   <script src="/new/js/site-analytics-loader.js"></script>
  *
  * View stats: https://ymorsi.goatcounter.com
  * (Site code at goatcounter.com must be "ymorsi" — same as your dashboard URL.)
