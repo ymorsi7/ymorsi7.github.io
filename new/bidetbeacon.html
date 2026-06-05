@@ -873,6 +873,11 @@ body.modal-open{overflow:hidden}
 .promo-dialog .dialog-actions{justify-content:center;flex-direction:column;gap:10px;margin-top:0}
 .promo-dialog .dialog-actions .btn{width:100%;min-height:48px;font-size:.95rem}
 .promo-dialog .promo-skip{border:none;background:transparent;color:var(--muted);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer;padding:8px;text-decoration:underline;text-underline-offset:2px}
+.about-dialog{max-width:480px;padding:28px 24px 24px;text-align:left}
+.about-dialog h2{font-size:1.25rem;margin-bottom:14px;padding-right:36px}
+.about-dialog .about-body{font-size:.9rem;line-height:1.6;color:var(--text)}
+.about-dialog .about-body p{margin:0 0 14px}
+.about-dialog .about-body p:last-child{margin-bottom:0;font-weight:600;color:var(--brand)}
 mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
 .overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px;z-index:2000}
 .overlay.open{display:flex}
@@ -905,6 +910,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
 .site-footer-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0.15rem 0.35rem}
 .site-footer a{color:var(--brand);text-decoration:none;font-weight:600;padding:4px 2px;-webkit-tap-highlight-color:transparent}
 .site-footer a:hover{text-decoration:underline}
+.site-footer-tagline{margin:4px 0 0;font-size:.68rem;color:var(--muted);font-weight:500;line-height:1.4}
 .mobile-tabs{display:none;flex-shrink:0;border-top:1px solid var(--line);background:var(--surface);padding:8px 12px calc(8px + var(--safe-bottom));gap:8px;z-index:200;box-shadow:0 -4px 20px rgba(15,23,42,.06)}
 .mobile-tab{flex:1;border:none;border-radius:999px;padding:12px 10px;font:inherit;font-size:.88rem;font-weight:700;color:var(--muted);background:transparent;cursor:pointer;transition:background .15s,color .15s;min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:6px;-webkit-tap-highlight-color:transparent}
 .mobile-tab.active{background:var(--brand-soft);color:var(--brand)}
@@ -981,6 +987,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
         <input type="search" id="searchInput" placeholder="Search city, name, or address…" autocomplete="off" aria-label="Search locations">
       </div>
       <div class="actions">
+        <button type="button" class="btn btn-ghost" id="aboutBtn">About</button>
         <button type="button" class="btn btn-ghost" id="nearMeBtn" aria-label="Find places near me">
           <span class="btn-icon" aria-hidden="true">📍</span>
           <span class="btn-label">Near me</span>
@@ -1028,6 +1035,22 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
     </aside>
   </div>
 
+  <div class="overlay" id="aboutOverlay" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="dialog about-dialog" id="aboutDialog">
+      <button type="button" class="dialog-close" id="aboutClose" aria-label="Close">×</button>
+      <h2 id="aboutTitle">About BidetBeacon</h2>
+      <div class="about-body">
+        <p>I have a habit of getting annoyed at minor inconveniences and then trying to build a solution for them.</p>
+        <p>As someone who travels regularly between the US and the Middle East, I noticed one thing the West evidently still hasn't figured out: Bidets.</p>
+        <p>In the Middle East, bidets are something you just don't have to think about. A convenience we don't realize we're spoiled with until we return to the West.</p>
+        <p>This has been ruffling my feathers for years now.. so I built BidetBeacon. A free map where you can find masajed, restaurants, hotels, and public spots that actually have bidets / washlets in the US, Canada, and the UK.</p>
+        <p>So far, there are hundreds of pins on the map, but the usefulness of this map is directly proportional to the suggestions filled on the site's form.</p>
+        <p>If you know a spot, add it. Takes a minute. Name, address, done.</p>
+        <p>Sadaqah jariyah of hygiene.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="overlay" id="promoOverlay" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
     <div class="dialog promo-dialog" id="promoDialog">
       <button type="button" class="dialog-close" id="promoClose" aria-label="Close">×</button>
@@ -1062,6 +1085,7 @@ mark.hl{background:#fef08a;border-radius:3px;padding:0 2px}
       <span aria-hidden="true">·</span>
       <a class="youtube-demo-footer" href="https://youtu.be/sQQ-bVxjqWc?si=QYB2L2aDgYlc6JRc" target="_blank" rel="noopener noreferrer" aria-label="Watch BidetBeacon demo on YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span>Demo</span></a>
     </nav>
+    <p class="site-footer-tagline">Built with passion &lt;3 · <span id="footerYear"></span></p>
   </footer>
 </div>
 
@@ -1625,6 +1649,10 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     document.querySelectorAll('.mobile-tab').forEach(tab=>{
       tab.addEventListener('click',()=> setMobileView(tab.dataset.view));
     });
+    document.getElementById('aboutBtn').addEventListener('click',()=> setOverlayOpen('aboutOverlay', true));
+    document.getElementById('aboutClose').addEventListener('click',()=> setOverlayOpen('aboutOverlay', false));
+    const footerYear = document.getElementById('footerYear');
+    if(footerYear) footerYear.textContent = String(new Date().getFullYear());
     document.getElementById('addBtn').addEventListener('click',()=> openAddForm('header'));
     document.getElementById('detailContent').addEventListener('click', e=>{
       if(e.target.closest('.js-open-add-form')){
@@ -1635,7 +1663,7 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
     initPromoPopup();
     document.getElementById('addClose').addEventListener('click',()=>{ setOverlayOpen('addOverlay', false); resetAddForm(); });
     document.getElementById('detailClose').addEventListener('click',()=> setOverlayOpen('detailOverlay', false));
-    ['detailOverlay','addOverlay'].forEach(id=>{
+    ['detailOverlay','addOverlay','aboutOverlay'].forEach(id=>{
       document.getElementById(id).addEventListener('click',e=>{ if(e.target.id===id) setOverlayOpen(id, false); });
     });
     document.addEventListener('keydown',e=>{
@@ -1645,6 +1673,7 @@ window.BIDETBEACON_SEED = [{"name":"Berkeley Masjid","address":"2716 Derby St, B
         } else {
           setOverlayOpen('detailOverlay', false);
           setOverlayOpen('addOverlay', false);
+          setOverlayOpen('aboutOverlay', false);
           resetAddForm();
         }
       }
