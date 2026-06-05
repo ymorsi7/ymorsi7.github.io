@@ -287,7 +287,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 6,
     vibesScore: 9,
     excerpt: "Amazing atmosphere and probably the best bathroom I've ever seen in a public place. Just Peachy drink is good. Coffee isn't the greatest but atmosphere is great.",
-    image: null,
+    image: "halal-vibes/imgs/milyar.jpg",
     content: `
       <p>1098 Monroe St, Santa Clara, CA 95050</p>
       <p>Amazing atmosphere, and I must say that they probably have the best bathroom I've ever seen in a public place. Bidet, air fresheners, personal sink, you name it.</p>
