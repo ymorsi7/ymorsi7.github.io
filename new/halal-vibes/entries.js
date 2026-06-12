@@ -2381,5 +2381,42 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-03",
     tags: ["halal", "desi", "biryani", "pakistani", "san francisco", "ocean ave"]
+  },
+  {
+    slug: "papi-tacos-churros-santa-ana",
+    title: "Papi Tacos & Churros",
+    region: "US",
+    location: "Santa Ana",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Fully halal Mexican street food—birria mulitas, tacos, and homemade churros. Santa Ana Main St location.",
+    image: "images/IMG_6409.jpg",
+    content: `
+      <p>2603 S Main St, Santa Ana, CA 92707</p>
+      <p>Halal-certified chicken and beef from a Muslim meat distributor. Known for slow-cooked birria, pollo asado, and churros made from scratch.</p>
+      <p>Pictured: birria mulita with melted cheese, seasoned meat, and fresh avocado.</p>
+    `,
+    date: "2026-06-04",
+    tags: ["halal", "mexican", "birria", "churros", "tacos", "santa ana", "oc"]
+  },
+  {
+    slug: "motw-coffee-pastries-san-diego",
+    title: "MOTW Coffee and Pastries",
+    region: "US",
+    location: "San Diego",
+    categories: ["coffee", "vibes"],
+    halalBadge: true,
+    foodScore: null,
+    vibesScore: 10,
+    excerpt: "Amazing vibes—brilliant café and my favorite in San Diego. Great location in Kearny Mesa / Convoy.",
+    image: null,
+    content: `
+      <p>7710 Balboa Ave Suite 129, San Diego, CA 92111</p>
+      <p>Amazing vibes. Brilliant café—my favorite in San Diego—and a really good location.</p>
+    `,
+    date: "2026-06-04",
+    tags: ["halal", "coffee", "pastries", "san diego", "kearny mesa", "convoy"]
   }
 ];
