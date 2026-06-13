@@ -1,0 +1,13 @@
+{
+  "terms": [
+    "alcohol", "beer", "wine", "vodka", "whiskey", "whisky", "tequila", "rum",
+    "gin", "champagne", "liquor", "drunk", "drinking", "intoxicated", "wasted",
+    "high", "stoned", "weed", "marijuana", "cannabis", "cocaine", "heroin",
+    "meth", "pills", "xanax", "molly", "ecstasy", "lsd", "acid trip", "smoke up",
+    "roll up", "take a shot", "get drunk", "party hard"
+  ],
+  "patterns": [
+    "\\b(drunk|wasted|stoned|intoxicat)\\w*\\b",
+    "\\b(beer|wine|vodka|whiskey|tequila|rum|gin|champagne|liquor)\\b"
+  ]
+}

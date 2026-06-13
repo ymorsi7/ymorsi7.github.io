@@ -1,0 +1,12 @@
+{
+  "terms": [
+    "god is fake", "god is dead", "god is cruel", "god is evil", "god is wrong",
+    "allah is fake", "allah is dead", "curse god", "curse allah", "hate god",
+    "hate allah", "f god", "f allah", "damn god", "damn allah", "screw god",
+    "god damn", "goddamn", "blaspheme god", "mock god", "mock allah"
+  ],
+  "patterns": [
+    "\\b(curse|hate|mock|damn|blasphem)\\w*\\s+(god|allah)\\b",
+    "\\b(god|allah)\\s+is\\s+(fake|dead|evil|cruel|wrong)\\b"
+  ]
+}

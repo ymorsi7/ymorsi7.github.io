@@ -1,0 +1,13 @@
+{
+  "terms": [
+    "gamble", "gambling", "casino", "lottery", "bet money", "poker", "blackjack",
+    "slot machine", "idol", "worship idols", "satan", "devil worship", "demon",
+    "sacrilege", "curse the prophet", "mock the prophet", "insult islam",
+    "pork", "bacon", "strip club", "porn", "pornography", "orgy", "adultery",
+    "fornication", "zina", "haram relationship"
+  ],
+  "patterns": [
+    "\\b(gambl|casino|lottery|porn)\\w*\\b",
+    "\\b(satan|devil|demon)\\w*\\b"
+  ]
+}

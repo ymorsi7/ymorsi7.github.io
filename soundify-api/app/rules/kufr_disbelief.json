@@ -1,0 +1,12 @@
+{
+  "terms": [
+    "kufr", "kafir", "kuffar", "disbelieve", "disbelief", "apostate", "apostasy",
+    "blasphemy", "blaspheme", "infidel", "idol worship", "shirk", "mushrik",
+    "polytheism", "deny allah", "deny god", "no god", "god is dead",
+    "reject islam", "leave islam", "ex-muslim", "anti-islam", "anti muslim"
+  ],
+  "patterns": [
+    "\\b(kufr|kafir|kuffar|shirk|mushrik|blasphem)\\w*\\b",
+    "\\b(disbeliev|apostas|infidel)\\w*\\b"
+  ]
+}

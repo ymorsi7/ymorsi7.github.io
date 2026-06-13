@@ -16,6 +16,9 @@ Personal site source for [ymorsi.com](https://ymorsi.com), deployed on Netlify. 
 - [Pomodoro](https://ymorsi.com/pomodoro.html) — focus timer
 - [Drawing Board](https://ymorsi.com/drawingBoard.html) — simple drawing canvas
 - [UCSD Tier List](https://ymorsi.com/UCSD-Tier-List/) — course tier list
+- [Soundify](https://ymorsi.com/soundify) — halal vocal cleaner (isolate vocals, mute haram lyrics)
+
+Backend API source: [`soundify-api/`](soundify-api/) — deploy separately on Modal.
 
 ## Contact
 

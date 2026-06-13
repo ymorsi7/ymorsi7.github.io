@@ -1,0 +1,9 @@
+{
+  "terms": [
+    "damn", "hell", "shit", "fuck", "bitch", "asshole", "bastard", "crap",
+    "dick", "pussy", "whore", "slut", "nigga", "nigger", "faggot", "retard"
+  ],
+  "patterns": [
+    "\\b(f+u+c+k+|s+h+i+t+|b+i+t+c+h+)\\b"
+  ]
+}

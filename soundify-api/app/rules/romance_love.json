@@ -1,0 +1,14 @@
+{
+  "terms": [
+    "love you", "i love", "my love", "baby", "babe", "darling", "sweetheart",
+    "kiss me", "kiss you", "hold me", "hold you", "make love", "sex", "sexy",
+    "seduce", "lust", "desire you", "want you", "need you", "miss you",
+    "heart belongs", "falling for", "crush on", "boyfriend", "girlfriend",
+    "lover", "romance", "romantic", "intimate", "passion", "caress",
+    "touch me", "body", "naked", "undress", "hook up", "date me", "dating"
+  ],
+  "patterns": [
+    "\\b(i\\s+love\\s+you|love\\s+you|my\\s+love|make\\s+love)\\b",
+    "\\b(kiss|seduc|lust|desire|passion|romanc)\\w*\\b"
+  ]
+}
