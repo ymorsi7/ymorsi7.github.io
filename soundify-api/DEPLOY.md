@@ -5,9 +5,13 @@
 ```bash
 cd soundify-api
 pip install modal
-modal setup
-modal secret create soundify-secrets OPENAI_API_KEY=sk-... OPENAI_MODEL=gpt-4o-mini
-modal deploy modal_app.py
+
+# If `modal` is not found, use python3 -m modal (or add to PATH):
+# export PATH="$HOME/Library/Python/3.13/bin:$PATH"
+
+python3 -m modal token new          # one-time: opens browser to authenticate
+python3 -m modal secret create soundify-secrets OPENAI_API_KEY=sk-... OPENAI_MODEL=gpt-4o-mini
+python3 -m modal deploy modal_app.py
 ```
 
 Copy the deployed URL (ends with `.modal.run`).

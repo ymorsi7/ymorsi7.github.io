@@ -17,14 +17,14 @@ Deployed on [Modal](https://modal.com) (serverless GPU). The static frontend liv
 
 - [Modal](https://modal.com) account
 - Python 3.11+
-- Modal CLI: `pip install modal && modal setup`
+- Modal CLI: `pip install modal` then `python3 -m modal token new`
 
 ## Secrets (Modal)
 
 Create a Modal secret named `soundify-secrets`:
 
 ```bash
-modal secret create soundify-secrets \
+python3 -m modal secret create soundify-secrets \
   OPENAI_API_KEY=sk-... \
   OPENAI_MODEL=gpt-4o-mini
 ```
@@ -41,7 +41,8 @@ CORS_ORIGIN=https://your-preview.netlify.app
 
 ```bash
 cd soundify-api
-modal deploy modal_app.py
+python3 -m modal token new    # first time only
+python3 -m modal deploy modal_app.py
 ```
 
 Modal prints a URL like:
