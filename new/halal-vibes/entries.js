@@ -2418,24 +2418,5 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-04",
     tags: ["halal", "coffee", "pastries", "san diego", "kearny mesa", "convoy"]
-  },
-  {
-    slug: "cairo-grill-santa-clara",
-    title: "Cairo Grill",
-    region: "US",
-    location: "Santa Clara",
-    categories: ["food", "vibes"],
-    halalBadge: true,
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "Halal Egyptian and Middle Eastern on Scott Blvd—hawawshi, koshary, shawarma, and weekend breakfast. Next to Fatima Bazaar.",
-    image: null,
-    content: `
-      <p>805 Scott Blvd, Santa Clara, CA 95050</p>
-      <p>Halal Egyptian and Middle Eastern restaurant attached to Fatima Bazaar. Known for hawawshi, koshary, falafel, shawarma wraps, kabab skewers, and weekend breakfast plates.</p>
-      <p>Open daily 10 AM – 9 PM · (408) 708-7075 · <a href="https://cairogrill.us/" target="_blank" rel="noopener noreferrer">cairogrill.us</a></p>
-    `,
-    date: "2026-06-12",
-    tags: ["halal", "egyptian", "middle eastern", "santa clara", "south bay", "san jose", "shawarma", "koshary"]
   }
 ];
