@@ -757,8 +757,8 @@
 		/* Reveal animations */
 		.reveal {
 			opacity: 0;
-			transform: translateY(20px);
-			transition: all 0.6s ease;
+			transform: translateY(12px);
+			transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 		}
 
 		.reveal.active {
@@ -2004,6 +2004,112 @@
 			right: -11px;
 		  }
 		}
+
+		/* Collapsible portfolio sections — title toggles content */
+		.fh5co-heading h2 .portfolio-section-heading-toggle {
+			background: none;
+			border: none;
+			font: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			line-height: inherit;
+			color: inherit;
+			cursor: pointer;
+			padding: 0;
+			margin: 0;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			transition: opacity 0.2s ease;
+		}
+
+		.portfolio-section-caret {
+			font-size: 0.72em;
+			opacity: 0.65;
+			transition: transform 0.25s ease;
+		}
+
+		.portfolio-collapsible:not(.portfolio-collapsed) .portfolio-section-caret {
+			transform: rotate(180deg);
+		}
+
+		.fh5co-heading h2 .portfolio-section-heading-toggle:hover {
+			opacity: 0.82;
+		}
+
+		.fh5co-heading h2 .portfolio-section-heading-toggle:focus-visible {
+			outline: 2px solid var(--primary-color);
+			outline-offset: 4px;
+			border-radius: 4px;
+		}
+
+		#fh5co-work .fh5co-heading h2 .portfolio-section-heading-toggle:focus-visible {
+			outline-color: rgba(255, 255, 255, 0.85);
+		}
+
+		.portfolio-section-body[hidden] {
+			display: none !important;
+		}
+
+		.portfolio-collapsible.portfolio-collapsed .fh5co-heading h2 {
+			margin: 0;
+			padding-bottom: 14px;
+		}
+
+		#fh5co-work.portfolio-collapsible.portfolio-collapsed,
+		#fh5co-awards.portfolio-collapsible.portfolio-collapsed,
+		#fh5co-recommendations.portfolio-collapsible.portfolio-collapsed {
+			padding: 0 !important;
+			min-height: 108px;
+		}
+
+		.portfolio-collapsible.portfolio-collapsed > .container {
+			display: contents;
+		}
+
+		.portfolio-collapsible.portfolio-collapsed .portfolio-section-heading-row {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			min-height: 108px;
+			margin: 0 !important;
+			padding: 1.15em 1.25rem;
+			box-sizing: border-box;
+		}
+
+		.portfolio-collapsible.portfolio-collapsed .portfolio-section-heading-row [class*="col-"] {
+			float: none;
+			width: 100%;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		.portfolio-collapsible.portfolio-collapsed .portfolio-section-heading-row .fh5co-heading {
+			margin: 0;
+			width: 100%;
+		}
+
+		.portfolio-section-heading-row,
+		.portfolio-section-heading-row.animate-box {
+			opacity: 1 !important;
+		}
+
+		.portfolio-section-body > .row:first-child .animate-box {
+			opacity: 1 !important;
+		}
+
+		@media screen and (max-width: 768px) {
+			#fh5co-work.portfolio-collapsible.portfolio-collapsed,
+			#fh5co-awards.portfolio-collapsible.portfolio-collapsed,
+			#fh5co-recommendations.portfolio-collapsible.portfolio-collapsed,
+			.portfolio-collapsible.portfolio-collapsed .portfolio-section-heading-row {
+				min-height: 96px;
+				padding: 1em 1rem;
+			}
+		}
+
 	</style>
 
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -2594,14 +2700,20 @@
 				</div>
 			</div>
 		</div> -->
-<a id = "projects"></a>
-		<div id="fh5co-work" class="fh5co-bg-dark">
+<a id="projects"></a>
+		<div id="fh5co-work" class="fh5co-bg-dark portfolio-collapsible portfolio-collapsed">
 			<div class="container">
-				<div id = "projects" class="row animate-box">
+				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Projects</h2>
+						<h2>
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-work-body">
+								Projects
+								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
+							</button>
+						</h2>
 					</div>
 				</div>
+				<div id="fh5co-work-body" class="portfolio-section-body" hidden>
 				<div class="row">
 
 					<div class="col-md-4 text-center col-padding animate-box reveal">
@@ -2686,23 +2798,30 @@
 						</a>
 					</div>
 				</div>
+				</div>
 			</div>
 		</div>
 
-		<div id="fh5co-awards" class="fh5co-bg-color" style="scroll-margin-top:100px;">
+		<div id="fh5co-awards" class="fh5co-bg-color portfolio-collapsible portfolio-collapsed" style="scroll-margin-top:100px;">
 			<div class="container">
-				<div class="row animate-box">
+				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Awards & Achievements</h2>
+						<h2>
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-awards-body">
+								Awards & Achievements
+								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
+							</button>
+						</h2>
 					</div>
 				</div>
+				<div id="fh5co-awards-body" class="portfolio-section-body" hidden>
 				<div class="row">
-					<div class="col-md-12 text-center animate-box">
+					<div class="col-md-12 text-center">
 						<div class="award-filters">
-							<button class="filter-btn active" data-filter="all">All Awards</button>
-							<button class="filter-btn" data-filter="hackathon">Hackathons</button>
-							<button class="filter-btn" data-filter="academic">Academic</button>
-							<button class="filter-btn" data-filter="professional">Professional</button>
+							<button type="button" class="filter-btn active" data-filter="all">All Awards</button>
+							<button type="button" class="filter-btn" data-filter="professional">Professional</button>
+							<button type="button" class="filter-btn" data-filter="hackathon">Hackathons</button>
+							<button type="button" class="filter-btn" data-filter="academic">Academic</button>
 						</div>
 					</div>
 				</div>
@@ -2928,17 +3047,24 @@
 						</div>
 					</div> -->
 				</div>
+				</div>
 			</div>
 		</div>
 
-		<div id="fh5co-recommendations">
+		<div id="fh5co-recommendations" class="portfolio-collapsible portfolio-collapsed">
 			<div class="container">
-				<div class="row animate-box">
+				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Recommendations</h2>
+						<h2>
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-recommendations-body">
+								Recommendations
+								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
+							</button>
+						</h2>
 					</div>
 				</div>
 
+				<div id="fh5co-recommendations-body" class="portfolio-section-body" hidden>
 				<div class="row recommendations-row">
 					<div class="col-md-12 animate-box reveal">
 						<div class="recommendation-card">
@@ -2999,6 +3125,7 @@
 							<p class="recommendation-quote">I met Yusuf during a mentorship program at UCSD, where he was an outstanding mentor who gave practical advice on coursework, research, and internships. We later took courses together and teamed up in major course projects and hackathons, including a 2nd place finish at HARD Hack 2023 and 1st place at HARD Hack 2025. Throughout these projects, Yusuf was highly professional in how he wrote and organized software, especially under intense time constraints. His programming, AI/ML, and data science skills are top-tier. He is also an excellent presenter who makes complex projects understandable for any audience. I am confident these strengths will carry forward to any role he pursues.</p>
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -3180,13 +3307,15 @@
 				for (var i = 0; i < reveals.length; i++) {
 					var windowHeight = window.innerHeight;
 					var revealTop = reveals[i].getBoundingClientRect().top;
-					var revealPoint = 150;
+					var revealPoint = 380;
 					
 					if (revealTop < windowHeight - revealPoint) {
 						reveals[i].classList.add('active');
 					}
 				}
 			}
+
+			window.reveal = reveal;
 			
 			// Initial check on page load
 			reveal();
@@ -3198,39 +3327,104 @@
 		<!-- Award filtering functionality -->
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
-				// Award filtering functionality
-				const filterButtons = document.querySelectorAll('.filter-btn');
-				const awardCards = document.querySelectorAll('[data-category]');
-				
-				filterButtons.forEach(button => {
+				var awardsBody = document.getElementById('fh5co-awards-body');
+				if (!awardsBody) return;
+
+				var filterButtons = awardsBody.querySelectorAll('.filter-btn');
+				var awardCards = awardsBody.querySelectorAll('[data-category]');
+
+				filterButtons.forEach(function(button) {
 					button.addEventListener('click', function() {
-						// Remove active class from all buttons
-						filterButtons.forEach(btn => btn.classList.remove('active'));
-						// Add active class to clicked button
-						this.classList.add('active');
-						
-						const filterValue = this.getAttribute('data-filter');
-						
-						// Filter the award cards
-						awardCards.forEach(card => {
-							const category = card.getAttribute('data-category');
-							
-							if (filterValue === 'all' || category === filterValue) {
-								card.style.display = 'block';
-								card.classList.add('visible');
+						filterButtons.forEach(function(btn) {
+							btn.classList.remove('active');
+						});
+						button.classList.add('active');
+
+						var filterValue = button.getAttribute('data-filter');
+
+						awardCards.forEach(function(card) {
+							var category = card.getAttribute('data-category');
+							var show = filterValue === 'all' || category === filterValue;
+
+							if (show) {
+								card.style.display = '';
 								card.classList.remove('hidden');
+								card.classList.add('active');
 							} else {
+								card.style.display = 'none';
 								card.classList.add('hidden');
-								card.classList.remove('visible');
-								// Hide after animation
-								setTimeout(() => {
-									card.style.display = 'none';
-								}, 400);
+								card.classList.remove('active');
 							}
 						});
+
+						if (typeof window.reveal === 'function') {
+							window.reveal();
+						}
 					});
 				});
 			});
+		</script>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			function expandPortfolioSection(section, options) {
+				options = options || {};
+				if (!section) return;
+				var body = section.querySelector('.portfolio-section-body');
+				var toggle = section.querySelector('.portfolio-section-heading-toggle');
+				if (!body || !toggle) return;
+
+				section.classList.remove('portfolio-collapsed');
+				body.removeAttribute('hidden');
+				toggle.setAttribute('aria-expanded', 'true');
+				body.querySelectorAll('.reveal').forEach(function(el) {
+					el.classList.add('active');
+				});
+				if (typeof window.reveal === 'function') {
+					setTimeout(window.reveal, 100);
+				}
+				if (options.hackathonFilter) {
+					setTimeout(function() {
+						var hackBtn = document.querySelector('.filter-btn[data-filter="hackathon"]');
+						if (hackBtn) hackBtn.click();
+					}, 100);
+				}
+			}
+
+			document.querySelectorAll('.portfolio-collapsible').forEach(function(section) {
+				var toggle = section.querySelector('.portfolio-section-heading-toggle');
+				var body = section.querySelector('.portfolio-section-body');
+				if (!toggle || !body) return;
+
+				toggle.addEventListener('click', function() {
+					if (section.classList.contains('portfolio-collapsed')) {
+						expandPortfolioSection(section);
+					} else {
+						section.classList.add('portfolio-collapsed');
+						body.setAttribute('hidden', '');
+						toggle.setAttribute('aria-expanded', 'false');
+					}
+				});
+			});
+
+			var hashSectionMap = {
+				projects: 'fh5co-work',
+				'fh5co-work': 'fh5co-work',
+				'fh5co-awards': 'fh5co-awards',
+				'fh5co-recommendations': 'fh5co-recommendations'
+			};
+
+			function expandFromHash() {
+				var hash = window.location.hash.replace('#', '');
+				var sectionId = hashSectionMap[hash];
+				if (!sectionId) return;
+				expandPortfolioSection(document.getElementById(sectionId), { scroll: true });
+			}
+
+			expandFromHash();
+			window.addEventListener('hashchange', expandFromHash);
+			window.expandPortfolioSection = expandPortfolioSection;
+		});
 		</script>
 
 		<script>
@@ -3254,16 +3448,13 @@
 		  if (hackathonLink) {
 			hackathonLink.addEventListener('click', function(e) {
 			  e.preventDefault();
-			  // Scroll to awards section
 			  var awardsSection = document.getElementById('fh5co-awards');
 			  if (awardsSection) {
+				if (typeof window.expandPortfolioSection === 'function') {
+				  window.expandPortfolioSection(awardsSection, { hackathonFilter: true });
+				}
 				awardsSection.scrollIntoView({behavior: 'smooth'});
 			  }
-			  // Activate hackathon filter
-			  setTimeout(function() {
-				var hackBtn = document.querySelector('.filter-btn[data-filter="hackathon"]');
-				if (hackBtn) hackBtn.click();
-			  }, 400); // Wait for scroll
 			});
 		  }
 
