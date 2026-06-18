@@ -1939,20 +1939,20 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "dr-ink-san-jose",
-    title: "Dr.ink",
+    title: "Dr. Ink",
     region: "US",
     location: "San Jose",
     categories: ["coffee", "vibes"],
     foodScore: null,
     vibesScore: null,
-    excerpt: "Good coffee spot in San Jose—pretty good for vibes.",
-    image: null,
+    excerpt: "Specialty coffee in downtown San Jose—creative seasonal drinks and a clean, modern vibe near San Pedro Square.",
+    image: "images/IMG_6607.jpg",
     content: `
-      <p>San Jose, CA</p>
-      <p>Good coffee spot in San Jose. Pretty good for vibes.</p>
+      <p>77 N Almaden Ave Suite 70, San Jose, CA 95110</p>
+      <p>Downtown San Jose specialty coffee shop near San Pedro Square. Known for creative seasonal lattes and layered iced drinks—great spot for vibes.</p>
     `,
-    date: "2026-06-03",
-    tags: ["halal", "coffee", "san jose", "south bay"]
+    date: "2026-06-12",
+    tags: ["halal", "coffee", "san jose", "south bay", "downtown", "specialty coffee"]
   },
   // {
   //   slug: "bagel-broker-los-angeles",
