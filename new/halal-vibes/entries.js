@@ -2455,5 +2455,26 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-12",
     tags: ["halal", "desserts", "cookies", "santa clara", "south bay"]
+  },
+  {
+    slug: "nahita-bakery-sunnyvale",
+    title: "Nahita Bakery",
+    region: "US",
+    location: "Sunnyvale",
+    categories: ["coffee", "food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 10,
+    excerpt: "Great Turkish breakfast—eggs with sausage and cheese börek are delectable. Fast service, decent vibes, and one of the few Cali spots that feels abroad (in a good way).",
+    image: "halal-vibes/imgs/download.png",
+    content: `
+      <p>1334 S Mary Ave, Sunnyvale, CA 94087</p>
+      <p>Breakfast · $10–20 · Sunnyvale West</p>
+      <p>Great bakery—they bring your food very quickly, great eats, and decent vibes. Reminds me of the amazing breakfasts they have in the Middle East. The eggs with sausage are delectable, and so is the cheese börek.</p>
+      <p>Highly recommend—one of the few places in Cali that makes me feel like I'm abroad (in a good way).</p>
+      <p><strong>Order type:</strong> Dine in · <strong>Meal type:</strong> Brunch · Food: 5 | Service: 5 | Atmosphere: 5</p>
+    `,
+    date: "2026-06-12",
+    tags: ["halal", "bakery", "breakfast", "brunch", "turkish", "sunnyvale", "south bay"]
   }
 ];
