@@ -1,0 +1,510 @@
+{
+  "applied": [
+    {
+      "slug": "urban-skillet-santa-monica",
+      "image": "halal-vibes/imgs/urban.png",
+      "source": "Same brand reuse (San Diego entry)"
+    },
+    {
+      "slug": "stans-donut-shop-santa-clara",
+      "image": "halal-vibes/imgs/stans-donut-shop-santa-clara.png",
+      "source": "stansdonutshop.com og:image"
+    },
+    {
+      "slug": "busboys-and-poets-dc",
+      "image": "halal-vibes/imgs/busboys-and-poets-dc.jpg",
+      "source": "busboysandpoets.com og:image"
+    },
+    {
+      "slug": "dough-burger-san-jose",
+      "image": "halal-vibes/imgs/dough-burger-san-jose.png",
+      "source": "doughburger.com social preview"
+    },
+    {
+      "slug": "cafe-luna-san-diego",
+      "image": "halal-vibes/imgs/cafe-luna-san-diego.jpg",
+      "source": "cafelunasd.com social share"
+    },
+    {
+      "slug": "batch-and-box-la-jolla",
+      "image": "halal-vibes/imgs/batch-and-box-la-jolla.jpg",
+      "source": "batchandbox.com product photo"
+    },
+    {
+      "slug": "nazs-halal-food-sterling",
+      "image": "halal-vibes/imgs/nazs-halal-food-sterling.jpg",
+      "source": "nazshalal.com share image"
+    },
+    {
+      "slug": "stumptown-cafe-portland",
+      "image": "halal-vibes/imgs/stumptown-cafe-portland.jpg",
+      "source": "stumptowncoffee.com social share"
+    },
+    {
+      "slug": "susiecakes-del-mar",
+      "image": "halal-vibes/imgs/susiecakes-del-mar.jpg",
+      "source": "susiecakes.com official product photo"
+    },
+    {
+      "slug": "mazra-redwood-city",
+      "image": "halal-vibes/imgs/mazra-redwood-city.jpg",
+      "source": "eatmazra.com official food photo"
+    },
+    {
+      "slug": "perch-los-angeles",
+      "image": "halal-vibes/imgs/perch-los-angeles.png",
+      "source": "perchla.com official building photo"
+    },
+    {
+      "slug": "mikes-red-tacos-mira-mesa",
+      "image": "halal-vibes/imgs/mikes-red-tacos-mira-mesa.webp",
+      "source": "mikesredtacos.com official photo"
+    },
+    {
+      "slug": "pakwan-restaurant-san-francisco",
+      "image": "halal-vibes/imgs/pakwan-restaurant-san-francisco.jpg",
+      "source": "pakwan.com official food photo"
+    },
+    {
+      "slug": "house-of-mandi-anaheim",
+      "image": "halal-vibes/imgs/house-of-mandi-anaheim.jpg",
+      "source": "houseofmandianaheim.com official photo"
+    },
+    {
+      "slug": "el-halal-amigos-san-jose",
+      "image": "halal-vibes/imgs/el-halal-amigos-san-jose.png",
+      "source": "elhalalamigos.com menu og:image"
+    }
+  ],
+  "stillMissing": [
+    {
+      "slug": "pacific-coast-grill-san-diego",
+      "title": "Pacific Coast Grill",
+      "location": "San Diego",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "mal-al-sham-san-diego",
+      "title": "Mal al Sham",
+      "location": "San Diego",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "kunduz-kabob-san-diego",
+      "title": "Kunduz Kabob",
+      "location": "San Diego",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "aerotel-lounge-jeddah",
+      "title": "Aerotel Lounge",
+      "location": "Jeddah (JED)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "jed-welcome-lounge",
+      "title": "JED Welcome Lounge",
+      "location": "Jeddah (JED)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "av-tap-vip-lounge-miami",
+      "title": "AV/TAP VIP Lounge",
+      "location": "Miami (MIA)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "plaza-premium-lounge-dfw",
+      "title": "Plaza Premium Lounge",
+      "location": "Dallas (DFW)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "admirals-club-ord",
+      "title": "American Airlines Admirals Club",
+      "location": "Chicago (ORD)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "cac-lounge-cairo-terminal-3",
+      "title": "CAC Lounge (E Lounge),  Terminal 3",
+      "location": "Cairo (CAI)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "pearl-lounge-alexandria-hbe",
+      "title": "Pearl Lounge",
+      "location": "Alexandria (HBE)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "plaza-premium-lounge-heathrow",
+      "title": "Plaza Premium Lounge",
+      "location": "London Heathrow (LHR)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "club-aspire-lounge-heathrow",
+      "title": "Club Aspire Lounge",
+      "location": "London Heathrow (LHR)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "lot-business-lounge-mazurek-warsaw",
+      "title": "LOT Business Lounge Mazurek",
+      "location": "Warsaw (WAW)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "skyserv-aristotle-onassis-lounge-athens",
+      "title": "Skyserv Aristotle Onassis Lounge",
+      "location": "Athens (ATH)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "aspire-lounge-san-diego",
+      "title": "Aspire Lounge",
+      "location": "San Diego (SAN)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "san-jose-airport-lounge",
+      "title": "The Club",
+      "location": "San Jose (SJC)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "plaza-premium-marmara-saw",
+      "title": "Plaza Premium Lounge – Marmara",
+      "location": "Istanbul (SAW)",
+      "categories": [
+        "lounges"
+      ]
+    },
+    {
+      "slug": "gad-alexandria",
+      "title": "Gad",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "slug": "bazooka-chicken-alexandria",
+      "title": "Bazooka Chicken",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": null,
+      "title": "Qahwa",
+      "location": "Cairo, Egypt",
+      "categories": [
+        "coffee",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "dukes-malibu",
+      "title": "Duke's Malibu",
+      "location": "Malibu",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "chicken-gs-mountain-view",
+      "title": "Chicken G's",
+      "location": "Mountain View",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "zankou-chicken-valencia",
+      "title": "Zankou Chicken Valencia",
+      "location": "Santa Clarita",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "slug": "hh-brazilian-steakhouse-beverlywood",
+      "title": "H&H Brazilian Steakhouse",
+      "location": "Los Angeles",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "sincerly-syria-hollywood",
+      "title": "Sincerly Syria",
+      "location": "Los Angeles",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "genoise-alexandria",
+      "title": "Genoise",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "mr-baker-alexandria",
+      "title": "Mr Baker",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "area-31-miami",
+      "title": "Area 31",
+      "location": "Miami",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "big-mug-coffee-santa-clara",
+      "title": "Big Mug Coffee Roaster",
+      "location": "Santa Clara",
+      "categories": [
+        "coffee",
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "propery-coffee-alexandria",
+      "title": "Propery Coffee",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "coffee",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "la-vienna-wedding-venue-alexandria",
+      "title": "La Vienna Wedding Venue",
+      "location": "Alexandria, Egypt",
+      "categories": [
+        "vibes"
+      ]
+    },
+    {
+      "slug": "brown-nose-coffee-new-cairo",
+      "title": "Brown Nose Coffee",
+      "location": "Cairo, Egypt",
+      "categories": [
+        "coffee",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "mr-shawarma-pacific-beach",
+      "title": "Mr Shawarma",
+      "location": "San Diego",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "talkin-tacos-washington-dc",
+      "title": "Talkin' Tacos",
+      "location": "Washington, D.C.",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "living-room-coffeehouse-la-jolla",
+      "title": "Living Room Coffeehouse",
+      "location": "La Jolla",
+      "categories": [
+        "coffee",
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "egglet-la-jolla",
+      "title": "Egglet",
+      "location": "La Jolla",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "craft-by-smoke-and-fire-anaheim",
+      "title": "Craft By Smoke & Fire",
+      "location": "Anaheim",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "tasa2go-fullerton",
+      "title": "Tasa2Go",
+      "location": "Fullerton",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "big-shoulders-coffee-chicago",
+      "title": "Big Shoulders Coffee",
+      "location": "Chicago",
+      "categories": [
+        "coffee",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "new-york-chicken-gyro-pasadena",
+      "title": "New York Chicken & Gyro",
+      "location": "Pasadena",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "ibn-alsham-cairo",
+      "title": "مطعم ابن الشام · Ibn Alsham Restaurant",
+      "location": "Cairo",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "zein-al-sham-el-rehab-cairo",
+      "title": "Zein al Sham · زين الشام",
+      "location": "Cairo",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "slug": "3am-bashandy-nasr-city-cairo",
+      "title": "3am Bashandy · عم بشندي",
+      "location": "Cairo",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "slug": "halalstreet-hot-pot-newark",
+      "title": "HalalStreet Hot Pot | Newark",
+      "location": "Newark",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "nyc-halal-eats-lombard",
+      "title": "NYC Halal Eats",
+      "location": "Chicago",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "alforon-mediterranean-lebanese-san-diego",
+      "title": "Alforon Mediterranean / Lebanese Cuisine",
+      "location": "San Diego",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "cracked-and-battered-san-francisco",
+      "title": "Cracked & Battered",
+      "location": "San Francisco",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "the-burger-shop-fremont",
+      "title": "The Burger Shop",
+      "location": "Fremont",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    },
+    {
+      "slug": "habibiz-san-jose",
+      "title": "Habibiz",
+      "location": "San Jose",
+      "categories": [
+        "food",
+        "vibes"
+      ]
+    }
+  ],
+  "summary": {
+    "applied": 15,
+    "stillMissing": 49,
+    "startedMissing": 64
+  }
+}

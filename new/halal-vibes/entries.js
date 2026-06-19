@@ -249,7 +249,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 10,
     vibesScore: 8,
     excerpt: "My #1 lunch/dinner pick in LA. Brisket wrap + mac and cheese is bussin—never disappoints. Parking is the only pain (sometimes worth the ticket).",
-    image: null,
+    image: "halal-vibes/imgs/urban.png",
     content: `
       <p>2307 Main St, Santa Monica, CA 90405</p>
       <p>My #1 lunch/dinner recommendation to anyone visiting LA. Amazing. The brisket wrap with mac and cheese is absolutely bussin, and they never disappoint. Only bad thing about this place is the parking—but sometimes it's worth the ticket.</p>
@@ -380,7 +380,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Brilliant cakes. Recommend cranberry loaf, carrot cake, and probably anything else. Very good service and quality desserts. My go-to bakery in Del Mar. 8/10 vibe score.",
-    image: null,
+    image: "halal-vibes/imgs/susiecakes-del-mar.jpg",
     content: `
       <p>3705 Caminito Ct #0500, San Diego, CA 92130</p>
       <p>Brilliant cakes. I recommend their cranberry loaf, carrot cake, and honestly probably anything else they have. Very good service and quality desserts. My go-to bakery in Del Mar. Food: 5 | Service: 5. 8/10 vibe score</p>
@@ -397,7 +397,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: null,
+    image: "halal-vibes/imgs/batch-and-box-la-jolla.jpg",
     content: `
       <p>La Jolla, San Diego, CA</p>
     `,
@@ -1028,7 +1028,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 9,
     vibesScore: 9,
     excerpt: "Great food with great service. Manicotti #1 recommendation. Bread with sauce appetizer pretty good. Olive Garden has no business being in the same complex. 9/10 vibe score.",
-    image: null,
+    image: "halal-vibes/imgs/cafe-luna-san-diego.jpg",
     content: `
       <p>11040 Rancho Carmel Dr #2, San Diego, CA 92128</p>
       <p>Great food with great service. I loved the Manicotti, definitely #1 recommendation. Bread with sauce appetizer was also pretty good. I'm not usually big on Italian restaurants but honestly the Olive Garden has no business being in the same complex as this 😂. Food: 5 | Service: 5. 9/10 vibe score</p>
@@ -1773,7 +1773,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "Pretty good vibes for coffee and hanging out. Food wasn't that great, but good for the vibes.",
-    image: null,
+    image: "halal-vibes/imgs/busboys-and-poets-dc.jpg",
     content: `
       <p>Washington, D.C.</p>
       <p>Pretty good vibes for coffee and hanging out. Food wasn't that great, but good for the vibes.</p>
@@ -1791,7 +1791,7 @@ const HALAL_VIBES_ENTRIES = [
     vibesScore: null,
     stars: 4,
     excerpt: "Pretty good food—I enjoyed it. 4 stars.",
-    image: null,
+    image: "halal-vibes/imgs/nazs-halal-food-sterling.jpg",
     content: `
       <p>Sterling, Northern Virginia</p>
       <p>Pretty good food, I enjoyed it. I give it like 4 stars.</p>
@@ -1999,7 +1999,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "Decent rooftop dessert spot—great view, fine for 1–4 people. Sit away from the alcohol; parking isn't too easy.",
-    image: null,
+    image: "halal-vibes/imgs/perch-los-angeles.png",
     content: `
       <p>Los Angeles, CA</p>
       <p>Decent rooftop dessert place. Make sure to sit away from the alcohol. Decent spot for 1–4 people. Great view. Parking not too easy though.</p>
@@ -2124,7 +2124,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 10,
     vibesScore: 9,
     excerpt: "Best halal Mexican I've had in San Diego. Amazing birria and crunch wrap—store confirmed halal beef.",
-    image: null,
+    image: "halal-vibes/imgs/mikes-red-tacos-mira-mesa.webp",
     content: `
       <p>9089 Mira Mesa Blvd, San Diego, CA 92126</p>
       <p>Best halal Mexican I've had in San Diego (not that there are many options). Amazing birria and great crunch wrap. Confirmed with the store that their beef is halal.</p>
@@ -2234,7 +2234,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 10,
     vibesScore: 9,
     excerpt: "Probably the best Arab food in the Bay—sublime beef kofta, solid falafel, great frozen date juice. Far, bad parking, long waits, pricey—but worth it.",
-    image: null,
+    image: "halal-vibes/imgs/mazra-redwood-city.jpg",
     content: `
       <p>2021 Broadway, Redwood City, CA 94063</p>
       <p>I've had quite a journey with my opinion of this place. I used to avoid it—not because of food quality, but because:</p>
@@ -2299,7 +2299,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 7,
     vibesScore: 8,
     excerpt: "One of my first Bay halal spots—chicken quesadillas with chips & salsa in-person. Fell off a bit but still good occasionally. Nice for groups, good parking.",
-    image: null,
+    image: "halal-vibes/imgs/el-halal-amigos-san-jose.png",
     content: `
       <p>1100 Lincoln Ave, San Jose, CA 95125</p>
       <p>One of my first halal spot experiences in the Bay. I love their chicken quesadillas, which comes with chips and salsa <em>only</em> if you go in-person AFAIK. It kind of fell off and isn't as good as it used to be, but good every once in a while nevertheless.</p>
@@ -2354,7 +2354,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 9,
     vibesScore: 8,
     excerpt: "Great halal burgers—amazing base prices, oily but worth it. Double with tomato; good parking near SJC. Watch them cook through the window.",
-    image: null,
+    image: "halal-vibes/imgs/dough-burger-san-jose.png",
     content: `
       <p>1751 N First St, San Jose, CA 95112</p>
       <p>Great burger place, despite having oily burgers. Amazing prices unless you're adding toppings, which make you pay quite a bit haha. I personally get the double with tomato on it. Parking situation is good, and it's very close to the airport. If you eat too much you will feel guilty because of how unhealthy it is haha, but it is a great halal option and my roommates and I go at least once a week.</p>
@@ -2373,7 +2373,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: 10,
     vibesScore: 9,
     excerpt: "Better desi food than I expected—TSM, naan, and biryani all great. This Ocean Ave location beats the Fremont branch by a mile.",
-    image: null,
+    image: "halal-vibes/imgs/pakwan-restaurant-san-francisco.jpg",
     content: `
       <p>1140 Ocean Ave, San Francisco, CA 94112</p>
       <p>Great location, amazing food—I didn't think I'd find better desi food than what they have at Zareen's. I had the TSM, naan, and some biryani and all of it was great.</p>
