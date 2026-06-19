@@ -309,6 +309,35 @@
 			color: var(--primary-color);
 		}
 
+		.role-meta {
+			margin-top: 12px;
+			text-align: center;
+			line-height: 1.5;
+		}
+
+		.role-when {
+			display: block;
+			font-size: 1.05rem;
+			font-weight: 500;
+			color: var(--primary-color);
+		}
+
+		.role-where {
+			display: block;
+			font-size: 0.98rem;
+			color: #64748b;
+			margin-top: 4px;
+		}
+
+		.role-duration {
+			font-weight: 500;
+			color: #64748b;
+		}
+
+		.role-duration:empty {
+			display: none;
+		}
+
 		/* Company logos in timeline */
 		.company-logo {
 			width: 56px;
@@ -833,9 +862,15 @@
 			.timeline-panel .institution-name {
 				display: none;
 			}
-			.timeline-panel .company {
+			.timeline-panel .company,
+			.timeline-panel .role-meta {
 				margin-top: 4px;
-				font-size: 0.9rem;
+			}
+			.timeline-panel .role-when {
+				font-size: 1rem;
+			}
+			.timeline-panel .role-where {
+				font-size: 0.95rem;
 			}
 			.timeline-panel.work-exp-collapsible .work-exp-summary-line,
 			.timeline-panel.edu-coursework-collapsible .coursework-summary-line {
@@ -2233,13 +2268,16 @@
 
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2024-08-01" data-role-end="present">
 									<div class="timeline-heading">
 										<img src="images/cisco_logo.jpg" alt="Cisco Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer II</h3>
 											<span class="institution-name">Cisco</span>
-											<span class="company">(Aug 2024 - Present) | San Jose, CA</span>
+											<div class="role-meta">
+												<span class="role-when">Aug 2024 – Present<span class="role-duration"></span></span>
+												<span class="role-where">San Jose, CA</span>
+											</div>
 										</div>
 									</div>
 									<div class="work-exp-summary-line">ML pipelines / RAGs @ supply chain <i class="fas fa-chevron-down expand-icon"></i></div>
@@ -2289,13 +2327,16 @@
 
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2024-04-01" data-role-end="2024-08-31">
 									<div class="timeline-heading">
 										<img src="images/fico.png" alt="FICO Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Data Science Intern</h3>
 											<span class="institution-name">FICO</span>
-											<span class="company">(April 2024 - Aug 2024) | San Diego, CA</span>
+											<div class="role-meta">
+												<span class="role-when">Apr 2024 – Aug 2024<span class="role-duration"></span></span>
+												<span class="role-where">San Diego, CA</span>
+											</div>
 										</div>
 									</div>
 									<div class="work-exp-summary-line">fraud detection @ ai analytics team <i class="fas fa-chevron-down expand-icon"></i></div>
@@ -2326,13 +2367,16 @@
 							</li> -->
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2023-06-01" data-role-end="2023-08-31">
 									<div class="timeline-heading">
 										<img src="images/southwest.jpeg" alt="Southwest Airlines Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
 											<span class="institution-name">Southwest Airlines</span>
-											<span class="company">(2023) | Dallas, TX</span>
+											<div class="role-meta">
+												<span class="role-when">2023<span class="role-duration"></span></span>
+												<span class="role-where">Dallas, TX</span>
+											</div>
 										</div>
 									</div>
 									<div class="work-exp-summary-line">infra tooling @ network automation team <i class="fas fa-chevron-down expand-icon"></i></div>
@@ -2345,13 +2389,16 @@
 							</li>
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2022-06-01" data-role-end="2023-05-31">
 									<div class="timeline-heading">
 										<img src="images/carsxe.png" alt="CarsXE Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
 											<span class="institution-name">CarsXE</span>
-											<span class="company">(2022-2023) | Highland, MD</span>
+											<div class="role-meta">
+												<span class="role-when">2022 – 2023<span class="role-duration"></span></span>
+												<span class="role-where">Highland, MD</span>
+											</div>
 										</div>
 									</div>
 									<div class="work-exp-summary-line">license plate CV & full-stack <i class="fas fa-chevron-down expand-icon"></i></div>
@@ -3429,6 +3476,63 @@
 
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
+			function parseRoleDate(value) {
+				if (!value || value === 'present') {
+					return new Date();
+				}
+				var parts = value.split('-');
+				var year = parseInt(parts[0], 10);
+				var month = parseInt(parts[1], 10) - 1;
+				var day = parts[2] ? parseInt(parts[2], 10) : 1;
+				return new Date(year, month, day);
+			}
+
+			function formatRoleDuration(totalMonths) {
+				if (totalMonths <= 0) {
+					return ' (< 1 mo)';
+				}
+				var years = Math.floor(totalMonths / 12);
+				var months = totalMonths % 12;
+				var parts = [];
+				if (years > 0) {
+					parts.push(years + ' yr' + (years === 1 ? '' : 's'));
+				}
+				if (months > 0) {
+					parts.push(months + ' mo' + (months === 1 ? '' : 's'));
+				}
+				if (years > 0 && months > 0) {
+					return ' (' + parts[0] + ' and ' + parts[1] + ')';
+				}
+				return ' (' + parts[0] + ')';
+			}
+
+			function getRoleDurationMonths(startDate, endDate) {
+				var months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+				months += endDate.getMonth() - startDate.getMonth();
+				if (endDate.getDate() < startDate.getDate()) {
+					months -= 1;
+				}
+				return Math.max(months, 0);
+			}
+
+			function renderRoleDurations() {
+				document.querySelectorAll('.timeline-panel[data-work-exp][data-role-start]').forEach(function(panel) {
+					var startValue = panel.getAttribute('data-role-start');
+					var endValue = panel.getAttribute('data-role-end') || 'present';
+					if (!startValue) return;
+
+					var startDate = parseRoleDate(startValue);
+					var endDate = parseRoleDate(endValue);
+					var durationText = formatRoleDuration(getRoleDurationMonths(startDate, endDate));
+					var durationEl = panel.querySelector('.role-duration');
+					if (!durationEl) return;
+
+					durationEl.textContent = durationText;
+				});
+			}
+
+			renderRoleDurations();
+
 			document.querySelectorAll('.timeline-panel[data-work-exp]').forEach(function(panel) {
 				panel.addEventListener('click', function() {
 					panel.classList.toggle('expanded');
