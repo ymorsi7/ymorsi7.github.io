@@ -2411,12 +2411,31 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: 10,
     excerpt: "Amazing vibes—brilliant café and my favorite in San Diego. Great location in Kearny Mesa / Convoy.",
-    image: null,
+    image: "images/IMG_6419.jpg",
     content: `
       <p>7710 Balboa Ave Suite 129, San Diego, CA 92111</p>
       <p>Amazing vibes. Brilliant café—my favorite in San Diego—and a really good location.</p>
     `,
     date: "2026-06-04",
     tags: ["halal", "coffee", "pastries", "san diego", "kearny mesa", "convoy"]
+  },
+  {
+    slug: "calic-bagel-los-angeles",
+    title: "Calic Bagel",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["food", "vibes"],
+    nonMeatOptions: true,
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "LA-style stuffed bagels and specialty coffee in Koreatown—signature garlic Calic and iced lattes.",
+    image: "images/IMG_6326.jpg",
+    content: `
+      <p>2748 W 8th St #107, Los Angeles, CA 90005</p>
+      <p>LA bagel shop known for cream cheese–stuffed bagels, garlic butter dips, and specialty coffee.</p>
+      <p><strong>Note:</strong> Meat is not halal, but there are lots of non-meat options.</p>
+    `,
+    date: "2026-06-12",
+    tags: ["bagels", "coffee", "los angeles", "koreatown"]
   }
 ];
