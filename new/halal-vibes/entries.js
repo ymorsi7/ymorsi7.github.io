@@ -171,24 +171,24 @@ const HALAL_VIBES_ENTRIES = [
     date: "2025-02-15",
     tags: ["halal", "zabiha", "burrito"]
   },
-  {
-    slug: "fidels-little-mexico-solana-beach",
-    title: "Fidel's Little Mexico",
-    region: "US",
-    location: "San Diego",
-    categories: ["food", "vibes"],
-    nonMeatOptions: true,
-    foodScore: null,
-    vibesScore: null,
-    excerpt: "Solana Beach. Only the seafood is halal,  not the full menu.",
-    image: null,
-    content: `
-      <p>Solana Beach, San Diego, CA</p>
-      <p><strong>Note:</strong> Only the seafood is halal.</p>
-    `,
-    date: "2025-05-31",
-    tags: ["seafood", "mexican", "solana beach"]
-  },
+  // {
+  //   slug: "fidels-little-mexico-solana-beach",
+  //   title: "Fidel's Little Mexico",
+  //   region: "US",
+  //   location: "San Diego",
+  //   categories: ["food", "vibes"],
+  //   nonMeatOptions: true,
+  //   foodScore: null,
+  //   vibesScore: null,
+  //   excerpt: "Solana Beach. Only the seafood is halal,  not the full menu.",
+  //   image: null,
+  //   content: `
+  //     <p>Solana Beach, San Diego, CA</p>
+  //     <p><strong>Note:</strong> Only the seafood is halal.</p>
+  //   `,
+  //   date: "2025-05-31",
+  //   tags: ["seafood", "mexican", "solana beach"]
+  // },
   {
     slug: "pacific-coast-grill-san-diego",
     title: "Pacific Coast Grill",
@@ -2437,5 +2437,23 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-12",
     tags: ["bagels", "coffee", "los angeles", "koreatown"]
+  },
+  {
+    slug: "choc-cookies-santa-clara",
+    title: "Choc Cookies",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["desserts", "vibes"],
+    foodScore: null,
+    vibesScore: null,
+    excerpt: "Giant fresh-baked cookies in Santa Clara—custom boxes with rotating flavors like triple choc and matcha.",
+    image: "images/choc.jpg",
+    content: `
+      <p>1614 Pomeroy Ave, Santa Clara, CA 95051</p>
+      <p>Giant chocolate chip cookies baked fresh daily in Santa Clara (alley behind the gas station). Custom boxes with rotating weekly flavors—triple choc, matcha, ube crinkle, and more.</p>
+      <p>SF South Bay / San Jose area · open late most nights.</p>
+    `,
+    date: "2026-06-12",
+    tags: ["halal", "desserts", "cookies", "santa clara", "south bay"]
   }
 ];
