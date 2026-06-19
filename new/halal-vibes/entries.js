@@ -1435,7 +1435,7 @@ const HALAL_VIBES_ENTRIES = [
     foodScore: null,
     vibesScore: null,
     excerpt: "",
-    image: "halal-vibes/imgs/arwa.jpg",
+    image: "images/arwa.jpg",
     content: `
       <p>605 Tasman Dr, Sunnyvale, CA 94089</p>
       <p>Coffee shop · $10–20</p>
