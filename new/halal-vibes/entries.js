@@ -2476,5 +2476,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-12",
     tags: ["halal", "bakery", "breakfast", "brunch", "turkish", "sunnyvale", "south bay"]
+  },
+  {
+    slug: "coffeebar-sunnyvale",
+    title: "Coffeebar Sunnyvale",
+    region: "US",
+    location: "Sunnyvale",
+    categories: ["coffee", "vibes"],
+    foodScore: null,
+    vibesScore: 10,
+    excerpt: "Amazing vibes (5/5 atmosphere)—great environment and one of my top places to sit in the South Bay. Way less crowded than Big Mug, with way better furniture and interior design. Parking isn't the best.",
+    image: "images/coffeebar.jpeg",
+    content: `
+      <p>401 Willow Ave, Sunnyvale, CA 94086</p>
+      <p>Amazing vibes—5/5 atmosphere—and a great environment overall. One of my top places to sit in; way less crowded than Big Mug and way better furniture/interior design.</p>
+      <p>Not the best parking, but worth it for the space. High ceilings, natural light, stone counters, and a calm, premium feel that makes it easy to stay awhile.</p>
+      <p><strong>Atmosphere:</strong> 5/5 · <strong>Parking:</strong> not great</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "sunnyvale", "south bay", "work friendly"]
   }
 ];
