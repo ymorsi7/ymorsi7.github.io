@@ -2818,52 +2818,133 @@
 		</p>
 	</div>
 	<script>
-		// Lazy-load gallery: inject img only when item is near viewport (data-src items). Existing img items keep native lazy loading.
+		// Gallery image loading: small previews in grid, full resolution in carousel only.
 		document.addEventListener('DOMContentLoaded', function () {
-			const imageObserver = new IntersectionObserver((entries, observer) => {
+			const PRELOAD_AHEAD = 8;
+			const MAX_CONCURRENT = 6;
+			const EAGER_COUNT = 12;
+			const items = Array.from(document.querySelectorAll('.portfolio-item'));
+			let loadQueue = [];
+			let activeLoads = 0;
+
+			function getPreviewSrc(src) {
+				if (!src || src.startsWith('http')) return src;
+				const slash = src.lastIndexOf('/');
+				if (slash === -1) return src;
+				return src.slice(0, slash) + '/thumbs/' + src.slice(slash + 1);
+			}
+
+			function wireClick(item) {
+				if (item.dataset.wired === '1') return;
+				item.dataset.wired = '1';
+				item.addEventListener('click', function () {
+					const fullSrc = this.getAttribute('data-full-src') || this.getAttribute('data-src');
+					if (fullSrc) openGalleryCarousel(this);
+				});
+			}
+
+			function markLoaded(img) {
+				img.classList.remove('loading');
+				img.classList.add('loaded');
+			}
+
+			function loadImageIntoItem(item, options = {}) {
+				if (item.dataset.loaded === '1' || item.dataset.loading === '1') return;
+				const fullSrc = item.getAttribute('data-full-src') || item.getAttribute('data-src');
+				if (!fullSrc) return;
+
+				let img = item.querySelector('img.thumbnail-img');
+				if (!img) {
+					img = document.createElement('img');
+					img.className = 'thumbnail-img loading';
+					img.alt = item.closest('.portfolio-box')?.querySelector('h6')?.textContent || 'Photo';
+					img.decoding = 'async';
+					item.appendChild(img);
+				} else if (!img.classList.contains('loading')) {
+					img.classList.add('loading');
+				}
+
+				if (options.priority === 'high') {
+					img.fetchPriority = 'high';
+				}
+
+				item.dataset.loading = '1';
+				const previewSrc = getPreviewSrc(fullSrc);
+
+				const finish = () => {
+					item.dataset.loading = '0';
+					item.dataset.loaded = '1';
+					markLoaded(img);
+					wireClick(item);
+					pumpQueue();
+				};
+
+				const tryFull = () => {
+					if (img.dataset.fallback === '1') {
+						finish();
+						return;
+					}
+					img.dataset.fallback = '1';
+					img.src = fullSrc;
+				};
+
+				img.onload = finish;
+				img.onerror = tryFull;
+				img.src = previewSrc;
+				if (img.complete && img.naturalHeight) finish();
+			}
+
+			function pumpQueue() {
+				while (activeLoads < MAX_CONCURRENT && loadQueue.length) {
+					const item = loadQueue.shift();
+					if (item.dataset.loaded === '1' || item.dataset.loading === '1') continue;
+					activeLoads++;
+					loadImageIntoItem(item);
+					const checkDone = () => {
+						if (item.dataset.loaded === '1' || item.dataset.loading === '0') {
+							activeLoads = Math.max(0, activeLoads - 1);
+							pumpQueue();
+						} else {
+							requestAnimationFrame(checkDone);
+						}
+					};
+					requestAnimationFrame(checkDone);
+				}
+			}
+
+			function enqueueItem(item, front) {
+				if (item.dataset.loaded === '1' || item.dataset.loading === '1') return;
+				if (loadQueue.includes(item)) return;
+				if (front) loadQueue.unshift(item);
+				else loadQueue.push(item);
+				pumpQueue();
+			}
+
+			function prefetchAhead(fromIndex) {
+				for (let i = 1; i <= PRELOAD_AHEAD; i++) {
+					const next = items[fromIndex + i];
+					if (next) enqueueItem(next);
+				}
+			}
+
+			// Eager-load first row(s) immediately
+			items.slice(0, EAGER_COUNT).forEach((item, i) => {
+				loadImageIntoItem(item, { priority: i < 3 ? 'high' : 'auto' });
+			});
+
+			const imageObserver = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (!entry.isIntersecting) return;
 					const item = entry.target;
-					observer.unobserve(item);
-
-					// Already has img (e.g. Athens/Cambridge) – just wire load + click
-					const existingImg = item.querySelector('img.thumbnail-img');
-					if (existingImg) {
-						if (existingImg.complete && existingImg.naturalHeight) {
-							existingImg.classList.add('loaded');
-						} else {
-							existingImg.addEventListener('load', function () { this.classList.add('loaded'); });
-						}
-						item.addEventListener('click', function () {
-							const fullSrc = this.getAttribute('data-full-src');
-							if (fullSrc) openGalleryCarousel(this);
-						});
-						return;
-					}
-
-					// data-src item: inject img only when in view so browser doesn't request image until now
-					const dataSrc = item.getAttribute('data-src');
-					const fullSrc = item.getAttribute('data-full-src');
-					if (!dataSrc) return;
-
-					const img = document.createElement('img');
-					img.src = dataSrc;
-					img.loading = 'lazy';
-					img.className = 'thumbnail-img';
-					img.alt = item.parentElement.querySelector('h6')?.textContent || 'Photo';
-					img.addEventListener('load', function () { this.classList.add('loaded'); });
-					item.appendChild(img);
-					if (img.complete && img.naturalHeight) img.classList.add('loaded');
-
-					item.addEventListener('click', function () {
-						const src = this.getAttribute('data-full-src');
-						if (src) openGalleryCarousel(this);
-					});
+					const index = items.indexOf(item);
+					enqueueItem(item, true);
+					prefetchAhead(index);
 				});
-			}, { rootMargin: '200px' });
+			}, { rootMargin: '900px 0px' });
 
-			document.querySelectorAll('.portfolio-item').forEach(item => {
-				imageObserver.observe(item);
+			items.forEach((item, index) => {
+				if (index >= EAGER_COUNT) imageObserver.observe(item);
+				else wireClick(item);
 			});
 		});
 
@@ -2893,6 +2974,13 @@
 		let filmstripDownX = 0;
 		let suppressFilmstripClick = false;
 
+		function getPreviewSrc(src) {
+			if (!src || src.startsWith('http')) return src;
+			const slash = src.lastIndexOf('/');
+			if (slash === -1) return src;
+			return src.slice(0, slash) + '/thumbs/' + src.slice(slash + 1);
+		}
+
 		function collectGallerySlides() {
 			return Array.from(document.querySelectorAll('.portfolio-box .portfolio-item')).map(item => {
 				const box = item.closest('.portfolio-box');
@@ -2900,7 +2988,7 @@
 				return {
 					item,
 					src: fullSrc,
-					thumbSrc: item.getAttribute('data-src') || item.querySelector('img')?.src || fullSrc,
+					thumbSrc: getPreviewSrc(fullSrc),
 					title: box?.querySelector('h6')?.textContent?.trim() || 'Photo',
 					date: box?.querySelector('p')?.textContent?.trim() || ''
 				};
@@ -2972,7 +3060,7 @@
 		}
 
 		function preloadAdjacent(index) {
-			[-1, 1].forEach(offset => {
+			[-2, -1, 1, 2].forEach(offset => {
 				const slide = gallerySlides[index + offset];
 				if (!slide) return;
 				const img = new Image();
