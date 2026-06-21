@@ -619,7 +619,8 @@
 
 		.hv-halal-badge,
 		.hv-halal-options-badge,
-		.hv-non-meat-badge {
+		.hv-non-meat-badge,
+		.hv-vibes-favorite-badge {
 			display: inline-flex;
 			align-items: center;
 			gap: 6px;
@@ -629,6 +630,20 @@
 			font-weight: 600;
 			line-height: 1.35;
 			border-radius: 6px;
+		}
+
+		.hv-card-badges {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-bottom: 4px;
+		}
+
+		.hv-card-badges .hv-halal-badge,
+		.hv-card-badges .hv-halal-options-badge,
+		.hv-card-badges .hv-non-meat-badge,
+		.hv-card-badges .hv-vibes-favorite-badge {
+			margin: 0;
 		}
 
 		.hv-halal-badge {
@@ -649,9 +664,25 @@
 			border: 1px solid rgba(212, 160, 23, 0.4);
 		}
 
+		.hv-vibes-favorite-badge {
+			color: #7c2d12;
+			background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+			border: 1px solid rgba(234, 88, 12, 0.45);
+			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+		}
+
+		.hv-vibes-favorite-badge i {
+			color: #ea580c;
+		}
+
 		.hv-modal-content .hv-halal-badge,
 		.hv-modal-content .hv-halal-options-badge,
-		.hv-modal-content .hv-non-meat-badge {
+		.hv-modal-content .hv-non-meat-badge,
+		.hv-modal-content .hv-vibes-favorite-badge {
+			margin-bottom: 1rem;
+		}
+
+		.hv-modal-content .hv-card-badges {
 			margin-bottom: 1rem;
 		}
 
@@ -1332,11 +1363,24 @@
 				return '<p class="hv-non-meat-badge" role="status"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Not halal · good non-meat options</p>';
 			}
 
+			function renderVibesFavoriteBadge() {
+				return '<p class="hv-vibes-favorite-badge" role="status"><i class="fa-solid fa-star" aria-hidden="true"></i> Yusuf\'s vibe pick</p>';
+			}
+
 			function renderDietaryBadges(entry) {
 				if (entry.nonMeatOptions) return renderNonMeatBadge();
 				if (entry.halalOptions) return renderHalalOptionsBadge();
 				if (entry.halalBadge || getEntrySection(entry) === 'restaurants') return renderHalalBadge();
 				return '';
+			}
+
+			function renderEntryBadges(entry) {
+				const parts = [];
+				if (entry.vibesFavorite) parts.push(renderVibesFavoriteBadge());
+				const dietary = renderDietaryBadges(entry);
+				if (dietary) parts.push(dietary);
+				if (!parts.length) return '';
+				return `<div class="hv-card-badges">${parts.join('')}</div>`;
 			}
 
 			function buildCard(entry) {
@@ -1364,7 +1408,7 @@
 					<div class="card-body">
 						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
 						<h3 class="card-title">${entry.title}</h3>
-						${renderDietaryBadges(entry)}
+						${renderEntryBadges(entry)}
 						${scoresWrap}
 						${entry.excerpt ? `<p class="card-excerpt">${entry.excerpt}</p>` : ''}
 						<a href="#${entry.slug}" class="card-read-more" data-slug="${entry.slug}">Read more <i class="fa-solid fa-arrow-right"></i></a>
@@ -1476,7 +1520,7 @@
 						<span class="card-tag">${normalizeCity(entry.location)}</span>
 						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
-					${renderDietaryBadges(entry)}
+					${renderEntryBadges(entry)}
 					${entry.stars != null ? renderStars(entry.stars) : ''}
 					${entry.foodScore != null ? `<p><strong>Food:</strong> ${entry.foodScore}/10</p>` : ''}
 					${entry.vibesScore != null ? `<p><strong>Vibes:</strong> ${entry.vibesScore}/10</p>` : ''}

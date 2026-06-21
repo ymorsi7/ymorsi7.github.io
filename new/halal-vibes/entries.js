@@ -12,10 +12,12 @@
  * nonMeatOptions: true — show "Not halal · good non-meat options" badge on card
  * halalBadge: true — show "Halal" badge (also auto on Halal Restaurants tab entries)
  * halalOptions: true — show "Has halal options" badge (e.g. partial halal menu)
+ * vibesFavorite: true — show "Yusuf's vibe pick" badge (personal favorites for atmosphere)
  */
 const HALAL_VIBES_ENTRIES = [
   {
     slug: "cafe-venetia-palo-alto",
+    vibesFavorite: true,
     title: "Cafe Venetia",
     region: "US",
     location: "Palo Alto",
@@ -34,6 +36,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "cafe-creme-austin",
+    vibesFavorite: true,
     title: "Café Crème - Downtown",
     region: "US",
     location: "Austin",
@@ -53,6 +56,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "nomad-donuts-san-diego",
+    vibesFavorite: true,
     title: "Nomad Donuts",
     region: "US",
     location: "San Diego",
@@ -122,6 +126,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "copa-vida-torrey-ridge-san-diego",
+    vibesFavorite: true,
     title: "Copa Vida Torrey Ridge",
     region: "US",
     location: "San Diego",
@@ -336,6 +341,7 @@ const HALAL_VIBES_ENTRIES = [
   */
   {
     slug: "mr-toots-coffeehouse-capitola",
+    vibesFavorite: true,
     title: "Mr Toots Coffeehouse",
     region: "US",
     location: "Santa Cruz/Capitola",
@@ -354,6 +360,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "portos-bakery-buena-park",
+    vibesFavorite: true,
     title: "Porto's Bakery and Cafe",
     region: "US",
     location: "Buena Park",
@@ -443,6 +450,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "alfursan-lounge-jeddah",
+    vibesFavorite: true,
     title: "Alfursan Lounge - Jeddah Airport",
     region: "Saudi Arabia",
     location: "Jeddah (JED)",
@@ -498,6 +506,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "admirals-club-ord",
+    vibesFavorite: true,
     title: "American Airlines Admirals Club",
     region: "US",
     location: "Chicago (ORD)",
@@ -516,6 +525,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "amex-lounge-lax",
+    vibesFavorite: true,
     title: "American Express Lounge",
     region: "US",
     location: "Los Angeles (LAX)",
@@ -568,6 +578,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "etihad-lounge-washington",
+    vibesFavorite: true,
     title: "Etihad Airways Washington Lounge",
     region: "US",
     location: "Washington, D.C. (IAD)",
@@ -712,6 +723,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "chase-sapphire-lounge-san-diego",
+    vibesFavorite: true,
     title: "Chase Sapphire Lounge",
     region: "US",
     location: "San Diego (SAN)",
@@ -789,6 +801,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "iga-lounge-istanbul",
+    vibesFavorite: true,
     title: "iGA Lounge",
     region: "Turkey",
     location: "Istanbul (IST)",
@@ -929,6 +942,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "1980-coffee-cairo",
+    vibesFavorite: true,
     title: "1980 Coffee",
     region: "Egypt",
     location: "Cairo, Egypt",
@@ -1280,6 +1294,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "cafe-53-chicago",
+    vibesFavorite: true,
     title: "Cafe 53",
     region: "US",
     location: "Chicago",
@@ -1322,6 +1337,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "central-perk-alexandria",
+    vibesFavorite: true,
     title: "Central Perk Cafe, Alexandria",
     region: "Egypt",
     location: "Alexandria, Egypt",
@@ -1339,6 +1355,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "propery-coffee-alexandria",
+    vibesFavorite: true,
     title: "Propery Coffee",
     region: "Egypt",
     location: "Alexandria, Egypt",
@@ -1356,6 +1373,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "croissante-santa-clara",
+    vibesFavorite: true,
     title: "Croissante",
     region: "US",
     location: "Santa Clara",
@@ -1374,6 +1392,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "social-specialty-coffee-cairo",
+    vibesFavorite: true,
     title: "Social Specialty Coffee",
     region: "Egypt",
     location: "Cairo",
@@ -1391,6 +1410,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "zed-and-co-alexandria",
+    vibesFavorite: true,
     title: "Zed & Co",
     region: "Egypt",
     location: "Alexandria, Egypt",
@@ -1409,6 +1429,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "coffee-lab-bakery-cairo",
+    vibesFavorite: true,
     title: "Coffee Lab & Bakery",
     region: "Egypt",
     location: "Cairo",
@@ -1461,6 +1482,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "sky-garden-london",
+    vibesFavorite: true,
     title: "Sky Garden",
     region: "UK",
     location: "London",
@@ -1565,6 +1587,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "layla-bagels-santa-monica",
+    vibesFavorite: true,
     title: "Layla Bagels",
     region: "US",
     location: "Los Angeles",
@@ -1613,6 +1636,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "ceremony-coffee-roasters-baltimore",
+    vibesFavorite: true,
     title: "Ceremony Coffee Roasters,  Harbor Point",
     region: "US",
     location: "Baltimore",
@@ -1629,6 +1653,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "temple-coffee-s-st-sacramento",
+    vibesFavorite: true,
     title: "Temple Coffee (S St)",
     region: "US",
     location: "Sacramento",
@@ -1716,6 +1741,7 @@ const HALAL_VIBES_ENTRIES = [
   */,
   {
     slug: "story-coffee-seattle",
+    vibesFavorite: true,
     title: "Story Coffee",
     region: "US",
     location: "Seattle",
@@ -1939,6 +1965,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "dr-ink-san-jose",
+    vibesFavorite: true,
     title: "Dr. Ink",
     region: "US",
     location: "San Jose",
@@ -2026,6 +2053,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "stumptown-cafe-portland",
+    vibesFavorite: true,
     title: "Stumptown Cafe",
     region: "US",
     location: "Portland",
@@ -2403,6 +2431,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "motw-coffee-pastries-san-diego",
+    vibesFavorite: true,
     title: "MOTW Coffee and Pastries",
     region: "US",
     location: "San Diego",
@@ -2421,6 +2450,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "calic-bagel-los-angeles",
+    vibesFavorite: true,
     title: "Calic Bagel",
     region: "US",
     location: "Los Angeles",
@@ -2479,6 +2509,7 @@ const HALAL_VIBES_ENTRIES = [
   },
   {
     slug: "coffeebar-sunnyvale",
+    vibesFavorite: true,
     title: "Coffeebar Sunnyvale",
     region: "US",
     location: "Sunnyvale",
