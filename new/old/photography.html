@@ -225,6 +225,14 @@
 			flex-wrap: wrap;
 		}
 
+		.filter-row {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 15px;
+			width: 100%;
+		}
+
 		.filter-btn {
 			font-size: 0.95em;
 			font-weight: 500;
@@ -316,79 +324,231 @@
 			z-index: 1;
 		}
 
-		/* Modal for full-quality images */
-		.image-modal {
+		/* Full-screen gallery carousel (iPhone-style) */
+		.gallery-carousel {
 			display: none;
 			position: fixed;
+			inset: 0;
 			z-index: 10000;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.95);
-			backdrop-filter: blur(10px);
-			animation: fadeIn 0.3s ease;
+			background: #000;
+			flex-direction: column;
+			user-select: none;
+			-webkit-user-select: none;
+			touch-action: none;
 		}
 
-		.image-modal.active {
+		.gallery-carousel.active {
+			display: flex;
+		}
+
+		.carousel-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent);
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 10003;
+			pointer-events: none;
+		}
+
+		.carousel-header > * {
+			pointer-events: auto;
+		}
+
+		.carousel-close {
+			width: 44px;
+			height: 44px;
+			border: none;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.15);
+			color: #fff;
+			font-size: 28px;
+			line-height: 1;
+			cursor: pointer;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			flex-shrink: 0;
+			transition: background 0.2s ease;
 		}
 
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-			}
-
-			to {
-				opacity: 1;
-			}
+		.carousel-close:hover,
+		.carousel-close:focus-visible {
+			background: rgba(255, 255, 255, 0.28);
+			outline: none;
 		}
 
-		.modal-content {
-			max-width: 90%;
-			max-height: 90%;
-			object-fit: contain;
-			animation: zoomIn 0.3s ease;
+		.carousel-meta {
+			flex: 1;
+			text-align: center;
+			padding: 0 12px;
+			min-width: 0;
 		}
 
-		@keyframes zoomIn {
-			from {
-				transform: scale(0.8);
-				opacity: 0;
-			}
-
-			to {
-				transform: scale(1);
-				opacity: 1;
-			}
+		.carousel-title {
+			display: block;
+			color: #fff;
+			font-size: 0.95em;
+			font-weight: 600;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
-		.modal-close {
+		.carousel-date {
+			display: block;
+			color: rgba(255, 255, 255, 0.65);
+			font-size: 0.8em;
+			margin-top: 2px;
+		}
+
+		.carousel-counter {
+			color: rgba(255, 255, 255, 0.85);
+			font-size: 0.85em;
+			font-weight: 500;
+			flex-shrink: 0;
+			min-width: 52px;
+			text-align: right;
+		}
+
+		.carousel-stage {
+			flex: 1;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			min-height: 0;
+		}
+
+		.carousel-slide-wrap {
 			position: absolute;
-			top: 20px;
-			right: 30px;
-			color: white;
-			font-size: 40px;
-			font-weight: bold;
-			cursor: pointer;
-			z-index: 10001;
-			transition: transform 0.2s ease;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			will-change: transform;
 		}
 
-		.modal-close:hover {
-			transform: scale(1.2);
+		.carousel-slide-wrap img {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			pointer-events: none;
+			-webkit-user-drag: none;
+			transition: opacity 0.22s ease;
 		}
 
-		.modal-loading {
-			color: white;
-			font-size: 18px;
+		.carousel-nav {
 			position: absolute;
 			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			transform: translateY(-50%);
+			z-index: 10002;
+			width: 48px;
+			height: 48px;
+			border: none;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.12);
+			color: #fff;
+			font-size: 32px;
+			line-height: 1;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background 0.2s ease, opacity 0.2s ease;
 		}
+
+		.carousel-nav:hover,
+		.carousel-nav:focus-visible {
+			background: rgba(255, 255, 255, 0.25);
+			outline: none;
+		}
+
+		.carousel-nav:disabled {
+			opacity: 0.25;
+			cursor: default;
+		}
+
+		.carousel-prev {
+			left: max(12px, env(safe-area-inset-left));
+		}
+
+		.carousel-next {
+			right: max(12px, env(safe-area-inset-right));
+		}
+
+		.carousel-loading {
+			position: absolute;
+			color: rgba(255, 255, 255, 0.8);
+			font-size: 16px;
+			pointer-events: none;
+		}
+
+		.carousel-hint {
+			position: absolute;
+			bottom: max(16px, env(safe-area-inset-bottom));
+			left: 50%;
+			transform: translateX(-50%);
+			color: rgba(255, 255, 255, 0.45);
+			font-size: 0.75em;
+			pointer-events: none;
+			white-space: nowrap;
+		}
+
+		.browse-gallery-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 0.95em;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+			padding: 10px 20px;
+			border-radius: 25px;
+			border: none;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+			transition: all 0.3s ease;
+			margin-top: 4px;
+			width: 100%;
+			justify-content: center;
+		}
+
+		.browse-gallery-btn:hover,
+		.browse-gallery-btn:focus-visible {
+			transform: translateY(-1px);
+			box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+			outline: none;
+		}
+
+		body.carousel-open {
+			overflow: hidden;
+		}
+
+		@media (max-width: 768px) {
+			.carousel-nav {
+				display: none;
+			}
+
+			.carousel-hint {
+				font-size: 0.7em;
+			}
+		}
+
+		@media (min-width: 769px) {
+			.carousel-hint {
+				display: none;
+			}
+		}
+
+		/* Legacy modal styles removed – carousel replaces single-image modal */
 
 		.portfolio-item::before {
 			content: '';
@@ -561,18 +721,37 @@
 
 	<!-- Filters -->
 	<div class="portfolio-filter">
-		<div class="filter-btn active" data-filter="all">All</div>
-		<div class="filter-btn" data-filter="nature">Nature</div>
-		<div class="filter-btn" data-filter="islam">Islam</div>
-		<div class="filter-btn" data-filter="urban">Urban</div>
-		<div class="filter-btn" data-filter="land">Landmarks</div>
+		<div class="filter-row">
+			<div class="filter-btn active" data-filter="all">All</div>
+			<div class="filter-btn" data-filter="nature">Nature</div>
+			<div class="filter-btn" data-filter="islam">Islam</div>
+			<div class="filter-btn" data-filter="urban">Urban</div>
+			<div class="filter-btn" data-filter="land">Landmarks</div>
+		</div>
+		<button type="button" class="browse-gallery-btn" id="browseGalleryBtn" aria-label="Browse all photos in fullscreen carousel">
+			<i class="fa fa-images" aria-hidden="true"></i> Browse All Photos
+		</button>
 	</div>
 
-	<!-- Image Modal -->
-	<div id="imageModal" class="image-modal">
-		<span class="modal-close">&times;</span>
-		<div class="modal-loading">Loading full-quality image...</div>
-		<img class="modal-content" id="modalImage" src="" alt="Full quality image">
+	<!-- Full-screen gallery carousel -->
+	<div id="galleryCarousel" class="gallery-carousel" role="dialog" aria-modal="true" aria-label="Photo gallery viewer" aria-hidden="true">
+		<div class="carousel-header">
+			<button type="button" class="carousel-close" id="carouselClose" aria-label="Close gallery">&times;</button>
+			<div class="carousel-meta">
+				<span class="carousel-title" id="carouselTitle"></span>
+				<span class="carousel-date" id="carouselDate"></span>
+			</div>
+			<span class="carousel-counter" id="carouselCounter"></span>
+		</div>
+		<div class="carousel-stage" id="carouselStage">
+			<div class="carousel-slide-wrap" id="carouselSlideWrap">
+				<img id="carouselImage" src="" alt="">
+			</div>
+			<div class="carousel-loading" id="carouselLoading" hidden>Loading…</div>
+		</div>
+		<button type="button" class="carousel-nav carousel-prev" id="carouselPrev" aria-label="Previous photo">&#8249;</button>
+		<button type="button" class="carousel-nav carousel-next" id="carouselNext" aria-label="Next photo">&#8250;</button>
+		<span class="carousel-hint">Swipe to browse · Tap ✕ to close</span>
 	</div>
 
 	<!-- Portfolio Gallery -->
@@ -2439,7 +2618,7 @@
 						}
 						item.addEventListener('click', function () {
 							const fullSrc = this.getAttribute('data-full-src');
-							if (fullSrc) showFullQualityImage(fullSrc);
+							if (fullSrc) openGalleryCarousel(this);
 						});
 						return;
 					}
@@ -2460,7 +2639,7 @@
 
 					item.addEventListener('click', function () {
 						const src = this.getAttribute('data-full-src');
-						if (src) showFullQualityImage(src);
+						if (src) openGalleryCarousel(this);
 					});
 				});
 			}, { rootMargin: '200px' });
@@ -2470,47 +2649,247 @@
 			});
 		});
 
-		// Modal functionality
-		const modal = document.getElementById('imageModal');
-		const modalImg = document.getElementById('modalImage');
-		const modalClose = document.querySelector('.modal-close');
-		const modalLoading = document.querySelector('.modal-loading');
+		// Full-screen gallery carousel
+		const carousel = document.getElementById('galleryCarousel');
+		const carouselImage = document.getElementById('carouselImage');
+		const carouselSlideWrap = document.getElementById('carouselSlideWrap');
+		const carouselTitle = document.getElementById('carouselTitle');
+		const carouselDate = document.getElementById('carouselDate');
+		const carouselCounter = document.getElementById('carouselCounter');
+		const carouselLoading = document.getElementById('carouselLoading');
+		const carouselPrev = document.getElementById('carouselPrev');
+		const carouselNext = document.getElementById('carouselNext');
+		const carouselClose = document.getElementById('carouselClose');
+		const carouselStage = document.getElementById('carouselStage');
+		const browseGalleryBtn = document.getElementById('browseGalleryBtn');
 
-		function showFullQualityImage(imageSrc) {
-			modal.classList.add('active');
-			modalLoading.style.display = 'block';
-			modalImg.style.display = 'none';
+		let gallerySlides = [];
+		let carouselIndex = 0;
+		let touchStartX = 0;
+		let touchStartY = 0;
+		let touchDeltaX = 0;
+		let isDragging = false;
 
-			// Create new image to preload
-			const fullImg = new Image();
-			fullImg.onload = function () {
-				modalImg.src = imageSrc;
-				modalImg.style.display = 'block';
-				modalLoading.style.display = 'none';
-			};
-			fullImg.onerror = function () {
-				modalLoading.textContent = 'Error loading image';
-			};
-			fullImg.src = imageSrc;
+		function collectGallerySlides() {
+			return Array.from(document.querySelectorAll('.portfolio-box .portfolio-item')).map(item => {
+				const box = item.closest('.portfolio-box');
+				return {
+					item,
+					src: item.getAttribute('data-full-src') || item.getAttribute('data-src') || item.querySelector('img')?.src || '',
+					title: box?.querySelector('h6')?.textContent?.trim() || 'Photo',
+					date: box?.querySelector('p')?.textContent?.trim() || ''
+				};
+			}).filter(slide => slide.src);
 		}
 
-		// Close modal
-		modalClose.addEventListener('click', function () {
-			modal.classList.remove('active');
-		});
+		function preloadAdjacent(index) {
+			[-1, 1].forEach(offset => {
+				const slide = gallerySlides[index + offset];
+				if (!slide) return;
+				const img = new Image();
+				img.src = slide.src;
+			});
+		}
 
-		// Close modal on background click
-		modal.addEventListener('click', function (e) {
-			if (e.target === modal) {
-				modal.classList.remove('active');
+		function updateCarouselUI() {
+			const slide = gallerySlides[carouselIndex];
+			if (!slide) return;
+
+			carouselTitle.textContent = slide.title;
+			carouselDate.textContent = slide.date;
+			carouselCounter.textContent = `${carouselIndex + 1} / ${gallerySlides.length}`;
+			carouselPrev.disabled = carouselIndex === 0;
+			carouselNext.disabled = carouselIndex === gallerySlides.length - 1;
+		}
+
+		function showCarouselImage() {
+			const slide = gallerySlides[carouselIndex];
+			if (!slide) return;
+
+			carouselLoading.hidden = false;
+			carouselImage.style.opacity = '0';
+
+			const fullImg = new Image();
+			fullImg.onload = function () {
+				carouselImage.src = slide.src;
+				carouselImage.alt = slide.title;
+				carouselImage.style.opacity = '1';
+				carouselLoading.hidden = true;
+				preloadAdjacent(carouselIndex);
+			};
+			fullImg.onerror = function () {
+				carouselLoading.textContent = 'Error loading image';
+			};
+			fullImg.src = slide.src;
+
+			updateCarouselUI();
+		}
+
+		function openGalleryCarousel(startItem, startIndex) {
+			gallerySlides = collectGallerySlides();
+			if (!gallerySlides.length) return;
+
+			if (startItem) {
+				carouselIndex = gallerySlides.findIndex(slide => slide.item === startItem);
+			} else if (typeof startIndex === 'number') {
+				carouselIndex = startIndex;
+			} else {
+				carouselIndex = 0;
 			}
+
+			if (carouselIndex < 0) carouselIndex = 0;
+
+			carousel.classList.add('active');
+			carousel.setAttribute('aria-hidden', 'false');
+			document.body.classList.add('carousel-open');
+			carouselSlideWrap.style.transition = 'none';
+			carouselSlideWrap.style.transform = 'translateX(0)';
+			carouselLoading.textContent = 'Loading…';
+			showCarouselImage();
+			carouselClose.focus();
+		}
+
+		function closeGalleryCarousel() {
+			carousel.classList.remove('active');
+			carousel.setAttribute('aria-hidden', 'true');
+			document.body.classList.remove('carousel-open');
+			carouselImage.src = '';
+			isDragging = false;
+			touchDeltaX = 0;
+			carouselSlideWrap.style.transform = 'translateX(0)';
+		}
+
+		function goToSlide(index) {
+			if (index < 0 || index >= gallerySlides.length) {
+				carouselSlideWrap.style.transition = 'transform 0.28s ease';
+				carouselSlideWrap.style.transform = 'translateX(0)';
+				return;
+			}
+			if (index === carouselIndex) {
+				carouselSlideWrap.style.transition = 'transform 0.28s ease';
+				carouselSlideWrap.style.transform = 'translateX(0)';
+				return;
+			}
+			carouselIndex = index;
+			carouselSlideWrap.style.transition = 'none';
+			carouselSlideWrap.style.transform = 'translateX(0)';
+			showCarouselImage();
+		}
+
+		function goPrev() {
+			goToSlide(carouselIndex - 1);
+		}
+
+		function goNext() {
+			goToSlide(carouselIndex + 1);
+		}
+
+		browseGalleryBtn.addEventListener('click', () => openGalleryCarousel(null, 0));
+		carouselClose.addEventListener('click', closeGalleryCarousel);
+		carouselPrev.addEventListener('click', goPrev);
+		carouselNext.addEventListener('click', goNext);
+
+		// No backdrop dismiss – only explicit close button (and Escape on desktop)
+
+		carouselStage.addEventListener('touchstart', (e) => {
+			if (!carousel.classList.contains('active')) return;
+			const touch = e.touches[0];
+			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
+			touchDeltaX = 0;
+			isDragging = true;
+			carouselSlideWrap.style.transition = 'none';
+		}, { passive: true });
+
+		carouselStage.addEventListener('touchmove', (e) => {
+			if (!isDragging) return;
+			const touch = e.touches[0];
+			const deltaX = touch.clientX - touchStartX;
+			const deltaY = touch.clientY - touchStartY;
+
+			if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 12) {
+				isDragging = false;
+				carouselSlideWrap.style.transform = 'translateX(0)';
+				return;
+			}
+
+			if (Math.abs(deltaX) > 8) e.preventDefault();
+
+			touchDeltaX = deltaX;
+			let resistance = deltaX;
+			if ((carouselIndex === 0 && deltaX > 0) || (carouselIndex === gallerySlides.length - 1 && deltaX < 0)) {
+				resistance = deltaX * 0.35;
+			}
+			carouselSlideWrap.style.transform = `translateX(${resistance}px)`;
+		}, { passive: false });
+
+		carouselStage.addEventListener('touchend', () => {
+			if (!isDragging) return;
+			isDragging = false;
+			const threshold = Math.min(window.innerWidth * 0.18, 80);
+
+			carouselSlideWrap.style.transition = 'transform 0.28s ease';
+
+			if (touchDeltaX <= -threshold && carouselIndex < gallerySlides.length - 1) {
+				carouselSlideWrap.style.transform = 'translateX(-110%)';
+				const nextIndex = carouselIndex + 1;
+				setTimeout(() => goToSlide(nextIndex), 220);
+			} else if (touchDeltaX >= threshold && carouselIndex > 0) {
+				carouselSlideWrap.style.transform = 'translateX(110%)';
+				const prevIndex = carouselIndex - 1;
+				setTimeout(() => goToSlide(prevIndex), 220);
+			} else {
+				carouselSlideWrap.style.transform = 'translateX(0)';
+			}
+
+			touchDeltaX = 0;
+		}, { passive: true });
+
+		// Mouse drag for desktop
+		carouselStage.addEventListener('mousedown', (e) => {
+			if (!carousel.classList.contains('active') || e.button !== 0) return;
+			touchStartX = e.clientX;
+			touchDeltaX = 0;
+			isDragging = true;
+			carouselSlideWrap.style.transition = 'none';
+			e.preventDefault();
 		});
 
-		// Close modal on Escape key
+		window.addEventListener('mousemove', (e) => {
+			if (!isDragging) return;
+			touchDeltaX = e.clientX - touchStartX;
+			let resistance = touchDeltaX;
+			if ((carouselIndex === 0 && touchDeltaX > 0) || (carouselIndex === gallerySlides.length - 1 && touchDeltaX < 0)) {
+				resistance = touchDeltaX * 0.35;
+			}
+			carouselSlideWrap.style.transform = `translateX(${resistance}px)`;
+		});
+
+		window.addEventListener('mouseup', () => {
+			if (!isDragging) return;
+			isDragging = false;
+			const threshold = 80;
+			carouselSlideWrap.style.transition = 'transform 0.28s ease';
+
+			if (touchDeltaX <= -threshold && carouselIndex < gallerySlides.length - 1) {
+				carouselSlideWrap.style.transform = 'translateX(-110%)';
+				const nextIndex = carouselIndex + 1;
+				setTimeout(() => goToSlide(nextIndex), 220);
+			} else if (touchDeltaX >= threshold && carouselIndex > 0) {
+				carouselSlideWrap.style.transform = 'translateX(110%)';
+				const prevIndex = carouselIndex - 1;
+				setTimeout(() => goToSlide(prevIndex), 220);
+			} else {
+				carouselSlideWrap.style.transform = 'translateX(0)';
+			}
+			touchDeltaX = 0;
+		});
+
 		document.addEventListener('keydown', function (e) {
-			if (e.key === 'Escape' && modal.classList.contains('active')) {
-				modal.classList.remove('active');
-			}
+			if (!carousel.classList.contains('active')) return;
+			if (e.key === 'Escape') closeGalleryCarousel();
+			else if (e.key === 'ArrowLeft') goPrev();
+			else if (e.key === 'ArrowRight') goNext();
 		});
 
 		// Smooth scrolling for navigation links
