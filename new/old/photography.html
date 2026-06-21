@@ -2802,18 +2802,48 @@
 	<!-- Footer -->
 	<div id="fh5co-footer">
 		<div class="footer-tools-links">
-			<a href="../index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
-			<a href="/halal-vibes" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a>
-			<a href="/bidetbeacon" class="footer-tool-link"><i class="fa-solid fa-toilet"></i> BidetBeacon</a>
+			<a id="footerHome" href="../index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+			<a id="footerHalal" href="../halal-vibes.html" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a>
+			<a id="footerBidet" href="../bidetbeacon.html" class="footer-tool-link"><i class="fa-solid fa-toilet"></i> BidetBeacon</a>
 		</div>
 		<hr class="footer-divider">
 		<p class="footer-line">
 			😁 2020 –
 			<script>document.write(new Date().getFullYear())</script>
 			<span class="footer-sep">·</span>
-			<a href="../index.html">Yusuf Morsi</a>
+			<a id="footerCopyright" href="../index.html">Yusuf Morsi</a>
 		</p>
 	</div>
+	<script>
+		(function () {
+			var home = document.getElementById('footerHome');
+			var halal = document.getElementById('footerHalal');
+			var bidet = document.getElementById('footerBidet');
+			var copyright = document.getElementById('footerCopyright');
+			if (!home || !halal || !bidet) return;
+
+			var path = location.pathname;
+			var host = location.hostname;
+			var inNewDir = /\/new\//i.test(path);
+			var onGithubPages = host.indexOf('github.io') !== -1;
+
+			if (location.protocol === 'file:' || inNewDir) {
+				home.href = '../index.html';
+				halal.href = '../halal-vibes.html';
+				bidet.href = '../bidetbeacon.html';
+			} else if (onGithubPages) {
+				home.href = '/new/index.html';
+				halal.href = '/new/halal-vibes.html';
+				bidet.href = '/new/bidetbeacon.html';
+			} else {
+				home.href = '/';
+				halal.href = '/halal-vibes';
+				bidet.href = '/bidetbeacon';
+			}
+
+			if (copyright) copyright.href = home.href;
+		})();
+	</script>
 	<script>
 		// Gallery image loading: small previews in grid, full resolution in carousel only.
 		document.addEventListener('DOMContentLoaded', function () {
