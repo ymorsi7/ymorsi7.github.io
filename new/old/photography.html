@@ -353,15 +353,12 @@
 		}
 
 		.portfolio-item img.thumbnail-img {
+			opacity: 1;
 			transition: opacity 0.2s ease;
 		}
 
-		.portfolio-item img.thumbnail-img.loading {
+		.portfolio-item img.thumbnail-img.loading:not(.loaded) {
 			opacity: 0;
-		}
-
-		.portfolio-item img.thumbnail-img.loaded {
-			opacity: 1;
 		}
 
 		.portfolio-item::after {
@@ -2885,6 +2882,8 @@
 						return;
 					}
 					img.dataset.fallback = '1';
+					img.onload = finish;
+					img.onerror = finish;
 					img.src = fullSrc;
 				};
 
