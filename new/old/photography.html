@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Inter', 'Poppins', sans-serif;">
+<html lang="en"
+	style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Inter', 'Poppins', sans-serif;">
 
 <head>
 	<title>YM | Photography</title>
@@ -40,11 +41,13 @@
 			align-items: center;
 			z-index: 1000;
 		}
+
 		#logo img {
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
 		}
+
 		#logo .tooltip {
 			position: absolute;
 			left: 50px;
@@ -60,7 +63,8 @@
 			transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 			pointer-events: none;
 		}
-		#logo img:hover + .tooltip,
+
+		#logo img:hover+.tooltip,
 		#logo .tooltip:hover {
 			opacity: 1;
 			visibility: visible;
@@ -72,10 +76,10 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			background: rgba(255,255,255,0.95);
+			background: rgba(255, 255, 255, 0.95);
 			backdrop-filter: blur(20px);
-			box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-			border-bottom: 1px solid rgba(255,255,255,0.2);
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 			padding: 8px 32px;
 			height: 64px;
 			position: sticky;
@@ -125,7 +129,8 @@
 			letter-spacing: 0.5px;
 		}
 
-		.nav-icon:hover, .nav-icon:focus {
+		.nav-icon:hover,
+		.nav-icon:focus {
 			background: rgba(102, 126, 234, 0.08);
 			color: #667eea;
 			transform: translateY(-2px) scale(1.07);
@@ -174,7 +179,7 @@
 			font-weight: 700;
 			margin-bottom: 0.15em;
 			letter-spacing: -1px;
-			text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+			text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 		}
 
 		.hero-subtitle {
@@ -187,9 +192,9 @@
 		.hero-cta {
 			display: inline-block;
 			padding: 8px 20px;
-			background: rgba(255,255,255,0.2);
+			background: rgba(255, 255, 255, 0.2);
 			color: white;
-			border: 2px solid rgba(255,255,255,0.3);
+			border: 2px solid rgba(255, 255, 255, 0.3);
 			border-radius: 50px;
 			font-size: 0.95em;
 			font-weight: 600;
@@ -200,9 +205,9 @@
 		}
 
 		.hero-cta:hover {
-			background: rgba(255,255,255,0.3);
+			background: rgba(255, 255, 255, 0.3);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 		}
 
 		/* Modern Filter Design */
@@ -212,10 +217,10 @@
 			gap: 15px;
 			margin: 30px auto;
 			padding: 20px 30px;
-			background: rgba(255,255,255,0.95);
+			background: rgba(255, 255, 255, 0.95);
 			backdrop-filter: blur(20px);
 			border-radius: 20px;
-			box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 			max-width: 600px;
 			flex-wrap: wrap;
 		}
@@ -258,14 +263,14 @@
 			background: white;
 			border-radius: 20px;
 			overflow: hidden;
-			box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 			transition: all 0.4s ease;
 			position: relative;
 		}
 
 		.portfolio-box:hover {
 			transform: translateY(-8px) scale(1.02);
-			box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 		}
 
 		.portfolio-item {
@@ -332,8 +337,13 @@
 		}
 
 		@keyframes fadeIn {
-			from { opacity: 0; }
-			to { opacity: 1; }
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
 		}
 
 		.modal-content {
@@ -344,8 +354,15 @@
 		}
 
 		@keyframes zoomIn {
-			from { transform: scale(0.8); opacity: 0; }
-			to { transform: scale(1); opacity: 1; }
+			from {
+				transform: scale(0.8);
+				opacity: 0;
+			}
+
+			to {
+				transform: scale(1);
+				opacity: 1;
+			}
 		}
 
 		.modal-close {
@@ -380,7 +397,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+			background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
 			opacity: 0;
 			transition: opacity 0.3s ease;
 		}
@@ -414,47 +431,83 @@
 		}
 
 		@media (max-width: 900px) {
-			.hero-content h1 { font-size: 2em; }
+			.hero-content h1 {
+				font-size: 2em;
+			}
+
 			.portfolio-gallery {
 				grid-template-columns: 1fr;
 				gap: 10px;
 				padding: 0 8px;
 			}
-			.portfolio-item { height: 200px; }
-			.portfolio-box h6, .portfolio-box p { margin-left: 10px; margin-right: 10px; }
+
+			.portfolio-item {
+				height: 200px;
+			}
+
+			.portfolio-box h6,
+			.portfolio-box p {
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+
 			.portfolio-filter {
 				padding: 10px 5px;
 				gap: 6px;
 				flex-wrap: wrap;
 				max-width: 100vw;
 			}
+
 			.redesigned-navbar {
 				padding: 6px 8px;
 				height: 54px;
 			}
-			.logo-text { font-size: 1.2em; }
-			.nav-icon, .nav-projects { font-size: 1.2em; padding: 8px 8px; }
+
+			.logo-text {
+				font-size: 1.2em;
+			}
+
+			.nav-icon,
+			.nav-projects {
+				font-size: 1.2em;
+				padding: 8px 8px;
+			}
 		}
 
 		@media (max-width: 600px) {
-			.hero-content h1 { font-size: 1.3em; }
+			.hero-content h1 {
+				font-size: 1.3em;
+			}
+
 			.portfolio-gallery {
 				padding: 0 2px;
 			}
-			.portfolio-item { height: 120px; }
+
+			.portfolio-item {
+				height: 120px;
+			}
+
 			.portfolio-filter {
 				padding: 6px 2px;
 				gap: 4px;
 			}
-			.navbar-right { gap: 8px; }
-			.nav-icon, .nav-projects { font-size: 1em; padding: 10px 6px; }
+
+			.navbar-right {
+				gap: 8px;
+			}
+
+			.nav-icon,
+			.nav-projects {
+				font-size: 1em;
+				padding: 10px 6px;
+			}
 		}
 
 		/* Footer Enhancement */
 		.footer {
 			text-align: center;
 			padding: 40px 20px;
-			background: rgba(255,255,255,0.95);
+			background: rgba(255, 255, 255, 0.95);
 			backdrop-filter: blur(20px);
 			color: #4a5568;
 			margin-top: 60px;
@@ -481,15 +534,19 @@
 	<nav class="navbar redesigned-navbar">
 		<div class="navbar-left">
 			<a href="#" class="logo">
-				<img src="docs/assets/img/cam.png" alt="YM Logo" style="height:36px;width:36px;vertical-align:middle;margin-right:14px;display:inline-block;">
+				<img src="docs/assets/img/cam.png" alt="YM Logo"
+					style="height:36px;width:36px;vertical-align:middle;margin-right:14px;display:inline-block;">
 				<span class="logo-text">YM PHOTOGRAPHY</span>
 			</a>
 		</div>
 		<div class="navbar-right">
-			<a href="https://www.instagram.com/surpassing.photography/" class="nav-icon" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-			<a href="https://www.youtube.com/c/YusufMorsi" class="nav-icon" target="_blank" aria-label="YouTube"><i class="fa fa-youtube-play"></i></a>
+			<a href="https://www.instagram.com/surpassing.photography/" class="nav-icon" target="_blank"
+				aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+			<a href="https://www.youtube.com/c/YusufMorsi" class="nav-icon" target="_blank" aria-label="YouTube"><i
+					class="fa fa-youtube-play"></i></a>
 			<a href="../index.html" class="nav-icon" aria-label="Home"><i class="fa fa-home"></i></a>
-			<a href="../index.html#projects" class="nav-icon nav-projects" aria-label="Projects"><i class="fa fa-briefcase"></i> <span>Projects</span></a>
+			<a href="../index.html#projects" class="nav-icon nav-projects" aria-label="Projects"><i
+					class="fa fa-briefcase"></i> <span>Projects</span></a>
 		</div>
 	</nav>
 
@@ -527,6 +584,160 @@
 	-->
 	<div class="portfolio-gallery">
 
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7225.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7225.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7211.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7211.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+<!-- 
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7197.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7197.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div> -->
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7191.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7191.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<!-- <div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7168.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7168.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div> -->
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7167.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7167.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+<!-- 
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7164.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7164.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div> -->
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7159.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7159.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7118.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7118.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+<!-- 
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7107.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7107.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div> -->
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7106.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7106.jpeg"></div>
+			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7023.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7023.jpeg"></div>
+			<h6>Point Lobos State Natural Reserve · Carmel, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7022.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7022.jpeg"></div>
+			<h6>Point Lobos State Natural Reserve · Carmel, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6975.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6975.jpeg"></div>
+			<h6>Point Lobos State Natural Reserve · Carmel, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6909.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6909.jpeg"></div>
+			<h6>Point Lobos State Natural Reserve · Carmel, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box urban">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6673.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6673.jpeg"></div>
+			<h6>San Jose, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box urban">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6639.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6639.jpeg"></div>
+			<h6>San Jose, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6595.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6595.jpeg"></div>
+			<h6>Santa Clara, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box urban land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6204.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6204.jpeg"></div>
+			<h6>Salesforce Transit Center · San Francisco, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box urban land">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6212.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6212.jpeg"></div>
+			<h6>San Francisco-Oakland Bay Bridge · San Francisco, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6155.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6155.jpeg"></div>
+			<h6>Pasadena, CA</h6>
+			<p>June 2026</p>
+		</div>
+
+		<div class="portfolio-box nature">
+			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_6154.jpeg"
+				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_6154.jpeg"></div>
+			<h6>Pasadena, CA</h6>
+			<p>June 2026</p>
+		</div>
+
 		<div class="portfolio-box urban">
 			<div class="portfolio-item" data-src="../images/sfJun.jpg" data-full-src="../images/sfJun.jpg"></div>
 			<h6>San Francisco, CA</h6>
@@ -540,37 +751,43 @@
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/santaclaraa.jpg" data-full-src="../images/santaclaraa.jpg"></div>
+			<div class="portfolio-item" data-src="../images/santaclaraa.jpg" data-full-src="../images/santaclaraa.jpg">
+			</div>
 			<h6>Santa Clara, CA</h6>
 			<p>June 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/pasadenajune.jpg" data-full-src="../images/pasadenajune.jpg"></div>
+			<div class="portfolio-item" data-src="../images/pasadenajune.jpg"
+				data-full-src="../images/pasadenajune.jpg"></div>
 			<h6>Pasadena, CA</h6>
 			<p>June 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/IMG_4824.jpeg" data-full-src="../images/IMG_4824.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_4824.jpeg" data-full-src="../images/IMG_4824.jpeg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>May 2026</p>
 		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="../images/IMG_4841.jpeg" data-full-src="../images/IMG_4841.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_4841.jpeg" data-full-src="../images/IMG_4841.jpeg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>May 2026</p>
 		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="../images/IMG_4859.jpeg" data-full-src="../images/IMG_4859.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_4859.jpeg" data-full-src="../images/IMG_4859.jpeg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>May 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/IMG_4579.jpeg" data-full-src="../images/IMG_4579.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_4579.jpeg" data-full-src="../images/IMG_4579.jpeg">
+			</div>
 			<h6>Swiss Alps, Switzerland</h6>
 			<p>April 2026</p>
 		</div>
@@ -584,7 +801,8 @@
 		-->
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/IMG_4583.jpeg" data-full-src="../images/IMG_4583.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_4583.jpeg" data-full-src="../images/IMG_4583.jpeg">
+			</div>
 			<h6>Swiss Alps, Switzerland</h6>
 			<p>April 2026</p>
 		</div>
@@ -596,37 +814,43 @@
 		</div>
 
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4431.jpeg" data-full-src="../images/all_pics/rome/IMG_4431.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4431.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4431.jpeg"></div>
 			<h6>Colosseum · Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
 
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4447.jpeg" data-full-src="../images/all_pics/rome/IMG_4447.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4447.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4447.jpeg"></div>
 			<h6>Roman Forum · Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4456.jpeg" data-full-src="../images/all_pics/rome/IMG_4456.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4456.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4456.jpeg"></div>
 			<h6>Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
 
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4493.jpeg" data-full-src="../images/all_pics/rome/IMG_4493.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4493.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4493.jpeg"></div>
 			<h6>Castel Sant'Angelo · Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4517.jpeg" data-full-src="../images/all_pics/rome/IMG_4517.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4517.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4517.jpeg"></div>
 			<h6>Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4527.jpeg" data-full-src="../images/all_pics/rome/IMG_4527.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/rome/IMG_4527.jpeg"
+				data-full-src="../images/all_pics/rome/IMG_4527.jpeg"></div>
 			<h6>Rome, Italy</h6>
 			<p>April 2026</p>
 		</div>
@@ -638,42 +862,50 @@
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/all_pics/alexandriaviewamazing.jpg" data-full-src="../images/all_pics/alexandriaviewamazing.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/alexandriaviewamazing.jpg"
+				data-full-src="../images/all_pics/alexandriaviewamazing.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/all_pics/alexandriaviewamazing2.jpg" data-full-src="../images/all_pics/alexandriaviewamazing2.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/alexandriaviewamazing2.jpg"
+				data-full-src="../images/all_pics/alexandriaviewamazing2.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/all_pics/alexnewww.jpg" data-full-src="../images/all_pics/alexnewww.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/alexnewww.jpg"
+				data-full-src="../images/all_pics/alexnewww.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/all_pics/alexsunsetcity.jpg" data-full-src="../images/all_pics/alexsunsetcity.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/alexsunsetcity.jpg"
+				data-full-src="../images/all_pics/alexsunsetcity.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/all_pics/brilliantsunsetgreenplaza.jpg" data-full-src="../images/all_pics/brilliantsunsetgreenplaza.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/brilliantsunsetgreenplaza.jpg"
+				data-full-src="../images/all_pics/brilliantsunsetgreenplaza.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/all_pics/Damanhour.jpg" data-full-src="../images/all_pics/Damanhour.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/Damanhour.jpg"
+				data-full-src="../images/all_pics/Damanhour.jpg"></div>
 			<h6>Damanhour, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/all_pics/sunsetcafe.jpg" data-full-src="../images/all_pics/sunsetcafe.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/sunsetcafe.jpg"
+				data-full-src="../images/all_pics/sunsetcafe.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>April 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/all_pics/zamalek.jpg" data-full-src="../images/all_pics/zamalek.jpg"></div>
+			<div class="portfolio-item" data-src="../images/all_pics/zamalek.jpg"
+				data-full-src="../images/all_pics/zamalek.jpg"></div>
 			<h6>Zamalek, Cairo, Egypt</h6>
 			<p>April 2026</p>
 		</div>
@@ -685,12 +917,14 @@
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2289.jpeg" data-full-src="../images/diyanet/IMG_2289.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2289.jpeg"
+				data-full-src="../images/diyanet/IMG_2289.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2302.jpeg" data-full-src="../images/diyanet/IMG_2302.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2302.jpeg"
+				data-full-src="../images/diyanet/IMG_2302.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
@@ -700,70 +934,82 @@
 			<p>March 2026</p>
 		</div> -->
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2321.jpeg" data-full-src="../images/diyanet/IMG_2321.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2321.jpeg"
+				data-full-src="../images/diyanet/IMG_2321.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2322.jpeg" data-full-src="../images/diyanet/IMG_2322.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2322.jpeg"
+				data-full-src="../images/diyanet/IMG_2322.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2330.jpeg" data-full-src="../images/diyanet/IMG_2330.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2330.jpeg"
+				data-full-src="../images/diyanet/IMG_2330.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/diyanet/IMG_2331.jpeg" data-full-src="../images/diyanet/IMG_2331.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/diyanet/IMG_2331.jpeg"
+				data-full-src="../images/diyanet/IMG_2331.jpeg"></div>
 			<h6>Diyanet Center of America · Lanham, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/IMG_2077.jpeg" data-full-src="../images/IMG_2077.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2077.jpeg" data-full-src="../images/IMG_2077.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/IMG_2156.jpeg" data-full-src="../images/IMG_2156.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2156.jpeg" data-full-src="../images/IMG_2156.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="../images/IMG_2258.jpeg" data-full-src="../images/IMG_2258.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2258.jpeg" data-full-src="../images/IMG_2258.jpeg">
+			</div>
 			<h6>Islamic Society of Baltimore · Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/IMG_2554.jpeg" data-full-src="../images/IMG_2554.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2554.jpeg" data-full-src="../images/IMG_2554.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/IMG_2251.jpeg" data-full-src="../images/IMG_2251.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2251.jpeg" data-full-src="../images/IMG_2251.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/IMG_2504.jpeg" data-full-src="../images/IMG_2504.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2504.jpeg" data-full-src="../images/IMG_2504.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="../images/IMG_2532.jpeg" data-full-src="../images/IMG_2532.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2532.jpeg" data-full-src="../images/IMG_2532.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="../images/IMG_2542.jpeg" data-full-src="../images/IMG_2542.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2542.jpeg" data-full-src="../images/IMG_2542.jpeg">
+			</div>
 			<h6>Baltimore, MD</h6>
 			<p>March 2026</p>
 		</div>
@@ -811,39 +1057,46 @@
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/sea/IMG_2727.jpeg" data-full-src="../images/sea/IMG_2727.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/sea/IMG_2727.jpeg"
+				data-full-src="../images/sea/IMG_2727.jpeg"></div>
 			<h6>Seattle, WA</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/sea/IMG_2793.jpeg" data-full-src="../images/sea/IMG_2793.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/sea/IMG_2793.jpeg"
+				data-full-src="../images/sea/IMG_2793.jpeg"></div>
 			<h6>Seattle, WA</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/sea/IMG_2808.jpeg" data-full-src="../images/sea/IMG_2808.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/sea/IMG_2808.jpeg"
+				data-full-src="../images/sea/IMG_2808.jpeg"></div>
 			<h6>Seattle, WA</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box nature land urban">
-			<div class="portfolio-item" data-src="../images/sea/IMG_2860.jpeg" data-full-src="../images/sea/IMG_2860.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/sea/IMG_2860.jpeg"
+				data-full-src="../images/sea/IMG_2860.jpeg"></div>
 			<h6>Gas Works Park · Seattle, WA</h6>
 			<p>March 2026</p>
 		</div>
 		<div class="portfolio-box nature land urban">
-			<div class="portfolio-item" data-src="../images/sea/IMG_2906.jpeg" data-full-src="../images/sea/IMG_2906.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/sea/IMG_2906.jpeg"
+				data-full-src="../images/sea/IMG_2906.jpeg"></div>
 			<h6>Space Needle · Seattle, WA</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/IMG_2633.jpeg" data-full-src="../images/IMG_2633.jpeg"></div>
+			<div class="portfolio-item" data-src="../images/IMG_2633.jpeg" data-full-src="../images/IMG_2633.jpeg">
+			</div>
 			<h6>Redmond, WA</h6>
 			<p>March 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/oaklandca.jpg" data-full-src="../images/oaklandca.jpg"></div>
+			<div class="portfolio-item" data-src="../images/oaklandca.jpg" data-full-src="../images/oaklandca.jpg">
+			</div>
 			<h6>Oakland, CA</h6>
 			<p>February 2026</p>
 		</div>
@@ -855,19 +1108,22 @@
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/capitolaa.jpg" data-full-src="../images/capitolaa.jpg"></div>
+			<div class="portfolio-item" data-src="../images/capitolaa.jpg" data-full-src="../images/capitolaa.jpg">
+			</div>
 			<h6>Capitola, CA</h6>
 			<p>January 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/capitolaa2.jpg" data-full-src="../images/capitolaa2.jpg"></div>
+			<div class="portfolio-item" data-src="../images/capitolaa2.jpg" data-full-src="../images/capitolaa2.jpg">
+			</div>
 			<h6>Capitola, CA</h6>
 			<p>January 2026</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="../images/cantuacreekca.jpg" data-full-src="../images/cantuacreekca.jpg"></div>
+			<div class="portfolio-item" data-src="../images/cantuacreekca.jpg"
+				data-full-src="../images/cantuacreekca.jpg"></div>
 			<h6>Cantua Creek, CA</h6>
 			<p>January 2026</p>
 		</div>
@@ -930,19 +1186,22 @@
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/images/chicagoNight.jpg" data-full-src="docs/images/chicagoNight.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoNight.jpg"
+				data-full-src="docs/images/chicagoNight.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/images/chicagoooo.jpg" data-full-src="docs/images/chicagoooo.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoooo.jpg"
+				data-full-src="docs/images/chicagoooo.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/images/chicagoL.jpg" data-full-src="docs/images/chicagoL.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/chicagoL.jpg" data-full-src="docs/images/chicagoL.jpg">
+			</div>
 			<h6>Chicago, IL</h6>
 			<p>November 2025</p>
 		</div>
@@ -954,51 +1213,59 @@
 		</div>
 
 		<div class="portfolio-box urban nature urban">
-			<div class="portfolio-item" data-src="docs/images/whitingINN.jpg" data-full-src="docs/images/whitingINN.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/whitingINN.jpg"
+				data-full-src="docs/images/whitingINN.jpg"></div>
 			<h6>Whiting, IN</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box  nature">
-			<div class="portfolio-item" data-src="docs/images/IMG_6558.jpg" data-full-src="docs/images/IMG_6558.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/IMG_6558.jpg" data-full-src="docs/images/IMG_6558.jpg">
+			</div>
 			<h6>Whiting, IN</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/images/bristolWIi.jpg" data-full-src="docs/images/bristolWIi.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/bristolWIi.jpg"
+				data-full-src="docs/images/bristolWIi.jpg"></div>
 			<h6>Bristol, WI</h6>
 			<p>November 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/images/bristolWi.jpg" data-full-src="docs/images/bristolWi.jpg"></div>
+			<div class="portfolio-item" data-src="docs/images/bristolWi.jpg" data-full-src="docs/images/bristolWi.jpg">
+			</div>
 			<h6>Bristol, WI</h6>
 			<p>November 2025</p>
 		</div>
 
-		
+
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/phoenixnew2.jpg" data-full-src="docs/assets/img/phoenixnew2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/phoenixnew2.jpg"
+				data-full-src="docs/assets/img/phoenixnew2.jpg"></div>
 			<h6>Phoenix, AZ</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/phoenixNew.jpg" data-full-src="docs/assets/img/phoenixNew.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/phoenixNew.jpg"
+				data-full-src="docs/assets/img/phoenixNew.jpg"></div>
 			<h6>Phoenix, AZ</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings2.jpg" data-full-src="docs/assets/img/JacumbaHotSprings2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings2.jpg"
+				data-full-src="docs/assets/img/JacumbaHotSprings2.jpg"></div>
 			<h6>Jacumba Hot Springs, CA</h6>
 			<p>October 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings.jpg" data-full-src="docs/assets/img/JacumbaHotSprings.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/JacumbaHotSprings.jpg"
+				data-full-src="docs/assets/img/JacumbaHotSprings.jpg"></div>
 			<h6>Jacumba Hot Springs, CA</h6>
 			<p>October 2025</p>
 		</div>
@@ -1007,32 +1274,37 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SFROCK.jpg" data-full-src="docs/assets/img/SFROCK.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SFROCK.jpg"
+				data-full-src="docs/assets/img/SFROCK.jpg"></div>
 			<h6>San Francisco, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoPoway.jpg" data-full-src="docs/assets/img/SanDiegoPoway.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoPoway.jpg"
+				data-full-src="docs/assets/img/SanDiegoPoway.jpg"></div>
 			<h6>Poway, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoLuv.jpg" data-full-src="docs/assets/img/SanDiegoLuv.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiegoLuv.jpg"
+				data-full-src="docs/assets/img/SanDiegoLuv.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SanDiego.jpg" data-full-src="docs/assets/img/SanDiego.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanDiego.jpg"
+				data-full-src="docs/assets/img/SanDiego.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/Marin.jpg" data-full-src="docs/assets/img/Marin.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Marin.jpg" data-full-src="docs/assets/img/Marin.jpg">
+			</div>
 			<h6>Marin County, CA</h6>
 			<p>September 2025</p>
 		</div>
@@ -1040,174 +1312,201 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/ICSDRocket.jpg" data-full-src="docs/assets/img/ICSDRocket.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/ICSDRocket.jpg"
+				data-full-src="docs/assets/img/ICSDRocket.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/BVHills2.jpg" data-full-src="docs/assets/img/BVHills2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BVHills2.jpg"
+				data-full-src="docs/assets/img/BVHills2.jpg"></div>
 			<h6>Beverly Hills, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box urban land">
-			<div class="portfolio-item" data-src="docs/assets/img/BVHills.jpg" data-full-src="docs/assets/img/BVHills.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BVHills.jpg"
+				data-full-src="docs/assets/img/BVHills.jpg"></div>
 			<h6>Rodeo Drive · Beverly Hills, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/Brisbane.jpg" data-full-src="docs/assets/img/Brisbane.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Brisbane.jpg"
+				data-full-src="docs/assets/img/Brisbane.jpg"></div>
 			<h6>Brisbane, CA</h6>
 			<p>September 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SDLJ.jpg" data-full-src="docs/assets/img/SDLJ.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SDLJ.jpg" data-full-src="docs/assets/img/SDLJ.jpg">
+			</div>
 			<h6>San Diego, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SanJoseSky.jpg" data-full-src="docs/assets/img/SanJoseSky.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanJoseSky.jpg"
+				data-full-src="docs/assets/img/SanJoseSky.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/SDLanding.jpg" data-full-src="docs/assets/img/SDLanding.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SDLanding.jpg"
+				data-full-src="docs/assets/img/SDLanding.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="docs/assets/img/AlexVibes.jpg" data-full-src="docs/assets/img/AlexVibes.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/AlexVibes.jpg"
+				data-full-src="docs/assets/img/AlexVibes.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>August 2025</p>
-		</div> 
+		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/SanJose.jpg" data-full-src="docs/assets/img/SanJose.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/SanJose.jpg"
+				data-full-src="docs/assets/img/SanJose.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/mountainview.jpg" data-full-src="docs/assets/img/mountainview.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mountainview.jpg"
+				data-full-src="docs/assets/img/mountainview.jpg"></div>
 			<h6>Mountain View, CA</h6>
 			<p>August 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/OrangeCA.jpg" data-full-src="docs/assets/img/OrangeCA.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/OrangeCA.jpg"
+				data-full-src="docs/assets/img/OrangeCA.jpg"></div>
 			<h6>Orange, CA</h6>
 			<p>July 2025</p>
 		</div>
-		
+
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/CityoL.jpg" data-full-src="docs/assets/img/CityoL.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/CityoL.jpg"
+				data-full-src="docs/assets/img/CityoL.jpg"></div>
 			<h6>City of London, UK</h6>
 			<p>July 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/canarywharf.jpg" data-full-src="docs/assets/img/canarywharf.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/canarywharf.jpg"
+				data-full-src="docs/assets/img/canarywharf.jpg"></div>
 			<h6>Canary Wharf, London, UK</h6>
 			<p>July 2025</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/MarinaThree.jpg" data-full-src="docs/assets/img/MarinaThree.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/MarinaThree.jpg"
+				data-full-src="docs/assets/img/MarinaThree.jpg"></div>
 			<h6>Marina El Alamein, Egypt</h6>
 			<p>July 2025</p>
 		</div>
 
 
-		
+
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/AlRehab.jpg" data-full-src="docs/assets/img/AlRehab.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/AlRehab.jpg"
+				data-full-src="docs/assets/img/AlRehab.jpg"></div>
 			<h6>New Cairo, Egypt</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/BorgAlArab.jpg" data-full-src="docs/assets/img/BorgAlArab.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/BorgAlArab.jpg"
+				data-full-src="docs/assets/img/BorgAlArab.jpg"></div>
 			<h6>Borg Al Arab, Egypt</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<!-- 11/6/2025 update above -->
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/gPAlex.jpeg" data-full-src="docs/assets/img/gPAlex.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gPAlex.jpeg"
+				data-full-src="docs/assets/img/gPAlex.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/alexhone.jpeg" data-full-src="docs/assets/img/alexhone.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexhone.jpeg"
+				data-full-src="docs/assets/img/alexhone.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="docs/assets/img/meccaSunset.jpeg" data-full-src="docs/assets/img/meccaSunset.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaSunset.jpeg"
+				data-full-src="docs/assets/img/meccaSunset.jpeg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box islam land">
-			<div class="portfolio-item" data-src="docs/assets/img/borgSaa.jpeg" data-full-src="docs/assets/img/borgSaa.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/borgSaa.jpeg"
+				data-full-src="docs/assets/img/borgSaa.jpeg"></div>
 			<h6>Mecca Clock Tower · Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box islam nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/meccaUrb.jpeg" data-full-src="docs/assets/img/meccaUrb.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaUrb.jpeg"
+				data-full-src="docs/assets/img/meccaUrb.jpeg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
-		
+		</div>
+
 		<div class="portfolio-box islam land">
-			<div class="portfolio-item" data-src="docs/assets/img/meccaNew.jpeg" data-full-src="docs/assets/img/meccaNew.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/meccaNew.jpeg"
+				data-full-src="docs/assets/img/meccaNew.jpeg"></div>
 			<h6>Masjid al-Haram · Mecca, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 
-		
+
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/qubaNew.jpeg" data-full-src="docs/assets/img/qubaNew.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/qubaNew.jpeg"
+				data-full-src="docs/assets/img/qubaNew.jpeg"></div>
 			<h6>Masjid Quba · Medina, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/qubaa.jpeg" data-full-src="docs/assets/img/qubaa.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/qubaa.jpeg"
+				data-full-src="docs/assets/img/qubaa.jpeg"></div>
 			<h6>Masjid Quba · Medina, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/nabnew2.jpeg" data-full-src="docs/assets/img/nabnew2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew2.jpeg"
+				data-full-src="docs/assets/img/nabnew2.jpeg"></div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/nabnew3.jpeg" data-full-src="docs/assets/img/nabnew3.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew3.jpeg"
+				data-full-src="docs/assets/img/nabnew3.jpeg"></div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/nabnew.jpeg" data-full-src="docs/assets/img/nabnew.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabnew.jpeg"
+				data-full-src="docs/assets/img/nabnew.jpeg"></div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
 			<p>July 2025</p>
-		</div> 
+		</div>
 
-<!-- 
+		<!-- 
 		<div class="portfolio-box nature islam">
 			<div class="portfolio-item" data-src="docs/assets/img/nabawiMagh.jpeg" data-full-src="docs/assets/img/nabawiMagh.jpeg"></div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
@@ -1216,129 +1515,151 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/newAlexSunset.jpeg" data-full-src="docs/assets/img/newAlexSunset.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/newAlexSunset.jpeg"
+				data-full-src="docs/assets/img/newAlexSunset.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2025</p>
-		</div> 
+		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/junealex.jpeg" data-full-src="docs/assets/img/junealex.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/junealex.jpeg"
+				data-full-src="docs/assets/img/junealex.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/turkey1.jpg" data-full-src="docs/assets/img/turkey1.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/turkey1.jpg"
+				data-full-src="docs/assets/img/turkey1.jpg"></div>
 			<h6>Istanbul, Turkey</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/camosque2.jpeg" data-full-src="docs/assets/img/camosque2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/camosque2.jpeg"
+				data-full-src="docs/assets/img/camosque2.jpeg"></div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/camosque1.jpeg" data-full-src="docs/assets/img/camosque1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/camosque1.jpeg"
+				data-full-src="docs/assets/img/camosque1.jpeg"></div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/cam2.jpg" data-full-src="docs/assets/img/cam2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cam2.jpg" data-full-src="docs/assets/img/cam2.jpg">
+			</div>
 			<h6>Cambridge, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/underg.jpg" data-full-src="docs/assets/img/underg.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/underg.jpg"
+				data-full-src="docs/assets/img/underg.jpg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/londonout.jpg" data-full-src="docs/assets/img/londonout.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/londonout.jpg"
+				data-full-src="docs/assets/img/londonout.jpg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/london2.jpeg" data-full-src="docs/assets/img/london2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/london2.jpeg"
+				data-full-src="docs/assets/img/london2.jpeg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/london1.jpeg" data-full-src="docs/assets/img/london1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/london1.jpeg"
+				data-full-src="docs/assets/img/london1.jpeg"></div>
 			<h6>London, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/bl.jpeg" data-full-src="docs/assets/img/bl.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bl.jpeg" data-full-src="docs/assets/img/bl.jpeg">
+			</div>
 			<h6>Feltham, UK</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/miami6.jpg" data-full-src="docs/assets/img/miami6.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami6.jpg"
+				data-full-src="docs/assets/img/miami6.jpg"></div>
 			<h6>Miami Beach, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/miami5.jpg" data-full-src="docs/assets/img/miami5.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami5.jpg"
+				data-full-src="docs/assets/img/miami5.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/miami4.jpg" data-full-src="docs/assets/img/miami4.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami4.jpg"
+				data-full-src="docs/assets/img/miami4.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/miami3.jpg" data-full-src="docs/assets/img/miami3.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami3.jpg"
+				data-full-src="docs/assets/img/miami3.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/miami2.jpg" data-full-src="docs/assets/img/miami2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/miami2.jpg"
+				data-full-src="docs/assets/img/miami2.jpg"></div>
 			<h6>Miami, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful2.jpeg" data-full-src="docs/assets/img/mi_beautiful2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful2.jpeg"
+				data-full-src="docs/assets/img/mi_beautiful2.jpeg"></div>
 			<h6>Marco Island, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful.jpeg" data-full-src="docs/assets/img/mi_beautiful.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mi_beautiful.jpeg"
+				data-full-src="docs/assets/img/mi_beautiful.jpeg"></div>
 			<h6>Marco Island, FL</h6>
 			<p>June 2025</p>
 		</div>
 
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/sfmay.jpg" data-full-src="docs/assets/img/sfmay.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sfmay.jpg" data-full-src="docs/assets/img/sfmay.jpg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>May 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/palms.jpg" data-full-src="docs/assets/img/palms.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/palms.jpg" data-full-src="docs/assets/img/palms.jpg">
+			</div>
 			<h6>San Diego, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/LosBanos.jpg" data-full-src="docs/assets/img/LosBanos.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/LosBanos.jpg"
+				data-full-src="docs/assets/img/LosBanos.jpg"></div>
 			<h6>Los Banos, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/gilroy.jpg" data-full-src="docs/assets/img/gilroy.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gilroy.jpg"
+				data-full-src="docs/assets/img/gilroy.jpg"></div>
 			<h6>Gilroy, CA</h6>
 			<p>April 2025</p>
 		</div>
@@ -1346,75 +1667,87 @@
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/sanjoseapril.jpg" data-full-src="docs/assets/img/sanjoseapril.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sanjoseapril.jpg"
+				data-full-src="docs/assets/img/sanjoseapril.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/stanfrd.jpg" data-full-src="docs/assets/img/stanfrd.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/stanfrd.jpg"
+				data-full-src="docs/assets/img/stanfrd.jpg"></div>
 			<h6>Stanford University · Stanford, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/milpitas.jpg" data-full-src="docs/assets/img/milpitas.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/milpitas.jpg"
+				data-full-src="docs/assets/img/milpitas.jpg"></div>
 			<h6>San Jose, CA</h6>
 			<p>April 2025</p>
 		</div>
 
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" data-src="docs/assets/img/roshdy.jpg" data-full-src="docs/assets/img/roshdy.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/roshdy.jpg"
+				data-full-src="docs/assets/img/roshdy.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>January 2025</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/kuwaitmasjid.jpg" data-full-src="docs/assets/img/kuwaitmasjid.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/kuwaitmasjid.jpg"
+				data-full-src="docs/assets/img/kuwaitmasjid.jpg"></div>
 			<h6>Kuwait City, Kuwait</h6>
 			<p>December 2024</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/sharjah2.jpg" data-full-src="docs/assets/img/sharjah2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sharjah2.jpg"
+				data-full-src="docs/assets/img/sharjah2.jpg"></div>
 			<h6>Sharjah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/rak.jpg" data-full-src="docs/assets/img/rak.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/rak.jpg" data-full-src="docs/assets/img/rak.jpg">
+			</div>
 			<h6>Ras Al-Khaimah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/Ras-Al-Khaimah.jpg" data-full-src="docs/assets/img/Ras-Al-Khaimah.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Ras-Al-Khaimah.jpg"
+				data-full-src="docs/assets/img/Ras-Al-Khaimah.jpg"></div>
 			<h6>Ras Al-Khaimah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature ">
-			<div class="portfolio-item" data-src="docs/assets/img/sharjah.jpg" data-full-src="docs/assets/img/sharjah.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sharjah.jpg"
+				data-full-src="docs/assets/img/sharjah.jpg"></div>
 			<h6>Sharjah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/Fujairah.jpg" data-full-src="docs/assets/img/Fujairah.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/Fujairah.jpg"
+				data-full-src="docs/assets/img/Fujairah.jpg"></div>
 			<h6>Fujairah, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature islam">
-			<div class="portfolio-item" data-src="docs/assets/img/dubai2.jpg" data-full-src="docs/assets/img/dubai2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dubai2.jpg"
+				data-full-src="docs/assets/img/dubai2.jpg"></div>
 			<h6>Dubai, UAE</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/dibba%20alFujairah.jpg" data-full-src="docs/assets/img/dibba%20alFujairah.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dibba%20alFujairah.jpg"
+				data-full-src="docs/assets/img/dibba%20alFujairah.jpg"></div>
 			<h6>Dibba Al-Fujairah, UAE</h6>
 			<p>December 2024</p>
 		</div>
@@ -1425,23 +1758,27 @@
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/med2.jpg" data-full-src="docs/assets/img/med2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/med2.jpg" data-full-src="docs/assets/img/med2.jpg">
+			</div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/medinasky.jpg" data-full-src="docs/assets/img/medinasky.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/medinasky.jpg"
+				data-full-src="docs/assets/img/medinasky.jpg"></div>
 			<h6>Medina, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/nabawi.jpg" data-full-src="docs/assets/img/nabawi.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nabawi.jpg"
+				data-full-src="docs/assets/img/nabawi.jpg"></div>
 			<h6>Masjid al-Nabawi · Medina, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/quba.jpg" data-full-src="docs/assets/img/quba.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/quba.jpg" data-full-src="docs/assets/img/quba.jpg">
+			</div>
 			<h6>Masjid Quba · Medina, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
@@ -1449,524 +1786,610 @@
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/mecca3.jpg" data-full-src="docs/assets/img/mecca3.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mecca3.jpg"
+				data-full-src="docs/assets/img/mecca3.jpg"></div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/mecca.jpg" data-full-src="docs/assets/img/mecca.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mecca.jpg" data-full-src="docs/assets/img/mecca.jpg">
+			</div>
 			<h6>Mecca, Saudi Arabia</h6>
 			<p>December 2024</p>
 		</div>
 
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" data-src="docs/assets/img/decalex.jpg" data-full-src="docs/assets/img/decalex.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/decalex.jpg"
+				data-full-src="docs/assets/img/decalex.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" data-src="docs/assets/img/alexsky.jpg" data-full-src="docs/assets/img/alexsky.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexsky.jpg"
+				data-full-src="docs/assets/img/alexsky.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" data-src="docs/assets/img/alexblue.jpg" data-full-src="docs/assets/img/alexblue.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexblue.jpg"
+				data-full-src="docs/assets/img/alexblue.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 		<div class="portfolio-box nature egy">
-			<div class="portfolio-item" data-src="docs/assets/img/blueclouds.jpg" data-full-src="docs/assets/img/blueclouds.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/blueclouds.jpg"
+				data-full-src="docs/assets/img/blueclouds.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>December 2024</p>
 		</div>
 
 
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/cat.jpg" data-full-src="docs/assets/img/cat.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cat.jpg" data-full-src="docs/assets/img/cat.jpg">
+			</div>
 			<h6>Avalon, CA</h6>
 			<p>November 2024</p>
 		</div>
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/sdnov1124.jpg" data-full-src="docs/assets/img/sdnov1124.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sdnov1124.jpg"
+				data-full-src="docs/assets/img/sdnov1124.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>November 2024</p>
 		</div>
 
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/laham.jpeg" data-full-src="docs/assets/img/laham.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/laham.jpeg"
+				data-full-src="docs/assets/img/laham.jpeg"></div>
 			<h6>Los Angeles, CA</h6>
 			<p>November 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/33.jpeg" data-full-src="docs/assets/img/33.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/33.jpeg" data-full-src="docs/assets/img/33.jpeg">
+			</div>
 			<h6>Chicago, IL</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/chiAbove.jpeg" data-full-src="docs/assets/img/chiAbove.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chiAbove.jpeg"
+				data-full-src="docs/assets/img/chiAbove.jpeg"></div>
 			<h6>Chicago, IL</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/hicOct.jpeg" data-full-src="docs/assets/img/hicOct.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/hicOct.jpeg"
+				data-full-src="docs/assets/img/hicOct.jpeg"></div>
 			<h6>Chicago, IL</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy">
-			<div class="portfolio-item" data-src="docs/assets/img/rehab.jpeg" data-full-src="docs/assets/img/rehab.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/rehab.jpeg"
+				data-full-src="docs/assets/img/rehab.jpeg"></div>
 			<h6>New Cairo, Egypt</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy">
-			<div class="portfolio-item" data-src="docs/assets/img/alll.jpeg" data-full-src="docs/assets/img/alll.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alll.jpeg" data-full-src="docs/assets/img/alll.jpeg">
+			</div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" data-src="docs/assets/img/anton1.jpeg" data-full-src="docs/assets/img/anton1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/anton1.jpeg"
+				data-full-src="docs/assets/img/anton1.jpeg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" data-src="docs/assets/img/dd.jpeg" data-full-src="docs/assets/img/dd.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dd.jpeg" data-full-src="docs/assets/img/dd.jpeg">
+			</div>
 			<h6>Alexandria, Egypt</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy islam">
-			<div class="portfolio-item" data-src="docs/assets/img/newcap.jpeg" data-full-src="docs/assets/img/newcap.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/newcap.jpeg"
+				data-full-src="docs/assets/img/newcap.jpeg"></div>
 			<h6>New Administrative Capital, Egypt</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban land">
-			<div class="portfolio-item" data-src="docs/assets/img/bigben.jpeg" data-full-src="docs/assets/img/bigben.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bigben.jpeg"
+				data-full-src="docs/assets/img/bigben.jpeg"></div>
 			<h6>Big Ben · London, UK</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/lr2.jpeg" data-full-src="docs/assets/img/lr2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lr2.jpeg" data-full-src="docs/assets/img/lr2.jpeg">
+			</div>
 			<h6>London, UK</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/lon.jpeg" data-full-src="docs/assets/img/lon.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lon.jpeg" data-full-src="docs/assets/img/lon.jpeg">
+			</div>
 			<h6>London, UK</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/lt.jpeg" data-full-src="docs/assets/img/lt.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lt.jpeg" data-full-src="docs/assets/img/lt.jpeg">
+			</div>
 			<h6>London, UK</h6>
 			<p>October 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/wm.jpeg" data-full-src="docs/assets/img/wm.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/wm.jpeg" data-full-src="docs/assets/img/wm.jpeg">
+			</div>
 			<h6>Washington Monument · Washington, DC</h6>
 			<p>September 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/portlandd.jpeg" data-full-src="docs/assets/img/portlandd.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/portlandd.jpeg"
+				data-full-src="docs/assets/img/portlandd.jpeg"></div>
 			<h6>Portland, OR</h6>
 			<p>September 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/capitola.jpeg" data-full-src="docs/assets/img/capitola.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/capitola.jpeg"
+				data-full-src="docs/assets/img/capitola.jpeg"></div>
 			<h6>Capitola, CA</h6>
 			<p>September 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/sr.jpeg" data-full-src="docs/assets/img/sr.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sr.jpeg" data-full-src="docs/assets/img/sr.jpeg">
+			</div>
 			<h6>San Jose, CA</h6>
 			<p>September 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/mttam.jpeg" data-full-src="docs/assets/img/mttam.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mttam.jpeg"
+				data-full-src="docs/assets/img/mttam.jpeg"></div>
 			<h6>Mount Tamalpais, CA</h6>
 			<p>August 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/mttam2.jpeg" data-full-src="docs/assets/img/mttam2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/mttam2.jpeg"
+				data-full-src="docs/assets/img/mttam2.jpeg"></div>
 			<h6>Mount Tamalpais, CA</h6>
 			<p>August 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/sfff.jpeg" data-full-src="docs/assets/img/sfff.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sfff.jpeg" data-full-src="docs/assets/img/sfff.jpeg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>August 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" data-src="docs/assets/img/alamein.jpg" data-full-src="docs/assets/img/alamein.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alamein.jpg"
+				data-full-src="docs/assets/img/alamein.jpg"></div>
 			<h6>El Alamein, Egypt</h6>
 			<p>June 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/centralp.jpg" data-full-src="docs/assets/img/centralp.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/centralp.jpg"
+				data-full-src="docs/assets/img/centralp.jpg"></div>
 			<h6>Central Park · New York, NY</h6>
 			<p>July 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/cenparknature.jpg" data-full-src="docs/assets/img/cenparknature.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cenparknature.jpg"
+				data-full-src="docs/assets/img/cenparknature.jpg"></div>
 			<h6>Central Park · New York, NY</h6>
 			<p>July 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/austintree.jpg" data-full-src="docs/assets/img/austintree.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/austintree.jpg"
+				data-full-src="docs/assets/img/austintree.jpg"></div>
 			<h6>Austin, TX</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg">
+			</div>
 			<h6>Atlanta, GA</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/bos.jpg" data-full-src="docs/assets/img/bos.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bos.jpg" data-full-src="docs/assets/img/bos.jpg">
+			</div>
 			<h6>Boston, MA</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/cenpark.jpg" data-full-src="docs/assets/img/cenpark.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cenpark.jpg"
+				data-full-src="docs/assets/img/cenpark.jpg"></div>
 			<h6>Central Park · New York, NY</h6>
 			<p>July 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/bean.jpg" data-full-src="docs/assets/img/bean.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/bean.jpg" data-full-src="docs/assets/img/bean.jpg">
+			</div>
 			<h6>Cloud Gate · Chicago, IL</h6>
 			<p>May 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/nyccc.jpeg" data-full-src="docs/assets/img/nyccc.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/nyccc.jpeg"
+				data-full-src="docs/assets/img/nyccc.jpeg"></div>
 			<h6>New York, NY</h6>
 			<p>July 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/dumbo.jpeg" data-full-src="docs/assets/img/dumbo.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dumbo.jpeg"
+				data-full-src="docs/assets/img/dumbo.jpeg"></div>
 			<h6>DUMBO · Brooklyn, NY</h6>
 			<p>July 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/chitowwn.jpg" data-full-src="docs/assets/img/chitowwn.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chitowwn.jpg"
+				data-full-src="docs/assets/img/chitowwn.jpg"></div>
 			<h6>Chicago, IL</h6>
 			<p>May 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/empview.jpg" data-full-src="docs/assets/img/empview.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/empview.jpg"
+				data-full-src="docs/assets/img/empview.jpg"></div>
 			<h6>New York, NY</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/atl.jpg" data-full-src="docs/assets/img/atl.jpg">
+			</div>
 			<h6>Atlanta, GA</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box egy nature">
-			<div class="portfolio-item" data-src="docs/assets/img/alexpalm.jpg" data-full-src="docs/assets/img/alexpalm.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexpalm.jpg"
+				data-full-src="docs/assets/img/alexpalm.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2024</p>
 		</div>
 
 
 		<div class="portfolio-box egy islam">
-			<div class="portfolio-item" data-src="docs/assets/img/morsijul24.jpg" data-full-src="docs/assets/img/morsijul24.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/morsijul24.jpg"
+				data-full-src="docs/assets/img/morsijul24.jpg"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>July 2024</p>
 		</div>
 
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/lombard.jpg" data-full-src="docs/assets/img/lombard.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lombard.jpg"
+				data-full-src="docs/assets/img/lombard.jpg"></div>
 			<h6>Lombard, IL</h6>
 			<p>May 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/lombard2.jpg" data-full-src="docs/assets/img/lombard2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lombard2.jpg"
+				data-full-src="docs/assets/img/lombard2.jpg"></div>
 			<h6>Lombard, IL</h6>
 			<p>May 2024</p>
 		</div>
 
 		<div class="portfolio-box islam">
-			<div class="portfolio-item" data-src="docs/assets/img/may24.jpg" data-full-src="docs/assets/img/may24.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/may24.jpg" data-full-src="docs/assets/img/may24.jpg">
+			</div>
 			<h6>Los Angeles, CA</h6>
 			<p>May 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/seattle.jpg" data-full-src="docs/assets/img/seattle.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/seattle.jpg"
+				data-full-src="docs/assets/img/seattle.jpg"></div>
 			<h6>Seattle, WA</h6>
 			<p>July 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/redmond.jpg" data-full-src="docs/assets/img/redmond.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/redmond.jpg"
+				data-full-src="docs/assets/img/redmond.jpg"></div>
 			<h6>Redmond, WA</h6>
 			<p>July 2023</p>
 		</div>
 
 
 		<div class="portfolio-box nature islam">
-			<div class="portfolio-item" data-src="docs/assets/img/vanc2.jpg" data-full-src="docs/assets/img/vanc2.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/vanc2.jpg" data-full-src="docs/assets/img/vanc2.jpg">
+			</div>
 			<h6>Vancouver, BC</h6>
 			<p>July 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/tampa.jpeg" data-full-src="docs/assets/img/tampa.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/tampa.jpeg"
+				data-full-src="docs/assets/img/tampa.jpeg"></div>
 			<h6>Tampa, FL</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/balt1.jpeg" data-full-src="docs/assets/img/balt1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/balt1.jpeg"
+				data-full-src="docs/assets/img/balt1.jpeg"></div>
 			<h6>Baltimore, MD</h6>
 			<p>July 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/dc2.jpeg" data-full-src="docs/assets/img/dc2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dc2.jpeg" data-full-src="docs/assets/img/dc2.jpeg">
+			</div>
 			<h6>Washington Monument · Washington, DC</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/w1.jpeg" data-full-src="docs/assets/img/w1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/w1.jpeg" data-full-src="docs/assets/img/w1.jpeg">
+			</div>
 			<h6>Williamsburg, VA</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/ches1.jpeg" data-full-src="docs/assets/img/ches1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/ches1.jpeg"
+				data-full-src="docs/assets/img/ches1.jpeg"></div>
 			<h6>Chesapeake, VA</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/chicago1.jpeg" data-full-src="docs/assets/img/chicago1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/chicago1.jpeg"
+				data-full-src="docs/assets/img/chicago1.jpeg"></div>
 			<h6>Chicago, IL</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature urban land">
-			<div class="portfolio-item" data-src="docs/assets/img/needle.jpg" data-full-src="docs/assets/img/needle.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/needle.jpg"
+				data-full-src="docs/assets/img/needle.jpg"></div>
 			<h6>Space Needle · Seattle, WA</h6>
 			<p>July 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/port.jpeg" data-full-src="docs/assets/img/port.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/port.jpeg" data-full-src="docs/assets/img/port.jpeg">
+			</div>
 			<h6>Portland, OR</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/abq.jpg" data-full-src="docs/assets/img/abq.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/abq.jpg" data-full-src="docs/assets/img/abq.jpg">
+			</div>
 			<h6>Albuquerque, NM</h6>
 			<p>May 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/dal.jpeg" data-full-src="docs/assets/img/dal.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dal.jpeg" data-full-src="docs/assets/img/dal.jpeg">
+			</div>
 			<h6>Dallas, TX</h6>
 			<p>May 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box vfa">
-			<div class="portfolio-item" data-src="docs/assets/img/lv.jpeg" data-full-src="docs/assets/img/lv.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/lv.jpeg" data-full-src="docs/assets/img/lv.jpeg">
+			</div>
 			<h6>Las Vegas, NV</h6>
 			<p>January 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box urban nature">
-			<div class="portfolio-item" data-src="docs/assets/img/dc1.jpeg" data-full-src="docs/assets/img/dc1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/dc1.jpeg" data-full-src="docs/assets/img/dc1.jpeg">
+			</div>
 			<h6>Washington, DC</h6>
 			<p>June 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/port2.jpeg" data-full-src="docs/assets/img/port2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/port2.jpeg"
+				data-full-src="docs/assets/img/port2.jpeg"></div>
 			<h6>Portland, OR</h6>
 			<p>May 2023</p>
 		</div>
-		
+
 		<div class="portfolio-box nature urban">
-			<div class="portfolio-item" data-src="docs/assets/img/h3.jpeg" data-full-src="docs/assets/img/h3.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h3.jpeg" data-full-src="docs/assets/img/h3.jpeg">
+			</div>
 			<h6>Honolulu, HI</h6>
 			<p>September 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/h2.jpeg" data-full-src="docs/assets/img/h2.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h2.jpeg" data-full-src="docs/assets/img/h2.jpeg">
+			</div>
 			<h6>Honolulu, HI</h6>
 			<p>September 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box vfa egy">
-			<div class="portfolio-item" data-src="docs/assets/img/alexSunset.webp" data-full-src="docs/assets/img/alexSunset.webp"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/alexSunset.webp"
+				data-full-src="docs/assets/img/alexSunset.webp"></div>
 			<h6>Alexandria, Egypt</h6>
 			<p>June 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box">
-			<div class="portfolio-item" data-src="docs/assets/img/h1.jpeg" data-full-src="docs/assets/img/h1.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/h1.jpeg" data-full-src="docs/assets/img/h1.jpeg">
+			</div>
 			<h6>Waikiki, Honolulu, HI</h6>
 			<p>September 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/hsf.jpeg" data-full-src="docs/assets/img/hsf.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/hsf.jpeg" data-full-src="docs/assets/img/hsf.jpeg">
+			</div>
 			<h6>San Francisco, CA</h6>
 			<p>August 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/losangeles22.webp" data-full-src="docs/assets/img/losangeles22.webp"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/losangeles22.webp"
+				data-full-src="docs/assets/img/losangeles22.webp"></div>
 			<h6>Los Angeles, CA</h6>
 			<p>May 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box vfa">
-			<div class="portfolio-item" data-src="docs/assets/img/i22.jpeg" data-full-src="docs/assets/img/i22.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/i22.jpeg" data-full-src="docs/assets/img/i22.jpeg">
+			</div>
 			<h6>Istanbul, Turkey</h6>
 			<p>June 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box vfa egy urban">
-			<div class="portfolio-item" data-src="docs/assets/img/cairo22.webp" data-full-src="docs/assets/img/cairo22.webp"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/cairo22.webp"
+				data-full-src="docs/assets/img/cairo22.webp"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2022</p>
 		</div>
 
 		<div class="portfolio-box vfa egy islam">
-			<div class="portfolio-item" data-src="docs/assets/img/azharJuly22.jpg" data-full-src="docs/assets/img/azharJuly22.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/azharJuly22.jpg"
+				data-full-src="docs/assets/img/azharJuly22.jpg"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box vfa egy">
-			<div class="portfolio-item" data-src="docs/assets/img/gleemBay.webp" data-full-src="docs/assets/img/gleemBay.webp"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/gleemBay.webp"
+				data-full-src="docs/assets/img/gleemBay.webp"></div>
 			<h6>Gleem Bay, Alexandria, Egypt</h6>
 			<p>June 2022</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/sdsunrise.jpeg" data-full-src="docs/assets/img/sdsunrise.jpeg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/sdsunrise.jpeg"
+				data-full-src="docs/assets/img/sdsunrise.jpeg"></div>
 			<h6>San Diego, CA</h6>
 			<p>August 2021</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/malibuu.jpg" data-full-src="docs/assets/img/photography/malibuu.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/malibuu.jpg"
+				data-full-src="docs/assets/img/photography/malibuu.jpg"></div>
 			<h6>Malibu, Los Angeles, CA</h6>
 			<p>July 2020</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/sfurban.jpg" data-full-src="docs/assets/img/photography/sfurban.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/sfurban.jpg"
+				data-full-src="docs/assets/img/photography/sfurban.jpg"></div>
 			<h6>San Francisco, CA</h6>
 			<p>July 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/gliderport.jpg" data-full-src="docs/assets/img/photography/gliderport.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/gliderport.jpg"
+				data-full-src="docs/assets/img/photography/gliderport.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>April 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/sdurban.jpg" data-full-src="docs/assets/img/photography/sdurban.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/sdurban.jpg"
+				data-full-src="docs/assets/img/photography/sdurban.jpg"></div>
 			<h6>San Diego, CA</h6>
 			<p>February 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/txcapital.jpg" data-full-src="docs/assets/img/txcapital.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/txcapital.jpg"
+				data-full-src="docs/assets/img/txcapital.jpg"></div>
 			<h6>Texas State Capitol · Austin, TX</h6>
 			<p>January 2024</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/castatecapitol19.jpg" data-full-src="docs/assets/img/photography/castatecapitol19.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/castatecapitol19.jpg"
+				data-full-src="docs/assets/img/photography/castatecapitol19.jpg"></div>
 			<h6>California State Capitol · Sacramento, CA</h6>
 			<p>July 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box land egy">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/giza.jpg" data-full-src="docs/assets/img/photography/giza.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/giza.jpg"
+				data-full-src="docs/assets/img/photography/giza.jpg"></div>
 			<h6>Pyramids of Giza · Giza, Egypt</h6>
 			<p>July 2018</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/flower.jpg" data-full-src="docs/assets/img/photography/flower.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/flower.jpg"
+				data-full-src="docs/assets/img/photography/flower.jpg"></div>
 			<h6>Sunflower on Concrete</h6>
 			<p>February 2018</p>
 		</div>
-		
+
 		<div class="portfolio-box nature">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/palmsprings.jpg" data-full-src="docs/assets/img/photography/palmsprings.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/palmsprings.jpg"
+				data-full-src="docs/assets/img/photography/palmsprings.jpg"></div>
 			<h6>Palm Springs, CA</h6>
 			<p>August 2018</p>
 		</div>
-		
+
 		<div class="portfolio-box land">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/hollywood.jpg" data-full-src="docs/assets/img/photography/hollywood.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/hollywood.jpg"
+				data-full-src="docs/assets/img/photography/hollywood.jpg"></div>
 			<h6>Hollywood · Los Angeles, CA</h6>
 			<p>August 2018</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/phx.jpg" data-full-src="docs/assets/img/photography/phx.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/phx.jpg"
+				data-full-src="docs/assets/img/photography/phx.jpg"></div>
 			<h6>Phoenix, AZ</h6>
 			<p>December 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box urban">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/hollyurban.jpg" data-full-src="docs/assets/img/photography/hollyurban.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/hollyurban.jpg"
+				data-full-src="docs/assets/img/photography/hollyurban.jpg"></div>
 			<h6>Hollywood · Los Angeles, CA</h6>
 			<p>December 2019</p>
 		</div>
-		
+
 		<div class="portfolio-box architecture egy islam">
-			<div class="portfolio-item" data-src="docs/assets/img/photography/cairo.jpg" data-full-src="docs/assets/img/photography/cairo.jpg"></div>
+			<div class="portfolio-item" data-src="docs/assets/img/photography/cairo.jpg"
+				data-full-src="docs/assets/img/photography/cairo.jpg"></div>
 			<h6>Cairo, Egypt</h6>
 			<p>July 2018</p>
 		</div>
-		
+
 	</div>
 	<!-- Map Container (hidden; map code removed for performance) -->
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			document.querySelectorAll('.filter-btn').forEach(button => {
 				button.addEventListener('click', () => {
 					document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
@@ -1987,7 +2410,7 @@
 	<!-- Footer -->
 	<div class="footer">
 		<center style="color:#1B2D55;">Yusuf M. &copy; 2020 -
-			<script>document.write(new Date().getFullYear())</script> | 
+			<script>document.write(new Date().getFullYear())</script> |
 			<a href="https://ymorsi.com" class="hover-underline-animation">
 				<i class="fa-solid fa-home"></i>&nbsp;Home
 			</a>
@@ -1999,7 +2422,7 @@
 	</div>
 	<script>
 		// Lazy-load gallery: inject img only when item is near viewport (data-src items). Existing img items keep native lazy loading.
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			const imageObserver = new IntersectionObserver((entries, observer) => {
 				entries.forEach(entry => {
 					if (!entry.isIntersecting) return;
@@ -2012,9 +2435,9 @@
 						if (existingImg.complete && existingImg.naturalHeight) {
 							existingImg.classList.add('loaded');
 						} else {
-							existingImg.addEventListener('load', function() { this.classList.add('loaded'); });
+							existingImg.addEventListener('load', function () { this.classList.add('loaded'); });
 						}
-						item.addEventListener('click', function() {
+						item.addEventListener('click', function () {
 							const fullSrc = this.getAttribute('data-full-src');
 							if (fullSrc) showFullQualityImage(fullSrc);
 						});
@@ -2031,11 +2454,11 @@
 					img.loading = 'lazy';
 					img.className = 'thumbnail-img';
 					img.alt = item.parentElement.querySelector('h6')?.textContent || 'Photo';
-					img.addEventListener('load', function() { this.classList.add('loaded'); });
+					img.addEventListener('load', function () { this.classList.add('loaded'); });
 					item.appendChild(img);
 					if (img.complete && img.naturalHeight) img.classList.add('loaded');
 
-					item.addEventListener('click', function() {
+					item.addEventListener('click', function () {
 						const src = this.getAttribute('data-full-src');
 						if (src) showFullQualityImage(src);
 					});
@@ -2052,44 +2475,44 @@
 		const modalImg = document.getElementById('modalImage');
 		const modalClose = document.querySelector('.modal-close');
 		const modalLoading = document.querySelector('.modal-loading');
-		
+
 		function showFullQualityImage(imageSrc) {
 			modal.classList.add('active');
 			modalLoading.style.display = 'block';
 			modalImg.style.display = 'none';
-			
+
 			// Create new image to preload
 			const fullImg = new Image();
-			fullImg.onload = function() {
+			fullImg.onload = function () {
 				modalImg.src = imageSrc;
 				modalImg.style.display = 'block';
 				modalLoading.style.display = 'none';
 			};
-			fullImg.onerror = function() {
+			fullImg.onerror = function () {
 				modalLoading.textContent = 'Error loading image';
 			};
 			fullImg.src = imageSrc;
 		}
-		
+
 		// Close modal
-		modalClose.addEventListener('click', function() {
+		modalClose.addEventListener('click', function () {
 			modal.classList.remove('active');
 		});
-		
+
 		// Close modal on background click
-		modal.addEventListener('click', function(e) {
+		modal.addEventListener('click', function (e) {
 			if (e.target === modal) {
 				modal.classList.remove('active');
 			}
 		});
-		
+
 		// Close modal on Escape key
-		document.addEventListener('keydown', function(e) {
+		document.addEventListener('keydown', function (e) {
 			if (e.key === 'Escape' && modal.classList.contains('active')) {
 				modal.classList.remove('active');
 			}
 		});
-		
+
 		// Smooth scrolling for navigation links
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
@@ -2103,6 +2526,7 @@
 			});
 		});
 	</script>
-<script src="/new/js/site-analytics-loader.js"></script>
+	<script src="/new/js/site-analytics-loader.js"></script>
 </body>
+
 </html>
