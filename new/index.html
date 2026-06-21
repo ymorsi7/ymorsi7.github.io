@@ -37,7 +37,8 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="images/smiling.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="/new/css/github-star.css">
@@ -89,7 +90,12 @@
 			margin-right: auto;
 		}
 
-		h1, h2, h3, h4, h5, h6 {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
 			font-family: 'Poppins', sans-serif;
 			font-weight: 600;
 			color: var(--primary-dark);
@@ -364,7 +370,7 @@
 		.timeline-body {
 			text-align: center;
 		}
-		
+
 		.timeline-body p {
 			text-align: left;
 		}
@@ -398,6 +404,7 @@
 		.timeline-panel.work-exp-collapsible {
 			cursor: pointer;
 		}
+
 		.timeline-panel.work-exp-collapsible .work-exp-summary-line {
 			user-select: none;
 			text-align: center;
@@ -410,21 +417,26 @@
 			font-weight: 500;
 			font-size: 1.1rem;
 		}
+
 		.timeline-panel.work-exp-collapsible .work-exp-summary-line:hover {
 			background: #e2e8f0;
 		}
+
 		.timeline-panel.work-exp-collapsible .work-exp-summary-line .expand-icon {
 			display: inline-block;
 			margin-left: 6px;
 			transition: transform 0.25s ease;
 			opacity: 0.8;
 		}
+
 		.timeline-panel.work-exp-collapsible.expanded .work-exp-summary-line .expand-icon {
 			transform: rotate(180deg);
 		}
+
 		.timeline-panel.work-exp-collapsible .work-exp-details {
 			display: none;
 		}
+
 		.timeline-panel.work-exp-collapsible.expanded .work-exp-details {
 			display: block;
 			margin-top: 14px;
@@ -432,6 +444,7 @@
 			border-top: 1px solid rgba(0, 0, 0, 0.06);
 			font-size: 1.4rem;
 		}
+
 		.timeline-panel.work-exp-collapsible.expanded .work-exp-details p {
 			font-size: 1.4rem;
 			max-width: 52ch;
@@ -443,6 +456,7 @@
 		.timeline-panel.edu-coursework-collapsible {
 			cursor: pointer;
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-summary-line {
 			user-select: none;
 			text-align: center;
@@ -455,21 +469,26 @@
 			font-weight: 500;
 			font-size: 1.1rem;
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-summary-line:hover {
 			background: #e2e8f0;
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-summary-line .expand-icon {
 			display: inline-block;
 			margin-left: 6px;
 			transition: transform 0.25s ease;
 			opacity: 0.8;
 		}
+
 		.timeline-panel.edu-coursework-collapsible.expanded .coursework-summary-line .expand-icon {
 			transform: rotate(180deg);
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-details {
 			display: none;
 		}
+
 		.timeline-panel.edu-coursework-collapsible.expanded .coursework-details {
 			display: block;
 			margin-top: 14px;
@@ -478,13 +497,16 @@
 			font-size: 1.2rem;
 			text-align: left;
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-details li {
 			padding: 6px 0;
 			border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-details li:last-child {
 			border-bottom: none;
 		}
+
 		.timeline-panel.edu-coursework-collapsible .coursework-details ul {
 			list-style: none;
 			padding-left: 0;
@@ -615,7 +637,7 @@
 		}
 
 		#fh5co-work .fh5co-heading h2:after {
-			background: rgba(255,255,255,0.5);
+			background: rgba(255, 255, 255, 0.5);
 		}
 
 		.work {
@@ -797,7 +819,9 @@
 
 		/* Responsive tweaks */
 		@media screen and (max-width: 768px) {
-			html, body {
+
+			html,
+			body {
 				max-width: 100vw;
 			}
 
@@ -806,7 +830,8 @@
 				height: auto;
 			}
 
-			a, button {
+			a,
+			button {
 				-webkit-tap-highlight-color: rgba(71, 85, 105, 0.15);
 			}
 
@@ -844,6 +869,7 @@
 			.timeline-panel .timeline-heading {
 				margin-bottom: 8px !important;
 			}
+
 			.timeline-panel .company-logo {
 				width: 44px;
 				height: 44px;
@@ -852,26 +878,33 @@
 				box-shadow: none;
 				padding: 0;
 			}
+
 			.timeline-panel h3.timeline-title {
 				margin: 0 0 4px 0 !important;
 				font-size: 1rem;
 			}
+
 			.timeline-panel .timeline-title:after {
 				display: none;
 			}
+
 			.timeline-panel .institution-name {
 				display: none;
 			}
+
 			.timeline-panel .company,
 			.timeline-panel .role-meta {
 				margin-top: 4px;
 			}
+
 			.timeline-panel .role-when {
 				font-size: 1.06rem;
 			}
+
 			.timeline-panel .role-where {
 				font-size: 1rem;
 			}
+
 			.timeline-panel.work-exp-collapsible .work-exp-summary-line,
 			.timeline-panel.edu-coursework-collapsible .coursework-summary-line {
 				margin-top: 6px;
@@ -879,16 +912,17 @@
 				padding: 8px 10px;
 				font-size: 0.95rem;
 			}
+
 			.timeline-panel.work-exp-collapsible.expanded .work-exp-details {
 				margin-top: 10px;
 				padding-top: 10px;
 			}
 
-			.timeline > li {
+			.timeline>li {
 				margin-bottom: 12px !important;
 			}
 
-			.timeline > li > .timeline-panel {
+			.timeline>li>.timeline-panel {
 				width: 100% !important;
 				float: none !important;
 			}
@@ -1045,6 +1079,7 @@
 				top: 10px;
 				right: 10px;
 			}
+
 			.award-article-link i {
 				font-size: 1.1rem;
 			}
@@ -1092,7 +1127,7 @@
 				height: 240px;
 			}
 
-			.timeline > li {
+			.timeline>li {
 				margin-bottom: 1.5em;
 			}
 		}
@@ -1126,7 +1161,7 @@
 		.institution-name:hover {
 			background: #e2e8f0;
 		}
-		
+
 		/* Enhanced project cards - OPTIMIZED for performance */
 		.work {
 			transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
@@ -1135,18 +1170,18 @@
 			position: relative;
 			will-change: transform;
 		}
-		
+
 		.work:hover {
 			transform: translateY(-8px);
 			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 		}
-		
+
 		.work .desc {
 			transition: background-color 0.2s ease-out, border-top-color 0.2s ease-out;
 			background: rgba(13, 17, 23, 0.9);
 			border-top: 3px solid var(--primary-color);
 		}
-		
+
 		.work:hover .desc {
 			background: rgba(13, 17, 23, 0.95);
 			border-top-color: var(--accent);
@@ -1177,9 +1212,10 @@
 			letter-spacing: 1px;
 			border-radius: 20px;
 			border: 2px solid #e6b800;
-			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 			z-index: 2;
 		}
+
 		@media (max-width: 768px) {
 			.diagonal-ribbon {
 				top: 8px;
@@ -1212,6 +1248,7 @@
 			0% {
 				transform: scale(1);
 			}
+
 			100% {
 				transform: scale(1.02);
 			}
@@ -1252,7 +1289,7 @@
 			.col-md-4 {
 				width: 100%;
 			}
-			
+
 			.project-banner {
 				top: 10px;
 				right: 10px;
@@ -1260,7 +1297,7 @@
 				font-size: 11px;
 			}
 		}
-		
+
 		/* Social icons enhanced */
 		.fh5co-social-icons li a {
 			transition: all 0.3s ease;
@@ -1294,7 +1331,7 @@
 			right: 20px;
 			z-index: 9999;
 		}
-		
+
 		.lang-switch-btn {
 			background-color: var(--primary-color);
 			color: white;
@@ -1318,19 +1355,19 @@
 			box-shadow: var(--shadow-md);
 			background-color: var(--secondary-color);
 		}
-		
+
 		.lang-switch-btn:focus {
 			outline: none;
 		}
-		
+
 		.lang-switch-btn:active {
 			transform: translateY(0);
 		}
-		
+
 		.lang-switch-btn i {
 			margin-right: 8px;
 		}
-		
+
 		.lang-label {
 			font-weight: 600;
 			font-size: 14px;
@@ -1351,9 +1388,9 @@
 		.timeline-heading {
 			margin-bottom: 12px !important;
 		}
-		
+
 		/* Remove extra space before Education section */
-		.timeline-heading + br {
+		.timeline-heading+br {
 			display: none;
 		}
 
@@ -1620,6 +1657,7 @@
 		.award-card {
 			position: relative;
 		}
+
 		.award-article-link {
 			position: absolute;
 			top: 12px;
@@ -1636,15 +1674,18 @@
 			text-decoration: none;
 			transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 		}
+
 		.award-article-link:hover {
 			background: var(--primary-color);
 			color: white;
 			transform: scale(1.08);
 		}
+
 		.award-article-link:focus-visible {
 			outline: 2px solid var(--primary-color);
 			outline-offset: 2px;
 		}
+
 		.award-article-link i {
 			font-size: 1rem;
 		}
@@ -1668,13 +1709,15 @@
 		}
 
 		.award-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* <-- change this from cover to contain */
-    border-radius: 50%;
-    display: block;
-    background: white;     /* optional: keeps the circle white if logo is transparent */
-}
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			/* <-- change this from cover to contain */
+			border-radius: 50%;
+			display: block;
+			background: white;
+			/* optional: keeps the circle white if logo is transparent */
+		}
 
 		.award-card h3 {
 			font-size: 16px;
@@ -1770,7 +1813,7 @@
 			.award-filters {
 				gap: 10px;
 			}
-			
+
 			.filter-btn {
 				padding: 8px 16px;
 				font-size: 13px;
@@ -1789,12 +1832,14 @@
 			width: 100%;
 			float: right;
 		}
+
 		.micro-mba-logo {
 			width: 32px;
 			height: 32px;
 			margin-bottom: 0;
 			margin-top: 0;
 		}
+
 		.micro-mba-title {
 			font-size: 0.95rem;
 			font-weight: 600;
@@ -1803,6 +1848,7 @@
 			margin-top: 4px;
 			margin-bottom: 4px;
 		}
+
 		.micro-mba-inst {
 			font-size: 0.95rem;
 			color: #4b6a88;
@@ -1810,7 +1856,7 @@
 
 		.timeline-inverted .micro-mba-panel {
 			position: relative;
-			left: -210px; 
+			left: -210px;
 		}
 
 		@media screen and (max-width: 768px) {
@@ -1822,7 +1868,8 @@
 			}
 		}
 
-		.timeline-body.micro-mba-body, .micro-mba-panel .timeline-body {
+		.timeline-body.micro-mba-body,
+		.micro-mba-panel .timeline-body {
 			padding: 0 0 2px 0;
 			margin: 0;
 			font-size: 0.98rem;
@@ -1830,214 +1877,240 @@
 
 		/* Flip Card Effect for Awards */
 		.flip-card {
-		  background: none;
-		  perspective: 1200px;
-		  min-height: 280px;
-		  height: 100%;
+			background: none;
+			perspective: 1200px;
+			min-height: 280px;
+			height: 100%;
 		}
+
 		.flip-card-inner {
-		  position: relative;
-		  width: 100%;
-		  height: 100%;
-		  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-		  transform-style: preserve-3d;
+			position: relative;
+			width: 100%;
+			height: 100%;
+			transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+			transform-style: preserve-3d;
 		}
-		.flip-card:hover .flip-card-inner, .flip-card:focus-within .flip-card-inner {
-		  transform: rotateY(180deg);
+
+		.flip-card:hover .flip-card-inner,
+		.flip-card:focus-within .flip-card-inner {
+			transform: rotateY(180deg);
 		}
-		.flip-card-front, .flip-card-back {
-		  position: absolute;
-		  width: 100%;
-		  height: 100%;
-		  top: 0;
-		  left: 0;
-		  backface-visibility: hidden;
-		  background: white;
-		  border-radius: 12px;
-		  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-		  padding: 25px 20px;
-		  display: flex;
-		  flex-direction: column;
-		  justify-content: space-between;
-		  align-items: center;
-		}
+
+		.flip-card-front,
 		.flip-card-back {
-		  transform: rotateY(180deg);
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			backface-visibility: hidden;
+			background: white;
+			border-radius: 12px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+			padding: 25px 20px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
 		}
+
+		.flip-card-back {
+			transform: rotateY(180deg);
+		}
+
 		.flip-card-front {
-		  z-index: 2;
+			z-index: 2;
 		}
+
 		.flip-card .award-logo {
-		  width: 60px;
-		  height: 60px;
-		  margin: 0 auto 15px auto;
-		  display: flex;
-		  align-items: center;
-		  justify-content: center;
-		  border-radius: 50%;
-		  /* Remove background and padding for flip cards */
-		  background: transparent;
-		  padding: 0;
-		  box-shadow: none;
-		  transition: all 0.3s ease;
+			width: 60px;
+			height: 60px;
+			margin: 0 auto 15px auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			/* Remove background and padding for flip cards */
+			background: transparent;
+			padding: 0;
+			box-shadow: none;
+			transition: all 0.3s ease;
 		}
-		.flip-card h3, .flip-card .award-org, .flip-card .award-date, .flip-card .award-desc {
-		  margin: 0 0 8px 0;
-		  text-align: center;
+
+		.flip-card h3,
+		.flip-card .award-org,
+		.flip-card .award-date,
+		.flip-card .award-desc {
+			margin: 0 0 8px 0;
+			text-align: center;
 		}
+
 		@media (max-width: 768px) {
-		  .flip-card, .flip-card-inner, .flip-card-front, .flip-card-back {
-			min-height: 220px;
-			padding: 15px 8px;
-		  }
+
+			.flip-card,
+			.flip-card-inner,
+			.flip-card-front,
+			.flip-card-back {
+				min-height: 220px;
+				padding: 15px 8px;
+			}
 		}
 
 		.fishtail-banner {
-		  position: absolute;
-		  top: 18px;
-		  right: 18px;
-		  background: #FFC94D;
-		  color: #2d2d2d;
-		  font-size: 13px;
-		  font-weight: 800;
-		  text-transform: uppercase;
-		  letter-spacing: 1px;
-		  padding: 8px 32px 8px 18px;
-		  border-radius: 16px 0 0 16px;
-		  border: 2px solid #e6b800;
-		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-		  z-index: 2;
-		  display: inline-block;
-		  overflow: visible;
+			position: absolute;
+			top: 18px;
+			right: 18px;
+			background: #FFC94D;
+			color: #2d2d2d;
+			font-size: 13px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			padding: 8px 32px 8px 18px;
+			border-radius: 16px 0 0 16px;
+			border: 2px solid #e6b800;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			z-index: 2;
+			display: inline-block;
+			overflow: visible;
 		}
+
 		.fishtail-banner::after {
-		  content: "";
-		  position: absolute;
-		  top: 0;
-		  right: -22px;
-		  width: 0;
-		  height: 0;
-		  border-top: 22px solid transparent;
-		  border-bottom: 22px solid transparent;
-		  border-left: 22px solid #FFC94D;
-		  z-index: 1;
+			content: "";
+			position: absolute;
+			top: 0;
+			right: -22px;
+			width: 0;
+			height: 0;
+			border-top: 22px solid transparent;
+			border-bottom: 22px solid transparent;
+			border-left: 22px solid #FFC94D;
+			z-index: 1;
 		}
+
 		@media (max-width: 768px) {
-		  .fishtail-banner {
-			top: 8px;
-			right: 8px;
-			font-size: 10px;
-			padding: 5px 18px 5px 10px;
-			border-radius: 12px 0 0 12px;
-		  }
-		  .fishtail-banner::after {
-			border-top: 14px solid transparent;
-			border-bottom: 14px solid transparent;
-			border-left: 14px solid #FFC94D;
-			right: -14px;
-		  }
+			.fishtail-banner {
+				top: 8px;
+				right: 8px;
+				font-size: 10px;
+				padding: 5px 18px 5px 10px;
+				border-radius: 12px 0 0 12px;
+			}
+
+			.fishtail-banner::after {
+				border-top: 14px solid transparent;
+				border-bottom: 14px solid transparent;
+				border-left: 14px solid #FFC94D;
+				right: -14px;
+			}
 		}
 
 		.vertical-fishtail-banner {
-		  position: absolute;
-		  top: 0;
-		  right: 32px;
-		  width: 38px;
-		  height: 110px;
-		  background: #FFC94D;
-		  color: #2d2d2d;
-		  font-size: 12px;
-		  font-weight: 800;
-		  text-transform: uppercase;
-		  letter-spacing: 1px;
-		  border-radius: 12px 12px 0 0;
-		  border: 2px solid #e6b800;
-		  border-bottom: none;
-		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-		  z-index: 2;
-		  display: flex;
-		  align-items: flex-start;
-		  justify-content: center;
-		  writing-mode: vertical-rl;
-		  text-orientation: mixed;
-		  padding-top: 12px;
-		  text-align: center;
-		  overflow: visible;
+			position: absolute;
+			top: 0;
+			right: 32px;
+			width: 38px;
+			height: 110px;
+			background: #FFC94D;
+			color: #2d2d2d;
+			font-size: 12px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			border-radius: 12px 12px 0 0;
+			border: 2px solid #e6b800;
+			border-bottom: none;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			z-index: 2;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			writing-mode: vertical-rl;
+			text-orientation: mixed;
+			padding-top: 12px;
+			text-align: center;
+			overflow: visible;
 		}
+
 		.vertical-fishtail-banner::after {
-		  content: "";
-		  position: absolute;
-		  bottom: -18px;
-		  left: 0;
-		  width: 0;
-		  height: 0;
-		  border-left: 19px solid transparent;
-		  border-right: 19px solid transparent;
-		  border-top: 18px solid #FFC94D;
+			content: "";
+			position: absolute;
+			bottom: -18px;
+			left: 0;
+			width: 0;
+			height: 0;
+			border-left: 19px solid transparent;
+			border-right: 19px solid transparent;
+			border-top: 18px solid #FFC94D;
 		}
+
 		@media (max-width: 768px) {
-		  .vertical-fishtail-banner {
-			right: 12px;
-			width: 28px;
-			height: 70px;
-			font-size: 9px;
-			border-radius: 8px 8px 0 0;
-			padding-top: 7px;
-		  }
-		  .vertical-fishtail-banner::after {
-			bottom: -12px;
-			border-left: 14px solid transparent;
-			border-right: 14px solid transparent;
-			border-top: 12px solid #FFC94D;
-		  }
+			.vertical-fishtail-banner {
+				right: 12px;
+				width: 28px;
+				height: 70px;
+				font-size: 9px;
+				border-radius: 8px 8px 0 0;
+				padding-top: 7px;
+			}
+
+			.vertical-fishtail-banner::after {
+				bottom: -12px;
+				border-left: 14px solid transparent;
+				border-right: 14px solid transparent;
+				border-top: 12px solid #FFC94D;
+			}
 		}
 
 		.horizontal-fishtail-banner {
-		  position: absolute;
-		  top: 18px;
-		  right: 18px;
-		  background: #FFC94D;
-		  color: #2d2d2d;
-		  font-size: 14px;
-		  font-weight: 800;
-		  text-transform: uppercase;
-		  letter-spacing: 1px;
-		  padding: 6px 28px 6px 18px;
-		  border-radius: 16px 0 0 16px;
-		  border: 2px solid #e6b800;
-		  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-		  z-index: 2;
-		  display: inline-block;
-		  height: 32px;
-		  line-height: 20px;
-		  overflow: visible;
+			position: absolute;
+			top: 18px;
+			right: 18px;
+			background: #FFC94D;
+			color: #2d2d2d;
+			font-size: 14px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			padding: 6px 28px 6px 18px;
+			border-radius: 16px 0 0 16px;
+			border: 2px solid #e6b800;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			z-index: 2;
+			display: inline-block;
+			height: 32px;
+			line-height: 20px;
+			overflow: visible;
 		}
+
 		.horizontal-fishtail-banner::after {
-		  content: "";
-		  position: absolute;
-		  top: 0;
-		  right: -18px;
-		  width: 0;
-		  height: 0;
-		  border-top: 16px solid transparent;
-		  border-bottom: 16px solid transparent;
-		  border-left: 18px solid #FFC94D;
+			content: "";
+			position: absolute;
+			top: 0;
+			right: -18px;
+			width: 0;
+			height: 0;
+			border-top: 16px solid transparent;
+			border-bottom: 16px solid transparent;
+			border-left: 18px solid #FFC94D;
 		}
+
 		@media (max-width: 768px) {
-		  .horizontal-fishtail-banner {
-			top: 8px;
-			right: 8px;
-			font-size: 10px;
-			padding: 4px 14px 4px 8px;
-			border-radius: 10px 0 0 10px;
-			height: 22px;
-		  }
-		  .horizontal-fishtail-banner::after {
-			border-top: 11px solid transparent;
-			border-bottom: 11px solid transparent;
-			border-left: 11px solid #FFC94D;
-			right: -11px;
-		  }
+			.horizontal-fishtail-banner {
+				top: 8px;
+				right: 8px;
+				font-size: 10px;
+				padding: 4px 14px 4px 8px;
+				border-radius: 10px 0 0 10px;
+				height: 22px;
+			}
+
+			.horizontal-fishtail-banner::after {
+				border-top: 11px solid transparent;
+				border-bottom: 11px solid transparent;
+				border-left: 11px solid #FFC94D;
+				right: -11px;
+			}
 		}
 
 		/* Collapsible portfolio sections — title toggles content */
@@ -2099,7 +2172,7 @@
 			min-height: 108px;
 		}
 
-		.portfolio-collapsible.portfolio-collapsed > .container {
+		.portfolio-collapsible.portfolio-collapsed>.container {
 			display: contents;
 		}
 
@@ -2131,11 +2204,12 @@
 			opacity: 1 !important;
 		}
 
-		.portfolio-section-body > .row:first-child .animate-box {
+		.portfolio-section-body>.row:first-child .animate-box {
 			opacity: 1 !important;
 		}
 
 		@media screen and (max-width: 768px) {
+
 			#fh5co-work.portfolio-collapsible.portfolio-collapsed,
 			#fh5co-awards.portfolio-collapsible.portfolio-collapsed,
 			#fh5co-recommendations.portfolio-collapsible.portfolio-collapsed,
@@ -2144,22 +2218,21 @@
 				padding: 1em 1rem;
 			}
 		}
-
 	</style>
 
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
-		
+
 		.arabic-font {
 			font-family: 'Cairo', 'Poppins', sans-serif !important;
 		}
-		
-		.arabic-font h1, 
-		.arabic-font h2, 
-		.arabic-font h3, 
-		.arabic-font h4, 
-		.arabic-font h5, 
+
+		.arabic-font h1,
+		.arabic-font h2,
+		.arabic-font h3,
+		.arabic-font h4,
+		.arabic-font h5,
 		.arabic-font h6,
 		.arabic-font p,
 		.arabic-font span,
@@ -2168,41 +2241,41 @@
 		.arabic-font li {
 			font-family: 'Cairo', 'Poppins', sans-serif !important;
 		}
-		
+
 		.rtl {
 			direction: rtl !important;
 			text-align: right;
 		}
-		
+
 		.rtl .timeline:before {
 			right: 50%;
 			left: auto;
 			margin-right: -2px;
 			margin-left: 0;
 		}
-		
+
 		.rtl .timeline-badge {
 			right: 50%;
 			left: auto;
 			margin-right: -25px;
 			margin-left: 0;
 		}
-		
+
 		.rtl .timeline-title:after {
 			right: 0;
 			left: 0;
 		}
-		
+
 		.rtl .fh5co-social-icons {
 			padding-right: 0;
 		}
-		
+
 		.rtl .timeline-body p {
 			text-align: right;
 		}
 	</style>
 	<script src="js/translator.js"></script>
-<script src="/new/js/site-analytics-loader.js"></script>
+	<script src="/new/js/site-analytics-loader.js"></script>
 </head>
 
 <body>
@@ -2218,7 +2291,7 @@
 			style="background-image:url(images/blueclouds.jpg) " data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div id="particles-js"></div>
-			
+
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center">
@@ -2228,9 +2301,14 @@
 								<!-- <div class="profile-thumb" style="background: url(images/animation.png);"></div> -->
 								<div class="profile-thumb" style="background: url(images/chicago.jpg);"></div>
 								<h1><span>Yusuf Morsi</span></h1>
-								<h3 style='font-size: 20px; font-weight: 500; margin-bottom: 15px;'><span>ML &commat; Cisco | ECE BS/MS @</span> <span>UC San Diego</span></h3>
-								<h3 style='font-size: 17px; opacity: 0.95;'><span>Prev @ FICO, Southwest Airlines, USC</span></h3>
-								<h3 style='font-size: 14px; opacity: 0.65;padding-top: 8px;'><span id="hackathon-winner-link" style="cursor:pointer; text-decoration:bold; color:white">8x Hackathon Winner</span></h3>
+								<h3 style='font-size: 20px; font-weight: 500; margin-bottom: 15px;'><span>ML &commat;
+										Cisco | ECE BS/MS @</span> <span>UC San Diego</span></h3>
+								<h3 style='font-size: 17px; opacity: 0.95;'><span>Prev @ FICO, Southwest Airlines,
+										USC</span></h3>
+								<h3 style='font-size: 14px; opacity: 0.65;padding-top: 8px;'><span
+										id="hackathon-winner-link"
+										style="cursor:pointer; text-decoration:bold; color:white">8x Hackathon
+										Winner</span></h3>
 								<p>
 								<ul class="fh5co-social-icons">
 									<li><a href="https://www.linkedin.com/in/yusufmorsi/" target="_blank"><i
@@ -2268,33 +2346,51 @@
 
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2024-08-01" data-role-end="present">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2024-08-01" data-role-end="present">
 									<div class="timeline-heading">
-										<img src="images/cisco_logo.jpg" alt="Cisco Logo" class="company-logo" loading="lazy">
+										<img src="images/cisco_logo.jpg" alt="Cisco Logo" class="company-logo"
+											loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer II</h3>
 											<span class="institution-name">Cisco</span>
 											<div class="role-meta">
-												<span class="role-when">Aug 2024 – Present<span class="role-duration"></span></span>
+												<span class="role-when">Aug 2024 – Present<span
+														class="role-duration"></span></span>
 												<span class="role-where">San Jose, CA</span>
 											</div>
 										</div>
 									</div>
-									<div class="work-exp-summary-line">ML pipelines / RAGs @ supply chain <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="work-exp-summary-line">ML pipelines / RAGs @ supply chain <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="timeline-body work-exp-details">
-										<p>Owned and led the link analysis automation project end-to-end, cutting a manual two-day data processing pipeline down to a few hours, with results surfaced across heatmaps, pinmaps, a RAG chatbot, and more, all built from scratch and deployed as an internal dashboard at link-analysis.cisco.com.</p>
-									
+										<p>Owned and led the link analysis automation project end-to-end, cutting a
+											manual two-day data processing pipeline down to a few hours, with results
+											surfaced across heatmaps, pinmaps, a RAG chatbot, and more, all built from
+											scratch and deployed as an internal dashboard at link-analysis.cisco.com.
+										</p>
+
 										<br>
-									
-										<p>Built and deployed debug-genie.cisco.com, a Snowflake + Streamlit platform that became the single source of truth for AI repair accuracy across global manufacturing partners (Flex, Foxconn, Fabrinet), tracking defect location prediction, component match, and technician feedback across tens of thousands of production units. Replaced weeks of ad-hoc SQL exports and cross-partner reconciliation meetings. Drove measurable manufacturing outcomes: fewer scrapped boards, fewer repair iterations, and reduced dependency on high-skill debug technicians, saving millions annually.</p>
-									
+
+										<p>Built and deployed debug-genie.cisco.com, a Snowflake + Streamlit platform
+											that became the single source of truth for AI repair accuracy across global
+											manufacturing partners (Flex, Foxconn, Fabrinet), tracking defect location
+											prediction, component match, and technician feedback across tens of
+											thousands of production units. Replaced weeks of ad-hoc SQL exports and
+											cross-partner reconciliation meetings. Drove measurable manufacturing
+											outcomes: fewer scrapped boards, fewer repair iterations, and reduced
+											dependency on high-skill debug technicians, saving millions annually.</p>
+
 										<br>
-									
-										<p>Built optimal RAG systems with attribute filtering from scratch for device log diagnosis.</p>
-									
+
+										<p>Built optimal RAG systems with attribute filtering from scratch for device
+											log diagnosis.</p>
+
 										<br>
-									
-										<p>Developed a multivariate anomaly detection process analyzing thermal telemetry across tens of thousands of production network devices to diagnose future corrosion beforehand purely from data.</p>
+
+										<p>Developed a multivariate anomaly detection process analyzing thermal
+											telemetry across tens of thousands of production network devices to diagnose
+											future corrosion beforehand purely from data.</p>
 									</div>
 								</div>
 							</li>
@@ -2327,23 +2423,31 @@
 
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2024-04-01" data-role-end="2024-08-31">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2024-04-01" data-role-end="2024-08-31">
 									<div class="timeline-heading">
 										<img src="images/fico.png" alt="FICO Logo" class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Data Science Intern</h3>
 											<span class="institution-name">FICO</span>
 											<div class="role-meta">
-												<span class="role-when">Apr 2024 – Aug 2024<span class="role-duration"></span></span>
+												<span class="role-when">Apr 2024 – Aug 2024<span
+														class="role-duration"></span></span>
 												<span class="role-where">San Diego, CA</span>
 											</div>
 										</div>
 									</div>
-									<div class="work-exp-summary-line">fraud detection @ ai analytics team <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="work-exp-summary-line">fraud detection @ ai analytics team <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="timeline-body work-exp-details">
 										<p>
-											Benchmarked six anomaly detection models (including CADE, Isolation Forest, and autoencoders) on fraud transaction data from major banks across the US, UK, Canada, India, and Brazil.</p>
-											<br><p>Engineered rolling temporal features that improved AUC and precision during distribution shift periods. Presented findings directly to the Chief Analytics Officer.</p>
+											Benchmarked six anomaly detection models (including CADE, Isolation Forest,
+											and autoencoders) on fraud transaction data from major banks across the US,
+											UK, Canada, India, and Brazil.</p>
+										<br>
+										<p>Engineered rolling temporal features that improved AUC and precision during
+											distribution shift periods. Presented findings directly to the Chief
+											Analytics Officer.</p>
 									</div>
 								</div>
 							</li>
@@ -2367,9 +2471,11 @@
 							</li> -->
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2023-06-01" data-role-end="2023-09-30">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2023-06-01" data-role-end="2023-09-30">
 									<div class="timeline-heading">
-										<img src="images/southwest.jpeg" alt="Southwest Airlines Logo" class="company-logo" loading="lazy">
+										<img src="images/southwest.jpeg" alt="Southwest Airlines Logo"
+											class="company-logo" loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
 											<span class="institution-name">Southwest Airlines</span>
@@ -2379,31 +2485,41 @@
 											</div>
 										</div>
 									</div>
-									<div class="work-exp-summary-line">infra tooling @ network automation team <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="work-exp-summary-line">infra tooling @ network automation team <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="timeline-body work-exp-details">
-										<p>Built full-stack tooling with React and Node.js to automate GTM workflows in Ansible Tower</p>
+										<p>Built full-stack tooling with React and Node.js to automate GTM workflows in
+											Ansible Tower</p>
 										<br>
-										<p>Contributed to an intern-led discounting system projected to save $24M per year by replacing third-party vendor fees for gift cards with an in-house solution & presented directly to the CIO.</p>
+										<p>Contributed to an intern-led discounting system projected to save $24M per
+											year by replacing third-party vendor fees for gift cards with an in-house
+											solution & presented directly to the CIO.</p>
 									</div>
 								</div>
 							</li>
 							<li class="timeline-inverted animate-box reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-								<div class="timeline-panel work-exp-collapsible" data-work-exp data-role-start="2022-06-01" data-role-end="2023-05-31">
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2022-06-01" data-role-end="2023-05-31">
 									<div class="timeline-heading">
-										<img src="images/carsxe.png" alt="CarsXE Logo" class="company-logo" loading="lazy">
+										<img src="images/carsxe.png" alt="CarsXE Logo" class="company-logo"
+											loading="lazy">
 										<div class="timeline-title-wrapper">
 											<h3 class="timeline-title">Software Engineer Intern</h3>
 											<span class="institution-name">CarsXE</span>
 											<div class="role-meta">
-												<span class="role-when">2022 – 2023<span class="role-duration"></span></span>
+												<span class="role-when">2022 – 2023<span
+														class="role-duration"></span></span>
 												<span class="role-where">Highland, MD</span>
 											</div>
 										</div>
 									</div>
-									<div class="work-exp-summary-line">license plate CV & full-stack <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="work-exp-summary-line">license plate CV & full-stack <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="timeline-body work-exp-details">
-										<p>Led development of a license plate recognition pipeline using YOLOv4, TensorFlow, and OCR. Built and published a pip package for the company's API alongside full-stack work in Vue, Nuxt, and Next.js.</p>
+										<p>Led development of a license plate recognition pipeline using YOLOv4,
+											TensorFlow, and OCR. Built and published a pip package for the company's API
+											alongside full-stack work in Vue, Nuxt, and Next.js.</p>
 									</div>
 								</div>
 							</li>
@@ -2429,10 +2545,13 @@
 									</div>
 									<div class="timeline-body">
 										<p style="text-align: center; margin-bottom: 12px;">
-											<span style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Machine Learning and Data Science M.S.</span>
+											<span
+												style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Machine
+												Learning and Data Science M.S.</span>
 										</p>
 									</div>
-									<div class="coursework-summary-line">Show Relevant Coursework <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="coursework-summary-line">Show Relevant Coursework <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="coursework-details">
 										<ul>
 											<li>CSE272 - Advanced Image Synthesis</li>
@@ -2467,10 +2586,13 @@
 									</div>
 									<div class="timeline-body">
 										<p style="text-align: center;">
-											<span style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Electrical Engineering B.S.</span>
+											<span
+												style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Electrical
+												Engineering B.S.</span>
 										</p>
 									</div>
-									<div class="coursework-summary-line">Show Relevant Coursework <i class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="coursework-summary-line">Show Relevant Coursework <i
+											class="fas fa-chevron-down expand-icon"></i></div>
 									<div class="coursework-details">
 										<ul>
 											<li>ECE175A - Pattern Recognition and Machine Learning</li>
@@ -2517,7 +2639,8 @@
 								<div>
 									<h3>Research Experience</h3>
 									<div style="text-align: center; margin-top: 20px;">
-										<button id="research-toggle" class="btn btn-primary" style="background: var(--primary-color); border: none; padding: 12px 25px; border-radius: 25px; color: white; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-size: 14px;">
+										<button id="research-toggle" class="btn btn-primary"
+											style="background: var(--primary-color); border: none; padding: 12px 25px; border-radius: 25px; color: white; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-size: 14px;">
 											<i class="icon-chevron-down" id="research-toggle-icon"></i>
 											<span id="research-toggle-text">Show Research Experience</span>
 										</button>
@@ -2525,7 +2648,8 @@
 								</div>
 							</li>
 
-							<li class="animate-box timeline-unverted reveal" id="research-item-1" style="display: none;">
+							<li class="animate-box timeline-unverted reveal" id="research-item-1"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
@@ -2537,13 +2661,15 @@
 										</div>
 									</div>
 									<div class="timeline-body">
-										<p>Optimizing query processing in large-scale databases by leveraging advanced machine learning algorithms</p>
+										<p>Optimizing query processing in large-scale databases by leveraging advanced
+											machine learning algorithms</p>
 										<p>Developing LLM-based model for query prediction and data retrieval</p>
 									</div>
 								</div>
 							</li>
 
-							<li class="timeline-inverted animate-box reveal" id="research-item-2" style="display: none;">
+							<li class="timeline-inverted animate-box reveal" id="research-item-2"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
@@ -2561,15 +2687,16 @@
 											patients, and physicians.</p>
 										<br>
 										<hr>
-										<span class="company">DigiHealth Lab (2021-2022) | San Diego, CA</span> 
-										
+										<span class="company">DigiHealth Lab (2021-2022) | San Diego, CA</span>
+
 										<p>Developed I2C communication code; designed and soldered circuits (i.e. IMU).
 										</p>
 									</div>
 								</div>
 							</li>
 
-							<li class="animate-box timeline-unverted reveal" id="research-item-3" style="display: none;">
+							<li class="animate-box timeline-unverted reveal" id="research-item-3"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
@@ -2578,11 +2705,13 @@
 											<h3 class="timeline-title">Research Assistant</h3>
 											<br>
 											<span class="institution-name">San Diego State University</span>
-											<span class="company">Experimental Mechanics Lab (2019) | San Diego, CA</span>
+											<span class="company">Experimental Mechanics Lab (2019) | San Diego,
+												CA</span>
 										</div>
 									</div>
 									<div class="timeline-body">
-										<p>As a high school intern, I researched tensile strength of ABS ASTM D638 3D printed and injection molded
+										<p>As a high school intern, I researched tensile strength of ABS ASTM D638 3D
+											printed and injection molded
 											samples.</p>
 									</div>
 								</div>
@@ -2747,13 +2876,14 @@
 				</div>
 			</div>
 		</div> -->
-<a id="projects"></a>
+		<a id="projects"></a>
 		<div id="fh5co-work" class="fh5co-bg-dark portfolio-collapsible portfolio-collapsed">
 			<div class="container">
 				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<h2>
-							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-work-body">
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false"
+								aria-controls="fh5co-work-body">
 								Projects
 								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
 							</button>
@@ -2761,50 +2891,57 @@
 					</div>
 				</div>
 				<div id="fh5co-work-body" class="portfolio-section-body" hidden>
-				<div class="row">
+					<div class="row">
 
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/Visual-Intertial-SLAM" target="_blank" class="work"
-							style="background-image: url(images/276a.png);">
-							<div class="desc">
-								<h3>Visual-Intertial SLAM</h3>
-								<span>Visual-Intertial SLAM with EKF and Feature Tracking</span>
-							</div>
-						</a>
-					</div>
-
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/SeismicLSTM"
-							target="_blank" class="work" style="background-image: url(images/lstm.png);">
-							<div class="desc">
-								<h3>SeismicLSTM</h3>
-								<span>Mitigating the high computational costs associated with applying Bayesian model updating in inverse problems / Uncertainty Quantification and Efficient Sensitivity Analysis by using Surrogate Models</span>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/VIAPF"
-							target="_blank" class="work" style="background-image: url(images/viapffff.png);">
-							<div class="desc">
-								<h3>VIAPF</h3>
-								<span>Trained and implemented autoencoder into a pipeline with Google Cloud transcription API to remove both musical instruments and profanity from music.</span>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<div class="work-container" style="position: relative;">
-							<!-- <a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work" style="background-image: url(images/medium.jpg); position: relative; overflow: hidden;"> -->
-								<a href="https://github.com/Girish-Krishnan/robust-lpr-restoration" target="_blank" class="work" style="background-image: url(images/lpr.png); position: relative; overflow: hidden;">
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<a href="https://github.com/ymorsi7/Visual-Intertial-SLAM" target="_blank" class="work"
+								style="background-image: url(images/276a.png);">
 								<div class="desc">
-									<!-- <h3>ProstheTech</h3> -->
-									 <h3>Robust LPR Restoration</h3>
-									 <span>Image processing algorithms to improve OCR detection accuracy of license plates.</span>
-									<!-- <span>3D-printed EMG</span> -->
+									<h3>Visual-Intertial SLAM</h3>
+									<span>Visual-Intertial SLAM with EKF and Feature Tracking</span>
 								</div>
 							</a>
 						</div>
-					</div>
-					<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
+
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<a href="https://github.com/ymorsi7/SeismicLSTM" target="_blank" class="work"
+								style="background-image: url(images/lstm.png);">
+								<div class="desc">
+									<h3>SeismicLSTM</h3>
+									<span>Mitigating the high computational costs associated with applying Bayesian
+										model updating in inverse problems / Uncertainty Quantification and Efficient
+										Sensitivity Analysis by using Surrogate Models</span>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<a href="https://github.com/ymorsi7/VIAPF" target="_blank" class="work"
+								style="background-image: url(images/viapffff.png);">
+								<div class="desc">
+									<h3>VIAPF</h3>
+									<span>Trained and implemented autoencoder into a pipeline with Google Cloud
+										transcription API to remove both musical instruments and profanity from
+										music.</span>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<div class="work-container" style="position: relative;">
+								<!-- <a href="https://github.com/ymorsi7/ProstheTech" target="_blank" class="work" style="background-image: url(images/medium.jpg); position: relative; overflow: hidden;"> -->
+								<a href="https://github.com/Girish-Krishnan/robust-lpr-restoration" target="_blank"
+									class="work"
+									style="background-image: url(images/lpr.png); position: relative; overflow: hidden;">
+									<div class="desc">
+										<!-- <h3>ProstheTech</h3> -->
+										<h3>Robust LPR Restoration</h3>
+										<span>Image processing algorithms to improve OCR detection accuracy of license
+											plates.</span>
+										<!-- <span>3D-printed EMG</span> -->
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/HateSpeechNLP" target="_blank" class="work"
 							style="background-image: url(old/docs/images/rmbl.png);">
 							<div class="desc">
@@ -2816,7 +2953,7 @@
 
 
 
-					<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
+						<!-- <div class="col-md-3 text-center col-padding animate-box reveal">
 						<a href="https://github.com/ymorsi7/SwayingAttention" target="_blank" class="work"
 							style="background-image: url(old/docs/assets/img/swayingattention.png);">
 							<div class="desc">
@@ -2826,35 +2963,38 @@
 							</div>
 						</a>
 					</div> -->
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://github.com/ymorsi7/FaceFinder-NamUS"
-							target="_blank" class="work" style="background-image: url(images/screenshot-namus.png);">
-							<div class="desc">
-								<h3>FaceFinder for NamUS</h3>
-								<span>Face and age recognition system for missing persons</span>
-							</div>
-						</a>
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<a href="https://github.com/ymorsi7/FaceFinder-NamUS" target="_blank" class="work"
+								style="background-image: url(images/screenshot-namus.png);">
+								<div class="desc">
+									<h3>FaceFinder for NamUS</h3>
+									<span>Face and age recognition system for missing persons</span>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal">
+							<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" class="work"
+								style="background-image: url(images/screenshot-ayatica.png);">
+								<div class="desc">
+									<h3>Ayatica</h3>
+									<span>Exploring patterns, miracles, and linguistic features in Islamic sacred texts
+										through data visualization</span>
+								</div>
+							</a>
+						</div>
 					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal">
-						<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" class="work"
-						style="background-image: url(images/screenshot-ayatica.png);">
-							<div class="desc">
-								<h3>Ayatica</h3>
-								<span>Exploring patterns, miracles, and linguistic features in Islamic sacred texts through data visualization</span>
-							</div>
-						</a>
-					</div>
-				</div>
 				</div>
 			</div>
 		</div>
 
-		<div id="fh5co-awards" class="fh5co-bg-color portfolio-collapsible portfolio-collapsed" style="scroll-margin-top:100px;">
+		<div id="fh5co-awards" class="fh5co-bg-color portfolio-collapsible portfolio-collapsed"
+			style="scroll-margin-top:100px;">
 			<div class="container">
 				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<h2>
-							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-awards-body">
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false"
+								aria-controls="fh5co-awards-body">
 								Awards & Achievements
 								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
 							</button>
@@ -2862,227 +3002,261 @@
 					</div>
 				</div>
 				<div id="fh5co-awards-body" class="portfolio-section-body" hidden>
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="award-filters">
-							<button type="button" class="filter-btn active" data-filter="all">All Awards</button>
-							<button type="button" class="filter-btn" data-filter="professional">Professional</button>
-							<button type="button" class="filter-btn" data-filter="hackathon">Hackathons</button>
-							<button type="button" class="filter-btn" data-filter="academic">Academic</button>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<div class="award-filters">
+								<button type="button" class="filter-btn active" data-filter="all">All Awards</button>
+								<button type="button" class="filter-btn"
+									data-filter="professional">Professional</button>
+								<button type="button" class="filter-btn" data-filter="hackathon">Hackathons</button>
+								<button type="button" class="filter-btn" data-filter="academic">Academic</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+					<div class="row">
 
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="images/gartner-press-release-twitter-thumbnail.png" alt="Gartner" loading="lazy">
-							</div>
-							<h3>Gartner Top 25 — Cisco Top 4</h3>
-							<p class="award-org">Gartner, Inc.</p>
-							<p class="award-date">June 2026</p>
-							<p class="award-desc">Major contributor to Debug/Genie, the AI-powered dashboard highlighted as a key driver behind Cisco's Top 4 ranking in Gartner's 2026 Supply Chain Top 25.</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="old/docs/images/ml.jpg" alt="Cisco" loading="lazy">
-							</div>
-							<h3>Award Finalist</h3>
-							<p class="award-org">Manufacturing Leadership Council</p>
-							<p class="award-date">Jun 2025</p>
-							<p class="award-desc">Our project at Cisco, Agentic Virtual FA, was a finalist for the Manufacturing Leadership Award</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="images/cisco-square-blue-logo-icon-png-735811696612218gzoiadfplh.png" alt="Cisco" loading="lazy">
-							</div>
-							<h3>Trade Secret Award</h3>
-							<p class="award-org">Cisco</p>
-							<p class="award-date">Jun 2025</p>
-							<p class="award-desc">Awarded to my team for the Virtual FA project (Agentic Virtual Failure Analysis)</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card flip-card">
-							<a href="https://www.linkedin.com/posts/hackthelaw_hackthelaw-hackathon-winners-activity-7426210933770887168-Yo-t?utm_source=share&utm_medium=member_desktop&rcm=ACoAACFPLWIB7nxCwAf1wAtGY8VOocTy9-W5apE" target="_blank" rel="noopener noreferrer" class="award-article-link" title="Read article" aria-label="Read article"><i class="fas fa-external-link-alt"></i></a>
-							<div class="flip-card-inner">
-								<!-- Front Side -->
-								<div class="flip-card-front">
-									<div class="award-logo">
-										<img src="old/docs/images/cambridge.png" alt="University of Cambridge" loading="lazy">
-									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">University of Cambridge</p>
-									<p class="award-date">Jun 2025</p>
-									<p class="award-desc">Won (solo win) the vLex challenge at Hack the Law @ Cambridge</p>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="images/gartner-press-release-twitter-thumbnail.png" alt="Gartner"
+										loading="lazy">
 								</div>
-								<!-- Back Side -->
-								<div class="flip-card-back">
-									<div class="award-logo">
-										<img src="old/docs/assets/img/images.png" alt="vLex" loading="lazy">
-									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">vLex</p>
-									<p class="award-date">Jun 2025</p>
-									<p class="award-desc">Won (solo win)  the vLex challenge at Hack the Law @ Cambridge</p>
-								</div>
+								<h3>Gartner Top 25 — Cisco Top 4</h3>
+								<p class="award-org">Gartner, Inc.</p>
+								<p class="award-date">June 2026</p>
+								<p class="award-desc">Major contributor to Debug/Genie, the AI-powered dashboard
+									highlighted as a key driver behind Cisco's Top 4 ranking in Gartner's 2026 Supply
+									Chain Top 25.</p>
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card flip-card">
-							<a href="https://www.linkedin.com/pulse/solarflair-turning-sunshine-strategy-ai-dain-protocol-xdilf/?trackingId=XxcnRon%2Fv9EB8HTwzCZB9w%3D%3D" target="_blank" rel="noopener noreferrer" class="award-article-link" title="Read article" aria-label="Read article"><i class="fas fa-external-link-alt"></i></a>
-							<div class="flip-card-inner">
-								<!-- Front Side -->
-								<div class="flip-card-front">
-									<div class="award-logo">
-										<img src="old/docs/images/ucla.png" alt="UCLA" loading="lazy">
-									</div>
-									<h3>2nd Place Hackathon Winner</h3>
-									<p class="award-org">UCLA</p>
-									<p class="award-date">Apr 2025</p>
-									<p class="award-desc">Won award (DAIN Track) in LA Hacks out of 172 teams (750 participants)</p>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="old/docs/images/ml.jpg" alt="Cisco" loading="lazy">
 								</div>
-								<!-- Back Side -->
-								<div class="flip-card-back">
-									<div class="award-logo">
-										<img src="old/docs/assets/img/dain_protocol_logo.jpg" alt="DAIN" loading="lazy">
+								<h3>Award Finalist</h3>
+								<p class="award-org">Manufacturing Leadership Council</p>
+								<p class="award-date">Jun 2025</p>
+								<p class="award-desc">Our project at Cisco, Agentic Virtual FA, was a finalist for the
+									Manufacturing Leadership Award</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="professional">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="images/cisco-square-blue-logo-icon-png-735811696612218gzoiadfplh.png"
+										alt="Cisco" loading="lazy">
+								</div>
+								<h3>Trade Secret Award</h3>
+								<p class="award-org">Cisco</p>
+								<p class="award-date">Jun 2025</p>
+								<p class="award-desc">Awarded to my team for the Virtual FA project (Agentic Virtual
+									Failure Analysis)</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card flip-card">
+								<a href="https://www.linkedin.com/posts/hackthelaw_hackthelaw-hackathon-winners-activity-7426210933770887168-Yo-t?utm_source=share&utm_medium=member_desktop&rcm=ACoAACFPLWIB7nxCwAf1wAtGY8VOocTy9-W5apE"
+									target="_blank" rel="noopener noreferrer" class="award-article-link"
+									title="Read article" aria-label="Read article"><i
+										class="fas fa-external-link-alt"></i></a>
+								<div class="flip-card-inner">
+									<!-- Front Side -->
+									<div class="flip-card-front">
+										<div class="award-logo">
+											<img src="old/docs/images/cambridge.png" alt="University of Cambridge"
+												loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">University of Cambridge</p>
+										<p class="award-date">Jun 2025</p>
+										<p class="award-desc">Won (solo win) the vLex challenge at Hack the Law @
+											Cambridge</p>
 									</div>
-									<h3>2nd Place Hackathon Winner</h3>
-									<p class="award-org">DAIN</p>
-									<p class="award-date">Apr 2025</p>
-									<p class="award-desc">Won award (DAIN Track) in LA Hacks out of 172 teams (750 participants)</p>
+									<!-- Back Side -->
+									<div class="flip-card-back">
+										<div class="award-logo">
+											<img src="old/docs/assets/img/images.png" alt="vLex" loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">vLex</p>
+										<p class="award-date">Jun 2025</p>
+										<p class="award-desc">Won (solo win) the vLex challenge at Hack the Law @
+											Cambridge</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card flip-card">
-							<a href="https://www.linkedin.com/posts/davis-wright-tremaine-llp_tech-software-ai-activity-7315076343648407552-IrKF?utm_source=share&utm_medium=member_desktop&rcm=ACoAACFPLWIB7nxCwAf1wAtGY8VOocTy9-W5apE" target="_blank" rel="noopener noreferrer" class="award-article-link" title="Read article" aria-label="Read article"><i class="fas fa-external-link-alt"></i></a>
-							<div class="flip-card-inner">
-								<!-- Front Side -->
-								<div class="flip-card-front">
-									<div class="award-logo">
-										<img src="old/docs/images/stanford.png" alt="Stanford Law School" loading="lazy">
+
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card flip-card">
+								<a href="https://www.linkedin.com/pulse/solarflair-turning-sunshine-strategy-ai-dain-protocol-xdilf/?trackingId=XxcnRon%2Fv9EB8HTwzCZB9w%3D%3D"
+									target="_blank" rel="noopener noreferrer" class="award-article-link"
+									title="Read article" aria-label="Read article"><i
+										class="fas fa-external-link-alt"></i></a>
+								<div class="flip-card-inner">
+									<!-- Front Side -->
+									<div class="flip-card-front">
+										<div class="award-logo">
+											<img src="old/docs/images/ucla.png" alt="UCLA" loading="lazy">
+										</div>
+										<h3>2nd Place Hackathon Winner</h3>
+										<p class="award-org">UCLA</p>
+										<p class="award-date">Apr 2025</p>
+										<p class="award-desc">Won award (DAIN Track) in LA Hacks out of 172 teams (750
+											participants)</p>
 									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">Stanford Law School</p>
-									<p class="award-date">Apr 2025</p>
-									<p class="award-desc">Won DWT challenge in Stanford Law School x LLM Hackathon (selected out of 48 teams)</p>
-								</div>
-								<!-- Back Side -->
-								<div class="flip-card-back">
-									<div class="award-logo">
-										<img src="old/docs/assets/img/davis_wright_tremaine_llp_logo.jpg" alt="Davis Wright Tremaine" loading="lazy">
+									<!-- Back Side -->
+									<div class="flip-card-back">
+										<div class="award-logo">
+											<img src="old/docs/assets/img/dain_protocol_logo.jpg" alt="DAIN"
+												loading="lazy">
+										</div>
+										<h3>2nd Place Hackathon Winner</h3>
+										<p class="award-org">DAIN</p>
+										<p class="award-date">Apr 2025</p>
+										<p class="award-desc">Won award (DAIN Track) in LA Hacks out of 172 teams (750
+											participants)</p>
 									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">Davis Wright Tremaine</p>
-									<p class="award-date">Apr 2025</p>
-									<p class="award-desc">Won DWT challenge in Stanford Law School x LLM Hackathon (selected out of 48 teams)</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
-							</div>
-							<h3>1st Place of Advanced Track</h3>
-							<p class="award-org">HARD Hack | IEEE UC San Diego</p>
-							<p class="award-date">Feb 2025</p>
-							<p class="award-desc">Won first place in the Advanced Category for developing a smart trash sorter</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="old/docs/images/lpl.png" alt="LPL Financial" loading="lazy">
-							</div>
-							<h3>Hackathon Winner</h3>
-							<p class="award-org">LPL Financial</p>
-							<p class="award-date">Jan 2025</p>
-							<p class="award-desc">Winner of "Most Viable Solution" category in competition with over 40 teams</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="old/docs/images/ace.jpg" alt="ACE Mentor" loading="lazy">
-							</div>
-							<h3>Scholarship for Electrical Engineering (4x)</h3>
-							<p class="award-org">ACE Mentor San Diego</p>
-							<p class="award-date">May 2019, 2020, 2023, 2024</p>
-							<p class="award-desc">Merit-based scholarship</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
-							</div>
-							<h3>2nd Place Hackathon Winner</h3>
-							<p class="award-org">HARD Hack | IEEE UC San Diego</p>
-							<p class="award-date">Apr 2023</p>
-							<p class="award-desc">2nd place in UCSD hardware hackathon (selected out of 23 teams)</p>
-						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card flip-card">
-							<div class="flip-card-inner">
-								<!-- Front Side -->
-								<div class="flip-card-front">
-									<div class="award-logo">
-										<img src="old/docs/images/mlh.png" alt="Domain.com" loading="lazy">
-									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">LateNightHacks</p>
-									<p class="award-date">May 2022</p>
-									<p class="award-desc">Won Domain.com prize for LateNightHacks 2022</p>
-								</div>
-								<!-- Back Side -->
-								<div class="flip-card-back">
-									<div class="award-logo">
-										<img src="old/docs/assets/img/domain.png" alt="Domain.com" loading="lazy">
-									</div>
-									<h3>Hackathon Winner</h3>
-									<p class="award-org">Domain.com</p>
-									<p class="award-date">May 2022</p>
-									<p class="award-desc">Won Domain.com prize for LateNightHacks 2022</p>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
-						<div class="award-card">
-							<div class="award-logo">
-								<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card flip-card">
+								<a href="https://www.linkedin.com/posts/davis-wright-tremaine-llp_tech-software-ai-activity-7315076343648407552-IrKF?utm_source=share&utm_medium=member_desktop&rcm=ACoAACFPLWIB7nxCwAf1wAtGY8VOocTy9-W5apE"
+									target="_blank" rel="noopener noreferrer" class="award-article-link"
+									title="Read article" aria-label="Read article"><i
+										class="fas fa-external-link-alt"></i></a>
+								<div class="flip-card-inner">
+									<!-- Front Side -->
+									<div class="flip-card-front">
+										<div class="award-logo">
+											<img src="old/docs/images/stanford.png" alt="Stanford Law School"
+												loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">Stanford Law School</p>
+										<p class="award-date">Apr 2025</p>
+										<p class="award-desc">Won DWT challenge in Stanford Law School x LLM Hackathon
+											(selected out of 48 teams)</p>
+									</div>
+									<!-- Back Side -->
+									<div class="flip-card-back">
+										<div class="award-logo">
+											<img src="old/docs/assets/img/davis_wright_tremaine_llp_logo.jpg"
+												alt="Davis Wright Tremaine" loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">Davis Wright Tremaine</p>
+										<p class="award-date">Apr 2025</p>
+										<p class="award-desc">Won DWT challenge in Stanford Law School x LLM Hackathon
+											(selected out of 48 teams)</p>
+									</div>
+								</div>
 							</div>
-							<h3>Hackathon Winner</h3>
-							<p class="award-org">SD Hacks</p>
-							<p class="award-date">Apr 2022</p>
-							<p class="award-desc">Winner of UCSD hackathon's Civic Engagement category (selected out of 30 teams)</p>
 						</div>
-					</div>
-					<div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
-						<div class="award-card">
-							<a href="https://extendedstudies.ucsd.edu/news-events/extended-studies-blog/patrick-henry-high-school-grad-plans-to-make-a-big-social-impact" target="_blank" rel="noopener noreferrer" class="award-article-link" title="Read article" aria-label="Read article"><i class="fas fa-external-link-alt"></i></a>
-							<div class="award-logo">
-								<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+								</div>
+								<h3>1st Place of Advanced Track</h3>
+								<p class="award-org">HARD Hack | IEEE UC San Diego</p>
+								<p class="award-date">Feb 2025</p>
+								<p class="award-desc">Won first place in the Advanced Category for developing a smart
+									trash sorter</p>
 							</div>
-							<h3>Student of Distinction</h3>
-							<p class="award-org">UCSD Extended Studies</p>
-							<p class="award-date">Jul 2020</p>
-							<p class="award-desc">Article written about me in the UCSD Extended Studies Newsletter</p>
 						</div>
-					</div>
-					<!-- <div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="old/docs/images/lpl.png" alt="LPL Financial" loading="lazy">
+								</div>
+								<h3>Hackathon Winner</h3>
+								<p class="award-org">LPL Financial</p>
+								<p class="award-date">Jan 2025</p>
+								<p class="award-desc">Winner of "Most Viable Solution" category in competition with over
+									40 teams</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="old/docs/images/ace.jpg" alt="ACE Mentor" loading="lazy">
+								</div>
+								<h3>Scholarship for Electrical Engineering (4x)</h3>
+								<p class="award-org">ACE Mentor San Diego</p>
+								<p class="award-date">May 2019, 2020, 2023, 2024</p>
+								<p class="award-desc">Merit-based scholarship</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+								</div>
+								<h3>2nd Place Hackathon Winner</h3>
+								<p class="award-org">HARD Hack | IEEE UC San Diego</p>
+								<p class="award-date">Apr 2023</p>
+								<p class="award-desc">2nd place in UCSD hardware hackathon (selected out of 23 teams)
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card flip-card">
+								<div class="flip-card-inner">
+									<!-- Front Side -->
+									<div class="flip-card-front">
+										<div class="award-logo">
+											<img src="old/docs/images/mlh.png" alt="Domain.com" loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">LateNightHacks</p>
+										<p class="award-date">May 2022</p>
+										<p class="award-desc">Won Domain.com prize for LateNightHacks 2022</p>
+									</div>
+									<!-- Back Side -->
+									<div class="flip-card-back">
+										<div class="award-logo">
+											<img src="old/docs/assets/img/domain.png" alt="Domain.com" loading="lazy">
+										</div>
+										<h3>Hackathon Winner</h3>
+										<p class="award-org">Domain.com</p>
+										<p class="award-date">May 2022</p>
+										<p class="award-desc">Won Domain.com prize for LateNightHacks 2022</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="hackathon">
+							<div class="award-card">
+								<div class="award-logo">
+									<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+								</div>
+								<h3>Hackathon Winner</h3>
+								<p class="award-org">SD Hacks</p>
+								<p class="award-date">Apr 2022</p>
+								<p class="award-desc">Winner of UCSD hackathon's Civic Engagement category (selected out
+									of 30 teams)</p>
+							</div>
+						</div>
+						<div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
+							<div class="award-card">
+								<a href="https://extendedstudies.ucsd.edu/news-events/extended-studies-blog/patrick-henry-high-school-grad-plans-to-make-a-big-social-impact"
+									target="_blank" rel="noopener noreferrer" class="award-article-link"
+									title="Read article" aria-label="Read article"><i
+										class="fas fa-external-link-alt"></i></a>
+								<div class="award-logo">
+									<img src="images/ucsd.png" alt="UC San Diego" loading="lazy">
+								</div>
+								<h3>Student of Distinction</h3>
+								<p class="award-org">UCSD Extended Studies</p>
+								<p class="award-date">Jul 2020</p>
+								<p class="award-desc">Article written about me in the UCSD Extended Studies Newsletter
+								</p>
+							</div>
+						</div>
+						<!-- <div class="col-md-4 text-center col-padding animate-box reveal" data-category="academic">
 						<div class="award-card">
 							<div class="award-logo">
 								<img src="old/docs/images/phhs.png" alt="Patrick Henry High School">
@@ -3093,7 +3267,7 @@
 							<p class="award-desc">Graduated with Honors and Academic Distinction</p>
 						</div>
 					</div> -->
-				</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -3103,7 +3277,8 @@
 				<div class="row portfolio-section-heading-row">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<h2>
-							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false" aria-controls="fh5co-recommendations-body">
+							<button type="button" class="portfolio-section-heading-toggle" aria-expanded="false"
+								aria-controls="fh5co-recommendations-body">
 								Recommendations
 								<i class="fas fa-chevron-down portfolio-section-caret" aria-hidden="true"></i>
 							</button>
@@ -3112,67 +3287,112 @@
 				</div>
 
 				<div id="fh5co-recommendations-body" class="portfolio-section-body" hidden>
-				<div class="row recommendations-row">
-					<div class="col-md-12 animate-box reveal">
-						<div class="recommendation-card">
-							<div class="recommendation-org-logo">
-								<img src="images/cisco_logo.jpg" alt="Cisco logo" loading="lazy">
-							</div>
-							<div class="recommendation-header">
-								<div class="recommendation-name-row">
-									<h3 class="recommendation-name">J.P. Chen</h3>
-									<span class="recommendation-relationship">Manager</span>
-									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/jpchen/" target="_blank" rel="noopener noreferrer" aria-label="J.P. Chen LinkedIn profile" title="View LinkedIn profile">
-										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
-									</a>
+					<div class="row recommendations-row">
+						<div class="col-md-12 animate-box reveal">
+							<div class="recommendation-card">
+								<div class="recommendation-org-logo">
+									<img src="images/cisco_logo.jpg" alt="Cisco logo" loading="lazy">
 								</div>
-								<p class="recommendation-role">Data Analytics &amp; Quality Leader | SW, HW, Cloud &amp; Production Quality Excellence</p>
-								<p class="recommendation-meta">May 27, 2026 - Managed Yusuf directly at Cisco</p>
+								<div class="recommendation-header">
+									<div class="recommendation-name-row">
+										<h3 class="recommendation-name">J.P. Chen</h3>
+										<span class="recommendation-relationship">Manager</span>
+										<a class="recommendation-profile-link"
+											href="https://www.linkedin.com/in/jpchen/" target="_blank"
+											rel="noopener noreferrer" aria-label="J.P. Chen LinkedIn profile"
+											title="View LinkedIn profile">
+											<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+										</a>
+									</div>
+									<p class="recommendation-role">Data Analytics &amp; Quality Leader | SW, HW, Cloud
+										&amp; Production Quality Excellence</p>
+									<p class="recommendation-meta">May 27, 2026 - Managed Yusuf directly at Cisco</p>
+								</div>
+								<p class="recommendation-quote">I had the pleasure of managing Yusuf at Cisco and can
+									confidently say he is an exceptional software engineer with tremendous potential.
+									Yusuf stands out for his strong technical capability and natural curiosity for new
+									technologies, especially in AI/ML. Even early in his career, he demonstrated an
+									impressive ability to quickly learn, adapt, and take on challenging problems. His
+									work on ML pipelines and RAG-based solutions in the supply chain space showed both
+									depth and practical impact. Beyond his technical skills, Yusuf is an absolute
+									pleasure to work with. He brings a positive attitude every day and contributes to a
+									highly collaborative team environment. He is proactive in helping others, often
+									stepping in to support teammates, troubleshoot issues, and accelerate overall
+									progress. What truly distinguishes him is his passion for technology. Outside of
+									work, he actively participates in hackathons and competitions, frequently earning
+									top awards, clear proof of both his dedication and talent. I highly recommend him
+									for any software engineering or AI/ML-focused role.</p>
 							</div>
-							<p class="recommendation-quote">I had the pleasure of managing Yusuf at Cisco and can confidently say he is an exceptional software engineer with tremendous potential. Yusuf stands out for his strong technical capability and natural curiosity for new technologies, especially in AI/ML. Even early in his career, he demonstrated an impressive ability to quickly learn, adapt, and take on challenging problems. His work on ML pipelines and RAG-based solutions in the supply chain space showed both depth and practical impact. Beyond his technical skills, Yusuf is an absolute pleasure to work with. He brings a positive attitude every day and contributes to a highly collaborative team environment. He is proactive in helping others, often stepping in to support teammates, troubleshoot issues, and accelerate overall progress. What truly distinguishes him is his passion for technology. Outside of work, he actively participates in hackathons and competitions, frequently earning top awards, clear proof of both his dedication and talent. I highly recommend him for any software engineering or AI/ML-focused role.</p>
 						</div>
-					</div>
 
-					<div class="col-md-12 animate-box reveal">
-						<div class="recommendation-card">
-							<div class="recommendation-org-logo">
-								<img src="images/southwest.jpeg" alt="Southwest Airlines logo" loading="lazy">
-							</div>
-							<div class="recommendation-header">
-								<div class="recommendation-name-row">
-									<h3 class="recommendation-name">Ayham Dewan</h3>
-									<span class="recommendation-relationship">Coworker</span>
-									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/ayham-dewan-23613118a/" target="_blank" rel="noopener noreferrer" aria-label="Ayham Dewan LinkedIn profile" title="View LinkedIn profile">
-										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
-									</a>
+						<div class="col-md-12 animate-box reveal">
+							<div class="recommendation-card">
+								<div class="recommendation-org-logo">
+									<img src="images/southwest.jpeg" alt="Southwest Airlines logo" loading="lazy">
 								</div>
-								<p class="recommendation-role">Software Engineer @ Southwest Airlines | MSCS @ Georgia Tech</p>
-								<p class="recommendation-meta">March 15, 2026 - Worked with Yusuf on the same team</p>
+								<div class="recommendation-header">
+									<div class="recommendation-name-row">
+										<h3 class="recommendation-name">Ayham Dewan</h3>
+										<span class="recommendation-relationship">Coworker</span>
+										<a class="recommendation-profile-link"
+											href="https://www.linkedin.com/in/ayham-dewan-23613118a/" target="_blank"
+											rel="noopener noreferrer" aria-label="Ayham Dewan LinkedIn profile"
+											title="View LinkedIn profile">
+											<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+										</a>
+									</div>
+									<p class="recommendation-role">Software Engineer @ Southwest Airlines | MSCS @
+										Georgia Tech</p>
+									<p class="recommendation-meta">March 15, 2026 - Worked with Yusuf on the same team
+									</p>
+								</div>
+								<p class="recommendation-quote">I've had the pleasure of working with Yusuf at Southwest
+									Airlines. Throughout our time together, he consistently showed tremendous ownership
+									and drove the vision and development of a critical feature while staying aligned
+									with team objectives and timelines. He showcased strong technical skills and
+									excelled in all stages of the project: design, development, and testing. Yusuf is a
+									natural leader who seeks to help his teammates whenever possible. His self-starter
+									mindset makes him resourceful and quick to execute. Even on ambiguous, ill-defined
+									problems, he performed thorough analysis and proposed practical, well-scoped
+									solutions. Beyond his professional strengths, Yusuf brought kindness,
+									thoughtfulness, humor, and a bright personality that made collaboration genuinely
+									enjoyable. His technical depth and positive team presence are a rare combination.
+								</p>
 							</div>
-							<p class="recommendation-quote">I've had the pleasure of working with Yusuf at Southwest Airlines. Throughout our time together, he consistently showed tremendous ownership and drove the vision and development of a critical feature while staying aligned with team objectives and timelines. He showcased strong technical skills and excelled in all stages of the project: design, development, and testing. Yusuf is a natural leader who seeks to help his teammates whenever possible. His self-starter mindset makes him resourceful and quick to execute. Even on ambiguous, ill-defined problems, he performed thorough analysis and proposed practical, well-scoped solutions. Beyond his professional strengths, Yusuf brought kindness, thoughtfulness, humor, and a bright personality that made collaboration genuinely enjoyable. His technical depth and positive team presence are a rare combination.</p>
 						</div>
-					</div>
 
-					<div class="col-md-12 animate-box reveal">
-						<div class="recommendation-card">
-							<div class="recommendation-org-logo">
-								<img src="images/ucsd.png" alt="UC San Diego logo" loading="lazy">
-							</div>
-							<div class="recommendation-header">
-								<div class="recommendation-name-row">
-									<h3 class="recommendation-name">Girish Krishnan</h3>
-									<span class="recommendation-relationship">University Colleague</span>
-									<a class="recommendation-profile-link" href="https://www.linkedin.com/in/girk/" target="_blank" rel="noopener noreferrer" aria-label="Girish Krishnan LinkedIn profile" title="View LinkedIn profile">
-										<i class="fab fa-linkedin-in" aria-hidden="true"></i>
-									</a>
+						<div class="col-md-12 animate-box reveal">
+							<div class="recommendation-card">
+								<div class="recommendation-org-logo">
+									<img src="images/ucsd.png" alt="UC San Diego logo" loading="lazy">
 								</div>
-								<p class="recommendation-role">Software Engineer @ SpaceX | EE + Math-CS + Physics @ UCSD</p>
-								<p class="recommendation-meta">March 3, 2026 - Worked with Yusuf on projects and hackathons</p>
+								<div class="recommendation-header">
+									<div class="recommendation-name-row">
+										<h3 class="recommendation-name">Girish Krishnan</h3>
+										<span class="recommendation-relationship">University Colleague</span>
+										<a class="recommendation-profile-link" href="https://www.linkedin.com/in/girk/"
+											target="_blank" rel="noopener noreferrer"
+											aria-label="Girish Krishnan LinkedIn profile" title="View LinkedIn profile">
+											<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+										</a>
+									</div>
+									<p class="recommendation-role">Software Engineer @ SpaceX | EE + Math-CS + Physics @
+										UCSD</p>
+									<p class="recommendation-meta">March 3, 2026 - Worked with Yusuf on projects and
+										hackathons</p>
+								</div>
+								<p class="recommendation-quote">I met Yusuf during a mentorship program at UCSD, where
+									he was an outstanding mentor who gave practical advice on coursework, research, and
+									internships. We later took courses together and teamed up in major course projects
+									and hackathons, including a 2nd place finish at HARD Hack 2023 and 1st place at HARD
+									Hack 2025. Throughout these projects, Yusuf was highly professional in how he wrote
+									and organized software, especially under intense time constraints. His programming,
+									AI/ML, and data science skills are top-tier. He is also an excellent presenter who
+									makes complex projects understandable for any audience. I am confident these
+									strengths will carry forward to any role he pursues.</p>
 							</div>
-							<p class="recommendation-quote">I met Yusuf during a mentorship program at UCSD, where he was an outstanding mentor who gave practical advice on coursework, research, and internships. We later took courses together and teamed up in major course projects and hackathons, including a 2nd place finish at HARD Hack 2023 and 1st place at HARD Hack 2025. Throughout these projects, Yusuf was highly professional in how he wrote and organized software, especially under intense time constraints. His programming, AI/ML, and data science skills are top-tier. He is also an excellent presenter who makes complex projects understandable for any audience. I am confident these strengths will carry forward to any role he pursues.</p>
 						</div>
 					</div>
-				</div>
 				</div>
 			</div>
 		</div>
@@ -3184,25 +3404,33 @@
 						<div class="footer-tools">
 							<span class="footer-tools-label">Tools</span>
 							<div class="footer-tools-links">
-								<a href="./mergePDF.html" class="footer-tool-link"><i class="fa-solid fa-file"></i> MergePDF</a>
+								<a href="./mergePDF.html" class="footer-tool-link"><i class="fa-solid fa-file"></i>
+									MergePDF</a>
 								<a href="./alarm.html" class="footer-tool-link"><i class="fas fa-clock"></i> Alarm</a>
-								<a href="./pomodoro.html" class="footer-tool-link"><i class="fa-solid fa-business-time"></i> Pomodoro</a>
-								<a href="./drawingBoard.html" class="footer-tool-link"><i class="fas fa-paint-brush"></i> Drawing Board</a>
-								<a href="./UCSD-Tier-List/index.html" class="footer-tool-link"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
-								<a href="/bidetbeacon" class="footer-tool-link"><i class="fa-solid fa-map-location-dot"></i> BidetBeacon</a>
+								<a href="./pomodoro.html" class="footer-tool-link"><i
+										class="fa-solid fa-business-time"></i> Pomodoro</a>
+								<a href="./drawingBoard.html" class="footer-tool-link"><i
+										class="fas fa-paint-brush"></i> Drawing Board</a>
+								<a href="./UCSD-Tier-List/index.html" class="footer-tool-link"><i
+										class="fa-solid fa-list"></i> UCSD Tier List</a>
+								<a href="/bidetbeacon" class="footer-tool-link"><i
+										class="fa-solid fa-map-location-dot"></i> BidetBeacon</a>
 							</div>
 						</div>
 						<hr class="footer-divider">
 						<p class="footer-line footer-copyright">😁 2020 –
 							<script>document.write(new Date().getFullYear())</script>
 							<span class="footer-sep">·</span>
-							<a href="./old/photography.html" target="_blank" class="hover-underline-animation">Photography</a>
+							<a href="./old/photography.html" target="_blank"
+								class="hover-underline-animation">Photography</a>
 							<span class="footer-sep">·</span>
 							<a href="/halal-vibes" class="hover-underline-animation">Halal Vibes</a>
 							<!-- <span class="footer-sep">·</span>
 							<a href="./old/index.html" target="_blank" class="hover-underline-animation">Pre-GPT (Archive)</a> -->
 							<span class="footer-sep">·</span>
-							<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Star</span></a>
+							<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io"
+								target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"><i
+									class="fa-brands fa-github" aria-hidden="true"></i><span>Star</span></a>
 						</p>
 					</div>
 				</div>
@@ -3229,16 +3457,16 @@
 		<script
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
 		<script src="js/google_map.js"></script>
-		
+
 		<!-- Particles.js -->
 		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 		<!-- Main -->
 		<script src="js/main.js"></script>
-		
+
 		<script>
 			// Initialize particles.js
-			document.addEventListener('DOMContentLoaded', function() {
+			document.addEventListener('DOMContentLoaded', function () {
 				if (typeof particlesJS !== 'undefined') {
 					particlesJS("particles-js", {
 						"particles": {
@@ -3344,18 +3572,18 @@
 					});
 				}
 			});
-			
+
 			// Reveal animations on scroll
 			window.addEventListener('scroll', reveal);
-			
+
 			function reveal() {
 				var reveals = document.querySelectorAll('.reveal');
-				
+
 				for (var i = 0; i < reveals.length; i++) {
 					var windowHeight = window.innerHeight;
 					var revealTop = reveals[i].getBoundingClientRect().top;
 					var revealPoint = 380;
-					
+
 					if (revealTop < windowHeight - revealPoint) {
 						reveals[i].classList.add('active');
 					}
@@ -3363,33 +3591,33 @@
 			}
 
 			window.reveal = reveal;
-			
+
 			// Initial check on page load
 			reveal();
 		</script>
 
 		<!-- Enhanced direct translation helper -->
 		<script src="js/translator.js"></script>
-		
+
 		<!-- Award filtering functionality -->
 		<script>
-			document.addEventListener('DOMContentLoaded', function() {
+			document.addEventListener('DOMContentLoaded', function () {
 				var awardsBody = document.getElementById('fh5co-awards-body');
 				if (!awardsBody) return;
 
 				var filterButtons = awardsBody.querySelectorAll('.filter-btn');
 				var awardCards = awardsBody.querySelectorAll('[data-category]');
 
-				filterButtons.forEach(function(button) {
-					button.addEventListener('click', function() {
-						filterButtons.forEach(function(btn) {
+				filterButtons.forEach(function (button) {
+					button.addEventListener('click', function () {
+						filterButtons.forEach(function (btn) {
 							btn.classList.remove('active');
 						});
 						button.classList.add('active');
 
 						var filterValue = button.getAttribute('data-filter');
 
-						awardCards.forEach(function(card) {
+						awardCards.forEach(function (card) {
 							var category = card.getAttribute('data-category');
 							var show = filterValue === 'all' || category === filterValue;
 
@@ -3413,187 +3641,187 @@
 		</script>
 
 		<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			function expandPortfolioSection(section, options) {
-				options = options || {};
-				if (!section) return;
-				var body = section.querySelector('.portfolio-section-body');
-				var toggle = section.querySelector('.portfolio-section-heading-toggle');
-				if (!body || !toggle) return;
+			document.addEventListener('DOMContentLoaded', function () {
+				function expandPortfolioSection(section, options) {
+					options = options || {};
+					if (!section) return;
+					var body = section.querySelector('.portfolio-section-body');
+					var toggle = section.querySelector('.portfolio-section-heading-toggle');
+					if (!body || !toggle) return;
 
-				section.classList.remove('portfolio-collapsed');
-				body.removeAttribute('hidden');
-				toggle.setAttribute('aria-expanded', 'true');
-				body.querySelectorAll('.reveal').forEach(function(el) {
-					el.classList.add('active');
-				});
-				if (typeof window.reveal === 'function') {
-					setTimeout(window.reveal, 100);
-				}
-				if (options.hackathonFilter) {
-					setTimeout(function() {
-						var hackBtn = document.querySelector('.filter-btn[data-filter="hackathon"]');
-						if (hackBtn) hackBtn.click();
-					}, 100);
-				}
-			}
-
-			document.querySelectorAll('.portfolio-collapsible').forEach(function(section) {
-				var toggle = section.querySelector('.portfolio-section-heading-toggle');
-				var body = section.querySelector('.portfolio-section-body');
-				if (!toggle || !body) return;
-
-				toggle.addEventListener('click', function() {
-					if (section.classList.contains('portfolio-collapsed')) {
-						expandPortfolioSection(section);
-					} else {
-						section.classList.add('portfolio-collapsed');
-						body.setAttribute('hidden', '');
-						toggle.setAttribute('aria-expanded', 'false');
+					section.classList.remove('portfolio-collapsed');
+					body.removeAttribute('hidden');
+					toggle.setAttribute('aria-expanded', 'true');
+					body.querySelectorAll('.reveal').forEach(function (el) {
+						el.classList.add('active');
+					});
+					if (typeof window.reveal === 'function') {
+						setTimeout(window.reveal, 100);
 					}
+					if (options.hackathonFilter) {
+						setTimeout(function () {
+							var hackBtn = document.querySelector('.filter-btn[data-filter="hackathon"]');
+							if (hackBtn) hackBtn.click();
+						}, 100);
+					}
+				}
+
+				document.querySelectorAll('.portfolio-collapsible').forEach(function (section) {
+					var toggle = section.querySelector('.portfolio-section-heading-toggle');
+					var body = section.querySelector('.portfolio-section-body');
+					if (!toggle || !body) return;
+
+					toggle.addEventListener('click', function () {
+						if (section.classList.contains('portfolio-collapsed')) {
+							expandPortfolioSection(section);
+						} else {
+							section.classList.add('portfolio-collapsed');
+							body.setAttribute('hidden', '');
+							toggle.setAttribute('aria-expanded', 'false');
+						}
+					});
 				});
+
+				var hashSectionMap = {
+					projects: 'fh5co-work',
+					'fh5co-work': 'fh5co-work',
+					'fh5co-awards': 'fh5co-awards',
+					'fh5co-recommendations': 'fh5co-recommendations'
+				};
+
+				function expandFromHash() {
+					var hash = window.location.hash.replace('#', '');
+					var sectionId = hashSectionMap[hash];
+					if (!sectionId) return;
+					expandPortfolioSection(document.getElementById(sectionId), { scroll: true });
+				}
+
+				expandFromHash();
+				window.addEventListener('hashchange', expandFromHash);
+				window.expandPortfolioSection = expandPortfolioSection;
 			});
-
-			var hashSectionMap = {
-				projects: 'fh5co-work',
-				'fh5co-work': 'fh5co-work',
-				'fh5co-awards': 'fh5co-awards',
-				'fh5co-recommendations': 'fh5co-recommendations'
-			};
-
-			function expandFromHash() {
-				var hash = window.location.hash.replace('#', '');
-				var sectionId = hashSectionMap[hash];
-				if (!sectionId) return;
-				expandPortfolioSection(document.getElementById(sectionId), { scroll: true });
-			}
-
-			expandFromHash();
-			window.addEventListener('hashchange', expandFromHash);
-			window.expandPortfolioSection = expandPortfolioSection;
-		});
 		</script>
 
 		<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			function parseRoleDate(value) {
-				if (!value || value === 'present') {
-					return new Date();
+			document.addEventListener('DOMContentLoaded', function () {
+				function parseRoleDate(value) {
+					if (!value || value === 'present') {
+						return new Date();
+					}
+					var parts = value.split('-');
+					var year = parseInt(parts[0], 10);
+					var month = parseInt(parts[1], 10) - 1;
+					var day = parts[2] ? parseInt(parts[2], 10) : 1;
+					return new Date(year, month, day);
 				}
-				var parts = value.split('-');
-				var year = parseInt(parts[0], 10);
-				var month = parseInt(parts[1], 10) - 1;
-				var day = parts[2] ? parseInt(parts[2], 10) : 1;
-				return new Date(year, month, day);
-			}
 
-			function formatRoleDuration(totalMonths) {
-				if (totalMonths <= 0) {
-					return ' (< 1 mo)';
+				function formatRoleDuration(totalMonths) {
+					if (totalMonths <= 0) {
+						return ' (< 1 mo)';
+					}
+					var years = Math.floor(totalMonths / 12);
+					var months = totalMonths % 12;
+					var parts = [];
+					if (years > 0) {
+						parts.push(years + ' yr' + (years === 1 ? '' : 's'));
+					}
+					if (months > 0) {
+						parts.push(months + ' mo' + (months === 1 ? '' : 's'));
+					}
+					if (years > 0 && months > 0) {
+						return ' (' + parts[0] + ' and ' + parts[1] + ')';
+					}
+					return ' (' + parts[0] + ')';
 				}
-				var years = Math.floor(totalMonths / 12);
-				var months = totalMonths % 12;
-				var parts = [];
-				if (years > 0) {
-					parts.push(years + ' yr' + (years === 1 ? '' : 's'));
-				}
-				if (months > 0) {
-					parts.push(months + ' mo' + (months === 1 ? '' : 's'));
-				}
-				if (years > 0 && months > 0) {
-					return ' (' + parts[0] + ' and ' + parts[1] + ')';
-				}
-				return ' (' + parts[0] + ')';
-			}
 
-			function getRoleDurationMonths(startDate, endDate) {
-				var months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
-				months += endDate.getMonth() - startDate.getMonth();
-				if (endDate.getDate() < startDate.getDate()) {
-					months -= 1;
+				function getRoleDurationMonths(startDate, endDate) {
+					var months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+					months += endDate.getMonth() - startDate.getMonth();
+					if (endDate.getDate() < startDate.getDate()) {
+						months -= 1;
+					}
+					return Math.max(months, 0);
 				}
-				return Math.max(months, 0);
-			}
 
-			function renderRoleDurations() {
-				document.querySelectorAll('.timeline-panel[data-work-exp][data-role-start]').forEach(function(panel) {
-					var startValue = panel.getAttribute('data-role-start');
-					var endValue = panel.getAttribute('data-role-end') || 'present';
-					if (!startValue) return;
+				function renderRoleDurations() {
+					document.querySelectorAll('.timeline-panel[data-work-exp][data-role-start]').forEach(function (panel) {
+						var startValue = panel.getAttribute('data-role-start');
+						var endValue = panel.getAttribute('data-role-end') || 'present';
+						if (!startValue) return;
 
-					var startDate = parseRoleDate(startValue);
-					var endDate = parseRoleDate(endValue);
-					var durationText = formatRoleDuration(getRoleDurationMonths(startDate, endDate));
-					var durationEl = panel.querySelector('.role-duration');
-					if (!durationEl) return;
+						var startDate = parseRoleDate(startValue);
+						var endDate = parseRoleDate(endValue);
+						var durationText = formatRoleDuration(getRoleDurationMonths(startDate, endDate));
+						var durationEl = panel.querySelector('.role-duration');
+						if (!durationEl) return;
 
-					durationEl.textContent = durationText;
+						durationEl.textContent = durationText;
+					});
+				}
+
+				renderRoleDurations();
+
+				document.querySelectorAll('.timeline-panel[data-work-exp]').forEach(function (panel) {
+					panel.addEventListener('click', function () {
+						panel.classList.toggle('expanded');
+					});
 				});
-			}
-
-			renderRoleDurations();
-
-			document.querySelectorAll('.timeline-panel[data-work-exp]').forEach(function(panel) {
-				panel.addEventListener('click', function() {
-					panel.classList.toggle('expanded');
+				document.querySelectorAll('.timeline-panel[data-edu-coursework]').forEach(function (panel) {
+					panel.addEventListener('click', function () {
+						panel.classList.toggle('expanded');
+					});
 				});
 			});
-			document.querySelectorAll('.timeline-panel[data-edu-coursework]').forEach(function(panel) {
-				panel.addEventListener('click', function() {
-					panel.classList.toggle('expanded');
-				});
-			});
-		});
 		</script>
 
 		<script>
-		document.addEventListener('DOMContentLoaded', function() {
-		  var hackathonLink = document.getElementById('hackathon-winner-link');
-		  if (hackathonLink) {
-			hackathonLink.addEventListener('click', function(e) {
-			  e.preventDefault();
-			  var awardsSection = document.getElementById('fh5co-awards');
-			  if (awardsSection) {
-				if (typeof window.expandPortfolioSection === 'function') {
-				  window.expandPortfolioSection(awardsSection, { hackathonFilter: true });
+			document.addEventListener('DOMContentLoaded', function () {
+				var hackathonLink = document.getElementById('hackathon-winner-link');
+				if (hackathonLink) {
+					hackathonLink.addEventListener('click', function (e) {
+						e.preventDefault();
+						var awardsSection = document.getElementById('fh5co-awards');
+						if (awardsSection) {
+							if (typeof window.expandPortfolioSection === 'function') {
+								window.expandPortfolioSection(awardsSection, { hackathonFilter: true });
+							}
+							awardsSection.scrollIntoView({ behavior: 'smooth' });
+						}
+					});
 				}
-				awardsSection.scrollIntoView({behavior: 'smooth'});
-			  }
-			});
-		  }
 
-		  // Research section toggle functionality
-		  var researchToggle = document.getElementById('research-toggle');
-		  var researchToggleIcon = document.getElementById('research-toggle-icon');
-		  var researchToggleText = document.getElementById('research-toggle-text');
-		  var researchItem1 = document.getElementById('research-item-1');
-		  var researchItem2 = document.getElementById('research-item-2');
-		  var researchItem3 = document.getElementById('research-item-3');
+				// Research section toggle functionality
+				var researchToggle = document.getElementById('research-toggle');
+				var researchToggleIcon = document.getElementById('research-toggle-icon');
+				var researchToggleText = document.getElementById('research-toggle-text');
+				var researchItem1 = document.getElementById('research-item-1');
+				var researchItem2 = document.getElementById('research-item-2');
+				var researchItem3 = document.getElementById('research-item-3');
 
-		  if (researchToggle) {
-			researchToggle.addEventListener('click', function() {
-			  if (researchItem1.style.display === 'none') {
-				// Show content
-				researchItem1.style.display = 'block';
-				researchItem2.style.display = 'block';
-				researchItem3.style.display = 'block';
-				researchToggleIcon.className = 'icon-chevron-up';
-				researchToggleText.textContent = 'Hide Research Experience';
-				// Trigger reveal animations for new content
-				setTimeout(function() {
-				  reveal();
-				}, 100);
-			  } else {
-				// Hide content
-				researchItem1.style.display = 'none';
-				researchItem2.style.display = 'none';
-				researchItem3.style.display = 'none';
-				researchToggleIcon.className = 'icon-chevron-down';
-				researchToggleText.textContent = 'Show Research Experience';
-			  }
+				if (researchToggle) {
+					researchToggle.addEventListener('click', function () {
+						if (researchItem1.style.display === 'none') {
+							// Show content
+							researchItem1.style.display = 'block';
+							researchItem2.style.display = 'block';
+							researchItem3.style.display = 'block';
+							researchToggleIcon.className = 'icon-chevron-up';
+							researchToggleText.textContent = 'Hide Research Experience';
+							// Trigger reveal animations for new content
+							setTimeout(function () {
+								reveal();
+							}, 100);
+						} else {
+							// Hide content
+							researchItem1.style.display = 'none';
+							researchItem2.style.display = 'none';
+							researchItem3.style.display = 'none';
+							researchToggleIcon.className = 'icon-chevron-down';
+							researchToggleText.textContent = 'Show Research Experience';
+						}
+					});
+				}
 			});
-		  }
-		});
 		</script>
 		<script src="https://kit.fontawesome.com/97ac8d9bb6.js" crossorigin="anonymous"></script>
 </body>

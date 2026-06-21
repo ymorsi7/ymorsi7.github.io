@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,11 +37,13 @@
             align-items: center;
             z-index: 1000;
         }
+
         #logo img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
         }
+
         #logo .tooltip {
             position: absolute;
             left: 50px;
@@ -56,7 +59,8 @@
             transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
             pointer-events: none;
         }
-        #logo img:hover + .tooltip,
+
+        #logo img:hover+.tooltip,
         #logo .tooltip:hover {
             opacity: 1;
             visibility: visible;
@@ -151,7 +155,7 @@
             font-size: 5rem;
             font-weight: bold;
             color: #ff0000;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(255, 0, 0, 0.8),
                 0 0 20px rgba(255, 0, 0, 0.6),
                 0 0 30px rgba(255, 0, 0, 0.4);
@@ -330,8 +334,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
         }
 
         .solar-gradient {
@@ -363,10 +374,10 @@
 
         .sun.active {
             background: radial-gradient(circle, rgba(255, 255, 200, 1) 0%, rgba(255, 200, 100, 0.9) 40%, rgba(255, 180, 50, 0.7) 70%, rgba(255, 150, 0, 0) 100%);
-            box-shadow: 0 0 200px rgba(255, 255, 200, 1), 
-                         0 0 400px rgba(255, 220, 100, 0.8), 
-                         0 0 600px rgba(255, 180, 50, 0.4),
-                         0 0 800px rgba(255, 150, 0, 0.2);
+            box-shadow: 0 0 200px rgba(255, 255, 200, 1),
+                0 0 400px rgba(255, 220, 100, 0.8),
+                0 0 600px rgba(255, 180, 50, 0.4),
+                0 0 800px rgba(255, 150, 0, 0.2);
         }
 
         .sunrise-gradient {
@@ -376,13 +387,13 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: linear-gradient(to bottom, 
-                rgba(255, 200, 150, 0) 0%,
-                rgba(255, 180, 100, 0) 20%,
-                rgba(255, 160, 80, 0) 40%,
-                rgba(255, 140, 60, 0) 60%,
-                rgba(255, 120, 40, 0) 80%,
-                rgba(50, 50, 50, 0) 100%);
+            background: linear-gradient(to bottom,
+                    rgba(255, 200, 150, 0) 0%,
+                    rgba(255, 180, 100, 0) 20%,
+                    rgba(255, 160, 80, 0) 40%,
+                    rgba(255, 140, 60, 0) 60%,
+                    rgba(255, 120, 40, 0) 80%,
+                    rgba(50, 50, 50, 0) 100%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 1s ease;
@@ -406,15 +417,24 @@
             font-size: 4rem;
             font-weight: bold;
             color: #ff0000;
-            text-shadow: 
+            text-shadow:
                 0 0 20px rgba(255, 0, 0, 0.8),
                 0 0 40px rgba(255, 0, 0, 0.6);
             animation: wakeUpAnimation 1s ease-in-out infinite;
         }
 
         @keyframes wakeUpAnimation {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.9; }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.9;
+            }
         }
 
         .hidden {
@@ -427,16 +447,19 @@
                 font-size: 3.5rem;
                 letter-spacing: 4px;
             }
+
             .container {
                 padding: 25px;
             }
+
             .wake-up-text {
                 font-size: 2.5rem;
             }
         }
     </style>
-<script src="/new/js/site-analytics-loader.js"></script>
+    <script src="/new/js/site-analytics-loader.js"></script>
 </head>
+
 <body>
     <div id="logo" onclick="window.location.href='https://ymorsi.com';">
         <img src="images/smiling.png" alt="YM Home">
@@ -454,7 +477,8 @@
         <div class="alarm-display-container">
             <div class="alarm-label">Wake me up at:</div>
             <div class="time-display">
-                <span id="alarmHourDisplay">07</span>:<span id="alarmMinuteDisplay">00</span><span class="am-pm" id="alarmAmPmLabel">AM</span>
+                <span id="alarmHourDisplay">07</span>:<span id="alarmMinuteDisplay">00</span><span class="am-pm"
+                    id="alarmAmPmLabel">AM</span>
             </div>
             <div class="control-buttons">
                 <button type="button" class="control-btn" id="hourUp" aria-label="Increase hour">+</button>
@@ -489,8 +513,10 @@
     <div class="alarm-active hidden" id="alarmActive">
         <div class="wake-up-text">Wake Up!</div>
         <div>
-            <button type="button" class="btn btn-primary" id="stopBtn" style="font-size: 1.5rem; padding: 20px 40px;">Stop</button>
-            <button type="button" class="btn btn-secondary" id="snoozeBtn" style="font-size: 1.5rem; padding: 20px 40px;">Snooze 10 minutes</button>
+            <button type="button" class="btn btn-primary" id="stopBtn"
+                style="font-size: 1.5rem; padding: 20px 40px;">Stop</button>
+            <button type="button" class="btn btn-secondary" id="snoozeBtn"
+                style="font-size: 1.5rem; padding: 20px 40px;">Snooze 10 minutes</button>
         </div>
     </div>
 
@@ -554,7 +580,7 @@
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
             const time12 = to12Hour(hour24);
-            document.getElementById('currentTime').textContent = 
+            document.getElementById('currentTime').textContent =
                 `${String(time12.hour).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${time12.amPm}`;
         }
 
@@ -641,7 +667,7 @@
                 previewAudio.pause();
                 previewAudio = null;
             }
-            
+
             previewAudio = new Audio(soundSources[currentSound]);
             previewAudio.volume = 0.5;
             previewAudio.play().catch(e => console.log('Audio preview error:', e));
@@ -727,12 +753,12 @@
         function updateSolarEffect(progress) {
             // Progress goes from 0 to 1 over 15 minutes
             const brightness = Math.min(progress, 1);
-            
+
             // Calculate sunrise colors (warm orange/yellow tones)
             const r = Math.floor(brightness * 255);
             const g = Math.floor(brightness * 220);
             const b = Math.floor(brightness * 150);
-            
+
             // Background transitions start from night mode base or day mode base
             if (nightMode) {
                 // In night mode: start from very dark (#000011) and gradually brighten
@@ -753,31 +779,31 @@
                 const finalB = Math.min(baseB + b * 0.3, 255);
                 document.body.style.backgroundColor = `rgb(${finalR}, ${finalG}, ${finalB})`;
             }
-            
+
             // Text color changes based on brightness
             document.body.style.color = brightness > 0.4 ? '#000' : '#fff';
-            
+
             // Sun appears and grows
             const sun = document.getElementById('sun');
             const sunOpacity = brightness;
             const sunSize = 200 + (brightness * 400); // Grow sun from 200px to 600px
             const sunPosition = 50 + (brightness * 20); // Move sun up as it rises
-            
+
             sun.style.opacity = sunOpacity;
             sun.style.width = `${sunSize}px`;
             sun.style.height = `${sunSize}px`;
             sun.style.top = `${sunPosition}%`;
-            
+
             if (brightness > 0.1) {
                 sun.classList.add('active');
             }
-            
+
             // Update gradient overlay
             const gradient = getSolarGradientEl();
             if (gradient) {
                 gradient.style.opacity = Math.max(0, 1 - brightness * 1.2);
             }
-            
+
             // Add sunrise gradient overlay
             let sunriseGrad = document.getElementById('sunrise-gradient');
             if (!sunriseGrad) {
@@ -907,4 +933,5 @@
         document.body.style.backgroundColor = '#d4c5a0';
     </script>
 </body>
+
 </html>
