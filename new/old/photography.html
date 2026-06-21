@@ -423,6 +423,7 @@
 			justify-content: center;
 			overflow: hidden;
 			min-height: 0;
+			padding-bottom: 72px;
 		}
 
 		.carousel-slide-wrap {
@@ -492,14 +493,80 @@
 		}
 
 		.carousel-hint {
+			display: none;
+		}
+
+		.carousel-filmstrip-wrap {
 			position: absolute;
-			bottom: max(16px, env(safe-area-inset-bottom));
-			left: 50%;
-			transform: translateX(-50%);
-			color: rgba(255, 255, 255, 0.45);
-			font-size: 0.75em;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 10003;
+			padding: 28px 0 max(10px, env(safe-area-inset-bottom));
+			background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
 			pointer-events: none;
-			white-space: nowrap;
+		}
+
+		.carousel-filmstrip-wrap > * {
+			pointer-events: auto;
+		}
+
+		.carousel-filmstrip {
+			display: flex;
+			gap: 5px;
+			overflow-x: auto;
+			overflow-y: hidden;
+			padding: 10px max(16px, env(safe-area-inset-left)) 6px max(16px, env(safe-area-inset-right));
+			-webkit-overflow-scrolling: touch;
+			scroll-snap-type: x proximity;
+			scroll-behavior: smooth;
+			touch-action: pan-x;
+			cursor: grab;
+			scrollbar-width: none;
+		}
+
+		.carousel-filmstrip:active {
+			cursor: grabbing;
+		}
+
+		.carousel-filmstrip::-webkit-scrollbar {
+			display: none;
+		}
+
+		.carousel-filmstrip-thumb {
+			flex: 0 0 auto;
+			width: 46px;
+			height: 46px;
+			padding: 0;
+			border: 2px solid transparent;
+			border-radius: 5px;
+			overflow: hidden;
+			opacity: 0.5;
+			transform: scale(0.9);
+			transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+			cursor: pointer;
+			background: rgba(255, 255, 255, 0.08);
+			scroll-snap-align: center;
+		}
+
+		.carousel-filmstrip-thumb.active {
+			opacity: 1;
+			transform: scale(1.12);
+			border-color: #fff;
+			box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+		}
+
+		.carousel-filmstrip-thumb img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none;
+			-webkit-user-drag: none;
+		}
+
+		.carousel-filmstrip-thumb:focus-visible {
+			outline: 2px solid #667eea;
+			outline-offset: 2px;
 		}
 
 		.browse-gallery-btn {
@@ -537,14 +604,24 @@
 				display: none;
 			}
 
-			.carousel-hint {
-				font-size: 0.7em;
+			.carousel-filmstrip-thumb {
+				width: 42px;
+				height: 42px;
+			}
+
+			.carousel-stage {
+				padding-bottom: 68px;
 			}
 		}
 
 		@media (min-width: 769px) {
-			.carousel-hint {
-				display: none;
+			.carousel-filmstrip-thumb {
+				width: 52px;
+				height: 52px;
+			}
+
+			.carousel-stage {
+				padding-bottom: 84px;
 			}
 		}
 
@@ -751,7 +828,9 @@
 		</div>
 		<button type="button" class="carousel-nav carousel-prev" id="carouselPrev" aria-label="Previous photo">&#8249;</button>
 		<button type="button" class="carousel-nav carousel-next" id="carouselNext" aria-label="Next photo">&#8250;</button>
-		<span class="carousel-hint">Swipe to browse · Tap ✕ to close</span>
+		<div class="carousel-filmstrip-wrap">
+			<div class="carousel-filmstrip" id="carouselFilmstrip" role="tablist" aria-label="Photo thumbnails"></div>
+		</div>
 	</div>
 
 	<!-- Portfolio Gallery -->
@@ -2661,6 +2740,7 @@
 		const carouselNext = document.getElementById('carouselNext');
 		const carouselClose = document.getElementById('carouselClose');
 		const carouselStage = document.getElementById('carouselStage');
+		const carouselFilmstrip = document.getElementById('carouselFilmstrip');
 		const browseGalleryBtn = document.getElementById('browseGalleryBtn');
 
 		let gallerySlides = [];
@@ -2669,17 +2749,87 @@
 		let touchStartY = 0;
 		let touchDeltaX = 0;
 		let isDragging = false;
+		let isFilmstripScrubbing = false;
+		let filmstripPointerId = null;
+		let filmstripDownX = 0;
+		let suppressFilmstripClick = false;
 
 		function collectGallerySlides() {
 			return Array.from(document.querySelectorAll('.portfolio-box .portfolio-item')).map(item => {
 				const box = item.closest('.portfolio-box');
+				const fullSrc = item.getAttribute('data-full-src') || item.getAttribute('data-src') || item.querySelector('img')?.src || '';
 				return {
 					item,
-					src: item.getAttribute('data-full-src') || item.getAttribute('data-src') || item.querySelector('img')?.src || '',
+					src: fullSrc,
+					thumbSrc: item.getAttribute('data-src') || item.querySelector('img')?.src || fullSrc,
 					title: box?.querySelector('h6')?.textContent?.trim() || 'Photo',
 					date: box?.querySelector('p')?.textContent?.trim() || ''
 				};
 			}).filter(slide => slide.src);
+		}
+
+		function buildFilmstrip() {
+			carouselFilmstrip.innerHTML = '';
+			const fragment = document.createDocumentFragment();
+
+			gallerySlides.forEach((slide, index) => {
+				const btn = document.createElement('button');
+				btn.type = 'button';
+				btn.className = 'carousel-filmstrip-thumb';
+				btn.dataset.index = String(index);
+				btn.setAttribute('role', 'tab');
+				btn.setAttribute('aria-label', `${slide.title}${slide.date ? ', ' + slide.date : ''}`);
+				btn.setAttribute('aria-selected', 'false');
+
+				const img = document.createElement('img');
+				img.src = slide.thumbSrc;
+				img.alt = '';
+				img.loading = 'lazy';
+				img.decoding = 'async';
+				btn.appendChild(img);
+
+				btn.addEventListener('click', () => {
+					if (suppressFilmstripClick) return;
+					goToSlide(index);
+				});
+
+				fragment.appendChild(btn);
+			});
+
+			carouselFilmstrip.appendChild(fragment);
+			updateFilmstripActive(false);
+		}
+
+		function getFilmstripIndex(clientX) {
+			const thumbs = carouselFilmstrip.querySelectorAll('.carousel-filmstrip-thumb');
+			if (!thumbs.length) return carouselIndex;
+
+			for (let i = 0; i < thumbs.length; i++) {
+				const rect = thumbs[i].getBoundingClientRect();
+				const mid = rect.left + rect.width / 2;
+				if (clientX < mid) return i;
+			}
+			return thumbs.length - 1;
+		}
+
+		function scrollFilmstripToActive(smooth) {
+			const active = carouselFilmstrip.querySelector('.carousel-filmstrip-thumb.active');
+			if (!active) return;
+			active.scrollIntoView({
+				behavior: smooth ? 'smooth' : 'auto',
+				inline: 'center',
+				block: 'nearest'
+			});
+		}
+
+		function updateFilmstripActive(smoothScroll) {
+			const thumbs = carouselFilmstrip.querySelectorAll('.carousel-filmstrip-thumb');
+			thumbs.forEach((thumb, index) => {
+				const isActive = index === carouselIndex;
+				thumb.classList.toggle('active', isActive);
+				thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+			});
+			scrollFilmstripToActive(smoothScroll !== false);
 		}
 
 		function preloadAdjacent(index) {
@@ -2700,11 +2850,22 @@
 			carouselCounter.textContent = `${carouselIndex + 1} / ${gallerySlides.length}`;
 			carouselPrev.disabled = carouselIndex === 0;
 			carouselNext.disabled = carouselIndex === gallerySlides.length - 1;
+			updateFilmstripActive(!isFilmstripScrubbing);
 		}
 
-		function showCarouselImage() {
+		function showCarouselImage(instant) {
 			const slide = gallerySlides[carouselIndex];
 			if (!slide) return;
+
+			if (instant) {
+				carouselImage.src = slide.src;
+				carouselImage.alt = slide.title;
+				carouselImage.style.opacity = '1';
+				carouselLoading.hidden = true;
+				preloadAdjacent(carouselIndex);
+				updateCarouselUI();
+				return;
+			}
 
 			carouselLoading.hidden = false;
 			carouselImage.style.opacity = '0';
@@ -2723,6 +2884,14 @@
 			fullImg.src = slide.src;
 
 			updateCarouselUI();
+		}
+
+		function scrubToSlide(index) {
+			if (index < 0 || index >= gallerySlides.length || index === carouselIndex) return;
+			carouselIndex = index;
+			carouselSlideWrap.style.transition = 'none';
+			carouselSlideWrap.style.transform = 'translateX(0)';
+			showCarouselImage(true);
 		}
 
 		function openGalleryCarousel(startItem, startIndex) {
@@ -2745,7 +2914,8 @@
 			carouselSlideWrap.style.transition = 'none';
 			carouselSlideWrap.style.transform = 'translateX(0)';
 			carouselLoading.textContent = 'Loading…';
-			showCarouselImage();
+			buildFilmstrip();
+			showCarouselImage(false);
 			carouselClose.focus();
 		}
 
@@ -2754,7 +2924,10 @@
 			carousel.setAttribute('aria-hidden', 'true');
 			document.body.classList.remove('carousel-open');
 			carouselImage.src = '';
+			carouselFilmstrip.innerHTML = '';
 			isDragging = false;
+			isFilmstripScrubbing = false;
+			filmstripPointerId = null;
 			touchDeltaX = 0;
 			carouselSlideWrap.style.transform = 'translateX(0)';
 		}
@@ -2773,7 +2946,7 @@
 			carouselIndex = index;
 			carouselSlideWrap.style.transition = 'none';
 			carouselSlideWrap.style.transform = 'translateX(0)';
-			showCarouselImage();
+			showCarouselImage(false);
 		}
 
 		function goPrev() {
@@ -2789,10 +2962,41 @@
 		carouselPrev.addEventListener('click', goPrev);
 		carouselNext.addEventListener('click', goNext);
 
+		carouselFilmstrip.addEventListener('pointerdown', (e) => {
+			if (!carousel.classList.contains('active')) return;
+			if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+			isFilmstripScrubbing = true;
+			filmstripPointerId = e.pointerId;
+			filmstripDownX = e.clientX;
+			suppressFilmstripClick = false;
+			carouselFilmstrip.setPointerCapture(e.pointerId);
+			scrubToSlide(getFilmstripIndex(e.clientX));
+			e.stopPropagation();
+		});
+
+		carouselFilmstrip.addEventListener('pointermove', (e) => {
+			if (!isFilmstripScrubbing || e.pointerId !== filmstripPointerId) return;
+			if (Math.abs(e.clientX - filmstripDownX) > 6) suppressFilmstripClick = true;
+			scrubToSlide(getFilmstripIndex(e.clientX));
+			e.stopPropagation();
+		});
+
+		function endFilmstripScrub(e) {
+			if (!isFilmstripScrubbing || (e && e.pointerId !== filmstripPointerId)) return;
+			isFilmstripScrubbing = false;
+			filmstripPointerId = null;
+			scrollFilmstripToActive(true);
+			setTimeout(() => { suppressFilmstripClick = false; }, 0);
+		}
+
+		carouselFilmstrip.addEventListener('pointerup', endFilmstripScrub);
+		carouselFilmstrip.addEventListener('pointercancel', endFilmstripScrub);
+
 		// No backdrop dismiss – only explicit close button (and Escape on desktop)
 
 		carouselStage.addEventListener('touchstart', (e) => {
-			if (!carousel.classList.contains('active')) return;
+			if (!carousel.classList.contains('active') || isFilmstripScrubbing) return;
 			const touch = e.touches[0];
 			touchStartX = touch.clientX;
 			touchStartY = touch.clientY;
