@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="en"
-	style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Inter', 'Poppins', sans-serif;">
+<html lang="en">
 
 <head>
 	<title>YM | Photography</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Yusuf Morsi photography — cities, nature, landmarks, and moments around the world." />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
-	<link rel="icon" type="image/x-icon" href="docs/assets/img/cam.png">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/97ac8d9bb6.js" crossorigin="anonymous" defer></script>
+	<link rel="icon" type="image/x-icon" href="../images/smiling.png">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<style>
+		:root {
+			--primary-color: #475569;
+			--primary-dark: #334155;
+			--secondary-color: #64748b;
+			--text-color: #475569;
+			--text-muted: #64748b;
+			--light-bg: #f8fafc;
+			--light-bg-2: #f1f5f9;
+			--dark-bg: #1e293b;
+			--card-bg: #ffffff;
+			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+			--shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+			--shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+			--radius: 16px;
+			--radius-sm: 12px;
+		}
+
 		/* Modern Reset & Base Styles */
 		* {
 			margin: 0;
@@ -22,6 +37,7 @@
 		}
 
 		html {
+			scroll-behavior: smooth;
 			overflow-x: hidden;
 			max-width: 100%;
 		}
@@ -29,65 +45,65 @@
 		body {
 			margin: 0;
 			padding: 0;
-			color: #2d3748;
-			font-family: 'Inter', sans-serif;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: var(--text-color);
+			font-family: 'Poppins', sans-serif;
+			background-color: var(--light-bg);
 			min-height: 100vh;
-			line-height: 1.6;
+			line-height: 1.7;
 			position: relative;
 			overflow-x: hidden;
 			width: 100%;
 			max-width: 100%;
+			font-weight: 400;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 600;
+			color: var(--primary-dark);
+		}
+
+		.hover-underline-animation {
+			display: inline-block;
+			position: relative;
+			color: var(--primary-color);
+			font-weight: 500;
+			text-decoration: none;
+			transition: color 0.25s ease;
+		}
+
+		.hover-underline-animation:before {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			bottom: 0;
+			left: 0;
+			background-color: var(--primary-color);
+			transform: scaleX(0);
+			transition: transform 0.25s ease;
+		}
+
+		.hover-underline-animation:hover {
+			color: var(--primary-dark);
+		}
+
+		.hover-underline-animation:hover:before {
+			transform: scaleX(1);
 		}
 
 		#logo {
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			z-index: 1000;
+			display: none;
 		}
 
-		#logo img {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-		}
-
-		#logo .tooltip {
-			position: absolute;
-			left: 50px;
-			background: rgba(0, 0, 0, 0.8);
-			color: white;
-			padding: 5px 10px;
-			border-radius: 4px;
-			font-size: 12px;
-			white-space: nowrap;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateX(-10px);
-			transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-			pointer-events: none;
-		}
-
-		#logo img:hover+.tooltip,
-		#logo .tooltip:hover {
-			opacity: 1;
-			visibility: visible;
-			transform: translateX(0);
-		}
-
-		/* Modern Navbar */
+		/* Navbar */
 		.redesigned-navbar {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(20px);
-			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+			background: var(--card-bg);
+			box-shadow: var(--shadow-sm);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 			padding: 8px 32px;
 			height: 64px;
 			position: sticky;
@@ -117,40 +133,39 @@
 		}
 
 		.logo-text {
-			font-family: 'Syncopate', sans-serif;
-			font-size: 2em;
-			font-weight: 700;
-			color: #2d3748;
-			letter-spacing: 2px;
-			margin-top: 2px;
+			font-family: 'Poppins', sans-serif;
+			font-size: 1.15em;
+			font-weight: 600;
+			color: var(--primary-dark);
+			letter-spacing: 0.02em;
+			margin-top: 0;
 		}
 
 		.nav-icon {
 			display: flex;
 			align-items: center;
-			font-size: 1.5em;
-			color: #4a5568;
+			font-size: 1.25em;
+			color: var(--secondary-color);
 			text-decoration: none;
 			padding: 6px 10px;
-			border-radius: 8px;
-			transition: background 0.2s, color 0.2s, transform 0.2s;
+			border-radius: var(--radius-sm);
+			transition: background 0.2s, color 0.2s;
 			font-weight: 500;
 		}
 
 		.nav-icon span {
-			font-size: 1em;
+			font-size: 0.9em;
 			margin-left: 7px;
-			color: #4a5568;
-			font-family: 'Inter', sans-serif;
+			color: var(--secondary-color);
+			font-family: 'Poppins', sans-serif;
 			font-weight: 500;
-			letter-spacing: 0.5px;
 		}
 
 		.nav-icon:hover,
 		.nav-icon:focus {
-			background: rgba(102, 126, 234, 0.08);
-			color: #667eea;
-			transform: translateY(-2px) scale(1.07);
+			background: var(--light-bg-2);
+			color: var(--primary-dark);
+			transform: none;
 			text-decoration: none;
 		}
 
@@ -159,17 +174,19 @@
 			padding-right: 16px;
 		}
 
-		/* Enhanced Hero Section */
+		/* Hero Section */
 		.hero-section {
 			width: 100%;
-			height: 25vh;
-			min-height: 180px;
-			background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+			height: 28vh;
+			min-height: 200px;
+			background-image: url('../images/sfJun.jpg');
+			background-size: cover;
+			background-position: center;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			position: relative;
-			margin-bottom: 18px;
+			margin-bottom: 0;
 			overflow: hidden;
 			box-sizing: border-box;
 		}
@@ -177,12 +194,8 @@
 		.hero-section::before {
 			content: '';
 			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-			opacity: 0.3;
+			inset: 0;
+			background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(15, 23, 42, 0.65));
 		}
 
 		.hero-content {
@@ -190,59 +203,61 @@
 			z-index: 2;
 			text-align: center;
 			color: white;
+			padding: 0 20px;
+			max-width: 640px;
 		}
 
 		.hero-content h1 {
-			font-size: 2.1em;
-			font-weight: 700;
-			margin-bottom: 0.15em;
-			letter-spacing: -1px;
-			text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+			font-size: clamp(1.75rem, 4vw, 2.25rem);
+			font-weight: 600;
+			margin-bottom: 0.35em;
+			letter-spacing: 0.02em;
+			color: white;
+			text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 		}
 
 		.hero-subtitle {
-			font-size: 1em;
-			margin-bottom: 0.7em;
-			opacity: 0.9;
-			font-weight: 300;
+			font-size: 1rem;
+			margin-bottom: 1em;
+			opacity: 0.92;
+			font-weight: 400;
+			color: rgba(255, 255, 255, 0.92);
 		}
 
 		.hero-cta {
 			display: inline-block;
-			padding: 8px 20px;
-			background: rgba(255, 255, 255, 0.2);
+			padding: 0.55rem 1.25rem;
+			background: rgba(255, 255, 255, 0.15);
 			color: white;
-			border: 2px solid rgba(255, 255, 255, 0.3);
-			border-radius: 50px;
+			border: 1px solid rgba(255, 255, 255, 0.35);
+			border-radius: 20px;
 			font-size: 0.95em;
-			font-weight: 600;
+			font-weight: 500;
 			text-decoration: none;
-			backdrop-filter: blur(10px);
-			transition: all 0.3s ease;
-			margin-top: 0;
+			transition: background 0.25s ease, transform 0.25s ease;
 		}
 
 		.hero-cta:hover {
-			background: rgba(255, 255, 255, 0.3);
+			background: rgba(255, 255, 255, 0.25);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+			color: white;
 		}
 
-		/* Modern Filter Design */
+		/* Filter bar */
 		.portfolio-filter {
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
 			justify-content: center;
 			gap: 12px;
-			margin: 30px auto;
-			padding: 20px 24px;
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(20px);
-			border-radius: 20px;
-			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-			width: min(600px, calc(100% - 32px));
-			max-width: 600px;
+			margin: 2rem auto;
+			padding: 1.25rem 1.5rem;
+			background: var(--card-bg);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow-md);
+			border: 1px solid rgba(0, 0, 0, 0.04);
+			width: min(640px, calc(100% - 32px));
+			max-width: 640px;
 			box-sizing: border-box;
 		}
 
@@ -250,35 +265,47 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
-			gap: 10px;
+			gap: 8px;
 			width: 100%;
 		}
 
 		.filter-btn {
-			font-size: 0.95em;
+			font-size: 0.9em;
 			font-weight: 500;
-			color: #4a5568;
+			color: var(--text-muted);
 			cursor: pointer;
-			padding: 10px 20px;
-			border-radius: 25px;
-			transition: all 0.3s ease;
+			padding: 0.5rem 1rem;
+			border-radius: 20px;
+			transition: color 0.2s ease, background 0.2s ease;
 			border: 1px solid transparent;
 			background: transparent;
 		}
 
 		.filter-btn:hover {
-			color: #667eea;
-			background: rgba(102, 126, 234, 0.1);
-			transform: translateY(-1px);
+			color: var(--primary-dark);
+			background: var(--light-bg-2);
 		}
 
 		.filter-btn.active {
 			color: white;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+			background: var(--primary-color);
+			box-shadow: var(--shadow-sm);
 		}
 
-		/* Enhanced Gallery */
+		/* Gallery grid */
+		.page-content {
+			position: relative;
+			padding-bottom: 2rem;
+		}
+
+		.page-content::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23475569' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+			pointer-events: none;
+			z-index: 0;
+		}
 		.portfolio-gallery {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
@@ -288,20 +315,23 @@
 			max-width: 1400px;
 			width: 100%;
 			box-sizing: border-box;
+			position: relative;
+			z-index: 1;
 		}
 
 		.portfolio-box {
-			background: white;
-			border-radius: 20px;
+			background: var(--card-bg);
+			border-radius: var(--radius);
 			overflow: hidden;
-			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-			transition: all 0.4s ease;
+			box-shadow: var(--shadow-md);
+			border: 1px solid rgba(0, 0, 0, 0.04);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
 			position: relative;
 		}
 
 		.portfolio-box:hover {
-			transform: translateY(-8px) scale(1.02);
-			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-lg);
 		}
 
 		.portfolio-item {
@@ -340,7 +370,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+			background: linear-gradient(135deg, rgba(71, 85, 105, 0.04) 0%, rgba(100, 116, 139, 0.06) 100%);
 			opacity: 0;
 			transition: opacity 0.3s ease;
 			pointer-events: none;
@@ -588,7 +618,7 @@
 		}
 
 		.carousel-filmstrip-thumb:focus-visible {
-			outline: 2px solid #667eea;
+			outline: 2px solid var(--primary-color);
 			outline-offset: 2px;
 		}
 
@@ -597,24 +627,26 @@
 			align-items: center;
 			gap: 8px;
 			font-size: 0.95em;
-			font-weight: 600;
+			font-weight: 500;
 			color: white;
 			cursor: pointer;
-			padding: 12px 20px;
-			border-radius: 25px;
+			padding: 0.65rem 1.25rem;
+			border-radius: 20px;
 			border: none;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-			transition: all 0.3s ease;
+			background: var(--primary-color);
+			box-shadow: var(--shadow-sm);
+			transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 			width: 100%;
 			justify-content: center;
 			box-sizing: border-box;
+			font-family: 'Poppins', sans-serif;
 		}
 
 		.browse-gallery-btn:hover,
 		.browse-gallery-btn:focus-visible {
+			background: var(--secondary-color);
 			transform: translateY(-1px);
-			box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+			box-shadow: var(--shadow-md);
 			outline: none;
 		}
 
@@ -667,16 +699,16 @@
 		}
 
 		.portfolio-box h6 {
-			font-size: 1.1em;
+			font-size: 1.05em;
 			font-weight: 600;
-			color: #2d3748;
+			color: var(--primary-dark);
 			margin: 15px 20px 5px;
 			text-align: left;
 		}
 
 		.portfolio-box p {
 			font-size: 0.9em;
-			color: #718096;
+			color: var(--text-muted);
 			margin: 0 20px 20px;
 			text-align: left;
 			font-weight: 400;
@@ -731,8 +763,7 @@
 			}
 
 			.logo-text {
-				font-size: 1.1em;
-				letter-spacing: 1px;
+				font-size: 0.95em;
 			}
 
 			.nav-icon,
@@ -788,52 +819,103 @@
 			}
 		}
 
-		/* Footer Enhancement */
-		.footer {
+		/* Footer */
+		#fh5co-footer {
+			padding: 3em 0;
+			background: var(--light-bg);
 			text-align: center;
-			padding: 40px 20px;
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(20px);
-			color: #4a5568;
-			margin-top: 60px;
+			border-top: 1px solid rgba(0, 0, 0, 0.06);
 			width: 100%;
 			box-sizing: border-box;
+			position: relative;
+			z-index: 1;
 		}
 
-		.footer a {
-			color: #667eea;
+		.footer-tools-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.5rem 1rem;
+			align-items: center;
+			margin-bottom: 1.25rem;
+		}
+
+		.footer-tool-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			padding: 0.5rem 0.9rem;
+			background: white;
+			color: var(--primary-color);
 			text-decoration: none;
-			transition: color 0.3s ease;
+			font-weight: 500;
+			font-size: 0.95rem;
+			border-radius: 20px;
+			border: 1px solid rgba(0, 0, 0, 0.06);
+			box-shadow: var(--shadow-sm);
+			transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 		}
 
-		.footer a:hover {
-			color: #764ba2;
+		.footer-tool-link:hover {
+			background: var(--light-bg-2);
+			color: var(--primary-dark);
+			box-shadow: var(--shadow-md);
+		}
+
+		.footer-tool-link i {
+			font-size: 0.9em;
+			opacity: 0.9;
+		}
+
+		.footer-divider {
+			border: none;
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+			margin: 1.25rem auto 1rem;
+			max-width: 280px;
+		}
+
+		.footer-line {
+			color: var(--text-color);
+			line-height: 1.6;
+			font-size: 15px;
+			margin-bottom: 0;
+		}
+
+		.footer-line a {
+			color: var(--primary-color);
+			text-decoration: none;
+		}
+
+		.footer-line a:hover {
+			color: var(--primary-dark);
+		}
+
+		.footer-sep {
+			color: var(--text-color);
+			opacity: 0.5;
+			margin: 0 0.35em;
 		}
 	</style>
 </head>
 
 <body>
-	<div id="logo" onclick="window.location.href='https://ymorsi.com';">
-		<img src="../images/smiling.png" alt="YM Home">
-		<div class="tooltip">YM - Home</div>
-	</div>
 	<!-- Navbar -->
-	<nav class="navbar redesigned-navbar">
+	<nav class="redesigned-navbar">
 		<div class="navbar-left">
-			<a href="#" class="logo">
-				<img src="docs/assets/img/cam.png" alt="YM Logo"
-					style="height:36px;width:36px;vertical-align:middle;margin-right:14px;display:inline-block;">
-				<span class="logo-text">YM PHOTOGRAPHY</span>
+			<a href="../index.html" class="logo">
+				<img src="docs/assets/img/cam.png" alt="YM Photography"
+					style="height:32px;width:32px;vertical-align:middle;margin-right:10px;display:inline-block;">
+				<span class="logo-text">Photography</span>
 			</a>
 		</div>
 		<div class="navbar-right">
 			<a href="https://www.instagram.com/surpassing.photography/" class="nav-icon" target="_blank"
-				aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-			<a href="https://www.youtube.com/c/YusufMorsi" class="nav-icon" target="_blank" aria-label="YouTube"><i
-					class="fa fa-youtube-play"></i></a>
-			<a href="../index.html" class="nav-icon" aria-label="Home"><i class="fa fa-home"></i></a>
+				rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+			<a href="https://www.youtube.com/c/YusufMorsi" class="nav-icon" target="_blank"
+				rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+			<a href="../index.html" class="nav-icon" aria-label="Home"><i class="fa-solid fa-home"></i></a>
 			<a href="../index.html#projects" class="nav-icon nav-projects" aria-label="Projects"><i
-					class="fa fa-briefcase"></i> <span>Projects</span></a>
+					class="fa-solid fa-briefcase"></i> <span>Projects</span></a>
 		</div>
 	</nav>
 
@@ -846,6 +928,8 @@
 		</div>
 	</section>
 
+	<div class="page-content">
+
 	<!-- Filters -->
 	<div class="portfolio-filter">
 		<div class="filter-row">
@@ -856,7 +940,7 @@
 			<div class="filter-btn" data-filter="land">Landmarks</div>
 		</div>
 		<button type="button" class="browse-gallery-btn" id="browseGalleryBtn" aria-label="Browse all photos in fullscreen carousel">
-			<i class="fa fa-images" aria-hidden="true"></i> Browse All Photos
+			<i class="fa-solid fa-images" aria-hidden="true"></i> Browse All Photos
 		</button>
 	</div>
 
@@ -2695,6 +2779,8 @@
 		</div>
 
 	</div>
+
+	</div><!-- /.page-content -->
 	<!-- Map Container (hidden; map code removed for performance) -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
@@ -2716,17 +2802,19 @@
 	</script>
 
 	<!-- Footer -->
-	<div class="footer">
-		<center style="color:#1B2D55;">Yusuf M. &copy; 2020 -
-			<script>document.write(new Date().getFullYear())</script> |
-			<a href="https://ymorsi.com" class="hover-underline-animation">
-				<i class="fa-solid fa-home"></i>&nbsp;Home
-			</a>
-			<span style="margin: 0 0.5em;">|</span>
-			<a href="/halal-vibes" class="hover-underline-animation">Halal Vibes</a>
-			<span style="margin: 0 0.5em;">|</span>
-			<a href="/bidetbeacon" class="hover-underline-animation">BidetBeacon</a>
-		</center>
+	<div id="fh5co-footer">
+		<div class="footer-tools-links">
+			<a href="../index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+			<a href="/halal-vibes" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a>
+			<a href="/bidetbeacon" class="footer-tool-link"><i class="fa-solid fa-toilet"></i> BidetBeacon</a>
+		</div>
+		<hr class="footer-divider">
+		<p class="footer-line">
+			😁 2020 –
+			<script>document.write(new Date().getFullYear())</script>
+			<span class="footer-sep">·</span>
+			<a href="../index.html">Yusuf Morsi</a>
+		</p>
 	</div>
 	<script>
 		// Lazy-load gallery: inject img only when item is near viewport (data-src items). Existing img items keep native lazy loading.
