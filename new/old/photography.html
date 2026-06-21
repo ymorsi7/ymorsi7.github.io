@@ -353,14 +353,15 @@
 		}
 
 		.portfolio-item img.thumbnail-img {
-			filter: blur(8px);
-			transform: scale(1.05);
-			transition: filter 0.5s ease, transform 0.5s ease;
+			transition: opacity 0.2s ease;
+		}
+
+		.portfolio-item img.thumbnail-img.loading {
+			opacity: 0;
 		}
 
 		.portfolio-item img.thumbnail-img.loaded {
-			filter: none;
-			transform: scale(1);
+			opacity: 1;
 		}
 
 		.portfolio-item::after {
@@ -982,13 +983,13 @@
 			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
 			<p>June 2026</p>
 		</div>
-
+<!-- 
 		<div class="portfolio-box nature ">
 			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7211.jpeg"
 				data-full-src="../halal-vibes/imgs/june-20-2026/IMG_7211.jpeg"></div>
 			<h6>Crystal Springs Reservoir · Hillsborough, CA</h6>
 			<p>June 2026</p>
-		</div>
+		</div> -->
 <!-- 
 		<div class="portfolio-box nature ">
 			<div class="portfolio-item" data-src="../halal-vibes/imgs/june-20-2026/IMG_7197.jpeg"
