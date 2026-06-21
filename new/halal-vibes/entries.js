@@ -2516,11 +2516,12 @@ const HALAL_VIBES_ENTRIES = [
     categories: ["coffee", "vibes"],
     foodScore: null,
     vibesScore: 10,
-    excerpt: "Amazing vibes (5/5 atmosphere)—great environment and one of my top places to sit in the South Bay. Way less crowded than Big Mug, with way better furniture and interior design. Parking isn't the best.",
+    excerpt: "Amazing vibes (5/5 atmosphere)—great environment and one of my top places to sit in the South Bay. Good desserts too—brownies, donut holes, coffee cake bites. Way less crowded than Big Mug, with way better furniture and interior design. Parking isn't the best.",
     image: "images/coffeebar.jpeg",
     content: `
       <p>401 Willow Ave, Sunnyvale, CA 94086</p>
       <p>Amazing vibes—5/5 atmosphere—and a great environment overall. One of my top places to sit in; way less crowded than Big Mug and way better furniture/interior design.</p>
+      <p>Good desserts too—brownies, donut holes, and coffee cake bites are worth grabbing with your coffee.</p>
       <p>Not the best parking, but worth it for the space. High ceilings, natural light, stone counters, and a calm, premium feel that makes it easy to stay awhile.</p>
       <p><strong>Atmosphere:</strong> 5/5 · <strong>Parking:</strong> not great</p>
     `,
@@ -2545,5 +2546,588 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-21",
     tags: ["coffee", "carmel", "monterey peninsula", "walkable"]
+  },
+  {
+    slug: "hh-brazilian-steakhouse-beverly-hills",
+    title: "H&H Brazilian Steakhouse Beverly Hills",
+    region: "US",
+    location: "Beverly Hills",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "My favorite steakhouse in Southern California—and it's halal. Parking isn't the greatest, but this is a great spot. Brazilian churrasco at the Beverly Center.",
+    image: null,
+    content: `
+      <p>8500 Beverly Blvd, Suite 113, Los Angeles, CA 90048</p>
+      <p>Beverly Hills · Brazilian · Halal · Venues &amp; Event Spaces</p>
+      <p>My favorite steakhouse I've had in Southern California, and it's halal. Parking isn't the greatest, but this is a great spot.</p>
+      <p>At the Beverly Center (corner of La Cienega &amp; 3rd). Winter room and private event spaces available. Open Mon–Sat 11:30 AM–10 PM, Sun 11:30 AM–9:30 PM.</p>
+      <p><strong>Halal:</strong> yes · <strong>Parking:</strong> not great (Beverly Center garage)</p>
+    `,
+    date: "2026-06-21",
+    tags: ["halal", "steakhouse", "brazilian", "beverly hills", "churrasco", "los angeles"]
+  },
+  {
+    slug: "richard-walkers-pancake-house-la-jolla",
+    title: "Richard Walker's Pancake House",
+    region: "US",
+    location: "La Jolla",
+    categories: ["food", "vibes"],
+    nonMeatOptions: true,
+    foodScore: 9,
+    vibesScore: 9,
+    excerpt: "Amazing breakfast vibes in La Jolla—near a great walking area outside and good food. Not halal, but solid non-meat breakfast options.",
+    image: null,
+    content: `
+      <p>909 Prospect St, Unit 190, La Jolla, CA 92037</p>
+      <p>Amazing breakfast vibes in La Jolla Village. Near a great walking area outside—the Village, coast, and shops are all easy to stroll before or after.</p>
+      <p>Good food and a classic pancake-house feel with warm wood details and natural light. Not halal, but plenty of vegetarian-friendly breakfast picks if you're avoiding meat.</p>
+      <p><strong>Meal type:</strong> Breakfast · Brunch · <strong>Area:</strong> La Jolla, San Diego</p>
+    `,
+    date: "2026-06-21",
+    tags: ["breakfast", "brunch", "pancakes", "la jolla", "san diego", "vegetarian options", "walkable"]
+  },
+  {
+    slug: "thyme-cafe-and-market-santa-monica",
+    title: "Thyme Cafe and Market",
+    region: "US",
+    location: "Santa Monica",
+    categories: ["coffee", "desserts", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "Nice Santa Monica spot for desserts, morning sips, and vibes—charming neighborhood cafe with baked goods, outdoor seating, and a relaxed community feel.",
+    image: null,
+    content: `
+      <p>1630 Ocean Park Blvd, Santa Monica, CA 90405</p>
+      <p>Nice spot in Santa Monica for desserts and morning sips—and the vibes hold up too. Charming neighborhood cafe and market with gourmet baked goods, coffee, and fare to eat in or take to go.</p>
+      <p>Outdoor seating area is a plus. Open Mon–Sat 8 AM–4 PM, Sun 8 AM–3 PM.</p>
+      <p><strong>Good for:</strong> morning coffee · pastries &amp; desserts · casual hangout</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "desserts", "bakery", "breakfast", "santa monica", "los angeles", "outdoor seating"]
+  },
+  {
+    slug: "sweet-mandy-bs-streeterville-chicago",
+    title: "Sweet Mandy B's",
+    region: "US",
+    location: "Chicago",
+    categories: ["desserts", "vibes"],
+    foodScore: 7,
+    vibesScore: 8,
+    excerpt: "Cute dessert spot near the Mag Mile (Streeterville)—decent desserts and a great walking area around Michigan Ave and the lakefront.",
+    image: null,
+    content: `
+      <p>254 E Ontario St, Chicago, IL 60611</p>
+      <p>Streeterville · steps from Michigan Avenue (Mag Mile)</p>
+      <p>Cute dessert spot with cupcakes, cookies, brownies, and cakes made in-house. Decent desserts—not over-the-top fancy, but solid sweet treats.</p>
+      <p>Great walking area outside—easy to grab something and stroll Michigan Ave, Streeterville, or toward the lakefront.</p>
+      <p>Open daily 9 AM–6 PM.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "cupcakes", "bakery", "chicago", "mag mile", "streeterville", "walkable"]
+  },
+  {
+    slug: "caffe-greco-san-francisco",
+    title: "Caffè Greco",
+    region: "US",
+    location: "San Francisco",
+    categories: ["coffee", "vibes"],
+    foodScore: 7,
+    vibesScore: 8,
+    excerpt: "North Beach classic—good, decent vibes on Columbus Ave. Old-school SF cafe energy.",
+    image: null,
+    content: `
+      <p>423 Columbus Ave, San Francisco, CA 94133</p>
+      <p>North Beach · Columbus Ave</p>
+      <p>Good, decent vibes—classic North Beach cafe feel in the heart of SF. A nice stop for coffee and people-watching in a walkable neighborhood.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "san francisco", "north beach", "columbus ave"]
+  },
+  {
+    slug: "chocolate-bash-tustin",
+    title: "Chocolate Bash",
+    region: "US",
+    location: "Tustin",
+    categories: ["desserts", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "Cute OC dessert spot in Tustin—made-to-order crepes, waffles, chocolate-dipped strawberries, and Dubai-style treats. Cozy inside, outdoor seating, open late.",
+    image: null,
+    content: `
+      <p>14099 Newport Ave, Tustin, CA 92780</p>
+      <p>Strata Tustin Center · Tustin, OC</p>
+      <p>Dessert spot built around made-to-order crepes, pancakes, waffles, and chocolate-dipped strawberries. Trendy, cute interior with indoor and outdoor seating—cozy atmosphere and a huge customizable menu.</p>
+      <p>Highlights: Belgium chocolate crepes, Dubai strawberry cup, bash roll, lava cake, chocolate-covered strawberries. Chocolate imported from Belgium/Italy. Open until 11 PM weekdays, midnight Fri–Sat.</p>
+      <p><strong>Good for:</strong> late-night dessert · crepe cravings · sharing with friends</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "crepes", "chocolate", "tustin", "oc", "orange county", "late night"]
+  },
+  {
+    slug: "big-als-pizzeria-orange",
+    title: "BiG AL's Pizzeria",
+    region: "US",
+    location: "Orange",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 8,
+    vibesScore: 7,
+    excerpt: "Good halal pizza and wings in Old Towne Orange—unique flavors (Lebanese garlic chicken, Hawaiian brisket, Jamaican jerk). Bit of a wait since everything's made to order, but still pretty good.",
+    image: null,
+    content: `
+      <p>396 W Chapman Ave, Orange, CA 92866</p>
+      <p>Old Towne Orange · near Orange Circle</p>
+      <p>Halal pizza, wings, and brisket subs—signature pies and top-rated wings made from scratch daily. Unique menu: Lebanese garlic chicken, spicy Hawaiian brisket, carne asada, Jamaican jerk wings, BBQ brisket sub, and more.</p>
+      <p>Good halal pizza spot in OC. There's a bit of a wait (made to order), but still pretty good. Spacious dining area, casual and trendy. Parking lot in back; street parking nearby too.</p>
+      <p>Open Mon–Thu &amp; Sun 11 AM–9 PM, Fri–Sat 11 AM–10 PM.</p>
+      <p><strong>Halal:</strong> yes (HTO certified; pizza chicken hand-slaughtered per owner)</p>
+    `,
+    date: "2026-06-21",
+    tags: ["halal", "pizza", "wings", "orange", "oc", "old towne orange", "brisket"]
+  },
+  {
+    slug: "kind-grounds-los-angeles",
+    title: "Kind Grounds",
+    region: "US",
+    location: "Los Angeles",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 6,
+    excerpt: "Good coffee on Sawtelle—nice spot with solid coffee. Decent vibes; outside area isn't amazing, but worth a stop.",
+    image: null,
+    content: `
+      <p>3759 Sawtelle Blvd, Los Angeles, CA 90066</p>
+      <p>Sawtelle · West LA</p>
+      <p>Good coffee spot in LA—nice spot with good coffee. Decent overall; vibes outside aren't amazing, but the coffee holds up.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "sawtelle", "west la", "los angeles"]
+  },
+  // {
+  //   slug: "mukja-korean-fried-chicken-atlanta",
+  //   title: "Mukja Korean Fried Chicken",
+  //   region: "US",
+  //   location: "Atlanta",
+  //   categories: ["food", "vibes"],
+  //   halalBadge: true,
+  //   foodScore: 9,
+  //   vibesScore: 8,
+  //   excerpt: "Halal Korean fried chicken in Midtown Atlanta—pretty great. Wings, tendies, and sauces were on point when I went.",
+  //   image: null,
+  //   content: `
+  //     <p>933 Peachtree St NE, Suite 951, Atlanta, GA 30309</p>
+  //     <p>Midtown Atlanta</p>
+  //     <p>Halal Korean fried chicken—and it was pretty great. Korean-style wings, quarter birds, tendies, mac &amp; cheese, loaded fries, and sauces like sweet heat and soy garlic.</p>
+  //     <p><strong>Note:</strong> Permanently closed June 2025.</p>
+  //   `,
+  //   date: "2026-06-21",
+  //   tags: ["halal", "korean", "fried chicken", "wings", "atlanta", "midtown", "closed"]
+  // },
+  {
+    slug: "tatte-bakery-cafe-back-bay-boston",
+    title: "Tatte Bakery & Cafe | Back Bay",
+    region: "US",
+    location: "Boston",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "Pretty nice coffee shop in Back Bay—I liked the vibes and the nice walking area around Boylston and the Common.",
+    image: null,
+    content: `
+      <p>399 Boylston St, Boston, MA 02116</p>
+      <p>Back Bay · Boston</p>
+      <p>Pretty nice coffee shop in Boston. I liked its vibes and the nice walking area around it—Boylston St, Back Bay, and easy strolls toward the Public Garden and Common.</p>
+      <p>Pastries, breakfast, and coffee in a bright, bustling cafe setting.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "bakery", "boston", "back bay", "walkable"]
+  },
+  {
+    slug: "legal-sea-foods-park-square-boston",
+    title: "Legal Sea Foods - Park Square",
+    region: "US",
+    location: "Boston",
+    categories: ["food", "vibes"],
+    nonMeatOptions: true,
+    foodScore: 9,
+    vibesScore: 8,
+    excerpt: "Great location in Park Square—amazing seafood. Clam chowder, raw bar, lobster, and patio dining across from the Park Plaza Hotel.",
+    image: null,
+    content: `
+      <p>79 Park Plaza, Boston, MA 02116</p>
+      <p>Park Square · corner of Arlington St · across from Park Plaza Hotel</p>
+      <p>Great location and amazing seafood. Boston staple since 1980—clam chowder, oysters and raw bar, lobster, grilled and fried seafood, plus patio in warmer months.</p>
+      <p>Wrap-around bar, open raw bar, and expansive lounge and dining areas. Not halal; seafood-focused menu.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["seafood", "boston", "park square", "clam chowder", "lobster", "walkable"]
+  },
+  {
+    slug: "ten-thousand-coffee-new-york",
+    title: "Ten Thousand Coffee",
+    region: "US",
+    location: "New York",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 9,
+    excerpt: "Great NYC coffee spot—I really liked it. Nice walking areas nearby; known for einspanners and matcha drinks.",
+    image: null,
+    content: `
+      <p>NYC locations: 750 3rd Ave, New York, NY 10017 · 1410 Broadway, New York, NY 10018 · 14 Wall St, New York, NY 10005</p>
+      <p>Great spot in New York—nice walking around Midtown, Broadway, or FiDi depending on which location. Good coffee; einspanner and matcha einspanner are popular picks.</p>
+      <p>Weekends typically 10 AM–5 PM at NYC shops.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "matcha", "einspanner", "new york", "nyc", "walkable"]
+  },
+  {
+    slug: "gregorys-coffee-midtown-new-york",
+    title: "Gregorys Coffee",
+    region: "US",
+    location: "New York",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 9,
+    excerpt: "Amazing place in Midtown—very good vibes and good coffee. Easy walk around Bryant Park and Times Square area.",
+    image: null,
+    content: `
+      <p>58 W 44th St, New York, NY 10036</p>
+      <p>Midtown · near Bryant Park &amp; Times Square</p>
+      <p>Amazing place—very good vibes and good coffee. Great stop in the heart of Midtown with plenty to walk to nearby.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "new york", "nyc", "midtown", "bryant park", "walkable"]
+  },
+  {
+    slug: "extraordinary-desserts-downtown-san-diego",
+    title: "Extraordinary Desserts",
+    region: "US",
+    location: "San Diego",
+    categories: ["desserts", "vibes"],
+    foodScore: 8,
+    vibesScore: 7,
+    excerpt: "Downtown/Little Italy dessert spot—good desserts and a decent outing every once in a while. Not great parking, and quite expensive.",
+    image: null,
+    content: `
+      <p>1430 Union St, San Diego, CA 92101</p>
+      <p>Little Italy · Downtown San Diego</p>
+      <p>Not great parking, and quite expensive—but good desserts and a decent outing every once in a while. Famous San Diego bakery with elaborate cakes, pastries, and a sit-down cafe vibe.</p>
+      <p><strong>Parking:</strong> not great · <strong>Price:</strong> on the pricier side</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "bakery", "san diego", "little italy", "downtown", "special occasion"]
+  },
+  {
+    slug: "chili-chutney-afghan-restaurant-lake-forest",
+    title: "Chili Chutney Afghan Restaurant",
+    region: "US",
+    location: "Lake Forest",
+    categories: ["food", "vibes"],
+    halalBadge: true,
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "OC Afghan spot—great burgers, very very very good. Halal home-style Afghan food (Lake Forest, near Tustin).",
+    image: null,
+    content: `
+      <p>24301 Muirlands Blvd Ste A, Lake Forest, CA 92630</p>
+      <p>Orange County · Lake Forest (near Tustin)</p>
+      <p>Great burgers—very very very good. Authentic Afghan halal food; kabobs, rice plates, and sandwiches. Family-run since 2009.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["halal", "afghan", "burgers", "lake forest", "oc", "orange county", "tustin area"]
+  },
+  {
+    slug: "the-boy-and-the-bear-pasadena",
+    title: "The Boy & The Bear",
+    region: "US",
+    location: "Pasadena",
+    categories: ["coffee", "vibes"],
+    vibesFavorite: true,
+    foodScore: 8,
+    vibesScore: 10,
+    excerpt: "AMAZING vibes—Pasadena coffee roastery I really loved. Thoughtfully designed, calm space on E Green St.",
+    image: null,
+    content: `
+      <p>951 E Green St, Pasadena, CA 91106</p>
+      <p>Pasadena · The Green Store</p>
+      <p>AMAZING vibes—I really loved this Pasadena coffee shop. Intentional, calm roastery café with great coffee and a beautiful space.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "pasadena", "los angeles", "roastery"]
+  },
+  {
+    slug: "caffe-bene-san-jose",
+    title: "Caffe Bene",
+    region: "US",
+    location: "San Jose",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 9,
+    excerpt: "Great San Jose spot—a bit overpriced but really nice vibes. Korean café classics, waffles, and coffee.",
+    image: null,
+    content: `
+      <p>181 E Tasman Dr, San Jose, CA 95134</p>
+      <p>North San Jose · near Levi's Stadium area</p>
+      <p>Great place—a bit overpriced but really nice vibes. Korean coffee chain with waffles, bingsu, and hangout-friendly seating.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "korean", "san jose", "south bay", "waffles"]
+  },
+  {
+    slug: "cat-and-cloud-coffee-santa-cruz",
+    title: "Cat & Cloud Coffee",
+    region: "US",
+    location: "Santa Cruz",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "Good coffee in Santa Cruz with a nice walking area around the Westside/Beach Flats neighborhood.",
+    image: null,
+    content: `
+      <p>719 Swift St, Suite 56, Santa Cruz, CA 95060</p>
+      <p>Westside Santa Cruz</p>
+      <p>Good coffee and a nice walking area around it—easy to stroll the Westside and nearby beach paths after a cup.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "santa cruz", "walkable"]
+  },
+  {
+    slug: "lookout-coffee-campbell",
+    title: "Lookout Coffee",
+    region: "US",
+    location: "Campbell",
+    categories: ["coffee", "vibes"],
+    foodScore: 7,
+    vibesScore: 7,
+    excerpt: "Campbell coffee shop—decent coffee, good taste, and decent vibes.",
+    image: null,
+    content: `
+      <p>2135 S Winchester Blvd, Suite 100, Campbell, CA 95008</p>
+      <p>Campbell · South Bay</p>
+      <p>Decent coffee with good taste and decent vibes—a solid neighborhood stop in Campbell.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "campbell", "south bay"]
+  },
+  {
+    slug: "the-penny-ice-creamery-los-altos",
+    title: "The Penny Ice Creamery",
+    region: "US",
+    location: "Los Altos",
+    categories: ["desserts", "vibes"],
+    foodScore: 8,
+    vibesScore: 7,
+    excerpt: "Good ice cream in Los Altos—local scoop shop on State St.",
+    image: null,
+    content: `
+      <p>170 State St, Unit 102, Los Altos, CA 94022</p>
+      <p>Downtown Los Altos</p>
+      <p>Good ice cream—local favorite scoop shop on State Street in downtown Los Altos.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "ice cream", "los altos", "south bay"]
+  },
+  {
+    slug: "doughnut-plant-brooklyn",
+    title: "Doughnut Plant",
+    region: "US",
+    location: "Brooklyn",
+    categories: ["desserts", "vibes"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Good desserts in Brooklyn—famous NYC doughnuts (cake doughnuts, filled squares, seasonal flavors).",
+    image: null,
+    content: `
+      <p>198 Bedford Ave, Brooklyn, NY 11249</p>
+      <p>Williamsburg · Brooklyn</p>
+      <p>Good desserts—iconic NYC doughnut shop known for cake doughnuts, filled flavors, and creative seasonal picks.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "donuts", "brooklyn", "new york", "nyc", "williamsburg"]
+  },
+  {
+    slug: "birria-landia-brooklyn",
+    title: "Birria-Landia",
+    region: "US",
+    location: "Brooklyn",
+    categories: ["food", "vibes"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Pretty fire tacos—NYC birria food truck with cult-following quesabirria. Hispanic street food done right.",
+    image: null,
+    content: `
+      <p>491 Metropolitan Ave, Brooklyn, NY 11211</p>
+      <p>Williamsburg · Brooklyn</p>
+      <p>Good Hispanic food truck in NY—pretty fire tacos. Birria and quesabirria with consommé; worth the hype and the line.</p>
+      <p><strong>Tip:</strong> Check Instagram for truck hours/location updates—can move.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["tacos", "birria", "food truck", "brooklyn", "new york", "nyc", "williamsburg"]
+  },
+  {
+    slug: "artly-coffee-seattle",
+    title: "Artly Coffee",
+    region: "US",
+    location: "Seattle",
+    categories: ["coffee", "vibes"],
+    foodScore: 8,
+    vibesScore: 8,
+    excerpt: "Really good vibes for walking outside and shopping downtown—coffee made by robot, but the Pike/Pine area around it is nice.",
+    image: null,
+    content: `
+      <p>101 Stewart St, Ste 102, Seattle, WA 98101</p>
+      <p>Downtown Seattle · Pike/Pine area</p>
+      <p>Really good vibes for walking outside and shopping—cool spot where coffee is made by a robot, but the area around it is nice for strolling downtown.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "seattle", "downtown", "robot barista", "walkable", "shopping"]
+  },
+  {
+    slug: "sues-gallery-cafe-saratoga",
+    title: "Sue's Gallery Cafe",
+    region: "US",
+    location: "Saratoga",
+    categories: ["coffee", "desserts", "vibes"],
+    foodScore: 8,
+    vibesScore: 9,
+    excerpt: "Really nice area in Saratoga Village—good desserts, coffee, and vibes on Big Basin Way.",
+    image: null,
+    content: `
+      <p>14665 Big Basin Way, Saratoga, CA 95070</p>
+      <p>Saratoga Village</p>
+      <p>Really nice area—good desserts, coffee, and vibes. Charming village café and gallery setting on Big Basin Way; easy to walk the downtown strip after.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "desserts", "saratoga", "south bay", "walkable", "village"]
+  },
+  {
+    slug: "uptown-coffee-glendale",
+    title: "Uptown Coffee",
+    region: "US",
+    location: "Glendale",
+    categories: ["coffee", "vibes"],
+    foodScore: 7,
+    vibesScore: 7,
+    excerpt: "Pretty decent coffee shop in LA/Glendale—not bad for a casual cup and hang.",
+    image: null,
+    content: `
+      <p>1831 W Glenoaks Blvd, Glendale, CA 91201</p>
+      <p>Glendale · Los Angeles area</p>
+      <p>Pretty decent coffee shop in LA—not bad. Solid neighborhood café on Glenoaks Blvd.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "glendale", "los angeles", "la"]
+  },
+  {
+    slug: "java-man-coffee-portland",
+    title: "Java Man Coffee",
+    region: "US",
+    location: "Portland",
+    categories: ["coffee", "vibes"],
+    vibesFavorite: true,
+    foodScore: 8,
+    vibesScore: 10,
+    excerpt: "Extremely beautiful—great sit, amazing vibes inside with lovely plants and beautiful design. One of my favorite Portland cafés.",
+    image: null,
+    content: `
+      <p>508 SW Broadway, Portland, OR 97204</p>
+      <p>Downtown Portland</p>
+      <p>Extremely beautiful—I really like it. Great sit, amazing vibes inside with lovely plants and beautiful stuff throughout the space.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "portland", "downtown", "plants", "beautiful"]
+  },
+  {
+    slug: "blue-star-donuts-portland",
+    title: "Blue Star Donuts",
+    region: "US",
+    location: "Portland",
+    categories: ["desserts"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Very good donuts—best apple fritter I've had in Portland.",
+    image: null,
+    content: `
+      <p>1701 SW Jefferson St, Portland, OR 97201</p>
+      <p>Portland · PSU / Goose Hollow area</p>
+      <p>Very good donuts. Best apple fritter I've had in Portland—worth stopping for.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "donuts", "apple fritter", "portland"]
+  },
+  {
+    slug: "ascension-coffee-crescent-court-dallas",
+    title: "Ascension Coffee — Crescent Court",
+    region: "US",
+    location: "Dallas",
+    categories: ["coffee", "vibes"],
+    vibesFavorite: true,
+    foodScore: 8,
+    vibesScore: 10,
+    excerpt: "One of my top vibes coffee shops in Dallas—very nice vibes and amazing sitting interior design inside. I really loved it.",
+    image: null,
+    content: `
+      <p>200 Crescent Ct, Dallas, TX 75201</p>
+      <p>Uptown Dallas · Crescent Court</p>
+      <p>One of my top vibes coffee shops in Dallas. Very nice vibes and amazing sitting interior design inside—I really loved it.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "dallas", "uptown", "interior design", "beautiful"]
+  },
+  {
+    slug: "fentons-creamery-oakland",
+    title: "Fentons Creamery",
+    region: "US",
+    location: "Oakland",
+    categories: ["desserts"],
+    foodScore: 8,
+    vibesScore: 7,
+    excerpt: "Pretty good ice cream in Oakland—classic scoop shop, good dessert stop.",
+    image: null,
+    content: `
+      <p>4226 Piedmont Ave, Oakland, CA 94611</p>
+      <p>Rockridge · Oakland</p>
+      <p>Pretty good ice cream—classic Oakland institution on Piedmont Ave. Good dessert.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "ice cream", "oakland", "east bay"]
+  },
+  {
+    slug: "mitchells-ice-cream-san-francisco",
+    title: "Mitchell's Ice Cream",
+    region: "US",
+    location: "San Francisco",
+    categories: ["desserts"],
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Really good ice cream in San Francisco—worth the trip for a scoop.",
+    image: null,
+    content: `
+      <p>688 San Jose Ave, San Francisco, CA 94110</p>
+      <p>Outer Mission · San Francisco</p>
+      <p>Really good ice cream—one of the best scoop shops in SF.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "ice cream", "san francisco", "sf"]
+  },
+  {
+    slug: "zumbar-coffee-tea-san-diego",
+    title: "Zumbar Coffee & Tea",
+    region: "US",
+    location: "San Diego",
+    categories: ["coffee"],
+    foodScore: 10,
+    vibesScore: 5,
+    excerpt: "Amazing quality coffee in San Diego—the coffee quality is great. Vibes not so much, but if you're a coffee person you'll like it.",
+    image: null,
+    content: `
+      <p>8057 La Jolla Blvd, La Jolla, CA 92037</p>
+      <p>La Jolla · San Diego area</p>
+      <p>Amazing quality coffee—the quality is great. Vibes not so much, but if you're a coffee guy you'll like it.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "san diego", "la jolla", "quality", "specialty coffee"]
   }
 ];
