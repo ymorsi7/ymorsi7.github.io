@@ -21,6 +21,11 @@
 			box-sizing: border-box;
 		}
 
+		html {
+			overflow-x: hidden;
+			max-width: 100%;
+		}
+
 		body {
 			margin: 0;
 			padding: 0;
@@ -30,6 +35,9 @@
 			min-height: 100vh;
 			line-height: 1.6;
 			position: relative;
+			overflow-x: hidden;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		#logo {
@@ -85,6 +93,21 @@
 			position: sticky;
 			top: 0;
 			z-index: 1000;
+			width: 100%;
+			max-width: 100%;
+			box-sizing: border-box;
+		}
+
+		.navbar-left {
+			min-width: 0;
+			flex: 1;
+		}
+
+		.navbar-right {
+			display: flex;
+			align-items: center;
+			gap: 18px;
+			flex-shrink: 0;
 		}
 
 		.logo {
@@ -106,7 +129,10 @@
 			display: flex;
 			align-items: center;
 			gap: 18px;
+			flex-shrink: 0;
 		}
+
+		/* navbar-right merged above */
 
 		.nav-icon {
 			display: flex;
