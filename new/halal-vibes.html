@@ -1128,7 +1128,7 @@
 				lounges: { title: 'Airport Lounges', subtitle: 'Layovers done right' }
 			};
 
-			const CITY_PRIORITY = ['San Diego', 'Los Angeles', 'OC', 'SF South Bay', 'San Francisco', 'Northern Virginia / DC'];
+			const CITY_PRIORITY = ['San Diego', 'Los Angeles / OC', 'SF Bay Area', 'DC / Maryland / Northern VA Area'];
 
 			/** Lounge entries group by travel region (not city). */
 			const LOUNGE_REGION_MAP = {
@@ -1145,29 +1145,34 @@
 
 			const LOUNGE_REGION_PRIORITY = ['US', 'Middle East', 'Europe'];
 
-			/** Metro groups for browse/filter (cards still show the specific city). */
+			/** Metro groups for browse/filter; cards show the group (e.g. all Bay Area → SF Bay Area). */
 			const CITY_TO_GROUP = {
 				'La Jolla': 'San Diego',
 				'Bellevue': 'Seattle',
-				'San Jose': 'SF South Bay',
-				'Mountain View': 'SF South Bay',
-				'Santa Clara': 'SF South Bay',
-				'Sunnyvale': 'SF South Bay',
-				'Palo Alto': 'SF South Bay',
-				'Redwood City': 'SF South Bay',
-				'Fremont': 'SF South Bay',
-				'Newark': 'SF South Bay',
-				'Malibu': 'Los Angeles',
-				'Venice': 'Los Angeles',
-				'Santa Clarita': 'Los Angeles',
-				'Pasadena': 'Los Angeles',
-				'Fullerton': 'OC',
-				'Buena Park': 'OC',
-				'Anaheim': 'OC',
-				'Santa Ana': 'OC',
-				'Northern Virginia': 'Northern Virginia / DC',
-				'Washington, D.C.': 'Northern Virginia / DC',
-				'Sterling': 'Northern Virginia / DC'
+				'San Francisco': 'SF Bay Area',
+				'San Jose': 'SF Bay Area',
+				'Mountain View': 'SF Bay Area',
+				'Santa Clara': 'SF Bay Area',
+				'Sunnyvale': 'SF Bay Area',
+				'Palo Alto': 'SF Bay Area',
+				'Redwood City': 'SF Bay Area',
+				'Fremont': 'SF Bay Area',
+				'Newark': 'SF Bay Area',
+				'Santa Cruz/Capitola': 'SF Bay Area',
+				'Carmel-by-the-Sea': 'SF Bay Area',
+				'Los Angeles': 'Los Angeles / OC',
+				'Malibu': 'Los Angeles / OC',
+				'Venice': 'Los Angeles / OC',
+				'Santa Clarita': 'Los Angeles / OC',
+				'Pasadena': 'Los Angeles / OC',
+				'Fullerton': 'Los Angeles / OC',
+				'Buena Park': 'Los Angeles / OC',
+				'Anaheim': 'Los Angeles / OC',
+				'Santa Ana': 'Los Angeles / OC',
+				'Baltimore': 'DC / Maryland / Northern VA Area',
+				'Northern Virginia': 'DC / Maryland / Northern VA Area',
+				'Washington, D.C.': 'DC / Maryland / Northern VA Area',
+				'Sterling': 'DC / Maryland / Northern VA Area'
 			};
 
 			const DESSERT_TAG_HINTS = ['desserts', 'donuts', 'pastries', 'croissants', 'bakery'];
@@ -1188,6 +1193,10 @@
 			function getCityGroup(loc) {
 				const city = normalizeCity(loc);
 				return CITY_TO_GROUP[city] || city;
+			}
+
+			function formatLocation(loc) {
+				return normalizeCity(loc);
 			}
 
 			function getLoungeRegion(entry) {
@@ -1406,7 +1415,7 @@
 				card.innerHTML = `
 					${imgSection}
 					<div class="card-body">
-						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${normalizeCity(entry.location)}</p>
+						<p class="card-location"><i class="fa-solid fa-location-dot"></i> ${formatLocation(entry.location)}</p>
 						<h3 class="card-title">${entry.title}</h3>
 						${renderEntryBadges(entry)}
 						${scoresWrap}
@@ -1450,7 +1459,7 @@
 						group.className = 'hv-city-group';
 
 						const entriesInGroup = grouped[groupName];
-						const subLabels = [...new Set(entriesInGroup.map(e => normalizeCity(e.location)))].sort((a, b) => a.localeCompare(b));
+						const subLabels = [...new Set(entriesInGroup.map(e => formatLocation(e.location)))].sort((a, b) => a.localeCompare(b));
 						const subHint = subLabels.length > 1
 							? `<p class="hv-city-group-sub">${subLabels.join(' · ')}</p>`
 							: '';
@@ -1517,7 +1526,7 @@
 				content.innerHTML = `
 					<h2 id="hv-modal-title">${entry.title}</h2>
 					<div class="card-tags" style="margin-bottom: 1rem;">
-						<span class="card-tag">${normalizeCity(entry.location)}</span>
+						<span class="card-tag">${formatLocation(entry.location)}</span>
 						<span class="card-tag">${SECTION_META[getEntrySection(entry)].title}</span>
 					</div>
 					${renderEntryBadges(entry)}

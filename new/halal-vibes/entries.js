@@ -2481,7 +2481,7 @@ const HALAL_VIBES_ENTRIES = [
     content: `
       <p>1614 Pomeroy Ave, Santa Clara, CA 95051</p>
       <p>Giant chocolate chip cookies baked fresh daily in Santa Clara (alley behind the gas station). Custom boxes with rotating weekly flavors—triple choc, matcha, ube crinkle, and more.</p>
-      <p>SF South Bay / San Jose area · open late most nights.</p>
+      <p>SF Bay Area · open late most nights.</p>
     `,
     date: "2026-06-12",
     tags: ["halal", "desserts", "cookies", "santa clara", "south bay"]
@@ -2526,5 +2526,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-21",
     tags: ["coffee", "sunnyvale", "south bay", "work friendly"]
+  },
+  {
+    slug: "carmel-valley-coffee-roasting-carmel-by-the-sea",
+    title: "Carmel Valley Coffee Roasting Co.",
+    region: "US",
+    location: "Carmel-by-the-Sea",
+    categories: ["coffee", "vibes"],
+    foodScore: 7,
+    vibesScore: 8,
+    excerpt: "Parking not great, but an amazing place to walk through—a cute little nook with nice vibes. Can get crowded; don't expect the best or most available seating. Coffee is decent.",
+    image: "images/cbts.jpeg",
+    content: `
+      <p>Ocean Ave, between Lincoln St & Monte Verde St, Carmel-by-the-Sea, CA 93921</p>
+      <p>Parking isn't great, but it's an amazing place to walk through. Sometimes quite crowded—don't expect the best sitting or much available seating—but a nice vibes area tucked in a cute little nook.</p>
+      <p>The coffee is decent. Great stop while strolling Carmel; more of a grab-and-wander vibe than a long sit-down session.</p>
+      <p><strong>Parking:</strong> not great · <strong>Seating:</strong> limited · <strong>Coffee:</strong> decent</p>
+    `,
+    date: "2026-06-21",
+    tags: ["coffee", "carmel", "monterey peninsula", "walkable"]
   }
 ];
