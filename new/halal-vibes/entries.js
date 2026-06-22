@@ -6,7 +6,7 @@
  *
  * Region: US | Egypt | UK | Saudi Arabia | Turkey
  * Location: city/area (airport lounges: include IATA code, e.g. "Las Vegas (LAS)")
- * Categories: coffee | food | vibes | lounges
+ * Categories: coffee | food | desserts | vibes | lounges (lounges only — do not combine with other categories)
  * Scores: 1-10, or null if N/A
  * Stars: 1-5 for airport lounges (optional)
  * nonMeatOptions: true — show "Not halal · good non-meat options" badge on card
@@ -454,7 +454,7 @@ const HALAL_VIBES_ENTRIES = [
     title: "Alfursan Lounge - Jeddah Airport",
     region: "Saudi Arabia",
     location: "Jeddah (JED)",
-    categories: ["food", "vibes", "lounges"],
+    categories: ["lounges"],
     foodScore: null,
     vibesScore: null,
     stars: 5,

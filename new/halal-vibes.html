@@ -1263,7 +1263,8 @@
 			}
 
 			function entryInSection(entry, section) {
-				if (section === 'lounges') return entry.categories.includes('lounges');
+				if (entry.categories.includes('lounges')) return section === 'lounges';
+				if (section === 'lounges') return false;
 				if (section === 'desserts') return entry.categories.includes('desserts') || getEntrySection(entry) === 'desserts';
 				if (section === 'sips') return entry.categories.includes('coffee') || getEntrySection(entry) === 'sips';
 				if (section === 'restaurants') return entry.categories.includes('food') || getEntrySection(entry) === 'restaurants';
