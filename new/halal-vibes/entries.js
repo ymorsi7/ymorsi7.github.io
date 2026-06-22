@@ -3148,5 +3148,23 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-21",
     tags: ["desserts", "mango", "hong kong", "santa clara", "south bay", "valley fair"]
+  },
+  {
+    slug: "cramers-bagels-santa-clara",
+    title: "Cramer's Bagels",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["food", "vibes"],
+    foodScore: 7,
+    vibesScore: 6,
+    excerpt: "Decent bagel—they let you customize, even over DoorDash, and it tastes good. Bagel was a tad bit chewy but that may have been a one-off.",
+    image: "images/IMG_7267.jpeg",
+    content: `
+      <p>495 El Camino Real Ste 131, Santa Clara, CA 95050</p>
+      <p>Santa Clara · South Bay (near SCU)</p>
+      <p>Decent bagel—they allow you to customize, even over DoorDash, and it tastes good. Bagel was a tad bit chewy but that part may have been a one-off.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["bagels", "breakfast", "santa clara", "south bay", "customizable"]
   }
 ];
