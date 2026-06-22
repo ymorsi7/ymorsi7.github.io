@@ -3129,5 +3129,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-21",
     tags: ["coffee", "san diego", "la jolla", "quality", "specialty coffee"]
+  },
+  {
+    slug: "hui-lau-shan-santa-clara",
+    title: "Hui Lau Shan",
+    region: "US",
+    location: "Santa Clara",
+    categories: ["desserts"],
+    vibesFavorite: true,
+    foodScore: 9,
+    vibesScore: 7,
+    excerpt: "Amazing mango pudding and desserts—Hong Kong dessert spot at Valley Fair on Stevens Creek.",
+    image: null,
+    content: `
+      <p>2855 Stevens Creek Blvd, Santa Clara, CA 95050</p>
+      <p>Westfield Valley Fair · Santa Clara</p>
+      <p>Amazing mango pudding and desserts—classic Hong Kong dessert chain. Mango-heavy menu, puddings, and fruit-based sweets worth stopping for.</p>
+    `,
+    date: "2026-06-21",
+    tags: ["desserts", "mango", "hong kong", "santa clara", "south bay", "valley fair"]
   }
 ];
