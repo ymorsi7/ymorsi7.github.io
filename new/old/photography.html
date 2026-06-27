@@ -247,49 +247,144 @@
 		.portfolio-filter {
 			display: flex;
 			flex-direction: column;
-			align-items: stretch;
-			justify-content: center;
-			gap: 12px;
+			align-items: center;
+			gap: 1.125rem;
 			margin: 2rem auto;
-			padding: 1.25rem 1.5rem;
+			padding: 1.35rem 1.25rem 1.25rem;
 			background: var(--card-bg);
 			border-radius: var(--radius);
 			box-shadow: var(--shadow-md);
-			border: 1px solid rgba(0, 0, 0, 0.04);
-			width: min(640px, calc(100% - 32px));
-			max-width: 640px;
+			border: 1px solid rgba(71, 85, 105, 0.08);
+			width: min(680px, calc(100% - 32px));
+			max-width: 680px;
 			box-sizing: border-box;
+			position: relative;
+			z-index: 2;
+			text-align: center;
+		}
+
+		.filter-section {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+			width: 100%;
+		}
+
+		.filter-section-label {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.35rem;
+			font-size: 0.72rem;
+			font-weight: 600;
+			letter-spacing: 0.07em;
+			text-transform: uppercase;
+			color: var(--text-muted);
+			margin: 0;
+			width: 100%;
+		}
+
+		.filter-section-label i {
+			font-size: 0.85rem;
+			opacity: 0.85;
+		}
+
+		.filter-track-wrap {
+			width: 100%;
+			max-width: 440px;
+			margin: 0 auto;
 		}
 
 		.filter-row {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
-			gap: 8px;
+			gap: 6px;
 			width: 100%;
+			padding: 6px;
+			background: var(--light-bg-2);
+			border-radius: 999px;
+			border: 1px solid rgba(71, 85, 105, 0.06);
 		}
 
 		.filter-btn {
-			font-size: 0.9em;
+			flex: 0 0 auto;
+			font-size: 0.875rem;
 			font-weight: 500;
 			color: var(--text-muted);
 			cursor: pointer;
-			padding: 0.5rem 1rem;
-			border-radius: 20px;
-			transition: color 0.2s ease, background 0.2s ease;
-			border: 1px solid transparent;
+			padding: 0.55rem 1rem;
+			min-height: 40px;
+			border-radius: 999px;
+			transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+			border: none;
 			background: transparent;
+			font-family: inherit;
+			white-space: nowrap;
+			-webkit-tap-highlight-color: transparent;
 		}
 
 		.filter-btn:hover {
 			color: var(--primary-dark);
-			background: var(--light-bg-2);
+			background: rgba(255, 255, 255, 0.65);
 		}
 
 		.filter-btn.active {
 			color: white;
 			background: var(--primary-color);
-			box-shadow: var(--shadow-sm);
+			box-shadow: 0 2px 8px rgba(51, 65, 85, 0.22);
+		}
+
+		.filter-section-album {
+			padding-top: 0.35rem;
+			border-top: 1px solid rgba(71, 85, 105, 0.08);
+		}
+
+		.album-select-wrap {
+			position: relative;
+			width: 100%;
+			max-width: 340px;
+			margin: 0 auto;
+		}
+
+		.album-select {
+			width: 100%;
+			font-family: inherit;
+			font-size: 0.925rem;
+			font-weight: 500;
+			padding: 0.72rem 2.25rem 0.72rem 0.95rem;
+			min-height: 44px;
+			border-radius: var(--radius-sm);
+			border: 1px solid rgba(71, 85, 105, 0.12);
+			background: var(--light-bg);
+			color: var(--primary-dark);
+			cursor: pointer;
+			appearance: none;
+			-webkit-appearance: none;
+			transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+		}
+
+		.album-select:hover {
+			border-color: rgba(71, 85, 105, 0.22);
+			background: #fff;
+		}
+
+		.album-select:focus {
+			outline: none;
+			border-color: var(--primary-color);
+			box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.12);
+			background: #fff;
+		}
+
+		.album-select-icon {
+			position: absolute;
+			right: 0.95rem;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 0.75rem;
+			color: var(--text-muted);
+			pointer-events: none;
 		}
 
 		/* Gallery grid */
@@ -623,29 +718,43 @@
 		.browse-gallery-btn {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			font-size: 0.95em;
-			font-weight: 500;
+			justify-content: center;
+			gap: 0.55rem;
+			font-size: 0.925rem;
+			font-weight: 600;
 			color: white;
 			cursor: pointer;
-			padding: 0.65rem 1.25rem;
-			border-radius: 20px;
+			padding: 0.8rem 1.5rem;
+			min-height: 48px;
+			border-radius: var(--radius-sm);
 			border: none;
-			background: var(--primary-color);
-			box-shadow: var(--shadow-sm);
+			background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+			box-shadow: 0 4px 14px rgba(51, 65, 85, 0.2);
 			transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 			width: 100%;
-			justify-content: center;
+			max-width: 340px;
+			margin: 0 auto;
 			box-sizing: border-box;
 			font-family: 'Poppins', sans-serif;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		.browse-gallery-btn i {
+			font-size: 1rem;
+			opacity: 0.92;
 		}
 
 		.browse-gallery-btn:hover,
 		.browse-gallery-btn:focus-visible {
-			background: var(--secondary-color);
+			background: linear-gradient(135deg, #1e293b 0%, var(--secondary-color) 100%);
 			transform: translateY(-1px);
-			box-shadow: var(--shadow-md);
+			box-shadow: 0 6px 18px rgba(51, 65, 85, 0.24);
 			outline: none;
+		}
+
+		.browse-gallery-btn:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 8px rgba(51, 65, 85, 0.18);
 		}
 
 		body.carousel-open {
@@ -743,16 +852,26 @@
 			}
 
 			.portfolio-filter {
-				padding: 16px;
-				gap: 10px;
+				padding: 1.1rem 1rem 1rem;
+				gap: 1rem;
 				width: calc(100% - 32px);
 				margin-left: auto;
 				margin-right: auto;
 			}
 
 			.filter-btn {
-				padding: 8px 14px;
-				font-size: 0.88em;
+				padding: 0.5rem 0.9rem;
+				font-size: 0.84rem;
+				min-height: 38px;
+			}
+
+			.album-select {
+				font-size: 0.9rem;
+			}
+
+			.browse-gallery-btn {
+				min-height: 46px;
+				font-size: 0.9rem;
 			}
 
 			.redesigned-navbar {
@@ -789,17 +908,25 @@
 			}
 
 			.portfolio-filter {
-				padding: 14px 12px;
+				padding: 1rem 0.85rem 0.9rem;
 				width: calc(100% - 24px);
+				gap: 0.9rem;
+			}
+
+			.filter-section-label {
+				font-size: 0.68rem;
 			}
 
 			.filter-row {
-				gap: 8px;
+				gap: 5px;
+				padding: 5px;
+				max-width: 100%;
 			}
 
 			.filter-btn {
-				padding: 7px 12px;
-				font-size: 0.85em;
+				padding: 0.48rem 0.8rem;
+				font-size: 0.82rem;
+				min-height: 36px;
 			}
 
 			.navbar-right {
@@ -930,15 +1057,32 @@
 
 	<!-- Filters -->
 	<div class="portfolio-filter">
-		<div class="filter-row">
-			<div class="filter-btn active" data-filter="all">All</div>
-			<div class="filter-btn" data-filter="nature">Nature</div>
-			<div class="filter-btn" data-filter="islam">Islam</div>
-			<div class="filter-btn" data-filter="urban">Urban</div>
-			<div class="filter-btn" data-filter="land">Landmarks</div>
+		<div class="filter-section">
+			<span class="filter-section-label">Category</span>
+			<div class="filter-track-wrap">
+				<div class="filter-row" role="tablist" aria-label="Photo categories">
+					<button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+					<button type="button" class="filter-btn" data-filter="nature" role="tab" aria-selected="false">Nature</button>
+					<button type="button" class="filter-btn" data-filter="islam" role="tab" aria-selected="false">Islam</button>
+					<button type="button" class="filter-btn" data-filter="urban" role="tab" aria-selected="false">Urban</button>
+					<button type="button" class="filter-btn" data-filter="land" role="tab" aria-selected="false">Landmarks</button>
+				</div>
+			</div>
+		</div>
+		<div class="filter-section filter-section-album">
+			<label class="filter-section-label" for="albumFilter">
+				<i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> City album
+			</label>
+			<div class="album-select-wrap">
+				<select id="albumFilter" class="album-select" aria-label="Filter by city album">
+					<option value="all">All cities</option>
+				</select>
+				<i class="fa-solid fa-chevron-down album-select-icon" aria-hidden="true"></i>
+			</div>
 		</div>
 		<button type="button" class="browse-gallery-btn" id="browseGalleryBtn" aria-label="Browse all photos in fullscreen carousel">
-			<i class="fa-solid fa-images" aria-hidden="true"></i> Browse All Photos
+			<i class="fa-solid fa-images" aria-hidden="true"></i>
+			<span>Browse All Photos</span>
 		</button>
 	</div>
 
@@ -971,6 +1115,7 @@
 		Neighborhoods → "Neighborhood, City, ST"
 		Landmarks → "Landmark Name · City, ST" (or Country)
 		Dates → "Month YYYY" (e.g. June 2026)
+		City albums: metro groupings in js/photography-albums.js (e.g. Pasadena → Los Angeles)
 	-->
 	<div class="portfolio-gallery" id="gallery">
 
@@ -2444,6 +2589,25 @@
 			<p>January 2024</p>
 		</div>
 
+		<div class="portfolio-box urban">
+			<div class="portfolio-item" data-src="../images/bosnnn.jpeg" data-full-src="../images/bosnnn.jpeg"></div>
+			<h6>Boston, MA</h6>
+			<p>January 2024</p>
+		</div>
+
+		<div class="portfolio-box urban">
+			<div class="portfolio-item" data-src="../images/bostonanoteher.jpg"
+				data-full-src="../images/bostonanoteher.jpg"></div>
+			<h6>Boston, MA</h6>
+			<p>January 2024</p>
+		</div>
+
+		<div class="portfolio-box urban">
+			<div class="portfolio-item" data-src="../images/bostonn.jpg" data-full-src="../images/bostonn.jpg"></div>
+			<h6>Boston, MA</h6>
+			<p>January 2024</p>
+		</div>
+
 		<div class="portfolio-box nature">
 			<div class="portfolio-item" data-src="docs/assets/img/cenpark.jpg"
 				data-full-src="docs/assets/img/cenpark.jpg"></div>
@@ -2815,22 +2979,10 @@
 
 	</div><!-- /.page-content -->
 	<!-- Map Container (hidden; map code removed for performance) -->
+	<script src="js/photography-albums.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			document.querySelectorAll('.filter-btn').forEach(button => {
-				button.addEventListener('click', () => {
-					document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-					button.classList.add('active');
-					const filter = button.getAttribute('data-filter');
-					document.querySelectorAll('.portfolio-box').forEach(item => {
-						if (filter === 'all' || item.classList.contains(filter)) {
-							item.style.display = 'block';
-						} else {
-							item.style.display = 'none';
-						}
-					});
-				});
-			});
+			if (window.PhotographyAlbums) PhotographyAlbums.init();
 		});
 	</script>
 
@@ -3046,17 +3198,22 @@
 		}
 
 		function collectGallerySlides() {
-			return Array.from(document.querySelectorAll('.portfolio-box .portfolio-item')).map(item => {
-				const box = item.closest('.portfolio-box');
-				const fullSrc = item.getAttribute('data-full-src') || item.getAttribute('data-src') || item.querySelector('img')?.src || '';
-				return {
-					item,
-					src: fullSrc,
-					thumbSrc: getPreviewSrc(fullSrc),
-					title: box?.querySelector('h6')?.textContent?.trim() || 'Photo',
-					date: box?.querySelector('p')?.textContent?.trim() || ''
-				};
-			}).filter(slide => slide.src);
+			return Array.from(document.querySelectorAll('.portfolio-box .portfolio-item'))
+				.filter(item => {
+					const box = item.closest('.portfolio-box');
+					return box && box.style.display !== 'none';
+				})
+				.map(item => {
+					const box = item.closest('.portfolio-box');
+					const fullSrc = item.getAttribute('data-full-src') || item.getAttribute('data-src') || item.querySelector('img')?.src || '';
+					return {
+						item,
+						src: fullSrc,
+						thumbSrc: getPreviewSrc(fullSrc),
+						title: box?.querySelector('h6')?.textContent?.trim() || 'Photo',
+						date: box?.querySelector('p')?.textContent?.trim() || ''
+					};
+				}).filter(slide => slide.src);
 		}
 
 		function buildFilmstrip() {
