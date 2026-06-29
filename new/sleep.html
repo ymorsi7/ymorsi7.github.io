@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wake Log — Bayesian Estimator</title>
+<style>
+  :root {
+    --bg: #fdfdf8; --bg-panel: #ffffff; --bg-input: #fafaf2; --line: #1a1a1a;
+    --text: #111111; --text-dim: #4a4a4a; --accent: #c0392b; --accent-dim: #8b1a1a;
+    --blue: #1a3a8f; --green: #1d6b3a;
+    --mono: 'Courier New', 'IBM Plex Mono', monospace;
+    --serif: 'Times New Roman', 'Source Serif 4', Georgia, serif; --sans: 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.45; min-height: 100vh;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(26,58,143,0.07) 27px, rgba(26,58,143,0.07) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.025) 39px, rgba(0,0,0,0.025) 40px);
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; position: relative; }
+  header { margin-bottom: 28px; padding-bottom: 18px; border-bottom: 3px solid var(--line); position: relative; }
+  header::after { content: "Σ ∂ ∫ ≈ μ σ² θ — pg.1"; position: absolute; top: -6px; right: 0; font-family: var(--mono); font-size: 10px; color: var(--text-dim); transform: rotate(-1.5deg); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700; transform: rotate(-0.3deg); display: inline-block; text-decoration: underline; text-decoration-style: wavy; }
+  h1 { font-family: var(--serif); font-size: 34px; font-weight: 700; letter-spacing: -0.01em; transform: rotate(-0.4deg); display: inline-block; text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--accent); }
+  h1::before { content: "[fig. 0] "; font-size: 14px; color: var(--text-dim); font-family: var(--mono); vertical-align: super; }
+  .sub { color: var(--text-dim); font-size: 13px; margin-top: 10px; max-width: 62ch; font-family: var(--mono); border-left: 2px dashed var(--text-dim); padding-left: 10px; }
+
+  .eq-block { margin-top: 18px; padding: 16px 18px; background: var(--bg-input); border: 2px solid var(--line); border-radius: 0; font-family: var(--mono); font-size: 13px; overflow-x: auto; transform: rotate(-0.15deg); box-shadow: 3px 3px 0 var(--line); position: relative; }
+  .eq-block::before { content: "(see derivation \00A7 2)"; position: absolute; top: -10px; right: 12px; background: var(--bg); padding: 0 6px; font-size: 10px; color: var(--accent); font-style: italic; }
+  .eq-block .eq-label { color: var(--text-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; text-decoration: underline; }
+  .eq-block .eq-main { color: var(--text); white-space: nowrap; font-size: 14px; font-weight: 700; }
+  .eq-block .eq-main .v { color: var(--accent); } .eq-block .eq-main .b { color: var(--blue); }
+  .eq-sub { margin-top: 10px; font-size: 11px; color: var(--text-dim); line-height: 1.8; font-style: italic; }
+
+  .panel { background: var(--bg-panel); border: 2px solid var(--line); border-radius: 0; padding: 26px; margin-bottom: 26px; position: relative; box-shadow: 4px 4px 0 rgba(0,0,0,0.85); }
+  .panel:nth-of-type(odd) { transform: rotate(0.2deg); }
+  .panel:nth-of-type(even) { transform: rotate(-0.2deg); }
+  .panel h2 { font-family: var(--serif); font-size: 18px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; text-decoration: underline; text-decoration-style: solid; }
+  .panel h2 .num { font-family: var(--mono); font-size: 11px; color: var(--bg); background: var(--line); border: 1px solid var(--line); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; }
+  .panel h2 .tag { font-family: var(--mono); font-size: 10px; color: var(--bg-panel); background: var(--accent); border: 1px solid var(--line); border-radius: 0; padding: 2px 7px; margin-left: auto; text-transform: uppercase; letter-spacing: 0.04em; transform: rotate(-2deg); font-weight: 700; }
+  .panel p.note { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.6; font-style: italic; border-left: 2px solid var(--line); padding-left: 10px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 6px; font-family: var(--mono); letter-spacing: 0.02em; text-transform: lowercase; }
+  input[type="date"], input[type="time"], input[type="text"], input[type="number"] {
+    width: 100%; background: var(--bg-input); border: 2px solid var(--line); color: var(--text);
+    padding: 10px 12px; border-radius: 0; font-family: var(--mono); font-size: 14px; transition: border-color 0.15s ease;
+  }
+  input:focus { outline: none; border-color: var(--accent); box-shadow: 2px 2px 0 var(--accent); }
+  input[type="date"]::-webkit-calendar-picker-indicator, input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0); }
+  .field { margin-bottom: 16px; }
+
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg-input); border: 2px solid var(--line); border-radius: 0; margin-bottom: 10px; }
+  .toggle-row .name { font-size: 14px; font-weight: 700; } .toggle-row .desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; font-style: italic; }
+  .switch { position: relative; width: 42px; height: 24px; flex-shrink: 0; margin-left: 16px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider-toggle { position: absolute; cursor: pointer; inset: 0; background: #ffffff; border: 2px solid var(--line); border-radius: 999px; transition: 0.2s; }
+  .slider-toggle:before { content: ""; position: absolute; height: 16px; width: 16px; left: 2px; bottom: 2px; background: var(--text-dim); border-radius: 50%; transition: 0.2s; }
+  input:checked + .slider-toggle { background: var(--bg-input); border-color: var(--accent); }
+  input:checked + .slider-toggle:before { background: var(--accent); transform: translateX(18px); }
+
+  .custom-vars { display: flex; flex-direction: column; gap: 10px; }
+  .custom-var-row { display: flex; gap: 8px; align-items: center; }
+  .custom-var-row input[type="text"] { flex: 1; }
+  .custom-var-row .remove-btn { background: none; border: 2px solid var(--line); color: var(--text-dim); border-radius: 0; width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .remove-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .add-var-btn { background: none; border: 2px dashed var(--line); color: var(--text-dim); border-radius: 0; padding: 10px; font-family: var(--mono); font-size: 13px; cursor: pointer; width: 100%; margin-top: 8px; transition: all 0.15s ease; }
+  .add-var-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .save-btn { width: 100%; background: var(--line); color: var(--bg); border: 2px solid var(--line); padding: 14px; border-radius: 0; font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; margin-top: 4px; transition: transform 0.1s ease, opacity 0.15s ease; box-shadow: 3px 3px 0 var(--accent); }
+  .save-btn:hover { opacity: 0.92; } .save-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--accent); }
+  .status-msg { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-top: 10px; min-height: 16px; text-align: center; font-weight: 700; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+  .stat-box { background: var(--bg-input); border: 2px solid var(--line); border-radius: 0; padding: 16px 14px; }
+  .stat-box .label { font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-box .value { font-family: var(--mono); font-size: 22px; color: var(--accent); margin-top: 6px; font-weight: 700; }
+  .stat-box .ci { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  .posterior-eq { font-family: var(--mono); font-size: 12px; background: var(--bg-input); border: 2px solid var(--line); border-radius: 0; padding: 16px 18px; margin-bottom: 18px; overflow-x: auto; transform: rotate(0.1deg); }
+  .posterior-eq .row { white-space: nowrap; margin-bottom: 6px; color: var(--text-dim); }
+  .posterior-eq .row:last-child { margin-bottom: 0; }
+  .posterior-eq .hl { color: var(--accent); font-weight: 700; } .posterior-eq .hl2 { color: var(--blue); font-weight: 700; }
+
+  .coef-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; margin-top: 4px; }
+  .coef-table th { text-align: left; color: var(--text-dim); font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--line); text-transform: uppercase; letter-spacing: 0.04em; font-size: 10px; }
+  .coef-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--text); }
+  .coef-table tr:last-child td { border-bottom: none; }
+  .coef-table .pos { color: var(--accent); font-weight: 700; } .coef-table .negv { color: var(--blue); font-weight: 700; }
+  .coef-table .ci-cell { color: var(--text-dim); font-size: 11px; }
+  .coef-table .shrink-cell { color: var(--green); font-size: 11px; }
+
+  .r2-line { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--line); line-height: 1.7; }
+  .r2-line span { color: var(--accent); font-weight: 700; }
+  .r2-line .bf-good { color: var(--green); } .r2-line .bf-bad { color: var(--accent-dim); }
+
+  .empty-note { font-size: 13px; color: var(--text-dim); text-align: center; padding: 20px 0; font-style: italic; }
+
+  .diag-box { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .diag-pill { font-family: var(--mono); font-size: 12px; background: var(--bg-input); border: 2px solid var(--line); border-radius: 0; padding: 10px 14px; flex: 1; min-width: 140px; }
+  .diag-pill .dlabel { color: var(--text-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .diag-pill .dval { color: var(--accent); font-size: 16px; margin-top: 4px; font-weight: 700; }
+  .diag-verdict { font-family: var(--mono); font-size: 12px; color: var(--text); padding: 12px 14px; background: var(--bg-input); border-left: 4px solid var(--accent-dim); border-radius: 0; line-height: 1.6; }
+  .diag-verdict.flag { border-left-color: var(--blue); }
+
+  .log-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+  .log-table th { text-align: left; color: var(--text-dim); font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--line); text-transform: uppercase; letter-spacing: 0.04em; font-size: 10px; }
+  .log-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--text); }
+  .log-table tr:last-child td { border-bottom: none; }
+  .log-table .del-cell { text-align: right; }
+  .log-table .del-link { color: var(--text-dim); cursor: pointer; font-size: 14px; }
+  .log-table .del-link:hover { color: var(--accent); }
+  .table-scroll { max-height: 320px; overflow-y: auto; }
+  .table-scroll::-webkit-scrollbar { width: 6px; }
+  .table-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+  .panel-footer { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .export-btn { background: none; border: 2px solid var(--line); color: var(--text-dim); font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: 0; cursor: pointer; }
+  .export-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .count-note { font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+
+  footer { text-align: center; color: var(--text-dim); font-size: 11px; margin-top: 40px; font-family: var(--mono); font-style: italic; transform: rotate(-0.3deg); }
+  footer::before { content: "— "; } footer::after { content: " —"; }
+
+  @media (max-width: 540px) {
+    .grid2 { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr; }
+    .diag-box { flex-direction: column; } h1 { font-size: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Normal–Inverse-Gamma hierarchical regression · model comparison via Bayes factor</div>
+    <h1>Wake Log</h1>
+    <p class="sub">Fits a fully conjugate Bayesian linear model — joint posterior over coefficients <em>and</em> noise variance, empirical-Bayes shrinkage on day-of-week effects, and a Bayes factor test for whether day-of-week is even justified. Also checks whether wake time should be modeled as circular (von Mises) rather than linear.</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Generative model</div>
+      <div class="eq-main">y<sub>i</sub> = x<sub>i</sub><sup>T</sup><span class="v">θ</span> + ε<sub>i</sub>,&nbsp; ε<sub>i</sub> ~ N(0, <span class="b">σ²</span>) &nbsp;|&nbsp; <span class="v">θ</span> | σ² ~ N(m₀, σ²V₀) &nbsp;|&nbsp; <span class="b">σ²</span> ~ InvGamma(a₀, b₀)</div>
+      <div class="eq-sub">
+        Joint conjugate posterior (Normal–Inverse-Gamma, exact closed form):<br>
+        V<sub>n</sub> = (V₀⁻¹ + X<sup>T</sup>X)⁻¹ &nbsp;·&nbsp; m<sub>n</sub> = V<sub>n</sub>(V₀⁻¹m₀ + X<sup>T</sup>y) &nbsp;·&nbsp; a<sub>n</sub> = a₀ + n/2<br>
+        b<sub>n</sub> = b₀ + ½(m₀<sup>T</sup>V₀⁻¹m₀ + y<sup>T</sup>y − m<sub>n</sub><sup>T</sup>V<sub>n</sub>⁻¹m<sub>n</sub>) &nbsp;→&nbsp; θ|y ~ Student-t(m<sub>n</sub>, (b<sub>n</sub>/a<sub>n</sub>)V<sub>n</sub>, df=2a<sub>n</sub>)
+      </div>
+    </div>
+  </header>
+
+  <!-- ENTRY FORM -->
+  <div class="panel">
+    <h2><span class="num">1</span> Log today</h2>
+    <div class="grid2">
+      <div class="field"><label for="dateInput">Date</label><input type="date" id="dateInput"></div>
+      <div class="field"><label for="dowDisplay">Day of week</label><input type="text" id="dowDisplay" disabled style="opacity:0.6"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label for="bedtimeInput">Bedtime (night before)</label><input type="time" id="bedtimeInput"></div>
+      <div class="field"><label for="waketimeInput">Wake time</label><input type="time" id="waketimeInput"></div>
+    </div>
+    <div id="toggleVarsContainer"></div>
+    <div class="field" style="margin-top: 4px;">
+      <label>Custom variables</label>
+      <div class="custom-vars" id="customVarsContainer"></div>
+      <button class="add-var-btn" id="addVarBtn">+ add a variable to track</button>
+    </div>
+    <button class="save-btn" id="saveBtn">Save entry</button>
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+
+  <!-- STATS -->
+  <div class="panel">
+    <h2><span class="num">2</span> Posterior estimate <span class="tag">NIG · exact</span></h2>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="label">Avg wake (m<sub>n</sub>[0])</div>
+        <div class="value" id="avgWake">—</div>
+        <div class="ci" id="ciWake">95% credible: —</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">E[σ] (residual sd)</div>
+        <div class="value" id="sigmaHat">—</div>
+        <div class="ci" id="sigmaCi">posterior mean</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">Entries (n)</div>
+        <div class="value" id="nCount">0</div>
+        <div class="ci">days logged</div>
+      </div>
+    </div>
+
+    <div class="posterior-eq" id="posteriorEq"><div class="row">Need ≥2 entries to form X.</div></div>
+
+    <label style="margin-bottom: 8px;">Posterior coefficients θ|y ~ Student-t (95% credible intervals)</label>
+    <div id="coefTableWrap"><div class="empty-note">Add entries to estimate coefficients.</div></div>
+
+    <div class="r2-line" id="r2Line"></div>
+  </div>
+
+  <!-- MODEL COMPARISON -->
+  <div class="panel">
+    <h2><span class="num">3</span> Is day-of-week justified? <span class="tag">Bayes factor</span></h2>
+    <p class="note">Comparing the full model (with day-of-week effects) against a reduced model (without) via marginal likelihood. A Bayes factor near 1 means day-of-week isn't earning its added complexity — Occam's razor, made quantitative.</p>
+    <div id="bfWrap"><div class="empty-note">Need ≥4 entries spanning ≥2 distinct days to compute.</div></div>
+  </div>
+
+  <!-- CIRCULAR DIAGNOSTIC -->
+  <div class="panel">
+    <h2><span class="num">4</span> Is wake time even linear? <span class="tag">von Mises check</span></h2>
+    <p class="note">Clock time wraps at midnight — a Gaussian on minutes-past-midnight silently breaks if your wake times cluster near that boundary. This checks circular concentration (R, κ) and reports a circular mean for comparison.</p>
+    <div id="circularWrap"><div class="empty-note">Need ≥3 entries to assess.</div></div>
+  </div>
+
+  <!-- LOG TABLE -->
+  <div class="panel">
+    <h2><span class="num">5</span> Log history</h2>
+    <div class="table-scroll">
+      <table class="log-table" id="logTable">
+        <thead><tr><th>Date</th><th>Day</th><th>Bed</th><th>Wake</th><th>Vars</th><th></th></tr></thead>
+        <tbody id="logTableBody"><tr><td colspan="6" style="text-align:center; color: var(--text-dim); padding: 24px;">No entries yet</td></tr></tbody>
+      </table>
+    </div>
+    <div class="panel-footer">
+      <span class="count-note" id="footerCount">0 entries</span>
+      <button class="export-btn" id="exportBtn">Export CSV</button>
+    </div>
+  </div>
+
+  <footer>stored in-session · no account, no server · export CSV to keep your data</footer>
+</div>
+
+<script>
+(function() {
+  const DOW_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const DOW_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const TAU2 = 400;     // prior variance on each coefficient (minutes^2), weakly informative
+  const A0 = 2, B0 = 2*30*30; // InvGamma prior shape/scale ~ centered near (30 min)^2, weak
+
+  let entries = [];
+  let variableDefs = [];
+
+  const dateInput = document.getElementById('dateInput');
+  const dowDisplay = document.getElementById('dowDisplay');
+  const bedtimeInput = document.getElementById('bedtimeInput');
+  const waketimeInput = document.getElementById('waketimeInput');
+  const toggleVarsContainer = document.getElementById('toggleVarsContainer');
+  const customVarsContainer = document.getElementById('customVarsContainer');
+  const addVarBtn = document.getElementById('addVarBtn');
+  const saveBtn = document.getElementById('saveBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const logTableBody = document.getElementById('logTableBody');
+  const footerCount = document.getElementById('footerCount');
+  const exportBtn = document.getElementById('exportBtn');
+
+  function todayStr() { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+  function updateDow() { dowDisplay.value = dateInput.value ? DOW_NAMES[new Date(dateInput.value+'T00:00:00').getDay()] : ''; }
+  dateInput.value = todayStr(); updateDow();
+  dateInput.addEventListener('change', updateDow);
+
+  const DEFAULT_TOGGLES = [{ id: 'companion_in_town', name: 'Companion in town', desc: 'Someone visiting who shifts your routine' }];
+
+  function renderToggleVars() {
+    toggleVarsContainer.innerHTML = '';
+    DEFAULT_TOGGLES.forEach(t => {
+      const row = document.createElement('div'); row.className = 'toggle-row';
+      row.innerHTML = `<div><div class="name">${t.name}</div><div class="desc">${t.desc}</div></div>
+        <label class="switch"><input type="checkbox" data-toggle-id="${t.id}"><span class="slider-toggle"></span></label>`;
+      toggleVarsContainer.appendChild(row);
+    });
+  }
+  renderToggleVars();
+
+  function renderCustomVarInputs() {
+    customVarsContainer.innerHTML = '';
+    variableDefs.forEach((v, idx) => {
+      const row = document.createElement('div'); row.className = 'custom-var-row';
+      row.innerHTML = `<input type="text" placeholder="variable name" value="${(v.name||'').replace(/"/g,'&quot;')}" data-var-idx="${idx}" data-role="name">
+        <input type="number" step="any" placeholder="value (e.g. 1/0)" data-var-idx="${idx}" data-role="value" style="flex: 0 0 40%;">
+        <button class="remove-btn" data-remove-idx="${idx}" title="remove variable">×</button>`;
+      customVarsContainer.appendChild(row);
+    });
+    customVarsContainer.querySelectorAll('[data-role="name"]').forEach(inp => inp.addEventListener('input', e => { variableDefs[+e.target.dataset.varIdx].name = e.target.value; }));
+    customVarsContainer.querySelectorAll('[data-remove-idx]').forEach(btn => btn.addEventListener('click', e => { variableDefs.splice(+e.target.dataset.removeIdx,1); renderCustomVarInputs(); }));
+  }
+  addVarBtn.addEventListener('click', () => { variableDefs.push({ name:'', id:'custom_'+Date.now() }); renderCustomVarInputs(); });
+
+  function timeToMinutes(t) { if (!t) return null; const [h,m] = t.split(':').map(Number); return h*60+m; }
+  function minutesToClock(mins) {
+    if (mins === null || isNaN(mins)) return '—';
+    mins = ((mins % 1440) + 1440) % 1440;
+    const h = Math.floor(mins/60), m = Math.round(mins%60);
+    const period = h>=12?'PM':'AM'; let h12 = h%12; if (h12===0) h12=12;
+    return `${h12}:${String(m).padStart(2,'0')} ${period}`;
+  }
+
+  // ---------- Matrix ops ----------
+  function matMul(A,B){ const r=A.length,c=B[0].length,inner=B.length; const out=Array.from({length:r},()=>new Array(c).fill(0));
+    for(let i=0;i<r;i++) for(let j=0;j<c;j++){ let s=0; for(let k=0;k<inner;k++) s+=A[i][k]*B[k][j]; out[i][j]=s; } return out; }
+  function transpose(A){ return A[0].map((_,j)=>A.map(row=>row[j])); }
+  function matAdd(A,B){ return A.map((row,i)=>row.map((v,j)=>v+B[i][j])); }
+  function matSub(A,B){ return A.map((row,i)=>row.map((v,j)=>v-B[i][j])); }
+  function identity(n){ return Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>i===j?1:0)); }
+  function scaleMat(A,s){ return A.map(row=>row.map(v=>v*s)); }
+  function invert(A){
+    const n=A.length; const M=A.map((row,i)=>[...row,...identity(n)[i]]);
+    for(let col=0;col<n;col++){
+      let pivot=col;
+      for(let r=col+1;r<n;r++) if(Math.abs(M[r][col])>Math.abs(M[pivot][col])) pivot=r;
+      if(Math.abs(M[pivot][col])<1e-9){ M[col][col]+=1e-6; pivot=col; }
+      [M[col],M[pivot]]=[M[pivot],M[col]];
+      const pv=M[col][col];
+      for(let j=0;j<2*n;j++) M[col][j]/=pv;
+      for(let r=0;r<n;r++){ if(r===col) continue; const f=M[r][col]; for(let j=0;j<2*n;j++) M[r][j]-=f*M[col][j]; }
+    }
+    return M.map(row=>row.slice(n));
+  }
+  function logdet(A){
+    // via LU-free Gaussian elimination tracking pivot product (sign ignored, A is PSD-ish here)
+    const n=A.length; const M=A.map(r=>[...r]); let logDetVal=0, sign=1;
+    for(let col=0;col<n;col++){
+      let pivot=col;
+      for(let r=col+1;r<n;r++) if(Math.abs(M[r][col])>Math.abs(M[pivot][col])) pivot=r;
+      if(pivot!==col){ [M[col],M[pivot]]=[M[pivot],M[col]]; sign*=-1; }
+      const pv=M[col][col]; if(Math.abs(pv)<1e-12) return -Infinity;
+      logDetVal+=Math.log(Math.abs(pv));
+      for(let r=col+1;r<n;r++){ const f=M[r][col]/pv; for(let j=col;j<n;j++) M[r][j]-=f*M[col][j]; }
+    }
+    return logDetVal;
+  }
+  function lgamma(x){
+    // Stirling/Lanczos approximation
+    const g=7, p=[0.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,
+      -176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+    if(x<0.5) return Math.log(Math.PI/Math.sin(Math.PI*x)) - lgamma(1-x);
+    x-=1; let a=p[0]; const t=x+g+0.5;
+    for(let i=1;i<g+2;i++) a+=p[i]/(x+i);
+    return 0.5*Math.log(2*Math.PI) + (x+0.5)*Math.log(t) - t + Math.log(a);
+  }
+
+  // ---------- Design matrix builders ----------
+  function buildDesign(includeDow) {
+    const validEntries = entries.filter(e => timeToMinutes(e.waketime) !== null);
+    if (validEntries.length === 0) return null;
+    const customKeys = Array.from(new Set(entries.flatMap(e => Object.keys(e.customVals||{}).filter(k=>k))));
+    const toggleKeys = DEFAULT_TOGGLES.map(t=>t.id);
+    const bedVals = validEntries.map(e=>timeToMinutes(e.bedtime)).filter(v=>v!==null);
+    const bedMean = bedVals.length ? bedVals.reduce((a,b)=>a+b,0)/bedVals.length : 0;
+
+    const colNames = ['intercept'];
+    const labels = ['μ (intercept)'];
+    if (includeDow) { for(let d=1;d<=6;d++){ colNames.push('dow_'+DOW_SHORT[d]); labels.push('α_'+DOW_SHORT[d]+' (vs Sun)'); } }
+    colNames.push('bedtime_c'); labels.push('β (bedtime, centered)');
+    toggleKeys.forEach(k => { colNames.push('tgl_'+k); labels.push(DEFAULT_TOGGLES.find(t=>t.id===k).name); });
+    customKeys.forEach(k => { colNames.push('var_'+k); labels.push(k); });
+
+    const X=[], y=[];
+    validEntries.forEach(e => {
+      const wake = timeToMinutes(e.waketime);
+      const dow = new Date(e.date+'T00:00:00').getDay();
+      const row=[1];
+      if (includeDow) for(let d=1;d<=6;d++) row.push(dow===d?1:0);
+      const bed = timeToMinutes(e.bedtime);
+      row.push(bed!==null ? bed-bedMean : 0);
+      toggleKeys.forEach(k => row.push((e.toggles||{})[k]===1?1:0));
+      customKeys.forEach(k => row.push((e.customVals||{})[k]!=null ? Number(e.customVals[k]) : 0));
+      X.push(row); y.push([wake]);
+    });
+    return { X, y, colNames, labels, n: X.length, p: X[0].length, dowIncluded: includeDow };
+  }
+
+  // ---------- Normal-Inverse-Gamma exact posterior ----------
+  function fitNIG(design) {
+    const { X, y, p, n } = design;
+    const Xt = transpose(X);
+    const V0inv = scaleMat(identity(p), 1/TAU2);
+    const m0 = Array.from({length:p}, () => [0]);
+
+    const XtX = matMul(Xt, X);
+    const Xty = matMul(Xt, y);
+    const Vn_inv = matAdd(V0inv, XtX);
+    const Vn = invert(Vn_inv);
+    const mn = matMul(Vn, matAdd(matMul(V0inv, m0), Xty));
+
+    const yty = matMul(transpose(y), y)[0][0];
+    const m0tV0invm0 = matMul(matMul(transpose(m0), V0inv), m0)[0][0];
+    const mntVninvmn = matMul(matMul(transpose(mn), Vn_inv), mn)[0][0];
+    const an = A0 + n/2;
+    const bn = B0 + 0.5*(m0tV0invm0 + yty - mntVninvmn);
+
+    const sigma2Mean = bn/(an-1); // E[sigma^2], requires an>1 (true once n>=1 given A0=2)
+    const df = 2*an;
+    // marginal variance of theta_i under multivariate-t: (bn/an)*Vn_ii * df/(df-2)
+    const scale = bn/an;
+    const seCoef = Vn.map((row,i) => {
+      const varI = scale*row[i]*df/Math.max(df-2,0.01);
+      return Math.sqrt(Math.max(varI,0));
+    });
+
+    // R^2 using posterior mean theta as point estimate
+    const theta = mn.map(r=>r[0]);
+    const yhat = matMul(X, mn);
+    const resid = y.map((r,i)=>r[0]-yhat[i][0]);
+    const yMean = y.reduce((a,r)=>a+r[0],0)/n;
+    const ssTot = y.reduce((a,r)=>a+(r[0]-yMean)**2,0);
+    const ssRes = resid.reduce((a,r)=>a+r*r,0);
+    const r2 = ssTot>0 ? 1-ssRes/ssTot : 0;
+
+    // log marginal likelihood (evidence) for this design
+    // logp(y) = -n/2 log(2pi) + 0.5*logdet(V0inv) - 0.5*logdet(Vn_inv) + a0*log(b0) - an*log(bn) + lgamma(an) - lgamma(a0)
+    const logML = -n/2*Math.log(2*Math.PI) + 0.5*logdet(V0inv) - 0.5*logdet(Vn_inv)
+      + A0*Math.log(B0) - an*Math.log(bn) + lgamma(an) - lgamma(A0);
+
+    return { theta, se: seCoef, r2, n, p, sigma2Mean, an, bn, logML, mn, Vn };
+  }
+
+  // ---------- Empirical-Bayes (Efron-Morris) shrinkage on day-of-week means ----------
+  function dayShrinkage() {
+    const valid = entries.filter(e => timeToMinutes(e.waketime)!==null);
+    const byDay = {};
+    valid.forEach(e => { const d = new Date(e.date+'T00:00:00').getDay(); (byDay[d]=byDay[d]||[]).push(timeToMinutes(e.waketime)); });
+    const days = Object.keys(byDay).map(Number);
+    if (days.length < 2) return null;
+    const allVals = valid.map(e=>timeToMinutes(e.waketime));
+    const grandMean = allVals.reduce((a,b)=>a+b,0)/allVals.length;
+    const dayMeans = {}, dayN = {};
+    days.forEach(d => { const v = byDay[d]; dayMeans[d] = v.reduce((a,b)=>a+b,0)/v.length; dayN[d]=v.length; });
+
+    // within-day variance pooled
+    let ssWithin=0, dfWithin=0;
+    days.forEach(d => { const v=byDay[d], m=dayMeans[d]; v.forEach(x=>ssWithin+=(x-m)**2); dfWithin += Math.max(v.length-1,0); });
+    const sigma2Within = dfWithin>0 ? ssWithin/dfWithin : 100;
+
+    let ssBetween=0;
+    days.forEach(d => ssBetween += dayN[d]*(dayMeans[d]-grandMean)**2);
+    const msBetween = ssBetween/Math.max(days.length-1,1);
+    const nHarm = days.length / days.reduce((a,d)=>a+1/dayN[d],0); // approx avg n
+    const tau2Between = Math.max(0, (msBetween - sigma2Within)/Math.max(nHarm,1));
+
+    const shrunk = {};
+    days.forEach(d => {
+      const B = tau2Between>0 ? sigma2Within/(sigma2Within + dayN[d]*tau2Between) : 1;
+      shrunk[d] = { raw: dayMeans[d], shrunk: grandMean + (1-B)*(dayMeans[d]-grandMean), n: dayN[d], B };
+    });
+    return { shrunk, grandMean, tau2Between, sigma2Within };
+  }
+
+  // ---------- Circular diagnostic ----------
+  function circularDiagnostic() {
+    const vals = entries.map(e=>timeToMinutes(e.waketime)).filter(v=>v!==null);
+    if (vals.length < 3) return null;
+    const angles = vals.map(m => 2*Math.PI*m/1440);
+    const sumCos = angles.reduce((a,t)=>a+Math.cos(t),0)/angles.length;
+    const sumSin = angles.reduce((a,t)=>a+Math.sin(t),0)/angles.length;
+    const R = Math.sqrt(sumCos**2 + sumSin**2);
+    let kappa;
+    if (R < 0.53) kappa = 2*R + R**3 + 5*R**5/6;
+    else if (R < 0.85) kappa = -0.4 + 1.39*R + 0.43/(1-R);
+    else kappa = 1/(R**3 - 4*R**2 + 3*R);
+    let circMeanAngle = Math.atan2(sumSin, sumCos); if (circMeanAngle < 0) circMeanAngle += 2*Math.PI;
+    const circMeanMin = circMeanAngle/(2*Math.PI)*1440;
+
+    // check proximity to midnight wrap: fraction of points within 90 min of midnight
+    const nearWrap = vals.filter(m => m < 90 || m > 1440-90).length / vals.length;
+
+    return { R, kappa, circMeanMin, nearWrap, n: vals.length };
+  }
+
+  function meanCISimple(vals) {
+    const n=vals.length; if(n===0) return {mean:null,lo:null,hi:null,n:0};
+    const mean=vals.reduce((a,b)=>a+b,0)/n; if(n<2) return {mean,lo:mean,hi:mean,n};
+    const variance=vals.reduce((a,b)=>a+(b-mean)**2,0)/(n-1); const se=Math.sqrt(variance/n);
+    return {mean, lo:mean-1.96*se, hi:mean+1.96*se, n};
+  }
+
+  function renderAll() {
+    const wakeVals = entries.map(e=>timeToMinutes(e.waketime)).filter(v=>v!==null);
+    document.getElementById('nCount').textContent = entries.length;
+
+    const design = buildDesign(true);
+    const posteriorEqEl = document.getElementById('posteriorEq');
+    const coefWrap = document.getElementById('coefTableWrap');
+    const r2Line = document.getElementById('r2Line');
+
+    if (!design || design.n < 2) {
+      document.getElementById('avgWake').textContent = wakeVals.length ? minutesToClock(wakeVals[0]) : '—';
+      document.getElementById('ciWake').textContent = '95% credible: need n≥2';
+      document.getElementById('sigmaHat').textContent = '—';
+      posteriorEqEl.innerHTML = '<div class="row">Need ≥2 entries to form X.</div>';
+      coefWrap.innerHTML = '<div class="empty-note">Add entries to estimate coefficients.</div>';
+      r2Line.textContent = '';
+      renderBF(null); renderCircular(); renderTable();
+      return;
+    }
+
+    const fit = fitNIG(design);
+    const interceptIdx = 0;
+    const muHat = fit.theta[interceptIdx];
+    const muSe = fit.se[interceptIdx];
+    const tcrit = fit.an > 2 ? 2.0 : 4.0; // rough t-approx for small df, conservative
+
+    document.getElementById('avgWake').textContent = minutesToClock(muHat);
+    document.getElementById('ciWake').textContent = `95% credible: ${minutesToClock(muHat - tcrit*muSe)} – ${minutesToClock(muHat + tcrit*muSe)}`;
+    document.getElementById('sigmaHat').textContent = Math.sqrt(fit.sigma2Mean).toFixed(1) + ' min';
+
+    posteriorEqEl.innerHTML = `
+      <div class="row">X is <span class="hl">${design.n}×${design.p}</span> &nbsp;|&nbsp; a₀=${A0}, b₀=${B0} &nbsp;→&nbsp; a<sub>n</sub>=${fit.an.toFixed(1)}, b<sub>n</sub>=${fit.bn.toFixed(0)}</div>
+      <div class="row">E[σ²|y] = b<sub>n</sub>/(a<sub>n</sub>−1) = <span class="hl">${fit.sigma2Mean.toFixed(1)}</span> min² &nbsp;→&nbsp; σ̂ ≈ ${Math.sqrt(fit.sigma2Mean).toFixed(1)} min</div>
+      <div class="row"><span class="hl2">θ|y</span> ~ Student-t(m<sub>n</sub>, (b<sub>n</sub>/a<sub>n</sub>)V<sub>n</sub>, df=${(2*fit.an).toFixed(1)}) — solved exactly via Gauss–Jordan, no sampling</div>
+    `;
+
+    let rows = '';
+    fit.theta.forEach((coef,i) => {
+      const lo = coef - tcrit*fit.se[i], hi = coef + tcrit*fit.se[i];
+      const cls = coef>=0?'pos':'negv'; const sign = coef>=0?'+':'';
+      rows += `<tr><td>${design.labels[i]}</td><td class="${cls}">${sign}${coef.toFixed(1)} min</td><td class="ci-cell">[${lo.toFixed(1)}, ${hi.toFixed(1)}]</td></tr>`;
+    });
+    coefWrap.innerHTML = `<table class="coef-table"><thead><tr><th>Term</th><th>Posterior mean</th><th>95% credible interval</th></tr></thead><tbody>${rows}</tbody></table>`;
+    r2Line.innerHTML = `R² = <span>${fit.r2.toFixed(3)}</span> (point estimate) &nbsp;·&nbsp; n=${fit.n}, p=${fit.p} &nbsp;·&nbsp; ${fit.n <= fit.p ? 'prior is doing most of the work — intervals will tighten as n grows' : 'likelihood is informing most coefficients'}`;
+
+    renderBF(design);
+    renderCircular();
+    renderTable();
+  }
+
+  function renderBF(designFull) {
+    const bfWrap = document.getElementById('bfWrap');
+    const designReduced = buildDesign(false);
+    const distinctDays = new Set(entries.map(e => new Date(e.date+'T00:00:00').getDay())).size;
+    if (!designFull || designFull.n < 4 || distinctDays < 2) {
+      bfWrap.innerHTML = '<div class="empty-note">Need ≥4 entries spanning ≥2 distinct days to compute.</div>';
+      return;
+    }
+    const fitFull = fitNIG(designFull);
+    const fitReduced = fitNIG(designReduced);
+    const logBF = fitFull.logML - fitReduced.logML;
+    const BF = Math.exp(Math.max(-50, Math.min(50, logBF)));
+
+    let verdict, cls;
+    if (BF > 3) { verdict = `Bayes factor ${BF.toFixed(2)} favors including day-of-week — there's real signal worth the extra parameters (Jeffreys' scale: ${BF>10?'strong':'positive'} evidence).`; cls=''; }
+    else if (BF < 1/3) { verdict = `Bayes factor ${BF.toFixed(2)} favors the simpler model — day-of-week isn't earning its complexity yet given current data.`; cls='flag'; }
+    else { verdict = `Bayes factor ${BF.toFixed(2)} — inconclusive, roughly equal evidence for both models. More data needed to decide.`; cls=''; }
+
+    bfWrap.innerHTML = `
+      <div class="diag-box">
+        <div class="diag-pill"><div class="dlabel">log p(y | full)</div><div class="dval">${fitFull.logML.toFixed(2)}</div></div>
+        <div class="diag-pill"><div class="dlabel">log p(y | reduced)</div><div class="dval">${fitReduced.logML.toFixed(2)}</div></div>
+        <div class="diag-pill"><div class="dlabel">Bayes factor</div><div class="dval">${BF.toFixed(2)}</div></div>
+      </div>
+      <div class="diag-verdict ${cls}">${verdict}</div>
+    `;
+  }
+
+  function renderCircular() {
+    const wrap = document.getElementById('circularWrap');
+    const diag = circularDiagnostic();
+    if (!diag) { wrap.innerHTML = '<div class="empty-note">Need ≥3 entries to assess.</div>'; return; }
+    const flag = diag.nearWrap > 0.15 || diag.R < 0.6;
+    wrap.innerHTML = `
+      <div class="diag-box">
+        <div class="diag-pill"><div class="dlabel">Mean resultant R</div><div class="dval">${diag.R.toFixed(3)}</div></div>
+        <div class="diag-pill"><div class="dlabel">von Mises κ</div><div class="dval">${diag.kappa.toFixed(2)}</div></div>
+        <div class="diag-pill"><div class="dlabel">Circular mean</div><div class="dval">${minutesToClock(diag.circMeanMin)}</div></div>
+        <div class="diag-pill"><div class="dlabel">Near midnight</div><div class="dval">${(diag.nearWrap*100).toFixed(0)}%</div></div>
+      </div>
+      <div class="diag-verdict ${flag?'flag':''}">${flag
+        ? `R=${diag.R.toFixed(2)} is low and/or ${(diag.nearWrap*100).toFixed(0)}% of wake times sit within 90 min of midnight — the Gaussian-on-minutes model is at real risk of bias near the wrap boundary. Treat the linear estimate above with caution; von Mises would be the defensible choice.`
+        : `R=${diag.R.toFixed(2)} is high and wake times sit safely away from the midnight boundary — modeling on linear minutes (the Gaussian/NIG approach above) is justified, no circular correction needed.`}</div>
+    `;
+  }
+
+  // ---------- Save / delete / table / export ----------
+  saveBtn.addEventListener('click', () => {
+    const date=dateInput.value, bedtime=bedtimeInput.value, waketime=waketimeInput.value;
+    if (!date || !waketime) { statusMsg.textContent='Need at least a date and wake time.'; statusMsg.style.color='#c0504d'; return; }
+    const toggles={}; toggleVarsContainer.querySelectorAll('[data-toggle-id]').forEach(inp=>{ toggles[inp.dataset.toggleId]=inp.checked?1:0; });
+    const customVals={}; customVarsContainer.querySelectorAll('[data-role="value"]').forEach(inp=>{ const idx=+inp.dataset.varIdx, def=variableDefs[idx]; if(def&&def.name) customVals[def.name]=inp.value===''?null:Number(inp.value); });
+    const dow=DOW_NAMES[new Date(date+'T00:00:00').getDay()];
+    entries.push({ id:Date.now(), date, dow, bedtime, waketime, toggles, customVals });
+    renderAll();
+    statusMsg.textContent=`Saved — ${dow}, woke at ${minutesToClock(timeToMinutes(waketime))}`; statusMsg.style.color='var(--accent)';
+    setTimeout(()=>{ statusMsg.textContent=''; }, 3000);
+    waketimeInput.value=''; bedtimeInput.value='';
+    toggleVarsContainer.querySelectorAll('[data-toggle-id]').forEach(inp=>inp.checked=false);
+    customVarsContainer.querySelectorAll('[data-role="value"]').forEach(inp=>inp.value='');
+  });
+
+  function deleteEntry(id) { entries = entries.filter(e=>e.id!==id); renderAll(); }
+
+  function renderTable() {
+    if (entries.length===0) { logTableBody.innerHTML='<tr><td colspan="6" style="text-align:center; color: var(--text-dim); padding: 24px;">No entries yet</td></tr>'; footerCount.textContent='0 entries'; return; }
+    const sorted=[...entries].sort((a,b)=>b.date.localeCompare(a.date));
+    logTableBody.innerHTML = sorted.map(e => {
+      const activeVars=[];
+      Object.entries(e.toggles||{}).forEach(([k,v])=>{ if(v===1) activeVars.push(DEFAULT_TOGGLES.find(t=>t.id===k)?.name||k); });
+      Object.entries(e.customVals||{}).forEach(([k,v])=>{ if(v!=null) activeVars.push(`${k}=${v}`); });
+      return `<tr><td>${e.date}</td><td>${e.dow.slice(0,3)}</td><td>${e.bedtime||'—'}</td><td>${e.waketime||'—'}</td><td>${activeVars.join(', ')||'—'}</td>
+        <td class="del-cell"><span class="del-link" data-del-id="${e.id}">×</span></td></tr>`;
+    }).join('');
+    logTableBody.querySelectorAll('[data-del-id]').forEach(el=>el.addEventListener('click',()=>deleteEntry(+el.dataset.delId)));
+    footerCount.textContent=`${entries.length} entr${entries.length===1?'y':'ies'}`;
+  }
+
+  exportBtn.addEventListener('click', () => {
+    if (entries.length===0) return;
+    const customKeys=new Set(); entries.forEach(e=>Object.keys(e.customVals||{}).forEach(k=>customKeys.add(k)));
+    const toggleKeys=DEFAULT_TOGGLES.map(t=>t.id);
+    const headers=['date','day_of_week','bedtime','waketime',...toggleKeys,...Array.from(customKeys)];
+    const lines=[headers.join(',')];
+    entries.forEach(e=>{ const row=[e.date,e.dow,e.bedtime||'',e.waketime||'']; toggleKeys.forEach(k=>row.push((e.toggles||{})[k]??0)); customKeys.forEach(k=>row.push((e.customVals||{})[k]??'')); lines.push(row.join(',')); });
+    const blob=new Blob([lines.join('\n')],{type:'text/csv'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='wake_log.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
