@@ -3185,5 +3185,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-22",
     tags: ["lounge", "airport", "sfo", "san francisco", "the club", "desserts"]
+  },
+  {
+    slug: "izzys-brooklyn-bagels-palo-alto",
+    title: "Izzy's Brooklyn Bagels",
+    region: "US",
+    location: "Palo Alto",
+    categories: ["food", "vibes"],
+    vibesFavorite: true,
+    foodScore: 10,
+    vibesScore: 8,
+    excerpt: "Best bagel in the Bay—delicious bagel and yummy. Near Stanford on California Ave; everything bagel with lox, egg, and avocado is the move.",
+    image: "images/IMG_7594.jpg",
+    content: `
+      <p>477 S California Ave, Palo Alto, CA 94306</p>
+      <p>Palo Alto · near Stanford</p>
+      <p>Best bagel in the Bay—delicious bagel and yummy. Classic Brooklyn-style spot on California Ave; great everything bagels with lox, egg, avocado, and capers.</p>
+    `,
+    date: "2026-06-22",
+    tags: ["bagels", "breakfast", "palo alto", "stanford", "south bay", "lox"]
   }
 ];
