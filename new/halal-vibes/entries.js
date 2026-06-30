@@ -3166,5 +3166,24 @@ const HALAL_VIBES_ENTRIES = [
     `,
     date: "2026-06-21",
     tags: ["bagels", "breakfast", "santa clara", "south bay", "customizable"]
+  },
+  {
+    slug: "the-club-sfo",
+    title: "The Club SFO",
+    region: "US",
+    location: "San Francisco (SFO)",
+    categories: ["lounges"],
+    foodScore: null,
+    vibesScore: null,
+    stars: 4,
+    excerpt: "Beautiful interior design and really nice desserts—the pudding custard and warm chocolate chip cookies are great. Haven't tried the main food yet. Waitlist around 10 PM was ridiculous—took 43 minutes to get in.",
+    image: "images/IMG_7646.jpeg",
+    content: `
+      <p>The Club SFO — San Francisco International Airport (SFO), Harvey Milk Terminal 1 · near Gate B4</p>
+      <p>Really nice desserts—the pudding custard and the chocolate chip cookies are warm. I haven't tried the actual food yet, but it has beautiful interior design.</p>
+      <p>Wait time around 10 PM was ridiculous—it took 43 minutes to get off the waitlist.</p>
+    `,
+    date: "2026-06-22",
+    tags: ["lounge", "airport", "sfo", "san francisco", "the club", "desserts"]
   }
 ];
