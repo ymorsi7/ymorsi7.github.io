@@ -7,7 +7,7 @@ Personal site source for [ymorsi.com](https://ymorsi.com), deployed on Netlify. 
 - **[ymorsi.com](https://ymorsi.com/)** — projects, experience, and contact
 - **[Halal Vibes](https://ymorsi.com/halal-vibes)** — halal food and coffee spots
 - **[Photography](https://ymorsi.com/old/photography.html)** — photo gallery
-- **[BidetBeacon](https://ymorsi7.github.io/bidetbeacon/)** — community map of bidets at masajed and restaurants ([open-source repo](https://github.com/ymorsi7/bidetbeacon))
+- **[BidetBeacon](https://bidetbeacon.netlify.app/)** — community map of bidets at masajed and restaurants ([open-source repo](https://github.com/ymorsi7/bidetbeacon))
 
 ## Tools
 
