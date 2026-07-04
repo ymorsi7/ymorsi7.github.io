@@ -24,6 +24,7 @@
 		'Pasadena, CA': 'los-angeles',
 		'Fullerton, CA': 'los-angeles',
 		'Orange, CA': 'los-angeles',
+		'Santa Ana, CA': 'los-angeles',
 		'Beverly Hills, CA': 'los-angeles',
 		'Malibu, Los Angeles, CA': 'los-angeles',
 		'Palm Springs, CA': 'los-angeles',
