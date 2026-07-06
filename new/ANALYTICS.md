@@ -2,7 +2,7 @@
 
 The whole static site (portfolio, tools, old pages, 404s, etc.) uses **[GoatCounter](https://www.goatcounter.com)** — free for personal and open-source sites, no cookies, privacy-friendly.
 
-**BidetBeacon** lives in its own repo ([ymorsi7/bidetbeacon](https://github.com/ymorsi7/bidetbeacon)) and is no longer tracked here. `/bidetbeacon` on this site redirects to [bidetbeacon.netlify.app](https://bidetbeacon.netlify.app/).
+**bidetbud.com** lives in its own repo ([ymorsi7/bidetbeacon](https://github.com/ymorsi7/bidetbeacon)) and is no longer tracked here. `/bidetbeacon` on this site redirects to [bidetbud.com](https://bidetbud.com/).
 
 Every HTML page includes one script:
 

@@ -144,6 +144,10 @@
 			font-size: 1rem;
 		}
 
+		a.tab {
+			text-decoration: none;
+		}
+
 		/* Main Container */
 		.main-content {
 			flex: 1;
@@ -746,7 +750,7 @@
 
 	<script>
 		// Tab switching
-		document.querySelectorAll('.tab').forEach(tab => {
+		document.querySelectorAll('button.tab').forEach(tab => {
 			tab.addEventListener('click', () => {
 				const toolName = tab.dataset.tool;
 				
