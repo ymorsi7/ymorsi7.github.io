@@ -29,6 +29,7 @@
 		'Fullerton, CA': 'los-angeles',
 		'Orange, CA': 'los-angeles',
 		'Santa Ana, CA': 'los-angeles',
+		'Newport Beach, CA': 'los-angeles',
 		'Beverly Hills, CA': 'los-angeles',
 		'Malibu, Los Angeles, CA': 'los-angeles',
 		'Palm Springs, CA': 'los-angeles',
