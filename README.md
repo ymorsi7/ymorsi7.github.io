@@ -12,7 +12,7 @@ Personal site source for [ymorsi.com](https://ymorsi.com), deployed on Netlify. 
 ## Tools
 
 - [MergePDF](https://ymorsi.com/mergePDF.html) — merge PDFs and images
-- [Alarm](https://ymorsi.com/alarm.html) — online alarm clock
+- [Alarm](https://ymorsi7.github.io/KukuKlokKlone/) — online alarm clock
 - [Pomodoro](https://ymorsi.com/pomodoro.html) — focus timer
 - [Drawing Board](https://ymorsi.com/drawingBoard.html) — simple drawing canvas
 - [UCSD Tier List](https://ymorsi.com/UCSD-Tier-List/) — course tier list
