@@ -1,25 +1,23 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>MergePDF - Merge PDFs and Images</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="description" content="Merge multiple PDFs and images into one PDF file" />
 	<meta name="keywords" content="pdf merger, merge pdf, merge images, pdf tool" />
 	<meta name="author" content="Yusuf Morsi" />
 
-	<!-- Favicon -->
-	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+	<link rel="icon" type="image/svg+xml"
+		href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230f172a'/%3E%3Crect x='28' y='22' width='44' height='56' rx='6' fill='none' stroke='white' stroke-width='5'/%3E%3Cpath d='M38 40 H62 M38 52 H54' stroke='%2394a3b8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="/new/css/github-star.css">
 
-	<!-- PDF-lib for PDF manipulation -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-	<!-- PDF.js for text extraction -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 	<style>
@@ -30,127 +28,124 @@
 		}
 
 		:root {
-			--blue-primary: #1e3a8a;
-			--blue-dark: #1e40af;
-			--blue-light: #3b82f6;
-			--blue-hover: #2563eb;
-			--text-dark: #1e293b;
-			--text-medium: #475569;
-			--text-light: #64748b;
-			--bg-white: #ffffff;
-			--bg-light: #f1f5f9;
-			--border-color: #e2e8f0;
-			--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-			--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-			--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+			--ink: #0f172a;
+			--muted: #64748b;
+			--line: rgba(15, 23, 42, 0.08);
+			--paper: #ffffff;
+			--stage: #e8edf3;
+			--chip: #f8fafc;
+			--chip-hover: #eef2f7;
+			--danger: #dc2626;
+			--blue-primary: #334155;
+			--blue-hover: #0f172a;
+			--blue-light: #64748b;
+			--shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+			--safe-top: env(safe-area-inset-top);
+			--safe-bottom: env(safe-area-inset-bottom);
+		}
+
+		html,
+		body {
+			min-height: 100%;
 		}
 
 		body {
-			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-			background: var(--bg-light);
-			color: var(--text-dark);
-			line-height: 1.6;
-			min-height: 100vh;
-			position: relative;
-			overflow-x: hidden;
+			font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background:
+				radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.06) 1px, transparent 0) 0 0 / 22px 22px,
+				var(--stage);
+			color: var(--ink);
+			line-height: 1.5;
 		}
 
-		#logo {
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			z-index: 1000;
-		}
-		#logo img {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-		}
-		#logo .tooltip {
-			position: absolute;
-			left: 50px;
-			background: rgba(0, 0, 0, 0.8);
-			color: white;
-			padding: 5px 10px;
-			border-radius: 4px;
-			font-size: 12px;
-			white-space: nowrap;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateX(-10px);
-			transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-			pointer-events: none;
-		}
-		#logo img:hover + .tooltip,
-		#logo .tooltip:hover {
-			opacity: 1;
-			visibility: visible;
-			transform: translateX(0);
-		}
-
-		#page {
-			position: relative;
-			z-index: 1;
+		.app {
 			min-height: 100vh;
 			display: flex;
 			flex-direction: column;
 		}
 
-		/* Header */
-		.header {
-			background: var(--blue-primary);
-			padding: 4rem 0 3rem;
-			box-shadow: var(--shadow-md);
+		.topbar {
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: calc(10px + var(--safe-top)) 16px 10px;
+			background: rgba(255, 255, 255, 0.82);
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+			border-bottom: 1px solid var(--line);
+			position: sticky;
+			top: 0;
+			z-index: 10;
 		}
 
-		.header-content {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 2rem;
-			text-align: center;
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			text-decoration: none;
+			color: var(--ink);
+			padding: 4px 8px 4px 4px;
+			border-radius: 999px;
 		}
 
-		.header h1 {
-			font-size: clamp(2.5rem, 6vw, 3.5rem);
-			font-weight: 700;
-			color: white;
-			margin-bottom: 0.75rem;
+		.brand:hover {
+			background: var(--chip-hover);
+		}
+
+		.brand img {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		.brand span {
+			font-weight: 600;
+			font-size: 0.95rem;
 			letter-spacing: -0.02em;
 		}
 
-		.header p {
-			font-size: clamp(1rem, 2vw, 1.125rem);
-			color: rgba(255, 255, 255, 0.9);
-			font-weight: 400;
-			max-width: 600px;
-			margin: 0 auto;
+		.topbar-spacer {
+			flex: 1;
 		}
 
-		/* Main Container */
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			color: var(--muted);
+			text-decoration: none;
+			font-size: 0.82rem;
+			font-weight: 500;
+			padding: 8px 10px;
+			border-radius: 10px;
+			white-space: nowrap;
+		}
+
+		.back-link:hover {
+			background: var(--chip-hover);
+			color: var(--ink);
+		}
+
 		.main-content {
 			flex: 1;
-			max-width: 1000px;
-			margin: -3rem auto 0;
-			padding: 0 2rem 4rem;
-			position: relative;
-			z-index: 2;
+			width: min(720px, calc(100% - 32px));
+			margin: 28px auto 0;
+			padding-bottom: 24px;
 		}
 
-		/* Alert Container */
 		#alert-container {
-			margin-bottom: 2rem;
+			margin-bottom: 14px;
+			min-height: 0;
 		}
 
 		.alert {
-			padding: 1rem 1.25rem;
-			border-radius: 8px;
-			margin-bottom: 1rem;
+			padding: 12px 14px;
+			border-radius: 12px;
+			margin-bottom: 10px;
 			display: none;
-			font-size: 0.95rem;
-			box-shadow: var(--shadow-sm);
+			font-size: 0.9rem;
 			border: 1px solid;
 		}
 
@@ -161,88 +156,83 @@
 		.alert-success {
 			background: #ecfdf5;
 			color: #065f46;
-			border-color: #10b981;
+			border-color: #a7f3d0;
 		}
 
 		.alert-error {
 			background: #fef2f2;
 			color: #991b1b;
-			border-color: #ef4444;
+			border-color: #fecaca;
 		}
 
 		.alert-info {
-			background: #eff6ff;
-			color: #1e40af;
-			border-color: var(--blue-light);
+			background: #f8fafc;
+			color: #334155;
+			border-color: var(--line);
 		}
 
-		/* Upload Card */
-		.upload-card {
-			background: var(--bg-white);
-			border-radius: 12px;
-			padding: 0;
-			box-shadow: var(--shadow-md);
-			margin-bottom: 2rem;
-			border: 1px solid var(--border-color);
+		.upload-card,
+		.files-card {
+			background: var(--paper);
+			border-radius: 20px;
+			box-shadow: var(--shadow);
+			border: 1px solid var(--line);
+			margin-bottom: 16px;
 		}
 
 		.drop-zone {
-			padding: 4rem 3rem;
+			padding: 48px 28px;
 			text-align: center;
 			cursor: pointer;
 			position: relative;
-			background: var(--bg-white);
-			transition: background-color 0.2s ease;
+			border-radius: 20px;
+			transition: background 0.15s ease;
 		}
 
 		.drop-zone::before {
 			content: '';
 			position: absolute;
-			top: 15px;
-			left: 15px;
-			right: 15px;
-			bottom: 15px;
-			border: 2px dashed var(--border-color);
-			border-radius: 8px;
-			transition: border-color 0.2s ease;
+			inset: 12px;
+			border: 1.5px dashed #cbd5e1;
+			border-radius: 14px;
+			pointer-events: none;
+			transition: border-color 0.15s ease;
 		}
 
-		.drop-zone:hover {
-			background: var(--bg-light);
-		}
-
-		.drop-zone:hover::before {
-			border-color: var(--blue-light);
-		}
-
+		.drop-zone:hover,
 		.drop-zone.drag-over {
-			background: rgba(30, 58, 138, 0.05);
+			background: #f8fafc;
 		}
 
 		.drop-zone.drag-over::before {
-			border-color: var(--blue-primary);
+			border-color: var(--ink);
 			border-style: solid;
 		}
 
 		.upload-icon {
-			font-size: 4rem;
-			color: var(--blue-primary);
-			margin-bottom: 1.5rem;
-			display: block;
+			width: 56px;
+			height: 56px;
+			margin: 0 auto 16px;
+			border-radius: 16px;
+			background: var(--chip);
+			color: var(--ink);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.4rem;
 		}
 
 		.drop-zone h2 {
-			font-size: 1.75rem;
+			font-size: 1.35rem;
 			font-weight: 600;
-			color: var(--text-dark);
-			margin-bottom: 0.75rem;
+			letter-spacing: -0.02em;
+			margin-bottom: 6px;
 		}
 
 		.drop-zone p {
-			color: var(--text-medium);
-			font-size: 1.1rem;
-			margin-bottom: 2.5rem;
-			font-weight: 400;
+			color: var(--muted);
+			font-size: 0.95rem;
+			margin-bottom: 22px;
 		}
 
 		.file-input {
@@ -253,38 +243,35 @@
 			pointer-events: none;
 		}
 
-		.btn-primary {
-			background: var(--blue-primary);
+		.btn-primary,
+		.btn-merge {
+			background: var(--ink);
 			color: white;
-			border: none;
-			border-radius: 8px;
-			padding: 0.875rem 2rem;
-			font-size: 1rem;
+			border: 0;
+			border-radius: 12px;
+			padding: 12px 18px;
+			font-size: 0.95rem;
 			font-weight: 600;
+			font-family: inherit;
 			cursor: pointer;
-			transition: background-color 0.2s ease;
 			display: inline-flex;
 			align-items: center;
-			gap: 0.5rem;
+			gap: 8px;
 		}
 
-		.btn-primary:hover {
-			background: var(--blue-hover);
+		.btn-primary:hover,
+		.btn-merge:hover:not(:disabled) {
+			background: #1e293b;
 		}
 
-		.btn-primary:active {
-			background: var(--blue-dark);
+		.btn-merge:disabled {
+			opacity: 0.55;
+			cursor: not-allowed;
 		}
 
-		/* File List Card */
 		.files-card {
-			background: var(--bg-white);
-			border-radius: 12px;
-			padding: 2rem;
-			box-shadow: var(--shadow-md);
 			display: none;
-			margin-bottom: 2rem;
-			border: 1px solid var(--border-color);
+			padding: 22px;
 		}
 
 		.files-card.show {
@@ -292,69 +279,61 @@
 		}
 
 		.files-card h3 {
-			font-size: 1.5rem;
+			font-size: 0.95rem;
 			font-weight: 600;
-			color: var(--text-dark);
-			margin-bottom: 1.5rem;
+			margin-bottom: 14px;
 			display: flex;
 			align-items: center;
-			gap: 0.75rem;
+			gap: 8px;
+			color: var(--ink);
 		}
 
 		.files-card h3 i {
-			color: var(--blue-primary);
-			font-size: 1.25rem;
+			color: var(--muted);
 		}
 
 		#fileList {
-			margin-bottom: 2rem;
+			margin-bottom: 16px;
 		}
 
 		.file-item {
-			background: var(--bg-light);
-			border-radius: 8px;
-			padding: 1.25rem;
-			margin-bottom: 0.75rem;
+			background: var(--chip);
+			border-radius: 14px;
+			padding: 12px 14px;
+			margin-bottom: 8px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			transition: all 0.2s ease;
-			border: 1px solid var(--border-color);
-			gap: 1.25rem;
+			gap: 12px;
+			border: 1px solid transparent;
 		}
 
 		.file-item:hover {
-			background: white;
-			border-color: var(--blue-light);
-			box-shadow: var(--shadow-sm);
+			border-color: var(--line);
+			background: #fff;
 		}
 
 		.file-info {
 			flex: 1;
 			display: flex;
 			align-items: center;
-			gap: 1.25rem;
+			gap: 12px;
 			min-width: 0;
 		}
 
 		.file-icon-wrapper {
-			width: 48px;
-			height: 48px;
-			border-radius: 8px;
-			background: var(--blue-primary);
+			width: 40px;
+			height: 40px;
+			border-radius: 10px;
+			background: var(--ink);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-shrink: 0;
-			transition: background-color 0.2s ease;
-		}
-
-		.file-item:hover .file-icon-wrapper {
-			background: var(--blue-hover);
 		}
 
 		.file-icon-wrapper i {
-			font-size: 1.5rem;
+			font-size: 1rem;
 			color: white;
 		}
 
@@ -364,190 +343,129 @@
 		}
 
 		.file-details h4 {
-			font-size: 1.1rem;
+			font-size: 0.95rem;
 			font-weight: 600;
-			color: var(--text-dark);
-			margin-bottom: 0.5rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
 		.file-details span {
-			font-size: 0.9rem;
-			color: var(--text-medium);
-			font-weight: 500;
+			font-size: 0.78rem;
+			color: var(--muted);
 		}
 
 		.file-actions {
 			display: flex;
-			gap: 0.75rem;
+			gap: 6px;
 			flex-shrink: 0;
 		}
 
 		.btn-action {
-			width: 44px;
-			height: 44px;
-			border-radius: 12px;
-			border: 2px solid #e2e8f0;
+			width: 34px;
+			height: 34px;
+			border-radius: 9px;
+			border: 1px solid var(--line);
 			background: white;
-			color: var(--text-medium);
+			color: var(--muted);
 			cursor: pointer;
-			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 1rem;
 		}
 
 		.btn-action:hover:not(:disabled) {
-			border-color: var(--blue-primary);
-			background: var(--blue-primary);
+			background: var(--ink);
+			border-color: var(--ink);
 			color: white;
 		}
 
 		.btn-action:disabled {
-			opacity: 0.4;
+			opacity: 0.35;
 			cursor: not-allowed;
-		}
-
-		.btn-remove {
-			border-color: #fee2e2;
-			color: #ef4444;
 		}
 
 		.btn-remove:hover:not(:disabled) {
-			background: #ef4444;
-			border-color: #ef4444;
+			background: var(--danger);
+			border-color: var(--danger);
 			color: white;
 		}
 
-		/* Merge Section */
 		.merge-section {
-			padding-top: 2rem;
-			border-top: 2px solid #f1f5f9;
-			text-align: center;
+			padding-top: 14px;
+			border-top: 1px solid var(--line);
+			text-align: right;
 		}
 
-		.btn-merge {
-			background: var(--blue-primary);
-			color: white;
-			border: none;
-			border-radius: 8px;
-			padding: 1rem 2.5rem;
-			font-size: 1.1rem;
-			font-weight: 600;
-			cursor: pointer;
-			transition: background-color 0.2s ease;
-			display: inline-flex;
-			align-items: center;
-			gap: 0.75rem;
-		}
-
-		.btn-merge:hover:not(:disabled) {
-			background: var(--blue-hover);
-		}
-
-		.btn-merge:disabled {
-			opacity: 0.6;
-			cursor: not-allowed;
-		}
-
-		.btn-merge i {
-			font-size: 1.2rem;
-		}
-
-		/* Spinner */
 		.spinner {
-			border: 3px solid rgba(255, 255, 255, 0.3);
-			border-top: 3px solid white;
+			border: 2px solid rgba(255, 255, 255, 0.3);
+			border-top: 2px solid white;
 			border-radius: 50%;
-			width: 20px;
-			height: 20px;
+			width: 16px;
+			height: 16px;
 			animation: spin 0.8s linear infinite;
 			display: inline-block;
 		}
 
 		@keyframes spin {
-			0% { transform: rotate(0deg); }
-			100% { transform: rotate(360deg); }
+			to { transform: rotate(360deg); }
 		}
 
-		/* Footer */
-		.footer {
-			background: var(--bg-white);
-			padding: 2.5rem 0;
-			text-align: center;
-			margin-top: 4rem;
-			border-top: 1px solid #f1f5f9;
+		.page-footer {
+			margin-top: auto;
+			padding: 8px 16px calc(12px + var(--safe-bottom));
 		}
 
-		.footer-content {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 2rem;
+		.footer-content,
+		.page-footer-nav {
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
 			justify-content: center;
+			gap: 2px 4px;
 		}
 
-		.footer a {
-			color: var(--blue-primary);
-			text-decoration: none;
-			font-weight: 500;
-			font-size: 0.95rem;
-			transition: color 0.2s ease;
+		.footer-content a,
+		.page-footer-nav a {
 			display: inline-flex;
 			align-items: center;
-			gap: 0.5rem;
+			gap: 0.35rem;
+			color: var(--muted);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.78rem;
+			padding: 0.28rem 0.5rem;
+			border-radius: 8px;
 		}
 
-		.footer a:hover {
-			color: var(--blue-hover);
+		.footer-content a:hover,
+		.page-footer-nav a:hover {
+			color: var(--ink);
+			background: rgba(255, 255, 255, 0.7);
 		}
 
-		/* Responsive */
-		@media screen and (max-width: 768px) {
-			.header {
-				padding: 3rem 0 2rem;
-			}
+		.footer-content span {
+			display: none;
+		}
 
-			.main-content {
-				margin-top: -2rem;
-				padding: 0 1.5rem 3rem;
-			}
-
+		@media (max-width: 640px) {
 			.drop-zone {
-				padding: 3rem 2rem;
+				padding: 36px 18px;
 			}
 
-			.upload-icon {
-				font-size: 3.5rem;
-				margin-bottom: 1.25rem;
+			.merge-section,
+			.file-actions {
+				text-align: center;
 			}
 
-			.drop-zone h2 {
-				font-size: 1.5rem;
-			}
-
-			.drop-zone p {
-				font-size: 1rem;
-				margin-bottom: 2rem;
-			}
-
-			.files-card {
-				padding: 2rem 1.5rem;
+			.btn-merge,
+			.btn-primary {
+				width: 100%;
+				justify-content: center;
 			}
 
 			.file-item {
 				flex-wrap: wrap;
-				padding: 1.25rem;
-			}
-
-			.file-info {
-				flex: 1 1 100%;
-				margin-bottom: 1rem;
 			}
 
 			.file-actions {
@@ -555,110 +473,66 @@
 				justify-content: flex-end;
 			}
 
-			.btn-merge {
-				width: 100%;
-				justify-content: center;
-			}
-		}
-
-		@media screen and (max-width: 480px) {
-			.header h1 {
-				font-size: 2rem;
-			}
-
-			.drop-zone {
-				padding: 2.5rem 1.5rem;
-			}
-
-			.btn-primary {
-				width: 100%;
-				justify-content: center;
-			}
-
-			.files-card {
-				padding: 1.5rem;
+			.back-link span {
+				display: none;
 			}
 		}
 	</style>
-<script src="/new/js/site-analytics-loader.js"></script>
+	<script src="/new/js/site-analytics-loader.js"></script>
 </head>
 
 <body>
-	<div id="logo" onclick="window.location.href='https://ymorsi.com';">
-		<img src="images/smiling.png" alt="YM Home">
-		<div class="tooltip">YM - Home</div>
-	</div>
-	<div id="page">
-		<header class="header">
-			<div class="header-content">
-				<h1>MergePDF</h1>
-				<p>Merge PDFs and images into one file</p>
-			</div>
+	<div class="app">
+		<header class="topbar">
+			<a class="brand" href="index.html" title="Back to portfolio">
+				<img src="images/smiling.png" alt="">
+				<span>MergePDF</span>
+			</a>
+			<div class="topbar-spacer"></div>
+			<a class="back-link" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>Portfolio</span></a>
 		</header>
 
 		<div class="main-content">
-			<!-- Alert messages -->
 			<div id="alert-container"></div>
 
-			<!-- Upload area -->
 			<div class="upload-card">
 				<div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-					<i class="fas fa-cloud-upload-alt upload-icon"></i>
-					<h2>Drop your files here</h2>
-					<p>Support PDF and image files (JPG, PNG, GIF, BMP, WEBP)</p>
+					<div class="upload-icon"><i class="fas fa-file-arrow-up"></i></div>
+					<h2>Drop files to merge</h2>
+					<p>PDFs and images · JPG, PNG, GIF, BMP, WEBP</p>
 					<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('fileInput').click();">
-						<i class="fas fa-folder-open"></i> Choose Files
+						<i class="fas fa-folder-open"></i> Choose files
 					</button>
 					<input type="file" id="fileInput" class="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.gif,.bmp,.webp">
 				</div>
 			</div>
 
-			<!-- File list -->
 			<div class="files-card" id="fileListContainer">
 				<h3>
-					<i class="fas fa-file-circle-check"></i> Selected Files
+					<i class="fas fa-layer-group"></i> Files in order
 				</h3>
 				<div id="fileList"></div>
 				<div class="merge-section">
 					<button class="btn-merge" id="mergeBtn" onclick="mergeFiles()">
-						<i class="fas fa-file-pdf"></i> Merge Files
+						<i class="fas fa-file-pdf"></i> Merge files
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<footer class="footer">
+		<footer class="page-footer">
 			<div class="footer-content">
-				<a href="index.html">
-					<i class="fas fa-arrow-left"></i> Back to Portfolio
-				</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
-				<a href="old/photography.html" target="_blank">Photography</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
+				<a href="tools.html"><i class="fas fa-tools"></i> More Tools</a>
+				<a href="old/photography.html" target="_blank" rel="noopener">Photography</a>
 				<a href="/halal-vibes">Halal Vibes</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
 				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer">Ayatica</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
 				<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer">bidetbud.com</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
 				<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
-				<span style="margin: 0 1rem; color: var(--text-light);">|</span>
 				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Star</span></a>
 			</div>
 		</footer>
 	</div>
 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
-	<!-- MergePDF Script -->
 	<script src="MergePDF/mergepdf.js"></script>
 </body>
 
