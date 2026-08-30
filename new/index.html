@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Yusuf Morsi</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<meta name="description" content="Yusuf Morsi - ML at Cisco | Prev @ FICO" />
+	<meta name="description" content="Yusuf Morsi - ML at Prokuro | Prev @ Cisco, FICO" />
 	<meta name="keywords" content="yusuf morsi, portfolio, machine learning, data science, electrical engineering" />
 	<meta name="author" content="Yusuf Morsi" />
 
@@ -25,12 +25,12 @@
 	 -->
 
 	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content="Yusuf Morsi - ML at Cisco | Prev @ FICO" />
+	<meta property="og:title" content="Yusuf Morsi - ML at Prokuro | Prev @ Cisco, FICO" />
 	<meta property="og:image" content="" />
 	<meta property="og:url" content="" />
 	<meta property="og:site_name" content="Yusuf Morsi" />
-	<meta property="og:description" content="Yusuf Morsi - ML at Cisco | Prev @ FICO" />
-	<meta name="twitter:title" content="Yusuf Morsi - ML at Cisco | Prev @ FICO" />
+	<meta property="og:description" content="Yusuf Morsi - ML at Prokuro | Prev @ Cisco, FICO" />
+	<meta name="twitter:title" content="Yusuf Morsi - ML at Prokuro | Prev @ Cisco, FICO" />
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
@@ -131,7 +131,7 @@
 		}
 
 		#fh5co-header .overlay {
-			background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(15, 23, 42, 0.65));
+			background: linear-gradient(rgba(0, 0, 0, 0.72), rgba(15, 23, 42, 0.86));
 		}
 
 		#fh5co-header h1 {
@@ -355,6 +355,12 @@
 			box-shadow: var(--shadow-sm);
 			margin: 0 auto 14px auto;
 			display: block;
+		}
+
+		.company-logo.logo-dark {
+			background: #fff;
+			padding: 0;
+			object-fit: cover;
 		}
 
 		.timeline-heading {
@@ -879,6 +885,10 @@
 				padding: 0;
 			}
 
+			.timeline-panel .company-logo.logo-dark {
+				background: #fff;
+			}
+
 			.timeline-panel h3.timeline-title {
 				margin: 0 0 4px 0 !important;
 				font-size: 1rem;
@@ -1156,6 +1166,10 @@
 			margin-left: auto;
 			margin-right: auto;
 			transition: background 0.25s ease;
+		}
+
+		.institution-name strong {
+			font-weight: 800;
 		}
 
 		.institution-name:hover {
@@ -2301,10 +2315,9 @@
 								<!-- <div class="profile-thumb" style="background: url(images/animation.png);"></div> -->
 								<div class="profile-thumb" style="background: url(images/chicago.jpg);"></div>
 								<h1><span>Yusuf Morsi</span></h1>
-								<h3 style='font-size: 20px; font-weight: 500; margin-bottom: 15px;'><span>ML &commat;
-										Cisco | ECE BS/MS @</span> <span>UC San Diego</span></h3>
-								<h3 style='font-size: 17px; opacity: 0.95;'><span>Prev @ FICO, Southwest Airlines,
-										USC</span></h3>
+								<h3 style='font-size: 23px; font-weight: 500; margin-bottom: 15px;'><span>ML for Supply Chain </span></h3>
+								<h3 style='font-size: 18px; font-weight: 500; margin-bottom: 15px;'><span>Prokuro.ai, Cisco | UC San Diego MSEE</span></h3>
+								<h3 style='font-size: 16px; opacity: 0.95;'><span>Prev @ Risely AI (<strong style="font-weight:800">YC</strong> S25), FICO, Southwest Airlines</span></h3>
 								<h3 style='font-size: 14px; opacity: 0.65;padding-top: 8px;'><span
 										id="hackathon-winner-link"
 										style="cursor:pointer; text-decoration:bold; color:white">8x Hackathon
@@ -2347,12 +2360,45 @@
 							<li class="animate-box timeline-unverted reveal">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
 								<div class="timeline-panel work-exp-collapsible" data-work-exp
-									data-role-start="2024-08-01" data-role-end="present">
+									data-role-start="2026-06-01" data-role-end="present">
+									<div class="timeline-heading">
+										<img src="images/favicon.png" alt="Prokuro logo" class="company-logo logo-dark"
+											loading="lazy">
+										<div class="timeline-title-wrapper">
+											<h3 class="timeline-title">Co-Founder, ML Engineer</h3>
+											<span class="institution-name">prokuro.ai</span>
+											<div class="role-meta">
+												<span class="role-when">Aug 2026 – Present<span
+														class="role-duration"></span></span>
+												<span class="role-where">San Francisco, CA</span>
+											</div>
+										</div>
+									</div>
+									<div class="work-exp-summary-line">agentic BOMs for supply chain <i
+											class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
+										<p>Building a bill-of-materials (BOM) risk agent that flags single-source parts,
+											EOL components, and lead-time risk in hardware BOMs.</p>
+										<br>
+										<p>Built a cache-first Digi-Key/Mouser enrichment pipeline (DynamoDB parts cache
+											+ paced live lookups) to ground BOM risk analysis and Bedrock (Nova)
+											procurement briefs on live lifecycle and stock data.</p>
+										<br>
+										<p>Wrote the backend services in Rust (Axum) on AWS ECS Fargate: parser,
+											enrichment, gateway, tariff, and purchasing.</p>
+									</div>
+								</div>
+							</li>
+
+							<li class="timeline-inverted animate-box reveal">
+								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2024-08-01" data-role-end="2026-10-31">
 									<div class="timeline-heading">
 										<img src="images/cisco_logo.jpg" alt="Cisco Logo" class="company-logo"
 											loading="lazy">
 										<div class="timeline-title-wrapper">
-											<h3 class="timeline-title">Software Engineer II</h3>
+											<h3 class="timeline-title">Software Engineer</h3>
 											<span class="institution-name">Cisco</span>
 											<div class="role-meta">
 												<span class="role-when">Aug 2024 – Present<span
@@ -2395,6 +2441,40 @@
 								</div>
 							</li>
 
+							<li class="animate-box timeline-unverted reveal">
+								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
+								<div class="timeline-panel work-exp-collapsible" data-work-exp
+									data-role-start="2026-07-01" data-role-end="2026-08-31">
+									<div class="timeline-heading">
+										<img src="images/risely_ai_logo.jpg" alt="Risely AI logo" class="company-logo logo-dark"
+											loading="lazy">
+										<div class="timeline-title-wrapper">
+											<h3 class="timeline-title">ML Engineer, Contract</h3>
+											<span class="institution-name">Risely AI (<strong>YC</strong> S25)</span>
+											<div class="role-meta">
+												<span class="role-when">July 2026 – Aug 2026<span
+														class="role-duration"></span></span>
+												<span class="role-where">San Francisco, CA</span>
+											</div>
+										</div>
+									</div>
+									<div class="work-exp-summary-line">production agents @ university OS <i
+											class="fas fa-chevron-down expand-icon"></i></div>
+									<div class="timeline-body work-exp-details">
+										<p>Proposed an identity and authorization approach for a 19+ agent fleet, then
+											built and shipped one production agent end to end against live data.</p>
+										<br>
+										<p>Built a human-in-the-loop post-call agent that reads call transcripts and CRM
+											data and proposes CRM updates, follow-up emails, and calendar invites for
+											review, with all writes gated behind approval.</p>
+										<br>
+										<p>Designed a three-tier AI enrichment fallback (native summary, transcript +
+											LLM, and speech-to-text + LLM via Deepgram/Claude) to stay resilient when
+											the primary AI endpoint was plan-gated.</p>
+									</div>
+								</div>
+							</li>
+
 
 
 							<!-- <li class="timeline-inverted animate-box reveal">
@@ -2431,7 +2511,7 @@
 											<h3 class="timeline-title">Data Science Intern</h3>
 											<span class="institution-name">FICO</span>
 											<div class="role-meta">
-												<span class="role-when">Apr 2024 – Aug 2024<span
+												<span class="role-when">2024<span
 														class="role-duration"></span></span>
 												<span class="role-where">San Diego, CA</span>
 											</div>
