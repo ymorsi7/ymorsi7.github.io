@@ -124,6 +124,7 @@
 
 		/* Header styles */
 		#fh5co-header {
+			background-color: #0f172a;
 			background-position: center center !important;
 			background-size: cover !important;
 			position: relative;
@@ -2302,7 +2303,22 @@
 	<div class="fh5co-loader"></div>
 	<div id="page">
 		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
-			style="background-image:url(images/blueclouds.jpg) " data-stellar-background-ratio="0.5">
+			data-stellar-background-ratio="0.5">
+			<script>
+				(function () {
+					var pics = [
+						'alex.jpg', 'alexmorn.jpg', 'alexold.jpg', 'beach.jpg', 'centp.jpg',
+						'finsburysquare.jpg', 'ggp.jpg', 'ggp2.jpg', 'ggp3.jpg', 'hawii.jpg',
+						'lajolla.jpg', 'london.jpg', 'londonmorning.jpg', 'mavida.jpg', 'mecca.jpg',
+						'newportbeach.jpg', 'nycback.jpg', 'nyclife.jpg', 'nynight.jpg', 'nywinter.jpg',
+						'nyyy.jpg', 'oregon.jpg', 'redwoods.jpg', 'sdlandgin2.jpg', 'sdlanding.jpg',
+						'viewfrombridge.jpg'
+					];
+					var pick = pics[Math.floor(Math.random() * pics.length)];
+					document.getElementById('fh5co-header').style.backgroundImage =
+						'url(images/nicebackgroundpics/' + pick + ')';
+				})();
+			</script>
 			<div class="overlay"></div>
 			<div id="particles-js"></div>
 
@@ -2626,7 +2642,7 @@
 									<div class="timeline-body">
 										<p style="text-align: center; margin-bottom: 12px;">
 											<span
-												style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Electrical Engineering: <br>Machine
+												style="background: #f1f5f9; color: var(--primary-color); font-weight: 500; padding: 6px 16px; border-radius: 20px; display: inline-block; font-size: 1.2rem;">Electrical Engineering: <br>bMachine
 												Learning and Data Science M.S.</span>
 										</p>
 									</div>
