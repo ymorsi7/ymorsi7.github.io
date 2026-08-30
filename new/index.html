@@ -1001,7 +1001,8 @@
 				word-wrap: break-word;
 			}
 
-			#research-toggle {
+			#research-toggle,
+			#internships-toggle {
 				min-height: 44px;
 				padding: 14px 28px !important;
 				font-size: 15px !important;
@@ -2414,7 +2415,7 @@
 										<img src="images/cisco_logo.jpg" alt="Cisco Logo" class="company-logo"
 											loading="lazy">
 										<div class="timeline-title-wrapper">
-											<h3 class="timeline-title">Software Engineer</h3>
+											<h3 class="timeline-title">Software Engineer II</h3>
 											<span class="institution-name">Cisco</span>
 											<div class="role-meta">
 												<span class="role-when">Aug 2024 – Present<span
@@ -2517,7 +2518,20 @@
 								</div>
 							</li> -->
 
-							<li class="timeline-inverted animate-box reveal">
+							<li class="timeline-heading text-center animate-box">
+								<div>
+									<div style="text-align: center; margin-top: 20px;">
+										<button id="internships-toggle" class="btn btn-primary"
+											style="background: var(--primary-color); border: none; padding: 12px 25px; border-radius: 25px; color: white; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-size: 14px;">
+											<i class="icon-chevron-down" id="internships-toggle-icon"></i>
+											<span id="internships-toggle-text">Show Internships</span>
+										</button>
+									</div>
+								</div>
+							</li>
+
+							<li class="timeline-inverted animate-box reveal" id="internship-item-1"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
 								<div class="timeline-panel work-exp-collapsible" data-work-exp
 									data-role-start="2024-04-01" data-role-end="2024-08-31">
@@ -2565,7 +2579,8 @@
 									</div>
 								</div>
 							</li> -->
-							<li class="animate-box timeline-unverted reveal">
+							<li class="animate-box timeline-unverted reveal" id="internship-item-2"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
 								<div class="timeline-panel work-exp-collapsible" data-work-exp
 									data-role-start="2023-06-01" data-role-end="2023-09-30">
@@ -2593,7 +2608,8 @@
 									</div>
 								</div>
 							</li>
-							<li class="timeline-inverted animate-box reveal">
+							<li class="timeline-inverted animate-box reveal" id="internship-item-3"
+								style="display: none;">
 								<div class="timeline-badge"><i class="icon-suitcase"></i></div>
 								<div class="timeline-panel work-exp-collapsible" data-work-exp
 									data-role-start="2022-06-01" data-role-end="2023-05-31">
@@ -3918,6 +3934,32 @@
 								window.expandPortfolioSection(awardsSection, { hackathonFilter: true });
 							}
 							awardsSection.scrollIntoView({ behavior: 'smooth' });
+						}
+					});
+				}
+
+				// Internships toggle functionality
+				var internshipsToggle = document.getElementById('internships-toggle');
+				var internshipsToggleIcon = document.getElementById('internships-toggle-icon');
+				var internshipsToggleText = document.getElementById('internships-toggle-text');
+				var internshipItems = [
+					document.getElementById('internship-item-1'),
+					document.getElementById('internship-item-2'),
+					document.getElementById('internship-item-3')
+				];
+
+				if (internshipsToggle && internshipItems.every(Boolean)) {
+					internshipsToggle.addEventListener('click', function () {
+						var hidden = internshipItems[0].style.display === 'none';
+						internshipItems.forEach(function (item) {
+							item.style.display = hidden ? 'block' : 'none';
+						});
+						internshipsToggleIcon.className = hidden ? 'icon-chevron-up' : 'icon-chevron-down';
+						internshipsToggleText.textContent = hidden ? 'Hide Internships' : 'Show Internships';
+						if (hidden) {
+							setTimeout(function () {
+								reveal();
+							}, 100);
 						}
 					});
 				}
