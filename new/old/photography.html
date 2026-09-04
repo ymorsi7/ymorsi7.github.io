@@ -3207,7 +3207,7 @@
 	<div id="fh5co-footer">
 		<div class="footer-tools-links">
 			<a id="footerHome" href="../index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
-			<a id="footerHalal" href="../halal-vibes.html" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a>
+			<!-- <a id="footerHalal" href="../halal-vibes.html" class="footer-tool-link"><i class="fa-solid fa-mug-hot"></i> Halal Vibes</a> -->
 		</div>
 		<hr class="footer-divider">
 		<p class="footer-line">
@@ -3227,7 +3227,7 @@
 			var halal = document.getElementById('footerHalal');
 			var bidet = document.getElementById('footerBidet');
 			var copyright = document.getElementById('footerCopyright');
-			if (!home || !halal || !bidet) return;
+			if (!home || !bidet) return;
 
 			var path = location.pathname;
 			var host = location.hostname;
@@ -3236,15 +3236,15 @@
 
 			if (location.protocol === 'file:' || inNewDir) {
 				home.href = '../index.html';
-				halal.href = '../halal-vibes.html';
+				if (halal) halal.href = '../halal-vibes.html';
 				bidet.href = 'https://bidetbud.com';
 			} else if (onGithubPages) {
 				home.href = '/new/index.html';
-				halal.href = '/new/halal-vibes.html';
+				if (halal) halal.href = '/new/halal-vibes.html';
 				bidet.href = 'https://bidetbud.com';
 			} else {
 				home.href = '/';
-				halal.href = '/halal-vibes';
+				if (halal) halal.href = '/halal-vibes';
 				bidet.href = 'https://bidetbud.com';
 			}
 
