@@ -379,8 +379,16 @@
 			background: var(--light-bg-2);
 		}
 
-		.lg-photos.multi {
+		.lg-photos.pair {
 			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.lg-photos.lead {
+			grid-template-columns: repeat(var(--cols), 1fr);
+		}
+
+		.lg-photos.lead a:first-child {
+			grid-column: 1 / -1;
 		}
 
 		.lg-photos a {
@@ -397,8 +405,12 @@
 			transition: opacity 0.4s ease, transform 0.4s ease;
 		}
 
-		.lg-photos.multi img {
+		.lg-photos.pair img {
 			height: 130px;
+		}
+
+		.lg-photos.lead a:not(:first-child) img {
+			height: 78px;
 		}
 
 		.lg-photos img.loaded {
@@ -697,7 +709,7 @@
 				<span>Yusuf Morsi</span>
 			</a>
 			<h1>Yusuf's Lounge Blog</h1>
-			<p>Every airport lounge I have been through, rated honestly. Nothing else on this page.</p>
+			<p>Some of the airport lounges I have been to, rated honestly. Just lounges on this page.</p>
 			<div class="lg-stats" id="lg-stats"></div>
 		</div>
 	</header>
@@ -912,16 +924,24 @@
 			}
 
 			function buildPhotos(entry) {
-				const photos = entry.images || [];
+				const photos = (entry.images || []).map(photo =>
+					typeof photo === 'string'
+						? { src: photo, alt: entry.title + ', ' + entry.airport }
+						: photo);
 				if (!photos.length) return '';
-				const items = photos.map(src => `
-					<a href="./${src}" target="_blank" rel="noopener" aria-label="Open photo of ${entry.title}">
-						<img data-src="./${src}"
+
+				const items = photos.map(photo => `
+					<a href="./${photo.src}" target="_blank" rel="noopener">
+						<img data-src="./${photo.src}"
 							src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-							alt="${entry.title}, ${entry.airport}" loading="lazy"
+							alt="${photo.alt}" title="${photo.alt}" loading="lazy"
 							onerror="this.parentElement.style.display='none'">
 					</a>`).join('');
-				return `<div class="lg-photos${photos.length > 1 ? ' multi' : ''}">${items}</div>`;
+
+				// One photo fills the card, two sit side by side, more get a lead shot plus a thumbnail strip.
+				const layout = photos.length === 1 ? '' : photos.length === 2 ? ' pair' : ' lead';
+				const columns = photos.length > 2 ? ` style="--cols: ${photos.length - 1}"` : '';
+				return `<div class="lg-photos${layout}"${columns}>${items}</div>`;
 			}
 
 			function buildCard(entry) {

@@ -10,7 +10,7 @@
  * stars: 1-5, halves and quarters are fine
  * access: short note on how you get in (optional)
  * tags: short labels, click to filter. Reuse existing ones where possible.
- * images: array of photo paths, relative to /new (optional)
+ * images: photo paths relative to /new, either "path.jpg" or { src, alt } (optional)
  * body: array of paragraphs (optional)
  */
 const LOUNGE_ENTRIES = [
@@ -23,7 +23,13 @@ const LOUNGE_ENTRIES = [
     stars: 5,
     access: "Paid entry, around $100. Priority Pass will not get you in.",
     tags: ["paid entry", "great food", "great desserts", "long walk"],
-    images: [],
+    images: [
+      { src: "lounges/airfrance/IMG_2533.jpg", alt: "Dining area of the Air France lounge at LAX" },
+      { src: "lounges/airfrance/IMG_2537.jpg", alt: "Plate of salmon, quiche, potato gratin, cheese and bread, with profiteroles, brownies, a macaron and mango pudding on the side" },
+      { src: "lounges/airfrance/IMG_2534.jpg", alt: "Dessert counter with macarons, profiteroles, brownies, fruit salad and mango pudding" },
+      { src: "lounges/airfrance/IMG_2535.jpg", alt: "Roasted salmon with capers and creamy leek sauce at the buffet" },
+      { src: "lounges/airfrance/IMG_2538.jpg", alt: "Puff pastry topped with a tomato sauce" }
+    ],
     body: [
       "I can't believe I didn't know about this lounge. The one downside is that it is really far from TBIT and requires a lot of walking, but I expect nothing less from one of America's worst international airports.",
       "The food options are excellent. I was very impressed to see roasted salmon with capers and creamy leek sauce, potato gratin, quiche, macarons, pretty good cheese and bread options, good profiteroles and brownies, tasty mango pudding, and some other stuff I can't pronounce.",
