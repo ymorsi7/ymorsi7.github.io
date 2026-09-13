@@ -38,6 +38,27 @@ const LOUNGE_ENTRIES = [
     date: "2026-09-13"
   },
   {
+    slug: "venture-x-lounge-jfk",
+    title: "Capital One Venture X Lounge",
+    region: "US",
+    city: "New York",
+    airport: "New York (JFK)",
+    stars: 4.5,
+    tags: ["card lounge", "no wait", "great food", "great desserts", "great ambiance", "hard to find"],
+    images: [
+      { src: "lounges/jfk-venturex/IMG_9956.jpg", alt: "Entrance and dining area of the Capital One Venture X lounge at JFK" },
+      { src: "lounges/jfk-venturex/IMG_9962.jpg", alt: "Tray with a brownie, cookies, blondie, deviled egg, a dessert and a grain salad" },
+      { src: "lounges/jfk-venturex/IMG_9957.jpg", alt: "Banquette seating with artwork above it" },
+      { src: "lounges/jfk-venturex/IMG_9959.jpg", alt: "Small bowl of cheese with a breadstick and jam" }
+    ],
+    body: [
+      "This is quite possibly the best lounge I have ever been to. Amazing ambiance, no wait, and they give you containers so you can bring things with you for the rest of your trip. Brilliant desserts, great service, amazing cheese options, and very good food.",
+      "They also have a Capital One Cafe where you can order a few things, including coffee and bagels, and of course you can get more than one and take them with you.",
+      "My only criticism is that it is very hard to find, even with the signs. This is my go to at JFK."
+    ],
+    date: "2026-09-13"
+  },
+  {
     slug: "amex-lounge-lax",
     title: "American Express Lounge",
     region: "US",
@@ -209,7 +230,12 @@ const LOUNGE_ENTRIES = [
     stars: 4,
     access: "Priority Pass, no extra cost.",
     tags: ["priority pass", "spacious", "long wait"],
-    images: [],
+    images: [
+      { src: "lounges/no1/IMG_3012.jpeg", alt: "Main seating area of the No1 Lounge with armchairs, dining tables and a bar at the far end" },
+      { src: "lounges/no1/IMG_3015.jpeg", alt: "Buffet counter with salads, potato salad, chips and a chickpea salad" },
+      { src: "lounges/no1/IMG_3016.jpeg", alt: "Snack counter with crackers, bread, blueberry muffins and chocolate cupcakes" },
+      { src: "lounges/no1/IMG_3017.jpeg", alt: "Wood panelled entrance to the lounge library area" }
+    ],
     body: [
       "Great lounge with pretty good food options, not impressive but good. The only reason I don't give it a full 5 is the long wait. It is very spacious and nice. Not as classy as Clubrooms, but it is a great lounge.",
       "Dessert options are a bit mid, but other than that it has what a lounge needs."
