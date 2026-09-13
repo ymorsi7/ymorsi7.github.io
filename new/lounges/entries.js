@@ -188,7 +188,11 @@ const LOUNGE_ENTRIES = [
     stars: 4.5,
     access: "Priority Pass plus £18.",
     tags: ["priority pass", "extra fee", "great ambiance", "long wait"],
-    images: [],
+    images: [
+      { src: "lounges/clubroom/clubroom2.jpeg", alt: "Seating area at Clubrooms with armchairs, artwork and a flower shaped chandelier" },
+      { src: "lounges/clubroom/clubroom1.jpeg", alt: "Prawn salad with sourdough bread and butter on a marble table" },
+      { src: "lounges/clubroom/clubroomtoilets.jpeg", alt: "Corridor to the bathrooms with herringbone floors and a marble table" }
+    ],
     body: [
       "Great lounge. It took a while to get through the queue, but once I did I was met with an amazing ambiance. One of the best lounges I have ever been to in that respect, especially compared to the other lounges at Heathrow. Dessert options are few, but the food is okay (prawn, pancakes, and so on).",
       "The first time I used this lounge was after a very rough trip, a week of back to back travel, and the comfort I was met with here was great. It sucks that you can't choose where you sit. I still give it 4.5 only because the food options aren't that impressive, especially compared to lounges at other airports.",
@@ -347,7 +351,10 @@ const LOUNGE_ENTRIES = [
     airport: "Medina (MED)",
     stars: 4,
     tags: ["great food", "great ambiance", "good wifi"],
-    images: [],
+    images: [
+      { src: "lounges/primeclass/IMG_2956.jpg", alt: "Entrance to a quiet room at the Primeclass Lounge with gold latticework and armchairs" },
+      { src: "lounges/primeclass/IMG_2957.jpg", alt: "Breakfast plate with omelette, foul, bread rolls, hummus and pickles" }
+    ],
     body: [
       "This is a great lounge, especially compared to other options in the Middle East. Their breakfast is bloody brilliant, and the dessert options are pretty decent too. It has an amazing ambiance and I highly recommend it.",
       "Pretty good wifi, and a good location, although it was hard to find at first."
@@ -382,6 +389,22 @@ const LOUNGE_ENTRIES = [
       "Very nice. A bit small, but good food with halal options. I enjoyed it and had a nice lounge experience. Not out of this world, but a good lounge."
     ],
     date: "2026-06-03"
+  },
+  {
+    slug: "ahlein-lounge-cai-t2",
+    title: "Ahlein Lounge",
+    region: "Egypt",
+    city: "Cairo",
+    airport: "Cairo (CAI), Terminal 2",
+    stars: 4,
+    tags: ["great food", "great service", "great ambiance"],
+    images: [
+      { src: "lounges/cairo.jpeg", alt: "Breakfast plate with scrambled eggs, sausage, bread rolls, toast and a cheese topped pastry" }
+    ],
+    body: [
+      "Brilliant lounge. The food options are amazing and the service is very good. The ambiance and the vibes are excellent, and I would highly recommend it."
+    ],
+    date: "2026-09-13"
   },
   {
     slug: "cac-lounge-cai-t3",
