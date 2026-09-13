@@ -1,0 +1,723 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Yusuf's Lounge Blog</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="description"
+		content="Honest airport lounge reviews from Yusuf Morsi. Priority Pass and paid lounges across the US, Europe, and the Middle East." />
+	<meta name="keywords"
+		content="airport lounge reviews, Priority Pass, LAX, LHR, JED, SFO, SAN, IST, lounge blog, Yusuf Morsi" />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<meta property="og:title" content="Yusuf's Lounge Blog | Airport Lounge Reviews" />
+	<meta property="og:description"
+		content="Honest airport lounge reviews across the US, Europe, and the Middle East." />
+	<meta name="twitter:title" content="Yusuf's Lounge Blog | Airport Lounge Reviews" />
+	<meta name="twitter:card" content="summary" />
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="images/Coffee_Transparent_PNG_Clip_Art_Image.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/new/css/github-star.css">
+
+	<style>
+		:root {
+			--primary-color: #2d4a3e;
+			--primary-dark: #1a2f26;
+			--secondary-color: #5a7c6e;
+			--accent-warm: #c17f59;
+			--accent-warm-hover: #a96b48;
+			--text-color: #2d4a3e;
+			--text-muted: #5a7c6e;
+			--light-bg: #faf9f7;
+			--light-bg-2: #f0ede8;
+			--card-bg: #ffffff;
+			--shadow-sm: 0 2px 8px rgba(45, 74, 62, 0.06);
+			--shadow-md: 0 8px 30px rgba(45, 74, 62, 0.1);
+			--radius: 18px;
+			--radius-sm: 12px;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			overflow-x: hidden;
+			font-size: 16px;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.7;
+			color: var(--text-color);
+			background: linear-gradient(180deg, var(--light-bg) 0%, #f5f2ee 100%);
+			font-weight: 400;
+			overflow-x: hidden;
+			min-height: 100vh;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 600;
+			color: var(--primary-dark);
+		}
+
+		#lg-header {
+			background-image: url(images/blueclouds.jpg);
+			background-position: center center;
+			background-size: cover;
+			position: relative;
+			min-height: 32vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 4rem 2rem;
+		}
+
+		#lg-header .overlay {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(26, 47, 38, 0.6) 0%, rgba(26, 47, 38, 0.75) 100%);
+		}
+
+		#lg-header .header-content {
+			position: relative;
+			z-index: 2;
+			text-align: center;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		#lg-header .logo-link {
+			position: absolute;
+			top: 28px;
+			left: 28px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			color: white;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 1.05rem;
+			z-index: 3;
+			transition: opacity 0.2s;
+		}
+
+		#lg-header .logo-link:hover {
+			opacity: 0.9;
+			color: white;
+		}
+
+		#lg-header .logo-link img {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			border: 2px solid rgba(255, 255, 255, 0.5);
+		}
+
+		#lg-header h1 {
+			font-family: 'Playfair Display', serif;
+			color: white;
+			font-size: clamp(2.5rem, 6vw, 3.75rem);
+			margin-bottom: 14px;
+			letter-spacing: -0.02em;
+			line-height: 1.15;
+			text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+		}
+
+		#lg-header p {
+			color: rgba(255, 255, 255, 0.95);
+			font-size: clamp(1.05rem, 2vw, 1.25rem);
+			line-height: 1.6;
+			max-width: 520px;
+			margin: 0 auto;
+		}
+
+		.lg-main {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 0 2rem 4rem;
+		}
+
+		.lg-nav-sticky {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			background: rgba(250, 249, 247, 0.94);
+			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+			border-bottom: 1px solid rgba(45, 74, 62, 0.08);
+			margin: 0 -2rem 2rem;
+			padding: 1.1rem 2rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			flex-wrap: wrap;
+		}
+
+		.lg-chips {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.lg-chip {
+			padding: 7px 15px;
+			border-radius: 999px;
+			border: 1px solid rgba(45, 74, 62, 0.15);
+			background: white;
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 0.2s ease;
+		}
+
+		.lg-chip:hover {
+			border-color: var(--primary-color);
+			color: var(--primary-color);
+		}
+
+		.lg-chip.active {
+			background: var(--primary-color);
+			border-color: var(--primary-color);
+			color: white;
+		}
+
+		.lg-chip .chip-count {
+			opacity: 0.6;
+			margin-left: 5px;
+			font-size: 0.78rem;
+		}
+
+		.lg-sort {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 0.85rem;
+			color: var(--text-muted);
+		}
+
+		.lg-sort select {
+			font-family: inherit;
+			font-size: 0.85rem;
+			color: var(--primary-dark);
+			padding: 6px 10px;
+			border-radius: 10px;
+			border: 1px solid rgba(45, 74, 62, 0.15);
+			background: white;
+			cursor: pointer;
+		}
+
+		.lg-intro {
+			margin-bottom: 2.5rem;
+			color: var(--text-muted);
+			font-size: 1rem;
+		}
+
+		.lg-intro strong {
+			color: var(--primary-dark);
+		}
+
+		.lg-group {
+			margin-bottom: 3rem;
+		}
+
+		.lg-group-header {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 1rem;
+			padding-bottom: 10px;
+			margin-bottom: 1.75rem;
+			border-bottom: 1px solid rgba(45, 74, 62, 0.12);
+		}
+
+		.lg-group-header h2 {
+			font-size: 1.15rem;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			margin: 0;
+		}
+
+		.lg-group-header span {
+			font-size: 0.85rem;
+			color: var(--text-muted);
+			white-space: nowrap;
+		}
+
+		.lg-entry {
+			background: var(--card-bg);
+			border: 1px solid rgba(45, 74, 62, 0.08);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow-sm);
+			padding: 28px 30px;
+			margin-bottom: 22px;
+		}
+
+		.lg-entry-head {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 1rem;
+			flex-wrap: wrap;
+		}
+
+		.lg-entry h3 {
+			font-size: 1.3rem;
+			margin: 0 0 4px;
+			line-height: 1.3;
+		}
+
+		.lg-airport {
+			font-size: 0.85rem;
+			font-weight: 500;
+			color: var(--accent-warm-hover);
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin: 0;
+		}
+
+		.lg-stars {
+			display: inline-flex;
+			align-items: center;
+			gap: 3px;
+			color: #d4a017;
+			font-size: 0.95rem;
+			white-space: nowrap;
+		}
+
+		.lg-stars .star-empty {
+			color: rgba(45, 74, 62, 0.2);
+		}
+
+		.lg-stars .rating-value {
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			margin-right: 6px;
+		}
+
+		.lg-access {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			margin: 16px 0 0;
+			padding: 6px 12px;
+			border-radius: 999px;
+			background: var(--light-bg-2);
+			color: var(--text-muted);
+			font-size: 0.82rem;
+		}
+
+		.lg-body p {
+			margin: 14px 0 0;
+		}
+
+		.lg-photos {
+			display: grid;
+			gap: 12px;
+			margin-top: 20px;
+		}
+
+		.lg-photos.multi {
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		}
+
+		.lg-photos a {
+			display: block;
+			overflow: hidden;
+			border-radius: var(--radius-sm);
+			background: var(--light-bg-2);
+		}
+
+		.lg-photos img {
+			width: 100%;
+			height: 260px;
+			object-fit: cover;
+			display: block;
+			opacity: 0;
+			transition: opacity 0.4s ease, transform 0.4s ease;
+		}
+
+		.lg-photos.multi img {
+			height: 180px;
+		}
+
+		.lg-photos img.loaded {
+			opacity: 1;
+		}
+
+		.lg-photos a:hover img {
+			transform: scale(1.03);
+		}
+
+		.lg-empty {
+			text-align: center;
+			color: var(--text-muted);
+			padding: 3rem 0;
+		}
+
+		.gototop {
+			position: fixed;
+			bottom: 25px;
+			right: 25px;
+			z-index: 100;
+			opacity: 0;
+			visibility: hidden;
+			transition: 0.3s;
+		}
+
+		.gototop.active {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.gototop a {
+			width: 48px;
+			height: 48px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			background: var(--primary-color);
+			box-shadow: var(--shadow-md);
+		}
+
+		#fh5co-footer {
+			background: var(--light-bg-2);
+			padding: 2.5rem 1.5rem;
+			text-align: center;
+		}
+
+		.footer-tools-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.5rem 1.25rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.footer-tool-link {
+			color: var(--primary-color);
+			font-size: 0.9rem;
+		}
+
+		.footer-divider {
+			border-color: rgba(45, 74, 62, 0.12);
+			max-width: 640px;
+			margin: 0 auto 1.25rem;
+		}
+
+		@media (max-width: 768px) {
+			#lg-header {
+				min-height: 28vh;
+				padding: 2rem 1.5rem;
+			}
+
+			#lg-header h1 {
+				font-size: 2.1rem;
+			}
+
+			#lg-header .logo-link {
+				top: 18px;
+				left: 18px;
+			}
+
+			#lg-header .logo-link img {
+				width: 40px;
+				height: 40px;
+			}
+
+			.lg-main {
+				padding: 0 1.25rem 3rem;
+			}
+
+			.lg-nav-sticky {
+				position: static;
+				margin: 0 -1.25rem 1.75rem;
+				padding: 1rem 1.25rem;
+			}
+
+			.lg-entry {
+				padding: 22px 20px;
+			}
+
+			.lg-photos img {
+				height: 210px;
+			}
+		}
+	</style>
+	<script src="/new/js/site-analytics-loader.js"></script>
+</head>
+
+<body>
+	<div id="page">
+		<header id="lg-header">
+			<div class="overlay"></div>
+			<a href="./index.html" class="logo-link" aria-label="Back to home">
+				<img src="images/chicago.jpg" alt="">
+				<span>Yusuf Morsi</span>
+			</a>
+			<div class="header-content">
+				<h1>Yusuf's Lounge Blog</h1>
+				<p>Airport lounge reviews, and nothing else</p>
+			</div>
+		</header>
+
+		<div class="lg-main">
+			<nav class="lg-nav-sticky" aria-label="Filter lounges">
+				<div class="lg-chips" id="lg-chips" role="group" aria-label="Filter by region"></div>
+				<label class="lg-sort">
+					Sort
+					<select id="lg-sort">
+						<option value="rating">Highest rated</option>
+						<option value="worst">Lowest rated</option>
+						<option value="recent">Most recent</option>
+					</select>
+				</label>
+			</nav>
+
+			<p class="lg-intro" id="lg-intro"></p>
+
+			<div id="lg-entries"></div>
+		</div>
+
+		<div id="fh5co-footer">
+			<div class="footer-tools-links">
+				<a href="./index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+				<a href="./old/photography.html" class="footer-tool-link"><i class="fa-solid fa-camera"></i>
+					Photography</a>
+				<a href="./tools.html" class="footer-tool-link"><i class="fas fa-tools"></i> Tools</a>
+			</div>
+			<hr class="footer-divider">
+			<p style="color: var(--text-color); font-size: 15px; margin-bottom: 0;">
+				😁 2020 –
+				<script>document.write(new Date().getFullYear())</script>
+				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer"
+					style="color: var(--primary-color);">Ayatica</a>
+				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+				<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer"
+					style="color: var(--primary-color);">bidetbud.com</a>
+				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank"
+					rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github"
+						aria-hidden="true"></i><span>Star</span></a>
+			</p>
+		</div>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
+					style="color: white;"></i></a>
+		</div>
+	</div>
+
+	<script src="lounges/entries.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const REGION_GROUPS = {
+				'US': 'United States',
+				'UK': 'Europe',
+				'Italy': 'Europe',
+				'Greece': 'Europe',
+				'Poland': 'Europe',
+				'Egypt': 'Middle East',
+				'Saudi Arabia': 'Middle East',
+				'Turkey': 'Middle East'
+			};
+
+			const GROUP_ORDER = ['United States', 'Europe', 'Middle East'];
+
+			let groupFilter = 'all';
+			let sortMode = 'rating';
+
+			function groupOf(entry) {
+				return REGION_GROUPS[entry.region] || entry.region;
+			}
+
+			function formatRating(rating) {
+				return Number.isInteger(rating) ? String(rating) : String(rating).replace(/0+$/, '');
+			}
+
+			function renderStars(rating) {
+				let html = '<span class="lg-stars" aria-label="' + formatRating(rating) + ' out of 5 stars">';
+				html += '<span class="rating-value">' + formatRating(rating) + '/5</span>';
+				for (let i = 1; i <= 5; i++) {
+					if (rating >= i) {
+						html += '<i class="fa-solid fa-star"></i>';
+					} else if (rating >= i - 0.5) {
+						html += '<i class="fa-solid fa-star-half-stroke"></i>';
+					} else {
+						html += '<i class="fa-regular fa-star star-empty"></i>';
+					}
+				}
+				return html + '</span>';
+			}
+
+			function comparator() {
+				if (sortMode === 'recent') {
+					return (a, b) => b.date.localeCompare(a.date) || b.stars - a.stars;
+				}
+				if (sortMode === 'worst') {
+					return (a, b) => a.stars - b.stars || a.title.localeCompare(b.title);
+				}
+				return (a, b) => b.stars - a.stars || a.title.localeCompare(b.title);
+			}
+
+			function buildPhotos(entry) {
+				const photos = entry.images || [];
+				if (!photos.length) return '';
+				const items = photos.map(src => `
+					<a href="./${src}" target="_blank" rel="noopener">
+						<img data-src="./${src}"
+							src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+							alt="${entry.title}, ${entry.airport}" loading="lazy"
+							onerror="this.parentElement.style.display='none'">
+					</a>`).join('');
+				return `<div class="lg-photos${photos.length > 1 ? ' multi' : ''}">${items}</div>`;
+			}
+
+			function buildEntry(entry) {
+				const article = document.createElement('article');
+				article.className = 'lg-entry';
+				article.id = entry.slug;
+
+				const body = (entry.body || []).map(p => `<p>${p}</p>`).join('');
+				const access = entry.access
+					? `<p class="lg-access"><i class="fa-solid fa-ticket" aria-hidden="true"></i> ${entry.access}</p>`
+					: '';
+
+				article.innerHTML = `
+					<div class="lg-entry-head">
+						<div>
+							<h3>${entry.title}</h3>
+							<p class="lg-airport"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i> ${entry.airport}</p>
+						</div>
+						${renderStars(entry.stars)}
+					</div>
+					${access}
+					<div class="lg-body">${body}</div>
+					${buildPhotos(entry)}
+				`;
+				return article;
+			}
+
+			const photoObserver = new IntersectionObserver(function (items, obs) {
+				items.forEach(item => {
+					if (!item.isIntersecting) return;
+					const img = item.target;
+					obs.unobserve(img);
+					const src = img.getAttribute('data-src');
+					if (!src) return;
+					img.removeAttribute('data-src');
+					img.addEventListener('load', function () { this.classList.add('loaded'); });
+					img.src = src;
+					if (img.complete && img.naturalHeight) img.classList.add('loaded');
+				});
+			}, { rootMargin: '200px' });
+
+			function renderChips() {
+				const counts = {};
+				LOUNGE_ENTRIES.forEach(entry => {
+					const group = groupOf(entry);
+					counts[group] = (counts[group] || 0) + 1;
+				});
+
+				const chips = [['all', 'All', LOUNGE_ENTRIES.length]].concat(
+					GROUP_ORDER.filter(g => counts[g]).map(g => [g, g, counts[g]])
+				);
+
+				const container = document.getElementById('lg-chips');
+				container.innerHTML = '';
+				chips.forEach(([value, label, count]) => {
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'lg-chip' + (groupFilter === value ? ' active' : '');
+					button.innerHTML = `${label} <span class="chip-count">${count}</span>`;
+					button.addEventListener('click', function () {
+						groupFilter = value;
+						renderChips();
+						render();
+					});
+					container.appendChild(button);
+				});
+			}
+
+			function renderIntro() {
+				const airports = new Set(LOUNGE_ENTRIES.map(e => e.airport.split(',')[0]));
+				const average = LOUNGE_ENTRIES.reduce((sum, e) => sum + e.stars, 0) / LOUNGE_ENTRIES.length;
+				document.getElementById('lg-intro').innerHTML =
+					`<strong>${LOUNGE_ENTRIES.length} lounges</strong> across ${airports.size} airports and stations, ` +
+					`averaging ${average.toFixed(1)}/5.`;
+			}
+
+			function render() {
+				const container = document.getElementById('lg-entries');
+				container.innerHTML = '';
+
+				const visible = LOUNGE_ENTRIES.filter(e => groupFilter === 'all' || groupOf(e) === groupFilter);
+				if (!visible.length) {
+					container.innerHTML = '<p class="lg-empty">Nothing here yet.</p>';
+					return;
+				}
+
+				const groups = {};
+				visible.forEach(entry => {
+					const key = groupOf(entry);
+					(groups[key] = groups[key] || []).push(entry);
+				});
+
+				GROUP_ORDER.filter(key => groups[key]).forEach(key => {
+					const section = document.createElement('section');
+					section.className = 'lg-group';
+
+					const list = groups[key].sort(comparator());
+					const header = document.createElement('div');
+					header.className = 'lg-group-header';
+					header.innerHTML = `<h2>${key}</h2><span>${list.length} lounge${list.length === 1 ? '' : 's'}</span>`;
+					section.appendChild(header);
+
+					list.forEach(entry => section.appendChild(buildEntry(entry)));
+					container.appendChild(section);
+				});
+
+				container.querySelectorAll('img[data-src]').forEach(img => photoObserver.observe(img));
+			}
+
+			document.getElementById('lg-sort').addEventListener('change', function () {
+				sortMode = this.value;
+				render();
+			});
+
+			renderChips();
+			renderIntro();
+			render();
+
+			if (window.location.hash) {
+				const target = document.getElementById(window.location.hash.slice(1));
+				if (target) target.scrollIntoView();
+			}
+
+			const gotop = document.querySelector('.gototop');
+			window.addEventListener('scroll', function () {
+				gotop.classList.toggle('active', window.scrollY > 400);
+			});
+			document.querySelector('.js-gotop').addEventListener('click', function (e) {
+				e.preventDefault();
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		});
+	</script>
+</body>
+
+</html>
