@@ -7,7 +7,7 @@
 	<title>Yusuf's Lounge Blog</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="description"
-		content="Honest airport lounge reviews from Yusuf Morsi. Priority Pass and paid lounges across the US, Europe, and the Middle East." />
+		content="Honest airport lounge reviews from Yusuf Morsi. Search and filter Priority Pass and paid lounges across the US, Europe, and the Middle East." />
 	<meta name="keywords"
 		content="airport lounge reviews, Priority Pass, LAX, LHR, JED, SFO, SAN, IST, lounge blog, Yusuf Morsi" />
 	<meta name="author" content="Yusuf Morsi" />
@@ -39,10 +39,11 @@
 			--light-bg: #faf9f7;
 			--light-bg-2: #f0ede8;
 			--card-bg: #ffffff;
+			--line: rgba(45, 74, 62, 0.12);
 			--shadow-sm: 0 2px 8px rgba(45, 74, 62, 0.06);
-			--shadow-md: 0 8px 30px rgba(45, 74, 62, 0.1);
-			--radius: 18px;
-			--radius-sm: 12px;
+			--shadow-md: 0 10px 30px rgba(45, 74, 62, 0.1);
+			--radius: 16px;
+			--radius-sm: 10px;
 		}
 
 		html {
@@ -53,12 +54,11 @@
 
 		body {
 			font-family: 'Poppins', sans-serif;
-			line-height: 1.7;
+			line-height: 1.65;
 			color: var(--text-color);
-			background: linear-gradient(180deg, var(--light-bg) 0%, #f5f2ee 100%);
+			background: var(--light-bg);
 			font-weight: 400;
 			overflow-x: hidden;
-			min-height: 100vh;
 		}
 
 		h1,
@@ -69,116 +69,209 @@
 			color: var(--primary-dark);
 		}
 
+		a:focus-visible,
+		button:focus-visible,
+		input:focus-visible,
+		select:focus-visible {
+			outline: 2px solid var(--accent-warm);
+			outline-offset: 2px;
+		}
+
+		/* Header */
 		#lg-header {
-			background-image: url(images/blueclouds.jpg);
-			background-position: center center;
-			background-size: cover;
-			position: relative;
-			min-height: 32vh;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 4rem 2rem;
+			background: var(--primary-dark);
+			color: white;
+			padding: 2.25rem 1.5rem 2rem;
 		}
 
-		#lg-header .overlay {
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(180deg, rgba(26, 47, 38, 0.6) 0%, rgba(26, 47, 38, 0.75) 100%);
-		}
-
-		#lg-header .header-content {
-			position: relative;
-			z-index: 2;
-			text-align: center;
-			max-width: 800px;
+		.lg-header-inner {
+			max-width: 1120px;
 			margin: 0 auto;
 		}
 
-		#lg-header .logo-link {
-			position: absolute;
-			top: 28px;
-			left: 28px;
-			display: flex;
+		.lg-back {
+			display: inline-flex;
 			align-items: center;
-			gap: 12px;
+			gap: 9px;
+			color: rgba(255, 255, 255, 0.78);
+			text-decoration: none;
+			font-size: 0.88rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.lg-back:hover,
+		.lg-back:focus {
 			color: white;
 			text-decoration: none;
-			font-weight: 500;
-			font-size: 1.05rem;
-			z-index: 3;
-			transition: opacity 0.2s;
 		}
 
-		#lg-header .logo-link:hover {
-			opacity: 0.9;
-			color: white;
-		}
-
-		#lg-header .logo-link img {
-			width: 48px;
-			height: 48px;
+		.lg-back img {
+			width: 30px;
+			height: 30px;
 			border-radius: 50%;
-			border: 2px solid rgba(255, 255, 255, 0.5);
+			border: 1px solid rgba(255, 255, 255, 0.35);
 		}
 
 		#lg-header h1 {
 			font-family: 'Playfair Display', serif;
 			color: white;
-			font-size: clamp(2.5rem, 6vw, 3.75rem);
-			margin-bottom: 14px;
-			letter-spacing: -0.02em;
-			line-height: 1.15;
-			text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+			font-size: clamp(2rem, 4.5vw, 2.9rem);
+			margin: 0 0 10px;
+			letter-spacing: -0.01em;
 		}
 
 		#lg-header p {
-			color: rgba(255, 255, 255, 0.95);
-			font-size: clamp(1.05rem, 2vw, 1.25rem);
-			line-height: 1.6;
-			max-width: 520px;
-			margin: 0 auto;
+			color: rgba(255, 255, 255, 0.8);
+			margin: 0;
+			max-width: 60ch;
+			font-size: 1rem;
 		}
 
-		.lg-main {
-			max-width: 860px;
-			margin: 0 auto;
-			padding: 0 2rem 4rem;
+		.lg-stats {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1.75rem;
+			margin-top: 1.75rem;
+			padding-top: 1.5rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.15);
 		}
 
-		.lg-nav-sticky {
+		.lg-stat b {
+			display: block;
+			font-size: 1.5rem;
+			font-weight: 600;
+			line-height: 1.2;
+			color: white;
+		}
+
+		.lg-stat span {
+			font-size: 0.8rem;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, 0.6);
+		}
+
+		/* Toolbar */
+		.lg-toolbar {
 			position: sticky;
 			top: 0;
-			z-index: 50;
-			background: rgba(250, 249, 247, 0.94);
-			backdrop-filter: blur(14px);
-			-webkit-backdrop-filter: blur(14px);
-			border-bottom: 1px solid rgba(45, 74, 62, 0.08);
-			margin: 0 -2rem 2rem;
-			padding: 1.1rem 2rem;
+			z-index: 40;
+			background: rgba(250, 249, 247, 0.96);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border-bottom: 1px solid var(--line);
+		}
+
+		.lg-toolbar-inner {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 0.9rem 1.5rem;
 			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 1rem;
 			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.lg-search {
+			position: relative;
+			flex: 1 1 280px;
+			min-width: 220px;
+		}
+
+		.lg-search .fa-magnifying-glass {
+			position: absolute;
+			left: 14px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			pointer-events: none;
+		}
+
+		.lg-search input {
+			width: 100%;
+			font-family: inherit;
+			font-size: 0.92rem;
+			color: var(--primary-dark);
+			padding: 10px 38px 10px 38px;
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			background: white;
+		}
+
+		.lg-search input::placeholder {
+			color: rgba(90, 124, 110, 0.75);
+		}
+
+		.lg-search-clear {
+			position: absolute;
+			right: 6px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 28px;
+			height: 28px;
+			border: none;
+			border-radius: 50%;
+			background: none;
+			color: var(--text-muted);
+			cursor: pointer;
+			display: none;
+		}
+
+		.lg-search-clear:hover {
+			background: var(--light-bg-2);
+			color: var(--primary-dark);
+		}
+
+		.lg-search.has-value .lg-search-clear {
+			display: block;
+		}
+
+		.lg-select {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			font-size: 0.82rem;
+			color: var(--text-muted);
+			white-space: nowrap;
+		}
+
+		.lg-select select {
+			font-family: inherit;
+			font-size: 0.88rem;
+			color: var(--primary-dark);
+			padding: 9px 12px;
+			border-radius: 999px;
+			border: 1px solid var(--line);
+			background: white;
+			cursor: pointer;
 		}
 
 		.lg-chips {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 0 1.5rem 0.9rem;
 			display: flex;
 			gap: 8px;
-			flex-wrap: wrap;
+			overflow-x: auto;
+			scrollbar-width: none;
+		}
+
+		.lg-chips::-webkit-scrollbar {
+			display: none;
 		}
 
 		.lg-chip {
-			padding: 7px 15px;
+			flex: 0 0 auto;
+			padding: 6px 14px;
 			border-radius: 999px;
-			border: 1px solid rgba(45, 74, 62, 0.15);
+			border: 1px solid var(--line);
 			background: white;
 			color: var(--text-muted);
-			font-size: 0.85rem;
+			font-size: 0.84rem;
 			font-weight: 500;
 			cursor: pointer;
-			transition: all 0.2s ease;
+			transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 		}
 
 		.lg-chip:hover {
@@ -192,157 +285,112 @@
 			color: white;
 		}
 
-		.lg-chip .chip-count {
+		.lg-chip .count {
 			opacity: 0.6;
 			margin-left: 5px;
-			font-size: 0.78rem;
+			font-size: 0.76rem;
 		}
 
-		.lg-sort {
+		/* Results */
+		.lg-main {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 1.75rem 1.5rem 4rem;
+		}
+
+		.lg-resultbar {
 			display: flex;
 			align-items: center;
-			gap: 8px;
-			font-size: 0.85rem;
-			color: var(--text-muted);
-		}
-
-		.lg-sort select {
-			font-family: inherit;
-			font-size: 0.85rem;
-			color: var(--primary-dark);
-			padding: 6px 10px;
-			border-radius: 10px;
-			border: 1px solid rgba(45, 74, 62, 0.15);
-			background: white;
-			cursor: pointer;
-		}
-
-		.lg-intro {
-			margin-bottom: 2.5rem;
-			color: var(--text-muted);
-			font-size: 1rem;
-		}
-
-		.lg-intro strong {
-			color: var(--primary-dark);
-		}
-
-		.lg-group {
-			margin-bottom: 3rem;
-		}
-
-		.lg-group-header {
-			display: flex;
-			align-items: baseline;
-			justify-content: space-between;
-			gap: 1rem;
-			padding-bottom: 10px;
-			margin-bottom: 1.75rem;
-			border-bottom: 1px solid rgba(45, 74, 62, 0.12);
-		}
-
-		.lg-group-header h2 {
-			font-size: 1.15rem;
-			letter-spacing: 0.06em;
-			text-transform: uppercase;
-			margin: 0;
-		}
-
-		.lg-group-header span {
-			font-size: 0.85rem;
-			color: var(--text-muted);
-			white-space: nowrap;
-		}
-
-		.lg-entry {
-			background: var(--card-bg);
-			border: 1px solid rgba(45, 74, 62, 0.08);
-			border-radius: var(--radius);
-			box-shadow: var(--shadow-sm);
-			padding: 28px 30px;
-			margin-bottom: 22px;
-		}
-
-		.lg-entry-head {
-			display: flex;
-			align-items: flex-start;
-			justify-content: space-between;
-			gap: 1rem;
 			flex-wrap: wrap;
+			gap: 10px;
+			margin-bottom: 1.5rem;
+			font-size: 0.9rem;
+			color: var(--text-muted);
 		}
 
-		.lg-entry h3 {
-			font-size: 1.3rem;
-			margin: 0 0 4px;
-			line-height: 1.3;
-		}
-
-		.lg-airport {
-			font-size: 0.85rem;
-			font-weight: 500;
-			color: var(--accent-warm-hover);
-			display: flex;
-			align-items: center;
-			gap: 6px;
-			margin: 0;
-		}
-
-		.lg-stars {
-			display: inline-flex;
-			align-items: center;
-			gap: 3px;
-			color: #d4a017;
-			font-size: 0.95rem;
-			white-space: nowrap;
-		}
-
-		.lg-stars .star-empty {
-			color: rgba(45, 74, 62, 0.2);
-		}
-
-		.lg-stars .rating-value {
-			font-size: 0.85rem;
-			font-weight: 700;
+		.lg-resultbar .count {
+			font-weight: 600;
 			color: var(--primary-dark);
-			margin-right: 6px;
 		}
 
-		.lg-access {
+		.lg-active-filter {
 			display: inline-flex;
 			align-items: center;
 			gap: 7px;
-			margin: 16px 0 0;
-			padding: 6px 12px;
+			padding: 4px 8px 4px 12px;
 			border-radius: 999px;
 			background: var(--light-bg-2);
-			color: var(--text-muted);
+			color: var(--primary-dark);
 			font-size: 0.82rem;
 		}
 
-		.lg-body p {
-			margin: 14px 0 0;
+		.lg-active-filter button {
+			border: none;
+			background: none;
+			color: var(--text-muted);
+			cursor: pointer;
+			line-height: 1;
+			padding: 2px 4px;
+			border-radius: 50%;
+		}
+
+		.lg-active-filter button:hover {
+			color: var(--primary-dark);
+		}
+
+		.lg-clear-all {
+			border: none;
+			background: none;
+			color: var(--accent-warm-hover);
+			font-size: 0.85rem;
+			font-weight: 500;
+			cursor: pointer;
+			text-decoration: underline;
+			padding: 0;
+		}
+
+		/* Cards */
+		.lg-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+			gap: 20px;
+		}
+
+		.lg-card {
+			background: var(--card-bg);
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			transition: box-shadow 0.2s ease, transform 0.2s ease;
+			scroll-margin-top: 140px;
+		}
+
+		.lg-card:hover {
+			box-shadow: var(--shadow-md);
+			transform: translateY(-2px);
 		}
 
 		.lg-photos {
 			display: grid;
-			gap: 12px;
-			margin-top: 20px;
+			grid-template-columns: 1fr;
+			gap: 2px;
+			background: var(--light-bg-2);
 		}
 
 		.lg-photos.multi {
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			grid-template-columns: repeat(2, 1fr);
 		}
 
 		.lg-photos a {
 			display: block;
 			overflow: hidden;
-			border-radius: var(--radius-sm);
-			background: var(--light-bg-2);
 		}
 
 		.lg-photos img {
 			width: 100%;
-			height: 260px;
+			height: 165px;
 			object-fit: cover;
 			display: block;
 			opacity: 0;
@@ -350,7 +398,7 @@
 		}
 
 		.lg-photos.multi img {
-			height: 180px;
+			height: 130px;
 		}
 
 		.lg-photos img.loaded {
@@ -358,23 +406,168 @@
 		}
 
 		.lg-photos a:hover img {
-			transform: scale(1.03);
+			transform: scale(1.04);
+		}
+
+		.lg-card-body {
+			padding: 22px 22px 24px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			flex: 1;
+		}
+
+		.lg-card-head {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 12px;
+		}
+
+		.lg-card h3 {
+			font-size: 1.12rem;
+			margin: 0 0 3px;
+			line-height: 1.35;
+		}
+
+		.lg-airport {
+			font-size: 0.82rem;
+			font-weight: 500;
+			color: var(--accent-warm-hover);
+			margin: 0;
+			display: flex;
+			align-items: baseline;
+			gap: 6px;
+		}
+
+		.lg-stars {
+			display: inline-flex;
+			align-items: center;
+			gap: 2px;
+			color: #d4a017;
+			font-size: 0.8rem;
+			white-space: nowrap;
+			padding-top: 3px;
+		}
+
+		.lg-stars .star-empty {
+			color: rgba(45, 74, 62, 0.18);
+		}
+
+		.lg-stars .rating-value {
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			margin-right: 5px;
+		}
+
+		.lg-access {
+			display: flex;
+			align-items: flex-start;
+			gap: 8px;
+			margin: 0;
+			font-size: 0.82rem;
+			color: var(--text-muted);
+			background: var(--light-bg);
+			border: 1px solid var(--line);
+			border-radius: var(--radius-sm);
+			padding: 8px 12px;
+		}
+
+		.lg-access i {
+			margin-top: 4px;
+			color: var(--secondary-color);
+		}
+
+		.lg-review {
+			font-size: 0.93rem;
+			margin: 0;
+		}
+
+		.lg-review p {
+			margin: 0 0 10px;
+		}
+
+		.lg-review p:last-child {
+			margin-bottom: 0;
+		}
+
+		.lg-card.collapsed .lg-review p:not(:first-child) {
+			display: none;
+		}
+
+		.lg-card.collapsed .lg-review p:first-child {
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		.lg-more {
+			align-self: flex-start;
+			border: none;
+			background: none;
+			padding: 0;
+			font-family: inherit;
+			font-size: 0.85rem;
+			font-weight: 500;
+			color: var(--primary-color);
+			cursor: pointer;
+		}
+
+		.lg-more:hover {
+			color: var(--accent-warm-hover);
+		}
+
+		.lg-tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			padding-top: 4px;
+		}
+
+		.lg-tag {
+			border: 1px solid var(--line);
+			background: white;
+			color: var(--text-muted);
+			border-radius: 999px;
+			padding: 3px 10px;
+			font-size: 0.74rem;
+			font-family: inherit;
+			cursor: pointer;
+			transition: all 0.15s ease;
+		}
+
+		.lg-tag:hover {
+			border-color: var(--secondary-color);
+			color: var(--primary-dark);
+		}
+
+		.lg-tag.active {
+			background: var(--primary-color);
+			border-color: var(--primary-color);
+			color: white;
 		}
 
 		.lg-empty {
 			text-align: center;
+			padding: 4rem 1rem;
 			color: var(--text-muted);
-			padding: 3rem 0;
 		}
 
+		.lg-empty h3 {
+			margin-bottom: 8px;
+		}
+
+		/* Back to top, overrides the table-cell rules in css/style.css */
 		.gototop {
 			position: fixed;
-			bottom: 25px;
-			right: 25px;
-			z-index: 100;
+			bottom: 24px;
+			right: 24px;
+			z-index: 60;
 			opacity: 0;
 			visibility: hidden;
-			transition: 0.3s;
+			transition: opacity 0.25s ease, visibility 0.25s ease;
 		}
 
 		.gototop.active {
@@ -383,16 +576,31 @@
 		}
 
 		.gototop a {
-			width: 48px;
-			height: 48px;
+			width: 44px;
+			height: 44px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			border-radius: 50%;
 			background: var(--primary-color);
+			color: white;
 			box-shadow: var(--shadow-md);
+			transition: background 0.2s ease;
 		}
 
+		.gototop a:hover {
+			background: var(--primary-dark);
+			color: white;
+		}
+
+		.gototop a i {
+			display: block;
+			height: auto;
+			line-height: 1;
+			font-size: 0.95rem;
+		}
+
+		/* Footer */
 		#fh5co-footer {
 			background: var(--light-bg-2);
 			padding: 2.5rem 1.5rem;
@@ -404,7 +612,7 @@
 			flex-wrap: wrap;
 			justify-content: center;
 			gap: 0.5rem 1.25rem;
-			margin-bottom: 1.5rem;
+			margin-bottom: 1.25rem;
 		}
 
 		.footer-tool-link {
@@ -413,47 +621,68 @@
 		}
 
 		.footer-divider {
-			border-color: rgba(45, 74, 62, 0.12);
+			border-color: var(--line);
 			max-width: 640px;
 			margin: 0 auto 1.25rem;
 		}
 
 		@media (max-width: 768px) {
 			#lg-header {
-				min-height: 28vh;
-				padding: 2rem 1.5rem;
+				padding: 1.5rem 1.25rem;
 			}
 
-			#lg-header h1 {
-				font-size: 2.1rem;
+			.lg-back {
+				margin-bottom: 1.1rem;
 			}
 
-			#lg-header .logo-link {
-				top: 18px;
-				left: 18px;
+			.lg-stats {
+				gap: 1.25rem;
+				margin-top: 1.25rem;
+				padding-top: 1.1rem;
 			}
 
-			#lg-header .logo-link img {
-				width: 40px;
-				height: 40px;
+			.lg-stat b {
+				font-size: 1.25rem;
+			}
+
+			.lg-toolbar {
+				position: static;
+			}
+
+			.lg-toolbar-inner {
+				padding: 0.75rem 1.25rem;
+				gap: 8px;
+			}
+
+			.lg-search {
+				flex: 1 1 100%;
+			}
+
+			.lg-select {
+				flex: 1 1 calc(50% - 4px);
+				min-width: 0;
+			}
+
+			.lg-select-label {
+				display: none;
+			}
+
+			.lg-select select {
+				width: 100%;
+				min-width: 0;
+				font-size: 0.84rem;
+			}
+
+			.lg-chips {
+				padding: 0 1.25rem 0.75rem;
 			}
 
 			.lg-main {
-				padding: 0 1.25rem 3rem;
+				padding: 1.5rem 1.25rem 3rem;
 			}
 
-			.lg-nav-sticky {
-				position: static;
-				margin: 0 -1.25rem 1.75rem;
-				padding: 1rem 1.25rem;
-			}
-
-			.lg-entry {
-				padding: 22px 20px;
-			}
-
-			.lg-photos img {
-				height: 210px;
+			.lg-grid {
+				grid-template-columns: 1fr;
 			}
 		}
 	</style>
@@ -461,65 +690,86 @@
 </head>
 
 <body>
-	<div id="page">
-		<header id="lg-header">
-			<div class="overlay"></div>
-			<a href="./index.html" class="logo-link" aria-label="Back to home">
+	<header id="lg-header">
+		<div class="lg-header-inner">
+			<a href="./index.html" class="lg-back">
 				<img src="images/chicago.jpg" alt="">
 				<span>Yusuf Morsi</span>
 			</a>
-			<div class="header-content">
-				<h1>Yusuf's Lounge Blog</h1>
-				<p>Airport lounge reviews, and nothing else</p>
+			<h1>Yusuf's Lounge Blog</h1>
+			<p>Every airport lounge I have been through, rated honestly. Nothing else on this page.</p>
+			<div class="lg-stats" id="lg-stats"></div>
+		</div>
+	</header>
+
+	<div class="lg-toolbar">
+		<div class="lg-toolbar-inner">
+			<div class="lg-search" id="lg-search-wrap">
+				<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+				<label class="sr-only" for="lg-search">Search lounges</label>
+				<input type="search" id="lg-search" autocomplete="off"
+					placeholder="Search lounge, airport, code or keyword" aria-describedby="lg-count">
+				<button type="button" class="lg-search-clear" id="lg-search-clear" aria-label="Clear search">
+					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
+				</button>
 			</div>
-		</header>
-
-		<div class="lg-main">
-			<nav class="lg-nav-sticky" aria-label="Filter lounges">
-				<div class="lg-chips" id="lg-chips" role="group" aria-label="Filter by region"></div>
-				<label class="lg-sort">
-					Sort
-					<select id="lg-sort">
-						<option value="rating">Highest rated</option>
-						<option value="worst">Lowest rated</option>
-						<option value="recent">Most recent</option>
-					</select>
-				</label>
-			</nav>
-
-			<p class="lg-intro" id="lg-intro"></p>
-
-			<div id="lg-entries"></div>
+			<label class="lg-select">
+				<span class="lg-select-label">Rating</span>
+				<select id="lg-rating" aria-label="Filter by rating">
+					<option value="0">Any rating</option>
+					<option value="4.5">4.5 and up</option>
+					<option value="4">4 and up</option>
+					<option value="3">3 and up</option>
+					<option value="low">Under 3</option>
+				</select>
+			</label>
+			<label class="lg-select">
+				<span class="lg-select-label">Sort</span>
+				<select id="lg-sort" aria-label="Sort lounges">
+					<option value="rating">Highest rated</option>
+					<option value="worst">Lowest rated</option>
+					<option value="recent">Recently added</option>
+					<option value="az">A to Z</option>
+				</select>
+			</label>
 		</div>
+		<div class="lg-chips" id="lg-chips" role="group" aria-label="Filter by region"></div>
+	</div>
 
-		<div id="fh5co-footer">
-			<div class="footer-tools-links">
-				<a href="./index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
-				<a href="./old/photography.html" class="footer-tool-link"><i class="fa-solid fa-camera"></i>
-					Photography</a>
-				<a href="./tools.html" class="footer-tool-link"><i class="fas fa-tools"></i> Tools</a>
-			</div>
-			<hr class="footer-divider">
-			<p style="color: var(--text-color); font-size: 15px; margin-bottom: 0;">
-				😁 2020 –
-				<script>document.write(new Date().getFullYear())</script>
-				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
-				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer"
-					style="color: var(--primary-color);">Ayatica</a>
-				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
-				<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer"
-					style="color: var(--primary-color);">bidetbud.com</a>
-				<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
-				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank"
-					rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github"
-						aria-hidden="true"></i><span>Star</span></a>
-			</p>
+	<main class="lg-main">
+		<div class="lg-resultbar">
+			<span id="lg-count" aria-live="polite"></span>
+			<span id="lg-active-filters" style="display: contents;"></span>
 		</div>
+		<div class="lg-grid" id="lg-results"></div>
+	</main>
 
-		<div class="gototop js-top">
-			<a href="#" class="js-gotop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
-					style="color: white;"></i></a>
+	<div id="fh5co-footer">
+		<div class="footer-tools-links">
+			<a href="./index.html" class="footer-tool-link"><i class="fa-solid fa-home"></i> Home</a>
+			<a href="./old/photography.html" class="footer-tool-link"><i class="fa-solid fa-camera"></i> Photography</a>
+			<a href="./tools.html" class="footer-tool-link"><i class="fas fa-tools"></i> Tools</a>
 		</div>
+		<hr class="footer-divider">
+		<p style="color: var(--text-color); font-size: 15px; margin-bottom: 0;">
+			😁 2020 –
+			<script>document.write(new Date().getFullYear())</script>
+			<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+			<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer"
+				style="color: var(--primary-color);">Ayatica</a>
+			<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+			<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer"
+				style="color: var(--primary-color);">bidetbud.com</a>
+			<span style="opacity: 0.5; margin: 0 0.35em;">·</span>
+			<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank"
+				rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github"
+					aria-hidden="true"></i><span>Star</span></a>
+		</p>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
+				aria-hidden="true"></i></a>
 	</div>
 
 	<script src="lounges/entries.js"></script>
@@ -535,50 +785,137 @@
 				'Saudi Arabia': 'Middle East',
 				'Turkey': 'Middle East'
 			};
-
 			const GROUP_ORDER = ['United States', 'Europe', 'Middle East'];
 
-			let groupFilter = 'all';
-			let sortMode = 'rating';
+			const searchInput = document.getElementById('lg-search');
+			const searchWrap = document.getElementById('lg-search-wrap');
+			const ratingSelect = document.getElementById('lg-rating');
+			const sortSelect = document.getElementById('lg-sort');
+			const resultsEl = document.getElementById('lg-results');
+			const countEl = document.getElementById('lg-count');
+			const activeFiltersEl = document.getElementById('lg-active-filters');
 
-			function groupOf(entry) {
-				return REGION_GROUPS[entry.region] || entry.region;
-			}
+			const state = { query: '', region: 'all', rating: '0', tag: '', sort: 'rating' };
+			const expanded = new Set();
+
+			LOUNGE_ENTRIES.forEach(entry => {
+				entry.group = REGION_GROUPS[entry.region] || entry.region;
+				entry.haystack = [
+					entry.title, entry.city, entry.airport, entry.region, entry.group,
+					entry.access || '', (entry.tags || []).join(' '), (entry.body || []).join(' ')
+				].join(' ').toLowerCase();
+			});
 
 			function formatRating(rating) {
-				return Number.isInteger(rating) ? String(rating) : String(rating).replace(/0+$/, '');
+				return String(rating).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
 			}
 
 			function renderStars(rating) {
 				let html = '<span class="lg-stars" aria-label="' + formatRating(rating) + ' out of 5 stars">';
-				html += '<span class="rating-value">' + formatRating(rating) + '/5</span>';
+				html += '<span class="rating-value">' + formatRating(rating) + '</span>';
 				for (let i = 1; i <= 5; i++) {
-					if (rating >= i) {
-						html += '<i class="fa-solid fa-star"></i>';
-					} else if (rating >= i - 0.5) {
-						html += '<i class="fa-solid fa-star-half-stroke"></i>';
-					} else {
-						html += '<i class="fa-regular fa-star star-empty"></i>';
-					}
+					if (rating >= i) html += '<i class="fa-solid fa-star" aria-hidden="true"></i>';
+					else if (rating >= i - 0.5) html += '<i class="fa-solid fa-star-half-stroke" aria-hidden="true"></i>';
+					else html += '<i class="fa-regular fa-star star-empty" aria-hidden="true"></i>';
 				}
 				return html + '</span>';
 			}
 
-			function comparator() {
-				if (sortMode === 'recent') {
-					return (a, b) => b.date.localeCompare(a.date) || b.stars - a.stars;
+			function matchesRating(entry) {
+				if (state.rating === '0') return true;
+				if (state.rating === 'low') return entry.stars < 3;
+				return entry.stars >= parseFloat(state.rating);
+			}
+
+			function matches(entry) {
+				if (state.region !== 'all' && entry.group !== state.region) return false;
+				if (state.tag && !(entry.tags || []).includes(state.tag)) return false;
+				if (!matchesRating(entry)) return false;
+				if (state.query) {
+					return state.query.split(/\s+/).every(word => entry.haystack.includes(word));
 				}
-				if (sortMode === 'worst') {
-					return (a, b) => a.stars - b.stars || a.title.localeCompare(b.title);
-				}
+				return true;
+			}
+
+			function sorter() {
+				if (state.sort === 'recent') return (a, b) => b.date.localeCompare(a.date) || b.stars - a.stars;
+				if (state.sort === 'worst') return (a, b) => a.stars - b.stars || a.title.localeCompare(b.title);
+				if (state.sort === 'az') return (a, b) => a.title.localeCompare(b.title);
 				return (a, b) => b.stars - a.stars || a.title.localeCompare(b.title);
+			}
+
+			function renderStats() {
+				const airports = new Set(LOUNGE_ENTRIES.map(e => e.airport.split(',')[0]));
+				const countries = new Set(LOUNGE_ENTRIES.map(e => e.region));
+				const average = LOUNGE_ENTRIES.reduce((sum, e) => sum + e.stars, 0) / LOUNGE_ENTRIES.length;
+				document.getElementById('lg-stats').innerHTML = `
+					<div class="lg-stat"><b>${LOUNGE_ENTRIES.length}</b><span>Lounges</span></div>
+					<div class="lg-stat"><b>${airports.size}</b><span>Airports</span></div>
+					<div class="lg-stat"><b>${countries.size}</b><span>Countries</span></div>
+					<div class="lg-stat"><b>${average.toFixed(1)}</b><span>Average rating</span></div>
+				`;
+			}
+
+			function renderChips() {
+				const counts = {};
+				LOUNGE_ENTRIES.forEach(e => { counts[e.group] = (counts[e.group] || 0) + 1; });
+				const chips = [['all', 'All lounges', LOUNGE_ENTRIES.length]]
+					.concat(GROUP_ORDER.filter(g => counts[g]).map(g => [g, g, counts[g]]));
+
+				const container = document.getElementById('lg-chips');
+				container.innerHTML = '';
+				chips.forEach(([value, label, count]) => {
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'lg-chip' + (state.region === value ? ' active' : '');
+					button.setAttribute('aria-pressed', state.region === value ? 'true' : 'false');
+					button.innerHTML = `${label} <span class="count">${count}</span>`;
+					button.addEventListener('click', function () {
+						state.region = value;
+						renderChips();
+						render();
+					});
+					container.appendChild(button);
+				});
+			}
+
+			function renderActiveFilters() {
+				const pills = [];
+				if (state.query) pills.push(['Search: ' + state.query, () => { state.query = ''; syncSearchInput(); }]);
+				if (state.region !== 'all') pills.push([state.region, () => { state.region = 'all'; renderChips(); }]);
+				if (state.rating !== '0') {
+					const label = state.rating === 'low' ? 'Under 3 stars' : state.rating + ' stars and up';
+					pills.push([label, () => { state.rating = '0'; ratingSelect.value = '0'; }]);
+				}
+				if (state.tag) pills.push(['Tag: ' + state.tag, () => { state.tag = ''; }]);
+
+				activeFiltersEl.innerHTML = '';
+				pills.forEach(([label, clear]) => {
+					const pill = document.createElement('span');
+					pill.className = 'lg-active-filter';
+					pill.innerHTML = `${label} <button type="button" aria-label="Remove filter ${label}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>`;
+					pill.querySelector('button').addEventListener('click', function () {
+						clear();
+						render();
+					});
+					activeFiltersEl.appendChild(pill);
+				});
+
+				if (pills.length > 1) {
+					const clearAll = document.createElement('button');
+					clearAll.type = 'button';
+					clearAll.className = 'lg-clear-all';
+					clearAll.textContent = 'Clear all';
+					clearAll.addEventListener('click', resetFilters);
+					activeFiltersEl.appendChild(clearAll);
+				}
 			}
 
 			function buildPhotos(entry) {
 				const photos = entry.images || [];
 				if (!photos.length) return '';
 				const items = photos.map(src => `
-					<a href="./${src}" target="_blank" rel="noopener">
+					<a href="./${src}" target="_blank" rel="noopener" aria-label="Open photo of ${entry.title}">
 						<img data-src="./${src}"
 							src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
 							alt="${entry.title}, ${entry.airport}" loading="lazy"
@@ -587,29 +924,53 @@
 				return `<div class="lg-photos${photos.length > 1 ? ' multi' : ''}">${items}</div>`;
 			}
 
-			function buildEntry(entry) {
-				const article = document.createElement('article');
-				article.className = 'lg-entry';
-				article.id = entry.slug;
+			function buildCard(entry) {
+				const card = document.createElement('article');
+				const paragraphs = entry.body || [];
+				const longReview = paragraphs.length > 1 || (paragraphs[0] || '').length > 260;
+				const isOpen = expanded.has(entry.slug);
 
-				const body = (entry.body || []).map(p => `<p>${p}</p>`).join('');
-				const access = entry.access
-					? `<p class="lg-access"><i class="fa-solid fa-ticket" aria-hidden="true"></i> ${entry.access}</p>`
-					: '';
+				card.className = 'lg-card' + (longReview && !isOpen ? ' collapsed' : '');
+				card.id = entry.slug;
 
-				article.innerHTML = `
-					<div class="lg-entry-head">
-						<div>
-							<h3>${entry.title}</h3>
-							<p class="lg-airport"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i> ${entry.airport}</p>
-						</div>
-						${renderStars(entry.stars)}
-					</div>
-					${access}
-					<div class="lg-body">${body}</div>
+				card.innerHTML = `
 					${buildPhotos(entry)}
+					<div class="lg-card-body">
+						<div class="lg-card-head">
+							<div>
+								<h3>${entry.title}</h3>
+								<p class="lg-airport"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i> ${entry.airport}</p>
+							</div>
+							${renderStars(entry.stars)}
+						</div>
+						${entry.access ? `<p class="lg-access"><i class="fa-solid fa-ticket" aria-hidden="true"></i><span>${entry.access}</span></p>` : ''}
+						${paragraphs.length ? `<div class="lg-review">${paragraphs.map(p => `<p>${p}</p>`).join('')}</div>` : ''}
+						${longReview ? `<button type="button" class="lg-more" aria-expanded="${isOpen}">${isOpen ? 'Show less' : 'Read full review'}</button>` : ''}
+						${(entry.tags || []).length ? `<div class="lg-tags">${entry.tags.map(tag =>
+							`<button type="button" class="lg-tag${state.tag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}</div>` : ''}
+					</div>
 				`;
-				return article;
+
+				const moreButton = card.querySelector('.lg-more');
+				if (moreButton) {
+					moreButton.addEventListener('click', function () {
+						const open = card.classList.toggle('collapsed') === false;
+						if (open) expanded.add(entry.slug); else expanded.delete(entry.slug);
+						this.textContent = open ? 'Show less' : 'Read full review';
+						this.setAttribute('aria-expanded', String(open));
+					});
+				}
+
+				card.querySelectorAll('.lg-tag').forEach(button => {
+					button.addEventListener('click', function () {
+						const tag = this.dataset.tag;
+						state.tag = state.tag === tag ? '' : tag;
+						render();
+						window.scrollTo({ top: document.querySelector('.lg-main').offsetTop - 160, behavior: 'smooth' });
+					});
+				});
+
+				return card;
 			}
 
 			const photoObserver = new IntersectionObserver(function (items, obs) {
@@ -624,93 +985,123 @@
 					img.src = src;
 					if (img.complete && img.naturalHeight) img.classList.add('loaded');
 				});
-			}, { rootMargin: '200px' });
+			}, { rootMargin: '250px' });
 
-			function renderChips() {
-				const counts = {};
-				LOUNGE_ENTRIES.forEach(entry => {
-					const group = groupOf(entry);
-					counts[group] = (counts[group] || 0) + 1;
-				});
-
-				const chips = [['all', 'All', LOUNGE_ENTRIES.length]].concat(
-					GROUP_ORDER.filter(g => counts[g]).map(g => [g, g, counts[g]])
-				);
-
-				const container = document.getElementById('lg-chips');
-				container.innerHTML = '';
-				chips.forEach(([value, label, count]) => {
-					const button = document.createElement('button');
-					button.type = 'button';
-					button.className = 'lg-chip' + (groupFilter === value ? ' active' : '');
-					button.innerHTML = `${label} <span class="chip-count">${count}</span>`;
-					button.addEventListener('click', function () {
-						groupFilter = value;
-						renderChips();
-						render();
-					});
-					container.appendChild(button);
-				});
+			function syncSearchInput() {
+				searchInput.value = state.query;
+				searchWrap.classList.toggle('has-value', state.query !== '');
 			}
 
-			function renderIntro() {
-				const airports = new Set(LOUNGE_ENTRIES.map(e => e.airport.split(',')[0]));
-				const average = LOUNGE_ENTRIES.reduce((sum, e) => sum + e.stars, 0) / LOUNGE_ENTRIES.length;
-				document.getElementById('lg-intro').innerHTML =
-					`<strong>${LOUNGE_ENTRIES.length} lounges</strong> across ${airports.size} airports and stations, ` +
-					`averaging ${average.toFixed(1)}/5.`;
+			function syncUrl() {
+				if (!history.replaceState) return;
+				const params = new URLSearchParams();
+				if (state.query) params.set('q', state.query);
+				if (state.region !== 'all') params.set('region', state.region);
+				if (state.rating !== '0') params.set('rating', state.rating);
+				if (state.tag) params.set('tag', state.tag);
+				const query = params.toString();
+				history.replaceState(null, '', query ? '?' + query : location.pathname);
+			}
+
+			function resetFilters() {
+				state.query = '';
+				state.region = 'all';
+				state.rating = '0';
+				state.tag = '';
+				syncSearchInput();
+				ratingSelect.value = '0';
+				renderChips();
+				render();
 			}
 
 			function render() {
-				const container = document.getElementById('lg-entries');
-				container.innerHTML = '';
+				const visible = LOUNGE_ENTRIES.filter(matches).sort(sorter());
 
-				const visible = LOUNGE_ENTRIES.filter(e => groupFilter === 'all' || groupOf(e) === groupFilter);
+				countEl.innerHTML = visible.length === LOUNGE_ENTRIES.length
+					? `<span class="count">${visible.length} lounges</span>`
+					: `<span class="count">${visible.length}</span> of ${LOUNGE_ENTRIES.length} lounges`;
+
+				renderActiveFilters();
+				syncUrl();
+
+				resultsEl.innerHTML = '';
 				if (!visible.length) {
-					container.innerHTML = '<p class="lg-empty">Nothing here yet.</p>';
+					resultsEl.innerHTML = `
+						<div class="lg-empty" style="grid-column: 1 / -1;">
+							<h3>No lounges match that</h3>
+							<p>Try a different airport, code or keyword.</p>
+							<button type="button" class="lg-clear-all" id="lg-empty-reset">Clear all filters</button>
+						</div>`;
+					document.getElementById('lg-empty-reset').addEventListener('click', resetFilters);
 					return;
 				}
 
-				const groups = {};
-				visible.forEach(entry => {
-					const key = groupOf(entry);
-					(groups[key] = groups[key] || []).push(entry);
-				});
-
-				GROUP_ORDER.filter(key => groups[key]).forEach(key => {
-					const section = document.createElement('section');
-					section.className = 'lg-group';
-
-					const list = groups[key].sort(comparator());
-					const header = document.createElement('div');
-					header.className = 'lg-group-header';
-					header.innerHTML = `<h2>${key}</h2><span>${list.length} lounge${list.length === 1 ? '' : 's'}</span>`;
-					section.appendChild(header);
-
-					list.forEach(entry => section.appendChild(buildEntry(entry)));
-					container.appendChild(section);
-				});
-
-				container.querySelectorAll('img[data-src]').forEach(img => photoObserver.observe(img));
+				const fragment = document.createDocumentFragment();
+				visible.forEach(entry => fragment.appendChild(buildCard(entry)));
+				resultsEl.appendChild(fragment);
+				resultsEl.querySelectorAll('img[data-src]').forEach(img => photoObserver.observe(img));
 			}
 
-			document.getElementById('lg-sort').addEventListener('change', function () {
-				sortMode = this.value;
+			let searchTimer;
+			searchInput.addEventListener('input', function () {
+				const value = this.value.trim().toLowerCase();
+				searchWrap.classList.toggle('has-value', this.value !== '');
+				clearTimeout(searchTimer);
+				searchTimer = setTimeout(function () {
+					state.query = value;
+					render();
+				}, 120);
+			});
+
+			document.getElementById('lg-search-clear').addEventListener('click', function () {
+				state.query = '';
+				syncSearchInput();
+				searchInput.focus();
 				render();
 			});
 
+			ratingSelect.addEventListener('change', function () {
+				state.rating = this.value;
+				render();
+			});
+
+			sortSelect.addEventListener('change', function () {
+				state.sort = this.value;
+				render();
+			});
+
+			document.addEventListener('keydown', function (e) {
+				if (e.key === '/' && document.activeElement !== searchInput) {
+					e.preventDefault();
+					searchInput.focus();
+					searchInput.select();
+				} else if (e.key === 'Escape' && document.activeElement === searchInput) {
+					state.query = '';
+					syncSearchInput();
+					render();
+				}
+			});
+
+			const params = new URLSearchParams(location.search);
+			state.query = (params.get('q') || '').toLowerCase();
+			state.region = params.get('region') || 'all';
+			state.rating = params.get('rating') || '0';
+			state.tag = params.get('tag') || '';
+			syncSearchInput();
+			ratingSelect.value = state.rating;
+
+			renderStats();
 			renderChips();
-			renderIntro();
 			render();
 
-			if (window.location.hash) {
-				const target = document.getElementById(window.location.hash.slice(1));
+			if (location.hash) {
+				const target = document.getElementById(location.hash.slice(1));
 				if (target) target.scrollIntoView();
 			}
 
 			const gotop = document.querySelector('.gototop');
 			window.addEventListener('scroll', function () {
-				gotop.classList.toggle('active', window.scrollY > 400);
+				gotop.classList.toggle('active', window.scrollY > 500);
 			});
 			document.querySelector('.js-gotop').addEventListener('click', function (e) {
 				e.preventDefault();
