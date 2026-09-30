@@ -237,24 +237,47 @@ async function mergeFiles() {
 
 // Add PDF to merged document
 async function addPdfToMerged(mergedPdf, pdfFile) {
-    const arrayBuffer = await pdfFile.arrayBuffer();
-    const bytes = new Uint8Array(arrayBuffer);
+    const original = new Uint8Array(await pdfFile.arrayBuffer());
 
     try {
-        const pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
-        const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-        pages.forEach((page) => mergedPdf.addPage(page));
-        return;
+        const pdf = await PDFLib.PDFDocument.load(original.slice(), { ignoreEncryption: true });
+        // ignoreEncryption lets locked PDFs load, but the page streams stay
+        // encrypted, so copyPages produces blank pages. Rasterize those instead.
+        if (!pdf.isEncrypted) {
+            const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+            pages.forEach((page) => mergedPdf.addPage(page));
+            return;
+        }
     } catch (directError) {
         console.warn('Direct PDF copy failed, rasterizing instead:', directError);
     }
 
     try {
-        await addPdfAsImages(mergedPdf, bytes);
+        await addPdfAsImages(mergedPdf, original);
     } catch (error) {
         console.error('Error adding PDF:', error);
         throw new Error(`Failed to add PDF "${pdfFile.name}": ${error.message}`);
     }
+}
+
+function canvasToJpegBytes(canvas) {
+    return new Promise((resolve, reject) => {
+        canvas.toBlob(async (blob) => {
+            if (blob) {
+                resolve(new Uint8Array(await blob.arrayBuffer()));
+                return;
+            }
+            try {
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+                const bin = atob(dataUrl.split(',')[1]);
+                const bytes = new Uint8Array(bin.length);
+                for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+                resolve(bytes);
+            } catch (err) {
+                reject(err);
+            }
+        }, 'image/jpeg', 0.92);
+    });
 }
 
 // Rasterize an encrypted or otherwise uncopyable PDF via PDF.js
@@ -263,28 +286,25 @@ async function addPdfAsImages(mergedPdf, bytes) {
         throw new Error('This PDF is encrypted and could not be merged.');
     }
 
-    const srcPdf = await pdfjsLib.getDocument({ data: bytes.slice(), password: '' }).promise;
+    const srcPdf = await pdfjsLib.getDocument({
+        data: bytes.slice(),
+        password: '',
+        stopAtErrors: false,
+    }).promise;
     const scale = 2;
 
     for (let pageNum = 1; pageNum <= srcPdf.numPages; pageNum++) {
         const page = await srcPdf.getPage(pageNum);
         const viewport = page.getViewport({ scale });
         const canvas = document.createElement('canvas');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        canvas.width = Math.ceil(viewport.width);
+        canvas.height = Math.ceil(viewport.height);
+        const ctx = canvas.getContext('2d', { alpha: false });
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await page.render({ canvasContext: ctx, viewport }).promise;
 
-        const jpegBytes = await new Promise((resolve, reject) => {
-            canvas.toBlob(async (blob) => {
-                if (!blob) {
-                    reject(new Error('Could not render PDF page'));
-                    return;
-                }
-                resolve(new Uint8Array(await blob.arrayBuffer()));
-            }, 'image/jpeg', 0.92);
-        });
-
-        const pdfImage = await mergedPdf.embedJpg(jpegBytes);
+        const pdfImage = await mergedPdf.embedJpg(await canvasToJpegBytes(canvas));
         const dims = pdfImage.scale(1);
         const outPage = mergedPdf.addPage([dims.width, dims.height]);
         outPage.drawImage(pdfImage, {
