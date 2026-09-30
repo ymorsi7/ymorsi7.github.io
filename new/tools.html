@@ -904,7 +904,7 @@
 					return '';
 				}
 				const arrayBuffer = await pdfFile.arrayBuffer();
-				const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+				const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer, password: '' });
 				const pdf = await loadingTask.promise;
 				
 				let fullText = '';
@@ -1036,9 +1036,34 @@
 				for (const fileObj of mergePDFSelectedFiles) {
 					if (fileObj.type === 'application/pdf') {
 						const arrayBuffer = await fileObj.file.arrayBuffer();
-						const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
-						const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-						pages.forEach((page) => mergedPdf.addPage(page));
+						const bytes = new Uint8Array(arrayBuffer);
+						try {
+							const pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+							const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+							pages.forEach((page) => mergedPdf.addPage(page));
+						} catch (directError) {
+							console.warn('Direct PDF copy failed, rasterizing instead:', directError);
+							if (typeof pdfjsLib === 'undefined') throw directError;
+							const srcPdf = await pdfjsLib.getDocument({ data: bytes.slice(), password: '' }).promise;
+							for (let pageNum = 1; pageNum <= srcPdf.numPages; pageNum++) {
+								const page = await srcPdf.getPage(pageNum);
+								const viewport = page.getViewport({ scale: 2 });
+								const canvas = document.createElement('canvas');
+								canvas.width = viewport.width;
+								canvas.height = viewport.height;
+								await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+								const jpegBytes = await new Promise((resolve, reject) => {
+									canvas.toBlob(async (blob) => {
+										if (!blob) return reject(new Error('Could not render PDF page'));
+										resolve(new Uint8Array(await blob.arrayBuffer()));
+									}, 'image/jpeg', 0.92);
+								});
+								const pdfImage = await mergedPdf.embedJpg(jpegBytes);
+								const dims = pdfImage.scale(1);
+								const outPage = mergedPdf.addPage([dims.width, dims.height]);
+								outPage.drawImage(pdfImage, { x: 0, y: 0, width: dims.width, height: dims.height });
+							}
+						}
 					} else {
 						const arrayBuffer = await fileObj.file.arrayBuffer();
 						let pdfImage;

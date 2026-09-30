@@ -237,17 +237,62 @@ async function mergeFiles() {
 
 // Add PDF to merged document
 async function addPdfToMerged(mergedPdf, pdfFile) {
+    const arrayBuffer = await pdfFile.arrayBuffer();
+    const bytes = new Uint8Array(arrayBuffer);
+
     try {
-        const arrayBuffer = await pdfFile.arrayBuffer();
-        const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+        const pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
         const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-        
-        pages.forEach((page) => {
-            mergedPdf.addPage(page);
-        });
+        pages.forEach((page) => mergedPdf.addPage(page));
+        return;
+    } catch (directError) {
+        console.warn('Direct PDF copy failed, rasterizing instead:', directError);
+    }
+
+    try {
+        await addPdfAsImages(mergedPdf, bytes);
     } catch (error) {
         console.error('Error adding PDF:', error);
         throw new Error(`Failed to add PDF "${pdfFile.name}": ${error.message}`);
+    }
+}
+
+// Rasterize an encrypted or otherwise uncopyable PDF via PDF.js
+async function addPdfAsImages(mergedPdf, bytes) {
+    if (typeof pdfjsLib === 'undefined') {
+        throw new Error('This PDF is encrypted and could not be merged.');
+    }
+
+    const srcPdf = await pdfjsLib.getDocument({ data: bytes.slice(), password: '' }).promise;
+    const scale = 2;
+
+    for (let pageNum = 1; pageNum <= srcPdf.numPages; pageNum++) {
+        const page = await srcPdf.getPage(pageNum);
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+        const jpegBytes = await new Promise((resolve, reject) => {
+            canvas.toBlob(async (blob) => {
+                if (!blob) {
+                    reject(new Error('Could not render PDF page'));
+                    return;
+                }
+                resolve(new Uint8Array(await blob.arrayBuffer()));
+            }, 'image/jpeg', 0.92);
+        });
+
+        const pdfImage = await mergedPdf.embedJpg(jpegBytes);
+        const dims = pdfImage.scale(1);
+        const outPage = mergedPdf.addPage([dims.width, dims.height]);
+        outPage.drawImage(pdfImage, {
+            x: 0,
+            y: 0,
+            width: dims.width,
+            height: dims.height,
+        });
     }
 }
 
@@ -328,7 +373,7 @@ const STOP_WORDS = new Set([
 async function extractTextFromPdf(pdfFile) {
     try {
         const arrayBuffer = await pdfFile.arrayBuffer();
-        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer, password: '' });
         const pdf = await loadingTask.promise;
         
         let fullText = '';
