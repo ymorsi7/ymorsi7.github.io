@@ -1,6 +1,6 @@
 import type { GameId } from '../storage/types'
 
-export type GameIcon = 'writer' | 'sheets' | 'planner' | 'mail'
+export type GameIcon = 'writer' | 'sheets' | 'planner' | 'mail' | 'plan'
 
 export type GameMeta = {
   id: GameId
@@ -9,7 +9,7 @@ export type GameMeta = {
   app: string
   blurb: string
   icon: GameIcon
-  variant: 'writer' | 'sheets' | 'mail'
+  variant: 'writer' | 'sheets' | 'mail' | 'plan'
 }
 
 export const GAMES: GameMeta[] = [
@@ -66,6 +66,15 @@ export const GAMES: GameMeta[] = [
     blurb: 'Unread',
     icon: 'mail',
     variant: 'mail',
+  },
+  {
+    id: 'floor',
+    file: 'Floor_3',
+    title: 'Floor_3 - Maps',
+    app: 'Maps',
+    blurb: 'Level 3 seating',
+    icon: 'plan',
+    variant: 'plan',
   },
 ]
 

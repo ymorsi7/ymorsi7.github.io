@@ -8,6 +8,8 @@ import { CrashGame } from '../games/crash/CrashGame'
 import { LeadershipGame } from '../games/leadership/LeadershipGame'
 import { RiskGame } from '../games/risk/RiskGame'
 import { InboxGame } from '../games/inbox/InboxGame'
+import { FloorGame } from '../games/floor/FloorGame'
+import { TUTORIALS } from '../games/tutorials'
 import { OfficeChrome, RecoveredDialog } from './OfficeChrome'
 
 type Mode = 'play' | 'boss' | 'grace'
@@ -40,6 +42,8 @@ export function GameScreen({
   const [hud, setHud] = useState<Hud>(EMPTY)
   const [over, setOver] = useState<number | null>(null)
   const [muted, setMuted] = useState(() => storage.getMuted())
+  const [help, setHelp] = useState(false)
+  const [note, setNote] = useState('')
   const modeRef = useRef<Mode>('play')
   const saved = useRef(false)
   const grace = useRef(0)
@@ -107,7 +111,12 @@ export function GameScreen({
   }, [company, storage])
 
   const cover = mode !== 'play'
-  const paused = mode !== 'play' || over != null
+  const paused = mode !== 'play' || over != null || help
+  const flash = (text: string) => {
+    setNote(text)
+    window.setTimeout(() => setNote(''), 1600)
+  }
+  const clip = `${meta.title}${hud.formula ? `\n${hud.formula}` : ''}`
   const props = {
     paused,
     cover,
@@ -152,7 +161,6 @@ export function GameScreen({
           icon={meta.icon}
           formulaName={hud.formulaName}
           formula={hud.formula}
-          statusLeft={hud.statusLeft}
           statusRight={hud.statusRight}
           muted={muted}
           onToggleMute={() => {
@@ -162,9 +170,40 @@ export function GameScreen({
           }}
           onFullscreen={toggleFullscreen}
           onClose={onExit}
+          onNew={retry}
+          onOpen={onExit}
+          onSave={() => flash('Saved')}
+          onPrint={() => window.print()}
+          onCut={() => {
+            void navigator.clipboard.writeText(clip).then(() => flash('Cut'))
+          }}
+          onCopy={() => {
+            void navigator.clipboard.writeText(clip).then(() => flash('Copied'))
+          }}
+          onPaste={() => {
+            void navigator.clipboard.readText().then((text) => flash(text.trim() ? text.trim().slice(0, 48) : 'Clipboard empty')).catch(() => flash('Clipboard blocked'))
+          }}
+          onTutorial={() => setHelp(true)}
+          statusLeft={note || hud.statusLeft}
           dialog={
             over != null && mode === 'play' ? (
               <RecoveredDialog score={over} product={meta.app} onRetry={retry} onClose={onExit} />
+            ) : help && mode === 'play' ? (
+              <div className="absolute inset-0 z-20 grid place-items-center bg-black/25 px-4">
+                <div className="w-[420px] max-w-full rounded-[3px] bg-white p-5 text-[#172B4D] shadow-xl">
+                  <h2 className="text-[18px] font-medium">How {meta.file} works</h2>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-[14px] leading-6">
+                    {TUTORIALS[game].map((step) => (
+                      <li key={step}>{step.replace(/\.$/, '')}.</li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex justify-end">
+                    <button type="button" onClick={() => setHelp(false)} className="rounded-[3px] bg-[#0C66E4] px-3 py-1.5 text-[14px] font-medium text-white">
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
             ) : undefined
           }
         >
@@ -174,6 +213,7 @@ export function GameScreen({
           {game === 'leadership' && <LeadershipGame key={round} {...props} />}
           {game === 'risk' && <RiskGame key={round} {...props} />}
           {game === 'inbox' && <InboxGame key={round} {...props} />}
+          {game === 'floor' && <FloorGame key={round} {...props} />}
         </OfficeChrome>
       </div>
     </div>

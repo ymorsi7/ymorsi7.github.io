@@ -25,6 +25,9 @@ export function HadithGate({ onAffirm }: { onAffirm: () => void }) {
           <p className="mt-3 text-[14px] leading-6 text-[#44546F]">
             The top of the pile looked fine. Paid hours work the same way: what sits on the screen is what people are meant to trust. These are games. They are not a cover for time that belongs to someone else.
           </p>
+          <p className="mt-3 text-[14px] leading-6 text-[#172B4D]">
+            Do not break the rules of your workplace, your contract, or this app. The app does not permit deception, skipped duties, or a screen dressed up as work you are not doing.
+          </p>
         </div>
         <div className="flex justify-end border-t border-[#DFE1E6] px-6 py-4">
           <button
@@ -32,7 +35,7 @@ export function HadithGate({ onAffirm }: { onAffirm: () => void }) {
             onClick={onAffirm}
             className="rounded-[3px] bg-[#0C66E4] px-3 py-2 text-left text-[14px] font-medium leading-5 text-white hover:bg-[#0055CC]"
           >
-            I am not cheating, and I am not taking time I have not earned
+            I am not cheating, I am not taking time I have not earned, and I am not breaking the rules
           </button>
         </div>
       </article>

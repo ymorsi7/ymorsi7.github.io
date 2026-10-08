@@ -134,9 +134,9 @@ function Command({
   )
 }
 
-function Mini({ children, label }: { children: ReactNode; label: string }) {
+function Mini({ children, label, onClick }: { children: ReactNode; label: string; onClick?: () => void }) {
   return (
-    <button type="button" className="flex items-center gap-1 px-1 py-px text-[11px] text-[#242424] hover:bg-[#f3f2f1]">
+    <button type="button" onClick={onClick} className="flex items-center gap-1 px-1 py-px text-[11px] text-[#242424] hover:bg-[#f3f2f1]">
       {children}
       <span>{label}</span>
     </button>
@@ -164,12 +164,20 @@ export function OfficeChrome({
   onToggleMute,
   onFullscreen,
   onClose,
+  onNew,
+  onOpen,
+  onSave,
+  onPrint,
+  onCut,
+  onCopy,
+  onPaste,
+  onTutorial,
   children,
   dialog,
 }: {
   title: string
-  variant: 'writer' | 'sheets' | 'mail'
-  icon: 'writer' | 'sheets' | 'planner' | 'mail'
+  variant: 'writer' | 'sheets' | 'mail' | 'plan'
+  icon: 'writer' | 'sheets' | 'planner' | 'mail' | 'plan'
   formulaName: string
   formula: string
   statusLeft: string
@@ -178,12 +186,23 @@ export function OfficeChrome({
   onToggleMute: () => void
   onFullscreen: () => void
   onClose: () => void
+  onNew: () => void
+  onOpen: () => void
+  onSave: () => void
+  onPrint: () => void
+  onCut: () => void
+  onCopy: () => void
+  onPaste: () => void
+  onTutorial: () => void
   children: ReactNode
   dialog?: ReactNode
 }) {
   const [tab, setTab] = useState<(typeof TABS)[number]>('Home')
   const [fileOpen, setFileOpen] = useState(false)
-  const accent = icon === 'sheets' ? '#107c41' : icon === 'planner' ? '#5b5fc7' : icon === 'mail' ? '#0f548c' : '#0f6cbd'
+  const accent = icon === 'sheets' ? '#107c41' : icon === 'planner' ? '#5b5fc7' : icon === 'mail' ? '#0f548c' : icon === 'plan' ? '#0f6cbd' : '#0f6cbd'
+  const [bold, setBold] = useState(false)
+  const [italic, setItalic] = useState(false)
+  const [underline, setUnderline] = useState(false)
 
   useEffect(() => {
     if (!fileOpen) return
@@ -196,8 +215,11 @@ export function OfficeChrome({
     <div className="flex h-full min-h-0 flex-col bg-white text-[#242424]">
       <header className="grid h-10 shrink-0 grid-cols-[auto_1fr_auto] items-center border-b border-[#e1e1e1] bg-white px-2">
         <img src={`${import.meta.env.BASE_URL}favicon-${icon}.svg`} alt="" className="h-5 w-5" />
-        <div className="truncate px-3 text-center text-[13px]">{title}</div>
+        <div className="truncate px-3 text-center text-[13px]" style={{ fontWeight: bold ? 700 : 400, fontStyle: italic ? 'italic' : 'normal', textDecoration: underline ? 'underline' : 'none' }}>{title}</div>
         <div className="flex items-center">
+          <button type="button" onClick={onTutorial} className="px-2 py-1 text-[12px] text-[#0f6cbd] hover:bg-[#f3f2f1]">
+            Tutorial
+          </button>
           <button type="button" title="Full screen (F11)" onClick={onFullscreen} className="px-2 py-1 text-[12px] text-[#616161] hover:bg-[#f3f2f1]">
             Full screen
           </button>
@@ -223,6 +245,7 @@ export function OfficeChrome({
                 setFileOpen((open) => !open)
                 return
               }
+              if (name === 'Help') onTutorial()
               setFileOpen(false)
               setTab(name)
             }}
@@ -237,48 +260,58 @@ export function OfficeChrome({
             className="absolute left-2 top-full z-30 w-52 rounded-lg border border-[#edebe9] bg-white py-1 shadow-xl"
             onPointerDown={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              className="flex w-full items-center justify-between px-3 py-2 text-left text-[13px] hover:bg-[#f5f5f5]"
-              onClick={() => {
-                setFileOpen(false)
-                onClose()
-              }}
-            >
-              <span>Close</span>
-              <span className="text-[11px] text-[#616161]">Esc</span>
-            </button>
+            {[
+              ['New', onNew],
+              ['Open', onOpen],
+              ['Save', onSave],
+              ['Print', onPrint],
+              ['Tutorial', onTutorial],
+              ['Close', onClose],
+            ].map(([label, action]) => (
+              <button
+                key={label as string}
+                type="button"
+                className="flex w-full items-center justify-between px-3 py-2 text-left text-[13px] hover:bg-[#f5f5f5]"
+                onClick={() => {
+                  setFileOpen(false)
+                  ;(action as () => void)()
+                }}
+              >
+                <span>{label as string}</span>
+                {label === 'Close' && <span className="text-[11px] text-[#616161]">Esc</span>}
+              </button>
+            ))}
           </div>
         )}
       </nav>
 
       <div className="flex h-[68px] shrink-0 items-stretch overflow-hidden border-b border-[#e1e1e1] bg-[#faf9f8] px-1">
         <RibbonGroup label="Clipboard">
-          <Command label="Paste"><PasteIcon /></Command>
+          <Command label="Paste" onClick={onPaste}><PasteIcon /></Command>
           <div className="flex flex-col justify-center">
-            <Mini label="Cut"><CutIcon /></Mini>
-            <Mini label="Copy"><CopyIcon /></Mini>
+            <Mini label="Cut" onClick={onCut}><CutIcon /></Mini>
+            <Mini label="Copy" onClick={onCopy}><CopyIcon /></Mini>
           </div>
         </RibbonGroup>
         {variant === 'writer' && (
           <RibbonGroup label="Font">
             <span className="self-center border border-[#d1d1d1] bg-white px-2 py-1 text-[12px]">Times New Roman</span>
             <span className="self-center border border-[#d1d1d1] bg-white px-2 py-1 text-[12px]">12</span>
-            <Command label="Bold"><BoldIcon /></Command>
-            <Command label="Italic"><ItalicIcon /></Command>
-            <Command label="Underline"><UnderlineIcon /></Command>
+            <Command label="Bold" pressed={bold} onClick={() => setBold((value) => !value)}><BoldIcon /></Command>
+            <Command label="Italic" pressed={italic} onClick={() => setItalic((value) => !value)}><ItalicIcon /></Command>
+            <Command label="Underline" pressed={underline} onClick={() => setUnderline((value) => !value)}><UnderlineIcon /></Command>
           </RibbonGroup>
         )}
         {variant === 'sheets' && (
           <RibbonGroup label="Data">
-            <Command label="Sum"><SumIcon /></Command>
-            <Command label="Chart"><ChartIcon /></Command>
+            <Command label="Sum" onClick={onSave}><SumIcon /></Command>
+            <Command label="Chart" onClick={onTutorial}><ChartIcon /></Command>
           </RibbonGroup>
         )}
-        {variant === 'mail' && (
-          <RibbonGroup label="Respond">
-            <Command label="Reply"><DocIcon /></Command>
-            <Command label="Forward"><FolderIcon /></Command>
+        {(variant === 'mail' || variant === 'plan') && (
+          <RibbonGroup label={variant === 'mail' ? 'Respond' : 'Walk'}>
+            <Command label={variant === 'mail' ? 'Reply' : 'Keys'} onClick={onTutorial}><DocIcon /></Command>
+            <Command label={variant === 'mail' ? 'Forward' : 'Plan'} onClick={onSave}><FolderIcon /></Command>
           </RibbonGroup>
         )}
         <RibbonGroup label={tab === 'Review' ? 'Alerts' : 'File'}>
@@ -286,12 +319,15 @@ export function OfficeChrome({
             <Command label={muted ? 'Muted' : 'Sound'} pressed={muted} onClick={onToggleMute}><DocIcon /></Command>
           ) : (
             <>
-              <Command label="New"><DocIcon /></Command>
-              <Command label="Open"><FolderIcon /></Command>
-              <Command label="Save"><SaveIcon /></Command>
-              <Command label="Print"><PrintIcon /></Command>
+              <Command label="New" onClick={onNew}><DocIcon /></Command>
+              <Command label="Open" onClick={onOpen}><FolderIcon /></Command>
+              <Command label="Save" onClick={onSave}><SaveIcon /></Command>
+              <Command label="Print" onClick={onPrint}><PrintIcon /></Command>
             </>
           )}
+        </RibbonGroup>
+        <RibbonGroup label="Help">
+          <Command label="Tutorial" onClick={onTutorial}><DocIcon /></Command>
         </RibbonGroup>
         {variant === 'mail' && (
           <RibbonGroup label="File under">

@@ -1,4 +1,4 @@
-export type GameId = 'breakdown' | 'leadership' | 'costcutter' | 'crash' | 'risk' | 'inbox'
+export type GameId = 'breakdown' | 'leadership' | 'costcutter' | 'crash' | 'risk' | 'inbox' | 'floor'
 
 export type ScoreEntry = {
   company: string
