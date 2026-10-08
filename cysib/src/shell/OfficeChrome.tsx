@@ -126,11 +126,29 @@ function Command({
     <button
       type="button"
       onClick={onClick}
-      className={`flex h-[60px] min-w-[52px] flex-col items-center justify-center gap-1 rounded-md px-1.5 text-[11px] leading-none text-[#242424] hover:bg-black/5 ${pressed ? 'bg-black/5' : ''}`}
+      className={`flex h-9 min-w-[40px] flex-col items-center justify-center gap-0.5 px-1 text-[11px] leading-none text-[#242424] hover:bg-[#f3f2f1] ${pressed ? 'bg-[#f3f2f1]' : ''}`}
     >
       {children}
       <span>{label}</span>
     </button>
+  )
+}
+
+function Mini({ children, label }: { children: ReactNode; label: string }) {
+  return (
+    <button type="button" className="flex items-center gap-1 px-1 py-px text-[11px] text-[#242424] hover:bg-[#f3f2f1]">
+      {children}
+      <span>{label}</span>
+    </button>
+  )
+}
+
+function RibbonGroup({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col border-r border-[#e6e6e6] px-1">
+      <div className="flex flex-1 items-center">{children}</div>
+      <div className="pb-0.5 text-center text-[10px] text-[#8a8886]">{label}</div>
+    </div>
   )
 }
 
@@ -150,8 +168,8 @@ export function OfficeChrome({
   dialog,
 }: {
   title: string
-  variant: 'writer' | 'sheets'
-  icon: 'writer' | 'sheets' | 'planner'
+  variant: 'writer' | 'sheets' | 'mail'
+  icon: 'writer' | 'sheets' | 'planner' | 'mail'
   formulaName: string
   formula: string
   statusLeft: string
@@ -165,7 +183,7 @@ export function OfficeChrome({
 }) {
   const [tab, setTab] = useState<(typeof TABS)[number]>('Home')
   const [fileOpen, setFileOpen] = useState(false)
-  const accent = icon === 'sheets' ? '#107c41' : icon === 'planner' ? '#5b5fc7' : '#0f6cbd'
+  const accent = icon === 'sheets' ? '#107c41' : icon === 'planner' ? '#5b5fc7' : icon === 'mail' ? '#0f548c' : '#0f6cbd'
 
   useEffect(() => {
     if (!fileOpen) return
@@ -176,29 +194,22 @@ export function OfficeChrome({
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-white text-[#242424]">
-      <header className="flex h-11 shrink-0 items-center gap-3 border-b border-[#edebe9] bg-white px-3">
-        <img src={`${import.meta.env.BASE_URL}favicon-${icon}.svg`} alt="" className="h-6 w-6 rounded-md" />
-        <div className="min-w-0">
-          <div className="truncate text-[14px] font-semibold leading-tight">{title}</div>
-          <div className="text-[11px] text-[#616161]">{variant === 'writer' ? 'Writer' : 'Sheets'}</div>
+      <header className="grid h-10 shrink-0 grid-cols-[auto_1fr_auto] items-center border-b border-[#e1e1e1] bg-white px-2">
+        <img src={`${import.meta.env.BASE_URL}favicon-${icon}.svg`} alt="" className="h-5 w-5" />
+        <div className="truncate px-3 text-center text-[13px]">{title}</div>
+        <div className="flex items-center">
+          <button type="button" title="Full screen (F11)" onClick={onFullscreen} className="px-2 py-1 text-[12px] text-[#616161] hover:bg-[#f3f2f1]">
+            Full screen
+          </button>
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={onClose}
+            className="grid h-8 w-8 place-items-center text-[16px] leading-none hover:bg-[#c42b1c] hover:text-white"
+          >
+            ×
+          </button>
         </div>
-        <div className="flex-1" />
-        <button
-          type="button"
-          title="F11"
-          onClick={onFullscreen}
-          className="rounded-md px-3 py-1.5 text-[13px] text-[#242424] hover:bg-[#f5f5f5]"
-        >
-          Full screen
-        </button>
-        <button
-          type="button"
-          aria-label="Close"
-          onClick={onClose}
-          className="grid h-8 w-8 place-items-center rounded-md text-[18px] leading-none text-[#242424] hover:bg-[#c42b1c] hover:text-white"
-        >
-          ×
-        </button>
       </header>
 
       <nav className="relative flex h-9 shrink-0 items-end gap-0.5 border-b border-[#edebe9] bg-white px-2">
@@ -241,45 +252,51 @@ export function OfficeChrome({
         )}
       </nav>
 
-      <div className="flex h-[72px] shrink-0 items-center gap-1 border-b border-[#edebe9] bg-[#faf9f8] px-2">
-        {(tab === 'Home' || tab === 'Insert' || tab === 'Draw' || tab === 'Layout' || tab === 'Help') && (
-          <>
-            <Command label="New"><DocIcon /></Command>
-            <Command label="Open"><FolderIcon /></Command>
-            <Command label="Save"><SaveIcon /></Command>
-            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
-            <Command label="Print"><PrintIcon /></Command>
-            <Command label="Cut"><CutIcon /></Command>
-            <Command label="Copy"><CopyIcon /></Command>
-            <Command label="Paste"><PasteIcon /></Command>
-          </>
-        )}
-        {tab === 'Home' && variant === 'writer' && (
-          <>
-            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
-            <span className="rounded-md border border-[#d1d1d1] bg-white px-2 py-1 text-[13px]">Times New Roman</span>
-            <span className="rounded-md border border-[#d1d1d1] bg-white px-2 py-1 text-[13px]">12</span>
+      <div className="flex h-[68px] shrink-0 items-stretch overflow-hidden border-b border-[#e1e1e1] bg-[#faf9f8] px-1">
+        <RibbonGroup label="Clipboard">
+          <Command label="Paste"><PasteIcon /></Command>
+          <div className="flex flex-col justify-center">
+            <Mini label="Cut"><CutIcon /></Mini>
+            <Mini label="Copy"><CopyIcon /></Mini>
+          </div>
+        </RibbonGroup>
+        {variant === 'writer' && (
+          <RibbonGroup label="Font">
+            <span className="self-center border border-[#d1d1d1] bg-white px-2 py-1 text-[12px]">Times New Roman</span>
+            <span className="self-center border border-[#d1d1d1] bg-white px-2 py-1 text-[12px]">12</span>
             <Command label="Bold"><BoldIcon /></Command>
             <Command label="Italic"><ItalicIcon /></Command>
             <Command label="Underline"><UnderlineIcon /></Command>
-          </>
+          </RibbonGroup>
         )}
-        {tab === 'Home' && variant === 'sheets' && (
-          <>
-            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
+        {variant === 'sheets' && (
+          <RibbonGroup label="Data">
             <Command label="Sum"><SumIcon /></Command>
             <Command label="Chart"><ChartIcon /></Command>
-          </>
+          </RibbonGroup>
         )}
-        {tab === 'Review' && (
-          <Command label={muted ? 'Muted' : 'Sound'} pressed={muted} onClick={onToggleMute}>
-            <DocIcon />
-          </Command>
+        {variant === 'mail' && (
+          <RibbonGroup label="Respond">
+            <Command label="Reply"><DocIcon /></Command>
+            <Command label="Forward"><FolderIcon /></Command>
+          </RibbonGroup>
         )}
-        {tab === 'View' && (
-          <Command label="Full screen" onClick={onFullscreen}>
-            <FolderIcon />
-          </Command>
+        <RibbonGroup label={tab === 'Review' ? 'Alerts' : 'File'}>
+          {tab === 'Review' ? (
+            <Command label={muted ? 'Muted' : 'Sound'} pressed={muted} onClick={onToggleMute}><DocIcon /></Command>
+          ) : (
+            <>
+              <Command label="New"><DocIcon /></Command>
+              <Command label="Open"><FolderIcon /></Command>
+              <Command label="Save"><SaveIcon /></Command>
+              <Command label="Print"><PrintIcon /></Command>
+            </>
+          )}
+        </RibbonGroup>
+        {variant === 'mail' && (
+          <RibbonGroup label="File under">
+            <span className="self-center px-2 text-[12px] text-[#242424]">1 Now · 2 Waiting · 3 Later · 4 FYI</span>
+          </RibbonGroup>
         )}
       </div>
 
@@ -301,7 +318,7 @@ export function OfficeChrome({
         </div>
       )}
 
-      <div className={`relative min-h-0 flex-1 ${variant === 'writer' ? 'bg-[#f3f2f1]' : 'bg-white'}`}>
+      <div className={`relative min-h-0 flex-1 ${variant === 'sheets' ? 'bg-white' : 'bg-[#f3f2f1]'}`}>
         {children}
         {dialog}
       </div>
@@ -371,7 +388,7 @@ export function Odometer({ value }: { value: number }) {
 function Digit({ value }: { value: number }) {
   const height = 20
   return (
-    <span className="relative inline-block shrink-0 overflow-hidden" style={{ height, width: 13 }}>
+    <span className="relative inline-block shrink-0 overflow-hidden" style={{ height, width: 15 }}>
       <span
         className="absolute left-0 top-0 flex w-full flex-col transition-transform duration-150"
         style={{ transform: `translateY(-${value * height}px)` }}

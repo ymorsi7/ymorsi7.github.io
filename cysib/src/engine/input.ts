@@ -5,6 +5,7 @@ export type InputState = {
   pointerDown: boolean
   justDown: boolean
   justUp: boolean
+  pointerButton: number
   keys: Set<string>
   justKeys: Set<string>
 }
@@ -17,6 +18,7 @@ export function createInput(): InputState {
     pointerDown: false,
     justDown: false,
     justUp: false,
+    pointerButton: 0,
     keys: new Set(),
     justKeys: new Set(),
   }

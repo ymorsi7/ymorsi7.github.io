@@ -30,10 +30,13 @@ export function Playfield(props: Props) {
 
     const onPointerDown = (event: PointerEvent) => {
       local(event)
+      if (event.button === 2) event.preventDefault()
+      input.pointerButton = event.button
       canvas.setPointerCapture(event.pointerId)
       input.pointerDown = true
       input.justDown = true
     }
+    const onContext = (event: Event) => event.preventDefault()
     const onPointerMove = (event: PointerEvent) => {
       local(event)
     }
@@ -58,6 +61,7 @@ export function Playfield(props: Props) {
     }
 
     canvas.addEventListener('pointerdown', onPointerDown)
+    canvas.addEventListener('contextmenu', onContext)
     canvas.addEventListener('pointermove', onPointerMove)
     canvas.addEventListener('pointerup', onPointerUp)
     canvas.addEventListener('pointercancel', onPointerUp)
@@ -121,6 +125,7 @@ export function Playfield(props: Props) {
     return () => {
       cancelAnimationFrame(raf)
       canvas.removeEventListener('pointerdown', onPointerDown)
+      canvas.removeEventListener('contextmenu', onContext)
       canvas.removeEventListener('pointermove', onPointerMove)
       canvas.removeEventListener('pointerup', onPointerUp)
       canvas.removeEventListener('pointercancel', onPointerUp)

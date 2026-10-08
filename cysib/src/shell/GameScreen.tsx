@@ -6,6 +6,8 @@ import { BreakdownGame } from '../games/breakdown/BreakdownGame'
 import { CostCutterGame } from '../games/costcutter/CostCutterGame'
 import { CrashGame } from '../games/crash/CrashGame'
 import { LeadershipGame } from '../games/leadership/LeadershipGame'
+import { RiskGame } from '../games/risk/RiskGame'
+import { InboxGame } from '../games/inbox/InboxGame'
 import { OfficeChrome, RecoveredDialog } from './OfficeChrome'
 
 type Mode = 'play' | 'boss' | 'grace'
@@ -170,6 +172,8 @@ export function GameScreen({
           {game === 'costcutter' && <CostCutterGame key={round} {...props} />}
           {game === 'crash' && <CrashGame key={round} {...props} />}
           {game === 'leadership' && <LeadershipGame key={round} {...props} />}
+          {game === 'risk' && <RiskGame key={round} {...props} />}
+          {game === 'inbox' && <InboxGame key={round} {...props} />}
         </OfficeChrome>
       </div>
     </div>

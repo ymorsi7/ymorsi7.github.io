@@ -1,6 +1,6 @@
 import type { GameId } from '../storage/types'
 
-export type GameIcon = 'writer' | 'sheets' | 'planner'
+export type GameIcon = 'writer' | 'sheets' | 'planner' | 'mail'
 
 export type GameMeta = {
   id: GameId
@@ -9,7 +9,7 @@ export type GameMeta = {
   app: string
   blurb: string
   icon: GameIcon
-  variant: 'writer' | 'sheets'
+  variant: 'writer' | 'sheets' | 'mail'
 }
 
 export const GAMES: GameMeta[] = [
@@ -18,7 +18,7 @@ export const GAMES: GameMeta[] = [
     file: 'Document1',
     title: 'Document1 - Writer',
     app: 'Writer',
-    blurb: 'Internal memo, still circulating.',
+    blurb: 'Memo for Thursday',
     icon: 'writer',
     variant: 'writer',
   },
@@ -27,7 +27,7 @@ export const GAMES: GameMeta[] = [
     file: 'Spend_Review',
     title: 'Spend_Review - Sheets',
     app: 'Sheets',
-    blurb: 'Stacked costs for a week that will not sit still.',
+    blurb: 'Spend by week',
     icon: 'sheets',
     variant: 'sheets',
   },
@@ -36,7 +36,7 @@ export const GAMES: GameMeta[] = [
     file: 'Week_Plan',
     title: 'Week_Plan - Sheets',
     app: 'Sheets',
-    blurb: 'A full calendar, if the blocks will agree.',
+    blurb: 'This week’s calendar',
     icon: 'planner',
     variant: 'sheets',
   },
@@ -45,9 +45,27 @@ export const GAMES: GameMeta[] = [
     file: 'Q3_Forecast',
     title: 'Q3_Forecast - Sheets',
     app: 'Sheets',
-    blurb: 'High case and low case, sharing one chart.',
+    blurb: 'Q3 forecast chart',
     icon: 'sheets',
     variant: 'sheets',
+  },
+  {
+    id: 'risk',
+    file: 'Risk_Register',
+    title: 'Risk_Register - Sheets',
+    app: 'Sheets',
+    blurb: 'Open items',
+    icon: 'sheets',
+    variant: 'sheets',
+  },
+  {
+    id: 'inbox',
+    file: 'Inbox',
+    title: 'Inbox - Mail',
+    app: 'Mail',
+    blurb: 'Unread',
+    icon: 'mail',
+    variant: 'mail',
   },
 ]
 
