@@ -1,21 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
 
-type Item = {
-  label: string
-  onSelect?: () => void
-  checked?: boolean
-  hint?: string
-  disabled?: boolean
-}
-
-function Glyph({ children }: { children: ReactNode }) {
-  return (
-    <button type="button" className="grid h-[22px] w-[22px] place-items-center border border-transparent hover:border-[#9ebae0] hover:bg-white/80" tabIndex={-1}>
-      {children}
-    </button>
-  )
-}
-
 function DocIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -125,30 +109,29 @@ function SumIcon() {
   )
 }
 
-const MENUS: Record<string, Item[]> = {
-  File: [
-    { label: 'Close', hint: 'Esc' },
-  ],
-  Edit: [
-    { label: 'Undo', disabled: true },
-    { label: 'Cut', disabled: true },
-    { label: 'Copy', disabled: true },
-    { label: 'Paste', disabled: true },
-  ],
-  View: [
-    { label: 'Normal', disabled: true },
-    { label: 'Page width', disabled: true },
-  ],
-  Insert: [
-    { label: 'Page break', disabled: true },
-    { label: 'Chart', disabled: true },
-  ],
-  Format: [
-    { label: 'Font…', disabled: true },
-    { label: 'Cells…', disabled: true },
-  ],
-  Tools: [],
-  Help: [{ label: 'About this desk', disabled: true }],
+const TABS = ['File', 'Home', 'Insert', 'Draw', 'Layout', 'Review', 'View', 'Help'] as const
+
+function Command({
+  children,
+  label,
+  onClick,
+  pressed,
+}: {
+  children: ReactNode
+  label: string
+  onClick?: () => void
+  pressed?: boolean
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex h-[60px] min-w-[52px] flex-col items-center justify-center gap-1 rounded-md px-1.5 text-[11px] leading-none text-[#242424] hover:bg-black/5 ${pressed ? 'bg-black/5' : ''}`}
+    >
+      {children}
+      <span>{label}</span>
+    </button>
+  )
 }
 
 export function OfficeChrome({
@@ -180,151 +163,152 @@ export function OfficeChrome({
   children: ReactNode
   dialog?: ReactNode
 }) {
-  const [open, setOpen] = useState<string | null>(null)
+  const [tab, setTab] = useState<(typeof TABS)[number]>('Home')
+  const [fileOpen, setFileOpen] = useState(false)
+  const accent = icon === 'sheets' ? '#107c41' : icon === 'planner' ? '#5b5fc7' : '#0f6cbd'
 
   useEffect(() => {
-    if (!open) return
-    const close = () => setOpen(null)
+    if (!fileOpen) return
+    const close = () => setFileOpen(false)
     window.addEventListener('pointerdown', close)
     return () => window.removeEventListener('pointerdown', close)
-  }, [open])
-
-  const menus = Object.keys(MENUS).map((name) => {
-    const items = name === 'File'
-      ? [{ label: 'Close', hint: 'Esc', onSelect: onClose }]
-      : name === 'Tools'
-        ? [
-            { label: 'Mute', checked: muted, onSelect: onToggleMute },
-            { label: 'Go full screen', hint: 'F11', onSelect: onFullscreen },
-          ]
-        : MENUS[name]
-    return { name, items }
-  })
+  }, [fileOpen])
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-[#d6e4f7] text-[#1f1f1f]">
-      <header
-        className="flex h-7 shrink-0 items-center gap-2 px-2 text-[11px] text-white"
-        style={{ background: 'linear-gradient(#5b9ae8, #245fb5 18%, #1d4f99)' }}
-      >
-        <img src={`${import.meta.env.BASE_URL}favicon-${icon}.svg`} alt="" className="h-4 w-4" />
-        <div className="min-w-0 flex-1 truncate font-semibold">{title}</div>
-        <div className="flex gap-1">
-          <span className="grid h-4 w-4 place-items-center border border-white/40 bg-white/10 text-[10px] leading-none">_</span>
-          <button type="button" title="Go full screen (F11)" onClick={onFullscreen} className="grid h-4 w-4 place-items-center border border-white/40 bg-white/10 text-[9px] leading-none">
-            □
-          </button>
-          <button type="button" aria-label="Close" onClick={onClose} className="grid h-4 w-4 place-items-center border border-white/40 bg-[#c75050] text-[10px] leading-none">
-            ×
-          </button>
+    <div className="flex h-full min-h-0 flex-col bg-white text-[#242424]">
+      <header className="flex h-11 shrink-0 items-center gap-3 border-b border-[#edebe9] bg-white px-3">
+        <img src={`${import.meta.env.BASE_URL}favicon-${icon}.svg`} alt="" className="h-6 w-6 rounded-md" />
+        <div className="min-w-0">
+          <div className="truncate text-[14px] font-semibold leading-tight">{title}</div>
+          <div className="text-[11px] text-[#616161]">{variant === 'writer' ? 'Writer' : 'Sheets'}</div>
         </div>
-      </header>
-
-      <nav className="relative flex h-[22px] shrink-0 items-center gap-0.5 border-b border-[#9ebae0] bg-[#f3f6fb] px-1 text-[11px]">
-        {menus.map((menu) => (
-          <div key={menu.name} className="relative">
-            <button
-              type="button"
-              className={`px-2 py-0.5 ${open === menu.name ? 'bg-[#316ac5] text-white' : 'hover:bg-[#d6e4f7]'}`}
-              onPointerDown={(event) => event.stopPropagation()}
-              onClick={() => setOpen((current) => (current === menu.name ? null : menu.name))}
-            >
-              {menu.name}
-            </button>
-            {open === menu.name && (
-              <div
-                className="absolute left-0 top-full z-30 min-w-44 border border-[#7a97c4] bg-white py-1 shadow-md"
-                onPointerDown={(event) => event.stopPropagation()}
-              >
-                {menu.items.map((item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    disabled={item.disabled}
-                    className="flex w-full items-center justify-between px-3 py-[3px] text-left text-[11px] hover:bg-[#316ac5] hover:text-white disabled:text-[#8a8a8a] disabled:hover:bg-transparent disabled:hover:text-[#8a8a8a]"
-                    onClick={() => {
-                      item.onSelect?.()
-                      setOpen(null)
-                    }}
-                  >
-                    <span>{item.checked ? '✓ ' : ''}{item.label}</span>
-                    {item.hint && <span className="pl-6 text-[10px] opacity-70">{item.hint}</span>}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </nav>
-
-      <div
-        className="flex h-8 shrink-0 items-center gap-0.5 border-b border-[#9ebae0] px-1"
-        style={{ background: 'linear-gradient(#d6e4f7, #bcd0ee)' }}
-      >
-        <Glyph><DocIcon /></Glyph>
-        <Glyph><FolderIcon /></Glyph>
-        <Glyph><SaveIcon /></Glyph>
-        <span className="mx-1 h-5 w-px bg-[#9ebae0]" />
-        <Glyph><PrintIcon /></Glyph>
-        <Glyph><CutIcon /></Glyph>
-        <Glyph><CopyIcon /></Glyph>
-        <Glyph><PasteIcon /></Glyph>
-        {variant === 'sheets' && (
-          <>
-            <span className="mx-1 h-5 w-px bg-[#9ebae0]" />
-            <Glyph><SumIcon /></Glyph>
-            <Glyph><ChartIcon /></Glyph>
-          </>
-        )}
-        {variant === 'writer' && (
-          <>
-            <span className="mx-1 h-5 w-px bg-[#9ebae0]" />
-            <span className="mx-1 border border-[#9ebae0] bg-white px-2 py-0.5 text-[11px]">Times New Roman</span>
-            <span className="border border-[#9ebae0] bg-white px-2 py-0.5 text-[11px]">12</span>
-            <Glyph><BoldIcon /></Glyph>
-            <Glyph><ItalicIcon /></Glyph>
-            <Glyph><UnderlineIcon /></Glyph>
-          </>
-        )}
+        <div className="flex-1" />
         <button
           type="button"
           title="F11"
           onClick={onFullscreen}
-          className="ml-auto border border-[#9ebae0] bg-white/70 px-2 py-0.5 text-[11px] hover:bg-white"
+          className="rounded-md px-3 py-1.5 text-[13px] text-[#242424] hover:bg-[#f5f5f5]"
         >
-          Go full screen
+          Full screen
         </button>
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={onClose}
+          className="grid h-8 w-8 place-items-center rounded-md text-[18px] leading-none text-[#242424] hover:bg-[#c42b1c] hover:text-white"
+        >
+          ×
+        </button>
+      </header>
+
+      <nav className="relative flex h-9 shrink-0 items-end gap-0.5 border-b border-[#edebe9] bg-white px-2">
+        {TABS.map((name) => (
+          <button
+            key={name}
+            type="button"
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => {
+              if (name === 'File') {
+                setFileOpen((open) => !open)
+                return
+              }
+              setFileOpen(false)
+              setTab(name)
+            }}
+            className={`rounded-t-md px-3 py-1.5 text-[13px] ${tab === name && name !== 'File' ? 'text-[#242424]' : 'text-[#616161] hover:bg-[#f5f5f5]'}`}
+            style={tab === name && name !== 'File' ? { boxShadow: `inset 0 -2px 0 ${accent}` } : undefined}
+          >
+            {name}
+          </button>
+        ))}
+        {fileOpen && (
+          <div
+            className="absolute left-2 top-full z-30 w-52 rounded-lg border border-[#edebe9] bg-white py-1 shadow-xl"
+            onPointerDown={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="flex w-full items-center justify-between px-3 py-2 text-left text-[13px] hover:bg-[#f5f5f5]"
+              onClick={() => {
+                setFileOpen(false)
+                onClose()
+              }}
+            >
+              <span>Close</span>
+              <span className="text-[11px] text-[#616161]">Esc</span>
+            </button>
+          </div>
+        )}
+      </nav>
+
+      <div className="flex h-[72px] shrink-0 items-center gap-1 border-b border-[#edebe9] bg-[#faf9f8] px-2">
+        {(tab === 'Home' || tab === 'Insert' || tab === 'Draw' || tab === 'Layout' || tab === 'Help') && (
+          <>
+            <Command label="New"><DocIcon /></Command>
+            <Command label="Open"><FolderIcon /></Command>
+            <Command label="Save"><SaveIcon /></Command>
+            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
+            <Command label="Print"><PrintIcon /></Command>
+            <Command label="Cut"><CutIcon /></Command>
+            <Command label="Copy"><CopyIcon /></Command>
+            <Command label="Paste"><PasteIcon /></Command>
+          </>
+        )}
+        {tab === 'Home' && variant === 'writer' && (
+          <>
+            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
+            <span className="rounded-md border border-[#d1d1d1] bg-white px-2 py-1 text-[13px]">Times New Roman</span>
+            <span className="rounded-md border border-[#d1d1d1] bg-white px-2 py-1 text-[13px]">12</span>
+            <Command label="Bold"><BoldIcon /></Command>
+            <Command label="Italic"><ItalicIcon /></Command>
+            <Command label="Underline"><UnderlineIcon /></Command>
+          </>
+        )}
+        {tab === 'Home' && variant === 'sheets' && (
+          <>
+            <span className="mx-1 h-10 w-px bg-[#e1dfdd]" />
+            <Command label="Sum"><SumIcon /></Command>
+            <Command label="Chart"><ChartIcon /></Command>
+          </>
+        )}
+        {tab === 'Review' && (
+          <Command label={muted ? 'Muted' : 'Sound'} pressed={muted} onClick={onToggleMute}>
+            <DocIcon />
+          </Command>
+        )}
+        {tab === 'View' && (
+          <Command label="Full screen" onClick={onFullscreen}>
+            <FolderIcon />
+          </Command>
+        )}
       </div>
 
       {variant === 'writer' && (
-        <div className="relative h-5 shrink-0 overflow-hidden border-b border-[#b9b9b9] bg-[#f4f4f4]">
+        <div className="relative h-4 shrink-0 overflow-hidden border-b border-[#edebe9] bg-[#faf9f8]">
           {Array.from({ length: 40 }, (_, index) => (
-            <span key={index} className="absolute top-0 h-full border-l border-[#c5c5c5]" style={{ left: 16 + index * 24 }}>
-              {index % 4 === 0 && <span className="absolute top-[7px] text-[9px] leading-none text-[#666]">{index / 4 + 1}</span>}
+            <span key={index} className="absolute top-0 h-full border-l border-[#e1dfdd]" style={{ left: 16 + index * 24 }}>
+              {index % 4 === 0 && <span className="absolute top-px pl-1 text-[9px] leading-none text-[#8a8886]">{index / 4 + 1}</span>}
             </span>
           ))}
         </div>
       )}
 
       {variant === 'sheets' && (
-        <div className="flex h-[26px] shrink-0 items-center gap-1 border-b border-[#9ebae0] bg-[#f4f7fb] px-1 text-[12px]">
-          <div className="w-16 shrink-0 border border-[#9ebae0] bg-white px-1 py-0.5 text-center">{formulaName || 'A1'}</div>
-          <div className="px-1 text-[11px] italic text-[#607890]">fx</div>
-          <div className="min-w-0 flex-1 truncate border border-[#9ebae0] bg-white px-2 py-0.5">{formula}</div>
+        <div className="flex h-10 shrink-0 items-center gap-2 border-b border-[#edebe9] bg-white px-3">
+          <div className="w-16 rounded-md border border-[#d1d1d1] px-2 py-1 text-center text-[13px]">{formulaName || 'A1'}</div>
+          <div className="text-[12px] italic text-[#616161]">fx</div>
+          <div className="min-w-0 flex-1 truncate rounded-md border border-[#d1d1d1] px-3 py-1 text-[13px]">{formula}</div>
         </div>
       )}
 
-      <div className="relative min-h-0 flex-1 bg-[#808080]">
+      <div className={`relative min-h-0 flex-1 ${variant === 'writer' ? 'bg-[#f3f2f1]' : 'bg-white'}`}>
         {children}
         {dialog}
       </div>
 
-      <footer
-        className="flex h-[22px] shrink-0 items-center gap-3 border-t border-[#9ebae0] px-2 text-[11px]"
-        style={{ background: 'linear-gradient(#e7f0fb, #d6e4f7)' }}
-      >
-        <span className="min-w-24 border border-[#9ebae0] bg-[#f7fbff] px-2 py-px shadow-[inset_1px_1px_0_#fff]">{statusLeft}</span>
-        <span className="ml-auto border border-[#9ebae0] bg-[#f7fbff] px-2 py-px shadow-[inset_1px_1px_0_#fff]">{statusRight}</span>
+      <footer className="flex h-7 shrink-0 items-center border-t border-[#edebe9] bg-[#faf9f8] px-3 text-[12px] text-[#616161]">
+        <span>{statusLeft}</span>
+        <span className="ml-auto text-[#242424]">{statusRight}</span>
       </footer>
     </div>
   )
@@ -342,20 +326,22 @@ export function RecoveredDialog({
   onClose: () => void
 }) {
   return (
-    <div className="absolute inset-0 z-20 grid place-items-center bg-black/10">
-      <div className="w-[340px] max-w-[92%] border border-[#245fb5] bg-[#ece9d8] shadow-lg">
-        <div className="flex items-center justify-between bg-[#245fb5] px-2 py-1 text-[11px] font-semibold text-white">
+    <div className="absolute inset-0 z-20 grid place-items-center bg-black/25 px-4">
+      <div className="w-[380px] max-w-full overflow-hidden rounded-xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between px-5 pt-4 text-[14px] font-semibold">
           <span>{product}</span>
-          <button type="button" aria-label="Close dialog" onClick={onClose} className="px-1">×</button>
+          <button type="button" aria-label="Close dialog" onClick={onClose} className="grid h-8 w-8 place-items-center rounded-md text-[18px] hover:bg-[#f5f5f5]">
+            ×
+          </button>
         </div>
-        <div className="px-4 py-4 text-[12px]">
+        <div className="px-5 pb-5 pt-2 text-[15px]">
           <p>Document recovered. Score: {Math.round(score).toLocaleString('en-US')}</p>
-          <div className="mt-4 flex justify-end gap-2">
-            <button type="button" onClick={onRetry} className="min-w-20 border border-[#7a97c4] bg-white px-3 py-1 hover:bg-[#e7f0fb]">
-              Retry
-            </button>
-            <button type="button" onClick={onClose} className="min-w-20 border border-[#7a97c4] bg-white px-3 py-1 hover:bg-[#e7f0fb]">
+          <div className="mt-5 flex justify-end gap-2">
+            <button type="button" onClick={onClose} className="rounded-lg px-4 py-2 text-[14px] hover:bg-[#f5f5f5]">
               Close
+            </button>
+            <button type="button" onClick={onRetry} className="rounded-lg bg-[#242424] px-4 py-2 text-[14px] font-semibold text-white">
+              Retry
             </button>
           </div>
         </div>
@@ -369,8 +355,8 @@ export function Odometer({ value }: { value: number }) {
   const [whole, frac] = safe.toFixed(2).split('.')
   const digits = (whole.length > 6 ? whole : whole.padStart(6, '0')).split('')
   return (
-    <span className="inline-flex h-7 shrink-0 items-center border border-[#9ebae0] bg-[#f7fbff] px-1.5 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.12)]">
-      <span className="mr-1 text-[12px] leading-none text-[#607890]">€</span>
+    <span className="inline-flex h-8 shrink-0 items-center rounded-lg border border-[#e5e5e5] bg-[#fafafa] px-2">
+      <span className="mr-1 text-[12px] leading-none text-[#737373]">€</span>
       {digits.map((digit, index) => (
         <Digit key={`w${index}`} value={Number(digit)} />
       ))}
@@ -393,7 +379,7 @@ function Digit({ value }: { value: number }) {
         {Array.from({ length: 10 }, (_, n) => (
           <span
             key={n}
-            className="block text-center text-[15px] font-semibold text-[#14315c] tabular-nums"
+            className="block text-center text-[15px] font-semibold text-[#242424] tabular-nums"
             style={{ height, lineHeight: `${height}px` }}
           >
             {n}

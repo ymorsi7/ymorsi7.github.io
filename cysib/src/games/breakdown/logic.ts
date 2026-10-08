@@ -196,7 +196,7 @@ export function createBreakdown(
     lastHitId: -1,
     header: {
       to: memo.to,
-      from: `${company} · ${memo.from}`,
+      from: company && company !== 'Unnamed' ? `${company} · ${memo.from}` : memo.from,
       date: memo.date,
       subject: memo.subject,
     },

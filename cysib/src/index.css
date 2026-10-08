@@ -8,9 +8,9 @@ body,
 }
 
 body {
-  font-family: Tahoma, "Segoe UI", sans-serif;
-  color: #1f1f1f;
-  background: #d4e2f5;
+  font-family: "Segoe UI", "Source Sans 3", system-ui, sans-serif;
+  color: #242424;
+  background: #f6f5f4;
   overflow: hidden;
 }
 

@@ -33,7 +33,7 @@ export function drawLeadership(
   const cells: SheetCell[] = [
     { c: 0, r: 0, text: 'Q3 forecast', bold: true },
     { c: 0, r: 1, text: 'Owner' },
-    { c: 1, r: 1, text: company },
+    { c: 1, r: 1, text: company === 'Unnamed' ? '' : company },
     { c: 0, r: 2, text: 'Budget remaining' },
     { c: 1, r: 2, text: budget.toLocaleString('en-US'), align: 'right', bold: true },
     { c: 3, r: 2, text: 'Scenario' },

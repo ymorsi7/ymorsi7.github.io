@@ -84,7 +84,7 @@ export function drawSheet(
   ctx.fillStyle = '#ffffff'
   ctx.fillRect(0, 0, width, height)
 
-  ctx.fillStyle = '#e9edf3'
+  ctx.fillStyle = '#faf9f8'
   ctx.fillRect(0, 0, width, model.header)
   ctx.fillRect(0, 0, model.gutter, height - model.tab)
 
@@ -93,7 +93,7 @@ export function drawSheet(
   ctx.rect(model.gutter, model.header, width - model.gutter, height - model.header - model.tab)
   ctx.clip()
 
-  ctx.strokeStyle = '#d4d4d4'
+  ctx.strokeStyle = '#edebe9'
   ctx.lineWidth = 1
   ctx.beginPath()
   let x = model.gutter
@@ -111,7 +111,7 @@ export function drawSheet(
   ctx.stroke()
 
   ctx.fillStyle = '#1f1f1f'
-  ctx.font = '13px Arial, Helvetica, sans-serif'
+  ctx.font = '12px "Segoe UI", "Source Sans 3", sans-serif'
   ctx.textBaseline = 'middle'
   for (const cell of opts.cells ?? []) {
     if (cell.c < 0 || cell.r < 0 || cell.c >= model.cols || cell.r >= model.rows) continue
@@ -121,7 +121,7 @@ export function drawSheet(
       ctx.fillRect(rect.x + 1, rect.y + 1, Math.max(0, rect.w - 1), Math.max(0, rect.h - 1))
     }
     ctx.fillStyle = cell.color ?? '#1f1f1f'
-    ctx.font = `${cell.bold ? 'bold ' : ''}13px Arial, Helvetica, sans-serif`
+    ctx.font = `${cell.bold ? 'bold ' : ''}12px "Segoe UI", "Source Sans 3", sans-serif`
     const align = cell.align ?? 'left'
     ctx.textAlign = align
     const tx = align === 'center' ? rect.x + rect.w / 2 : align === 'right' ? rect.x + rect.w - 4 : rect.x + 4
@@ -129,10 +129,10 @@ export function drawSheet(
   }
   ctx.restore()
 
-  ctx.fillStyle = '#e9edf3'
+  ctx.fillStyle = '#faf9f8'
   ctx.fillRect(0, 0, width, model.header)
   ctx.fillRect(0, 0, model.gutter, height - model.tab)
-  ctx.strokeStyle = '#9ebae0'
+  ctx.strokeStyle = '#edebe9'
   ctx.lineWidth = 1
   ctx.strokeRect(0.5, 0.5, width - 1, model.header - 0.5)
   ctx.beginPath()
@@ -141,7 +141,8 @@ export function drawSheet(
   ctx.stroke()
 
   ctx.fillStyle = '#1f1f1f'
-  ctx.font = '12px Arial, Helvetica, sans-serif'
+  ctx.fillStyle = '#616161'
+  ctx.font = '11px "Segoe UI", "Source Sans 3", sans-serif'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   x = model.gutter
@@ -151,7 +152,7 @@ export function drawSheet(
     x += model.colW[c] ?? 0
   }
   ctx.textAlign = 'right'
-  ctx.font = '12px Arial, Helvetica, sans-serif'
+  ctx.font = '11px "Segoe UI", "Source Sans 3", sans-serif'
   const rowCount = Math.min(model.rows, 200)
   for (let r = 0; r < rowCount; r++) {
     ctx.fillText(String(r + 1), model.gutter - 5, model.header + r * model.rowH + model.rowH / 2)
@@ -159,16 +160,16 @@ export function drawSheet(
 
   if (opts.select) {
     const rect = cellRect(model, opts.select.c, opts.select.r)
-    ctx.strokeStyle = '#000000'
+    ctx.strokeStyle = '#107c41'
     ctx.lineWidth = 2
     ctx.strokeRect(rect.x + 1.5, rect.y + 1.5, rect.w - 3, rect.h - 3)
     ctx.lineWidth = 1
   }
 
   const tabY = height - model.tab
-  ctx.fillStyle = '#d6e4f7'
+  ctx.fillStyle = '#f3f2f1'
   ctx.fillRect(0, tabY, width, model.tab)
-  ctx.strokeStyle = '#9ebae0'
+  ctx.strokeStyle = '#edebe9'
   ctx.beginPath()
   ctx.moveTo(0, tabY + 0.5)
   ctx.lineTo(width, tabY + 0.5)
@@ -176,14 +177,18 @@ export function drawSheet(
 
   let tabX = 6
   for (const tab of opts.tabs ?? [opts.activeTab]) {
-    ctx.font = '12px Tahoma, "Segoe UI", sans-serif'
-    const tw = Math.max(78, ctx.measureText(tab).width + 22)
+    ctx.font = '12px "Segoe UI", "Source Sans 3", sans-serif'
+    const tw = Math.max(78, ctx.measureText(tab).width + 28)
     const active = tab === opts.activeTab
-    ctx.fillStyle = active ? '#ffffff' : '#e4edf8'
-    ctx.fillRect(tabX, tabY + 3, tw, model.tab - 3)
-    ctx.strokeStyle = '#9ebae0'
-    ctx.strokeRect(tabX + 0.5, tabY + 3.5, tw, model.tab - 4)
-    ctx.fillStyle = '#1f1f1f'
+    ctx.fillStyle = active ? '#ffffff' : '#f3f2f1'
+    ctx.beginPath()
+    ctx.roundRect(tabX, tabY + 4, tw, model.tab - 4, [6, 6, 0, 0])
+    ctx.fill()
+    if (active) {
+      ctx.fillStyle = '#107c41'
+      ctx.fillRect(tabX + 8, tabY + 4, tw - 16, 2)
+    }
+    ctx.fillStyle = '#242424'
     ctx.textAlign = 'left'
     ctx.textBaseline = 'middle'
     ctx.fillText(tab, tabX + 10, tabY + model.tab / 2 + 1)
@@ -195,11 +200,11 @@ export function drawChartFrame(ctx: CanvasRenderingContext2D, rect: Rect, title:
   ctx.save()
   ctx.fillStyle = '#ffffff'
   ctx.fillRect(rect.x, rect.y, rect.w, rect.h)
-  ctx.strokeStyle = '#7f7f7f'
+  ctx.strokeStyle = '#e1dfdd'
   ctx.lineWidth = 1
   ctx.strokeRect(rect.x + 0.5, rect.y + 0.5, rect.w - 1, rect.h - 1)
-  ctx.fillStyle = '#1f1f1f'
-  ctx.font = 'bold 13px Arial, Helvetica, sans-serif'
+  ctx.fillStyle = '#242424'
+  ctx.font = '600 13px "Segoe UI", "Source Sans 3", sans-serif'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillText(fitText(ctx, title, rect.w - 16), rect.x + rect.w / 2, rect.y + 14)

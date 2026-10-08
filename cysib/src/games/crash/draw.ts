@@ -37,7 +37,7 @@ export function drawCrash(
     { c: 3, r: 10, text: 'Room' },
     { c: 4, r: 10, text: 'Harbor 4', align: 'center' },
     { c: 0, r: 11, text: 'Organizer' },
-    { c: 1, r: 11, text: company, align: 'left' },
+    { c: 1, r: 11, text: company === 'Unnamed' ? '' : company, align: 'left' },
     { c: 3, r: 11, text: 'Hold' },
     { c: 4, r: 11, text: 'None', align: 'center' },
   ]
@@ -74,7 +74,7 @@ export function drawCrash(
 
   if (!cover && state.armed) {
     const rect = meetingCell(width, height, state.armed)
-    ctx.strokeStyle = '#245fb5'
+    ctx.strokeStyle = '#5b5fc7'
     ctx.lineWidth = 2
     ctx.strokeRect(rect.x + 3, rect.y + 3, rect.w - 6, rect.h - 6)
   }

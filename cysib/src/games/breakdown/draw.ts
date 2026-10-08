@@ -16,10 +16,10 @@ function fontFor(brick: Brick, fontSize: number, damaged: boolean): string {
 
 export function drawBreakdown(ctx: CanvasRenderingContext2D, state: BreakdownState, cover: boolean) {
   const { page } = state
-  ctx.fillStyle = '#808080'
+  ctx.fillStyle = '#f3f2f1'
   ctx.fillRect(0, 0, state.width, state.height)
-  ctx.fillStyle = 'rgba(0,0,0,0.18)'
-  ctx.fillRect(page.x + 4, page.y + 4, page.w, page.h)
+  ctx.fillStyle = 'rgba(0,0,0,0.08)'
+  ctx.fillRect(page.x + 2, page.y + 3, page.w, page.h)
   ctx.fillStyle = '#ffffff'
   ctx.fillRect(page.x, page.y, page.w, page.h)
   ctx.strokeStyle = '#c8c8c8'
