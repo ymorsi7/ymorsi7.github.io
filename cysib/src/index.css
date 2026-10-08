@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  color: #1f1f1f;
+  background: #d4e2f5;
+  overflow: hidden;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
