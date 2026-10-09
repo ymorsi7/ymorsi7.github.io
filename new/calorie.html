@@ -1,0 +1,1038 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Calorie Calculator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="description" content="Estimate daily calories to maintain, lose, or gain weight, including faster weekly rates than typical calculators show." />
+	<meta name="author" content="Yusuf Morsi" />
+
+	<link rel="icon" type="image/svg+xml"
+		href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230f172a'/%3E%3Cpath d='M38 62c8-18 10-28 10-40 10 12 18 22 18 34 0 12-8 20-18 20s-18-8-18-18c0-2 1-5 2-8z' fill='none' stroke='white' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="/new/css/github-star.css">
+
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+
+		:root {
+			--ink: #0f172a;
+			--muted: #64748b;
+			--line: rgba(15, 23, 42, 0.08);
+			--paper: #ffffff;
+			--stage: #e8edf3;
+			--chip: #f8fafc;
+			--chip-hover: #eef2f7;
+			--ok: #0f766e;
+			--warn: #b45309;
+			--danger: #dc2626;
+			--shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+			--safe-top: env(safe-area-inset-top);
+			--safe-bottom: env(safe-area-inset-bottom);
+		}
+
+		html, body { min-height: 100%; }
+
+		body {
+			font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background:
+				radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.06) 1px, transparent 0) 0 0 / 22px 22px,
+				var(--stage);
+			color: var(--ink);
+			line-height: 1.5;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.topbar {
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: calc(10px + var(--safe-top)) 16px 10px;
+			background: rgba(255, 255, 255, 0.82);
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+			border-bottom: 1px solid var(--line);
+			position: sticky;
+			top: 0;
+			z-index: 10;
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			text-decoration: none;
+			color: var(--ink);
+			padding: 4px 8px 4px 4px;
+			border-radius: 999px;
+		}
+
+		.brand:hover { background: var(--chip-hover); }
+
+		.brand img {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		.brand span {
+			font-weight: 600;
+			font-size: 0.95rem;
+			letter-spacing: -0.02em;
+		}
+
+		.topbar-spacer { flex: 1; }
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			color: var(--muted);
+			text-decoration: none;
+			font-size: 0.82rem;
+			font-weight: 500;
+			padding: 8px 10px;
+			border-radius: 10px;
+			white-space: nowrap;
+		}
+
+		.back-link:hover {
+			background: var(--chip-hover);
+			color: var(--ink);
+		}
+
+		.main-content {
+			flex: 1;
+			width: min(860px, calc(100% - 32px));
+			margin: 28px auto 0;
+			padding-bottom: 24px;
+		}
+
+		.card {
+			background: var(--paper);
+			border-radius: 20px;
+			box-shadow: var(--shadow);
+			border: 1px solid var(--line);
+			padding: 22px;
+			margin-bottom: 16px;
+		}
+
+		.card h1 {
+			font-size: 1.45rem;
+			letter-spacing: -0.03em;
+			margin-bottom: 4px;
+		}
+
+		.lede {
+			color: var(--muted);
+			font-size: 0.92rem;
+			margin-bottom: 18px;
+		}
+
+		.seg {
+			display: flex;
+			background: var(--chip);
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			padding: 4px;
+			gap: 4px;
+			margin-bottom: 18px;
+		}
+
+		.seg button {
+			flex: 1;
+			border: 0;
+			background: transparent;
+			color: var(--muted);
+			font: inherit;
+			font-size: 0.85rem;
+			font-weight: 600;
+			padding: 8px 10px;
+			border-radius: 9px;
+			cursor: pointer;
+		}
+
+		.seg button.active {
+			background: white;
+			color: var(--ink);
+			box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 14px 16px;
+		}
+
+		.field { min-width: 0; }
+		.field.span2 { grid-column: 1 / -1; }
+
+		label, .lbl {
+			display: block;
+			font-size: 0.78rem;
+			font-weight: 600;
+			color: var(--muted);
+			margin-bottom: 6px;
+		}
+
+		input[type="number"], select {
+			width: 100%;
+			border: 1px solid var(--line);
+			background: var(--chip);
+			border-radius: 12px;
+			padding: 11px 12px;
+			font: inherit;
+			font-size: 0.95rem;
+			color: var(--ink);
+		}
+
+		input:focus, select:focus {
+			outline: 2px solid var(--ink);
+			outline-offset: 1px;
+			background: white;
+		}
+
+		.pair {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+
+		.radios {
+			display: flex;
+			gap: 8px;
+		}
+
+		.radios label {
+			flex: 1;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			padding: 11px 12px;
+			border-radius: 12px;
+			border: 1px solid var(--line);
+			background: var(--chip);
+			color: var(--ink);
+			font-size: 0.9rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.radios input { accent-color: var(--ink); }
+
+		.hint {
+			font-size: 0.75rem;
+			color: var(--muted);
+			margin-top: 6px;
+		}
+
+		.settings-toggle {
+			margin-top: 14px;
+			background: none;
+			border: 0;
+			color: var(--muted);
+			font: inherit;
+			font-size: 0.85rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.settings-toggle:hover { color: var(--ink); }
+
+		.settings {
+			display: none;
+			margin-top: 12px;
+			padding-top: 14px;
+			border-top: 1px solid var(--line);
+		}
+
+		.settings.open { display: block; }
+
+		.actions {
+			display: flex;
+			gap: 8px;
+			margin-top: 16px;
+		}
+
+		.btn-primary, .btn-ghost {
+			border: 0;
+			border-radius: 12px;
+			padding: 12px 16px;
+			font: inherit;
+			font-weight: 600;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.btn-primary {
+			background: var(--ink);
+			color: white;
+		}
+
+		.btn-primary:hover { background: #1e293b; }
+
+		.btn-ghost {
+			background: var(--chip);
+			color: var(--ink);
+			border: 1px solid var(--line);
+		}
+
+		.stat-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 10px;
+			margin-bottom: 16px;
+		}
+
+		.stat {
+			background: var(--chip);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 14px;
+		}
+
+		.stat .k {
+			font-size: 0.72rem;
+			font-weight: 600;
+			color: var(--muted);
+			text-transform: uppercase;
+			letter-spacing: 0.04em;
+		}
+
+		.stat .v {
+			font-size: 1.35rem;
+			font-weight: 700;
+			letter-spacing: -0.03em;
+			margin-top: 4px;
+		}
+
+		.rate {
+			display: grid;
+			grid-template-columns: 1fr auto auto;
+			gap: 10px;
+			align-items: center;
+			padding: 12px 0;
+			border-bottom: 1px solid var(--line);
+		}
+
+		.rate:last-child { border-bottom: 0; }
+
+		.rate .name { font-weight: 600; }
+		.rate .sub { font-size: 0.78rem; color: var(--muted); }
+
+		.rate .cals {
+			font-variant-numeric: tabular-nums;
+			font-weight: 700;
+			font-size: 1.05rem;
+			text-align: right;
+		}
+
+		.rate .pct {
+			width: 54px;
+			text-align: right;
+			color: var(--muted);
+			font-size: 0.82rem;
+			font-variant-numeric: tabular-nums;
+		}
+
+		.badge {
+			display: inline-block;
+			margin-left: 6px;
+			font-size: 0.68rem;
+			font-weight: 700;
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+			padding: 2px 6px;
+			border-radius: 999px;
+		}
+
+		.badge.warn { background: #fff7ed; color: var(--warn); }
+		.badge.danger { background: #fef2f2; color: var(--danger); }
+
+		.note {
+			margin-top: 14px;
+			padding: 12px 14px;
+			border-radius: 12px;
+			background: #f8fafc;
+			border: 1px solid var(--line);
+			font-size: 0.85rem;
+			color: #334155;
+		}
+
+		.note.warn {
+			background: #fff7ed;
+			border-color: #fed7aa;
+			color: #9a3412;
+		}
+
+		.note.danger {
+			background: #fef2f2;
+			border-color: #fecaca;
+			color: #991b1b;
+		}
+
+		.slider-wrap { margin: 8px 0 4px; }
+
+		input[type="range"] {
+			width: 100%;
+			accent-color: var(--ink);
+		}
+
+		.slider-meta {
+			display: flex;
+			justify-content: space-between;
+			font-size: 0.8rem;
+			color: var(--muted);
+		}
+
+		.custom-result {
+			margin-top: 12px;
+			padding: 16px;
+			border-radius: 14px;
+			background: var(--chip);
+			border: 1px solid var(--line);
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: baseline;
+		}
+
+		.custom-result .big {
+			font-size: 2rem;
+			font-weight: 700;
+			letter-spacing: -0.04em;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.88rem;
+		}
+
+		th {
+			text-align: left;
+			font-size: 0.72rem;
+			text-transform: uppercase;
+			letter-spacing: 0.04em;
+			color: var(--muted);
+			padding: 8px 6px;
+			border-bottom: 1px solid var(--line);
+		}
+
+		td {
+			padding: 8px 6px;
+			border-bottom: 1px solid var(--line);
+			font-variant-numeric: tabular-nums;
+		}
+
+		tr:last-child td { border-bottom: 0; }
+
+		.eq {
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			font-size: 0.8rem;
+			background: var(--chip);
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			padding: 12px 14px;
+			margin: 8px 0 12px;
+			overflow-x: auto;
+		}
+
+		.hidden { display: none !important; }
+
+		h2 {
+			font-size: 1.05rem;
+			letter-spacing: -0.02em;
+			margin-bottom: 10px;
+		}
+
+		.page-footer {
+			margin-top: auto;
+			padding: 8px 16px calc(12px + var(--safe-bottom));
+		}
+
+		.footer-content {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 2px 4px;
+		}
+
+		.footer-content a {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			color: var(--muted);
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.78rem;
+			padding: 0.28rem 0.5rem;
+			border-radius: 8px;
+		}
+
+		.footer-content a:hover {
+			color: var(--ink);
+			background: rgba(255, 255, 255, 0.7);
+		}
+
+		@media (max-width: 640px) {
+			.grid, .stat-row { grid-template-columns: 1fr; }
+			.back-link span { display: none; }
+			.rate { grid-template-columns: 1fr auto; }
+			.rate .pct { display: none; }
+		}
+
+		@media print {
+			.topbar, .page-footer, .actions, .settings-toggle { display: none !important; }
+			body { background: white; }
+			.card { box-shadow: none; break-inside: avoid; }
+		}
+	</style>
+	<script src="/new/js/site-analytics-loader.js"></script>
+</head>
+
+<body>
+	<div class="app">
+		<header class="topbar">
+			<a class="brand" href="index.html" title="Back to portfolio">
+				<img src="images/smiling.png" alt="">
+				<span>Calorie Calculator</span>
+			</a>
+			<div class="topbar-spacer"></div>
+			<a class="back-link" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>Portfolio</span></a>
+		</header>
+
+		<div class="main-content">
+			<div class="card">
+				<h1>Daily calorie estimate</h1>
+				<p class="lede">Mifflin-St Jeor by default, same activity multipliers as typical TDEE calculators. Faster weekly rates are shown as math, not as a recommendation.</p>
+
+				<div class="seg" role="tablist" aria-label="Units">
+					<button type="button" class="active" data-units="us">US Units</button>
+					<button type="button" data-units="metric">Metric</button>
+					<button type="button" data-units="other">Other</button>
+				</div>
+
+				<form id="calc-form" class="grid">
+					<div class="field">
+						<label for="age">Age</label>
+						<input id="age" name="age" type="number" min="15" max="80" step="1" value="24" required>
+						<div class="hint">Ages 15 to 80</div>
+					</div>
+					<div class="field">
+						<span class="lbl">Gender</span>
+						<div class="radios">
+							<label><input type="radio" name="gender" value="male" checked> Male</label>
+							<label><input type="radio" name="gender" value="female"> Female</label>
+						</div>
+					</div>
+
+					<div class="field" data-show="us">
+						<span class="lbl">Height</span>
+						<div class="pair">
+							<input id="feet" type="number" min="3" max="8" step="1" value="5" aria-label="Feet">
+							<input id="inches" type="number" min="0" max="11" step="1" value="8" aria-label="Inches">
+						</div>
+						<div class="hint">Feet and inches</div>
+					</div>
+					<div class="field hidden" data-show="metric other">
+						<label for="cm">Height (cm)</label>
+						<input id="cm" type="number" min="100" max="250" step="0.1" value="172.7">
+					</div>
+
+					<div class="field" data-show="us">
+						<label for="lb">Weight (lb)</label>
+						<input id="lb" type="number" min="50" max="600" step="0.1" value="215.1">
+					</div>
+					<div class="field hidden" data-show="metric">
+						<label for="kg">Weight (kg)</label>
+						<input id="kg" type="number" min="25" max="270" step="0.1" value="97.6">
+					</div>
+					<div class="field hidden" data-show="other">
+						<span class="lbl">Weight</span>
+						<div class="pair">
+							<input id="stone" type="number" min="4" max="40" step="1" value="15" aria-label="Stone">
+							<input id="stone-lb" type="number" min="0" max="13.9" step="0.1" value="5.1" aria-label="Pounds">
+						</div>
+						<div class="hint">Stone and pounds</div>
+					</div>
+
+					<div class="field span2">
+						<label for="activity">Activity</label>
+						<select id="activity"></select>
+						<div class="hint">Exercise: 15-30 min elevated heart rate. Intense: 45-120 min. Very intense: 2+ hours.</div>
+					</div>
+
+					<div class="field">
+						<label for="goal">Goal weight (optional)</label>
+						<input id="goal" type="number" min="50" max="600" step="0.1" placeholder="e.g. 180">
+						<div class="hint" id="goal-hint">Pounds</div>
+					</div>
+					<div class="field">
+						<label for="energy">Energy unit</label>
+						<select id="energy">
+							<option value="kcal">Calories (kcal)</option>
+							<option value="kj">Kilojoules (kJ)</option>
+						</select>
+					</div>
+				</form>
+
+				<button type="button" class="settings-toggle" id="settings-btn">+ Settings</button>
+				<div class="settings" id="settings">
+					<div class="grid">
+						<div class="field">
+							<label for="formula">BMR formula</label>
+							<select id="formula">
+								<option value="mifflin">Mifflin-St Jeor</option>
+								<option value="harris">Revised Harris-Benedict</option>
+								<option value="katch">Katch-McArdle</option>
+							</select>
+						</div>
+						<div class="field hidden" id="fat-field">
+							<label for="fat">Body fat %</label>
+							<input id="fat" type="number" min="1" max="60" step="0.1" value="20">
+						</div>
+					</div>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn-primary" id="calc-btn"><i class="fas fa-calculator"></i> Calculate</button>
+					<button type="button" class="btn-ghost" id="clear-btn">Clear</button>
+				</div>
+			</div>
+
+			<div class="card hidden" id="results">
+				<h2>Results</h2>
+				<div class="stat-row">
+					<div class="stat"><div class="k">BMR</div><div class="v" id="bmr-out"></div></div>
+					<div class="stat"><div class="k">Maintain</div><div class="v" id="tdee-out"></div></div>
+					<div class="stat"><div class="k">Min recommended</div><div class="v" id="min-out"></div></div>
+				</div>
+				<div id="rate-list"></div>
+				<div class="note" id="result-note"></div>
+			</div>
+
+			<div class="card hidden" id="custom-card">
+				<h2>Custom weekly change</h2>
+				<p class="lede" style="margin-bottom:10px">Calculator.net stops at 2 lb/week. This slider goes to 5 lb/week so you can see the calorie math. Rates above 2 lb/week are generally unsafe without medical supervision.</p>
+				<div class="slider-wrap">
+					<input type="range" id="custom-rate" min="-5" max="5" step="0.5" value="-1">
+				</div>
+				<div class="slider-meta">
+					<span>Lose 5 lb/week</span>
+					<strong id="custom-label">Lose 1 lb/week</strong>
+					<span>Gain 5 lb/week</span>
+				</div>
+				<div class="custom-result">
+					<div>
+						<div class="k" style="font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em">Daily intake</div>
+						<div class="big" id="custom-cals"></div>
+					</div>
+					<div id="custom-extra" style="text-align:right;color:var(--muted);font-size:0.88rem"></div>
+				</div>
+				<div class="note" id="custom-note"></div>
+			</div>
+
+			<div class="card hidden" id="zigzag-card">
+				<h2>Zigzag calorie cycling</h2>
+				<p class="lede">Same weekly total as a flat diet, with high and low days so intake is not identical every day.</p>
+				<div class="seg" id="zig-seg">
+					<button type="button" class="active" data-zig="mild">Mild (0.5 lb/week)</button>
+					<button type="button" data-zig="loss">1 lb/week</button>
+					<button type="button" data-zig="custom">Custom rate</button>
+				</div>
+				<h3 style="font-size:0.9rem;margin:8px 0">Schedule 1: two high days, five low days</h3>
+				<div class="table-wrap"><table id="zig1"></table></div>
+				<h3 style="font-size:0.9rem;margin:16px 0 8px">Schedule 2: gradual up and down</h3>
+				<div class="table-wrap"><table id="zig2"></table></div>
+			</div>
+
+			<div class="card hidden" id="activity-card">
+				<h2>If you keep eating at maintenance</h2>
+				<p class="lede">Estimated extra weekly loss from raising activity while still eating the current maintain calories.</p>
+				<table id="activity-table"></table>
+			</div>
+
+			<div class="card">
+				<h2>How this is calculated</h2>
+				<p class="lede">BMR is calories at rest. Maintenance multiplies BMR by an activity factor. A pound of body weight is treated as about 3,500 calories, so 0.5 lb/week is a 250 calorie daily gap, 1 lb/week is 500, and 2 lb/week is 1,000.</p>
+				<div class="eq">Mifflin-St Jeor (men): 10W + 6.25H - 5A + 5<br>Mifflin-St Jeor (women): 10W + 6.25H - 5A - 161<br>Harris-Benedict (men): 13.397W + 4.799H - 5.677A + 88.362<br>Harris-Benedict (women): 9.247W + 3.098H - 4.330A + 447.593<br>Katch-McArdle: 370 + 21.6(1 - F)W<br>W = kg, H = cm, A = age, F = body fat as a fraction</div>
+				<p class="lede" style="margin:0">Harvard Health suggests at least 1,500 calories/day for men and 1,200 for women unless a doctor is supervising. Going lower than that, or trying to lose more than 2 lb/week, can drop metabolism, burn muscle, and is not a good idea to do on your own.</p>
+			</div>
+		</div>
+
+		<footer class="page-footer">
+			<div class="footer-content">
+				<a href="tools.html"><i class="fas fa-tools"></i> More Tools</a>
+				<a href="old/photography.html" target="_blank" rel="noopener">Photography</a>
+				<a href="cysib/">CYSIB</a>
+				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer">Ayatica</a>
+				<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer">bidetbud.com</a>
+				<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
+				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Star</span></a>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		(function () {
+			const LB_PER_KG = 2.2046226218;
+			const CM_PER_IN = 2.54;
+			const KCAL_PER_LB = 3500;
+			const KJ_PER_KCAL = 4.1868;
+			const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			const WAVE = [-1, -2 / 3, -1 / 3, 0, -1 / 6, -1 / 2, -5 / 6];
+			const ACTIVITIES = [
+				{ id: 'sedentary', label: 'Sedentary: little or no exercise', factor: 1.2 },
+				{ id: 'light', label: 'Light: exercise 1-3 times/week', factor: 1.375 },
+				{ id: 'moderate', label: 'Moderate: exercise 4-5 times/week', factor: 1.465 },
+				{ id: 'active', label: 'Active: daily exercise or intense exercise 3-4 times/week', factor: 1.55 },
+				{ id: 'very', label: 'Very Active: intense exercise 6-7 times/week', factor: 1.725 },
+				{ id: 'extra', label: 'Extra Active: very intense exercise daily, or a physical job', factor: 1.9 }
+			];
+
+			const $ = (id) => document.getElementById(id);
+			const activitySelect = $('activity');
+			ACTIVITIES.forEach((a) => {
+				const opt = document.createElement('option');
+				opt.value = a.id;
+				opt.textContent = a.label;
+				if (a.id === 'sedentary') opt.selected = true;
+				activitySelect.appendChild(opt);
+			});
+
+			let units = 'us';
+			let zigMode = 'mild';
+			let last = null;
+
+			function round(n) { return Math.round(n); }
+
+			function fmtEnergy(kcal) {
+				if ($('energy').value === 'kj') return round(kcal * KJ_PER_KCAL).toLocaleString() + ' kJ';
+				return round(kcal).toLocaleString() + ' cal';
+			}
+
+			function currentHeightCm() {
+				if (units === 'us') {
+					const ft = Number($('feet').value) || 0;
+					const inch = Number($('inches').value) || 0;
+					return (ft * 12 + inch) * CM_PER_IN;
+				}
+				return Number($('cm').value) || 0;
+			}
+
+			function currentWeightKg() {
+				if (units === 'us') return (Number($('lb').value) || 0) / LB_PER_KG;
+				if (units === 'metric') return Number($('kg').value) || 0;
+				const st = Number($('stone').value) || 0;
+				const lb = Number($('stone-lb').value) || 0;
+				return (st * 14 + lb) / LB_PER_KG;
+			}
+
+			function currentWeightLb() {
+				return currentWeightKg() * LB_PER_KG;
+			}
+
+			function goalLb() {
+				const raw = Number($('goal').value);
+				if (!raw) return null;
+				if (units === 'metric') return raw * LB_PER_KG;
+				if (units === 'other') return raw * 14;
+				return raw;
+			}
+
+			function minCalories(gender) {
+				return gender === 'female' ? 1200 : 1500;
+			}
+
+			function bmr(weightKg, heightCm, age, gender, formula, fatPct) {
+				if (formula === 'katch') {
+					const f = Math.max(0, Math.min(0.6, (Number(fatPct) || 0) / 100));
+					return 370 + 21.6 * (1 - f) * weightKg;
+				}
+				if (formula === 'harris') {
+					if (gender === 'female') return 9.247 * weightKg + 3.098 * heightCm - 4.330 * age + 447.593;
+					return 13.397 * weightKg + 4.799 * heightCm - 5.677 * age + 88.362;
+				}
+				if (gender === 'female') return 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+				return 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+			}
+
+			function intakeForLbPerWeek(tdee, lbPerWeek) {
+				return round(tdee + lbPerWeek * (KCAL_PER_LB / 7));
+			}
+
+			function weeksToGoal(currentLb, targetLb, lbPerWeek) {
+				if (!targetLb || !lbPerWeek) return null;
+				const delta = targetLb - currentLb;
+				if (delta === 0) return 0;
+				if (Math.sign(delta) !== Math.sign(lbPerWeek)) return null;
+				return Math.abs(delta / lbPerWeek);
+			}
+
+			function rateMeta(lbPerWeek, calories, minCal) {
+				const abs = Math.abs(lbPerWeek);
+				if (calories < minCal) return { badge: 'danger', text: 'Below minimum' };
+				if (abs >= 2) return { badge: 'danger', text: 'Not recommended' };
+				if (abs > 1) return { badge: 'warn', text: 'Aggressive' };
+				return null;
+			}
+
+			function redistribute(days, weeklyTarget, floor) {
+				const out = days.map((n) => Math.max(floor, n));
+				let extra = out.reduce((a, b) => a + b, 0) - weeklyTarget;
+				if (Math.abs(extra) < 1) return out.map(round);
+				const step = extra > 0 ? -1 : 1;
+				let guard = 0;
+				while (Math.abs(extra) >= 1 && guard < 20000) {
+					let idx = 0;
+					if (step < 0) {
+						for (let i = 1; i < out.length; i++) if (out[i] > out[idx]) idx = i;
+						if (out[idx] <= floor) break;
+					} else {
+						for (let i = 1; i < out.length; i++) if (out[i] < out[idx]) idx = i;
+					}
+					out[idx] += step;
+					extra += step;
+					guard++;
+				}
+				return out.map(round);
+			}
+
+			function zigzag1(maintain, goal, floor) {
+				const weekly = round(goal) * 7;
+				const high = maintain;
+				const low = (weekly - 2 * high) / 5;
+				const days = [high, low, low, low, low, low, high];
+				return redistribute(days, weekly, floor);
+			}
+
+			function zigzag2(maintain, goal, floor) {
+				const deficit = maintain - goal;
+				const amp = 2 * deficit;
+				const days = WAVE.map((f) => round(maintain + f * amp));
+				return redistribute(days, round(goal) * 7, floor);
+			}
+
+			function syncUnitFields() {
+				document.querySelectorAll('[data-show]').forEach((el) => {
+					const show = el.getAttribute('data-show').split(/\s+/);
+					el.classList.toggle('hidden', !show.includes(units));
+				});
+				$('goal-hint').textContent = units === 'metric' ? 'Kilograms' : units === 'other' ? 'Stone' : 'Pounds';
+			}
+
+			function collect() {
+				const age = Number($('age').value);
+				const gender = document.querySelector('input[name="gender"]:checked').value;
+				const heightCm = currentHeightCm();
+				const weightKg = currentWeightKg();
+				const activity = ACTIVITIES.find((a) => a.id === activitySelect.value) || ACTIVITIES[0];
+				const formula = $('formula').value;
+				if (age < 15 || age > 80 || heightCm < 100 || weightKg < 25) return null;
+				const basal = round(bmr(weightKg, heightCm, age, gender, formula, $('fat').value));
+				const tdee = round(basal * activity.factor);
+				return {
+					age, gender, heightCm, weightKg,
+					weightLb: weightKg * LB_PER_KG,
+					activity, formula, basal, tdee,
+					minCal: minCalories(gender),
+					goal: goalLb()
+				};
+			}
+
+			function renderRates(data) {
+				const losses = [0, -0.5, -1, -1.5, -2, -2.5, -3, -3.5, -4];
+				const gains = [0.5, 1, 2];
+				const rows = [...losses, ...gains];
+				const list = $('rate-list');
+				list.innerHTML = '';
+				rows.forEach((lb) => {
+					const cals = intakeForLbPerWeek(data.tdee, lb);
+					const pct = round((cals / data.tdee) * 100);
+					const meta = rateMeta(lb, cals, data.minCal);
+					let title = 'Maintain weight';
+					if (lb < 0) title = (Math.abs(lb) === 0.5 ? 'Mild weight loss' : 'Weight loss') + ' · ' + Math.abs(lb) + ' lb/week';
+					if (lb > 0) title = 'Weight gain · ' + lb + ' lb/week';
+					if (lb === -2) title = 'Extreme weight loss · 2 lb/week';
+					if (lb < -2) title = 'Faster than 2 lb/week · ' + Math.abs(lb) + ' lb/week';
+					const weeks = weeksToGoal(data.weightLb, data.goal, lb);
+					const sub = weeks != null ? Math.round(weeks) + ' weeks to goal' : (lb === 0 ? '100% of maintenance' : Math.abs(lb * 500) + ' cal/day ' + (lb < 0 ? 'deficit' : 'surplus'));
+					const row = document.createElement('div');
+					row.className = 'rate';
+					row.innerHTML = '<div><div class="name">' + title + (meta ? ' <span class="badge ' + meta.badge + '">' + meta.text + '</span>' : '') + '</div><div class="sub">' + sub + '</div></div><div class="cals">' + fmtEnergy(Math.max(cals, 0)) + '</div><div class="pct">' + pct + '%</div>';
+					list.appendChild(row);
+				});
+			}
+
+			function renderZigzag(data) {
+				const customLb = Number($('custom-rate').value);
+				const map = { mild: -0.5, loss: -1, custom: customLb };
+				const lb = map[zigMode];
+				const goal = intakeForLbPerWeek(data.tdee, lb);
+				const floor = data.minCal;
+				const s1 = zigzag1(data.tdee, goal, floor);
+				const s2 = zigzag2(data.tdee, goal, floor);
+				function table(el, days) {
+					el.innerHTML = '<thead><tr><th>Day</th><th>Intake</th></tr></thead>' +
+						'<tbody>' + days.map((c, i) => '<tr><td>' + DAYS[i] + '</td><td>' + fmtEnergy(c) + '</td></tr>').join('') +
+						'<tr><td><strong>Weekly</strong></td><td><strong>' + fmtEnergy(days.reduce((a, b) => a + b, 0)) + '</strong></td></tr></tbody>';
+				}
+				table($('zig1'), s1);
+				table($('zig2'), s2);
+			}
+
+			function renderActivity(data) {
+				const body = ACTIVITIES.filter((a) => a.factor > data.activity.factor).map((a) => {
+					const extra = round(data.basal * a.factor) - data.tdee;
+					const lb = (extra * 7) / KCAL_PER_LB;
+					return '<tr><td>' + a.label.replace(/^[^:]+:\s*/, '') + '</td><td>' + lb.toFixed(1) + ' lb</td></tr>';
+				}).join('');
+				$('activity-table').innerHTML = '<thead><tr><th>Activity level</th><th>Weight lost / week</th></tr></thead><tbody>' +
+					(body || '<tr><td colspan="2">Already on the highest activity level.</td></tr>') + '</tbody>';
+			}
+
+			function renderCustom(data) {
+				const lb = Number($('custom-rate').value);
+				const cals = intakeForLbPerWeek(data.tdee, lb);
+				const abs = Math.abs(lb);
+				const dir = lb === 0 ? 'Maintain' : (lb < 0 ? 'Lose' : 'Gain');
+				$('custom-label').textContent = dir + (lb === 0 ? '' : ' ' + abs + ' lb/week');
+				$('custom-cals').textContent = fmtEnergy(Math.max(cals, 0));
+				const weeks = weeksToGoal(data.weightLb, data.goal, lb);
+				const pct = round((cals / data.tdee) * 100);
+				$('custom-extra').innerHTML = pct + '% of maintain' + (weeks != null ? '<br>' + Math.round(weeks) + ' weeks to goal' : '');
+				const note = $('custom-note');
+				if (lb === 0) {
+					note.className = 'note';
+					note.textContent = 'This is estimated maintenance.';
+				} else if (cals < data.minCal) {
+					note.className = 'note danger';
+					note.textContent = 'This target is ' + fmtEnergy(cals) + ', below the ' + data.minCal.toLocaleString() + ' calorie/day minimum usually cited for unsupervised dieting. Do not use this as a daily target.';
+				} else if (Math.abs(lb) > 2) {
+					note.className = 'note danger';
+					note.textContent = 'More than 2 lb/week usually means too large a deficit, muscle loss, and rebound. Talk to a doctor before trying this.';
+				} else if (Math.abs(lb) === 2) {
+					note.className = 'note warn';
+					note.textContent = '2 lb/week is the usual upper bound. Stay at or above ' + data.minCal.toLocaleString() + ' calories/day unless a doctor is involved.';
+				} else {
+					note.className = 'note';
+					note.textContent = 'A ' + Math.abs(lb * 500) + ' calorie/day ' + (lb < 0 ? 'deficit' : 'surplus') + ' is the 3,500 calorie rule of thumb. Actual change varies.';
+				}
+			}
+
+			function render() {
+				const data = collect();
+				last = data;
+				const show = document.querySelectorAll('#results, #custom-card, #zigzag-card, #activity-card');
+				if (!data) {
+					show.forEach((el) => el.classList.add('hidden'));
+					return;
+				}
+				show.forEach((el) => el.classList.remove('hidden'));
+				$('bmr-out').textContent = fmtEnergy(data.basal);
+				$('tdee-out').textContent = fmtEnergy(data.tdee);
+				$('min-out').textContent = fmtEnergy(data.minCal);
+				renderRates(data);
+				renderCustom(data);
+				renderZigzag(data);
+				renderActivity(data);
+				const twoLb = intakeForLbPerWeek(data.tdee, -2);
+				const note = $('result-note');
+				if (twoLb < data.minCal) {
+					note.className = 'note warn';
+					note.textContent = 'Losing 2 lb/week here drops below ' + data.minCal.toLocaleString() + ' calories/day. Faster rates are shown for reference only. Get medical advice before eating less than that.';
+				} else {
+					note.className = 'note';
+					note.textContent = 'These are estimates. Weight, water, and training all move the real number. Recalculate as weight changes.';
+				}
+			}
+
+			document.querySelectorAll('.seg button[data-units]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					units = btn.getAttribute('data-units');
+					document.querySelectorAll('.seg button[data-units]').forEach((b) => b.classList.toggle('active', b === btn));
+					const kg = currentWeightKg();
+					const cm = currentHeightCm();
+					const totalIn = cm / CM_PER_IN;
+					$('feet').value = Math.floor(totalIn / 12);
+					$('inches').value = round(totalIn % 12);
+					$('cm').value = (Math.round(cm * 10) / 10).toString();
+					$('lb').value = (Math.round(kg * LB_PER_KG * 10) / 10).toString();
+					$('kg').value = (Math.round(kg * 10) / 10).toString();
+					const totalLb = kg * LB_PER_KG;
+					$('stone').value = Math.floor(totalLb / 14);
+					$('stone-lb').value = (Math.round((totalLb % 14) * 10) / 10).toString();
+					syncUnitFields();
+					render();
+				});
+			});
+
+			$('settings-btn').addEventListener('click', () => {
+				$('settings').classList.toggle('open');
+			});
+
+			$('formula').addEventListener('change', () => {
+				$('fat-field').classList.toggle('hidden', $('formula').value !== 'katch');
+				render();
+			});
+
+			document.querySelectorAll('#zig-seg button').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					zigMode = btn.getAttribute('data-zig');
+					document.querySelectorAll('#zig-seg button').forEach((b) => b.classList.toggle('active', b === btn));
+					if (last) renderZigzag(last);
+				});
+			});
+
+			$('calc-form').addEventListener('submit', (e) => { e.preventDefault(); render(); });
+			$('calc-btn').addEventListener('click', render);
+			$('custom-rate').addEventListener('input', () => { if (last) { renderCustom(last); if (zigMode === 'custom') renderZigzag(last); } });
+			$('energy').addEventListener('change', () => { if (last) render(); });
+			$('clear-btn').addEventListener('click', () => {
+				$('age').value = 24;
+				document.querySelector('input[name="gender"][value="male"]').checked = true;
+				$('feet').value = 5;
+				$('inches').value = 8;
+				$('cm').value = 172.7;
+				$('lb').value = 215.1;
+				$('kg').value = 97.6;
+				$('stone').value = 15;
+				$('stone-lb').value = 5.1;
+				activitySelect.value = 'sedentary';
+				$('goal').value = '';
+				$('formula').value = 'mifflin';
+				$('fat-field').classList.add('hidden');
+				$('custom-rate').value = -1;
+				render();
+			});
+
+			['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'activity', 'goal', 'fat'].forEach((id) => {
+				$(id).addEventListener('input', () => { if (last) render(); });
+				$(id).addEventListener('change', () => { if (last) render(); });
+			});
+			document.querySelectorAll('input[name="gender"]').forEach((el) => el.addEventListener('change', () => { if (last) render(); }));
+
+			syncUnitFields();
+			render();
+		})();
+	</script>
+</body>
+
+</html>
