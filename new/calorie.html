@@ -725,6 +725,7 @@
 		<footer class="page-footer">
 			<div class="footer-content">
 				<a href="tools.html"><i class="fas fa-tools"></i> More Tools</a>
+				<a href="calorie.html"><i class="fas fa-fire"></i> Calories</a>
 				<a href="old/photography.html" target="_blank" rel="noopener">Photography</a>
 				<a href="cysib/">CYSIB</a>
 				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer">Ayatica</a>
@@ -768,6 +769,65 @@
 			let units = 'us';
 			let zigMode = 'mild';
 			let last = null;
+			const CACHE_KEY = 'ymorsi-calorie-calc';
+
+			function saveCache() {
+				try {
+					const genderEl = document.querySelector('input[name="gender"]:checked');
+					const payload = {
+						units,
+						zigMode,
+						showGain: !$('gain-arrows').classList.contains('hidden'),
+						settingsOpen: $('settings').classList.contains('open'),
+						energy: $('energy').value,
+						formula: $('formula').value,
+						gender: genderEl ? genderEl.value : '',
+						activity: activitySelect.value,
+						fields: {}
+					};
+					['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'goal', 'fat', 'custom-lb', 'custom-dir'].forEach((id) => {
+						payload.fields[id] = $(id).value;
+					});
+					localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+				} catch (err) { /* private mode */ }
+			}
+
+			function loadCache() {
+				try {
+					const raw = localStorage.getItem(CACHE_KEY);
+					if (!raw) return;
+					const data = JSON.parse(raw);
+					if (!data || typeof data !== 'object') return;
+					if (data.units === 'metric' || data.units === 'other' || data.units === 'us') units = data.units;
+					document.querySelectorAll('.seg button[data-units]').forEach((b) => {
+						b.classList.toggle('active', b.getAttribute('data-units') === units);
+					});
+					if (data.fields) {
+						Object.keys(data.fields).forEach((id) => {
+							if ($(id) && data.fields[id] != null) $(id).value = data.fields[id];
+						});
+					}
+					if (data.gender) {
+						const el = document.querySelector('input[name="gender"][value="' + data.gender + '"]');
+						if (el) el.checked = true;
+					}
+					if (data.activity) activitySelect.value = data.activity;
+					if (data.energy) $('energy').value = data.energy;
+					if (data.formula) $('formula').value = data.formula;
+					$('fat-field').classList.toggle('hidden', $('formula').value !== 'katch');
+					if (data.zigMode) {
+						zigMode = data.zigMode;
+						document.querySelectorAll('#zig-seg button').forEach((b) => {
+							b.classList.toggle('active', b.getAttribute('data-zig') === zigMode);
+						});
+					}
+					if (data.showGain) {
+						$('gain-arrows').classList.remove('hidden');
+						$('gain-toggle').textContent = 'Hide weight gain';
+					}
+					if (data.settingsOpen) $('settings').classList.add('open');
+				} catch (err) { /* ignore bad cache */ }
+			}
 
 			function round(n) { return Math.round(n); }
 
@@ -1042,6 +1102,7 @@
 					hideResults();
 					alert.classList.remove('hidden');
 					alert.textContent = missingMessage();
+					saveCache();
 					return;
 				}
 				alert.classList.add('hidden');
@@ -1063,6 +1124,7 @@
 					note.className = 'note';
 					note.textContent = 'These are estimates. Weight, water, and training all move the real number. Recalculate as weight changes.';
 				}
+				saveCache();
 			}
 
 			document.querySelectorAll('.seg button[data-units]').forEach((btn) => {
@@ -1095,16 +1157,13 @@
 					}
 					syncUnitFields();
 					if (last) render();
+					else saveCache();
 				});
 			});
 
 			$('settings-btn').addEventListener('click', () => {
 				$('settings').classList.toggle('open');
-			});
-
-			$('formula').addEventListener('change', () => {
-				$('fat-field').classList.toggle('hidden', $('formula').value !== 'katch');
-				if (last) render();
+				saveCache();
 			});
 
 			document.querySelectorAll('#zig-seg button').forEach((btn) => {
@@ -1112,27 +1171,36 @@
 					zigMode = btn.getAttribute('data-zig');
 					document.querySelectorAll('#zig-seg button').forEach((b) => b.classList.toggle('active', b === btn));
 					if (last) renderZigzag(last);
+					saveCache();
 				});
 			});
 
 			$('calc-form').addEventListener('submit', (e) => { e.preventDefault(); render(); });
 			$('calc-btn').addEventListener('click', render);
 			function onCustomRate() {
-				if (!last) return;
-				renderCustom(last);
-				if (zigMode === 'custom') renderZigzag(last);
+				if (last) {
+					renderCustom(last);
+					if (zigMode === 'custom') renderZigzag(last);
+				}
+				saveCache();
 			}
 			$('custom-lb').addEventListener('input', onCustomRate);
 			$('custom-dir').addEventListener('change', onCustomRate);
 			$('gain-toggle').addEventListener('click', () => {
 				const open = $('gain-arrows').classList.toggle('hidden');
 				$('gain-toggle').textContent = open ? 'Show info for weight gain' : 'Hide weight gain';
+				saveCache();
 			});
-			$('energy').addEventListener('change', () => { if (last) render(); });
 			$('clear-btn').addEventListener('click', () => {
 				['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'goal', 'fat'].forEach((id) => { $(id).value = ''; });
 				document.querySelectorAll('input[name="gender"]').forEach((el) => { el.checked = false; });
 				activitySelect.value = '';
+				units = 'us';
+				document.querySelectorAll('.seg button[data-units]').forEach((b) => {
+					b.classList.toggle('active', b.getAttribute('data-units') === 'us');
+				});
+				syncUnitFields();
+				$('energy').value = 'kcal';
 				$('formula').value = 'mifflin';
 				$('fat-field').classList.add('hidden');
 				$('custom-lb').value = '';
@@ -1141,15 +1209,25 @@
 				$('gain-toggle').textContent = 'Show info for weight gain';
 				$('form-alert').classList.add('hidden');
 				hideResults();
+				try { localStorage.removeItem(CACHE_KEY); } catch (err) { /* ignore */ }
 			});
 
 			['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'activity', 'goal', 'fat'].forEach((id) => {
-				$(id).addEventListener('input', () => { if (last) render(); });
-				$(id).addEventListener('change', () => { if (last) render(); });
+				$(id).addEventListener('input', () => { if (last) render(); else saveCache(); });
+				$(id).addEventListener('change', () => { if (last) render(); else saveCache(); });
 			});
-			document.querySelectorAll('input[name="gender"]').forEach((el) => el.addEventListener('change', () => { if (last) render(); }));
+			document.querySelectorAll('input[name="gender"]').forEach((el) => el.addEventListener('change', () => { if (last) render(); else saveCache(); }));
+			$('energy').addEventListener('change', () => { if (last) render(); else saveCache(); });
+			$('formula').addEventListener('change', () => {
+				$('fat-field').classList.toggle('hidden', $('formula').value !== 'katch');
+				if (last) render();
+				else saveCache();
+			});
 
 			syncUnitFields();
+			loadCache();
+			syncUnitFields();
+			if (collect()) render();
 		})();
 	</script>
 </body>
