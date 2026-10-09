@@ -321,48 +321,124 @@
 			margin-top: 4px;
 		}
 
-		.rate {
-			display: grid;
-			grid-template-columns: 1fr auto auto;
-			gap: 10px;
-			align-items: center;
-			padding: 12px 0;
-			border-bottom: 1px solid var(--line);
+		.arrows {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
 		}
 
-		.rate:last-child { border-bottom: 0; }
+		.arrow-row {
+			display: flex;
+			align-items: stretch;
+			min-height: 68px;
+		}
 
-		.rate .name { font-weight: 600; }
-		.rate .sub { font-size: 0.78rem; color: var(--muted); }
+		#custom-row { margin-top: 8px; }
 
-		.rate .cals {
-			font-variant-numeric: tabular-nums;
+		.arrow-label {
+			flex: 1.15;
+			background: #e8e8e8;
+			color: var(--ink);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 10px 28px 10px 16px;
+			clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
+			z-index: 1;
+			margin-right: -8px;
+		}
+
+		.arrow-label .name {
 			font-weight: 700;
-			font-size: 1.05rem;
-			text-align: right;
+			font-size: 1.02rem;
+			line-height: 1.2;
 		}
 
-		.rate .pct {
-			width: 54px;
-			text-align: right;
-			color: var(--muted);
+		.arrow-label .sub {
 			font-size: 0.82rem;
+			color: #6b7280;
+			font-weight: 500;
+			margin-top: 2px;
+		}
+
+		.arrow-value {
+			flex: 0.95;
+			background: #d7ebc7;
+			border: 1px solid #9cba7a;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 8px 14px 8px 22px;
+		}
+
+		.arrow-value.warn {
+			background: #fde8c8;
+			border-color: #d4a017;
+		}
+
+		.arrow-value.danger {
+			background: #f8d4d4;
+			border-color: #d98a8a;
+		}
+
+		.arrow-kcal {
+			font-size: 1.55rem;
+			font-weight: 800;
+			letter-spacing: -0.03em;
+			line-height: 1.1;
 			font-variant-numeric: tabular-nums;
 		}
 
-		.badge {
-			display: inline-block;
+		.arrow-kcal .pct {
+			font-size: 0.82rem;
+			font-weight: 600;
+			color: #6b7280;
 			margin-left: 6px;
-			font-size: 0.68rem;
-			font-weight: 700;
-			letter-spacing: 0.03em;
-			text-transform: uppercase;
-			padding: 2px 6px;
-			border-radius: 999px;
 		}
 
-		.badge.warn { background: #fff7ed; color: var(--warn); }
-		.badge.danger { background: #fef2f2; color: var(--danger); }
+		.arrow-unit {
+			font-size: 0.8rem;
+			color: #6b7280;
+			margin-top: 2px;
+		}
+
+		.custom-fields {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 6px;
+			margin-top: 8px;
+		}
+
+		.custom-fields select,
+		.custom-fields input {
+			width: auto;
+			max-width: 88px;
+			padding: 6px 8px;
+			font-size: 0.85rem;
+			border-radius: 8px;
+		}
+
+		.custom-fields span {
+			font-size: 0.8rem;
+			color: #6b7280;
+			font-weight: 500;
+		}
+
+		.gain-toggle {
+			margin-top: 12px;
+			background: none;
+			border: 0;
+			color: #1d4ed8;
+			font: inherit;
+			font-size: 0.92rem;
+			font-weight: 600;
+			cursor: pointer;
+			text-decoration: underline;
+			padding: 0;
+		}
+
+		.gain-toggle:hover { color: var(--ink); }
 
 		.note {
 			margin-top: 14px;
@@ -384,38 +460,6 @@
 			background: #fef2f2;
 			border-color: #fecaca;
 			color: #991b1b;
-		}
-
-		.slider-wrap { margin: 8px 0 4px; }
-
-		input[type="range"] {
-			width: 100%;
-			accent-color: var(--ink);
-		}
-
-		.slider-meta {
-			display: flex;
-			justify-content: space-between;
-			font-size: 0.8rem;
-			color: var(--muted);
-		}
-
-		.custom-result {
-			margin-top: 12px;
-			padding: 16px;
-			border-radius: 14px;
-			background: var(--chip);
-			border: 1px solid var(--line);
-			display: flex;
-			justify-content: space-between;
-			gap: 12px;
-			align-items: baseline;
-		}
-
-		.custom-result .big {
-			font-size: 2rem;
-			font-weight: 700;
-			letter-spacing: -0.04em;
 		}
 
 		table {
@@ -494,8 +538,9 @@
 		@media (max-width: 640px) {
 			.grid, .stat-row { grid-template-columns: 1fr; }
 			.back-link span { display: none; }
-			.rate { grid-template-columns: 1fr auto; }
-			.rate .pct { display: none; }
+			.arrow-row { min-height: 60px; }
+			.arrow-kcal { font-size: 1.3rem; }
+			.arrow-label { padding-right: 24px; }
 		}
 
 		@media print {
@@ -532,13 +577,13 @@
 				<form id="calc-form" class="grid">
 					<div class="field">
 						<label for="age">Age</label>
-						<input id="age" name="age" type="number" min="15" max="80" step="1" value="24" required>
+						<input id="age" name="age" type="number" min="15" max="80" step="1" placeholder="Age" required>
 						<div class="hint">Ages 15 to 80</div>
 					</div>
 					<div class="field">
 						<span class="lbl">Gender</span>
 						<div class="radios">
-							<label><input type="radio" name="gender" value="male" checked> Male</label>
+							<label><input type="radio" name="gender" value="male"> Male</label>
 							<label><input type="radio" name="gender" value="female"> Female</label>
 						</div>
 					</div>
@@ -546,29 +591,29 @@
 					<div class="field" data-show="us">
 						<span class="lbl">Height</span>
 						<div class="pair">
-							<input id="feet" type="number" min="3" max="8" step="1" value="5" aria-label="Feet">
-							<input id="inches" type="number" min="0" max="11" step="1" value="8" aria-label="Inches">
+							<input id="feet" type="number" min="3" max="8" step="1" placeholder="ft" aria-label="Feet">
+							<input id="inches" type="number" min="0" max="11" step="1" placeholder="in" aria-label="Inches">
 						</div>
 						<div class="hint">Feet and inches</div>
 					</div>
 					<div class="field hidden" data-show="metric other">
 						<label for="cm">Height (cm)</label>
-						<input id="cm" type="number" min="100" max="250" step="0.1" value="172.7">
+						<input id="cm" type="number" min="100" max="250" step="0.1" placeholder="cm">
 					</div>
 
 					<div class="field" data-show="us">
 						<label for="lb">Weight (lb)</label>
-						<input id="lb" type="number" min="50" max="600" step="0.1" value="215.1">
+						<input id="lb" type="number" min="50" max="600" step="0.1" placeholder="lb">
 					</div>
 					<div class="field hidden" data-show="metric">
 						<label for="kg">Weight (kg)</label>
-						<input id="kg" type="number" min="25" max="270" step="0.1" value="97.6">
+						<input id="kg" type="number" min="25" max="270" step="0.1" placeholder="kg">
 					</div>
 					<div class="field hidden" data-show="other">
 						<span class="lbl">Weight</span>
 						<div class="pair">
-							<input id="stone" type="number" min="4" max="40" step="1" value="15" aria-label="Stone">
-							<input id="stone-lb" type="number" min="0" max="13.9" step="0.1" value="5.1" aria-label="Pounds">
+							<input id="stone" type="number" min="4" max="40" step="1" placeholder="st" aria-label="Stone">
+							<input id="stone-lb" type="number" min="0" max="13.9" step="0.1" placeholder="lb" aria-label="Pounds">
 						</div>
 						<div class="hint">Stone and pounds</div>
 					</div>
@@ -606,7 +651,7 @@
 						</div>
 						<div class="field hidden" id="fat-field">
 							<label for="fat">Body fat %</label>
-							<input id="fat" type="number" min="1" max="60" step="0.1" value="20">
+							<input id="fat" type="number" min="1" max="60" step="0.1" placeholder="%">
 						</div>
 					</div>
 				</div>
@@ -615,6 +660,7 @@
 					<button type="button" class="btn-primary" id="calc-btn"><i class="fas fa-calculator"></i> Calculate</button>
 					<button type="button" class="btn-ghost" id="clear-btn">Clear</button>
 				</div>
+				<div class="note hidden" id="form-alert"></div>
 			</div>
 
 			<div class="card hidden" id="results">
@@ -624,29 +670,28 @@
 					<div class="stat"><div class="k">Maintain</div><div class="v" id="tdee-out"></div></div>
 					<div class="stat"><div class="k">Min recommended</div><div class="v" id="min-out"></div></div>
 				</div>
-				<div id="rate-list"></div>
-				<div class="note" id="result-note"></div>
-			</div>
-
-			<div class="card hidden" id="custom-card">
-				<h2>Custom weekly change</h2>
-				<p class="lede" style="margin-bottom:10px">Calculator.net stops at 2 lb/week. This slider goes to 5 lb/week so you can see the calorie math. Rates above 2 lb/week are generally unsafe without medical supervision.</p>
-				<div class="slider-wrap">
-					<input type="range" id="custom-rate" min="-5" max="5" step="0.5" value="-1">
-				</div>
-				<div class="slider-meta">
-					<span>Lose 5 lb/week</span>
-					<strong id="custom-label">Lose 1 lb/week</strong>
-					<span>Gain 5 lb/week</span>
-				</div>
-				<div class="custom-result">
-					<div>
-						<div class="k" style="font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em">Daily intake</div>
-						<div class="big" id="custom-cals"></div>
+				<div class="arrows" id="loss-arrows"></div>
+				<div class="arrow-row" id="custom-row">
+					<div class="arrow-label">
+						<div class="name">Custom weekly rate</div>
+						<div class="custom-fields">
+							<select id="custom-dir" aria-label="Lose or gain">
+								<option value="-1">Lose</option>
+								<option value="1">Gain</option>
+							</select>
+							<input id="custom-lb" type="number" min="0.1" max="10" step="0.1" placeholder="e.g. 2.5" aria-label="Pounds per week">
+							<span>lb/week</span>
+						</div>
 					</div>
-					<div id="custom-extra" style="text-align:right;color:var(--muted);font-size:0.88rem"></div>
+					<div class="arrow-value" id="custom-value">
+						<div class="arrow-kcal" id="custom-cals">—</div>
+						<div class="arrow-unit" id="custom-unit">Calories/day</div>
+					</div>
 				</div>
-				<div class="note" id="custom-note"></div>
+				<button type="button" class="gain-toggle" id="gain-toggle">Show info for weight gain</button>
+				<div class="arrows hidden" id="gain-arrows"></div>
+				<div class="note hidden" id="custom-note"></div>
+				<div class="note" id="result-note"></div>
 			</div>
 
 			<div class="card hidden" id="zigzag-card">
@@ -709,11 +754,14 @@
 
 			const $ = (id) => document.getElementById(id);
 			const activitySelect = $('activity');
+			const blank = document.createElement('option');
+			blank.value = '';
+			blank.textContent = 'Select activity';
+			activitySelect.appendChild(blank);
 			ACTIVITIES.forEach((a) => {
 				const opt = document.createElement('option');
 				opt.value = a.id;
 				opt.textContent = a.label;
-				if (a.id === 'sedentary') opt.selected = true;
 				activitySelect.appendChild(opt);
 			});
 
@@ -723,23 +771,38 @@
 
 			function round(n) { return Math.round(n); }
 
+			function energyNumber(kcal) {
+				if ($('energy').value === 'kj') return round(Math.max(kcal, 0) * KJ_PER_KCAL);
+				return round(Math.max(kcal, 0));
+			}
+
+			function energyUnit() {
+				return $('energy').value === 'kj' ? 'kJ/day' : 'Calories/day';
+			}
+
 			function fmtEnergy(kcal) {
-				if ($('energy').value === 'kj') return round(kcal * KJ_PER_KCAL).toLocaleString() + ' kJ';
-				return round(kcal).toLocaleString() + ' cal';
+				const n = energyNumber(kcal);
+				return n.toLocaleString() + ($('energy').value === 'kj' ? ' kJ' : ' cal');
+			}
+
+			function hasValue(id) {
+				return String($(id).value).trim() !== '';
 			}
 
 			function currentHeightCm() {
 				if (units === 'us') {
+					if (!hasValue('feet') && !hasValue('inches')) return 0;
 					const ft = Number($('feet').value) || 0;
 					const inch = Number($('inches').value) || 0;
 					return (ft * 12 + inch) * CM_PER_IN;
 				}
-				return Number($('cm').value) || 0;
+				return hasValue('cm') ? Number($('cm').value) : 0;
 			}
 
 			function currentWeightKg() {
-				if (units === 'us') return (Number($('lb').value) || 0) / LB_PER_KG;
-				if (units === 'metric') return Number($('kg').value) || 0;
+				if (units === 'us') return hasValue('lb') ? Number($('lb').value) / LB_PER_KG : 0;
+				if (units === 'metric') return hasValue('kg') ? Number($('kg').value) : 0;
+				if (!hasValue('stone') && !hasValue('stone-lb')) return 0;
 				const st = Number($('stone').value) || 0;
 				const lb = Number($('stone-lb').value) || 0;
 				return (st * 14 + lb) / LB_PER_KG;
@@ -784,14 +847,6 @@
 				if (delta === 0) return 0;
 				if (Math.sign(delta) !== Math.sign(lbPerWeek)) return null;
 				return Math.abs(delta / lbPerWeek);
-			}
-
-			function rateMeta(lbPerWeek, calories, minCal) {
-				const abs = Math.abs(lbPerWeek);
-				if (calories < minCal) return { badge: 'danger', text: 'Below minimum' };
-				if (abs >= 2) return { badge: 'danger', text: 'Not recommended' };
-				if (abs > 1) return { badge: 'warn', text: 'Aggressive' };
-				return null;
 			}
 
 			function redistribute(days, weeklyTarget, floor) {
@@ -839,13 +894,16 @@
 			}
 
 			function collect() {
+				const genderEl = document.querySelector('input[name="gender"]:checked');
+				const activity = ACTIVITIES.find((a) => a.id === activitySelect.value);
+				const formula = $('formula').value;
+				if (!hasValue('age') || !genderEl || !activity) return null;
 				const age = Number($('age').value);
-				const gender = document.querySelector('input[name="gender"]:checked').value;
+				const gender = genderEl.value;
 				const heightCm = currentHeightCm();
 				const weightKg = currentWeightKg();
-				const activity = ACTIVITIES.find((a) => a.id === activitySelect.value) || ACTIVITIES[0];
-				const formula = $('formula').value;
 				if (age < 15 || age > 80 || heightCm < 100 || weightKg < 25) return null;
+				if (formula === 'katch' && !hasValue('fat')) return null;
 				const basal = round(bmr(weightKg, heightCm, age, gender, formula, $('fat').value));
 				const tdee = round(basal * activity.factor);
 				return {
@@ -857,33 +915,63 @@
 				};
 			}
 
+			function valueTone(lbPerWeek, calories, minCal) {
+				if (calories < minCal || Math.abs(lbPerWeek) > 2) return 'danger';
+				if (Math.abs(lbPerWeek) === 2) return 'warn';
+				return '';
+			}
+
+			function fillValue(el, data, lbPerWeek) {
+				const cals = intakeForLbPerWeek(data.tdee, lbPerWeek);
+				const pct = round((cals / data.tdee) * 100);
+				const tone = valueTone(lbPerWeek, cals, data.minCal);
+				el.className = 'arrow-value' + (tone ? ' ' + tone : '');
+				el.innerHTML = '<div class="arrow-kcal">' + energyNumber(cals).toLocaleString() +
+					' <span class="pct">' + pct + '%</span></div><div class="arrow-unit">' + energyUnit() + '</div>';
+			}
+
+			function arrowRow(title, sub, data, lbPerWeek) {
+				const row = document.createElement('div');
+				row.className = 'arrow-row';
+				row.innerHTML = '<div class="arrow-label"><div class="name"></div>' +
+					(sub ? '<div class="sub"></div>' : '') + '</div><div class="arrow-value"></div>';
+				row.querySelector('.name').textContent = title;
+				if (sub) row.querySelector('.sub').textContent = sub;
+				fillValue(row.querySelector('.arrow-value'), data, lbPerWeek);
+				return row;
+			}
+
 			function renderRates(data) {
-				const losses = [0, -0.5, -1, -1.5, -2, -2.5, -3, -3.5, -4];
-				const gains = [0.5, 1, 2];
-				const rows = [...losses, ...gains];
-				const list = $('rate-list');
-				list.innerHTML = '';
-				rows.forEach((lb) => {
-					const cals = intakeForLbPerWeek(data.tdee, lb);
-					const pct = round((cals / data.tdee) * 100);
-					const meta = rateMeta(lb, cals, data.minCal);
-					let title = 'Maintain weight';
-					if (lb < 0) title = (Math.abs(lb) === 0.5 ? 'Mild weight loss' : 'Weight loss') + ' · ' + Math.abs(lb) + ' lb/week';
-					if (lb > 0) title = 'Weight gain · ' + lb + ' lb/week';
-					if (lb === -2) title = 'Extreme weight loss · 2 lb/week';
-					if (lb < -2) title = 'Faster than 2 lb/week · ' + Math.abs(lb) + ' lb/week';
-					const weeks = weeksToGoal(data.weightLb, data.goal, lb);
-					const sub = weeks != null ? Math.round(weeks) + ' weeks to goal' : (lb === 0 ? '100% of maintenance' : Math.abs(lb * 500) + ' cal/day ' + (lb < 0 ? 'deficit' : 'surplus'));
-					const row = document.createElement('div');
-					row.className = 'rate';
-					row.innerHTML = '<div><div class="name">' + title + (meta ? ' <span class="badge ' + meta.badge + '">' + meta.text + '</span>' : '') + '</div><div class="sub">' + sub + '</div></div><div class="cals">' + fmtEnergy(Math.max(cals, 0)) + '</div><div class="pct">' + pct + '%</div>';
-					list.appendChild(row);
-				});
+				const loss = $('loss-arrows');
+				const gain = $('gain-arrows');
+				loss.innerHTML = '';
+				gain.innerHTML = '';
+				const losses = [
+					{ lb: 0, title: 'Maintain weight', sub: '' },
+					{ lb: -0.5, title: 'Mild weight loss', sub: '0.5 lb/week' },
+					{ lb: -1, title: 'Weight loss', sub: '1 lb/week' },
+					{ lb: -2, title: 'Extreme weight loss', sub: '2 lb/week' },
+					{ lb: -3, title: 'Fast weight loss', sub: '3 lb/week' },
+					{ lb: -4, title: 'Faster weight loss', sub: '4 lb/week' }
+				];
+				losses.forEach((row) => loss.appendChild(arrowRow(row.title, row.sub, data, row.lb)));
+				[
+					{ lb: 0.5, title: 'Mild weight gain', sub: '0.5 lb/week' },
+					{ lb: 1, title: 'Weight gain', sub: '1 lb/week' },
+					{ lb: 2, title: 'Fast weight gain', sub: '2 lb/week' }
+				].forEach((row) => gain.appendChild(arrowRow(row.title, row.sub, data, row.lb)));
+			}
+
+			function customWeeklyLb() {
+				if (!hasValue('custom-lb')) return null;
+				const n = Number($('custom-lb').value);
+				if (!n || n <= 0) return null;
+				return n * Number($('custom-dir').value);
 			}
 
 			function renderZigzag(data) {
-				const customLb = Number($('custom-rate').value);
-				const map = { mild: -0.5, loss: -1, custom: customLb };
+				const customLb = customWeeklyLb();
+				const map = { mild: -0.5, loss: -1, custom: customLb == null ? -1 : customLb };
 				const lb = map[zigMode];
 				const goal = intakeForLbPerWeek(data.tdee, lb);
 				const floor = data.minCal;
@@ -909,42 +997,55 @@
 			}
 
 			function renderCustom(data) {
-				const lb = Number($('custom-rate').value);
-				const cals = intakeForLbPerWeek(data.tdee, lb);
-				const abs = Math.abs(lb);
-				const dir = lb === 0 ? 'Maintain' : (lb < 0 ? 'Lose' : 'Gain');
-				$('custom-label').textContent = dir + (lb === 0 ? '' : ' ' + abs + ' lb/week');
-				$('custom-cals').textContent = fmtEnergy(Math.max(cals, 0));
-				const weeks = weeksToGoal(data.weightLb, data.goal, lb);
-				const pct = round((cals / data.tdee) * 100);
-				$('custom-extra').innerHTML = pct + '% of maintain' + (weeks != null ? '<br>' + Math.round(weeks) + ' weeks to goal' : '');
+				const lb = customWeeklyLb();
+				const value = $('custom-value');
 				const note = $('custom-note');
-				if (lb === 0) {
-					note.className = 'note';
-					note.textContent = 'This is estimated maintenance.';
-				} else if (cals < data.minCal) {
+				if (lb == null) {
+					value.className = 'arrow-value';
+					value.innerHTML = '<div class="arrow-kcal">—</div><div class="arrow-unit">' + energyUnit() + '</div>';
+					note.className = 'note hidden';
+					return;
+				}
+				fillValue(value, data, lb);
+				const cals = intakeForLbPerWeek(data.tdee, lb);
+				if (cals < data.minCal) {
 					note.className = 'note danger';
-					note.textContent = 'This target is ' + fmtEnergy(cals) + ', below the ' + data.minCal.toLocaleString() + ' calorie/day minimum usually cited for unsupervised dieting. Do not use this as a daily target.';
+					note.textContent = 'This custom rate is below the ' + data.minCal.toLocaleString() + ' calorie/day minimum usually cited for unsupervised dieting. Do not use it as a daily target.';
 				} else if (Math.abs(lb) > 2) {
 					note.className = 'note danger';
 					note.textContent = 'More than 2 lb/week usually means too large a deficit, muscle loss, and rebound. Talk to a doctor before trying this.';
-				} else if (Math.abs(lb) === 2) {
-					note.className = 'note warn';
-					note.textContent = '2 lb/week is the usual upper bound. Stay at or above ' + data.minCal.toLocaleString() + ' calories/day unless a doctor is involved.';
 				} else {
-					note.className = 'note';
-					note.textContent = 'A ' + Math.abs(lb * 500) + ' calorie/day ' + (lb < 0 ? 'deficit' : 'surplus') + ' is the 3,500 calorie rule of thumb. Actual change varies.';
+					note.className = 'note hidden';
 				}
+			}
+
+			function hideResults() {
+				last = null;
+				document.querySelectorAll('#results, #zigzag-card, #activity-card').forEach((el) => el.classList.add('hidden'));
+			}
+
+			function missingMessage() {
+				if (!hasValue('age')) return 'Enter age, gender, height, weight, and activity, then calculate.';
+				if (!document.querySelector('input[name="gender"]:checked')) return 'Choose a gender.';
+				if (currentHeightCm() < 100) return 'Enter height.';
+				if (currentWeightKg() < 25) return 'Enter weight.';
+				if (!activitySelect.value) return 'Choose an activity level.';
+				if ($('formula').value === 'katch' && !hasValue('fat')) return 'Enter body fat % for Katch-McArdle.';
+				return 'Enter age, gender, height, weight, and activity, then calculate.';
 			}
 
 			function render() {
 				const data = collect();
-				last = data;
-				const show = document.querySelectorAll('#results, #custom-card, #zigzag-card, #activity-card');
+				const show = document.querySelectorAll('#results, #zigzag-card, #activity-card');
+				const alert = $('form-alert');
 				if (!data) {
-					show.forEach((el) => el.classList.add('hidden'));
+					hideResults();
+					alert.classList.remove('hidden');
+					alert.textContent = missingMessage();
 					return;
 				}
+				alert.classList.add('hidden');
+				last = data;
 				show.forEach((el) => el.classList.remove('hidden'));
 				$('bmr-out').textContent = fmtEnergy(data.basal);
 				$('tdee-out').textContent = fmtEnergy(data.tdee);
@@ -970,17 +1071,30 @@
 					document.querySelectorAll('.seg button[data-units]').forEach((b) => b.classList.toggle('active', b === btn));
 					const kg = currentWeightKg();
 					const cm = currentHeightCm();
-					const totalIn = cm / CM_PER_IN;
-					$('feet').value = Math.floor(totalIn / 12);
-					$('inches').value = round(totalIn % 12);
-					$('cm').value = (Math.round(cm * 10) / 10).toString();
-					$('lb').value = (Math.round(kg * LB_PER_KG * 10) / 10).toString();
-					$('kg').value = (Math.round(kg * 10) / 10).toString();
-					const totalLb = kg * LB_PER_KG;
-					$('stone').value = Math.floor(totalLb / 14);
-					$('stone-lb').value = (Math.round((totalLb % 14) * 10) / 10).toString();
+					if (cm >= 100) {
+						const totalIn = cm / CM_PER_IN;
+						$('feet').value = Math.floor(totalIn / 12);
+						$('inches').value = round(totalIn % 12);
+						$('cm').value = (Math.round(cm * 10) / 10).toString();
+					} else {
+						$('feet').value = '';
+						$('inches').value = '';
+						$('cm').value = '';
+					}
+					if (kg >= 25) {
+						$('lb').value = (Math.round(kg * LB_PER_KG * 10) / 10).toString();
+						$('kg').value = (Math.round(kg * 10) / 10).toString();
+						const totalLb = kg * LB_PER_KG;
+						$('stone').value = Math.floor(totalLb / 14);
+						$('stone-lb').value = (Math.round((totalLb % 14) * 10) / 10).toString();
+					} else {
+						$('lb').value = '';
+						$('kg').value = '';
+						$('stone').value = '';
+						$('stone-lb').value = '';
+					}
 					syncUnitFields();
-					render();
+					if (last) render();
 				});
 			});
 
@@ -990,7 +1104,7 @@
 
 			$('formula').addEventListener('change', () => {
 				$('fat-field').classList.toggle('hidden', $('formula').value !== 'katch');
-				render();
+				if (last) render();
 			});
 
 			document.querySelectorAll('#zig-seg button').forEach((btn) => {
@@ -1003,24 +1117,30 @@
 
 			$('calc-form').addEventListener('submit', (e) => { e.preventDefault(); render(); });
 			$('calc-btn').addEventListener('click', render);
-			$('custom-rate').addEventListener('input', () => { if (last) { renderCustom(last); if (zigMode === 'custom') renderZigzag(last); } });
+			function onCustomRate() {
+				if (!last) return;
+				renderCustom(last);
+				if (zigMode === 'custom') renderZigzag(last);
+			}
+			$('custom-lb').addEventListener('input', onCustomRate);
+			$('custom-dir').addEventListener('change', onCustomRate);
+			$('gain-toggle').addEventListener('click', () => {
+				const open = $('gain-arrows').classList.toggle('hidden');
+				$('gain-toggle').textContent = open ? 'Show info for weight gain' : 'Hide weight gain';
+			});
 			$('energy').addEventListener('change', () => { if (last) render(); });
 			$('clear-btn').addEventListener('click', () => {
-				$('age').value = 24;
-				document.querySelector('input[name="gender"][value="male"]').checked = true;
-				$('feet').value = 5;
-				$('inches').value = 8;
-				$('cm').value = 172.7;
-				$('lb').value = 215.1;
-				$('kg').value = 97.6;
-				$('stone').value = 15;
-				$('stone-lb').value = 5.1;
-				activitySelect.value = 'sedentary';
-				$('goal').value = '';
+				['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'goal', 'fat'].forEach((id) => { $(id).value = ''; });
+				document.querySelectorAll('input[name="gender"]').forEach((el) => { el.checked = false; });
+				activitySelect.value = '';
 				$('formula').value = 'mifflin';
 				$('fat-field').classList.add('hidden');
-				$('custom-rate').value = -1;
-				render();
+				$('custom-lb').value = '';
+				$('custom-dir').value = '-1';
+				$('gain-arrows').classList.add('hidden');
+				$('gain-toggle').textContent = 'Show info for weight gain';
+				$('form-alert').classList.add('hidden');
+				hideResults();
 			});
 
 			['age', 'feet', 'inches', 'cm', 'lb', 'kg', 'stone', 'stone-lb', 'activity', 'goal', 'fat'].forEach((id) => {
@@ -1030,7 +1150,6 @@
 			document.querySelectorAll('input[name="gender"]').forEach((el) => el.addEventListener('change', () => { if (last) render(); }));
 
 			syncUnitFields();
-			render();
 		})();
 	</script>
 </body>
