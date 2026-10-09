@@ -37,10 +37,13 @@
 
 		'San Diego, CA': 'san-diego',
 		'La Jolla, San Diego, CA': 'san-diego',
+		'Little Italy, San Diego, CA': 'san-diego',
 		'Tijuana, Mexico': 'san-diego',
 		'Poway, CA': 'san-diego',
 		'Jacumba Hot Springs, CA': 'san-diego',
 		'Julian, CA': 'san-diego',
+		'Pine Valley, CA': 'san-diego',
+		'Rancho Penasquitos, San Diego, CA': 'san-diego',
 
 		'Carmel, CA': 'monterey-bay',
 
@@ -68,8 +71,11 @@
 		'Sunny Valley, OR': 'oregon',
 		'Douglas County, OR': 'oregon',
 		'Phoenix, AZ': 'phoenix',
+		'Tucson, AZ': 'tucson',
 		'Austin, TX': 'texas',
 		'Dallas, TX': 'texas',
+		'Richardson, TX': 'texas',
+		'Las Cruces, NM': 'new-mexico',
 		'Atlanta, GA': 'atlanta',
 		'Charlotte, NC': 'charlotte',
 		'Cornelius, NC': 'charlotte',
@@ -136,6 +142,7 @@
 		'portland': 'Portland',
 		'oregon': 'Oregon',
 		'phoenix': 'Phoenix',
+		'tucson': 'Tucson',
 		'texas': 'Texas',
 		'atlanta': 'Atlanta',
 		'charlotte': 'Charlotte',
