@@ -108,6 +108,7 @@ function forceTranslateAllContent() {
         // Dates
         translateByMapping({
             "(Aug 2024 - Present) | San Jose, CA": "(أغسطس ٢٠٢٤ - حتى الآن) | سان خوسيه، كاليفورنيا",
+            "Aug 2024 – Sep 2026": "أغسطس ٢٠٢٤ – سبتمبر ٢٠٢٦",
             "(Sep 2024 - April 2025) | Los Angeles, CA": "(سبتمبر ٢٠٢٤ - أبريل ٢٠٢٥) | لوس أنجلوس، كاليفورنيا",
             "(2024) | San Diego, CA": "(٢٠٢٤) | سان دييجو، كاليفورنيا",
             "(2023) | San Jose, CA": "(٢٠٢٣) | سان خوسيه، كاليفورنيا",

@@ -236,6 +236,8 @@ export function Portal({
               <span className="px-1.5">·</span>
               <a href="/cysib/" className="text-[#0C66E4] hover:underline">CYSIB</a>
               <span className="px-1.5">·</span>
+              <a href="/cysib_og/" className="text-[#0C66E4] hover:underline">Old CYSIB</a>
+              <span className="px-1.5">·</span>
               <span>Tools</span>
               {TOOLS.map((tool) => (
                 <span key={tool.label}>

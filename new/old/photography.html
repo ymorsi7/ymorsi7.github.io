@@ -3335,6 +3335,8 @@
 			<span class="footer-sep">·</span>
 			<a id="footerCopyright" href="../index.html">Yusuf Morsi</a>
 			<span class="footer-sep">·</span>
+			<a id="footerCysib" href="../cysib/">CYSIB</a>
+			<span class="footer-sep">·</span>
 			<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer">Ayatica</a>
 			<span class="footer-sep">·</span>
 			<a id="footerBidet" href="https://bidetbud.com" target="_blank" rel="noopener noreferrer">bidetbud.com</a>
@@ -3345,6 +3347,7 @@
 			var home = document.getElementById('footerHome');
 			var halal = document.getElementById('footerHalal');
 			var bidet = document.getElementById('footerBidet');
+			var cysib = document.getElementById('footerCysib');
 			var copyright = document.getElementById('footerCopyright');
 			if (!home || !bidet) return;
 
@@ -3356,14 +3359,17 @@
 			if (location.protocol === 'file:' || inNewDir) {
 				home.href = '../index.html';
 				if (halal) halal.href = '../halal-vibes.html';
+				if (cysib) cysib.href = '../cysib/';
 				bidet.href = 'https://bidetbud.com';
 			} else if (onGithubPages) {
 				home.href = '/new/index.html';
 				if (halal) halal.href = '/new/halal-vibes.html';
+				if (cysib) cysib.href = '/new/cysib/';
 				bidet.href = 'https://bidetbud.com';
 			} else {
 				home.href = '/';
 				if (halal) halal.href = '/halal-vibes';
+				if (cysib) cysib.href = '/cysib/';
 				bidet.href = 'https://bidetbud.com';
 			}
 
