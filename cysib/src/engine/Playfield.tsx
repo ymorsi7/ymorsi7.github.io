@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { createInput, edgeFree, type InputState } from './input'
+import { aliasesFor, createInput, edgeFree, type InputState } from './input'
 
 type Size = { w: number; h: number }
 
@@ -52,12 +52,15 @@ export function Playfield(props: Props) {
       if (event.repeat) return
       const tag = (event.target as HTMLElement | null)?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA') return
-      if (event.key.startsWith('Arrow')) event.preventDefault()
-      input.keys.add(event.key)
-      input.justKeys.add(event.key)
+      const keys = aliasesFor(event.key)
+      if (keys.some((key) => key.startsWith('Arrow'))) event.preventDefault()
+      for (const key of keys) {
+        input.keys.add(key)
+        input.justKeys.add(key)
+      }
     }
     const onKeyUp = (event: KeyboardEvent) => {
-      input.keys.delete(event.key)
+      for (const key of aliasesFor(event.key)) input.keys.delete(key)
     }
 
     canvas.addEventListener('pointerdown', onPointerDown)
@@ -76,8 +79,8 @@ export function Playfield(props: Props) {
 
     const paint = () => {
       const rect = canvas.getBoundingClientRect()
-      const w = Math.max(1, rect.width)
-      const h = Math.max(1, rect.height)
+      const w = Math.max(1, Math.round(rect.width))
+      const h = Math.max(1, Math.round(rect.height))
       const dpr = Math.min(2, window.devicePixelRatio || 1)
       const bw = Math.floor(w * dpr)
       const bh = Math.floor(h * dpr)
@@ -103,8 +106,8 @@ export function Playfield(props: Props) {
           const rect = canvas.getBoundingClientRect()
           const snap = first ? input : edgeFree(input)
           propsRef.current.onUpdate(step / 1000, snap, {
-            w: Math.max(1, rect.width),
-            h: Math.max(1, rect.height),
+            w: Math.max(1, Math.round(rect.width)),
+            h: Math.max(1, Math.round(rect.height)),
           })
           if (running) propsRef.current.onSeconds?.(step / 1000)
           acc -= step

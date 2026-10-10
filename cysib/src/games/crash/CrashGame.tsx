@@ -22,6 +22,7 @@ export function CrashGame(props: Props) {
   propsRef.current = props
   const hudKey = useRef('')
   const overSent = useRef(false)
+  const lastCell = useRef<ReturnType<typeof cellAt>>(null)
 
   return (
     <Playfield
@@ -31,8 +32,11 @@ export function CrashGame(props: Props) {
       onUpdate={(dt, input, size) => {
         let state = stateRef.current ?? createCrash()
         const before = state.score
-        const cell = cellAt(size.w, size.h, input.pointerX, input.pointerY)
+        const hover = cellAt(size.w, size.h, input.pointerX, input.pointerY)
+        if (hover) lastCell.current = hover
+        const cell = hover ?? ((input.pointerDown || input.justUp) ? lastCell.current : null)
         state = updateCrash(state, { ...input, cell }, dt)
+        if (input.justUp) lastCell.current = hover
         if (state.score > before) blip(700, 0.045, propsRef.current.muted)
         if (state.phase === 'over' && !overSent.current) {
           overSent.current = true

@@ -30,7 +30,7 @@ export function CostCutterGame(props: Props) {
       onSeconds={props.onSeconds}
       onUpdate={(dt, input, size) => {
         let state = stateRef.current ?? createCutter()
-        const hit = input.justUp ? hitSegment(size.w, size.h, state, input.pointerX, input.pointerY) : null
+        const hit = input.justDown ? hitSegment(size.w, size.h, state, input.pointerX, input.pointerY) : null
         const before = state.score
         state = updateCutter(state, { ...input, hit }, dt)
         if (state.score > before) blip(520, 0.04, propsRef.current.muted)

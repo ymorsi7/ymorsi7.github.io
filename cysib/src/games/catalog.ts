@@ -76,6 +76,15 @@ export const GAMES: GameMeta[] = [
     icon: 'plan',
     variant: 'plan',
   },
+  {
+    id: 'stack',
+    file: 'Staffing',
+    title: 'Staffing - Sheets',
+    app: 'Sheets',
+    blurb: 'Headcount stack',
+    icon: 'sheets',
+    variant: 'sheets',
+  },
 ]
 
 export function gameMeta(id: GameId): GameMeta {

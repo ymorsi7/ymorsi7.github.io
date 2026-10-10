@@ -9,6 +9,7 @@ import { LeadershipGame } from '../games/leadership/LeadershipGame'
 import { RiskGame } from '../games/risk/RiskGame'
 import { InboxGame } from '../games/inbox/InboxGame'
 import { FloorGame } from '../games/floor/FloorGame'
+import { StackGame } from '../games/stack/StackGame'
 import { TUTORIALS } from '../games/tutorials'
 import { OfficeChrome, RecoveredDialog } from './OfficeChrome'
 
@@ -214,6 +215,7 @@ export function GameScreen({
           {game === 'risk' && <RiskGame key={round} {...props} />}
           {game === 'inbox' && <InboxGame key={round} {...props} />}
           {game === 'floor' && <FloorGame key={round} {...props} />}
+          {game === 'stack' && <StackGame key={round} {...props} />}
         </OfficeChrome>
       </div>
     </div>

@@ -10,6 +10,18 @@ export type InputState = {
   justKeys: Set<string>
 }
 
+const WASD: Record<string, string> = {
+  w: 'ArrowUp',
+  a: 'ArrowLeft',
+  s: 'ArrowDown',
+  d: 'ArrowRight',
+}
+
+export function aliasesFor(key: string): string[] {
+  const extra = WASD[key.toLowerCase()]
+  return extra ? [key, extra] : [key]
+}
+
 export function createInput(): InputState {
   return {
     pointerX: 0,

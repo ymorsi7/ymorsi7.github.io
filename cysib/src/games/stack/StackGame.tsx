@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { blip } from '../../engine/audio'
 import { Playfield } from '../../engine/Playfield'
-import { drawFloor } from './draw'
-import { createFloor, updateFloor, type FloorState } from './logic'
+import { drawStack } from './draw'
+import { createStack, updateStack, type StackState } from './logic'
 
 type Hud = { formulaName: string; formula: string; statusLeft: string; statusRight: string }
 type Props = {
@@ -15,8 +15,8 @@ type Props = {
   onSeconds: (seconds: number) => void
 }
 
-export function FloorGame(props: Props) {
-  const stateRef = useRef<FloorState | null>(null)
+export function StackGame(props: Props) {
+  const stateRef = useRef<StackState | null>(null)
   const propsRef = useRef(props)
   propsRef.current = props
   const hudKey = useRef('')
@@ -28,22 +28,23 @@ export function FloorGame(props: Props) {
       cover={props.cover}
       onSeconds={props.onSeconds}
       onUpdate={(dt, input, size) => {
-        let state = stateRef.current ?? createFloor()
+        let state = stateRef.current ?? createStack()
         const before = state.score
-        state = updateFloor(state, input, dt, size)
-        if (state.score > before) blip(520, 0.03, propsRef.current.muted)
-        if (state.phase !== 'play' && !overSent.current) {
+        const beforeLines = state.lines
+        state = updateStack(state, input, dt, size)
+        if (state.score > before) blip(state.lines > beforeLines ? 760 : 520, 0.04, propsRef.current.muted)
+        if (state.phase === 'over' && !overSent.current) {
           overSent.current = true
-          blip(state.phase === 'won' ? 880 : 150, 0.12, propsRef.current.muted)
+          blip(160, 0.12, propsRef.current.muted)
           propsRef.current.onOver(state.score)
         }
         const hud: Hud = {
-          formulaName: '',
-          formula: '',
-          statusLeft: `Stops ${state.lives}`,
+          formulaName: 'C2',
+          formula: `=STACK(${state.lines},Band${state.level})`,
+          statusLeft: state.phase === 'over' ? 'Ready' : 'Ready',
           statusRight: `Sum: ${state.score.toLocaleString('en-US')}`,
         }
-        const key = hud.statusLeft + hud.statusRight
+        const key = hud.formula + hud.statusRight
         if (key !== hudKey.current) {
           hudKey.current = key
           propsRef.current.onHud(hud)
@@ -51,7 +52,7 @@ export function FloorGame(props: Props) {
         stateRef.current = state
       }}
       onDraw={(ctx, size, cover) => {
-        if (stateRef.current) drawFloor(ctx, stateRef.current, size.w, size.h, cover)
+        if (stateRef.current) drawStack(ctx, stateRef.current, size.w, size.h, cover)
       }}
     />
   )

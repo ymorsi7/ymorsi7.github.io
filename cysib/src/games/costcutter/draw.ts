@@ -38,7 +38,7 @@ export function hitSegment(
   for (let c = 0; c < state.columns.length; c++) {
     for (let r = 0; r < state.columns[c].length; r++) {
       const rect = segmentRect(plot, c, r, state.maxColumns)
-      if (x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h) return { c, r }
+      if (x >= rect.x - 3 && x <= rect.x + rect.w + 3 && y >= rect.y - 1 && y <= rect.y + rect.h + 1) return { c, r }
     }
   }
   return null

@@ -26,7 +26,11 @@ export const TUTORIALS: Record<GameId, string[]> = {
       '. ',
     ),
   floor:
-    'This is the seating plan. You are the blue dot. Arrow keys move through the aisles. Pass over the small desk marks to clear them. The other colored dots are visitors. Touch one and you lose a stop. Clear every desk mark to finish the walk.'.split(
+    'This is the seating plan. You are the blue dot. Arrow keys or WASD move through the aisles. Click an aisle to walk that way. Pass over the small desk marks to clear them. The larger marks send visitors to a meeting. Touch a visitor and you lose a stop. Clear every desk mark to finish the walk.'.split(
+      '. ',
+    ),
+  stack:
+    'This is the staffing grid. Colored blocks drop in from the top. Left and right move a block. Up or W turns it. Down soft-drops it. Enter drops it to the bottom. Clear a full row of ten. Space hides the game. Esc leaves the file.'.split(
       '. ',
     ),
 }
