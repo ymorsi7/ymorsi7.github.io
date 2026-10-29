@@ -6,7 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Calorie Calculator</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<meta name="description" content="Estimate daily calories to maintain, lose, or gain weight, including faster weekly rates than typical calculators show." />
+	<meta name="description"
+		content="Estimate daily calories to maintain, lose, or gain weight, including faster weekly rates than typical calculators show." />
 	<meta name="author" content="Yusuf Morsi" />
 
 	<link rel="icon" type="image/svg+xml"
@@ -17,7 +18,11 @@
 	<link rel="stylesheet" href="/new/css/github-star.css">
 
 	<style>
-		* { margin: 0; padding: 0; box-sizing: border-box; }
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
 
 		:root {
 			--ink: #0f172a;
@@ -35,7 +40,10 @@
 			--safe-bottom: env(safe-area-inset-bottom);
 		}
 
-		html, body { min-height: 100%; }
+		html,
+		body {
+			min-height: 100%;
+		}
 
 		body {
 			font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -77,7 +85,9 @@
 			border-radius: 999px;
 		}
 
-		.brand:hover { background: var(--chip-hover); }
+		.brand:hover {
+			background: var(--chip-hover);
+		}
 
 		.brand img {
 			width: 32px;
@@ -92,7 +102,9 @@
 			letter-spacing: -0.02em;
 		}
 
-		.topbar-spacer { flex: 1; }
+		.topbar-spacer {
+			flex: 1;
+		}
 
 		.back-link {
 			display: inline-flex;
@@ -175,10 +187,16 @@
 			gap: 14px 16px;
 		}
 
-		.field { min-width: 0; }
-		.field.span2 { grid-column: 1 / -1; }
+		.field {
+			min-width: 0;
+		}
 
-		label, .lbl {
+		.field.span2 {
+			grid-column: 1 / -1;
+		}
+
+		label,
+		.lbl {
 			display: block;
 			font-size: 0.78rem;
 			font-weight: 600;
@@ -186,7 +204,8 @@
 			margin-bottom: 6px;
 		}
 
-		input[type="number"], select {
+		input[type="number"],
+		select {
 			width: 100%;
 			border: 1px solid var(--line);
 			background: var(--chip);
@@ -197,7 +216,8 @@
 			color: var(--ink);
 		}
 
-		input:focus, select:focus {
+		input:focus,
+		select:focus {
 			outline: 2px solid var(--ink);
 			outline-offset: 1px;
 			background: white;
@@ -231,7 +251,9 @@
 			cursor: pointer;
 		}
 
-		.radios input { accent-color: var(--ink); }
+		.radios input {
+			accent-color: var(--ink);
+		}
 
 		.hint {
 			font-size: 0.75rem;
@@ -250,7 +272,9 @@
 			cursor: pointer;
 		}
 
-		.settings-toggle:hover { color: var(--ink); }
+		.settings-toggle:hover {
+			color: var(--ink);
+		}
 
 		.settings {
 			display: none;
@@ -259,7 +283,9 @@
 			border-top: 1px solid var(--line);
 		}
 
-		.settings.open { display: block; }
+		.settings.open {
+			display: block;
+		}
 
 		.actions {
 			display: flex;
@@ -267,7 +293,8 @@
 			margin-top: 16px;
 		}
 
-		.btn-primary, .btn-ghost {
+		.btn-primary,
+		.btn-ghost {
 			border: 0;
 			border-radius: 12px;
 			padding: 12px 16px;
@@ -284,7 +311,9 @@
 			color: white;
 		}
 
-		.btn-primary:hover { background: #1e293b; }
+		.btn-primary:hover {
+			background: #1e293b;
+		}
 
 		.btn-ghost {
 			background: var(--chip);
@@ -333,7 +362,9 @@
 			min-height: 68px;
 		}
 
-		#custom-row { margin-top: 8px; }
+		#custom-row {
+			margin-top: 8px;
+		}
 
 		.arrow-label {
 			flex: 1.15;
@@ -438,7 +469,9 @@
 			padding: 0;
 		}
 
-		.gain-toggle:hover { color: var(--ink); }
+		.gain-toggle:hover {
+			color: var(--ink);
+		}
 
 		.note {
 			margin-top: 14px;
@@ -484,7 +517,9 @@
 			font-variant-numeric: tabular-nums;
 		}
 
-		tr:last-child td { border-bottom: 0; }
+		tr:last-child td {
+			border-bottom: 0;
+		}
 
 		.eq {
 			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -497,7 +532,9 @@
 			overflow-x: auto;
 		}
 
-		.hidden { display: none !important; }
+		.hidden {
+			display: none !important;
+		}
 
 		h2 {
 			font-size: 1.05rem;
@@ -536,17 +573,46 @@
 		}
 
 		@media (max-width: 640px) {
-			.grid, .stat-row { grid-template-columns: 1fr; }
-			.back-link span { display: none; }
-			.arrow-row { min-height: 60px; }
-			.arrow-kcal { font-size: 1.3rem; }
-			.arrow-label { padding-right: 24px; }
+
+			.grid,
+			.stat-row {
+				grid-template-columns: 1fr;
+			}
+
+			.back-link span {
+				display: none;
+			}
+
+			.arrow-row {
+				min-height: 60px;
+			}
+
+			.arrow-kcal {
+				font-size: 1.3rem;
+			}
+
+			.arrow-label {
+				padding-right: 24px;
+			}
 		}
 
 		@media print {
-			.topbar, .page-footer, .actions, .settings-toggle { display: none !important; }
-			body { background: white; }
-			.card { box-shadow: none; break-inside: avoid; }
+
+			.topbar,
+			.page-footer,
+			.actions,
+			.settings-toggle {
+				display: none !important;
+			}
+
+			body {
+				background: white;
+			}
+
+			.card {
+				box-shadow: none;
+				break-inside: avoid;
+			}
 		}
 	</style>
 	<script src="/new/js/site-analytics-loader.js"></script>
@@ -560,13 +626,15 @@
 				<span>Calorie Calculator</span>
 			</a>
 			<div class="topbar-spacer"></div>
-			<a class="back-link" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>Portfolio</span></a>
+			<a class="back-link" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i>
+				<span>Portfolio</span></a>
 		</header>
 
 		<div class="main-content">
 			<div class="card">
 				<h1>Daily calorie estimate</h1>
-				<p class="lede">Mifflin-St Jeor by default, same activity multipliers as typical TDEE calculators. Faster weekly rates are shown as math, not as a recommendation.</p>
+				<p class="lede">Mifflin-St Jeor by default, same activity multipliers as typical TDEE calculators.
+					Faster weekly rates are shown as math, not as a recommendation.</p>
 
 				<div class="seg" role="tablist" aria-label="Units">
 					<button type="button" class="active" data-units="us">US Units</button>
@@ -592,7 +660,8 @@
 						<span class="lbl">Height</span>
 						<div class="pair">
 							<input id="feet" type="number" min="3" max="8" step="1" placeholder="ft" aria-label="Feet">
-							<input id="inches" type="number" min="0" max="11" step="1" placeholder="in" aria-label="Inches">
+							<input id="inches" type="number" min="0" max="11" step="1" placeholder="in"
+								aria-label="Inches">
 						</div>
 						<div class="hint">Feet and inches</div>
 					</div>
@@ -612,8 +681,10 @@
 					<div class="field hidden" data-show="other">
 						<span class="lbl">Weight</span>
 						<div class="pair">
-							<input id="stone" type="number" min="4" max="40" step="1" placeholder="st" aria-label="Stone">
-							<input id="stone-lb" type="number" min="0" max="13.9" step="0.1" placeholder="lb" aria-label="Pounds">
+							<input id="stone" type="number" min="4" max="40" step="1" placeholder="st"
+								aria-label="Stone">
+							<input id="stone-lb" type="number" min="0" max="13.9" step="0.1" placeholder="lb"
+								aria-label="Pounds">
 						</div>
 						<div class="hint">Stone and pounds</div>
 					</div>
@@ -621,7 +692,8 @@
 					<div class="field span2">
 						<label for="activity">Activity</label>
 						<select id="activity"></select>
-						<div class="hint">Exercise: 15-30 min elevated heart rate. Intense: 45-120 min. Very intense: 2+ hours.</div>
+						<div class="hint">Exercise: 15-30 min elevated heart rate. Intense: 45-120 min. Very intense: 2+
+							hours.</div>
 					</div>
 
 					<div class="field">
@@ -657,7 +729,8 @@
 				</div>
 
 				<div class="actions">
-					<button type="button" class="btn-primary" id="calc-btn"><i class="fas fa-calculator"></i> Calculate</button>
+					<button type="button" class="btn-primary" id="calc-btn"><i class="fas fa-calculator"></i>
+						Calculate</button>
 					<button type="button" class="btn-ghost" id="clear-btn">Clear</button>
 				</div>
 				<div class="note hidden" id="form-alert"></div>
@@ -666,9 +739,18 @@
 			<div class="card hidden" id="results">
 				<h2>Results</h2>
 				<div class="stat-row">
-					<div class="stat"><div class="k">BMR</div><div class="v" id="bmr-out"></div></div>
-					<div class="stat"><div class="k">Maintain</div><div class="v" id="tdee-out"></div></div>
-					<div class="stat"><div class="k">Min recommended</div><div class="v" id="min-out"></div></div>
+					<div class="stat">
+						<div class="k">BMR</div>
+						<div class="v" id="bmr-out"></div>
+					</div>
+					<div class="stat">
+						<div class="k">Maintain</div>
+						<div class="v" id="tdee-out"></div>
+					</div>
+					<div class="stat">
+						<div class="k">Min recommended</div>
+						<div class="v" id="min-out"></div>
+					</div>
 				</div>
 				<div class="arrows" id="loss-arrows"></div>
 				<div class="arrow-row" id="custom-row">
@@ -679,7 +761,8 @@
 								<option value="-1">Lose</option>
 								<option value="1">Gain</option>
 							</select>
-							<input id="custom-lb" type="number" min="0.1" max="10" step="0.1" placeholder="e.g. 2.5" aria-label="Pounds per week">
+							<input id="custom-lb" type="number" min="0.1" max="10" step="0.1" placeholder="e.g. 2.5"
+								aria-label="Pounds per week">
 							<span>lb/week</span>
 						</div>
 					</div>
@@ -696,29 +779,42 @@
 
 			<div class="card hidden" id="zigzag-card">
 				<h2>Zigzag calorie cycling</h2>
-				<p class="lede">Same weekly total as a flat diet, with high and low days so intake is not identical every day.</p>
+				<p class="lede">Same weekly total as a flat diet, with high and low days so intake is not identical
+					every day.</p>
 				<div class="seg" id="zig-seg">
 					<button type="button" class="active" data-zig="mild">Mild (0.5 lb/week)</button>
 					<button type="button" data-zig="loss">1 lb/week</button>
 					<button type="button" data-zig="custom">Custom rate</button>
 				</div>
 				<h3 style="font-size:0.9rem;margin:8px 0">Schedule 1: two high days, five low days</h3>
-				<div class="table-wrap"><table id="zig1"></table></div>
+				<div class="table-wrap">
+					<table id="zig1"></table>
+				</div>
 				<h3 style="font-size:0.9rem;margin:16px 0 8px">Schedule 2: gradual up and down</h3>
-				<div class="table-wrap"><table id="zig2"></table></div>
+				<div class="table-wrap">
+					<table id="zig2"></table>
+				</div>
 			</div>
 
 			<div class="card hidden" id="activity-card">
 				<h2>If you keep eating at maintenance</h2>
-				<p class="lede">Estimated extra weekly loss from raising activity while still eating the current maintain calories.</p>
+				<p class="lede">Estimated extra weekly loss from raising activity while still eating the current
+					maintain calories.</p>
 				<table id="activity-table"></table>
 			</div>
 
 			<div class="card">
 				<h2>How this is calculated</h2>
-				<p class="lede">BMR is calories at rest. Maintenance multiplies BMR by an activity factor. A pound of body weight is treated as about 3,500 calories, so 0.5 lb/week is a 250 calorie daily gap, 1 lb/week is 500, and 2 lb/week is 1,000.</p>
-				<div class="eq">Mifflin-St Jeor (men): 10W + 6.25H - 5A + 5<br>Mifflin-St Jeor (women): 10W + 6.25H - 5A - 161<br>Harris-Benedict (men): 13.397W + 4.799H - 5.677A + 88.362<br>Harris-Benedict (women): 9.247W + 3.098H - 4.330A + 447.593<br>Katch-McArdle: 370 + 21.6(1 - F)W<br>W = kg, H = cm, A = age, F = body fat as a fraction</div>
-				<p class="lede" style="margin:0">Harvard Health suggests at least 1,500 calories/day for men and 1,200 for women unless a doctor is supervising. Going lower than that, or trying to lose more than 2 lb/week, can drop metabolism, burn muscle, and is not a good idea to do on your own.</p>
+				<p class="lede">BMR is calories at rest. Maintenance multiplies BMR by an activity factor. A pound of
+					body weight is treated as about 3,500 calories, so 0.5 lb/week is a 250 calorie daily gap, 1 lb/week
+					is 500, and 2 lb/week is 1,000.</p>
+				<div class="eq">Mifflin-St Jeor (men): 10W + 6.25H - 5A + 5<br>Mifflin-St Jeor (women): 10W + 6.25H - 5A
+					- 161<br>Harris-Benedict (men): 13.397W + 4.799H - 5.677A + 88.362<br>Harris-Benedict (women):
+					9.247W + 3.098H - 4.330A + 447.593<br>Katch-McArdle: 370 + 21.6(1 - F)W<br>W = kg, H = cm, A = age,
+					F = body fat as a fraction</div>
+				<p class="lede" style="margin:0">Harvard Health suggests at least 1,500 calories/day for men and 1,200
+					for women unless a doctor is supervising. Going lower than that, or trying to lose more than 2
+					lb/week, can drop metabolism, burn muscle, and is not a good idea to do on your own.</p>
 			</div>
 		</div>
 
@@ -731,7 +827,9 @@
 				<a href="https://ymorsi7.github.io/Ayatica/" target="_blank" rel="noopener noreferrer">Ayatica</a>
 				<a href="https://bidetbud.com" target="_blank" rel="noopener noreferrer">bidetbud.com</a>
 				<a href="UCSD-Tier-List/index.html"><i class="fa-solid fa-list"></i> UCSD Tier List</a>
-				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Star</span></a>
+				<a class="github-star-footer" href="https://github.com/ymorsi7/ymorsi7.github.io" target="_blank"
+					rel="noopener noreferrer" aria-label="Star on GitHub"><i class="fa-brands fa-github"
+						aria-hidden="true"></i><span>Star</span></a>
 			</div>
 		</footer>
 	</div>

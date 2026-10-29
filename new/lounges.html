@@ -970,7 +970,7 @@
 						${paragraphs.length ? `<div class="lg-review">${paragraphs.map(p => `<p>${p}</p>`).join('')}</div>` : ''}
 						${longReview ? `<button type="button" class="lg-more" aria-expanded="${isOpen}">${isOpen ? 'Show less' : 'Read full review'}</button>` : ''}
 						${(entry.tags || []).length ? `<div class="lg-tags">${entry.tags.map(tag =>
-							`<button type="button" class="lg-tag${state.tag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}</div>` : ''}
+					`<button type="button" class="lg-tag${state.tag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}</div>` : ''}
 					</div>
 				`;
 

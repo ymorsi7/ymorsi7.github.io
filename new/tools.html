@@ -6,12 +6,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Tools - PDF, Image, Text & More</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free online tools: PDF merger, background remover, file converter, GIF editor, LaTeX converter, word counter" />
+	<meta name="description"
+		content="Free online tools: PDF merger, background remover, file converter, GIF editor, LaTeX converter, word counter" />
 	<meta name="keywords" content="pdf tools, image tools, file converter, gif editor, latex converter, word counter" />
 	<meta name="author" content="Yusuf Morsi" />
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
+	<link rel="icon" type="image/svg+xml"
+		href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Cpath d='M20 25 L20 75 L80 75 L80 45 L60 45 L60 25 Z' fill='white'/%3E%3Cpath d='M60 25 L60 45 L80 45 Z' fill='%233b82f6'/%3E%3C/svg%3E">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -427,6 +429,7 @@
 				padding: 2rem 1.5rem;
 			}
 		}
+
 		#logo {
 			position: absolute;
 			top: 10px;
@@ -436,11 +439,13 @@
 			align-items: center;
 			z-index: 1000;
 		}
+
 		#logo img {
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
 		}
+
 		#logo .tooltip {
 			position: absolute;
 			left: 50px;
@@ -456,14 +461,15 @@
 			transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 			pointer-events: none;
 		}
-		#logo img:hover + .tooltip,
+
+		#logo img:hover+.tooltip,
 		#logo .tooltip:hover {
 			opacity: 1;
 			visibility: visible;
 			transform: translateX(0);
 		}
 	</style>
-<script src="/new/js/site-analytics-loader.js"></script>
+	<script src="/new/js/site-analytics-loader.js"></script>
 </head>
 
 <body>
@@ -517,19 +523,23 @@
 					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
 						<i class="fas fa-file-pdf" style="color: var(--blue-primary);"></i> Merge PDFs
 					</h2>
-					<div class="drop-zone" id="mergepdf-dropzone" onclick="document.getElementById('mergepdf-input').click()">
+					<div class="drop-zone" id="mergepdf-dropzone"
+						onclick="document.getElementById('mergepdf-input').click()">
 						<i class="fas fa-cloud-upload-alt upload-icon"></i>
 						<h3>Drop your files here</h3>
 						<p>Support PDF and image files (JPG, PNG, GIF, BMP, WEBP)</p>
-						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('mergepdf-input').click();">
+						<button class="btn-primary" type="button"
+							onclick="event.stopPropagation(); document.getElementById('mergepdf-input').click();">
 							<i class="fas fa-folder-open"></i> Choose Files
 						</button>
-						<input type="file" id="mergepdf-input" class="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.gif,.bmp,.webp">
+						<input type="file" id="mergepdf-input" class="file-input" multiple
+							accept=".pdf,.jpg,.jpeg,.png,.gif,.bmp,.webp">
 					</div>
 					<div id="mergepdf-filelist" style="display: none;">
 						<h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Selected Files</h3>
 						<div id="mergepdf-list"></div>
-						<button class="btn-primary" id="mergepdf-btn" onclick="mergePDFFiles()" style="margin-top: 1.5rem; width: 100%;">
+						<button class="btn-primary" id="mergepdf-btn" onclick="mergePDFFiles()"
+							style="margin-top: 1.5rem; width: 100%;">
 							<i class="fas fa-file-pdf"></i> Merge Files
 						</button>
 					</div>
@@ -542,11 +552,13 @@
 					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
 						<i class="fas fa-magic" style="color: var(--blue-primary);"></i> Background Remover
 					</h2>
-					<div class="drop-zone" id="bgremover-dropzone" onclick="document.getElementById('bgremover-input').click()">
+					<div class="drop-zone" id="bgremover-dropzone"
+						onclick="document.getElementById('bgremover-input').click()">
 						<i class="fas fa-image upload-icon"></i>
 						<h3>Drop your image here</h3>
 						<p>Support JPG, PNG, WEBP, and other common image formats</p>
-						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('bgremover-input').click();">
+						<button class="btn-primary" type="button"
+							onclick="event.stopPropagation(); document.getElementById('bgremover-input').click();">
 							<i class="fas fa-folder-open"></i> Choose Image
 						</button>
 						<input type="file" id="bgremover-input" class="file-input" accept="image/*">
@@ -555,23 +567,27 @@
 						<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
 							Sensitivity: <span id="bgremover-sensitivity-value">50</span>%
 						</label>
-						<input type="range" id="bgremover-sensitivity" min="10" max="90" value="50" style="width: 100%; margin-bottom: 1rem;">
+						<input type="range" id="bgremover-sensitivity" min="10" max="90" value="50"
+							style="width: 100%; margin-bottom: 1rem;">
 						<small style="color: var(--text-muted); display: block; margin-bottom: 1rem;">
 							Lower = more aggressive (removes more), Higher = less aggressive (preserves more)
 						</small>
 					</div>
-					<button class="btn-primary" id="bgremover-process-btn" onclick="processBackgroundRemovalFromBtn()" style="width: 100%; margin-top: 1rem; display: none;">
+					<button class="btn-primary" id="bgremover-process-btn" onclick="processBackgroundRemovalFromBtn()"
+						style="width: 100%; margin-top: 1rem; display: none;">
 						<i class="fas fa-magic"></i> Remove Background
 					</button>
 					<div id="bgremover-result" style="display: none; margin-top: 2rem;">
 						<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
 							<div>
 								<h4 style="margin-bottom: 0.5rem;">Original</h4>
-								<img id="bgremover-original" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+								<img id="bgremover-original"
+									style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
 							</div>
 							<div>
 								<h4 style="margin-bottom: 0.5rem;">Result</h4>
-								<canvas id="bgremover-canvas" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);"></canvas>
+								<canvas id="bgremover-canvas"
+									style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);"></canvas>
 							</div>
 						</div>
 						<button class="btn-primary" onclick="downloadBackgroundRemoved()" style="width: 100%;">
@@ -587,16 +603,20 @@
 					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
 						<i class="fas fa-exchange-alt" style="color: var(--blue-primary);"></i> File Converter
 					</h2>
-					<div class="drop-zone" id="converter-dropzone" onclick="document.getElementById('converter-input').click()">
+					<div class="drop-zone" id="converter-dropzone"
+						onclick="document.getElementById('converter-input').click()">
 						<i class="fas fa-file-upload upload-icon"></i>
 						<h3>Drop your files here</h3>
-						<p>Convert between PDF, PNG, JPG, WEBP, HEIC, and more. Select multiple files for batch conversion.</p>
-						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('converter-input').click();">
+						<p>Convert between PDF, PNG, JPG, WEBP, HEIC, and more. Select multiple files for batch
+							conversion.</p>
+						<button class="btn-primary" type="button"
+							onclick="event.stopPropagation(); document.getElementById('converter-input').click();">
 							<i class="fas fa-folder-open"></i> Choose Files
 						</button>
 						<input type="file" id="converter-input" class="file-input" accept="*/*" multiple>
 					</div>
-					<div id="converter-file-list" style="display: none; margin-top: 1.5rem; max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+					<div id="converter-file-list"
+						style="display: none; margin-top: 1.5rem; max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
 						<h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Selected Files:</h4>
 						<ul id="converter-files" style="list-style: none; padding: 0; margin: 0;"></ul>
 					</div>
@@ -622,17 +642,20 @@
 					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
 						<i class="fas fa-film" style="color: var(--blue-primary);"></i> GIF & Video Editor
 					</h2>
-					<div class="drop-zone" id="gifeditor-dropzone" onclick="document.getElementById('gifeditor-input').click()">
+					<div class="drop-zone" id="gifeditor-dropzone"
+						onclick="document.getElementById('gifeditor-input').click()">
 						<i class="fas fa-video upload-icon"></i>
 						<h3>Drop your GIF or video here</h3>
 						<p>Edit, crop, resize, compress GIFs and videos</p>
-						<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('gifeditor-input').click();">
+						<button class="btn-primary" type="button"
+							onclick="event.stopPropagation(); document.getElementById('gifeditor-input').click();">
 							<i class="fas fa-folder-open"></i> Choose File
 						</button>
 						<input type="file" id="gifeditor-input" class="file-input" accept="image/gif,video/*">
 					</div>
 					<div id="gifeditor-controls" style="display: none; margin-top: 1.5rem;">
-						<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+						<div
+							style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
 							<button class="btn-secondary" onclick="cropGIF()">
 								<i class="fas fa-crop"></i> Crop
 							</button>
@@ -669,7 +692,8 @@
 						<option value="letter">Letter</option>
 					</select>
 					<label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Enter your text:</label>
-					<textarea id="latex-input" class="text-area" placeholder="Type or paste your text here... (For Resume template, the template is pre-filled - just copy and customize)"></textarea>
+					<textarea id="latex-input" class="text-area"
+						placeholder="Type or paste your text here... (For Resume template, the template is pre-filled - just copy and customize)"></textarea>
 					<button class="btn-primary" onclick="convertToLaTeX()" style="width: 100%; margin-top: 1rem;">
 						<i class="fas fa-code"></i> Convert to LaTeX
 					</button>
@@ -689,7 +713,8 @@
 					<h2 style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--text-dark);">
 						<i class="fas fa-font" style="color: var(--blue-primary);"></i> Word Counter
 					</h2>
-					<textarea id="wordcounter-input" class="text-area" placeholder="Type or paste your text here to count words, characters, sentences, and paragraphs..."></textarea>
+					<textarea id="wordcounter-input" class="text-area"
+						placeholder="Type or paste your text here to count words, characters, sentences, and paragraphs..."></textarea>
 					<div class="stats-grid">
 						<div class="stat-card">
 							<div class="stat-value" id="word-count">0</div>
@@ -762,11 +787,11 @@
 		document.querySelectorAll('button.tab').forEach(tab => {
 			tab.addEventListener('click', () => {
 				const toolName = tab.dataset.tool;
-				
+
 				// Update active tab
 				document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
 				tab.classList.add('active');
-				
+
 				// Update active section
 				document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
 				document.getElementById(toolName + '-section').classList.add('active');
@@ -781,7 +806,7 @@
 			alert.textContent = message;
 			alertContainer.innerHTML = '';
 			alertContainer.appendChild(alert);
-			
+
 			if (type === 'success' || type === 'info') {
 				setTimeout(() => {
 					alert.classList.remove('show');
@@ -835,7 +860,7 @@
 		function updateMergePDFFileList() {
 			const fileList = document.getElementById('mergepdf-list');
 			const fileListContainer = document.getElementById('mergepdf-filelist');
-			
+
 			if (mergePDFSelectedFiles.length === 0) {
 				fileListContainer.style.display = 'none';
 				return;
@@ -913,17 +938,17 @@
 				const arrayBuffer = await pdfFile.arrayBuffer();
 				const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer, password: '' });
 				const pdf = await loadingTask.promise;
-				
+
 				let fullText = '';
 				const maxPages = Math.min(pdf.numPages, 3);
-				
+
 				for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
 					const page = await pdf.getPage(pageNum);
 					const textContent = await page.getTextContent();
 					const pageText = textContent.items.map(item => item.str).join(' ');
 					fullText += pageText + ' ';
 				}
-				
+
 				return fullText.trim();
 			} catch (error) {
 				console.warn('Could not extract text from PDF:', error);
@@ -935,7 +960,7 @@
 			const termFrequencies = {};
 			const documentFrequencies = {};
 			const totalDocuments = allTexts.length + filenames.length;
-			
+
 			allTexts.forEach((text, docIndex) => {
 				const tokens = tokenize(text);
 				const docTerms = {};
@@ -948,7 +973,7 @@
 					documentFrequencies[term] = (documentFrequencies[term] || 0) + 1;
 				});
 			});
-			
+
 			filenames.forEach((filename, docIndex) => {
 				const words = extractWordsFromFilename(filename);
 				words.forEach(term => {
@@ -957,7 +982,7 @@
 					documentFrequencies[term] = (documentFrequencies[term] || 0) + 1;
 				});
 			});
-			
+
 			const scores = {};
 			Object.keys(termFrequencies).forEach(term => {
 				const tf = Object.values(termFrequencies[term]).reduce((sum, val) => sum + val, 0);
@@ -965,21 +990,21 @@
 				const idf = Math.log(totalDocuments / df);
 				scores[term] = tf * idf;
 			});
-			
+
 			return scores;
 		}
 
 		async function generateFilename(files) {
 			try {
 				const filenames = files.map(f => f.name || 'file');
-				
+
 				// First, try to extract meaningful words from filenames
 				const allWords = [];
 				filenames.forEach(name => {
 					const words = extractWordsFromFilename(name);
 					allWords.push(...words);
 				});
-				
+
 				// Count word frequency
 				const wordCounts = {};
 				allWords.forEach(word => {
@@ -987,14 +1012,14 @@
 						wordCounts[word] = (wordCounts[word] || 0) + 1;
 					}
 				});
-				
+
 				// Get most common meaningful words
 				const sortedWords = Object.entries(wordCounts)
 					.sort((a, b) => b[1] - a[1])
 					.slice(0, 4)
 					.map(entry => entry[0])
 					.filter(w => w && w.length > 2);
-				
+
 				if (sortedWords.length > 0) {
 					const filename = sortedWords.join('-');
 					if (filename.length > 60) {
@@ -1002,7 +1027,7 @@
 					}
 					return filename + '.pdf';
 				}
-				
+
 				// Fallback: Use first filename without extension
 				if (filenames.length > 0) {
 					const firstFile = filenames[0];
@@ -1016,7 +1041,7 @@
 						return cleanName + '.pdf';
 					}
 				}
-				
+
 				// Last resort: use date-based name
 				const date = new Date().toISOString().split('T')[0];
 				return `merged-${date}.pdf`;
@@ -1134,12 +1159,12 @@
 				}
 
 				const pdfBytes = await mergedPdf.save();
-				
+
 				// Generate filename using NLP
 				btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating filename...';
 				const fileObjects = mergePDFSelectedFiles.map(f => ({ name: f.name, file: f.file }));
 				const generatedName = await generateFilename(fileObjects);
-				
+
 				const blob = new Blob([pdfBytes], { type: 'application/pdf' });
 				const url = URL.createObjectURL(blob);
 				const link = document.createElement('a');
@@ -1164,7 +1189,7 @@
 		// Background Remover functionality - Canvas-based, no backend required
 		let bgRemoverResult = null;
 		let bgRemoverImgBitmap = null;
-		
+
 		// Update sensitivity display
 		document.getElementById('bgremover-sensitivity').addEventListener('input', (e) => {
 			document.getElementById('bgremover-sensitivity-value').textContent = e.target.value;
@@ -1173,7 +1198,7 @@
 		document.getElementById('bgremover-input').addEventListener('change', async (e) => {
 			const file = e.target.files[0];
 			if (!file) return;
-			
+
 			const imageUrl = URL.createObjectURL(file);
 			document.getElementById('bgremover-original').src = imageUrl;
 			bgRemoverImgBitmap = await createImageBitmap(file);
@@ -1195,44 +1220,44 @@
 			canvas.height = image.height;
 			const ctx = canvas.getContext('2d');
 			ctx.drawImage(image, 0, 0);
-			
+
 			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 			const data = imageData.data;
 			const width = canvas.width;
 			const height = canvas.height;
-			
+
 			// Create a mask to track which pixels are background
 			const mask = new Uint8Array(width * height);
 			const visited = new Uint8Array(width * height);
-			
+
 			// Sample background colors from edges (more reliable than corners)
 			const edgeSamples = [];
 			const edgeWidth = Math.max(3, Math.floor(Math.min(width, height) * 0.02));
-			
+
 			// Sample from all four edges
 			for (let i = 0; i < edgeWidth; i++) {
 				// Top edge
 				for (let x = 0; x < width; x++) {
 					const idx = (i * width + x) * 4;
-					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+					edgeSamples.push([data[idx], data[idx + 1], data[idx + 2]]);
 				}
 				// Bottom edge
 				for (let x = 0; x < width; x++) {
 					const idx = ((height - 1 - i) * width + x) * 4;
-					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+					edgeSamples.push([data[idx], data[idx + 1], data[idx + 2]]);
 				}
 				// Left edge
 				for (let y = 0; y < height; y++) {
 					const idx = (y * width + i) * 4;
-					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+					edgeSamples.push([data[idx], data[idx + 1], data[idx + 2]]);
 				}
 				// Right edge
 				for (let y = 0; y < height; y++) {
 					const idx = (y * width + (width - 1 - i)) * 4;
-					edgeSamples.push([data[idx], data[idx+1], data[idx+2]]);
+					edgeSamples.push([data[idx], data[idx + 1], data[idx + 2]]);
 				}
 			}
-			
+
 			// Calculate average background color from edges
 			let avgR = 0, avgG = 0, avgB = 0;
 			for (const [r, g, b] of edgeSamples) {
@@ -1243,7 +1268,7 @@
 			avgR /= edgeSamples.length;
 			avgG /= edgeSamples.length;
 			avgB /= edgeSamples.length;
-			
+
 			// Calculate standard deviation for threshold
 			let sumSqDiff = 0;
 			for (const [r, g, b] of edgeSamples) {
@@ -1259,7 +1284,7 @@
 			// Convert 10-90 range to multiplier: 10 = 1.0x, 50 = 2.5x, 90 = 4.0x
 			const sensitivityMultiplier = 1.0 + (sensitivity / 100) * 3.0;
 			const threshold = Math.max(20, stdDev * sensitivityMultiplier);
-			
+
 			// Helper function to get pixel color distance
 			function getColorDistance(idx) {
 				const r = data[idx];
@@ -1271,14 +1296,14 @@
 					Math.pow(b - avgB, 2)
 				);
 			}
-			
+
 			// Flood fill from edges to identify background
 			const queue = [];
-			
+
 			// Add edge pixels to queue
 			for (let y = 0; y < height; y++) {
 				for (let x = 0; x < width; x++) {
-					if (y < edgeWidth || y >= height - edgeWidth || 
+					if (y < edgeWidth || y >= height - edgeWidth ||
 						x < edgeWidth || x >= width - edgeWidth) {
 						const idx = (y * width + x) * 4;
 						if (getColorDistance(idx) < threshold) {
@@ -1288,13 +1313,13 @@
 					}
 				}
 			}
-			
+
 			// Flood fill
 			while (queue.length > 0) {
 				const [x, y] = queue.shift();
 				const idx = (y * width + x) * 4;
 				mask[y * width + x] = 1; // Mark as background
-				
+
 				// Check neighbors
 				const neighbors = [
 					[x - 1, y],
@@ -1302,7 +1327,7 @@
 					[x, y - 1],
 					[x, y + 1]
 				];
-				
+
 				for (const [nx, ny] of neighbors) {
 					if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
 						const nIdx = ny * width + nx;
@@ -1316,13 +1341,13 @@
 					}
 				}
 			}
-			
+
 			// Apply mask and smooth edges
 			for (let y = 0; y < height; y++) {
 				for (let x = 0; x < width; x++) {
 					const idx = (y * width + x) * 4;
 					const maskIdx = y * width + x;
-					
+
 					if (mask[maskIdx]) {
 						// Check if this is an edge pixel (has non-background neighbors)
 						let hasForegroundNeighbor = false;
@@ -1330,7 +1355,7 @@
 							[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1],
 							[x - 1, y - 1], [x + 1, y - 1], [x - 1, y + 1], [x + 1, y + 1]
 						];
-						
+
 						for (const [nx, ny] of neighbors) {
 							if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
 								if (!mask[ny * width + nx]) {
@@ -1339,7 +1364,7 @@
 								}
 							}
 						}
-						
+
 						if (hasForegroundNeighbor) {
 							// Edge pixel - use partial transparency for smooth edges
 							const dist = getColorDistance(idx);
@@ -1352,7 +1377,7 @@
 					}
 				}
 			}
-			
+
 			ctx.putImageData(imageData, 0, 0);
 			return canvas;
 		}
@@ -1366,10 +1391,10 @@
 			try {
 				showAlert('Processing image (no backend required)...', 'info');
 				const canvas = document.getElementById('bgremover-canvas');
-				
+
 				// Get sensitivity value
 				const sensitivity = parseInt(document.getElementById('bgremover-sensitivity').value) || 50;
-				
+
 				// Create image from file
 				const img = new Image();
 				const imageUrl = URL.createObjectURL(file);
@@ -1378,15 +1403,15 @@
 					img.onerror = reject;
 					img.src = imageUrl;
 				});
-				
+
 				// Process image with sensitivity
 				const processedCanvas = removeBackgroundCanvas(img, sensitivity);
-				
+
 				canvas.width = processedCanvas.width;
 				canvas.height = processedCanvas.height;
 				const ctx = canvas.getContext('2d');
 				ctx.drawImage(processedCanvas, 0, 0);
-				
+
 				bgRemoverResult = canvas.toDataURL('image/png');
 				document.getElementById('bgremover-result').style.display = 'block';
 				showAlert('Background removed successfully!', 'success');
@@ -1411,7 +1436,7 @@
 
 		// File Converter functionality
 		let converterFiles = [];
-		
+
 		// Load JSZip for creating ZIP files
 		let JSZip = null;
 		async function loadJSZip() {
@@ -1456,40 +1481,40 @@
 							document.head.appendChild(script);
 						});
 					}
-					
+
 					// Wait a bit for loadPyodide to be available
 					let retries = 0;
 					while (typeof loadPyodide === 'undefined' && retries < 10) {
 						await new Promise(resolve => setTimeout(resolve, 100));
 						retries++;
 					}
-					
+
 					if (typeof loadPyodide === 'undefined') {
 						throw new Error('Pyodide failed to load');
 					}
-					
+
 					// Initialize Pyodide
 					pyodideHeic = await loadPyodide({
 						indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
 					});
-					
+
 					// Load required packages
 					showAlert('Loading Python packages (micropip, pillow)...', 'info');
 					await pyodideHeic.loadPackage(['micropip', 'pillow']);
-					
+
 					// Install pillow-heif using micropip
 					showAlert('Installing pillow-heif...', 'info');
 					await pyodideHeic.runPythonAsync(`
 						import micropip
 						await micropip.install('pillow-heif')
 					`);
-					
+
 					// Register pillow_heif opener
 					await pyodideHeic.runPythonAsync(`
 						from pillow_heif import register_heif_opener
 						register_heif_opener()
 					`);
-					
+
 					showAlert('HEIC conversion ready!', 'success');
 					return pyodideHeic;
 				} catch (error) {
@@ -1505,7 +1530,7 @@
 			if (converterFiles.length > 0) {
 				document.getElementById('converter-file-list').style.display = 'block';
 				document.getElementById('converter-options').style.display = 'block';
-				
+
 				// Display file list
 				const fileList = document.getElementById('converter-files');
 				fileList.innerHTML = '';
@@ -1552,13 +1577,13 @@
 					let fileName = file.name.replace(/\.[^/.]+$/, '');
 
 					// Check if HEIC file (check extension first, then MIME type)
-					const isHeic = file.name.toLowerCase().endsWith('.heic') || 
-					                file.name.toLowerCase().endsWith('.heif') ||
-					                file.name.toLowerCase().endsWith('.hif') ||
-					                file.type === 'image/heic' || 
-					                file.type === 'image/heif' ||
-					                file.type === 'image/heic-sequence' ||
-					                file.type === 'image/heif-sequence';
+					const isHeic = file.name.toLowerCase().endsWith('.heic') ||
+						file.name.toLowerCase().endsWith('.heif') ||
+						file.name.toLowerCase().endsWith('.hif') ||
+						file.type === 'image/heic' ||
+						file.type === 'image/heif' ||
+						file.type === 'image/heic-sequence' ||
+						file.type === 'image/heif-sequence';
 
 					if (isHeic) {
 						// Use Pyodide with PIL + pillow_heif for HEIC conversion
@@ -1567,14 +1592,14 @@
 							if (!pyodideHeic) {
 								await initPyodideHeic();
 							}
-							
+
 							// Read file as array buffer
 							const arrayBuffer = await file.arrayBuffer();
 							const uint8Array = new Uint8Array(arrayBuffer);
-							
+
 							// Write file to Pyodide filesystem
 							pyodideHeic.FS.writeFile('input.heic', uint8Array);
-							
+
 							// Determine output format
 							let outputFormat = 'PNG';
 							let outputMime = 'image/png';
@@ -1592,7 +1617,7 @@
 								outputMime = 'image/png';
 								outputExt = 'png';
 							}
-							
+
 							// Run Python conversion code using PIL + pillow_heif
 							showAlert(`Converting ${file.name}...`, 'info');
 							await pyodideHeic.runPythonAsync(`
@@ -1614,10 +1639,10 @@
 								else:
 									image.save('output.${outputExt}', format='${outputFormat}', quality=90, optimize=True)
 							`);
-							
+
 							// Read converted file from Pyodide filesystem
 							const convertedData = pyodideHeic.FS.readFile('output.' + outputExt);
-							
+
 							// Clean up files
 							try {
 								pyodideHeic.FS.unlink('input.heic');
@@ -1625,7 +1650,7 @@
 							} catch (e) {
 								// Ignore cleanup errors
 							}
-							
+
 							// Create blob from converted data
 							if (format === 'pdf') {
 								// Convert PNG to PDF
@@ -1637,13 +1662,13 @@
 									img.onerror = reject;
 									img.src = imageUrl;
 								});
-								
+
 								const canvas = document.createElement('canvas');
 								canvas.width = img.width;
 								canvas.height = img.height;
 								const ctx = canvas.getContext('2d');
 								ctx.drawImage(img, 0, 0);
-								
+
 								const pdfDoc = await PDFLib.PDFDocument.create();
 								const pngData = await new Promise(resolve => {
 									canvas.toBlob(resolve, 'image/png');
@@ -1858,7 +1883,7 @@
 		function convertToLaTeX() {
 			const text = document.getElementById('latex-input').value;
 			const template = document.getElementById('latex-template').value;
-			
+
 			// Template headers
 			const templates = {
 				ieee: `\\documentclass[conference]{IEEEtran}
@@ -1991,14 +2016,14 @@ University Name}
 				showAlert('Resume template generated! Customize the fields as needed.', 'success');
 				return;
 			}
-			
+
 			if (!text.trim()) {
 				showAlert('Please enter some text', 'error');
 				return;
 			}
 
 			let latexCode = templates[template] || templates.article;
-			
+
 			// Convert text to LaTeX
 			const paragraphs = text.split(/\n\n+/);
 			paragraphs.forEach((para, idx) => {
@@ -2014,7 +2039,7 @@ University Name}
 						.replace(/\_/g, '\\_')
 						.replace(/\~/g, '\\textasciitilde{}')
 						.replace(/\%/g, '\\%');
-					
+
 					// For IEEE and engineering templates, add proper section formatting
 					if (template === 'ieee' || template === 'ieee-journal' || template === 'engineering-report') {
 						// Check if paragraph looks like a section header (short, all caps, or ends with colon)
@@ -2026,7 +2051,7 @@ University Name}
 					} else {
 						latexCode += para;
 					}
-					
+
 					if (idx < paragraphs.length - 1) {
 						latexCode += '\n\n';
 					}
@@ -2063,25 +2088,25 @@ University Name}
 
 		function updateWordCount() {
 			const text = document.getElementById('wordcounter-input').value;
-			
+
 			// Word count
 			const words = text.trim() ? text.trim().split(/\s+/).filter(w => w.length > 0) : [];
 			document.getElementById('word-count').textContent = words.length;
-			
+
 			// Character count
 			document.getElementById('char-count').textContent = text.length;
-			
+
 			// Character count (no spaces)
 			document.getElementById('char-no-spaces').textContent = text.replace(/\s/g, '').length;
-			
+
 			// Sentence count
 			const sentences = text.match(/[.!?]+/g) || [];
 			document.getElementById('sentence-count').textContent = sentences.length || (text.trim() ? 1 : 0);
-			
+
 			// Paragraph count
 			const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
 			document.getElementById('paragraph-count').textContent = paragraphs.length || (text.trim() ? 1 : 0);
-			
+
 			// Reading time (average 200 words per minute)
 			const readingTime = words.length / 200;
 			document.getElementById('reading-time').textContent = readingTime.toFixed(1);
@@ -2096,7 +2121,7 @@ University Name}
 		function setupDragAndDrop(dropzoneId, inputId) {
 			const dropzone = document.getElementById(dropzoneId);
 			const input = document.getElementById(inputId);
-			
+
 			dropzone.addEventListener('dragover', (e) => {
 				e.preventDefault();
 				dropzone.classList.add('drag-over');
@@ -2120,6 +2145,3 @@ University Name}
 </body>
 
 </html>
-
-
-

@@ -11,7 +11,8 @@
 	<meta name="author" content="Yusuf Morsi" />
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='white' stroke-width='3'/%3E%3Cpath d='M45 45 L55 55 M55 45 L45 55' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+	<link rel="icon" type="image/svg+xml"
+		href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231e3a8a'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='white' stroke-width='3'/%3E%3Cpath d='M45 45 L55 55 M55 45 L45 55' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -392,8 +393,13 @@
 		}
 
 		@keyframes spin {
-			0% { transform: rotate(0deg); }
-			100% { transform: rotate(360deg); }
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
 		}
 
 		/* Progress Bar */
@@ -579,7 +585,7 @@
 			}
 		}
 	</style>
-<script src="/new/js/site-analytics-loader.js"></script>
+	<script src="/new/js/site-analytics-loader.js"></script>
 </head>
 
 <body>
@@ -613,11 +619,15 @@
 							<i class="fas fa-music upload-icon"></i>
 							<h2>Drop your audio file here</h2>
 							<p>Support MP3, WAV, M4A, FLAC, and OGG audio files</p>
-							<p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">Uses free client-side processing - no API required. Works best with stereo files where vocals are centered.</p>
-							<button class="btn-primary" type="button" onclick="event.stopPropagation(); document.getElementById('fileInput').click();">
+							<p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">Uses free
+								client-side processing - no API required. Works best with stereo files where vocals are
+								centered.</p>
+							<button class="btn-primary" type="button"
+								onclick="event.stopPropagation(); document.getElementById('fileInput').click();">
 								<i class="fas fa-folder-open"></i> Choose File
 							</button>
-							<input type="file" id="fileInput" class="file-input" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg">
+							<input type="file" id="fileInput" class="file-input"
+								accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg">
 						</div>
 					</div>
 				</div>
@@ -628,14 +638,20 @@
 						<div class="youtube-input-section">
 							<i class="fab fa-youtube upload-icon" style="font-size: 3rem;"></i>
 							<h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Enter YouTube Video URL</h2>
-							<p style="color: var(--text-medium); margin-bottom: 1.5rem; font-size: 0.95rem;">Paste a YouTube video link to extract and isolate vocals</p>
+							<p style="color: var(--text-medium); margin-bottom: 1.5rem; font-size: 0.95rem;">Paste a
+								YouTube video link to extract and isolate vocals</p>
 							<div class="youtube-input-wrapper">
-								<input type="text" id="youtubeUrl" class="youtube-input" placeholder="https://www.youtube.com/watch?v=..." onkeypress="if(event.key === 'Enter') loadYouTubeAudio()">
+								<input type="text" id="youtubeUrl" class="youtube-input"
+									placeholder="https://www.youtube.com/watch?v=..."
+									onkeypress="if(event.key === 'Enter') loadYouTubeAudio()">
 								<button class="btn-youtube" id="youtubeBtn" onclick="loadYouTubeAudio()">
 									<i class="fas fa-download"></i> Load Audio
 								</button>
 							</div>
-							<p style="font-size: 0.85rem; color: var(--text-light); margin-top: 1rem; font-style: italic;">Note: YouTube extraction requires a backend service. This feature needs server-side support with yt-dlp or similar.</p>
+							<p
+								style="font-size: 0.85rem; color: var(--text-light); margin-top: 1rem; font-style: italic;">
+								Note: YouTube extraction requires a backend service. This feature needs server-side
+								support with yt-dlp or similar.</p>
 						</div>
 					</div>
 				</div>
@@ -721,7 +737,7 @@
 		let audioBuffer = null;
 
 		// Initialize on page load
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			initializeDropZone();
 			initializeFileInput();
 		});
@@ -763,7 +779,7 @@
 			// Validate YouTube URL
 			const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
 			const match = youtubeUrl.match(youtubeRegex);
-			
+
 			if (!match) {
 				showAlert('error', 'Please enter a valid YouTube URL');
 				return;
@@ -780,25 +796,25 @@
 				// Option 1: Use a free YouTube audio extraction service
 				// Note: This is a placeholder - you'll need to implement a backend or use a service
 				const videoId = match[1];
-				
+
 				// Try using a public API endpoint (you would need to set this up on your backend)
 				// For now, we'll show an error explaining this needs a backend
-				
+
 				// Example: You could set up a backend endpoint like:
 				// const response = await fetch('/api/extract-youtube-audio', {
 				//     method: 'POST',
 				//     headers: { 'Content-Type': 'application/json' },
 				//     body: JSON.stringify({ url: youtubeUrl })
 				// });
-				
+
 				updateProgress(50, 'Downloading audio stream...');
-				
+
 				// Alternative: Use a free service like youtube-dl-server
 				// This requires you to host a backend server with youtube-dl or yt-dlp
 				const backendUrl = 'YOUR_BACKEND_URL/api/extract-audio'; // Replace with your backend
-				
+
 				showAlert('info', 'YouTube extraction requires a backend service. Please set up a server with yt-dlp or use the file upload option. For now, you can manually download audio from YouTube and upload it here.');
-				
+
 				// Placeholder for actual implementation:
 				// const response = await fetch(backendUrl, {
 				//     method: 'POST',
@@ -864,7 +880,7 @@
 		// Initialize file input
 		function initializeFileInput() {
 			const fileInput = document.getElementById('fileInput');
-			fileInput.addEventListener('change', function(e) {
+			fileInput.addEventListener('change', function (e) {
 				if (e.target.files.length > 0) {
 					handleFile(e.target.files[0]);
 				}
@@ -874,8 +890,8 @@
 		// Handle selected file
 		function handleFile(file) {
 			// Validate file type
-			const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/wave', 'audio/x-wav', 
-								'audio/mp4', 'audio/m4a', 'audio/flac', 'audio/ogg', 'audio/vorbis'];
+			const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/wave', 'audio/x-wav',
+				'audio/mp4', 'audio/m4a', 'audio/flac', 'audio/ogg', 'audio/vorbis'];
 			const validExtensions = ['.mp3', '.wav', '.m4a', '.flac', '.ogg'];
 			const fileName = file.name.toLowerCase();
 			const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
@@ -947,13 +963,13 @@
 			try {
 				// Create audio context
 				const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-				
+
 				// Load audio file
 				const arrayBuffer = await selectedFile.arrayBuffer();
 				updateProgress(30, 'Decoding audio...');
-				
+
 				const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-				
+
 				// Check if stereo
 				if (audioBuffer.numberOfChannels < 2) {
 					showAlert('error', 'This audio file is not stereo. Vocal isolation works best with stereo files where vocals are centered.');
@@ -968,21 +984,21 @@
 				const leftChannel = audioBuffer.getChannelData(0);
 				const rightChannel = audioBuffer.getChannelData(1);
 				const length = audioBuffer.length;
-				
+
 				// Create isolated vocal buffer
 				const isolatedVocalBuffer = audioContext.createBuffer(
 					1, // mono
 					length,
 					audioBuffer.sampleRate
 				);
-				
+
 				const isolatedChannel = isolatedVocalBuffer.getChannelData(0);
-				
+
 				// Since L - R perfectly removes vocals (works great for instrumental)
 				// The vocals are what's removed, so they must be centered and identical
 				// For vocals: we want content where L ≈ R (channels are similar)
 				// Since vocals are centered and identical: Vocal ≈ L (when L ≈ R)
-				
+
 				// Direct approach: Where channels match, that's vocals
 				// Weight by how similar the channels are
 				for (let i = 0; i < length; i++) {
@@ -990,18 +1006,18 @@
 					const right = rightChannel[i];
 					const diff = Math.abs(left - right);
 					const sum = Math.abs(left) + Math.abs(right);
-					
+
 					// Calculate how similar the channels are (1.0 = identical, 0.0 = very different)
 					const similarity = sum > 0.0001 ? 1.0 - (diff / (sum + 0.0001)) : 1.0;
-					
+
 					// Vocals are centered, so take the average of L and R
 					const center = (left + right) * 0.5;
-					
+
 					// Only keep content where channels are similar (vocals)
 					// Use similarity as a gate - strongly emphasize similar content
 					// The similarity^2 squares it to make the gate more aggressive
 					isolatedChannel[i] = center * Math.pow(Math.max(similarity, 0.0), 2.0);
-					
+
 					// Additional filtering: If channels are very different, reduce signal significantly
 					if (diff > sum * 0.5) {
 						// Channels are very different (likely instrumental)
@@ -1020,7 +1036,7 @@
 						max = absValue;
 					}
 				}
-				
+
 				if (max > 0) {
 					for (let i = 0; i < isolatedChannel.length; i++) {
 						isolatedChannel[i] = isolatedChannel[i] / max * 0.9;
@@ -1032,20 +1048,20 @@
 				// Convert AudioBuffer to WAV Blob
 				processedAudioBlob = audioBufferToWav(isolatedVocalBuffer);
 				processedFileName = selectedFile.name.replace(/\.[^/.]+$/, '') + '_vocals_isolated.wav';
-				
+
 				updateProgress(100, 'Complete!');
 
 				// Show processed audio card with player
 				const processedCard = document.getElementById('processedCard');
 				const processedPlayer = document.getElementById('processedPlayer');
 				const processedFileNameEl = document.getElementById('processedFileName');
-				
+
 				processedFileNameEl.textContent = processedFileName;
-				
+
 				// Create URL for audio player
 				const playerUrl = URL.createObjectURL(processedAudioBlob);
 				processedPlayer.src = playerUrl;
-				
+
 				// Show the processed card
 				processedCard.style.display = 'block';
 				processedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1070,7 +1086,7 @@
 			const arrayBuffer = new ArrayBuffer(44 + length * numberOfChannels * 2);
 			const view = new DataView(arrayBuffer);
 			const channels = [];
-			
+
 			// Get channel data
 			for (let i = 0; i < numberOfChannels; i++) {
 				channels.push(buffer.getChannelData(i));
@@ -1125,7 +1141,7 @@
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
-			
+
 			// Clean up URL after a delay
 			setTimeout(() => {
 				URL.revokeObjectURL(downloadUrl);
@@ -1159,17 +1175,17 @@
 		// Show alert message
 		function showAlert(type, message) {
 			const alertContainer = document.getElementById('alert-container');
-			
+
 			alertContainer.innerHTML = '';
-			
+
 			const alert = document.createElement('div');
 			alert.className = `alert alert-${type} show`;
 			alert.innerHTML = `
 				<strong>${type === 'error' ? 'Error' : type === 'success' ? 'Success' : 'Info'}:</strong> ${message}
 			`;
-			
+
 			alertContainer.appendChild(alert);
-			
+
 			setTimeout(() => {
 				alert.classList.remove('show');
 				setTimeout(() => {
@@ -1181,4 +1197,3 @@
 </body>
 
 </html>
-
